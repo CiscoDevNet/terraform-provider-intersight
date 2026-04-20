@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -21,15 +21,16 @@ import (
 // checks if the WorkloadWorkloadMetadata type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WorkloadWorkloadMetadata{}
 
-// WorkloadWorkloadMetadata ### Overview The WorkloadMetadata holds version agnostic information about a workload definition. It serves as a statistical summary and aggregation container for workload definitions. WorkloadMetadata provides a centralized view of deployment states and conformance status across all deployments associated with a specific workload definition. #### Purpose WorkloadMetadata exists to provide efficient access to aggregated metrics and state information for workload definitions without requiring clients to query and aggregate data from individual deployments. This improves performance and provides a consistent view of workload health across the organization. #### Key Concepts - **Deployment Summary Aggregation:** - Maintains real-time aggregated counts of deployment states across all workload deployments associated with the definition. - **Conformance Summary Aggregation:** - Tracks conformance states across deployments, helping administrators understand compliance and drift status at the workload definition level. - **Read-Only Reference Data:** - All properties are read-only, as this object serves as a computed aggregation maintained automatically by the system.
+// WorkloadWorkloadMetadata ### Overview The WorkloadMetadata holds version agnostic information about a workload definition. It serves as a statistical summary and aggregation container for workload definitions. WorkloadMetadata provides a centralized view of deployment states and conformance status across all deployments associated with a specific workload definition. #### Purpose WorkloadMetadata exists to provide efficient access to aggregated metrics and state information for workload definitions without requiring clients to query and aggregate data from individual deployments. This improves performance and provides a consistent view of workload health across the organization. #### Key Concepts - **Deployment Summary Aggregation:** - Maintains real-time aggregated counts of deployment states across all workload deployments associated with the definition. - **Conformance Summary Aggregation:** - Tracks conformance states across deployments, helping administrators understand compliance and drift status at the workload definition level. - **Rename Support:** - Renames a workload definition through the renameRequest property. This updates the definition name and all associated workload objects across all versions of the workload definition.
 type WorkloadWorkloadMetadata struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType         string                     `json:"ObjectType"`
-	ConformanceSummary []WorkloadStateAggregation `json:"ConformanceSummary,omitempty"`
-	DeploymentSummary  []WorkloadStateAggregation `json:"DeploymentSummary,omitempty"`
+	ObjectType         string                        `json:"ObjectType"`
+	ConformanceSummary []WorkloadStateAggregation    `json:"ConformanceSummary,omitempty"`
+	DeploymentSummary  []WorkloadStateAggregation    `json:"DeploymentSummary,omitempty"`
+	RenameRequest      NullableWorkloadRenameRequest `json:"RenameRequest,omitempty"`
 	// Reference name for the workload, generated by the system and used internally for identification.
 	WorkloadRefName      *string                                      `json:"WorkloadRefName,omitempty"`
 	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -185,6 +186,49 @@ func (o *WorkloadWorkloadMetadata) SetDeploymentSummary(v []WorkloadStateAggrega
 	o.DeploymentSummary = v
 }
 
+// GetRenameRequest returns the RenameRequest field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkloadWorkloadMetadata) GetRenameRequest() WorkloadRenameRequest {
+	if o == nil || IsNil(o.RenameRequest.Get()) {
+		var ret WorkloadRenameRequest
+		return ret
+	}
+	return *o.RenameRequest.Get()
+}
+
+// GetRenameRequestOk returns a tuple with the RenameRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkloadWorkloadMetadata) GetRenameRequestOk() (*WorkloadRenameRequest, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RenameRequest.Get(), o.RenameRequest.IsSet()
+}
+
+// HasRenameRequest returns a boolean if a field has been set.
+func (o *WorkloadWorkloadMetadata) HasRenameRequest() bool {
+	if o != nil && o.RenameRequest.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRenameRequest gets a reference to the given NullableWorkloadRenameRequest and assigns it to the RenameRequest field.
+func (o *WorkloadWorkloadMetadata) SetRenameRequest(v WorkloadRenameRequest) {
+	o.RenameRequest.Set(&v)
+}
+
+// SetRenameRequestNil sets the value for RenameRequest to be an explicit nil
+func (o *WorkloadWorkloadMetadata) SetRenameRequestNil() {
+	o.RenameRequest.Set(nil)
+}
+
+// UnsetRenameRequest ensures that no value is present for RenameRequest, not even an explicit nil
+func (o *WorkloadWorkloadMetadata) UnsetRenameRequest() {
+	o.RenameRequest.Unset()
+}
+
 // GetWorkloadRefName returns the WorkloadRefName field value if set, zero value otherwise.
 func (o *WorkloadWorkloadMetadata) GetWorkloadRefName() string {
 	if o == nil || IsNil(o.WorkloadRefName) {
@@ -292,6 +336,9 @@ func (o WorkloadWorkloadMetadata) ToMap() (map[string]interface{}, error) {
 	if o.DeploymentSummary != nil {
 		toSerialize["DeploymentSummary"] = o.DeploymentSummary
 	}
+	if o.RenameRequest.IsSet() {
+		toSerialize["RenameRequest"] = o.RenameRequest.Get()
+	}
 	if !IsNil(o.WorkloadRefName) {
 		toSerialize["WorkloadRefName"] = o.WorkloadRefName
 	}
@@ -352,9 +399,10 @@ func (o *WorkloadWorkloadMetadata) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType         string                     `json:"ObjectType"`
-		ConformanceSummary []WorkloadStateAggregation `json:"ConformanceSummary,omitempty"`
-		DeploymentSummary  []WorkloadStateAggregation `json:"DeploymentSummary,omitempty"`
+		ObjectType         string                        `json:"ObjectType"`
+		ConformanceSummary []WorkloadStateAggregation    `json:"ConformanceSummary,omitempty"`
+		DeploymentSummary  []WorkloadStateAggregation    `json:"DeploymentSummary,omitempty"`
+		RenameRequest      NullableWorkloadRenameRequest `json:"RenameRequest,omitempty"`
 		// Reference name for the workload, generated by the system and used internally for identification.
 		WorkloadRefName *string                                      `json:"WorkloadRefName,omitempty"`
 		Organization    NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -369,6 +417,7 @@ func (o *WorkloadWorkloadMetadata) UnmarshalJSON(data []byte) (err error) {
 		varWorkloadWorkloadMetadata.ObjectType = varWorkloadWorkloadMetadataWithoutEmbeddedStruct.ObjectType
 		varWorkloadWorkloadMetadata.ConformanceSummary = varWorkloadWorkloadMetadataWithoutEmbeddedStruct.ConformanceSummary
 		varWorkloadWorkloadMetadata.DeploymentSummary = varWorkloadWorkloadMetadataWithoutEmbeddedStruct.DeploymentSummary
+		varWorkloadWorkloadMetadata.RenameRequest = varWorkloadWorkloadMetadataWithoutEmbeddedStruct.RenameRequest
 		varWorkloadWorkloadMetadata.WorkloadRefName = varWorkloadWorkloadMetadataWithoutEmbeddedStruct.WorkloadRefName
 		varWorkloadWorkloadMetadata.Organization = varWorkloadWorkloadMetadataWithoutEmbeddedStruct.Organization
 		*o = WorkloadWorkloadMetadata(varWorkloadWorkloadMetadata)
@@ -392,6 +441,7 @@ func (o *WorkloadWorkloadMetadata) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConformanceSummary")
 		delete(additionalProperties, "DeploymentSummary")
+		delete(additionalProperties, "RenameRequest")
 		delete(additionalProperties, "WorkloadRefName")
 		delete(additionalProperties, "Organization")
 

@@ -145,7 +145,7 @@ Method | HTTP request | Description
 
 ## GetEquipmentChassisByMoid
 
-> EquipmentChassis GetEquipmentChassisByMoid(ctx, moid).Execute()
+> EquipmentChassis GetEquipmentChassisByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Chassis' resource.
 
@@ -163,10 +163,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentChassisByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -192,6 +195,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentChassisByMoidR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -213,7 +219,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentChassisControllerByMoid
 
-> EquipmentChassisController GetEquipmentChassisControllerByMoid(ctx, moid).Execute()
+> EquipmentChassisController GetEquipmentChassisControllerByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.ChassisController' resource.
 
@@ -231,10 +237,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisControllerByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisControllerByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentChassisControllerByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -260,6 +269,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentChassisControl
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -365,7 +377,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentChassisIdPoolByMoid
 
-> EquipmentChassisIdPool GetEquipmentChassisIdPoolByMoid(ctx, moid).Execute()
+> EquipmentChassisIdPool GetEquipmentChassisIdPoolByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.ChassisIdPool' resource.
 
@@ -383,10 +395,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisIdPoolByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisIdPoolByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentChassisIdPoolByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -412,6 +427,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentChassisIdPoolB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -517,7 +535,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentChassisIdentityByMoid
 
-> EquipmentChassisIdentity GetEquipmentChassisIdentityByMoid(ctx, moid).Execute()
+> EquipmentChassisIdentity GetEquipmentChassisIdentityByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.ChassisIdentity' resource.
 
@@ -535,10 +553,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisIdentityByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisIdentityByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentChassisIdentityByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -564,6 +585,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentChassisIdentit
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -753,7 +777,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentChassisOperationByMoid
 
-> EquipmentChassisOperation GetEquipmentChassisOperationByMoid(ctx, moid).Execute()
+> EquipmentChassisOperation GetEquipmentChassisOperationByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.ChassisOperation' resource.
 
@@ -771,10 +795,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisOperationByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentChassisOperationByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentChassisOperationByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -800,6 +827,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentChassisOperati
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -905,7 +935,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentDeviceSummaryByMoid
 
-> EquipmentDeviceSummary GetEquipmentDeviceSummaryByMoid(ctx, moid).Execute()
+> EquipmentDeviceSummary GetEquipmentDeviceSummaryByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.DeviceSummary' resource.
 
@@ -923,10 +953,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentDeviceSummaryByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentDeviceSummaryByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentDeviceSummaryByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -952,6 +985,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentDeviceSummaryB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1057,7 +1093,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentEnclosureElementByMoid
 
-> EquipmentEnclosureElement GetEquipmentEnclosureElementByMoid(ctx, moid).Execute()
+> EquipmentEnclosureElement GetEquipmentEnclosureElementByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.EnclosureElement' resource.
 
@@ -1075,10 +1111,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentEnclosureElementByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentEnclosureElementByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentEnclosureElementByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1104,6 +1143,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentEnclosureEleme
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1209,7 +1251,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentEndPointLogByMoid
 
-> EquipmentEndPointLog GetEquipmentEndPointLogByMoid(ctx, moid).Execute()
+> EquipmentEndPointLog GetEquipmentEndPointLogByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.EndPointLog' resource.
 
@@ -1227,10 +1269,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentEndPointLogByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentEndPointLogByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentEndPointLogByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1256,6 +1301,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentEndPointLogByM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1361,7 +1409,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentExpanderModuleByMoid
 
-> EquipmentExpanderModule GetEquipmentExpanderModuleByMoid(ctx, moid).Execute()
+> EquipmentExpanderModule GetEquipmentExpanderModuleByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.ExpanderModule' resource.
 
@@ -1379,10 +1427,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentExpanderModuleByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1408,6 +1459,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentExpanderModule
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1429,7 +1483,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentExpanderModuleIdentityByMoid
 
-> EquipmentExpanderModuleIdentity GetEquipmentExpanderModuleIdentityByMoid(ctx, moid).Execute()
+> EquipmentExpanderModuleIdentity GetEquipmentExpanderModuleIdentityByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.ExpanderModuleIdentity' resource.
 
@@ -1447,10 +1501,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleIdentityByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleIdentityByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentExpanderModuleIdentityByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1476,6 +1533,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentExpanderModule
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1665,7 +1725,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentExpanderModuleOperationByMoid
 
-> EquipmentExpanderModuleOperation GetEquipmentExpanderModuleOperationByMoid(ctx, moid).Execute()
+> EquipmentExpanderModuleOperation GetEquipmentExpanderModuleOperationByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.ExpanderModuleOperation' resource.
 
@@ -1683,10 +1743,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleOperationByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleOperationByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentExpanderModuleOperationByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1712,6 +1775,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentExpanderModule
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1817,7 +1883,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentFanByMoid
 
-> EquipmentFan GetEquipmentFanByMoid(ctx, moid).Execute()
+> EquipmentFan GetEquipmentFanByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Fan' resource.
 
@@ -1835,10 +1901,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentFanByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentFanByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentFanByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1864,6 +1933,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentFanByMoidReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1885,7 +1957,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentFanControlByMoid
 
-> EquipmentFanControl GetEquipmentFanControlByMoid(ctx, moid).Execute()
+> EquipmentFanControl GetEquipmentFanControlByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.FanControl' resource.
 
@@ -1903,10 +1975,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentFanControlByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentFanControlByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentFanControlByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1932,6 +2007,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentFanControlByMo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2121,7 +2199,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentFanModuleByMoid
 
-> EquipmentFanModule GetEquipmentFanModuleByMoid(ctx, moid).Execute()
+> EquipmentFanModule GetEquipmentFanModuleByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.FanModule' resource.
 
@@ -2139,10 +2217,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentFanModuleByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentFanModuleByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentFanModuleByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2168,6 +2249,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentFanModuleByMoi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2273,7 +2357,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentFexByMoid
 
-> EquipmentFex GetEquipmentFexByMoid(ctx, moid).Execute()
+> EquipmentFex GetEquipmentFexByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Fex' resource.
 
@@ -2291,10 +2375,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentFexByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentFexByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentFexByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2320,6 +2407,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentFexByMoidReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2341,7 +2431,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentFexIdentityByMoid
 
-> EquipmentFexIdentity GetEquipmentFexIdentityByMoid(ctx, moid).Execute()
+> EquipmentFexIdentity GetEquipmentFexIdentityByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.FexIdentity' resource.
 
@@ -2359,10 +2449,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentFexIdentityByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentFexIdentityByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentFexIdentityByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2388,6 +2481,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentFexIdentityByM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2577,7 +2673,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentFexOperationByMoid
 
-> EquipmentFexOperation GetEquipmentFexOperationByMoid(ctx, moid).Execute()
+> EquipmentFexOperation GetEquipmentFexOperationByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.FexOperation' resource.
 
@@ -2595,10 +2691,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentFexOperationByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentFexOperationByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentFexOperationByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2624,6 +2723,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentFexOperationBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2729,7 +2831,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentFruByMoid
 
-> EquipmentFru GetEquipmentFruByMoid(ctx, moid).Execute()
+> EquipmentFru GetEquipmentFruByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Fru' resource.
 
@@ -2747,10 +2849,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentFruByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentFruByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentFruByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2776,6 +2881,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentFruByMoidReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2881,7 +2989,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentHybridDriveSlotByMoid
 
-> EquipmentHybridDriveSlot GetEquipmentHybridDriveSlotByMoid(ctx, moid).Execute()
+> EquipmentHybridDriveSlot GetEquipmentHybridDriveSlotByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.HybridDriveSlot' resource.
 
@@ -2899,10 +3007,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentHybridDriveSlotByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentHybridDriveSlotByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentHybridDriveSlotByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2928,6 +3039,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentHybridDriveSlo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3033,7 +3147,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentInterconnectByMoid
 
-> EquipmentInterconnect GetEquipmentInterconnectByMoid(ctx, moid).Execute()
+> EquipmentInterconnect GetEquipmentInterconnectByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Interconnect' resource.
 
@@ -3051,10 +3165,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentInterconnectByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentInterconnectByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentInterconnectByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3080,6 +3197,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentInterconnectBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3185,7 +3305,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentIoCardByMoid
 
-> EquipmentIoCard GetEquipmentIoCardByMoid(ctx, moid).Execute()
+> EquipmentIoCard GetEquipmentIoCardByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.IoCard' resource.
 
@@ -3203,10 +3323,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentIoCardByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentIoCardByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentIoCardByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3232,6 +3355,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentIoCardByMoidRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3337,7 +3463,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentIoCardOperationByMoid
 
-> EquipmentIoCardOperation GetEquipmentIoCardOperationByMoid(ctx, moid).Execute()
+> EquipmentIoCardOperation GetEquipmentIoCardOperationByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.IoCardOperation' resource.
 
@@ -3355,10 +3481,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentIoCardOperationByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentIoCardOperationByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentIoCardOperationByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3384,6 +3513,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentIoCardOperatio
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3489,7 +3621,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentIoExpanderByMoid
 
-> EquipmentIoExpander GetEquipmentIoExpanderByMoid(ctx, moid).Execute()
+> EquipmentIoExpander GetEquipmentIoExpanderByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.IoExpander' resource.
 
@@ -3507,10 +3639,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentIoExpanderByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentIoExpanderByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentIoExpanderByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3536,6 +3671,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentIoExpanderByMo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3641,7 +3779,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentLocatorLedByMoid
 
-> EquipmentLocatorLed GetEquipmentLocatorLedByMoid(ctx, moid).Execute()
+> EquipmentLocatorLed GetEquipmentLocatorLedByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.LocatorLed' resource.
 
@@ -3659,10 +3797,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentLocatorLedByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentLocatorLedByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentLocatorLedByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3688,6 +3829,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentLocatorLedByMo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3793,7 +3937,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentLogDownloadByMoid
 
-> EquipmentLogDownload GetEquipmentLogDownloadByMoid(ctx, moid).Execute()
+> EquipmentLogDownload GetEquipmentLogDownloadByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.LogDownload' resource.
 
@@ -3811,10 +3955,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentLogDownloadByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentLogDownloadByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentLogDownloadByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3840,6 +3987,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentLogDownloadByM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3945,7 +4095,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentPsuByMoid
 
-> EquipmentPsu GetEquipmentPsuByMoid(ctx, moid).Execute()
+> EquipmentPsu GetEquipmentPsuByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Psu' resource.
 
@@ -3963,10 +4113,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentPsuByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentPsuByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentPsuByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3992,6 +4145,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentPsuByMoidReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4013,7 +4169,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentPsuControlByMoid
 
-> EquipmentPsuControl GetEquipmentPsuControlByMoid(ctx, moid).Execute()
+> EquipmentPsuControl GetEquipmentPsuControlByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.PsuControl' resource.
 
@@ -4031,10 +4187,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentPsuControlByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentPsuControlByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentPsuControlByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4060,6 +4219,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentPsuControlByMo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4249,7 +4411,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentRackEnclosureByMoid
 
-> EquipmentRackEnclosure GetEquipmentRackEnclosureByMoid(ctx, moid).Execute()
+> EquipmentRackEnclosure GetEquipmentRackEnclosureByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.RackEnclosure' resource.
 
@@ -4267,10 +4429,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentRackEnclosureByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentRackEnclosureByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentRackEnclosureByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4296,6 +4461,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentRackEnclosureB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4401,7 +4569,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentRackEnclosureSlotByMoid
 
-> EquipmentRackEnclosureSlot GetEquipmentRackEnclosureSlotByMoid(ctx, moid).Execute()
+> EquipmentRackEnclosureSlot GetEquipmentRackEnclosureSlotByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.RackEnclosureSlot' resource.
 
@@ -4419,10 +4587,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentRackEnclosureSlotByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentRackEnclosureSlotByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentRackEnclosureSlotByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4448,6 +4619,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentRackEnclosureS
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4553,7 +4727,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentRiserByMoid
 
-> EquipmentRiser GetEquipmentRiserByMoid(ctx, moid).Execute()
+> EquipmentRiser GetEquipmentRiserByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Riser' resource.
 
@@ -4571,10 +4745,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentRiserByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentRiserByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentRiserByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4600,6 +4777,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentRiserByMoidReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4705,7 +4885,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentSensorByMoid
 
-> EquipmentSensor GetEquipmentSensorByMoid(ctx, moid).Execute()
+> EquipmentSensor GetEquipmentSensorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Sensor' resource.
 
@@ -4723,10 +4903,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentSensorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentSensorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentSensorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4752,6 +4935,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentSensorByMoidRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4857,7 +5043,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentSharedAdapterUnitByMoid
 
-> EquipmentSharedAdapterUnit GetEquipmentSharedAdapterUnitByMoid(ctx, moid).Execute()
+> EquipmentSharedAdapterUnit GetEquipmentSharedAdapterUnitByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.SharedAdapterUnit' resource.
 
@@ -4875,10 +5061,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentSharedAdapterUnitByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentSharedAdapterUnitByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentSharedAdapterUnitByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4904,6 +5093,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentSharedAdapterU
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5009,7 +5201,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentSharedGraphicsCardByMoid
 
-> EquipmentSharedGraphicsCard GetEquipmentSharedGraphicsCardByMoid(ctx, moid).Execute()
+> EquipmentSharedGraphicsCard GetEquipmentSharedGraphicsCardByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.SharedGraphicsCard' resource.
 
@@ -5027,10 +5219,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentSharedGraphicsCardByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentSharedGraphicsCardByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentSharedGraphicsCardByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5056,6 +5251,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentSharedGraphics
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5161,7 +5359,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentSharedIoModuleByMoid
 
-> EquipmentSharedIoModule GetEquipmentSharedIoModuleByMoid(ctx, moid).Execute()
+> EquipmentSharedIoModule GetEquipmentSharedIoModuleByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.SharedIoModule' resource.
 
@@ -5179,10 +5377,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentSharedIoModuleByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentSharedIoModuleByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentSharedIoModuleByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5208,6 +5409,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentSharedIoModule
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5313,7 +5517,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentSwitchCardByMoid
 
-> EquipmentSwitchCard GetEquipmentSwitchCardByMoid(ctx, moid).Execute()
+> EquipmentSwitchCard GetEquipmentSwitchCardByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.SwitchCard' resource.
 
@@ -5331,10 +5535,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentSwitchCardByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentSwitchCardByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentSwitchCardByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5360,6 +5567,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentSwitchCardByMo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5465,7 +5675,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentSwitchOperationByMoid
 
-> EquipmentSwitchOperation GetEquipmentSwitchOperationByMoid(ctx, moid).Execute()
+> EquipmentSwitchOperation GetEquipmentSwitchOperationByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.SwitchOperation' resource.
 
@@ -5483,10 +5693,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentSwitchOperationByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentSwitchOperationByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentSwitchOperationByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5512,6 +5725,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentSwitchOperatio
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5617,7 +5833,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentSystemIoControllerByMoid
 
-> EquipmentSystemIoController GetEquipmentSystemIoControllerByMoid(ctx, moid).Execute()
+> EquipmentSystemIoController GetEquipmentSystemIoControllerByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.SystemIoController' resource.
 
@@ -5635,10 +5851,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentSystemIoControllerByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentSystemIoControllerByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentSystemIoControllerByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5664,6 +5883,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentSystemIoContro
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5769,7 +5991,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentTpmByMoid
 
-> EquipmentTpm GetEquipmentTpmByMoid(ctx, moid).Execute()
+> EquipmentTpm GetEquipmentTpmByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Tpm' resource.
 
@@ -5787,10 +6009,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentTpmByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentTpmByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentTpmByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5816,6 +6041,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentTpmByMoidReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5921,7 +6149,7 @@ Name | Type | Description  | Notes
 
 ## GetEquipmentTransceiverByMoid
 
-> EquipmentTransceiver GetEquipmentTransceiverByMoid(ctx, moid).Execute()
+> EquipmentTransceiver GetEquipmentTransceiverByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'equipment.Transceiver' resource.
 
@@ -5939,10 +6167,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EquipmentApi.GetEquipmentTransceiverByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.EquipmentApi.GetEquipmentTransceiverByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EquipmentApi.GetEquipmentTransceiverByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5968,6 +6199,9 @@ Other parameters are passed through a pointer to a apiGetEquipmentTransceiverByM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 

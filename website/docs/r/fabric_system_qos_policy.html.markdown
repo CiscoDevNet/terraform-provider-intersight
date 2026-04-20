@@ -90,6 +90,12 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `pfc_watchdog`:(HashMap) - PFC Watchdog configuration. 
+This complex property has following sub-properties:
+  + `is_watchdog_enabled`:(bool) Enables or disables the Priority-based Flow Control (PFC) watchdog feature. When enabled, the watchdog actively monitors PFC pause frames. By default Priority Flow Control is enabled for new QoS policies. Existing policies remain unaffected. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `shutdown_multiplier`:(int) The Shutdown Multiplier, multiplied by the watchdog timer, determines the total duration a Priority-based Flow Control (PFC)-enabled queue remains in shutdown mode. The maximum Watchdog Shutdown Multiplier is 10. However, if the Watchdog Interval exceeds 500 milliseconds, the Multiplier limit is reduced to 2. 
+  + `watchdog_interval`:(int) Time in milliseconds for the PFC Watchdog. The Watchdog product (Watchdog Interval (in milliseconds) × Shutdown Multiplier) cannot exceed 1000ms. 
 * `profiles`:(Array) An array of relationships to fabricBaseSwitchProfile resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

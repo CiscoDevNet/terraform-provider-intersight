@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Actions** | Pointer to **[]string** |  | [optional] 
 **CompletionTime** | Pointer to **string** | The timestamp when the request processing completed. | [optional] [readonly] 
 **Headers** | Pointer to [**[]BulkHttpHeader**](BulkHttpHeader.md) |  | [optional] 
+**IsBackupEncryptionKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;backupEncryptionKey&#39; property has been set. | [optional] [readonly] [default to false]
 **NumSubRequests** | Pointer to **int64** | The number of sub requests received in this request. | [optional] [readonly] 
 **OrgMoid** | Pointer to **string** | The moid of the organization under which this request was issued. | [optional] [readonly] 
 **RequestReceivedTime** | Pointer to **string** | The timestamp when the request was received. | [optional] [readonly] 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **StatusMessage** | Pointer to **string** | The status message corresponding to the status. | [optional] [readonly] 
 **Uri** | Pointer to **string** | The URI on which this bulk action is to be performed. The value will be used when there is no override in the SubRequest. | [optional] 
 **Verb** | Pointer to **string** | The type of operation to be performed. One of - Post (Create), Patch (Update) or Delete (Remove). The value will be used when there is no override in the SubRequest. * &#x60;POST&#x60; - Used to create a REST resource. * &#x60;PATCH&#x60; - Used to update a REST resource. * &#x60;DELETE&#x60; - Used to delete a REST resource. | [optional] [default to "POST"]
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **AsyncResults** | Pointer to [**[]BulkSubRequestObjRelationship**](BulkSubRequestObjRelationship.md) | An array of relationships to bulkSubRequestObj resources. | [optional] [readonly] 
 **AsyncResultsFailed** | Pointer to [**[]BulkSubRequestObjRelationship**](BulkSubRequestObjRelationship.md) | An array of relationships to bulkSubRequestObj resources. | [optional] [readonly] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
@@ -204,6 +206,31 @@ HasHeaders returns a boolean if a field has been set.
 `func (o *BulkRequest) UnsetHeaders()`
 
 UnsetHeaders ensures that no value is present for Headers, not even an explicit nil
+### GetIsBackupEncryptionKeySet
+
+`func (o *BulkRequest) GetIsBackupEncryptionKeySet() bool`
+
+GetIsBackupEncryptionKeySet returns the IsBackupEncryptionKeySet field if non-nil, zero value otherwise.
+
+### GetIsBackupEncryptionKeySetOk
+
+`func (o *BulkRequest) GetIsBackupEncryptionKeySetOk() (*bool, bool)`
+
+GetIsBackupEncryptionKeySetOk returns a tuple with the IsBackupEncryptionKeySet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsBackupEncryptionKeySet
+
+`func (o *BulkRequest) SetIsBackupEncryptionKeySet(v bool)`
+
+SetIsBackupEncryptionKeySet sets IsBackupEncryptionKeySet field to given value.
+
+### HasIsBackupEncryptionKeySet
+
+`func (o *BulkRequest) HasIsBackupEncryptionKeySet() bool`
+
+HasIsBackupEncryptionKeySet returns a boolean if a field has been set.
+
 ### GetNumSubRequests
 
 `func (o *BulkRequest) GetNumSubRequests() int64`
@@ -474,6 +501,41 @@ SetVerb sets Verb field to given value.
 
 HasVerb returns a boolean if a field has been set.
 
+### GetAccount
+
+`func (o *BulkRequest) GetAccount() IamAccountRelationship`
+
+GetAccount returns the Account field if non-nil, zero value otherwise.
+
+### GetAccountOk
+
+`func (o *BulkRequest) GetAccountOk() (*IamAccountRelationship, bool)`
+
+GetAccountOk returns a tuple with the Account field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccount
+
+`func (o *BulkRequest) SetAccount(v IamAccountRelationship)`
+
+SetAccount sets Account field to given value.
+
+### HasAccount
+
+`func (o *BulkRequest) HasAccount() bool`
+
+HasAccount returns a boolean if a field has been set.
+
+### SetAccountNil
+
+`func (o *BulkRequest) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *BulkRequest) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetAsyncResults
 
 `func (o *BulkRequest) GetAsyncResults() []BulkSubRequestObjRelationship`

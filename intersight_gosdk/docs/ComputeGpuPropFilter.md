@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.GpuPropFilter"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.GpuPropFilter"]
 **Count** | Pointer to **int64** | Number of GPUs to be selected. | [optional] [default to 1]
-**Model** | Pointer to **string** | Specific GPU model to select. * &#x60;Any&#x60; - To select any GPU model available in GPU Node. * &#x60;UCSC-GPU-H100-NVL&#x60; - NVIDIA H100 GPU with NVL interface. * &#x60;UCSC-GPU-H200-NVL&#x60; - NVIDIA H200 GPU with NVLink interface. * &#x60;UCSC-GPU-L40S&#x60; - NVIDIA L40S GPU with PCIe interface. * &#x60;UCSC-GPU-RTXP6000&#x60; - NVIDIA RTXP6000 GPU with PCIe interface. | [optional] [default to "Any"]
+**Model** | Pointer to **string** | Specific GPU model to select. * &#x60;Any&#x60; - To select any GPU model available in GPU Node. * &#x60;UCSC-GPU-H100-NVL&#x60; - NVIDIA H100 GPU with NVL interface. * &#x60;UCSC-GPU-H200-NVL&#x60; - NVIDIA H200 GPU with NVLink interface. * &#x60;UCSC-GPU-L40S&#x60; - NVIDIA L40S GPU with PCIe interface. * &#x60;UCSC-GPU-RTXP6000&#x60; - NVIDIA RTXP6000 GPU with PCIe interface. * &#x60;UCSC-GPU-RTXP4500&#x60; - NVIDIA RTXP4500 GPU with PCIe interface. | [optional] [default to "Any"]
 
 ## Methods
 

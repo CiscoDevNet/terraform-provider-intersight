@@ -60,19 +60,6 @@ func Test_intersight_SchedulerApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SchedulerApiService DeleteSchedulerTaskResult", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.SchedulerApi.DeleteSchedulerTaskResult(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test SchedulerApiService DeleteSchedulerTaskSchedule", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

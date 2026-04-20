@@ -50,6 +50,10 @@ This complex property has following sub-properties:
   + `mac_aging_option`:(string) This specifies one of the option to configure the MAC address aging time.* `Default` - This option sets the default MAC address aging time to 14500 seconds for End Host mode.* `Custom` - This option allows the the user to configure the MAC address aging time on the switch. For Switch Model UCS-FI-6454 or higher, the valid range is 120 to 918000 seconds and the switch will set the lower multiple of 5 of the given time.* `Never` - This option disables the MAC address aging process and never allows the MAC address entries to get removed from the table. 
   + `mac_aging_time`:(int) Define the MAC address aging time in seconds. This field is valid when the \ Custom\  MAC address aging option is selected. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `mac_learning_settings`:(HashMap) - Settings to control mac learning options. 
+This complex property has following sub-properties:
+  + `disabled_vlans`:(string) List of VLANs for which MAC learning is disabled. Applicable only when Fabric Interconnect is in Ethernet Switching Mode. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 

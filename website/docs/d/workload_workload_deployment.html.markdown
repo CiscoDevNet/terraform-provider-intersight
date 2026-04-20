@@ -14,6 +14,7 @@ description: |-
         - **Change Tracking and Validation:** - Records all configuration changes and maintains validation state to ensure deployments remain properly configured before executing actions.
         - **Conformance Monitoring:** - Continuously monitors whether deployed instances remain in conformance with the deployment specification, detecting and reporting configuration drift.
         - **Rollout Strategy:** - Supports configurable rollout strategies for controlling how changes are propagated to existing workload instances, enabling controlled updates with minimal disruption.
+        - **Rename Support:** - Renames a workload deployment through the renameRequest property. This updates the deployment name and all the objects managed by the deployment.
 
 ---
 
@@ -29,6 +30,7 @@ A WorkloadDeployment bridges the gap between a workload definition (the template
 - **Change Tracking and Validation:** - Records all configuration changes and maintains validation state to ensure deployments remain properly configured before executing actions.
 - **Conformance Monitoring:** - Continuously monitors whether deployed instances remain in conformance with the deployment specification, detecting and reporting configuration drift.
 - **Rollout Strategy:** - Supports configurable rollout strategies for controlling how changes are propagated to existing workload instances, enabling controlled updates with minimal disruption.
+- **Rename Support:** - Renames a workload deployment through the renameRequest property. This updates the deployment name and all the objects managed by the deployment.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

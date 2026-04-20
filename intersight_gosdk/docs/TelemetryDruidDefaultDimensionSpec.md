@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | the dimension spec type. | 
-**Dimension** | **string** |  | 
-**OutputName** | **string** |  | 
-**OutputType** | **string** |  | [default to "STRING"]
+**Dimension** | **string** | Attributes or fields that provide context for metrics. | 
+**OutputName** | **string** | Name of the output dimension. | 
+**OutputType** | **string** | Type of the output dimension. | [default to "STRING"]
 
 ## Methods
 

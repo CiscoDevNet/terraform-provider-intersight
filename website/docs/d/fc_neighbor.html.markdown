@@ -21,11 +21,14 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `peer_device_capability`:(string) This field defines if neighbor is a switch or an NPV device.* `Switch` - Switch type neighbors of an interface.* `NPV` - N Port Virtualization neighbors of an interface. 
+* `peer_device_capability`:(string) This field defines if neighbor is a switch, storage or an NPV device.* `Switch` - Switch type neighbors of an interface.* `NPV` - N Port Virtualization neighbors of an interface.* `Storage` - Storage type neighbors of an interface. 
 * `peer_interface`:(string) Interface through which the relationship is established. 
 * `peer_ip_address`:(string) IP address of the peer switch. 
+* `peer_port_wwn`:(string) World Wide Name of the neighbor port. 
 * `peer_switch_name`:(string) Device Id of the neighbor switch. 
 * `peer_wwn`:(string) World Wide Name of the neighbor switch. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `vendor`:(string) Vendor name for the neighboring storage device. Available only for Storage neighbors. 
+* `vsan`:(int) VSAN associated with this neighbor port. 
  

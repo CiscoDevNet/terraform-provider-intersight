@@ -140,6 +140,16 @@ func getStoragePureVolumeSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nx_vm_disk_id": {
+			Description: "Nutanix disk UUID (extId) from owner_disk_id tag value.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"nx_vm_id": {
+			Description: "Nutanix VM UUID (extId) from owner_id tag value.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -825,6 +835,16 @@ func dataSourceStoragePureVolumeRead(c context.Context, d *schema.ResourceData, 
 		o.SetName(x)
 	}
 
+	if v, ok := d.GetOk("nx_vm_disk_id"); ok {
+		x := (v.(string))
+		o.SetNxVmDiskId(x)
+	}
+
+	if v, ok := d.GetOk("nx_vm_id"); ok {
+		x := (v.(string))
+		o.SetNxVmId(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1360,6 +1380,8 @@ func dataSourceStoragePureVolumeRead(c context.Context, d *schema.ResourceData, 
 				temp["moid"] = (s.GetMoid())
 				temp["naa_id"] = (s.GetNaaId())
 				temp["name"] = (s.GetName())
+				temp["nx_vm_disk_id"] = (s.GetNxVmDiskId())
+				temp["nx_vm_id"] = (s.GetNxVmId())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **RemovedPolicies** | Pointer to **[]string** |  | [optional] 
 **ReportedPolicyChanges** | Pointer to [**[]PolicyReportedPolicyChange**](PolicyReportedPolicyChange.md) |  | [optional] 
 **ScheduledActions** | Pointer to [**[]PolicyScheduledAction**](PolicyScheduledAction.md) |  | [optional] 
+**IncompletePolicies** | Pointer to [**[]PolicyAbstractPolicyRelationship**](PolicyAbstractPolicyRelationship.md) | An array of relationships to policyAbstractPolicy resources. | [optional] [readonly] 
 **PolicyBucket** | Pointer to [**[]PolicyAbstractPolicyRelationship**](PolicyAbstractPolicyRelationship.md) | An array of relationships to policyAbstractPolicy resources. | [optional] 
 
 ## Methods
@@ -381,6 +382,41 @@ HasScheduledActions returns a boolean if a field has been set.
 `func (o *PolicyAbstractConfigProfile) UnsetScheduledActions()`
 
 UnsetScheduledActions ensures that no value is present for ScheduledActions, not even an explicit nil
+### GetIncompletePolicies
+
+`func (o *PolicyAbstractConfigProfile) GetIncompletePolicies() []PolicyAbstractPolicyRelationship`
+
+GetIncompletePolicies returns the IncompletePolicies field if non-nil, zero value otherwise.
+
+### GetIncompletePoliciesOk
+
+`func (o *PolicyAbstractConfigProfile) GetIncompletePoliciesOk() (*[]PolicyAbstractPolicyRelationship, bool)`
+
+GetIncompletePoliciesOk returns a tuple with the IncompletePolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncompletePolicies
+
+`func (o *PolicyAbstractConfigProfile) SetIncompletePolicies(v []PolicyAbstractPolicyRelationship)`
+
+SetIncompletePolicies sets IncompletePolicies field to given value.
+
+### HasIncompletePolicies
+
+`func (o *PolicyAbstractConfigProfile) HasIncompletePolicies() bool`
+
+HasIncompletePolicies returns a boolean if a field has been set.
+
+### SetIncompletePoliciesNil
+
+`func (o *PolicyAbstractConfigProfile) SetIncompletePoliciesNil(b bool)`
+
+ SetIncompletePoliciesNil sets the value for IncompletePolicies to be an explicit nil
+
+### UnsetIncompletePolicies
+`func (o *PolicyAbstractConfigProfile) UnsetIncompletePolicies()`
+
+UnsetIncompletePolicies ensures that no value is present for IncompletePolicies, not even an explicit nil
 ### GetPolicyBucket
 
 `func (o *PolicyAbstractConfigProfile) GetPolicyBucket() []PolicyAbstractPolicyRelationship`

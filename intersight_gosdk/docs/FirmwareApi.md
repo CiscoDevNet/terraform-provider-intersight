@@ -4,54 +4,24 @@ All URIs are relative to *https://intersight.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateFirmwareBiosDescriptor**](FirmwareApi.md#CreateFirmwareBiosDescriptor) | **Post** /api/v1/firmware/BiosDescriptors | Create a &#39;firmware.BiosDescriptor&#39; resource.
-[**CreateFirmwareBoardControllerDescriptor**](FirmwareApi.md#CreateFirmwareBoardControllerDescriptor) | **Post** /api/v1/firmware/BoardControllerDescriptors | Create a &#39;firmware.BoardControllerDescriptor&#39; resource.
 [**CreateFirmwareChassisUpgrade**](FirmwareApi.md#CreateFirmwareChassisUpgrade) | **Post** /api/v1/firmware/ChassisUpgrades | Create a &#39;firmware.ChassisUpgrade&#39; resource.
-[**CreateFirmwareCimcDescriptor**](FirmwareApi.md#CreateFirmwareCimcDescriptor) | **Post** /api/v1/firmware/CimcDescriptors | Create a &#39;firmware.CimcDescriptor&#39; resource.
-[**CreateFirmwareDimmDescriptor**](FirmwareApi.md#CreateFirmwareDimmDescriptor) | **Post** /api/v1/firmware/DimmDescriptors | Create a &#39;firmware.DimmDescriptor&#39; resource.
 [**CreateFirmwareDistributable**](FirmwareApi.md#CreateFirmwareDistributable) | **Post** /api/v1/firmware/Distributables | Create a &#39;firmware.Distributable&#39; resource.
-[**CreateFirmwareDriveDescriptor**](FirmwareApi.md#CreateFirmwareDriveDescriptor) | **Post** /api/v1/firmware/DriveDescriptors | Create a &#39;firmware.DriveDescriptor&#39; resource.
 [**CreateFirmwareDriverDistributable**](FirmwareApi.md#CreateFirmwareDriverDistributable) | **Post** /api/v1/firmware/DriverDistributables | Create a &#39;firmware.DriverDistributable&#39; resource.
 [**CreateFirmwareEula**](FirmwareApi.md#CreateFirmwareEula) | **Post** /api/v1/firmware/Eulas | Create a &#39;firmware.Eula&#39; resource.
-[**CreateFirmwareGpuDescriptor**](FirmwareApi.md#CreateFirmwareGpuDescriptor) | **Post** /api/v1/firmware/GpuDescriptors | Create a &#39;firmware.GpuDescriptor&#39; resource.
-[**CreateFirmwareHbaDescriptor**](FirmwareApi.md#CreateFirmwareHbaDescriptor) | **Post** /api/v1/firmware/HbaDescriptors | Create a &#39;firmware.HbaDescriptor&#39; resource.
-[**CreateFirmwareIomDescriptor**](FirmwareApi.md#CreateFirmwareIomDescriptor) | **Post** /api/v1/firmware/IomDescriptors | Create a &#39;firmware.IomDescriptor&#39; resource.
-[**CreateFirmwareMswitchDescriptor**](FirmwareApi.md#CreateFirmwareMswitchDescriptor) | **Post** /api/v1/firmware/MswitchDescriptors | Create a &#39;firmware.MswitchDescriptor&#39; resource.
-[**CreateFirmwareNxosDescriptor**](FirmwareApi.md#CreateFirmwareNxosDescriptor) | **Post** /api/v1/firmware/NxosDescriptors | Create a &#39;firmware.NxosDescriptor&#39; resource.
 [**CreateFirmwarePciNodeUpgrade**](FirmwareApi.md#CreateFirmwarePciNodeUpgrade) | **Post** /api/v1/firmware/PciNodeUpgrades | Create a &#39;firmware.PciNodeUpgrade&#39; resource.
-[**CreateFirmwarePcieDescriptor**](FirmwareApi.md#CreateFirmwarePcieDescriptor) | **Post** /api/v1/firmware/PcieDescriptors | Create a &#39;firmware.PcieDescriptor&#39; resource.
 [**CreateFirmwarePolicy**](FirmwareApi.md#CreateFirmwarePolicy) | **Post** /api/v1/firmware/Policies | Create a &#39;firmware.Policy&#39; resource.
-[**CreateFirmwarePsuDescriptor**](FirmwareApi.md#CreateFirmwarePsuDescriptor) | **Post** /api/v1/firmware/PsuDescriptors | Create a &#39;firmware.PsuDescriptor&#39; resource.
-[**CreateFirmwarePsxDescriptor**](FirmwareApi.md#CreateFirmwarePsxDescriptor) | **Post** /api/v1/firmware/PsxDescriptors | Create a &#39;firmware.PsxDescriptor&#39; resource.
-[**CreateFirmwareSasExpanderDescriptor**](FirmwareApi.md#CreateFirmwareSasExpanderDescriptor) | **Post** /api/v1/firmware/SasExpanderDescriptors | Create a &#39;firmware.SasExpanderDescriptor&#39; resource.
 [**CreateFirmwareServerConfigurationUtilityDistributable**](FirmwareApi.md#CreateFirmwareServerConfigurationUtilityDistributable) | **Post** /api/v1/firmware/ServerConfigurationUtilityDistributables | Create a &#39;firmware.ServerConfigurationUtilityDistributable&#39; resource.
-[**CreateFirmwareStorageControllerDescriptor**](FirmwareApi.md#CreateFirmwareStorageControllerDescriptor) | **Post** /api/v1/firmware/StorageControllerDescriptors | Create a &#39;firmware.StorageControllerDescriptor&#39; resource.
 [**CreateFirmwareSwitchUpgrade**](FirmwareApi.md#CreateFirmwareSwitchUpgrade) | **Post** /api/v1/firmware/SwitchUpgrades | Create a &#39;firmware.SwitchUpgrade&#39; resource.
 [**CreateFirmwareUnsupportedVersionUpgrade**](FirmwareApi.md#CreateFirmwareUnsupportedVersionUpgrade) | **Post** /api/v1/firmware/UnsupportedVersionUpgrades | Create a &#39;firmware.UnsupportedVersionUpgrade&#39; resource.
 [**CreateFirmwareUpgrade**](FirmwareApi.md#CreateFirmwareUpgrade) | **Post** /api/v1/firmware/Upgrades | Create a &#39;firmware.Upgrade&#39; resource.
 [**CreateFirmwareUpgradeImpact**](FirmwareApi.md#CreateFirmwareUpgradeImpact) | **Post** /api/v1/firmware/UpgradeImpacts | Create a &#39;firmware.UpgradeImpact&#39; resource.
 [**CreateFirmwareUpgradeValidity**](FirmwareApi.md#CreateFirmwareUpgradeValidity) | **Post** /api/v1/firmware/UpgradeValidities | Create a &#39;firmware.UpgradeValidity&#39; resource.
-[**DeleteFirmwareBiosDescriptor**](FirmwareApi.md#DeleteFirmwareBiosDescriptor) | **Delete** /api/v1/firmware/BiosDescriptors/{Moid} | Delete a &#39;firmware.BiosDescriptor&#39; resource.
-[**DeleteFirmwareBoardControllerDescriptor**](FirmwareApi.md#DeleteFirmwareBoardControllerDescriptor) | **Delete** /api/v1/firmware/BoardControllerDescriptors/{Moid} | Delete a &#39;firmware.BoardControllerDescriptor&#39; resource.
 [**DeleteFirmwareChassisUpgrade**](FirmwareApi.md#DeleteFirmwareChassisUpgrade) | **Delete** /api/v1/firmware/ChassisUpgrades/{Moid} | Delete a &#39;firmware.ChassisUpgrade&#39; resource.
-[**DeleteFirmwareCimcDescriptor**](FirmwareApi.md#DeleteFirmwareCimcDescriptor) | **Delete** /api/v1/firmware/CimcDescriptors/{Moid} | Delete a &#39;firmware.CimcDescriptor&#39; resource.
-[**DeleteFirmwareDimmDescriptor**](FirmwareApi.md#DeleteFirmwareDimmDescriptor) | **Delete** /api/v1/firmware/DimmDescriptors/{Moid} | Delete a &#39;firmware.DimmDescriptor&#39; resource.
 [**DeleteFirmwareDistributable**](FirmwareApi.md#DeleteFirmwareDistributable) | **Delete** /api/v1/firmware/Distributables/{Moid} | Delete a &#39;firmware.Distributable&#39; resource.
-[**DeleteFirmwareDriveDescriptor**](FirmwareApi.md#DeleteFirmwareDriveDescriptor) | **Delete** /api/v1/firmware/DriveDescriptors/{Moid} | Delete a &#39;firmware.DriveDescriptor&#39; resource.
 [**DeleteFirmwareDriverDistributable**](FirmwareApi.md#DeleteFirmwareDriverDistributable) | **Delete** /api/v1/firmware/DriverDistributables/{Moid} | Delete a &#39;firmware.DriverDistributable&#39; resource.
-[**DeleteFirmwareGpuDescriptor**](FirmwareApi.md#DeleteFirmwareGpuDescriptor) | **Delete** /api/v1/firmware/GpuDescriptors/{Moid} | Delete a &#39;firmware.GpuDescriptor&#39; resource.
-[**DeleteFirmwareHbaDescriptor**](FirmwareApi.md#DeleteFirmwareHbaDescriptor) | **Delete** /api/v1/firmware/HbaDescriptors/{Moid} | Delete a &#39;firmware.HbaDescriptor&#39; resource.
-[**DeleteFirmwareIomDescriptor**](FirmwareApi.md#DeleteFirmwareIomDescriptor) | **Delete** /api/v1/firmware/IomDescriptors/{Moid} | Delete a &#39;firmware.IomDescriptor&#39; resource.
-[**DeleteFirmwareMswitchDescriptor**](FirmwareApi.md#DeleteFirmwareMswitchDescriptor) | **Delete** /api/v1/firmware/MswitchDescriptors/{Moid} | Delete a &#39;firmware.MswitchDescriptor&#39; resource.
-[**DeleteFirmwareNxosDescriptor**](FirmwareApi.md#DeleteFirmwareNxosDescriptor) | **Delete** /api/v1/firmware/NxosDescriptors/{Moid} | Delete a &#39;firmware.NxosDescriptor&#39; resource.
 [**DeleteFirmwarePciNodeUpgrade**](FirmwareApi.md#DeleteFirmwarePciNodeUpgrade) | **Delete** /api/v1/firmware/PciNodeUpgrades/{Moid} | Delete a &#39;firmware.PciNodeUpgrade&#39; resource.
-[**DeleteFirmwarePcieDescriptor**](FirmwareApi.md#DeleteFirmwarePcieDescriptor) | **Delete** /api/v1/firmware/PcieDescriptors/{Moid} | Delete a &#39;firmware.PcieDescriptor&#39; resource.
 [**DeleteFirmwarePolicy**](FirmwareApi.md#DeleteFirmwarePolicy) | **Delete** /api/v1/firmware/Policies/{Moid} | Delete a &#39;firmware.Policy&#39; resource.
-[**DeleteFirmwarePsuDescriptor**](FirmwareApi.md#DeleteFirmwarePsuDescriptor) | **Delete** /api/v1/firmware/PsuDescriptors/{Moid} | Delete a &#39;firmware.PsuDescriptor&#39; resource.
-[**DeleteFirmwarePsxDescriptor**](FirmwareApi.md#DeleteFirmwarePsxDescriptor) | **Delete** /api/v1/firmware/PsxDescriptors/{Moid} | Delete a &#39;firmware.PsxDescriptor&#39; resource.
-[**DeleteFirmwareSasExpanderDescriptor**](FirmwareApi.md#DeleteFirmwareSasExpanderDescriptor) | **Delete** /api/v1/firmware/SasExpanderDescriptors/{Moid} | Delete a &#39;firmware.SasExpanderDescriptor&#39; resource.
 [**DeleteFirmwareServerConfigurationUtilityDistributable**](FirmwareApi.md#DeleteFirmwareServerConfigurationUtilityDistributable) | **Delete** /api/v1/firmware/ServerConfigurationUtilityDistributables/{Moid} | Delete a &#39;firmware.ServerConfigurationUtilityDistributable&#39; resource.
-[**DeleteFirmwareStorageControllerDescriptor**](FirmwareApi.md#DeleteFirmwareStorageControllerDescriptor) | **Delete** /api/v1/firmware/StorageControllerDescriptors/{Moid} | Delete a &#39;firmware.StorageControllerDescriptor&#39; resource.
 [**DeleteFirmwareSwitchUpgrade**](FirmwareApi.md#DeleteFirmwareSwitchUpgrade) | **Delete** /api/v1/firmware/SwitchUpgrades/{Moid} | Delete a &#39;firmware.SwitchUpgrade&#39; resource.
 [**DeleteFirmwareUnsupportedVersionUpgrade**](FirmwareApi.md#DeleteFirmwareUnsupportedVersionUpgrade) | **Delete** /api/v1/firmware/UnsupportedVersionUpgrades/{Moid} | Delete a &#39;firmware.UnsupportedVersionUpgrade&#39; resource.
 [**DeleteFirmwareUpgrade**](FirmwareApi.md#DeleteFirmwareUpgrade) | **Delete** /api/v1/firmware/Upgrades/{Moid} | Delete a &#39;firmware.Upgrade&#39; resource.
@@ -115,187 +85,21 @@ Method | HTTP request | Description
 [**GetFirmwareUpgradeList**](FirmwareApi.md#GetFirmwareUpgradeList) | **Get** /api/v1/firmware/Upgrades | Read a &#39;firmware.Upgrade&#39; resource.
 [**GetFirmwareUpgradeStatusByMoid**](FirmwareApi.md#GetFirmwareUpgradeStatusByMoid) | **Get** /api/v1/firmware/UpgradeStatuses/{Moid} | Read a &#39;firmware.UpgradeStatus&#39; resource.
 [**GetFirmwareUpgradeStatusList**](FirmwareApi.md#GetFirmwareUpgradeStatusList) | **Get** /api/v1/firmware/UpgradeStatuses | Read a &#39;firmware.UpgradeStatus&#39; resource.
-[**PatchFirmwareBiosDescriptor**](FirmwareApi.md#PatchFirmwareBiosDescriptor) | **Patch** /api/v1/firmware/BiosDescriptors/{Moid} | Update a &#39;firmware.BiosDescriptor&#39; resource.
-[**PatchFirmwareBoardControllerDescriptor**](FirmwareApi.md#PatchFirmwareBoardControllerDescriptor) | **Patch** /api/v1/firmware/BoardControllerDescriptors/{Moid} | Update a &#39;firmware.BoardControllerDescriptor&#39; resource.
-[**PatchFirmwareCimcDescriptor**](FirmwareApi.md#PatchFirmwareCimcDescriptor) | **Patch** /api/v1/firmware/CimcDescriptors/{Moid} | Update a &#39;firmware.CimcDescriptor&#39; resource.
-[**PatchFirmwareDimmDescriptor**](FirmwareApi.md#PatchFirmwareDimmDescriptor) | **Patch** /api/v1/firmware/DimmDescriptors/{Moid} | Update a &#39;firmware.DimmDescriptor&#39; resource.
 [**PatchFirmwareDistributable**](FirmwareApi.md#PatchFirmwareDistributable) | **Patch** /api/v1/firmware/Distributables/{Moid} | Update a &#39;firmware.Distributable&#39; resource.
-[**PatchFirmwareDriveDescriptor**](FirmwareApi.md#PatchFirmwareDriveDescriptor) | **Patch** /api/v1/firmware/DriveDescriptors/{Moid} | Update a &#39;firmware.DriveDescriptor&#39; resource.
 [**PatchFirmwareDriverDistributable**](FirmwareApi.md#PatchFirmwareDriverDistributable) | **Patch** /api/v1/firmware/DriverDistributables/{Moid} | Update a &#39;firmware.DriverDistributable&#39; resource.
-[**PatchFirmwareGpuDescriptor**](FirmwareApi.md#PatchFirmwareGpuDescriptor) | **Patch** /api/v1/firmware/GpuDescriptors/{Moid} | Update a &#39;firmware.GpuDescriptor&#39; resource.
-[**PatchFirmwareHbaDescriptor**](FirmwareApi.md#PatchFirmwareHbaDescriptor) | **Patch** /api/v1/firmware/HbaDescriptors/{Moid} | Update a &#39;firmware.HbaDescriptor&#39; resource.
-[**PatchFirmwareIomDescriptor**](FirmwareApi.md#PatchFirmwareIomDescriptor) | **Patch** /api/v1/firmware/IomDescriptors/{Moid} | Update a &#39;firmware.IomDescriptor&#39; resource.
-[**PatchFirmwareMswitchDescriptor**](FirmwareApi.md#PatchFirmwareMswitchDescriptor) | **Patch** /api/v1/firmware/MswitchDescriptors/{Moid} | Update a &#39;firmware.MswitchDescriptor&#39; resource.
-[**PatchFirmwareNxosDescriptor**](FirmwareApi.md#PatchFirmwareNxosDescriptor) | **Patch** /api/v1/firmware/NxosDescriptors/{Moid} | Update a &#39;firmware.NxosDescriptor&#39; resource.
-[**PatchFirmwarePcieDescriptor**](FirmwareApi.md#PatchFirmwarePcieDescriptor) | **Patch** /api/v1/firmware/PcieDescriptors/{Moid} | Update a &#39;firmware.PcieDescriptor&#39; resource.
 [**PatchFirmwarePolicy**](FirmwareApi.md#PatchFirmwarePolicy) | **Patch** /api/v1/firmware/Policies/{Moid} | Update a &#39;firmware.Policy&#39; resource.
-[**PatchFirmwarePsuDescriptor**](FirmwareApi.md#PatchFirmwarePsuDescriptor) | **Patch** /api/v1/firmware/PsuDescriptors/{Moid} | Update a &#39;firmware.PsuDescriptor&#39; resource.
-[**PatchFirmwarePsxDescriptor**](FirmwareApi.md#PatchFirmwarePsxDescriptor) | **Patch** /api/v1/firmware/PsxDescriptors/{Moid} | Update a &#39;firmware.PsxDescriptor&#39; resource.
 [**PatchFirmwareRunningFirmware**](FirmwareApi.md#PatchFirmwareRunningFirmware) | **Patch** /api/v1/firmware/RunningFirmwares/{Moid} | Update a &#39;firmware.RunningFirmware&#39; resource.
-[**PatchFirmwareSasExpanderDescriptor**](FirmwareApi.md#PatchFirmwareSasExpanderDescriptor) | **Patch** /api/v1/firmware/SasExpanderDescriptors/{Moid} | Update a &#39;firmware.SasExpanderDescriptor&#39; resource.
 [**PatchFirmwareServerConfigurationUtilityDistributable**](FirmwareApi.md#PatchFirmwareServerConfigurationUtilityDistributable) | **Patch** /api/v1/firmware/ServerConfigurationUtilityDistributables/{Moid} | Update a &#39;firmware.ServerConfigurationUtilityDistributable&#39; resource.
-[**PatchFirmwareStorageControllerDescriptor**](FirmwareApi.md#PatchFirmwareStorageControllerDescriptor) | **Patch** /api/v1/firmware/StorageControllerDescriptors/{Moid} | Update a &#39;firmware.StorageControllerDescriptor&#39; resource.
 [**PatchFirmwareUnsupportedVersionUpgrade**](FirmwareApi.md#PatchFirmwareUnsupportedVersionUpgrade) | **Patch** /api/v1/firmware/UnsupportedVersionUpgrades/{Moid} | Update a &#39;firmware.UnsupportedVersionUpgrade&#39; resource.
 [**PatchFirmwareUpgrade**](FirmwareApi.md#PatchFirmwareUpgrade) | **Patch** /api/v1/firmware/Upgrades/{Moid} | Update a &#39;firmware.Upgrade&#39; resource.
-[**UpdateFirmwareBiosDescriptor**](FirmwareApi.md#UpdateFirmwareBiosDescriptor) | **Post** /api/v1/firmware/BiosDescriptors/{Moid} | Update a &#39;firmware.BiosDescriptor&#39; resource.
-[**UpdateFirmwareBoardControllerDescriptor**](FirmwareApi.md#UpdateFirmwareBoardControllerDescriptor) | **Post** /api/v1/firmware/BoardControllerDescriptors/{Moid} | Update a &#39;firmware.BoardControllerDescriptor&#39; resource.
-[**UpdateFirmwareCimcDescriptor**](FirmwareApi.md#UpdateFirmwareCimcDescriptor) | **Post** /api/v1/firmware/CimcDescriptors/{Moid} | Update a &#39;firmware.CimcDescriptor&#39; resource.
-[**UpdateFirmwareDimmDescriptor**](FirmwareApi.md#UpdateFirmwareDimmDescriptor) | **Post** /api/v1/firmware/DimmDescriptors/{Moid} | Update a &#39;firmware.DimmDescriptor&#39; resource.
 [**UpdateFirmwareDistributable**](FirmwareApi.md#UpdateFirmwareDistributable) | **Post** /api/v1/firmware/Distributables/{Moid} | Update a &#39;firmware.Distributable&#39; resource.
-[**UpdateFirmwareDriveDescriptor**](FirmwareApi.md#UpdateFirmwareDriveDescriptor) | **Post** /api/v1/firmware/DriveDescriptors/{Moid} | Update a &#39;firmware.DriveDescriptor&#39; resource.
 [**UpdateFirmwareDriverDistributable**](FirmwareApi.md#UpdateFirmwareDriverDistributable) | **Post** /api/v1/firmware/DriverDistributables/{Moid} | Update a &#39;firmware.DriverDistributable&#39; resource.
-[**UpdateFirmwareGpuDescriptor**](FirmwareApi.md#UpdateFirmwareGpuDescriptor) | **Post** /api/v1/firmware/GpuDescriptors/{Moid} | Update a &#39;firmware.GpuDescriptor&#39; resource.
-[**UpdateFirmwareHbaDescriptor**](FirmwareApi.md#UpdateFirmwareHbaDescriptor) | **Post** /api/v1/firmware/HbaDescriptors/{Moid} | Update a &#39;firmware.HbaDescriptor&#39; resource.
-[**UpdateFirmwareIomDescriptor**](FirmwareApi.md#UpdateFirmwareIomDescriptor) | **Post** /api/v1/firmware/IomDescriptors/{Moid} | Update a &#39;firmware.IomDescriptor&#39; resource.
-[**UpdateFirmwareMswitchDescriptor**](FirmwareApi.md#UpdateFirmwareMswitchDescriptor) | **Post** /api/v1/firmware/MswitchDescriptors/{Moid} | Update a &#39;firmware.MswitchDescriptor&#39; resource.
-[**UpdateFirmwareNxosDescriptor**](FirmwareApi.md#UpdateFirmwareNxosDescriptor) | **Post** /api/v1/firmware/NxosDescriptors/{Moid} | Update a &#39;firmware.NxosDescriptor&#39; resource.
-[**UpdateFirmwarePcieDescriptor**](FirmwareApi.md#UpdateFirmwarePcieDescriptor) | **Post** /api/v1/firmware/PcieDescriptors/{Moid} | Update a &#39;firmware.PcieDescriptor&#39; resource.
 [**UpdateFirmwarePolicy**](FirmwareApi.md#UpdateFirmwarePolicy) | **Post** /api/v1/firmware/Policies/{Moid} | Update a &#39;firmware.Policy&#39; resource.
-[**UpdateFirmwarePsuDescriptor**](FirmwareApi.md#UpdateFirmwarePsuDescriptor) | **Post** /api/v1/firmware/PsuDescriptors/{Moid} | Update a &#39;firmware.PsuDescriptor&#39; resource.
-[**UpdateFirmwarePsxDescriptor**](FirmwareApi.md#UpdateFirmwarePsxDescriptor) | **Post** /api/v1/firmware/PsxDescriptors/{Moid} | Update a &#39;firmware.PsxDescriptor&#39; resource.
 [**UpdateFirmwareRunningFirmware**](FirmwareApi.md#UpdateFirmwareRunningFirmware) | **Post** /api/v1/firmware/RunningFirmwares/{Moid} | Update a &#39;firmware.RunningFirmware&#39; resource.
-[**UpdateFirmwareSasExpanderDescriptor**](FirmwareApi.md#UpdateFirmwareSasExpanderDescriptor) | **Post** /api/v1/firmware/SasExpanderDescriptors/{Moid} | Update a &#39;firmware.SasExpanderDescriptor&#39; resource.
 [**UpdateFirmwareServerConfigurationUtilityDistributable**](FirmwareApi.md#UpdateFirmwareServerConfigurationUtilityDistributable) | **Post** /api/v1/firmware/ServerConfigurationUtilityDistributables/{Moid} | Update a &#39;firmware.ServerConfigurationUtilityDistributable&#39; resource.
-[**UpdateFirmwareStorageControllerDescriptor**](FirmwareApi.md#UpdateFirmwareStorageControllerDescriptor) | **Post** /api/v1/firmware/StorageControllerDescriptors/{Moid} | Update a &#39;firmware.StorageControllerDescriptor&#39; resource.
 [**UpdateFirmwareUnsupportedVersionUpgrade**](FirmwareApi.md#UpdateFirmwareUnsupportedVersionUpgrade) | **Post** /api/v1/firmware/UnsupportedVersionUpgrades/{Moid} | Update a &#39;firmware.UnsupportedVersionUpgrade&#39; resource.
 [**UpdateFirmwareUpgrade**](FirmwareApi.md#UpdateFirmwareUpgrade) | **Post** /api/v1/firmware/Upgrades/{Moid} | Update a &#39;firmware.Upgrade&#39; resource.
 
-
-
-## CreateFirmwareBiosDescriptor
-
-> FirmwareBiosDescriptor CreateFirmwareBiosDescriptor(ctx).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.BiosDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareBiosDescriptor := *openapiclient.NewFirmwareBiosDescriptor("ClassId_example", "ObjectType_example") // FirmwareBiosDescriptor | The 'firmware.BiosDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareBiosDescriptor(context.Background()).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareBiosDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareBiosDescriptor`: FirmwareBiosDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareBiosDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareBiosDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareBiosDescriptor** | [**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md) | The &#39;firmware.BiosDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwareBoardControllerDescriptor
-
-> FirmwareBoardControllerDescriptor CreateFirmwareBoardControllerDescriptor(ctx).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.BoardControllerDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareBoardControllerDescriptor := *openapiclient.NewFirmwareBoardControllerDescriptor("ClassId_example", "ObjectType_example") // FirmwareBoardControllerDescriptor | The 'firmware.BoardControllerDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareBoardControllerDescriptor(context.Background()).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareBoardControllerDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareBoardControllerDescriptor`: FirmwareBoardControllerDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareBoardControllerDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareBoardControllerDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareBoardControllerDescriptor** | [**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md) | The &#39;firmware.BoardControllerDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## CreateFirmwareChassisUpgrade
@@ -366,142 +170,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateFirmwareCimcDescriptor
-
-> FirmwareCimcDescriptor CreateFirmwareCimcDescriptor(ctx).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.CimcDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareCimcDescriptor := *openapiclient.NewFirmwareCimcDescriptor("ClassId_example", "ObjectType_example") // FirmwareCimcDescriptor | The 'firmware.CimcDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareCimcDescriptor(context.Background()).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareCimcDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareCimcDescriptor`: FirmwareCimcDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareCimcDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareCimcDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareCimcDescriptor** | [**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md) | The &#39;firmware.CimcDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwareDimmDescriptor
-
-> FirmwareDimmDescriptor CreateFirmwareDimmDescriptor(ctx).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.DimmDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareDimmDescriptor := *openapiclient.NewFirmwareDimmDescriptor("ClassId_example", "ObjectType_example") // FirmwareDimmDescriptor | The 'firmware.DimmDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareDimmDescriptor(context.Background()).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareDimmDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareDimmDescriptor`: FirmwareDimmDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareDimmDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareDimmDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareDimmDescriptor** | [**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md) | The &#39;firmware.DimmDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## CreateFirmwareDistributable
 
 > FirmwareDistributable CreateFirmwareDistributable(ctx).FirmwareDistributable(firmwareDistributable).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -555,74 +223,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FirmwareDistributable**](FirmwareDistributable.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwareDriveDescriptor
-
-> FirmwareDriveDescriptor CreateFirmwareDriveDescriptor(ctx).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.DriveDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareDriveDescriptor := *openapiclient.NewFirmwareDriveDescriptor("ClassId_example", "ObjectType_example") // FirmwareDriveDescriptor | The 'firmware.DriveDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareDriveDescriptor(context.Background()).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareDriveDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareDriveDescriptor`: FirmwareDriveDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareDriveDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareDriveDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareDriveDescriptor** | [**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md) | The &#39;firmware.DriveDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
 
 ### Authorization
 
@@ -774,346 +374,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateFirmwareGpuDescriptor
-
-> FirmwareGpuDescriptor CreateFirmwareGpuDescriptor(ctx).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.GpuDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareGpuDescriptor := *openapiclient.NewFirmwareGpuDescriptor("ClassId_example", "ObjectType_example") // FirmwareGpuDescriptor | The 'firmware.GpuDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareGpuDescriptor(context.Background()).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareGpuDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareGpuDescriptor`: FirmwareGpuDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareGpuDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareGpuDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareGpuDescriptor** | [**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md) | The &#39;firmware.GpuDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwareHbaDescriptor
-
-> FirmwareHbaDescriptor CreateFirmwareHbaDescriptor(ctx).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.HbaDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareHbaDescriptor := *openapiclient.NewFirmwareHbaDescriptor("ClassId_example", "ObjectType_example") // FirmwareHbaDescriptor | The 'firmware.HbaDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareHbaDescriptor(context.Background()).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareHbaDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareHbaDescriptor`: FirmwareHbaDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareHbaDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareHbaDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareHbaDescriptor** | [**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md) | The &#39;firmware.HbaDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwareIomDescriptor
-
-> FirmwareIomDescriptor CreateFirmwareIomDescriptor(ctx).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.IomDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareIomDescriptor := *openapiclient.NewFirmwareIomDescriptor("ClassId_example", "ObjectType_example") // FirmwareIomDescriptor | The 'firmware.IomDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareIomDescriptor(context.Background()).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareIomDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareIomDescriptor`: FirmwareIomDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareIomDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareIomDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareIomDescriptor** | [**FirmwareIomDescriptor**](FirmwareIomDescriptor.md) | The &#39;firmware.IomDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwareMswitchDescriptor
-
-> FirmwareMswitchDescriptor CreateFirmwareMswitchDescriptor(ctx).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.MswitchDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareMswitchDescriptor := *openapiclient.NewFirmwareMswitchDescriptor("ClassId_example", "ObjectType_example") // FirmwareMswitchDescriptor | The 'firmware.MswitchDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareMswitchDescriptor(context.Background()).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareMswitchDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareMswitchDescriptor`: FirmwareMswitchDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareMswitchDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareMswitchDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareMswitchDescriptor** | [**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md) | The &#39;firmware.MswitchDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwareNxosDescriptor
-
-> FirmwareNxosDescriptor CreateFirmwareNxosDescriptor(ctx).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.NxosDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareNxosDescriptor := *openapiclient.NewFirmwareNxosDescriptor("ClassId_example", "ObjectType_example") // FirmwareNxosDescriptor | The 'firmware.NxosDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareNxosDescriptor(context.Background()).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareNxosDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareNxosDescriptor`: FirmwareNxosDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareNxosDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareNxosDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareNxosDescriptor** | [**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md) | The &#39;firmware.NxosDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## CreateFirmwarePciNodeUpgrade
 
 > FirmwarePciNodeUpgrade CreateFirmwarePciNodeUpgrade(ctx).FirmwarePciNodeUpgrade(firmwarePciNodeUpgrade).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -1167,74 +427,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FirmwarePciNodeUpgrade**](FirmwarePciNodeUpgrade.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwarePcieDescriptor
-
-> FirmwarePcieDescriptor CreateFirmwarePcieDescriptor(ctx).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.PcieDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwarePcieDescriptor := *openapiclient.NewFirmwarePcieDescriptor("ClassId_example", "ObjectType_example") // FirmwarePcieDescriptor | The 'firmware.PcieDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwarePcieDescriptor(context.Background()).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwarePcieDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwarePcieDescriptor`: FirmwarePcieDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwarePcieDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwarePcieDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwarePcieDescriptor** | [**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md) | The &#39;firmware.PcieDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
 
 ### Authorization
 
@@ -1318,210 +510,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateFirmwarePsuDescriptor
-
-> FirmwarePsuDescriptor CreateFirmwarePsuDescriptor(ctx).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.PsuDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwarePsuDescriptor := *openapiclient.NewFirmwarePsuDescriptor("ClassId_example", "ObjectType_example") // FirmwarePsuDescriptor | The 'firmware.PsuDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwarePsuDescriptor(context.Background()).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwarePsuDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwarePsuDescriptor`: FirmwarePsuDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwarePsuDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwarePsuDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwarePsuDescriptor** | [**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md) | The &#39;firmware.PsuDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwarePsxDescriptor
-
-> FirmwarePsxDescriptor CreateFirmwarePsxDescriptor(ctx).FirmwarePsxDescriptor(firmwarePsxDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.PsxDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwarePsxDescriptor := *openapiclient.NewFirmwarePsxDescriptor("ClassId_example", "ObjectType_example") // FirmwarePsxDescriptor | The 'firmware.PsxDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwarePsxDescriptor(context.Background()).FirmwarePsxDescriptor(firmwarePsxDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwarePsxDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwarePsxDescriptor`: FirmwarePsxDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwarePsxDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwarePsxDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwarePsxDescriptor** | [**FirmwarePsxDescriptor**](FirmwarePsxDescriptor.md) | The &#39;firmware.PsxDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwarePsxDescriptor**](FirmwarePsxDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwareSasExpanderDescriptor
-
-> FirmwareSasExpanderDescriptor CreateFirmwareSasExpanderDescriptor(ctx).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.SasExpanderDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareSasExpanderDescriptor := *openapiclient.NewFirmwareSasExpanderDescriptor("ClassId_example", "ObjectType_example") // FirmwareSasExpanderDescriptor | The 'firmware.SasExpanderDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareSasExpanderDescriptor(context.Background()).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareSasExpanderDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareSasExpanderDescriptor`: FirmwareSasExpanderDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareSasExpanderDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareSasExpanderDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareSasExpanderDescriptor** | [**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md) | The &#39;firmware.SasExpanderDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## CreateFirmwareServerConfigurationUtilityDistributable
 
 > FirmwareServerConfigurationUtilityDistributable CreateFirmwareServerConfigurationUtilityDistributable(ctx).FirmwareServerConfigurationUtilityDistributable(firmwareServerConfigurationUtilityDistributable).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -1575,74 +563,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FirmwareServerConfigurationUtilityDistributable**](FirmwareServerConfigurationUtilityDistributable.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFirmwareStorageControllerDescriptor
-
-> FirmwareStorageControllerDescriptor CreateFirmwareStorageControllerDescriptor(ctx).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'firmware.StorageControllerDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	firmwareStorageControllerDescriptor := *openapiclient.NewFirmwareStorageControllerDescriptor("ClassId_example", "ObjectType_example") // FirmwareStorageControllerDescriptor | The 'firmware.StorageControllerDescriptor' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.CreateFirmwareStorageControllerDescriptor(context.Background()).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareStorageControllerDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFirmwareStorageControllerDescriptor`: FirmwareStorageControllerDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareStorageControllerDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFirmwareStorageControllerDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **firmwareStorageControllerDescriptor** | [**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md) | The &#39;firmware.StorageControllerDescriptor&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
 
 ### Authorization
 
@@ -1998,138 +918,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteFirmwareBiosDescriptor
-
-> DeleteFirmwareBiosDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.BiosDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareBiosDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareBiosDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareBiosDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareBoardControllerDescriptor
-
-> DeleteFirmwareBoardControllerDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.BoardControllerDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareBoardControllerDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareBoardControllerDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareBoardControllerDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteFirmwareChassisUpgrade
 
 > DeleteFirmwareChassisUpgrade(ctx, moid).Execute()
@@ -2172,138 +960,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteFirmwareChassisUpgradeRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareCimcDescriptor
-
-> DeleteFirmwareCimcDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.CimcDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareCimcDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareCimcDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareCimcDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareDimmDescriptor
-
-> DeleteFirmwareDimmDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.DimmDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareDimmDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareDimmDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareDimmDescriptorRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2394,72 +1050,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteFirmwareDriveDescriptor
-
-> DeleteFirmwareDriveDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.DriveDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareDriveDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareDriveDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareDriveDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteFirmwareDriverDistributable
 
 > DeleteFirmwareDriverDistributable(ctx, moid).Execute()
@@ -2502,336 +1092,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteFirmwareDriverDistributableRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareGpuDescriptor
-
-> DeleteFirmwareGpuDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.GpuDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareGpuDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareGpuDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareGpuDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareHbaDescriptor
-
-> DeleteFirmwareHbaDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.HbaDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareHbaDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareHbaDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareHbaDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareIomDescriptor
-
-> DeleteFirmwareIomDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.IomDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareIomDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareIomDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareIomDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareMswitchDescriptor
-
-> DeleteFirmwareMswitchDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.MswitchDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareMswitchDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareMswitchDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareMswitchDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareNxosDescriptor
-
-> DeleteFirmwareNxosDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.NxosDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareNxosDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareNxosDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareNxosDescriptorRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2922,72 +1182,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteFirmwarePcieDescriptor
-
-> DeleteFirmwarePcieDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.PcieDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwarePcieDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwarePcieDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwarePcieDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteFirmwarePolicy
 
 > DeleteFirmwarePolicy(ctx, moid).Execute()
@@ -3054,204 +1248,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteFirmwarePsuDescriptor
-
-> DeleteFirmwarePsuDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.PsuDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwarePsuDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwarePsuDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwarePsuDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwarePsxDescriptor
-
-> DeleteFirmwarePsxDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.PsxDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwarePsxDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwarePsxDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwarePsxDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareSasExpanderDescriptor
-
-> DeleteFirmwareSasExpanderDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.SasExpanderDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareSasExpanderDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareSasExpanderDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareSasExpanderDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteFirmwareServerConfigurationUtilityDistributable
 
 > DeleteFirmwareServerConfigurationUtilityDistributable(ctx, moid).Execute()
@@ -3294,72 +1290,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteFirmwareServerConfigurationUtilityDistributableRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteFirmwareStorageControllerDescriptor
-
-> DeleteFirmwareStorageControllerDescriptor(ctx, moid).Execute()
-
-Delete a 'firmware.StorageControllerDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.FirmwareApi.DeleteFirmwareStorageControllerDescriptor(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.DeleteFirmwareStorageControllerDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteFirmwareStorageControllerDescriptorRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -3584,7 +1514,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareBiosDescriptorByMoid
 
-> FirmwareBiosDescriptor GetFirmwareBiosDescriptorByMoid(ctx, moid).Execute()
+> FirmwareBiosDescriptor GetFirmwareBiosDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.BiosDescriptor' resource.
 
@@ -3602,10 +1532,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareBiosDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareBiosDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareBiosDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3631,6 +1564,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareBiosDescriptorB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3736,7 +1672,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareBoardControllerDescriptorByMoid
 
-> FirmwareBoardControllerDescriptor GetFirmwareBoardControllerDescriptorByMoid(ctx, moid).Execute()
+> FirmwareBoardControllerDescriptor GetFirmwareBoardControllerDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.BoardControllerDescriptor' resource.
 
@@ -3754,10 +1690,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareBoardControllerDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareBoardControllerDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareBoardControllerDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3783,6 +1722,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareBoardController
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3888,7 +1830,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareChassisUpgradeByMoid
 
-> FirmwareChassisUpgrade GetFirmwareChassisUpgradeByMoid(ctx, moid).Execute()
+> FirmwareChassisUpgrade GetFirmwareChassisUpgradeByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.ChassisUpgrade' resource.
 
@@ -3906,10 +1848,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareChassisUpgradeByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareChassisUpgradeByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareChassisUpgradeByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3935,6 +1880,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareChassisUpgradeB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4040,7 +1988,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareCimcDescriptorByMoid
 
-> FirmwareCimcDescriptor GetFirmwareCimcDescriptorByMoid(ctx, moid).Execute()
+> FirmwareCimcDescriptor GetFirmwareCimcDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.CimcDescriptor' resource.
 
@@ -4058,10 +2006,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareCimcDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareCimcDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareCimcDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4087,6 +2038,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareCimcDescriptorB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4192,7 +2146,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareDimmDescriptorByMoid
 
-> FirmwareDimmDescriptor GetFirmwareDimmDescriptorByMoid(ctx, moid).Execute()
+> FirmwareDimmDescriptor GetFirmwareDimmDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.DimmDescriptor' resource.
 
@@ -4210,10 +2164,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareDimmDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareDimmDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareDimmDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4239,6 +2196,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareDimmDescriptorB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4344,7 +2304,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareDistributableByMoid
 
-> FirmwareDistributable GetFirmwareDistributableByMoid(ctx, moid).Execute()
+> FirmwareDistributable GetFirmwareDistributableByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.Distributable' resource.
 
@@ -4362,10 +2322,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareDistributableByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareDistributableByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareDistributableByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4391,6 +2354,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareDistributableBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4496,7 +2462,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareDistributableMetaByMoid
 
-> FirmwareDistributableMeta GetFirmwareDistributableMetaByMoid(ctx, moid).Execute()
+> FirmwareDistributableMeta GetFirmwareDistributableMetaByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.DistributableMeta' resource.
 
@@ -4514,10 +2480,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareDistributableMetaByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareDistributableMetaByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareDistributableMetaByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4543,6 +2512,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareDistributableMe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4648,7 +2620,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareDriveDescriptorByMoid
 
-> FirmwareDriveDescriptor GetFirmwareDriveDescriptorByMoid(ctx, moid).Execute()
+> FirmwareDriveDescriptor GetFirmwareDriveDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.DriveDescriptor' resource.
 
@@ -4666,10 +2638,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareDriveDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareDriveDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareDriveDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4695,6 +2670,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareDriveDescriptor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4800,7 +2778,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareDriverDistributableByMoid
 
-> FirmwareDriverDistributable GetFirmwareDriverDistributableByMoid(ctx, moid).Execute()
+> FirmwareDriverDistributable GetFirmwareDriverDistributableByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.DriverDistributable' resource.
 
@@ -4818,10 +2796,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareDriverDistributableByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareDriverDistributableByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareDriverDistributableByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4847,6 +2828,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareDriverDistribut
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4952,7 +2936,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareEulaByMoid
 
-> FirmwareEula GetFirmwareEulaByMoid(ctx, moid).Execute()
+> FirmwareEula GetFirmwareEulaByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.Eula' resource.
 
@@ -4970,10 +2954,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareEulaByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareEulaByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareEulaByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4999,6 +2986,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareEulaByMoidReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5104,7 +3094,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareFirmwareSummaryByMoid
 
-> FirmwareFirmwareSummary GetFirmwareFirmwareSummaryByMoid(ctx, moid).Execute()
+> FirmwareFirmwareSummary GetFirmwareFirmwareSummaryByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.FirmwareSummary' resource.
 
@@ -5122,10 +3112,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareFirmwareSummaryByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareFirmwareSummaryByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareFirmwareSummaryByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5151,6 +3144,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareFirmwareSummary
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5256,7 +3252,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareGpuDescriptorByMoid
 
-> FirmwareGpuDescriptor GetFirmwareGpuDescriptorByMoid(ctx, moid).Execute()
+> FirmwareGpuDescriptor GetFirmwareGpuDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.GpuDescriptor' resource.
 
@@ -5274,10 +3270,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareGpuDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareGpuDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareGpuDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5303,6 +3302,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareGpuDescriptorBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5408,7 +3410,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareHbaDescriptorByMoid
 
-> FirmwareHbaDescriptor GetFirmwareHbaDescriptorByMoid(ctx, moid).Execute()
+> FirmwareHbaDescriptor GetFirmwareHbaDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.HbaDescriptor' resource.
 
@@ -5426,10 +3428,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareHbaDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareHbaDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareHbaDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5455,6 +3460,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareHbaDescriptorBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5560,7 +3568,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareIomDescriptorByMoid
 
-> FirmwareIomDescriptor GetFirmwareIomDescriptorByMoid(ctx, moid).Execute()
+> FirmwareIomDescriptor GetFirmwareIomDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.IomDescriptor' resource.
 
@@ -5578,10 +3586,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareIomDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareIomDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareIomDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5607,6 +3618,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareIomDescriptorBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5712,7 +3726,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareMswitchDescriptorByMoid
 
-> FirmwareMswitchDescriptor GetFirmwareMswitchDescriptorByMoid(ctx, moid).Execute()
+> FirmwareMswitchDescriptor GetFirmwareMswitchDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.MswitchDescriptor' resource.
 
@@ -5730,10 +3744,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareMswitchDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareMswitchDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareMswitchDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5759,6 +3776,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareMswitchDescript
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5864,7 +3884,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareNxosDescriptorByMoid
 
-> FirmwareNxosDescriptor GetFirmwareNxosDescriptorByMoid(ctx, moid).Execute()
+> FirmwareNxosDescriptor GetFirmwareNxosDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.NxosDescriptor' resource.
 
@@ -5882,10 +3902,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareNxosDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareNxosDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareNxosDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5911,6 +3934,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareNxosDescriptorB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6016,7 +4042,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwarePciNodeUpgradeByMoid
 
-> FirmwarePciNodeUpgrade GetFirmwarePciNodeUpgradeByMoid(ctx, moid).Execute()
+> FirmwarePciNodeUpgrade GetFirmwarePciNodeUpgradeByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.PciNodeUpgrade' resource.
 
@@ -6034,10 +4060,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwarePciNodeUpgradeByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwarePciNodeUpgradeByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwarePciNodeUpgradeByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6063,6 +4092,9 @@ Other parameters are passed through a pointer to a apiGetFirmwarePciNodeUpgradeB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6168,7 +4200,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwarePcieDescriptorByMoid
 
-> FirmwarePcieDescriptor GetFirmwarePcieDescriptorByMoid(ctx, moid).Execute()
+> FirmwarePcieDescriptor GetFirmwarePcieDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.PcieDescriptor' resource.
 
@@ -6186,10 +4218,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwarePcieDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwarePcieDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwarePcieDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6215,6 +4250,9 @@ Other parameters are passed through a pointer to a apiGetFirmwarePcieDescriptorB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6320,7 +4358,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwarePolicyByMoid
 
-> FirmwarePolicy GetFirmwarePolicyByMoid(ctx, moid).Execute()
+> FirmwarePolicy GetFirmwarePolicyByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.Policy' resource.
 
@@ -6338,10 +4376,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwarePolicyByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwarePolicyByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwarePolicyByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6367,6 +4408,9 @@ Other parameters are passed through a pointer to a apiGetFirmwarePolicyByMoidReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6472,7 +4516,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwarePsuDescriptorByMoid
 
-> FirmwarePsuDescriptor GetFirmwarePsuDescriptorByMoid(ctx, moid).Execute()
+> FirmwarePsuDescriptor GetFirmwarePsuDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.PsuDescriptor' resource.
 
@@ -6490,10 +4534,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwarePsuDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwarePsuDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwarePsuDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6519,6 +4566,9 @@ Other parameters are passed through a pointer to a apiGetFirmwarePsuDescriptorBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6624,7 +4674,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwarePsxDescriptorByMoid
 
-> FirmwarePsxDescriptor GetFirmwarePsxDescriptorByMoid(ctx, moid).Execute()
+> FirmwarePsxDescriptor GetFirmwarePsxDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.PsxDescriptor' resource.
 
@@ -6642,10 +4692,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwarePsxDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwarePsxDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwarePsxDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6671,6 +4724,9 @@ Other parameters are passed through a pointer to a apiGetFirmwarePsxDescriptorBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6776,7 +4832,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareRunningFirmwareByMoid
 
-> FirmwareRunningFirmware GetFirmwareRunningFirmwareByMoid(ctx, moid).Execute()
+> FirmwareRunningFirmware GetFirmwareRunningFirmwareByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.RunningFirmware' resource.
 
@@ -6794,10 +4850,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareRunningFirmwareByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareRunningFirmwareByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareRunningFirmwareByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6823,6 +4882,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareRunningFirmware
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6928,7 +4990,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareSasExpanderDescriptorByMoid
 
-> FirmwareSasExpanderDescriptor GetFirmwareSasExpanderDescriptorByMoid(ctx, moid).Execute()
+> FirmwareSasExpanderDescriptor GetFirmwareSasExpanderDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.SasExpanderDescriptor' resource.
 
@@ -6946,10 +5008,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareSasExpanderDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareSasExpanderDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareSasExpanderDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6975,6 +5040,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareSasExpanderDesc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7080,7 +5148,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareServerConfigurationUtilityDistributableByMoid
 
-> FirmwareServerConfigurationUtilityDistributable GetFirmwareServerConfigurationUtilityDistributableByMoid(ctx, moid).Execute()
+> FirmwareServerConfigurationUtilityDistributable GetFirmwareServerConfigurationUtilityDistributableByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.ServerConfigurationUtilityDistributable' resource.
 
@@ -7098,10 +5166,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareServerConfigurationUtilityDistributableByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareServerConfigurationUtilityDistributableByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareServerConfigurationUtilityDistributableByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7127,6 +5198,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareServerConfigura
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7232,7 +5306,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareStorageControllerDescriptorByMoid
 
-> FirmwareStorageControllerDescriptor GetFirmwareStorageControllerDescriptorByMoid(ctx, moid).Execute()
+> FirmwareStorageControllerDescriptor GetFirmwareStorageControllerDescriptorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.StorageControllerDescriptor' resource.
 
@@ -7250,10 +5324,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareStorageControllerDescriptorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareStorageControllerDescriptorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareStorageControllerDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7279,6 +5356,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareStorageControll
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7384,7 +5464,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareSwitchUpgradeByMoid
 
-> FirmwareSwitchUpgrade GetFirmwareSwitchUpgradeByMoid(ctx, moid).Execute()
+> FirmwareSwitchUpgrade GetFirmwareSwitchUpgradeByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.SwitchUpgrade' resource.
 
@@ -7402,10 +5482,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareSwitchUpgradeByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareSwitchUpgradeByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareSwitchUpgradeByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7431,6 +5514,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareSwitchUpgradeBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7536,7 +5622,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareUnsupportedVersionUpgradeByMoid
 
-> FirmwareUnsupportedVersionUpgrade GetFirmwareUnsupportedVersionUpgradeByMoid(ctx, moid).Execute()
+> FirmwareUnsupportedVersionUpgrade GetFirmwareUnsupportedVersionUpgradeByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.UnsupportedVersionUpgrade' resource.
 
@@ -7554,10 +5640,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareUnsupportedVersionUpgradeByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareUnsupportedVersionUpgradeByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareUnsupportedVersionUpgradeByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7583,6 +5672,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareUnsupportedVers
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7688,7 +5780,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareUpgradeByMoid
 
-> FirmwareUpgrade GetFirmwareUpgradeByMoid(ctx, moid).Execute()
+> FirmwareUpgrade GetFirmwareUpgradeByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.Upgrade' resource.
 
@@ -7706,10 +5798,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareUpgradeByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareUpgradeByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareUpgradeByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7735,6 +5830,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareUpgradeByMoidRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7756,7 +5854,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareUpgradeImpactStatusByMoid
 
-> FirmwareUpgradeImpactStatus GetFirmwareUpgradeImpactStatusByMoid(ctx, moid).Execute()
+> FirmwareUpgradeImpactStatus GetFirmwareUpgradeImpactStatusByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.UpgradeImpactStatus' resource.
 
@@ -7774,10 +5872,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareUpgradeImpactStatusByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareUpgradeImpactStatusByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareUpgradeImpactStatusByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7803,6 +5904,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareUpgradeImpactSt
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7992,7 +6096,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareUpgradeStatusByMoid
 
-> FirmwareUpgradeStatus GetFirmwareUpgradeStatusByMoid(ctx, moid).Execute()
+> FirmwareUpgradeStatus GetFirmwareUpgradeStatusByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'firmware.UpgradeStatus' resource.
 
@@ -8010,10 +6114,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.GetFirmwareUpgradeStatusByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.FirmwareApi.GetFirmwareUpgradeStatusByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareUpgradeStatusByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8039,6 +6146,9 @@ Other parameters are passed through a pointer to a apiGetFirmwareUpgradeStatusBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -8142,294 +6252,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PatchFirmwareBiosDescriptor
-
-> FirmwareBiosDescriptor PatchFirmwareBiosDescriptor(ctx, moid).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.BiosDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareBiosDescriptor := *openapiclient.NewFirmwareBiosDescriptor("ClassId_example", "ObjectType_example") // FirmwareBiosDescriptor | The 'firmware.BiosDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareBiosDescriptor(context.Background(), moid).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareBiosDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareBiosDescriptor`: FirmwareBiosDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareBiosDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareBiosDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareBiosDescriptor** | [**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md) | The &#39;firmware.BiosDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwareBoardControllerDescriptor
-
-> FirmwareBoardControllerDescriptor PatchFirmwareBoardControllerDescriptor(ctx, moid).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.BoardControllerDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareBoardControllerDescriptor := *openapiclient.NewFirmwareBoardControllerDescriptor("ClassId_example", "ObjectType_example") // FirmwareBoardControllerDescriptor | The 'firmware.BoardControllerDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareBoardControllerDescriptor(context.Background(), moid).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareBoardControllerDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareBoardControllerDescriptor`: FirmwareBoardControllerDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareBoardControllerDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareBoardControllerDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareBoardControllerDescriptor** | [**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md) | The &#39;firmware.BoardControllerDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwareCimcDescriptor
-
-> FirmwareCimcDescriptor PatchFirmwareCimcDescriptor(ctx, moid).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.CimcDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareCimcDescriptor := *openapiclient.NewFirmwareCimcDescriptor("ClassId_example", "ObjectType_example") // FirmwareCimcDescriptor | The 'firmware.CimcDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareCimcDescriptor(context.Background(), moid).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareCimcDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareCimcDescriptor`: FirmwareCimcDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareCimcDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareCimcDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareCimcDescriptor** | [**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md) | The &#39;firmware.CimcDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwareDimmDescriptor
-
-> FirmwareDimmDescriptor PatchFirmwareDimmDescriptor(ctx, moid).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.DimmDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareDimmDescriptor := *openapiclient.NewFirmwareDimmDescriptor("ClassId_example", "ObjectType_example") // FirmwareDimmDescriptor | The 'firmware.DimmDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareDimmDescriptor(context.Background(), moid).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareDimmDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareDimmDescriptor`: FirmwareDimmDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareDimmDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareDimmDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareDimmDescriptor** | [**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md) | The &#39;firmware.DimmDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## PatchFirmwareDistributable
 
 > FirmwareDistributable PatchFirmwareDistributable(ctx, moid).FirmwareDistributable(firmwareDistributable).IfMatch(ifMatch).Execute()
@@ -8487,78 +6309,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FirmwareDistributable**](FirmwareDistributable.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwareDriveDescriptor
-
-> FirmwareDriveDescriptor PatchFirmwareDriveDescriptor(ctx, moid).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.DriveDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareDriveDescriptor := *openapiclient.NewFirmwareDriveDescriptor("ClassId_example", "ObjectType_example") // FirmwareDriveDescriptor | The 'firmware.DriveDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareDriveDescriptor(context.Background(), moid).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareDriveDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareDriveDescriptor`: FirmwareDriveDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareDriveDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareDriveDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareDriveDescriptor** | [**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md) | The &#39;firmware.DriveDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
 
 ### Authorization
 
@@ -8646,438 +6396,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PatchFirmwareGpuDescriptor
-
-> FirmwareGpuDescriptor PatchFirmwareGpuDescriptor(ctx, moid).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.GpuDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareGpuDescriptor := *openapiclient.NewFirmwareGpuDescriptor("ClassId_example", "ObjectType_example") // FirmwareGpuDescriptor | The 'firmware.GpuDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareGpuDescriptor(context.Background(), moid).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareGpuDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareGpuDescriptor`: FirmwareGpuDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareGpuDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareGpuDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareGpuDescriptor** | [**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md) | The &#39;firmware.GpuDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwareHbaDescriptor
-
-> FirmwareHbaDescriptor PatchFirmwareHbaDescriptor(ctx, moid).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.HbaDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareHbaDescriptor := *openapiclient.NewFirmwareHbaDescriptor("ClassId_example", "ObjectType_example") // FirmwareHbaDescriptor | The 'firmware.HbaDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareHbaDescriptor(context.Background(), moid).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareHbaDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareHbaDescriptor`: FirmwareHbaDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareHbaDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareHbaDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareHbaDescriptor** | [**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md) | The &#39;firmware.HbaDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwareIomDescriptor
-
-> FirmwareIomDescriptor PatchFirmwareIomDescriptor(ctx, moid).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.IomDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareIomDescriptor := *openapiclient.NewFirmwareIomDescriptor("ClassId_example", "ObjectType_example") // FirmwareIomDescriptor | The 'firmware.IomDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareIomDescriptor(context.Background(), moid).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareIomDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareIomDescriptor`: FirmwareIomDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareIomDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareIomDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareIomDescriptor** | [**FirmwareIomDescriptor**](FirmwareIomDescriptor.md) | The &#39;firmware.IomDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwareMswitchDescriptor
-
-> FirmwareMswitchDescriptor PatchFirmwareMswitchDescriptor(ctx, moid).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.MswitchDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareMswitchDescriptor := *openapiclient.NewFirmwareMswitchDescriptor("ClassId_example", "ObjectType_example") // FirmwareMswitchDescriptor | The 'firmware.MswitchDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareMswitchDescriptor(context.Background(), moid).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareMswitchDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareMswitchDescriptor`: FirmwareMswitchDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareMswitchDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareMswitchDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareMswitchDescriptor** | [**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md) | The &#39;firmware.MswitchDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwareNxosDescriptor
-
-> FirmwareNxosDescriptor PatchFirmwareNxosDescriptor(ctx, moid).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.NxosDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareNxosDescriptor := *openapiclient.NewFirmwareNxosDescriptor("ClassId_example", "ObjectType_example") // FirmwareNxosDescriptor | The 'firmware.NxosDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareNxosDescriptor(context.Background(), moid).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareNxosDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareNxosDescriptor`: FirmwareNxosDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareNxosDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareNxosDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareNxosDescriptor** | [**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md) | The &#39;firmware.NxosDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwarePcieDescriptor
-
-> FirmwarePcieDescriptor PatchFirmwarePcieDescriptor(ctx, moid).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.PcieDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwarePcieDescriptor := *openapiclient.NewFirmwarePcieDescriptor("ClassId_example", "ObjectType_example") // FirmwarePcieDescriptor | The 'firmware.PcieDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwarePcieDescriptor(context.Background(), moid).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwarePcieDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwarePcieDescriptor`: FirmwarePcieDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwarePcieDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwarePcieDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwarePcieDescriptor** | [**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md) | The &#39;firmware.PcieDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## PatchFirmwarePolicy
 
 > FirmwarePolicy PatchFirmwarePolicy(ctx, moid).FirmwarePolicy(firmwarePolicy).IfMatch(ifMatch).Execute()
@@ -9135,150 +6453,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FirmwarePolicy**](FirmwarePolicy.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwarePsuDescriptor
-
-> FirmwarePsuDescriptor PatchFirmwarePsuDescriptor(ctx, moid).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.PsuDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwarePsuDescriptor := *openapiclient.NewFirmwarePsuDescriptor("ClassId_example", "ObjectType_example") // FirmwarePsuDescriptor | The 'firmware.PsuDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwarePsuDescriptor(context.Background(), moid).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwarePsuDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwarePsuDescriptor`: FirmwarePsuDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwarePsuDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwarePsuDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwarePsuDescriptor** | [**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md) | The &#39;firmware.PsuDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwarePsxDescriptor
-
-> FirmwarePsxDescriptor PatchFirmwarePsxDescriptor(ctx, moid).FirmwarePsxDescriptor(firmwarePsxDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.PsxDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwarePsxDescriptor := *openapiclient.NewFirmwarePsxDescriptor("ClassId_example", "ObjectType_example") // FirmwarePsxDescriptor | The 'firmware.PsxDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwarePsxDescriptor(context.Background(), moid).FirmwarePsxDescriptor(firmwarePsxDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwarePsxDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwarePsxDescriptor`: FirmwarePsxDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwarePsxDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwarePsxDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwarePsxDescriptor** | [**FirmwarePsxDescriptor**](FirmwarePsxDescriptor.md) | The &#39;firmware.PsxDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwarePsxDescriptor**](FirmwarePsxDescriptor.md)
 
 ### Authorization
 
@@ -9366,78 +6540,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PatchFirmwareSasExpanderDescriptor
-
-> FirmwareSasExpanderDescriptor PatchFirmwareSasExpanderDescriptor(ctx, moid).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.SasExpanderDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareSasExpanderDescriptor := *openapiclient.NewFirmwareSasExpanderDescriptor("ClassId_example", "ObjectType_example") // FirmwareSasExpanderDescriptor | The 'firmware.SasExpanderDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareSasExpanderDescriptor(context.Background(), moid).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareSasExpanderDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareSasExpanderDescriptor`: FirmwareSasExpanderDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareSasExpanderDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareSasExpanderDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareSasExpanderDescriptor** | [**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md) | The &#39;firmware.SasExpanderDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## PatchFirmwareServerConfigurationUtilityDistributable
 
 > FirmwareServerConfigurationUtilityDistributable PatchFirmwareServerConfigurationUtilityDistributable(ctx, moid).FirmwareServerConfigurationUtilityDistributable(firmwareServerConfigurationUtilityDistributable).IfMatch(ifMatch).Execute()
@@ -9495,78 +6597,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FirmwareServerConfigurationUtilityDistributable**](FirmwareServerConfigurationUtilityDistributable.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchFirmwareStorageControllerDescriptor
-
-> FirmwareStorageControllerDescriptor PatchFirmwareStorageControllerDescriptor(ctx, moid).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.StorageControllerDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareStorageControllerDescriptor := *openapiclient.NewFirmwareStorageControllerDescriptor("ClassId_example", "ObjectType_example") // FirmwareStorageControllerDescriptor | The 'firmware.StorageControllerDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.PatchFirmwareStorageControllerDescriptor(context.Background(), moid).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareStorageControllerDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchFirmwareStorageControllerDescriptor`: FirmwareStorageControllerDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareStorageControllerDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchFirmwareStorageControllerDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareStorageControllerDescriptor** | [**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md) | The &#39;firmware.StorageControllerDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
 
 ### Authorization
 
@@ -9726,294 +6756,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateFirmwareBiosDescriptor
-
-> FirmwareBiosDescriptor UpdateFirmwareBiosDescriptor(ctx, moid).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.BiosDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareBiosDescriptor := *openapiclient.NewFirmwareBiosDescriptor("ClassId_example", "ObjectType_example") // FirmwareBiosDescriptor | The 'firmware.BiosDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareBiosDescriptor(context.Background(), moid).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareBiosDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareBiosDescriptor`: FirmwareBiosDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareBiosDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareBiosDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareBiosDescriptor** | [**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md) | The &#39;firmware.BiosDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwareBoardControllerDescriptor
-
-> FirmwareBoardControllerDescriptor UpdateFirmwareBoardControllerDescriptor(ctx, moid).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.BoardControllerDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareBoardControllerDescriptor := *openapiclient.NewFirmwareBoardControllerDescriptor("ClassId_example", "ObjectType_example") // FirmwareBoardControllerDescriptor | The 'firmware.BoardControllerDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareBoardControllerDescriptor(context.Background(), moid).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareBoardControllerDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareBoardControllerDescriptor`: FirmwareBoardControllerDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareBoardControllerDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareBoardControllerDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareBoardControllerDescriptor** | [**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md) | The &#39;firmware.BoardControllerDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwareCimcDescriptor
-
-> FirmwareCimcDescriptor UpdateFirmwareCimcDescriptor(ctx, moid).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.CimcDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareCimcDescriptor := *openapiclient.NewFirmwareCimcDescriptor("ClassId_example", "ObjectType_example") // FirmwareCimcDescriptor | The 'firmware.CimcDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareCimcDescriptor(context.Background(), moid).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareCimcDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareCimcDescriptor`: FirmwareCimcDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareCimcDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareCimcDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareCimcDescriptor** | [**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md) | The &#39;firmware.CimcDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwareDimmDescriptor
-
-> FirmwareDimmDescriptor UpdateFirmwareDimmDescriptor(ctx, moid).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.DimmDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareDimmDescriptor := *openapiclient.NewFirmwareDimmDescriptor("ClassId_example", "ObjectType_example") // FirmwareDimmDescriptor | The 'firmware.DimmDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareDimmDescriptor(context.Background(), moid).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareDimmDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareDimmDescriptor`: FirmwareDimmDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareDimmDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareDimmDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareDimmDescriptor** | [**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md) | The &#39;firmware.DimmDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateFirmwareDistributable
 
 > FirmwareDistributable UpdateFirmwareDistributable(ctx, moid).FirmwareDistributable(firmwareDistributable).IfMatch(ifMatch).Execute()
@@ -10071,78 +6813,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FirmwareDistributable**](FirmwareDistributable.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwareDriveDescriptor
-
-> FirmwareDriveDescriptor UpdateFirmwareDriveDescriptor(ctx, moid).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.DriveDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareDriveDescriptor := *openapiclient.NewFirmwareDriveDescriptor("ClassId_example", "ObjectType_example") // FirmwareDriveDescriptor | The 'firmware.DriveDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareDriveDescriptor(context.Background(), moid).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareDriveDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareDriveDescriptor`: FirmwareDriveDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareDriveDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareDriveDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareDriveDescriptor** | [**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md) | The &#39;firmware.DriveDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
 
 ### Authorization
 
@@ -10230,438 +6900,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateFirmwareGpuDescriptor
-
-> FirmwareGpuDescriptor UpdateFirmwareGpuDescriptor(ctx, moid).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.GpuDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareGpuDescriptor := *openapiclient.NewFirmwareGpuDescriptor("ClassId_example", "ObjectType_example") // FirmwareGpuDescriptor | The 'firmware.GpuDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareGpuDescriptor(context.Background(), moid).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareGpuDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareGpuDescriptor`: FirmwareGpuDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareGpuDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareGpuDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareGpuDescriptor** | [**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md) | The &#39;firmware.GpuDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwareHbaDescriptor
-
-> FirmwareHbaDescriptor UpdateFirmwareHbaDescriptor(ctx, moid).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.HbaDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareHbaDescriptor := *openapiclient.NewFirmwareHbaDescriptor("ClassId_example", "ObjectType_example") // FirmwareHbaDescriptor | The 'firmware.HbaDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareHbaDescriptor(context.Background(), moid).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareHbaDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareHbaDescriptor`: FirmwareHbaDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareHbaDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareHbaDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareHbaDescriptor** | [**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md) | The &#39;firmware.HbaDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwareIomDescriptor
-
-> FirmwareIomDescriptor UpdateFirmwareIomDescriptor(ctx, moid).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.IomDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareIomDescriptor := *openapiclient.NewFirmwareIomDescriptor("ClassId_example", "ObjectType_example") // FirmwareIomDescriptor | The 'firmware.IomDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareIomDescriptor(context.Background(), moid).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareIomDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareIomDescriptor`: FirmwareIomDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareIomDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareIomDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareIomDescriptor** | [**FirmwareIomDescriptor**](FirmwareIomDescriptor.md) | The &#39;firmware.IomDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwareMswitchDescriptor
-
-> FirmwareMswitchDescriptor UpdateFirmwareMswitchDescriptor(ctx, moid).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.MswitchDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareMswitchDescriptor := *openapiclient.NewFirmwareMswitchDescriptor("ClassId_example", "ObjectType_example") // FirmwareMswitchDescriptor | The 'firmware.MswitchDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareMswitchDescriptor(context.Background(), moid).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareMswitchDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareMswitchDescriptor`: FirmwareMswitchDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareMswitchDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareMswitchDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareMswitchDescriptor** | [**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md) | The &#39;firmware.MswitchDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwareNxosDescriptor
-
-> FirmwareNxosDescriptor UpdateFirmwareNxosDescriptor(ctx, moid).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.NxosDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareNxosDescriptor := *openapiclient.NewFirmwareNxosDescriptor("ClassId_example", "ObjectType_example") // FirmwareNxosDescriptor | The 'firmware.NxosDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareNxosDescriptor(context.Background(), moid).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareNxosDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareNxosDescriptor`: FirmwareNxosDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareNxosDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareNxosDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareNxosDescriptor** | [**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md) | The &#39;firmware.NxosDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwarePcieDescriptor
-
-> FirmwarePcieDescriptor UpdateFirmwarePcieDescriptor(ctx, moid).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.PcieDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwarePcieDescriptor := *openapiclient.NewFirmwarePcieDescriptor("ClassId_example", "ObjectType_example") // FirmwarePcieDescriptor | The 'firmware.PcieDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwarePcieDescriptor(context.Background(), moid).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwarePcieDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwarePcieDescriptor`: FirmwarePcieDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwarePcieDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwarePcieDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwarePcieDescriptor** | [**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md) | The &#39;firmware.PcieDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateFirmwarePolicy
 
 > FirmwarePolicy UpdateFirmwarePolicy(ctx, moid).FirmwarePolicy(firmwarePolicy).IfMatch(ifMatch).Execute()
@@ -10719,150 +6957,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FirmwarePolicy**](FirmwarePolicy.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwarePsuDescriptor
-
-> FirmwarePsuDescriptor UpdateFirmwarePsuDescriptor(ctx, moid).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.PsuDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwarePsuDescriptor := *openapiclient.NewFirmwarePsuDescriptor("ClassId_example", "ObjectType_example") // FirmwarePsuDescriptor | The 'firmware.PsuDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwarePsuDescriptor(context.Background(), moid).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwarePsuDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwarePsuDescriptor`: FirmwarePsuDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwarePsuDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwarePsuDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwarePsuDescriptor** | [**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md) | The &#39;firmware.PsuDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwarePsxDescriptor
-
-> FirmwarePsxDescriptor UpdateFirmwarePsxDescriptor(ctx, moid).FirmwarePsxDescriptor(firmwarePsxDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.PsxDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwarePsxDescriptor := *openapiclient.NewFirmwarePsxDescriptor("ClassId_example", "ObjectType_example") // FirmwarePsxDescriptor | The 'firmware.PsxDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwarePsxDescriptor(context.Background(), moid).FirmwarePsxDescriptor(firmwarePsxDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwarePsxDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwarePsxDescriptor`: FirmwarePsxDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwarePsxDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwarePsxDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwarePsxDescriptor** | [**FirmwarePsxDescriptor**](FirmwarePsxDescriptor.md) | The &#39;firmware.PsxDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwarePsxDescriptor**](FirmwarePsxDescriptor.md)
 
 ### Authorization
 
@@ -10950,78 +7044,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateFirmwareSasExpanderDescriptor
-
-> FirmwareSasExpanderDescriptor UpdateFirmwareSasExpanderDescriptor(ctx, moid).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.SasExpanderDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareSasExpanderDescriptor := *openapiclient.NewFirmwareSasExpanderDescriptor("ClassId_example", "ObjectType_example") // FirmwareSasExpanderDescriptor | The 'firmware.SasExpanderDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareSasExpanderDescriptor(context.Background(), moid).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareSasExpanderDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareSasExpanderDescriptor`: FirmwareSasExpanderDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareSasExpanderDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareSasExpanderDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareSasExpanderDescriptor** | [**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md) | The &#39;firmware.SasExpanderDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateFirmwareServerConfigurationUtilityDistributable
 
 > FirmwareServerConfigurationUtilityDistributable UpdateFirmwareServerConfigurationUtilityDistributable(ctx, moid).FirmwareServerConfigurationUtilityDistributable(firmwareServerConfigurationUtilityDistributable).IfMatch(ifMatch).Execute()
@@ -11079,78 +7101,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FirmwareServerConfigurationUtilityDistributable**](FirmwareServerConfigurationUtilityDistributable.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateFirmwareStorageControllerDescriptor
-
-> FirmwareStorageControllerDescriptor UpdateFirmwareStorageControllerDescriptor(ctx, moid).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).Execute()
-
-Update a 'firmware.StorageControllerDescriptor' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	firmwareStorageControllerDescriptor := *openapiclient.NewFirmwareStorageControllerDescriptor("ClassId_example", "ObjectType_example") // FirmwareStorageControllerDescriptor | The 'firmware.StorageControllerDescriptor' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirmwareApi.UpdateFirmwareStorageControllerDescriptor(context.Background(), moid).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareStorageControllerDescriptor``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateFirmwareStorageControllerDescriptor`: FirmwareStorageControllerDescriptor
-	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareStorageControllerDescriptor`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateFirmwareStorageControllerDescriptorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **firmwareStorageControllerDescriptor** | [**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md) | The &#39;firmware.StorageControllerDescriptor&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
 
 ### Authorization
 

@@ -19,7 +19,6 @@ Name | Type | Description | Notes
 **ServiceVersion** | Pointer to **string** | Version of the service that owns the item MO. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the item&#39;s export operation. * &#x60;&#x60; - The operation has not started. * &#x60;Ready&#x60; - The operation is ready to start. * &#x60;ValidationInProgress&#x60; - The validation operation is in progress. * &#x60;Valid&#x60; - The content to be imported is valid. * &#x60;InValid&#x60; - The content to be imported is not valid and the status message will have the reason. * &#x60;InProgress&#x60; - The operation is in progress. * &#x60;Success&#x60; - The operation has succeeded. * &#x60;Failed&#x60; - The operation has failed. * &#x60;RollBackInitiated&#x60; - The rollback has been initiated for import failure. * &#x60;RollBackFailed&#x60; - The rollback has failed for import failure. * &#x60;RollbackCompleted&#x60; - The rollback has completed for import failure. * &#x60;RollbackAborted&#x60; - The rollback has been aborted for import failure. * &#x60;OperationTimedOut&#x60; - The operation has timed out. * &#x60;OperationCancelled&#x60; - The operation has been canceled. * &#x60;CancelInProgress&#x60; - The operation is being canceled. | [optional] [readonly] [default to ""]
 **StatusMessage** | Pointer to **string** | Progress or error message for the MO&#39;s export operation. | [optional] [readonly] 
-**Export** | Pointer to [**NullableBulkExportRelationship**](BulkExportRelationship.md) |  | [optional] 
 **ParentItem** | Pointer to [**NullableBulkExportedItemRelationship**](BulkExportedItemRelationship.md) |  | [optional] 
 **RelatedItems** | Pointer to [**[]BulkExportedItemRelationship**](BulkExportedItemRelationship.md) | An array of relationships to bulkExportedItem resources. | [optional] [readonly] 
 
@@ -427,41 +426,6 @@ SetStatusMessage sets StatusMessage field to given value.
 
 HasStatusMessage returns a boolean if a field has been set.
 
-### GetExport
-
-`func (o *BulkExportedItem) GetExport() BulkExportRelationship`
-
-GetExport returns the Export field if non-nil, zero value otherwise.
-
-### GetExportOk
-
-`func (o *BulkExportedItem) GetExportOk() (*BulkExportRelationship, bool)`
-
-GetExportOk returns a tuple with the Export field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExport
-
-`func (o *BulkExportedItem) SetExport(v BulkExportRelationship)`
-
-SetExport sets Export field to given value.
-
-### HasExport
-
-`func (o *BulkExportedItem) HasExport() bool`
-
-HasExport returns a boolean if a field has been set.
-
-### SetExportNil
-
-`func (o *BulkExportedItem) SetExportNil(b bool)`
-
- SetExportNil sets the value for Export to be an explicit nil
-
-### UnsetExport
-`func (o *BulkExportedItem) UnsetExport()`
-
-UnsetExport ensures that no value is present for Export, not even an explicit nil
 ### GetParentItem
 
 `func (o *BulkExportedItem) GetParentItem() BulkExportedItemRelationship`

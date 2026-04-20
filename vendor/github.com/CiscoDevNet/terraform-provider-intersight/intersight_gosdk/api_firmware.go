@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -22,370 +22,6 @@ import (
 
 // FirmwareApiService FirmwareApi service
 type FirmwareApiService service
-
-type ApiCreateFirmwareBiosDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	firmwareBiosDescriptor *FirmwareBiosDescriptor
-	ifMatch                *string
-	ifNoneMatch            *string
-}
-
-// The &#39;firmware.BiosDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareBiosDescriptorRequest) FirmwareBiosDescriptor(firmwareBiosDescriptor FirmwareBiosDescriptor) ApiCreateFirmwareBiosDescriptorRequest {
-	r.firmwareBiosDescriptor = &firmwareBiosDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareBiosDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareBiosDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareBiosDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareBiosDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareBiosDescriptorRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareBiosDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareBiosDescriptor Create a 'firmware.BiosDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareBiosDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareBiosDescriptor(ctx context.Context) ApiCreateFirmwareBiosDescriptorRequest {
-	return ApiCreateFirmwareBiosDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareBiosDescriptor
-func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirmwareBiosDescriptorRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareBiosDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareBiosDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareBiosDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareBiosDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareBiosDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwareBoardControllerDescriptorRequest struct {
-	ctx                               context.Context
-	ApiService                        *FirmwareApiService
-	firmwareBoardControllerDescriptor *FirmwareBoardControllerDescriptor
-	ifMatch                           *string
-	ifNoneMatch                       *string
-}
-
-// The &#39;firmware.BoardControllerDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareBoardControllerDescriptorRequest) FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor FirmwareBoardControllerDescriptor) ApiCreateFirmwareBoardControllerDescriptorRequest {
-	r.firmwareBoardControllerDescriptor = &firmwareBoardControllerDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareBoardControllerDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareBoardControllerDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareBoardControllerDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareBoardControllerDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareBoardControllerDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareBoardControllerDescriptor Create a 'firmware.BoardControllerDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareBoardControllerDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptor(ctx context.Context) ApiCreateFirmwareBoardControllerDescriptorRequest {
-	return ApiCreateFirmwareBoardControllerDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareBoardControllerDescriptor
-func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r ApiCreateFirmwareBoardControllerDescriptorRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareBoardControllerDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareBoardControllerDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareBoardControllerDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareBoardControllerDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareBoardControllerDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
 
 type ApiCreateFirmwareChassisUpgradeRequest struct {
 	ctx                    context.Context
@@ -569,370 +205,6 @@ func (a *FirmwareApiService) CreateFirmwareChassisUpgradeExecute(r ApiCreateFirm
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateFirmwareCimcDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	firmwareCimcDescriptor *FirmwareCimcDescriptor
-	ifMatch                *string
-	ifNoneMatch            *string
-}
-
-// The &#39;firmware.CimcDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareCimcDescriptorRequest) FirmwareCimcDescriptor(firmwareCimcDescriptor FirmwareCimcDescriptor) ApiCreateFirmwareCimcDescriptorRequest {
-	r.firmwareCimcDescriptor = &firmwareCimcDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareCimcDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareCimcDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareCimcDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareCimcDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareCimcDescriptorRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareCimcDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareCimcDescriptor Create a 'firmware.CimcDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareCimcDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareCimcDescriptor(ctx context.Context) ApiCreateFirmwareCimcDescriptorRequest {
-	return ApiCreateFirmwareCimcDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareCimcDescriptor
-func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirmwareCimcDescriptorRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareCimcDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareCimcDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareCimcDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareCimcDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareCimcDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwareDimmDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	firmwareDimmDescriptor *FirmwareDimmDescriptor
-	ifMatch                *string
-	ifNoneMatch            *string
-}
-
-// The &#39;firmware.DimmDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareDimmDescriptorRequest) FirmwareDimmDescriptor(firmwareDimmDescriptor FirmwareDimmDescriptor) ApiCreateFirmwareDimmDescriptorRequest {
-	r.firmwareDimmDescriptor = &firmwareDimmDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareDimmDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareDimmDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareDimmDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareDimmDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareDimmDescriptorRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareDimmDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareDimmDescriptor Create a 'firmware.DimmDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareDimmDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareDimmDescriptor(ctx context.Context) ApiCreateFirmwareDimmDescriptorRequest {
-	return ApiCreateFirmwareDimmDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareDimmDescriptor
-func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirmwareDimmDescriptorRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareDimmDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDimmDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareDimmDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareDimmDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareDimmDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiCreateFirmwareDistributableRequest struct {
 	ctx                   context.Context
 	ApiService            *FirmwareApiService
@@ -1026,188 +298,6 @@ func (a *FirmwareApiService) CreateFirmwareDistributableExecute(r ApiCreateFirmw
 	}
 	// body params
 	localVarPostBody = r.firmwareDistributable
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwareDriveDescriptorRequest struct {
-	ctx                     context.Context
-	ApiService              *FirmwareApiService
-	firmwareDriveDescriptor *FirmwareDriveDescriptor
-	ifMatch                 *string
-	ifNoneMatch             *string
-}
-
-// The &#39;firmware.DriveDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareDriveDescriptorRequest) FirmwareDriveDescriptor(firmwareDriveDescriptor FirmwareDriveDescriptor) ApiCreateFirmwareDriveDescriptorRequest {
-	r.firmwareDriveDescriptor = &firmwareDriveDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareDriveDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareDriveDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareDriveDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareDriveDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareDriveDescriptorRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareDriveDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareDriveDescriptor Create a 'firmware.DriveDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareDriveDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareDriveDescriptor(ctx context.Context) ApiCreateFirmwareDriveDescriptorRequest {
-	return ApiCreateFirmwareDriveDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareDriveDescriptor
-func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFirmwareDriveDescriptorRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareDriveDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDriveDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareDriveDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareDriveDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareDriveDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1661,916 +751,6 @@ func (a *FirmwareApiService) CreateFirmwareEulaExecute(r ApiCreateFirmwareEulaRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateFirmwareGpuDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	firmwareGpuDescriptor *FirmwareGpuDescriptor
-	ifMatch               *string
-	ifNoneMatch           *string
-}
-
-// The &#39;firmware.GpuDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareGpuDescriptorRequest) FirmwareGpuDescriptor(firmwareGpuDescriptor FirmwareGpuDescriptor) ApiCreateFirmwareGpuDescriptorRequest {
-	r.firmwareGpuDescriptor = &firmwareGpuDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareGpuDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareGpuDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareGpuDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareGpuDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareGpuDescriptorRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareGpuDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareGpuDescriptor Create a 'firmware.GpuDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareGpuDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareGpuDescriptor(ctx context.Context) ApiCreateFirmwareGpuDescriptorRequest {
-	return ApiCreateFirmwareGpuDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareGpuDescriptor
-func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmwareGpuDescriptorRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareGpuDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareGpuDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareGpuDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareGpuDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareGpuDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwareHbaDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	firmwareHbaDescriptor *FirmwareHbaDescriptor
-	ifMatch               *string
-	ifNoneMatch           *string
-}
-
-// The &#39;firmware.HbaDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareHbaDescriptorRequest) FirmwareHbaDescriptor(firmwareHbaDescriptor FirmwareHbaDescriptor) ApiCreateFirmwareHbaDescriptorRequest {
-	r.firmwareHbaDescriptor = &firmwareHbaDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareHbaDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareHbaDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareHbaDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareHbaDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareHbaDescriptorRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareHbaDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareHbaDescriptor Create a 'firmware.HbaDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareHbaDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareHbaDescriptor(ctx context.Context) ApiCreateFirmwareHbaDescriptorRequest {
-	return ApiCreateFirmwareHbaDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareHbaDescriptor
-func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmwareHbaDescriptorRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareHbaDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareHbaDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareHbaDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareHbaDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareHbaDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwareIomDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	firmwareIomDescriptor *FirmwareIomDescriptor
-	ifMatch               *string
-	ifNoneMatch           *string
-}
-
-// The &#39;firmware.IomDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareIomDescriptorRequest) FirmwareIomDescriptor(firmwareIomDescriptor FirmwareIomDescriptor) ApiCreateFirmwareIomDescriptorRequest {
-	r.firmwareIomDescriptor = &firmwareIomDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareIomDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareIomDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareIomDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareIomDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareIomDescriptorRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareIomDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareIomDescriptor Create a 'firmware.IomDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareIomDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareIomDescriptor(ctx context.Context) ApiCreateFirmwareIomDescriptorRequest {
-	return ApiCreateFirmwareIomDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareIomDescriptor
-func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmwareIomDescriptorRequest) (*FirmwareIomDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareIomDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareIomDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareIomDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareIomDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareIomDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwareMswitchDescriptorRequest struct {
-	ctx                       context.Context
-	ApiService                *FirmwareApiService
-	firmwareMswitchDescriptor *FirmwareMswitchDescriptor
-	ifMatch                   *string
-	ifNoneMatch               *string
-}
-
-// The &#39;firmware.MswitchDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareMswitchDescriptorRequest) FirmwareMswitchDescriptor(firmwareMswitchDescriptor FirmwareMswitchDescriptor) ApiCreateFirmwareMswitchDescriptorRequest {
-	r.firmwareMswitchDescriptor = &firmwareMswitchDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareMswitchDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareMswitchDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareMswitchDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareMswitchDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareMswitchDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareMswitchDescriptor Create a 'firmware.MswitchDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareMswitchDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareMswitchDescriptor(ctx context.Context) ApiCreateFirmwareMswitchDescriptorRequest {
-	return ApiCreateFirmwareMswitchDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareMswitchDescriptor
-func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateFirmwareMswitchDescriptorRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareMswitchDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareMswitchDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareMswitchDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareMswitchDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareMswitchDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwareNxosDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	firmwareNxosDescriptor *FirmwareNxosDescriptor
-	ifMatch                *string
-	ifNoneMatch            *string
-}
-
-// The &#39;firmware.NxosDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareNxosDescriptorRequest) FirmwareNxosDescriptor(firmwareNxosDescriptor FirmwareNxosDescriptor) ApiCreateFirmwareNxosDescriptorRequest {
-	r.firmwareNxosDescriptor = &firmwareNxosDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareNxosDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareNxosDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareNxosDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareNxosDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareNxosDescriptorRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareNxosDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareNxosDescriptor Create a 'firmware.NxosDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareNxosDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareNxosDescriptor(ctx context.Context) ApiCreateFirmwareNxosDescriptorRequest {
-	return ApiCreateFirmwareNxosDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareNxosDescriptor
-func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirmwareNxosDescriptorRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareNxosDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareNxosDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareNxosDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareNxosDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareNxosDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiCreateFirmwarePciNodeUpgradeRequest struct {
 	ctx                    context.Context
 	ApiService             *FirmwareApiService
@@ -2664,188 +844,6 @@ func (a *FirmwareApiService) CreateFirmwarePciNodeUpgradeExecute(r ApiCreateFirm
 	}
 	// body params
 	localVarPostBody = r.firmwarePciNodeUpgrade
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwarePcieDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	firmwarePcieDescriptor *FirmwarePcieDescriptor
-	ifMatch                *string
-	ifNoneMatch            *string
-}
-
-// The &#39;firmware.PcieDescriptor&#39; resource to create.
-func (r ApiCreateFirmwarePcieDescriptorRequest) FirmwarePcieDescriptor(firmwarePcieDescriptor FirmwarePcieDescriptor) ApiCreateFirmwarePcieDescriptorRequest {
-	r.firmwarePcieDescriptor = &firmwarePcieDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwarePcieDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwarePcieDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwarePcieDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwarePcieDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwarePcieDescriptorRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwarePcieDescriptorExecute(r)
-}
-
-/*
-CreateFirmwarePcieDescriptor Create a 'firmware.PcieDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwarePcieDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwarePcieDescriptor(ctx context.Context) ApiCreateFirmwarePcieDescriptorRequest {
-	return ApiCreateFirmwarePcieDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwarePcieDescriptor
-func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirmwarePcieDescriptorRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwarePcieDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwarePcieDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwarePcieDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwarePcieDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwarePcieDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -3117,552 +1115,6 @@ func (a *FirmwareApiService) CreateFirmwarePolicyExecute(r ApiCreateFirmwarePoli
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateFirmwarePsuDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	firmwarePsuDescriptor *FirmwarePsuDescriptor
-	ifMatch               *string
-	ifNoneMatch           *string
-}
-
-// The &#39;firmware.PsuDescriptor&#39; resource to create.
-func (r ApiCreateFirmwarePsuDescriptorRequest) FirmwarePsuDescriptor(firmwarePsuDescriptor FirmwarePsuDescriptor) ApiCreateFirmwarePsuDescriptorRequest {
-	r.firmwarePsuDescriptor = &firmwarePsuDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwarePsuDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwarePsuDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwarePsuDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwarePsuDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwarePsuDescriptorRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwarePsuDescriptorExecute(r)
-}
-
-/*
-CreateFirmwarePsuDescriptor Create a 'firmware.PsuDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwarePsuDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwarePsuDescriptor(ctx context.Context) ApiCreateFirmwarePsuDescriptorRequest {
-	return ApiCreateFirmwarePsuDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwarePsuDescriptor
-func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmwarePsuDescriptorRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwarePsuDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwarePsuDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwarePsuDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwarePsuDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwarePsuDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwarePsxDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	firmwarePsxDescriptor *FirmwarePsxDescriptor
-	ifMatch               *string
-	ifNoneMatch           *string
-}
-
-// The &#39;firmware.PsxDescriptor&#39; resource to create.
-func (r ApiCreateFirmwarePsxDescriptorRequest) FirmwarePsxDescriptor(firmwarePsxDescriptor FirmwarePsxDescriptor) ApiCreateFirmwarePsxDescriptorRequest {
-	r.firmwarePsxDescriptor = &firmwarePsxDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwarePsxDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwarePsxDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwarePsxDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwarePsxDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwarePsxDescriptorRequest) Execute() (*FirmwarePsxDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwarePsxDescriptorExecute(r)
-}
-
-/*
-CreateFirmwarePsxDescriptor Create a 'firmware.PsxDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwarePsxDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwarePsxDescriptor(ctx context.Context) ApiCreateFirmwarePsxDescriptorRequest {
-	return ApiCreateFirmwarePsxDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwarePsxDescriptor
-func (a *FirmwareApiService) CreateFirmwarePsxDescriptorExecute(r ApiCreateFirmwarePsxDescriptorRequest) (*FirmwarePsxDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwarePsxDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwarePsxDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PsxDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwarePsxDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwarePsxDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwarePsxDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwareSasExpanderDescriptorRequest struct {
-	ctx                           context.Context
-	ApiService                    *FirmwareApiService
-	firmwareSasExpanderDescriptor *FirmwareSasExpanderDescriptor
-	ifMatch                       *string
-	ifNoneMatch                   *string
-}
-
-// The &#39;firmware.SasExpanderDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareSasExpanderDescriptorRequest) FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor FirmwareSasExpanderDescriptor) ApiCreateFirmwareSasExpanderDescriptorRequest {
-	r.firmwareSasExpanderDescriptor = &firmwareSasExpanderDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareSasExpanderDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareSasExpanderDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareSasExpanderDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareSasExpanderDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareSasExpanderDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareSasExpanderDescriptor Create a 'firmware.SasExpanderDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareSasExpanderDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptor(ctx context.Context) ApiCreateFirmwareSasExpanderDescriptorRequest {
-	return ApiCreateFirmwareSasExpanderDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareSasExpanderDescriptor
-func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCreateFirmwareSasExpanderDescriptorRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareSasExpanderDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareSasExpanderDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareSasExpanderDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareSasExpanderDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareSasExpanderDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiCreateFirmwareServerConfigurationUtilityDistributableRequest struct {
 	ctx                                             context.Context
 	ApiService                                      *FirmwareApiService
@@ -3756,188 +1208,6 @@ func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributab
 	}
 	// body params
 	localVarPostBody = r.firmwareServerConfigurationUtilityDistributable
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateFirmwareStorageControllerDescriptorRequest struct {
-	ctx                                 context.Context
-	ApiService                          *FirmwareApiService
-	firmwareStorageControllerDescriptor *FirmwareStorageControllerDescriptor
-	ifMatch                             *string
-	ifNoneMatch                         *string
-}
-
-// The &#39;firmware.StorageControllerDescriptor&#39; resource to create.
-func (r ApiCreateFirmwareStorageControllerDescriptorRequest) FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor FirmwareStorageControllerDescriptor) ApiCreateFirmwareStorageControllerDescriptorRequest {
-	r.firmwareStorageControllerDescriptor = &firmwareStorageControllerDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateFirmwareStorageControllerDescriptorRequest) IfMatch(ifMatch string) ApiCreateFirmwareStorageControllerDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateFirmwareStorageControllerDescriptorRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareStorageControllerDescriptorRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
-	return r.ApiService.CreateFirmwareStorageControllerDescriptorExecute(r)
-}
-
-/*
-CreateFirmwareStorageControllerDescriptor Create a 'firmware.StorageControllerDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareStorageControllerDescriptorRequest
-*/
-func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptor(ctx context.Context) ApiCreateFirmwareStorageControllerDescriptorRequest {
-	return ApiCreateFirmwareStorageControllerDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareStorageControllerDescriptor
-func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r ApiCreateFirmwareStorageControllerDescriptorRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareStorageControllerDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareStorageControllerDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareStorageControllerDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareStorageControllerDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareStorageControllerDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -4937,290 +2207,6 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeValidityExecute(r ApiCreateFir
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteFirmwareBiosDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareBiosDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareBiosDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareBiosDescriptor Delete a 'firmware.BiosDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareBiosDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareBiosDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareBiosDescriptorRequest {
-	return ApiDeleteFirmwareBiosDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareBiosDescriptorExecute(r ApiDeleteFirmwareBiosDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareBiosDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareBoardControllerDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareBoardControllerDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareBoardControllerDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareBoardControllerDescriptor Delete a 'firmware.BoardControllerDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareBoardControllerDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareBoardControllerDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareBoardControllerDescriptorRequest {
-	return ApiDeleteFirmwareBoardControllerDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareBoardControllerDescriptorExecute(r ApiDeleteFirmwareBoardControllerDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareBoardControllerDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiDeleteFirmwareChassisUpgradeRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
@@ -5260,290 +2246,6 @@ func (a *FirmwareApiService) DeleteFirmwareChassisUpgradeExecute(r ApiDeleteFirm
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ChassisUpgrades/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareCimcDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareCimcDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareCimcDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareCimcDescriptor Delete a 'firmware.CimcDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareCimcDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareCimcDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareCimcDescriptorRequest {
-	return ApiDeleteFirmwareCimcDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareCimcDescriptorExecute(r ApiDeleteFirmwareCimcDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareCimcDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareDimmDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareDimmDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareDimmDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareDimmDescriptor Delete a 'firmware.DimmDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareDimmDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareDimmDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareDimmDescriptorRequest {
-	return ApiDeleteFirmwareDimmDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareDimmDescriptorExecute(r ApiDeleteFirmwareDimmDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareDimmDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -5789,148 +2491,6 @@ func (a *FirmwareApiService) DeleteFirmwareDistributableExecute(r ApiDeleteFirmw
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeleteFirmwareDriveDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareDriveDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareDriveDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareDriveDescriptor Delete a 'firmware.DriveDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareDriveDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareDriveDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareDriveDescriptorRequest {
-	return ApiDeleteFirmwareDriveDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareDriveDescriptorExecute(r ApiDeleteFirmwareDriveDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareDriveDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiDeleteFirmwareDriverDistributableRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
@@ -5970,716 +2530,6 @@ func (a *FirmwareApiService) DeleteFirmwareDriverDistributableExecute(r ApiDelet
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriverDistributables/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareGpuDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareGpuDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareGpuDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareGpuDescriptor Delete a 'firmware.GpuDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareGpuDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareGpuDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareGpuDescriptorRequest {
-	return ApiDeleteFirmwareGpuDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareGpuDescriptorExecute(r ApiDeleteFirmwareGpuDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareGpuDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareHbaDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareHbaDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareHbaDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareHbaDescriptor Delete a 'firmware.HbaDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareHbaDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareHbaDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareHbaDescriptorRequest {
-	return ApiDeleteFirmwareHbaDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareHbaDescriptorExecute(r ApiDeleteFirmwareHbaDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareHbaDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareIomDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareIomDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareIomDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareIomDescriptor Delete a 'firmware.IomDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareIomDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareIomDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareIomDescriptorRequest {
-	return ApiDeleteFirmwareIomDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareIomDescriptorExecute(r ApiDeleteFirmwareIomDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareIomDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareMswitchDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareMswitchDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareMswitchDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareMswitchDescriptor Delete a 'firmware.MswitchDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareMswitchDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareMswitchDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareMswitchDescriptorRequest {
-	return ApiDeleteFirmwareMswitchDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareMswitchDescriptorExecute(r ApiDeleteFirmwareMswitchDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareMswitchDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareNxosDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareNxosDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareNxosDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareNxosDescriptor Delete a 'firmware.NxosDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareNxosDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareNxosDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareNxosDescriptorRequest {
-	return ApiDeleteFirmwareNxosDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareNxosDescriptorExecute(r ApiDeleteFirmwareNxosDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareNxosDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -6925,148 +2775,6 @@ func (a *FirmwareApiService) DeleteFirmwarePciNodeUpgradeExecute(r ApiDeleteFirm
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeleteFirmwarePcieDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwarePcieDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwarePcieDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwarePcieDescriptor Delete a 'firmware.PcieDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwarePcieDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwarePcieDescriptor(ctx context.Context, moid string) ApiDeleteFirmwarePcieDescriptorRequest {
-	return ApiDeleteFirmwarePcieDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwarePcieDescriptorExecute(r ApiDeleteFirmwarePcieDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwarePcieDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiDeleteFirmwarePolicyRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
@@ -7209,432 +2917,6 @@ func (a *FirmwareApiService) DeleteFirmwarePolicyExecute(r ApiDeleteFirmwarePoli
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeleteFirmwarePsuDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwarePsuDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwarePsuDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwarePsuDescriptor Delete a 'firmware.PsuDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwarePsuDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwarePsuDescriptor(ctx context.Context, moid string) ApiDeleteFirmwarePsuDescriptorRequest {
-	return ApiDeleteFirmwarePsuDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwarePsuDescriptorExecute(r ApiDeleteFirmwarePsuDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwarePsuDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwarePsxDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwarePsxDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwarePsxDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwarePsxDescriptor Delete a 'firmware.PsxDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwarePsxDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwarePsxDescriptor(ctx context.Context, moid string) ApiDeleteFirmwarePsxDescriptorRequest {
-	return ApiDeleteFirmwarePsxDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwarePsxDescriptorExecute(r ApiDeleteFirmwarePsxDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwarePsxDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PsxDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareSasExpanderDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareSasExpanderDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareSasExpanderDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareSasExpanderDescriptor Delete a 'firmware.SasExpanderDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareSasExpanderDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareSasExpanderDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareSasExpanderDescriptorRequest {
-	return ApiDeleteFirmwareSasExpanderDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareSasExpanderDescriptorExecute(r ApiDeleteFirmwareSasExpanderDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareSasExpanderDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
@@ -7674,148 +2956,6 @@ func (a *FirmwareApiService) DeleteFirmwareServerConfigurationUtilityDistributab
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ServerConfigurationUtilityDistributables/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiDeleteFirmwareStorageControllerDescriptorRequest struct {
-	ctx        context.Context
-	ApiService *FirmwareApiService
-	moid       string
-}
-
-func (r ApiDeleteFirmwareStorageControllerDescriptorRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteFirmwareStorageControllerDescriptorExecute(r)
-}
-
-/*
-DeleteFirmwareStorageControllerDescriptor Delete a 'firmware.StorageControllerDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareStorageControllerDescriptorRequest
-*/
-func (a *FirmwareApiService) DeleteFirmwareStorageControllerDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareStorageControllerDescriptorRequest {
-	return ApiDeleteFirmwareStorageControllerDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *FirmwareApiService) DeleteFirmwareStorageControllerDescriptorExecute(r ApiDeleteFirmwareStorageControllerDescriptorRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareStorageControllerDescriptor")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -8349,6 +3489,27 @@ type ApiGetFirmwareBiosDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareBiosDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareBiosDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareBiosDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareBiosDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareBiosDescriptorByMoidRequest) At(at string) ApiGetFirmwareBiosDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareBiosDescriptorByMoidRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
@@ -8393,6 +3554,18 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoidExecute(r ApiGetFirm
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8778,6 +3951,27 @@ type ApiGetFirmwareBoardControllerDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareBoardControllerDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareBoardControllerDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) At(at string) ApiGetFirmwareBoardControllerDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
@@ -8822,6 +4016,18 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9207,6 +4413,27 @@ type ApiGetFirmwareChassisUpgradeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareChassisUpgradeByMoidRequest) Select_(select_ string) ApiGetFirmwareChassisUpgradeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareChassisUpgradeByMoidRequest) Expand(expand string) ApiGetFirmwareChassisUpgradeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareChassisUpgradeByMoidRequest) At(at string) ApiGetFirmwareChassisUpgradeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareChassisUpgradeByMoidRequest) Execute() (*FirmwareChassisUpgrade, *http.Response, error) {
@@ -9251,6 +4478,18 @@ func (a *FirmwareApiService) GetFirmwareChassisUpgradeByMoidExecute(r ApiGetFirm
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9636,6 +4875,27 @@ type ApiGetFirmwareCimcDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareCimcDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareCimcDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareCimcDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareCimcDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareCimcDescriptorByMoidRequest) At(at string) ApiGetFirmwareCimcDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareCimcDescriptorByMoidRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
@@ -9680,6 +4940,18 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoidExecute(r ApiGetFirm
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10065,6 +5337,27 @@ type ApiGetFirmwareDimmDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareDimmDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareDimmDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareDimmDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareDimmDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareDimmDescriptorByMoidRequest) At(at string) ApiGetFirmwareDimmDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareDimmDescriptorByMoidRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
@@ -10109,6 +5402,18 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoidExecute(r ApiGetFirm
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10494,6 +5799,27 @@ type ApiGetFirmwareDistributableByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareDistributableByMoidRequest) Select_(select_ string) ApiGetFirmwareDistributableByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareDistributableByMoidRequest) Expand(expand string) ApiGetFirmwareDistributableByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareDistributableByMoidRequest) At(at string) ApiGetFirmwareDistributableByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareDistributableByMoidRequest) Execute() (*FirmwareDistributable, *http.Response, error) {
@@ -10538,6 +5864,18 @@ func (a *FirmwareApiService) GetFirmwareDistributableByMoidExecute(r ApiGetFirmw
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10923,6 +6261,27 @@ type ApiGetFirmwareDistributableMetaByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareDistributableMetaByMoidRequest) Select_(select_ string) ApiGetFirmwareDistributableMetaByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareDistributableMetaByMoidRequest) Expand(expand string) ApiGetFirmwareDistributableMetaByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareDistributableMetaByMoidRequest) At(at string) ApiGetFirmwareDistributableMetaByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareDistributableMetaByMoidRequest) Execute() (*FirmwareDistributableMeta, *http.Response, error) {
@@ -10967,6 +6326,18 @@ func (a *FirmwareApiService) GetFirmwareDistributableMetaByMoidExecute(r ApiGetF
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11352,6 +6723,27 @@ type ApiGetFirmwareDriveDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareDriveDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareDriveDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareDriveDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareDriveDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareDriveDescriptorByMoidRequest) At(at string) ApiGetFirmwareDriveDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareDriveDescriptorByMoidRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
@@ -11396,6 +6788,18 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoidExecute(r ApiGetFir
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11781,6 +7185,27 @@ type ApiGetFirmwareDriverDistributableByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareDriverDistributableByMoidRequest) Select_(select_ string) ApiGetFirmwareDriverDistributableByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareDriverDistributableByMoidRequest) Expand(expand string) ApiGetFirmwareDriverDistributableByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareDriverDistributableByMoidRequest) At(at string) ApiGetFirmwareDriverDistributableByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareDriverDistributableByMoidRequest) Execute() (*FirmwareDriverDistributable, *http.Response, error) {
@@ -11825,6 +7250,18 @@ func (a *FirmwareApiService) GetFirmwareDriverDistributableByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12210,6 +7647,27 @@ type ApiGetFirmwareEulaByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareEulaByMoidRequest) Select_(select_ string) ApiGetFirmwareEulaByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareEulaByMoidRequest) Expand(expand string) ApiGetFirmwareEulaByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareEulaByMoidRequest) At(at string) ApiGetFirmwareEulaByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareEulaByMoidRequest) Execute() (*FirmwareEula, *http.Response, error) {
@@ -12254,6 +7712,18 @@ func (a *FirmwareApiService) GetFirmwareEulaByMoidExecute(r ApiGetFirmwareEulaBy
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12639,6 +8109,27 @@ type ApiGetFirmwareFirmwareSummaryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareFirmwareSummaryByMoidRequest) Select_(select_ string) ApiGetFirmwareFirmwareSummaryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareFirmwareSummaryByMoidRequest) Expand(expand string) ApiGetFirmwareFirmwareSummaryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareFirmwareSummaryByMoidRequest) At(at string) ApiGetFirmwareFirmwareSummaryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareFirmwareSummaryByMoidRequest) Execute() (*FirmwareFirmwareSummary, *http.Response, error) {
@@ -12683,6 +8174,18 @@ func (a *FirmwareApiService) GetFirmwareFirmwareSummaryByMoidExecute(r ApiGetFir
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13068,6 +8571,27 @@ type ApiGetFirmwareGpuDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareGpuDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareGpuDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareGpuDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareGpuDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareGpuDescriptorByMoidRequest) At(at string) ApiGetFirmwareGpuDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareGpuDescriptorByMoidRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
@@ -13112,6 +8636,18 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoidExecute(r ApiGetFirmw
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13497,6 +9033,27 @@ type ApiGetFirmwareHbaDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareHbaDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareHbaDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareHbaDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareHbaDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareHbaDescriptorByMoidRequest) At(at string) ApiGetFirmwareHbaDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareHbaDescriptorByMoidRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
@@ -13541,6 +9098,18 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoidExecute(r ApiGetFirmw
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13926,6 +9495,27 @@ type ApiGetFirmwareIomDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareIomDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareIomDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareIomDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareIomDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareIomDescriptorByMoidRequest) At(at string) ApiGetFirmwareIomDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareIomDescriptorByMoidRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
@@ -13970,6 +9560,18 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoidExecute(r ApiGetFirmw
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14355,6 +9957,27 @@ type ApiGetFirmwareMswitchDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareMswitchDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareMswitchDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) At(at string) ApiGetFirmwareMswitchDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
@@ -14399,6 +10022,18 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoidExecute(r ApiGetF
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14784,6 +10419,27 @@ type ApiGetFirmwareNxosDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareNxosDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareNxosDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareNxosDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareNxosDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareNxosDescriptorByMoidRequest) At(at string) ApiGetFirmwareNxosDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareNxosDescriptorByMoidRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
@@ -14828,6 +10484,18 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoidExecute(r ApiGetFirm
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15213,6 +10881,27 @@ type ApiGetFirmwarePciNodeUpgradeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwarePciNodeUpgradeByMoidRequest) Select_(select_ string) ApiGetFirmwarePciNodeUpgradeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwarePciNodeUpgradeByMoidRequest) Expand(expand string) ApiGetFirmwarePciNodeUpgradeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwarePciNodeUpgradeByMoidRequest) At(at string) ApiGetFirmwarePciNodeUpgradeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwarePciNodeUpgradeByMoidRequest) Execute() (*FirmwarePciNodeUpgrade, *http.Response, error) {
@@ -15257,6 +10946,18 @@ func (a *FirmwareApiService) GetFirmwarePciNodeUpgradeByMoidExecute(r ApiGetFirm
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15642,6 +11343,27 @@ type ApiGetFirmwarePcieDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwarePcieDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwarePcieDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwarePcieDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwarePcieDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwarePcieDescriptorByMoidRequest) At(at string) ApiGetFirmwarePcieDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwarePcieDescriptorByMoidRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
@@ -15686,6 +11408,18 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoidExecute(r ApiGetFirm
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16071,6 +11805,27 @@ type ApiGetFirmwarePolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwarePolicyByMoidRequest) Select_(select_ string) ApiGetFirmwarePolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwarePolicyByMoidRequest) Expand(expand string) ApiGetFirmwarePolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwarePolicyByMoidRequest) At(at string) ApiGetFirmwarePolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwarePolicyByMoidRequest) Execute() (*FirmwarePolicy, *http.Response, error) {
@@ -16115,6 +11870,18 @@ func (a *FirmwareApiService) GetFirmwarePolicyByMoidExecute(r ApiGetFirmwarePoli
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16500,6 +12267,27 @@ type ApiGetFirmwarePsuDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwarePsuDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwarePsuDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwarePsuDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwarePsuDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwarePsuDescriptorByMoidRequest) At(at string) ApiGetFirmwarePsuDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwarePsuDescriptorByMoidRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
@@ -16544,6 +12332,18 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoidExecute(r ApiGetFirmw
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16929,6 +12729,27 @@ type ApiGetFirmwarePsxDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwarePsxDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwarePsxDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwarePsxDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwarePsxDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwarePsxDescriptorByMoidRequest) At(at string) ApiGetFirmwarePsxDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwarePsxDescriptorByMoidRequest) Execute() (*FirmwarePsxDescriptor, *http.Response, error) {
@@ -16973,6 +12794,18 @@ func (a *FirmwareApiService) GetFirmwarePsxDescriptorByMoidExecute(r ApiGetFirmw
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17358,6 +13191,27 @@ type ApiGetFirmwareRunningFirmwareByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareRunningFirmwareByMoidRequest) Select_(select_ string) ApiGetFirmwareRunningFirmwareByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareRunningFirmwareByMoidRequest) Expand(expand string) ApiGetFirmwareRunningFirmwareByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareRunningFirmwareByMoidRequest) At(at string) ApiGetFirmwareRunningFirmwareByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareRunningFirmwareByMoidRequest) Execute() (*FirmwareRunningFirmware, *http.Response, error) {
@@ -17402,6 +13256,18 @@ func (a *FirmwareApiService) GetFirmwareRunningFirmwareByMoidExecute(r ApiGetFir
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17787,6 +13653,27 @@ type ApiGetFirmwareSasExpanderDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareSasExpanderDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareSasExpanderDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) At(at string) ApiGetFirmwareSasExpanderDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
@@ -17831,6 +13718,18 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18216,6 +14115,27 @@ type ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) Select_(select_ string) ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) Expand(expand string) ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) At(at string) ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) Execute() (*FirmwareServerConfigurationUtilityDistributable, *http.Response, error) {
@@ -18260,6 +14180,18 @@ func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableB
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18645,6 +14577,27 @@ type ApiGetFirmwareStorageControllerDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) Select_(select_ string) ApiGetFirmwareStorageControllerDescriptorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) Expand(expand string) ApiGetFirmwareStorageControllerDescriptorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) At(at string) ApiGetFirmwareStorageControllerDescriptorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
@@ -18689,6 +14642,18 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19074,6 +15039,27 @@ type ApiGetFirmwareSwitchUpgradeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareSwitchUpgradeByMoidRequest) Select_(select_ string) ApiGetFirmwareSwitchUpgradeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareSwitchUpgradeByMoidRequest) Expand(expand string) ApiGetFirmwareSwitchUpgradeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareSwitchUpgradeByMoidRequest) At(at string) ApiGetFirmwareSwitchUpgradeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareSwitchUpgradeByMoidRequest) Execute() (*FirmwareSwitchUpgrade, *http.Response, error) {
@@ -19118,6 +15104,18 @@ func (a *FirmwareApiService) GetFirmwareSwitchUpgradeByMoidExecute(r ApiGetFirmw
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19503,6 +15501,27 @@ type ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest) Select_(select_ string) ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest) Expand(expand string) ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest) At(at string) ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest) Execute() (*FirmwareUnsupportedVersionUpgrade, *http.Response, error) {
@@ -19547,6 +15566,18 @@ func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19932,6 +15963,27 @@ type ApiGetFirmwareUpgradeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareUpgradeByMoidRequest) Select_(select_ string) ApiGetFirmwareUpgradeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareUpgradeByMoidRequest) Expand(expand string) ApiGetFirmwareUpgradeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareUpgradeByMoidRequest) At(at string) ApiGetFirmwareUpgradeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareUpgradeByMoidRequest) Execute() (*FirmwareUpgrade, *http.Response, error) {
@@ -19976,6 +16028,18 @@ func (a *FirmwareApiService) GetFirmwareUpgradeByMoidExecute(r ApiGetFirmwareUpg
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -20086,6 +16150,27 @@ type ApiGetFirmwareUpgradeImpactStatusByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) Select_(select_ string) ApiGetFirmwareUpgradeImpactStatusByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) Expand(expand string) ApiGetFirmwareUpgradeImpactStatusByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) At(at string) ApiGetFirmwareUpgradeImpactStatusByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) Execute() (*FirmwareUpgradeImpactStatus, *http.Response, error) {
@@ -20130,6 +16215,18 @@ func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -20790,6 +16887,27 @@ type ApiGetFirmwareUpgradeStatusByMoidRequest struct {
 	ctx        context.Context
 	ApiService *FirmwareApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFirmwareUpgradeStatusByMoidRequest) Select_(select_ string) ApiGetFirmwareUpgradeStatusByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFirmwareUpgradeStatusByMoidRequest) Expand(expand string) ApiGetFirmwareUpgradeStatusByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFirmwareUpgradeStatusByMoidRequest) At(at string) ApiGetFirmwareUpgradeStatusByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetFirmwareUpgradeStatusByMoidRequest) Execute() (*FirmwareUpgradeStatus, *http.Response, error) {
@@ -20834,6 +16952,18 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusByMoidExecute(r ApiGetFirmw
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -21215,710 +17345,6 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusListExecute(r ApiGetFirmwar
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPatchFirmwareBiosDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwareBiosDescriptor *FirmwareBiosDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.BiosDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareBiosDescriptorRequest) FirmwareBiosDescriptor(firmwareBiosDescriptor FirmwareBiosDescriptor) ApiPatchFirmwareBiosDescriptorRequest {
-	r.firmwareBiosDescriptor = &firmwareBiosDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareBiosDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareBiosDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareBiosDescriptorRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareBiosDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareBiosDescriptor Update a 'firmware.BiosDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareBiosDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareBiosDescriptor(ctx context.Context, moid string) ApiPatchFirmwareBiosDescriptorRequest {
-	return ApiPatchFirmwareBiosDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareBiosDescriptor
-func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwareBiosDescriptorRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareBiosDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareBiosDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareBiosDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareBiosDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareBiosDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwareBoardControllerDescriptorRequest struct {
-	ctx                               context.Context
-	ApiService                        *FirmwareApiService
-	moid                              string
-	firmwareBoardControllerDescriptor *FirmwareBoardControllerDescriptor
-	ifMatch                           *string
-}
-
-// The &#39;firmware.BoardControllerDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareBoardControllerDescriptorRequest) FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor FirmwareBoardControllerDescriptor) ApiPatchFirmwareBoardControllerDescriptorRequest {
-	r.firmwareBoardControllerDescriptor = &firmwareBoardControllerDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareBoardControllerDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareBoardControllerDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareBoardControllerDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareBoardControllerDescriptor Update a 'firmware.BoardControllerDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareBoardControllerDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptor(ctx context.Context, moid string) ApiPatchFirmwareBoardControllerDescriptorRequest {
-	return ApiPatchFirmwareBoardControllerDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareBoardControllerDescriptor
-func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r ApiPatchFirmwareBoardControllerDescriptorRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareBoardControllerDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareBoardControllerDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareBoardControllerDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareBoardControllerDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareBoardControllerDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwareCimcDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwareCimcDescriptor *FirmwareCimcDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.CimcDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareCimcDescriptorRequest) FirmwareCimcDescriptor(firmwareCimcDescriptor FirmwareCimcDescriptor) ApiPatchFirmwareCimcDescriptorRequest {
-	r.firmwareCimcDescriptor = &firmwareCimcDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareCimcDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareCimcDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareCimcDescriptorRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareCimcDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareCimcDescriptor Update a 'firmware.CimcDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareCimcDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareCimcDescriptor(ctx context.Context, moid string) ApiPatchFirmwareCimcDescriptorRequest {
-	return ApiPatchFirmwareCimcDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareCimcDescriptor
-func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwareCimcDescriptorRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareCimcDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareCimcDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareCimcDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareCimcDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareCimcDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwareDimmDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwareDimmDescriptor *FirmwareDimmDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.DimmDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareDimmDescriptorRequest) FirmwareDimmDescriptor(firmwareDimmDescriptor FirmwareDimmDescriptor) ApiPatchFirmwareDimmDescriptorRequest {
-	r.firmwareDimmDescriptor = &firmwareDimmDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareDimmDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareDimmDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareDimmDescriptorRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareDimmDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareDimmDescriptor Update a 'firmware.DimmDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareDimmDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareDimmDescriptor(ctx context.Context, moid string) ApiPatchFirmwareDimmDescriptorRequest {
-	return ApiPatchFirmwareDimmDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareDimmDescriptor
-func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwareDimmDescriptorRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareDimmDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDimmDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareDimmDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareDimmDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareDimmDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiPatchFirmwareDistributableRequest struct {
 	ctx                   context.Context
 	ApiService            *FirmwareApiService
@@ -22006,182 +17432,6 @@ func (a *FirmwareApiService) PatchFirmwareDistributableExecute(r ApiPatchFirmwar
 	}
 	// body params
 	localVarPostBody = r.firmwareDistributable
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwareDriveDescriptorRequest struct {
-	ctx                     context.Context
-	ApiService              *FirmwareApiService
-	moid                    string
-	firmwareDriveDescriptor *FirmwareDriveDescriptor
-	ifMatch                 *string
-}
-
-// The &#39;firmware.DriveDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareDriveDescriptorRequest) FirmwareDriveDescriptor(firmwareDriveDescriptor FirmwareDriveDescriptor) ApiPatchFirmwareDriveDescriptorRequest {
-	r.firmwareDriveDescriptor = &firmwareDriveDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareDriveDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareDriveDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareDriveDescriptorRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareDriveDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareDriveDescriptor Update a 'firmware.DriveDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareDriveDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareDriveDescriptor(ctx context.Context, moid string) ApiPatchFirmwareDriveDescriptorRequest {
-	return ApiPatchFirmwareDriveDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareDriveDescriptor
-func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmwareDriveDescriptorRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareDriveDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDriveDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareDriveDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareDriveDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareDriveDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -22447,1062 +17697,6 @@ func (a *FirmwareApiService) PatchFirmwareDriverDistributableExecute(r ApiPatchF
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPatchFirmwareGpuDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwareGpuDescriptor *FirmwareGpuDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.GpuDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareGpuDescriptorRequest) FirmwareGpuDescriptor(firmwareGpuDescriptor FirmwareGpuDescriptor) ApiPatchFirmwareGpuDescriptorRequest {
-	r.firmwareGpuDescriptor = &firmwareGpuDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareGpuDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareGpuDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareGpuDescriptorRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareGpuDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareGpuDescriptor Update a 'firmware.GpuDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareGpuDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareGpuDescriptor(ctx context.Context, moid string) ApiPatchFirmwareGpuDescriptorRequest {
-	return ApiPatchFirmwareGpuDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareGpuDescriptor
-func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwareGpuDescriptorRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareGpuDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareGpuDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareGpuDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareGpuDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareGpuDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwareHbaDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwareHbaDescriptor *FirmwareHbaDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.HbaDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareHbaDescriptorRequest) FirmwareHbaDescriptor(firmwareHbaDescriptor FirmwareHbaDescriptor) ApiPatchFirmwareHbaDescriptorRequest {
-	r.firmwareHbaDescriptor = &firmwareHbaDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareHbaDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareHbaDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareHbaDescriptorRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareHbaDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareHbaDescriptor Update a 'firmware.HbaDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareHbaDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareHbaDescriptor(ctx context.Context, moid string) ApiPatchFirmwareHbaDescriptorRequest {
-	return ApiPatchFirmwareHbaDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareHbaDescriptor
-func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwareHbaDescriptorRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareHbaDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareHbaDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareHbaDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareHbaDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareHbaDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwareIomDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwareIomDescriptor *FirmwareIomDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.IomDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareIomDescriptorRequest) FirmwareIomDescriptor(firmwareIomDescriptor FirmwareIomDescriptor) ApiPatchFirmwareIomDescriptorRequest {
-	r.firmwareIomDescriptor = &firmwareIomDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareIomDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareIomDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareIomDescriptorRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareIomDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareIomDescriptor Update a 'firmware.IomDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareIomDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareIomDescriptor(ctx context.Context, moid string) ApiPatchFirmwareIomDescriptorRequest {
-	return ApiPatchFirmwareIomDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareIomDescriptor
-func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwareIomDescriptorRequest) (*FirmwareIomDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareIomDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareIomDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareIomDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareIomDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareIomDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwareMswitchDescriptorRequest struct {
-	ctx                       context.Context
-	ApiService                *FirmwareApiService
-	moid                      string
-	firmwareMswitchDescriptor *FirmwareMswitchDescriptor
-	ifMatch                   *string
-}
-
-// The &#39;firmware.MswitchDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareMswitchDescriptorRequest) FirmwareMswitchDescriptor(firmwareMswitchDescriptor FirmwareMswitchDescriptor) ApiPatchFirmwareMswitchDescriptorRequest {
-	r.firmwareMswitchDescriptor = &firmwareMswitchDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareMswitchDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareMswitchDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareMswitchDescriptorRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareMswitchDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareMswitchDescriptor Update a 'firmware.MswitchDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareMswitchDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareMswitchDescriptor(ctx context.Context, moid string) ApiPatchFirmwareMswitchDescriptorRequest {
-	return ApiPatchFirmwareMswitchDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareMswitchDescriptor
-func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFirmwareMswitchDescriptorRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareMswitchDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareMswitchDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareMswitchDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareMswitchDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareMswitchDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwareNxosDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwareNxosDescriptor *FirmwareNxosDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.NxosDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareNxosDescriptorRequest) FirmwareNxosDescriptor(firmwareNxosDescriptor FirmwareNxosDescriptor) ApiPatchFirmwareNxosDescriptorRequest {
-	r.firmwareNxosDescriptor = &firmwareNxosDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareNxosDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareNxosDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareNxosDescriptorRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareNxosDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareNxosDescriptor Update a 'firmware.NxosDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareNxosDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareNxosDescriptor(ctx context.Context, moid string) ApiPatchFirmwareNxosDescriptorRequest {
-	return ApiPatchFirmwareNxosDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareNxosDescriptor
-func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwareNxosDescriptorRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareNxosDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareNxosDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareNxosDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareNxosDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareNxosDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwarePcieDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwarePcieDescriptor *FirmwarePcieDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.PcieDescriptor&#39; resource to update.
-func (r ApiPatchFirmwarePcieDescriptorRequest) FirmwarePcieDescriptor(firmwarePcieDescriptor FirmwarePcieDescriptor) ApiPatchFirmwarePcieDescriptorRequest {
-	r.firmwarePcieDescriptor = &firmwarePcieDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwarePcieDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwarePcieDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwarePcieDescriptorRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwarePcieDescriptorExecute(r)
-}
-
-/*
-PatchFirmwarePcieDescriptor Update a 'firmware.PcieDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwarePcieDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwarePcieDescriptor(ctx context.Context, moid string) ApiPatchFirmwarePcieDescriptorRequest {
-	return ApiPatchFirmwarePcieDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwarePcieDescriptor
-func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwarePcieDescriptorRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwarePcieDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwarePcieDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwarePcieDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwarePcieDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwarePcieDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiPatchFirmwarePolicyRequest struct {
 	ctx            context.Context
 	ApiService     *FirmwareApiService
@@ -23590,358 +17784,6 @@ func (a *FirmwareApiService) PatchFirmwarePolicyExecute(r ApiPatchFirmwarePolicy
 	}
 	// body params
 	localVarPostBody = r.firmwarePolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwarePsuDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwarePsuDescriptor *FirmwarePsuDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.PsuDescriptor&#39; resource to update.
-func (r ApiPatchFirmwarePsuDescriptorRequest) FirmwarePsuDescriptor(firmwarePsuDescriptor FirmwarePsuDescriptor) ApiPatchFirmwarePsuDescriptorRequest {
-	r.firmwarePsuDescriptor = &firmwarePsuDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwarePsuDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwarePsuDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwarePsuDescriptorRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwarePsuDescriptorExecute(r)
-}
-
-/*
-PatchFirmwarePsuDescriptor Update a 'firmware.PsuDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwarePsuDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwarePsuDescriptor(ctx context.Context, moid string) ApiPatchFirmwarePsuDescriptorRequest {
-	return ApiPatchFirmwarePsuDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwarePsuDescriptor
-func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwarePsuDescriptorRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwarePsuDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwarePsuDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwarePsuDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwarePsuDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwarePsuDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwarePsxDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwarePsxDescriptor *FirmwarePsxDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.PsxDescriptor&#39; resource to update.
-func (r ApiPatchFirmwarePsxDescriptorRequest) FirmwarePsxDescriptor(firmwarePsxDescriptor FirmwarePsxDescriptor) ApiPatchFirmwarePsxDescriptorRequest {
-	r.firmwarePsxDescriptor = &firmwarePsxDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwarePsxDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwarePsxDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwarePsxDescriptorRequest) Execute() (*FirmwarePsxDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwarePsxDescriptorExecute(r)
-}
-
-/*
-PatchFirmwarePsxDescriptor Update a 'firmware.PsxDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwarePsxDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwarePsxDescriptor(ctx context.Context, moid string) ApiPatchFirmwarePsxDescriptorRequest {
-	return ApiPatchFirmwarePsxDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwarePsxDescriptor
-func (a *FirmwareApiService) PatchFirmwarePsxDescriptorExecute(r ApiPatchFirmwarePsxDescriptorRequest) (*FirmwarePsxDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwarePsxDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwarePsxDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PsxDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwarePsxDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwarePsxDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwarePsxDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -24207,182 +18049,6 @@ func (a *FirmwareApiService) PatchFirmwareRunningFirmwareExecute(r ApiPatchFirmw
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPatchFirmwareSasExpanderDescriptorRequest struct {
-	ctx                           context.Context
-	ApiService                    *FirmwareApiService
-	moid                          string
-	firmwareSasExpanderDescriptor *FirmwareSasExpanderDescriptor
-	ifMatch                       *string
-}
-
-// The &#39;firmware.SasExpanderDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareSasExpanderDescriptorRequest) FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor FirmwareSasExpanderDescriptor) ApiPatchFirmwareSasExpanderDescriptorRequest {
-	r.firmwareSasExpanderDescriptor = &firmwareSasExpanderDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareSasExpanderDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareSasExpanderDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareSasExpanderDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareSasExpanderDescriptor Update a 'firmware.SasExpanderDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareSasExpanderDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptor(ctx context.Context, moid string) ApiPatchFirmwareSasExpanderDescriptorRequest {
-	return ApiPatchFirmwareSasExpanderDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareSasExpanderDescriptor
-func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatchFirmwareSasExpanderDescriptorRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareSasExpanderDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareSasExpanderDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareSasExpanderDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareSasExpanderDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareSasExpanderDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiPatchFirmwareServerConfigurationUtilityDistributableRequest struct {
 	ctx                                             context.Context
 	ApiService                                      *FirmwareApiService
@@ -24470,182 +18136,6 @@ func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributabl
 	}
 	// body params
 	localVarPostBody = r.firmwareServerConfigurationUtilityDistributable
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchFirmwareStorageControllerDescriptorRequest struct {
-	ctx                                 context.Context
-	ApiService                          *FirmwareApiService
-	moid                                string
-	firmwareStorageControllerDescriptor *FirmwareStorageControllerDescriptor
-	ifMatch                             *string
-}
-
-// The &#39;firmware.StorageControllerDescriptor&#39; resource to update.
-func (r ApiPatchFirmwareStorageControllerDescriptorRequest) FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor FirmwareStorageControllerDescriptor) ApiPatchFirmwareStorageControllerDescriptorRequest {
-	r.firmwareStorageControllerDescriptor = &firmwareStorageControllerDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchFirmwareStorageControllerDescriptorRequest) IfMatch(ifMatch string) ApiPatchFirmwareStorageControllerDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
-	return r.ApiService.PatchFirmwareStorageControllerDescriptorExecute(r)
-}
-
-/*
-PatchFirmwareStorageControllerDescriptor Update a 'firmware.StorageControllerDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareStorageControllerDescriptorRequest
-*/
-func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptor(ctx context.Context, moid string) ApiPatchFirmwareStorageControllerDescriptorRequest {
-	return ApiPatchFirmwareStorageControllerDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareStorageControllerDescriptor
-func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r ApiPatchFirmwareStorageControllerDescriptorRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareStorageControllerDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareStorageControllerDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareStorageControllerDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareStorageControllerDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareStorageControllerDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -25087,710 +18577,6 @@ func (a *FirmwareApiService) PatchFirmwareUpgradeExecute(r ApiPatchFirmwareUpgra
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateFirmwareBiosDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwareBiosDescriptor *FirmwareBiosDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.BiosDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareBiosDescriptorRequest) FirmwareBiosDescriptor(firmwareBiosDescriptor FirmwareBiosDescriptor) ApiUpdateFirmwareBiosDescriptorRequest {
-	r.firmwareBiosDescriptor = &firmwareBiosDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareBiosDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareBiosDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareBiosDescriptorRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareBiosDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareBiosDescriptor Update a 'firmware.BiosDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareBiosDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareBiosDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareBiosDescriptorRequest {
-	return ApiUpdateFirmwareBiosDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareBiosDescriptor
-func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirmwareBiosDescriptorRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareBiosDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareBiosDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareBiosDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareBiosDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareBiosDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwareBoardControllerDescriptorRequest struct {
-	ctx                               context.Context
-	ApiService                        *FirmwareApiService
-	moid                              string
-	firmwareBoardControllerDescriptor *FirmwareBoardControllerDescriptor
-	ifMatch                           *string
-}
-
-// The &#39;firmware.BoardControllerDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor FirmwareBoardControllerDescriptor) ApiUpdateFirmwareBoardControllerDescriptorRequest {
-	r.firmwareBoardControllerDescriptor = &firmwareBoardControllerDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareBoardControllerDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareBoardControllerDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareBoardControllerDescriptor Update a 'firmware.BoardControllerDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareBoardControllerDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareBoardControllerDescriptorRequest {
-	return ApiUpdateFirmwareBoardControllerDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareBoardControllerDescriptor
-func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r ApiUpdateFirmwareBoardControllerDescriptorRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareBoardControllerDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareBoardControllerDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareBoardControllerDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareBoardControllerDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareBoardControllerDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwareCimcDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwareCimcDescriptor *FirmwareCimcDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.CimcDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareCimcDescriptorRequest) FirmwareCimcDescriptor(firmwareCimcDescriptor FirmwareCimcDescriptor) ApiUpdateFirmwareCimcDescriptorRequest {
-	r.firmwareCimcDescriptor = &firmwareCimcDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareCimcDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareCimcDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareCimcDescriptorRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareCimcDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareCimcDescriptor Update a 'firmware.CimcDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareCimcDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareCimcDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareCimcDescriptorRequest {
-	return ApiUpdateFirmwareCimcDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareCimcDescriptor
-func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirmwareCimcDescriptorRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareCimcDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareCimcDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareCimcDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareCimcDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareCimcDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwareDimmDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwareDimmDescriptor *FirmwareDimmDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.DimmDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareDimmDescriptorRequest) FirmwareDimmDescriptor(firmwareDimmDescriptor FirmwareDimmDescriptor) ApiUpdateFirmwareDimmDescriptorRequest {
-	r.firmwareDimmDescriptor = &firmwareDimmDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareDimmDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareDimmDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareDimmDescriptorRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareDimmDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareDimmDescriptor Update a 'firmware.DimmDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareDimmDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareDimmDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareDimmDescriptorRequest {
-	return ApiUpdateFirmwareDimmDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareDimmDescriptor
-func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirmwareDimmDescriptorRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareDimmDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDimmDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareDimmDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareDimmDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareDimmDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiUpdateFirmwareDistributableRequest struct {
 	ctx                   context.Context
 	ApiService            *FirmwareApiService
@@ -25878,182 +18664,6 @@ func (a *FirmwareApiService) UpdateFirmwareDistributableExecute(r ApiUpdateFirmw
 	}
 	// body params
 	localVarPostBody = r.firmwareDistributable
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwareDriveDescriptorRequest struct {
-	ctx                     context.Context
-	ApiService              *FirmwareApiService
-	moid                    string
-	firmwareDriveDescriptor *FirmwareDriveDescriptor
-	ifMatch                 *string
-}
-
-// The &#39;firmware.DriveDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareDriveDescriptorRequest) FirmwareDriveDescriptor(firmwareDriveDescriptor FirmwareDriveDescriptor) ApiUpdateFirmwareDriveDescriptorRequest {
-	r.firmwareDriveDescriptor = &firmwareDriveDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareDriveDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareDriveDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareDriveDescriptorRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareDriveDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareDriveDescriptor Update a 'firmware.DriveDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareDriveDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareDriveDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareDriveDescriptorRequest {
-	return ApiUpdateFirmwareDriveDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareDriveDescriptor
-func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFirmwareDriveDescriptorRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareDriveDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDriveDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareDriveDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareDriveDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareDriveDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -26319,1062 +18929,6 @@ func (a *FirmwareApiService) UpdateFirmwareDriverDistributableExecute(r ApiUpdat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateFirmwareGpuDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwareGpuDescriptor *FirmwareGpuDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.GpuDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareGpuDescriptorRequest) FirmwareGpuDescriptor(firmwareGpuDescriptor FirmwareGpuDescriptor) ApiUpdateFirmwareGpuDescriptorRequest {
-	r.firmwareGpuDescriptor = &firmwareGpuDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareGpuDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareGpuDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareGpuDescriptorRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareGpuDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareGpuDescriptor Update a 'firmware.GpuDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareGpuDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareGpuDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareGpuDescriptorRequest {
-	return ApiUpdateFirmwareGpuDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareGpuDescriptor
-func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmwareGpuDescriptorRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareGpuDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareGpuDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareGpuDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareGpuDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareGpuDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwareHbaDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwareHbaDescriptor *FirmwareHbaDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.HbaDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareHbaDescriptorRequest) FirmwareHbaDescriptor(firmwareHbaDescriptor FirmwareHbaDescriptor) ApiUpdateFirmwareHbaDescriptorRequest {
-	r.firmwareHbaDescriptor = &firmwareHbaDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareHbaDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareHbaDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareHbaDescriptorRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareHbaDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareHbaDescriptor Update a 'firmware.HbaDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareHbaDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareHbaDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareHbaDescriptorRequest {
-	return ApiUpdateFirmwareHbaDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareHbaDescriptor
-func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmwareHbaDescriptorRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareHbaDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareHbaDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareHbaDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareHbaDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareHbaDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwareIomDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwareIomDescriptor *FirmwareIomDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.IomDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareIomDescriptorRequest) FirmwareIomDescriptor(firmwareIomDescriptor FirmwareIomDescriptor) ApiUpdateFirmwareIomDescriptorRequest {
-	r.firmwareIomDescriptor = &firmwareIomDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareIomDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareIomDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareIomDescriptorRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareIomDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareIomDescriptor Update a 'firmware.IomDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareIomDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareIomDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareIomDescriptorRequest {
-	return ApiUpdateFirmwareIomDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareIomDescriptor
-func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmwareIomDescriptorRequest) (*FirmwareIomDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareIomDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareIomDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareIomDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareIomDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareIomDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwareMswitchDescriptorRequest struct {
-	ctx                       context.Context
-	ApiService                *FirmwareApiService
-	moid                      string
-	firmwareMswitchDescriptor *FirmwareMswitchDescriptor
-	ifMatch                   *string
-}
-
-// The &#39;firmware.MswitchDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareMswitchDescriptorRequest) FirmwareMswitchDescriptor(firmwareMswitchDescriptor FirmwareMswitchDescriptor) ApiUpdateFirmwareMswitchDescriptorRequest {
-	r.firmwareMswitchDescriptor = &firmwareMswitchDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareMswitchDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareMswitchDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareMswitchDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareMswitchDescriptor Update a 'firmware.MswitchDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareMswitchDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareMswitchDescriptorRequest {
-	return ApiUpdateFirmwareMswitchDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareMswitchDescriptor
-func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateFirmwareMswitchDescriptorRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareMswitchDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareMswitchDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareMswitchDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareMswitchDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareMswitchDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwareNxosDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwareNxosDescriptor *FirmwareNxosDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.NxosDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareNxosDescriptorRequest) FirmwareNxosDescriptor(firmwareNxosDescriptor FirmwareNxosDescriptor) ApiUpdateFirmwareNxosDescriptorRequest {
-	r.firmwareNxosDescriptor = &firmwareNxosDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareNxosDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareNxosDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareNxosDescriptorRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareNxosDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareNxosDescriptor Update a 'firmware.NxosDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareNxosDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareNxosDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareNxosDescriptorRequest {
-	return ApiUpdateFirmwareNxosDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareNxosDescriptor
-func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirmwareNxosDescriptorRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareNxosDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareNxosDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareNxosDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareNxosDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareNxosDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwarePcieDescriptorRequest struct {
-	ctx                    context.Context
-	ApiService             *FirmwareApiService
-	moid                   string
-	firmwarePcieDescriptor *FirmwarePcieDescriptor
-	ifMatch                *string
-}
-
-// The &#39;firmware.PcieDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwarePcieDescriptorRequest) FirmwarePcieDescriptor(firmwarePcieDescriptor FirmwarePcieDescriptor) ApiUpdateFirmwarePcieDescriptorRequest {
-	r.firmwarePcieDescriptor = &firmwarePcieDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwarePcieDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwarePcieDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwarePcieDescriptorRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwarePcieDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwarePcieDescriptor Update a 'firmware.PcieDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwarePcieDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwarePcieDescriptor(ctx context.Context, moid string) ApiUpdateFirmwarePcieDescriptorRequest {
-	return ApiUpdateFirmwarePcieDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwarePcieDescriptor
-func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirmwarePcieDescriptorRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwarePcieDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwarePcieDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwarePcieDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwarePcieDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwarePcieDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiUpdateFirmwarePolicyRequest struct {
 	ctx            context.Context
 	ApiService     *FirmwareApiService
@@ -27462,358 +19016,6 @@ func (a *FirmwareApiService) UpdateFirmwarePolicyExecute(r ApiUpdateFirmwarePoli
 	}
 	// body params
 	localVarPostBody = r.firmwarePolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwarePsuDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwarePsuDescriptor *FirmwarePsuDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.PsuDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwarePsuDescriptorRequest) FirmwarePsuDescriptor(firmwarePsuDescriptor FirmwarePsuDescriptor) ApiUpdateFirmwarePsuDescriptorRequest {
-	r.firmwarePsuDescriptor = &firmwarePsuDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwarePsuDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwarePsuDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwarePsuDescriptorRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwarePsuDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwarePsuDescriptor Update a 'firmware.PsuDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwarePsuDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwarePsuDescriptor(ctx context.Context, moid string) ApiUpdateFirmwarePsuDescriptorRequest {
-	return ApiUpdateFirmwarePsuDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwarePsuDescriptor
-func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmwarePsuDescriptorRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwarePsuDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwarePsuDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwarePsuDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwarePsuDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwarePsuDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwarePsxDescriptorRequest struct {
-	ctx                   context.Context
-	ApiService            *FirmwareApiService
-	moid                  string
-	firmwarePsxDescriptor *FirmwarePsxDescriptor
-	ifMatch               *string
-}
-
-// The &#39;firmware.PsxDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwarePsxDescriptorRequest) FirmwarePsxDescriptor(firmwarePsxDescriptor FirmwarePsxDescriptor) ApiUpdateFirmwarePsxDescriptorRequest {
-	r.firmwarePsxDescriptor = &firmwarePsxDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwarePsxDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwarePsxDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwarePsxDescriptorRequest) Execute() (*FirmwarePsxDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwarePsxDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwarePsxDescriptor Update a 'firmware.PsxDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwarePsxDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwarePsxDescriptor(ctx context.Context, moid string) ApiUpdateFirmwarePsxDescriptorRequest {
-	return ApiUpdateFirmwarePsxDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwarePsxDescriptor
-func (a *FirmwareApiService) UpdateFirmwarePsxDescriptorExecute(r ApiUpdateFirmwarePsxDescriptorRequest) (*FirmwarePsxDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwarePsxDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwarePsxDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/PsxDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwarePsxDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwarePsxDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwarePsxDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -28079,182 +19281,6 @@ func (a *FirmwareApiService) UpdateFirmwareRunningFirmwareExecute(r ApiUpdateFir
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateFirmwareSasExpanderDescriptorRequest struct {
-	ctx                           context.Context
-	ApiService                    *FirmwareApiService
-	moid                          string
-	firmwareSasExpanderDescriptor *FirmwareSasExpanderDescriptor
-	ifMatch                       *string
-}
-
-// The &#39;firmware.SasExpanderDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor FirmwareSasExpanderDescriptor) ApiUpdateFirmwareSasExpanderDescriptorRequest {
-	r.firmwareSasExpanderDescriptor = &firmwareSasExpanderDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareSasExpanderDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareSasExpanderDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareSasExpanderDescriptor Update a 'firmware.SasExpanderDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareSasExpanderDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareSasExpanderDescriptorRequest {
-	return ApiUpdateFirmwareSasExpanderDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareSasExpanderDescriptor
-func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpdateFirmwareSasExpanderDescriptorRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareSasExpanderDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareSasExpanderDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareSasExpanderDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareSasExpanderDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareSasExpanderDescriptor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest struct {
 	ctx                                             context.Context
 	ApiService                                      *FirmwareApiService
@@ -28342,182 +19368,6 @@ func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributab
 	}
 	// body params
 	localVarPostBody = r.firmwareServerConfigurationUtilityDistributable
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateFirmwareStorageControllerDescriptorRequest struct {
-	ctx                                 context.Context
-	ApiService                          *FirmwareApiService
-	moid                                string
-	firmwareStorageControllerDescriptor *FirmwareStorageControllerDescriptor
-	ifMatch                             *string
-}
-
-// The &#39;firmware.StorageControllerDescriptor&#39; resource to update.
-func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor FirmwareStorageControllerDescriptor) ApiUpdateFirmwareStorageControllerDescriptorRequest {
-	r.firmwareStorageControllerDescriptor = &firmwareStorageControllerDescriptor
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) IfMatch(ifMatch string) ApiUpdateFirmwareStorageControllerDescriptorRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
-	return r.ApiService.UpdateFirmwareStorageControllerDescriptorExecute(r)
-}
-
-/*
-UpdateFirmwareStorageControllerDescriptor Update a 'firmware.StorageControllerDescriptor' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareStorageControllerDescriptorRequest
-*/
-func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareStorageControllerDescriptorRequest {
-	return ApiUpdateFirmwareStorageControllerDescriptorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FirmwareStorageControllerDescriptor
-func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r ApiUpdateFirmwareStorageControllerDescriptorRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FirmwareStorageControllerDescriptor
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareStorageControllerDescriptor")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.firmwareStorageControllerDescriptor == nil {
-		return localVarReturnValue, nil, reportError("firmwareStorageControllerDescriptor is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.firmwareStorageControllerDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

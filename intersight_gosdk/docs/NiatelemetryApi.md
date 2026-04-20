@@ -4,9 +4,6 @@ All URIs are relative to *https://intersight.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateNiatelemetryNexusCloudAccount**](NiatelemetryApi.md#CreateNiatelemetryNexusCloudAccount) | **Post** /api/v1/niatelemetry/NexusCloudAccounts | Create a &#39;niatelemetry.NexusCloudAccount&#39; resource.
-[**CreateNiatelemetryNexusCloudSite**](NiatelemetryApi.md#CreateNiatelemetryNexusCloudSite) | **Post** /api/v1/niatelemetry/NexusCloudSites | Create a &#39;niatelemetry.NexusCloudSite&#39; resource.
-[**DeleteNiatelemetryNexusCloudSite**](NiatelemetryApi.md#DeleteNiatelemetryNexusCloudSite) | **Delete** /api/v1/niatelemetry/NexusCloudSites/{Moid} | Delete a &#39;niatelemetry.NexusCloudSite&#39; resource.
 [**GetNiatelemetryAaaLdapProviderDetailsByMoid**](NiatelemetryApi.md#GetNiatelemetryAaaLdapProviderDetailsByMoid) | **Get** /api/v1/niatelemetry/AaaLdapProviderDetails/{Moid} | Read a &#39;niatelemetry.AaaLdapProviderDetails&#39; resource.
 [**GetNiatelemetryAaaLdapProviderDetailsList**](NiatelemetryApi.md#GetNiatelemetryAaaLdapProviderDetailsList) | **Get** /api/v1/niatelemetry/AaaLdapProviderDetails | Read a &#39;niatelemetry.AaaLdapProviderDetails&#39; resource.
 [**GetNiatelemetryAaaRadiusProviderDetailsByMoid**](NiatelemetryApi.md#GetNiatelemetryAaaRadiusProviderDetailsByMoid) | **Get** /api/v1/niatelemetry/AaaRadiusProviderDetails/{Moid} | Read a &#39;niatelemetry.AaaRadiusProviderDetails&#39; resource.
@@ -175,220 +172,12 @@ Method | HTTP request | Description
 [**GetNiatelemetrySystemControllerDetailsList**](NiatelemetryApi.md#GetNiatelemetrySystemControllerDetailsList) | **Get** /api/v1/niatelemetry/SystemControllerDetails | Read a &#39;niatelemetry.SystemControllerDetails&#39; resource.
 [**GetNiatelemetryTenantByMoid**](NiatelemetryApi.md#GetNiatelemetryTenantByMoid) | **Get** /api/v1/niatelemetry/Tenants/{Moid} | Read a &#39;niatelemetry.Tenant&#39; resource.
 [**GetNiatelemetryTenantList**](NiatelemetryApi.md#GetNiatelemetryTenantList) | **Get** /api/v1/niatelemetry/Tenants | Read a &#39;niatelemetry.Tenant&#39; resource.
-[**PatchNiatelemetryNexusCloudAccount**](NiatelemetryApi.md#PatchNiatelemetryNexusCloudAccount) | **Patch** /api/v1/niatelemetry/NexusCloudAccounts/{Moid} | Update a &#39;niatelemetry.NexusCloudAccount&#39; resource.
-[**PatchNiatelemetryNexusCloudSite**](NiatelemetryApi.md#PatchNiatelemetryNexusCloudSite) | **Patch** /api/v1/niatelemetry/NexusCloudSites/{Moid} | Update a &#39;niatelemetry.NexusCloudSite&#39; resource.
-[**PatchNiatelemetryNiaInventory**](NiatelemetryApi.md#PatchNiatelemetryNiaInventory) | **Patch** /api/v1/niatelemetry/NiaInventories/{Moid} | Update a &#39;niatelemetry.NiaInventory&#39; resource.
-[**UpdateNiatelemetryNexusCloudAccount**](NiatelemetryApi.md#UpdateNiatelemetryNexusCloudAccount) | **Post** /api/v1/niatelemetry/NexusCloudAccounts/{Moid} | Update a &#39;niatelemetry.NexusCloudAccount&#39; resource.
-[**UpdateNiatelemetryNexusCloudSite**](NiatelemetryApi.md#UpdateNiatelemetryNexusCloudSite) | **Post** /api/v1/niatelemetry/NexusCloudSites/{Moid} | Update a &#39;niatelemetry.NexusCloudSite&#39; resource.
-[**UpdateNiatelemetryNiaInventory**](NiatelemetryApi.md#UpdateNiatelemetryNiaInventory) | **Post** /api/v1/niatelemetry/NiaInventories/{Moid} | Update a &#39;niatelemetry.NiaInventory&#39; resource.
 
-
-
-## CreateNiatelemetryNexusCloudAccount
-
-> NiatelemetryNexusCloudAccount CreateNiatelemetryNexusCloudAccount(ctx).NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'niatelemetry.NexusCloudAccount' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	niatelemetryNexusCloudAccount := *openapiclient.NewNiatelemetryNexusCloudAccount("ClassId_example", "ObjectType_example") // NiatelemetryNexusCloudAccount | The 'niatelemetry.NexusCloudAccount' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.CreateNiatelemetryNexusCloudAccount(context.Background()).NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.CreateNiatelemetryNexusCloudAccount``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateNiatelemetryNexusCloudAccount`: NiatelemetryNexusCloudAccount
-	fmt.Fprintf(os.Stdout, "Response from `NiatelemetryApi.CreateNiatelemetryNexusCloudAccount`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateNiatelemetryNexusCloudAccountRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **niatelemetryNexusCloudAccount** | [**NiatelemetryNexusCloudAccount**](NiatelemetryNexusCloudAccount.md) | The &#39;niatelemetry.NexusCloudAccount&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**NiatelemetryNexusCloudAccount**](NiatelemetryNexusCloudAccount.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateNiatelemetryNexusCloudSite
-
-> NiatelemetryNexusCloudSite CreateNiatelemetryNexusCloudSite(ctx).NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'niatelemetry.NexusCloudSite' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	niatelemetryNexusCloudSite := *openapiclient.NewNiatelemetryNexusCloudSite("ClassId_example", "ObjectType_example") // NiatelemetryNexusCloudSite | The 'niatelemetry.NexusCloudSite' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.CreateNiatelemetryNexusCloudSite(context.Background()).NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.CreateNiatelemetryNexusCloudSite``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateNiatelemetryNexusCloudSite`: NiatelemetryNexusCloudSite
-	fmt.Fprintf(os.Stdout, "Response from `NiatelemetryApi.CreateNiatelemetryNexusCloudSite`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateNiatelemetryNexusCloudSiteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **niatelemetryNexusCloudSite** | [**NiatelemetryNexusCloudSite**](NiatelemetryNexusCloudSite.md) | The &#39;niatelemetry.NexusCloudSite&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**NiatelemetryNexusCloudSite**](NiatelemetryNexusCloudSite.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteNiatelemetryNexusCloudSite
-
-> DeleteNiatelemetryNexusCloudSite(ctx, moid).Execute()
-
-Delete a 'niatelemetry.NexusCloudSite' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NiatelemetryApi.DeleteNiatelemetryNexusCloudSite(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.DeleteNiatelemetryNexusCloudSite``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteNiatelemetryNexusCloudSiteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## GetNiatelemetryAaaLdapProviderDetailsByMoid
 
-> NiatelemetryAaaLdapProviderDetails GetNiatelemetryAaaLdapProviderDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryAaaLdapProviderDetails GetNiatelemetryAaaLdapProviderDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.AaaLdapProviderDetails' resource.
 
@@ -406,10 +195,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryAaaLdapProviderDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryAaaLdapProviderDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryAaaLdapProviderDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -435,6 +227,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryAaaLdapProv
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -540,7 +335,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryAaaRadiusProviderDetailsByMoid
 
-> NiatelemetryAaaRadiusProviderDetails GetNiatelemetryAaaRadiusProviderDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryAaaRadiusProviderDetails GetNiatelemetryAaaRadiusProviderDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.AaaRadiusProviderDetails' resource.
 
@@ -558,10 +353,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryAaaRadiusProviderDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryAaaRadiusProviderDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryAaaRadiusProviderDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -587,6 +385,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryAaaRadiusPr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -692,7 +493,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryAaaTacacsProviderDetailsByMoid
 
-> NiatelemetryAaaTacacsProviderDetails GetNiatelemetryAaaTacacsProviderDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryAaaTacacsProviderDetails GetNiatelemetryAaaTacacsProviderDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.AaaTacacsProviderDetails' resource.
 
@@ -710,10 +511,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryAaaTacacsProviderDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryAaaTacacsProviderDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryAaaTacacsProviderDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -739,6 +543,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryAaaTacacsPr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -844,7 +651,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicAppPluginDetailsByMoid
 
-> NiatelemetryApicAppPluginDetails GetNiatelemetryApicAppPluginDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicAppPluginDetails GetNiatelemetryApicAppPluginDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicAppPluginDetails' resource.
 
@@ -862,10 +669,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicAppPluginDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicAppPluginDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicAppPluginDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -891,6 +701,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicAppPlug
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -996,7 +809,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicCoreFileDetailsByMoid
 
-> NiatelemetryApicCoreFileDetails GetNiatelemetryApicCoreFileDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicCoreFileDetails GetNiatelemetryApicCoreFileDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicCoreFileDetails' resource.
 
@@ -1014,10 +827,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicCoreFileDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicCoreFileDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicCoreFileDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1043,6 +859,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicCoreFil
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1148,7 +967,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicDbgexpRsExportDestByMoid
 
-> NiatelemetryApicDbgexpRsExportDest GetNiatelemetryApicDbgexpRsExportDestByMoid(ctx, moid).Execute()
+> NiatelemetryApicDbgexpRsExportDest GetNiatelemetryApicDbgexpRsExportDestByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicDbgexpRsExportDest' resource.
 
@@ -1166,10 +985,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicDbgexpRsExportDestByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicDbgexpRsExportDestByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicDbgexpRsExportDestByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1195,6 +1017,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicDbgexpR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1300,7 +1125,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicDbgexpRsTsSchedulerByMoid
 
-> NiatelemetryApicDbgexpRsTsScheduler GetNiatelemetryApicDbgexpRsTsSchedulerByMoid(ctx, moid).Execute()
+> NiatelemetryApicDbgexpRsTsScheduler GetNiatelemetryApicDbgexpRsTsSchedulerByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicDbgexpRsTsScheduler' resource.
 
@@ -1318,10 +1143,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicDbgexpRsTsSchedulerByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicDbgexpRsTsSchedulerByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicDbgexpRsTsSchedulerByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1347,6 +1175,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicDbgexpR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1452,7 +1283,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicFanDetailsByMoid
 
-> NiatelemetryApicFanDetails GetNiatelemetryApicFanDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicFanDetails GetNiatelemetryApicFanDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicFanDetails' resource.
 
@@ -1470,10 +1301,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicFanDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicFanDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicFanDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1499,6 +1333,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicFanDeta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1604,7 +1441,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicFexDetailsByMoid
 
-> NiatelemetryApicFexDetails GetNiatelemetryApicFexDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicFexDetails GetNiatelemetryApicFexDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicFexDetails' resource.
 
@@ -1622,10 +1459,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicFexDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicFexDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicFexDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1651,6 +1491,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicFexDeta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1756,7 +1599,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicFlashDetailsByMoid
 
-> NiatelemetryApicFlashDetails GetNiatelemetryApicFlashDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicFlashDetails GetNiatelemetryApicFlashDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicFlashDetails' resource.
 
@@ -1774,10 +1617,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicFlashDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicFlashDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicFlashDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1803,6 +1649,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicFlashDe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1908,7 +1757,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicNtpAuthByMoid
 
-> NiatelemetryApicNtpAuth GetNiatelemetryApicNtpAuthByMoid(ctx, moid).Execute()
+> NiatelemetryApicNtpAuth GetNiatelemetryApicNtpAuthByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicNtpAuth' resource.
 
@@ -1926,10 +1775,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicNtpAuthByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicNtpAuthByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicNtpAuthByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1955,6 +1807,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicNtpAuth
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2060,7 +1915,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicPerformanceDataByMoid
 
-> NiatelemetryApicPerformanceData GetNiatelemetryApicPerformanceDataByMoid(ctx, moid).Execute()
+> NiatelemetryApicPerformanceData GetNiatelemetryApicPerformanceDataByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicPerformanceData' resource.
 
@@ -2078,10 +1933,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicPerformanceDataByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicPerformanceDataByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicPerformanceDataByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2107,6 +1965,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicPerform
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2212,7 +2073,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicPodDataByMoid
 
-> NiatelemetryApicPodData GetNiatelemetryApicPodDataByMoid(ctx, moid).Execute()
+> NiatelemetryApicPodData GetNiatelemetryApicPodDataByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicPodData' resource.
 
@@ -2230,10 +2091,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicPodDataByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicPodDataByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicPodDataByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2259,6 +2123,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicPodData
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2364,7 +2231,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicPsuDetailsByMoid
 
-> NiatelemetryApicPsuDetails GetNiatelemetryApicPsuDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicPsuDetails GetNiatelemetryApicPsuDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicPsuDetails' resource.
 
@@ -2382,10 +2249,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicPsuDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicPsuDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicPsuDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2411,6 +2281,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicPsuDeta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2516,7 +2389,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicRealmDetailsByMoid
 
-> NiatelemetryApicRealmDetails GetNiatelemetryApicRealmDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicRealmDetails GetNiatelemetryApicRealmDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicRealmDetails' resource.
 
@@ -2534,10 +2407,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicRealmDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicRealmDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicRealmDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2563,6 +2439,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicRealmDe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2668,7 +2547,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicSnmpClientGrpDetailsByMoid
 
-> NiatelemetryApicSnmpClientGrpDetails GetNiatelemetryApicSnmpClientGrpDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicSnmpClientGrpDetails GetNiatelemetryApicSnmpClientGrpDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicSnmpClientGrpDetails' resource.
 
@@ -2686,10 +2565,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpClientGrpDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpClientGrpDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicSnmpClientGrpDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2715,6 +2597,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicSnmpCli
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2820,7 +2705,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid
 
-> NiatelemetryApicSnmpCommunityAccessDetails GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicSnmpCommunityAccessDetails GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicSnmpCommunityAccessDetails' resource.
 
@@ -2838,10 +2723,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2867,6 +2755,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicSnmpCom
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2972,7 +2863,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicSnmpCommunityDetailsByMoid
 
-> NiatelemetryApicSnmpCommunityDetails GetNiatelemetryApicSnmpCommunityDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicSnmpCommunityDetails GetNiatelemetryApicSnmpCommunityDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicSnmpCommunityDetails' resource.
 
@@ -2990,10 +2881,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpCommunityDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpCommunityDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicSnmpCommunityDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3019,6 +2913,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicSnmpCom
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3124,7 +3021,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicSnmpTrapDetailsByMoid
 
-> NiatelemetryApicSnmpTrapDetails GetNiatelemetryApicSnmpTrapDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicSnmpTrapDetails GetNiatelemetryApicSnmpTrapDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicSnmpTrapDetails' resource.
 
@@ -3142,10 +3039,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpTrapDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpTrapDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicSnmpTrapDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3171,6 +3071,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicSnmpTra
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3276,7 +3179,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid
 
-> NiatelemetryApicSnmpTrapFwdServerDetails GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicSnmpTrapFwdServerDetails GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicSnmpTrapFwdServerDetails' resource.
 
@@ -3294,10 +3197,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3323,6 +3229,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicSnmpTra
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3428,7 +3337,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicSnmpVersionThreeDetailsByMoid
 
-> NiatelemetryApicSnmpVersionThreeDetails GetNiatelemetryApicSnmpVersionThreeDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicSnmpVersionThreeDetails GetNiatelemetryApicSnmpVersionThreeDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicSnmpVersionThreeDetails' resource.
 
@@ -3446,10 +3355,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpVersionThreeDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSnmpVersionThreeDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicSnmpVersionThreeDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3475,6 +3387,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicSnmpVer
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3580,7 +3495,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicSysLogGrpByMoid
 
-> NiatelemetryApicSysLogGrp GetNiatelemetryApicSysLogGrpByMoid(ctx, moid).Execute()
+> NiatelemetryApicSysLogGrp GetNiatelemetryApicSysLogGrpByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicSysLogGrp' resource.
 
@@ -3598,10 +3513,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSysLogGrpByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSysLogGrpByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicSysLogGrpByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3627,6 +3545,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicSysLogG
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3732,7 +3653,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicSysLogSrcByMoid
 
-> NiatelemetryApicSysLogSrc GetNiatelemetryApicSysLogSrcByMoid(ctx, moid).Execute()
+> NiatelemetryApicSysLogSrc GetNiatelemetryApicSysLogSrcByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicSysLogSrc' resource.
 
@@ -3750,10 +3671,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSysLogSrcByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicSysLogSrcByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicSysLogSrcByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3779,6 +3703,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicSysLogS
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -3884,7 +3811,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicTransceiverDetailsByMoid
 
-> NiatelemetryApicTransceiverDetails GetNiatelemetryApicTransceiverDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryApicTransceiverDetails GetNiatelemetryApicTransceiverDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicTransceiverDetails' resource.
 
@@ -3902,10 +3829,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicTransceiverDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicTransceiverDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicTransceiverDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3931,6 +3861,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicTransce
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4036,7 +3969,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicUiPageCountsByMoid
 
-> NiatelemetryApicUiPageCounts GetNiatelemetryApicUiPageCountsByMoid(ctx, moid).Execute()
+> NiatelemetryApicUiPageCounts GetNiatelemetryApicUiPageCountsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicUiPageCounts' resource.
 
@@ -4054,10 +3987,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicUiPageCountsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicUiPageCountsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicUiPageCountsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4083,6 +4019,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicUiPageC
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4188,7 +4127,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryApicVisionByMoid
 
-> NiatelemetryApicVision GetNiatelemetryApicVisionByMoid(ctx, moid).Execute()
+> NiatelemetryApicVision GetNiatelemetryApicVisionByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.ApicVision' resource.
 
@@ -4206,10 +4145,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicVisionByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryApicVisionByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryApicVisionByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4235,6 +4177,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryApicVisionB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4340,7 +4285,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryAppDetailsByMoid
 
-> NiatelemetryAppDetails GetNiatelemetryAppDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryAppDetails GetNiatelemetryAppDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.AppDetails' resource.
 
@@ -4358,10 +4303,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryAppDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryAppDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryAppDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4387,6 +4335,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryAppDetailsB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4492,7 +4443,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryCloudDetailsByMoid
 
-> NiatelemetryCloudDetails GetNiatelemetryCloudDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryCloudDetails GetNiatelemetryCloudDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.CloudDetails' resource.
 
@@ -4510,10 +4461,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryCloudDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryCloudDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryCloudDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4539,6 +4493,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryCloudDetail
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4644,7 +4601,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryCommonPoliciesByMoid
 
-> NiatelemetryCommonPolicies GetNiatelemetryCommonPoliciesByMoid(ctx, moid).Execute()
+> NiatelemetryCommonPolicies GetNiatelemetryCommonPoliciesByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.CommonPolicies' resource.
 
@@ -4662,10 +4619,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryCommonPoliciesByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryCommonPoliciesByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryCommonPoliciesByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4691,6 +4651,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryCommonPolic
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4796,7 +4759,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryDcnmFanDetailsByMoid
 
-> NiatelemetryDcnmFanDetails GetNiatelemetryDcnmFanDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryDcnmFanDetails GetNiatelemetryDcnmFanDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.DcnmFanDetails' resource.
 
@@ -4814,10 +4777,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmFanDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmFanDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryDcnmFanDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4843,6 +4809,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryDcnmFanDeta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -4948,7 +4917,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryDcnmFexDetailsByMoid
 
-> NiatelemetryDcnmFexDetails GetNiatelemetryDcnmFexDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryDcnmFexDetails GetNiatelemetryDcnmFexDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.DcnmFexDetails' resource.
 
@@ -4966,10 +4935,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmFexDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmFexDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryDcnmFexDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4995,6 +4967,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryDcnmFexDeta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5100,7 +5075,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryDcnmModuleDetailsByMoid
 
-> NiatelemetryDcnmModuleDetails GetNiatelemetryDcnmModuleDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryDcnmModuleDetails GetNiatelemetryDcnmModuleDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.DcnmModuleDetails' resource.
 
@@ -5118,10 +5093,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmModuleDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmModuleDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryDcnmModuleDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5147,6 +5125,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryDcnmModuleD
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5252,7 +5233,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryDcnmPsuDetailsByMoid
 
-> NiatelemetryDcnmPsuDetails GetNiatelemetryDcnmPsuDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryDcnmPsuDetails GetNiatelemetryDcnmPsuDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.DcnmPsuDetails' resource.
 
@@ -5270,10 +5251,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmPsuDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmPsuDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryDcnmPsuDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5299,6 +5283,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryDcnmPsuDeta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5404,7 +5391,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryDcnmTransceiverDetailsByMoid
 
-> NiatelemetryDcnmTransceiverDetails GetNiatelemetryDcnmTransceiverDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryDcnmTransceiverDetails GetNiatelemetryDcnmTransceiverDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.DcnmTransceiverDetails' resource.
 
@@ -5422,10 +5409,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmTransceiverDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDcnmTransceiverDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryDcnmTransceiverDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5451,6 +5441,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryDcnmTransce
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5556,7 +5549,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryDomInfoObjectByMoid
 
-> NiatelemetryDomInfoObject GetNiatelemetryDomInfoObjectByMoid(ctx, moid).Execute()
+> NiatelemetryDomInfoObject GetNiatelemetryDomInfoObjectByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.DomInfoObject' resource.
 
@@ -5574,10 +5567,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDomInfoObjectByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDomInfoObjectByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryDomInfoObjectByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5603,6 +5599,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryDomInfoObje
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5708,7 +5707,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryDomThresInfoObjectByMoid
 
-> NiatelemetryDomThresInfoObject GetNiatelemetryDomThresInfoObjectByMoid(ctx, moid).Execute()
+> NiatelemetryDomThresInfoObject GetNiatelemetryDomThresInfoObjectByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.DomThresInfoObject' resource.
 
@@ -5726,10 +5725,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDomThresInfoObjectByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryDomThresInfoObjectByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryDomThresInfoObjectByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5755,6 +5757,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryDomThresInf
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -5860,7 +5865,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryEpgByMoid
 
-> NiatelemetryEpg GetNiatelemetryEpgByMoid(ctx, moid).Execute()
+> NiatelemetryEpg GetNiatelemetryEpgByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.Epg' resource.
 
@@ -5878,10 +5883,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryEpgByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryEpgByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryEpgByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5907,6 +5915,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryEpgByMoidRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6012,7 +6023,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryFabricModuleDetailsByMoid
 
-> NiatelemetryFabricModuleDetails GetNiatelemetryFabricModuleDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryFabricModuleDetails GetNiatelemetryFabricModuleDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.FabricModuleDetails' resource.
 
@@ -6030,10 +6041,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFabricModuleDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFabricModuleDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryFabricModuleDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6059,6 +6073,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryFabricModul
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6164,7 +6181,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryFabricNodeControlDetailsByMoid
 
-> NiatelemetryFabricNodeControlDetails GetNiatelemetryFabricNodeControlDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryFabricNodeControlDetails GetNiatelemetryFabricNodeControlDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.FabricNodeControlDetails' resource.
 
@@ -6182,10 +6199,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFabricNodeControlDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFabricNodeControlDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryFabricNodeControlDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6211,6 +6231,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryFabricNodeC
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6316,7 +6339,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryFabricPodProfileByMoid
 
-> NiatelemetryFabricPodProfile GetNiatelemetryFabricPodProfileByMoid(ctx, moid).Execute()
+> NiatelemetryFabricPodProfile GetNiatelemetryFabricPodProfileByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.FabricPodProfile' resource.
 
@@ -6334,10 +6357,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFabricPodProfileByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFabricPodProfileByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryFabricPodProfileByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6363,6 +6389,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryFabricPodPr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6468,7 +6497,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryFabricPodSsByMoid
 
-> NiatelemetryFabricPodSs GetNiatelemetryFabricPodSsByMoid(ctx, moid).Execute()
+> NiatelemetryFabricPodSs GetNiatelemetryFabricPodSsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.FabricPodSs' resource.
 
@@ -6486,10 +6515,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFabricPodSsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFabricPodSsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryFabricPodSsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6515,6 +6547,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryFabricPodSs
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6620,7 +6655,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryFaultByMoid
 
-> NiatelemetryFault GetNiatelemetryFaultByMoid(ctx, moid).Execute()
+> NiatelemetryFault GetNiatelemetryFaultByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.Fault' resource.
 
@@ -6638,10 +6673,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFaultByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryFaultByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryFaultByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6667,6 +6705,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryFaultByMoid
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6772,7 +6813,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryHcloudDetailsByMoid
 
-> NiatelemetryHcloudDetails GetNiatelemetryHcloudDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryHcloudDetails GetNiatelemetryHcloudDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.HcloudDetails' resource.
 
@@ -6790,10 +6831,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHcloudDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHcloudDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryHcloudDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6819,6 +6863,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryHcloudDetai
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -6924,7 +6971,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryHealthInsightsDataByMoid
 
-> NiatelemetryHealthInsightsData GetNiatelemetryHealthInsightsDataByMoid(ctx, moid).Execute()
+> NiatelemetryHealthInsightsData GetNiatelemetryHealthInsightsDataByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.HealthInsightsData' resource.
 
@@ -6942,10 +6989,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHealthInsightsDataByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHealthInsightsDataByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryHealthInsightsDataByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6971,6 +7021,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryHealthInsig
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7076,7 +7129,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryHttpsAclContractDetailsByMoid
 
-> NiatelemetryHttpsAclContractDetails GetNiatelemetryHttpsAclContractDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryHttpsAclContractDetails GetNiatelemetryHttpsAclContractDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.HttpsAclContractDetails' resource.
 
@@ -7094,10 +7147,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclContractDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclContractDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryHttpsAclContractDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7123,6 +7179,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryHttpsAclCon
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7228,7 +7287,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryHttpsAclContractFilterMapByMoid
 
-> NiatelemetryHttpsAclContractFilterMap GetNiatelemetryHttpsAclContractFilterMapByMoid(ctx, moid).Execute()
+> NiatelemetryHttpsAclContractFilterMap GetNiatelemetryHttpsAclContractFilterMapByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.HttpsAclContractFilterMap' resource.
 
@@ -7246,10 +7305,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclContractFilterMapByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclContractFilterMapByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryHttpsAclContractFilterMapByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7275,6 +7337,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryHttpsAclCon
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7380,7 +7445,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryHttpsAclEpgContractMapByMoid
 
-> NiatelemetryHttpsAclEpgContractMap GetNiatelemetryHttpsAclEpgContractMapByMoid(ctx, moid).Execute()
+> NiatelemetryHttpsAclEpgContractMap GetNiatelemetryHttpsAclEpgContractMapByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.HttpsAclEpgContractMap' resource.
 
@@ -7398,10 +7463,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclEpgContractMapByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclEpgContractMapByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryHttpsAclEpgContractMapByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7427,6 +7495,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryHttpsAclEpg
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7532,7 +7603,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryHttpsAclEpgDetailsByMoid
 
-> NiatelemetryHttpsAclEpgDetails GetNiatelemetryHttpsAclEpgDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryHttpsAclEpgDetails GetNiatelemetryHttpsAclEpgDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.HttpsAclEpgDetails' resource.
 
@@ -7550,10 +7621,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclEpgDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclEpgDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryHttpsAclEpgDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7579,6 +7653,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryHttpsAclEpg
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7684,7 +7761,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryHttpsAclFilterDetailsByMoid
 
-> NiatelemetryHttpsAclFilterDetails GetNiatelemetryHttpsAclFilterDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryHttpsAclFilterDetails GetNiatelemetryHttpsAclFilterDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.HttpsAclFilterDetails' resource.
 
@@ -7702,10 +7779,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclFilterDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryHttpsAclFilterDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryHttpsAclFilterDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7731,6 +7811,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryHttpsAclFil
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7836,7 +7919,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryInsightGroupDetailsByMoid
 
-> NiatelemetryInsightGroupDetails GetNiatelemetryInsightGroupDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryInsightGroupDetails GetNiatelemetryInsightGroupDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.InsightGroupDetails' resource.
 
@@ -7854,10 +7937,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryInsightGroupDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryInsightGroupDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryInsightGroupDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7883,6 +7969,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryInsightGrou
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -7988,7 +8077,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryLcByMoid
 
-> NiatelemetryLc GetNiatelemetryLcByMoid(ctx, moid).Execute()
+> NiatelemetryLc GetNiatelemetryLcByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.Lc' resource.
 
@@ -8006,10 +8095,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryLcByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryLcByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryLcByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8035,6 +8127,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryLcByMoidReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -8140,7 +8235,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryLeafPolGrpDetailsByMoid
 
-> NiatelemetryLeafPolGrpDetails GetNiatelemetryLeafPolGrpDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryLeafPolGrpDetails GetNiatelemetryLeafPolGrpDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.LeafPolGrpDetails' resource.
 
@@ -8158,10 +8253,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryLeafPolGrpDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryLeafPolGrpDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryLeafPolGrpDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8187,6 +8285,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryLeafPolGrpD
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -8292,7 +8393,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryMdsNeighborsByMoid
 
-> NiatelemetryMdsNeighbors GetNiatelemetryMdsNeighborsByMoid(ctx, moid).Execute()
+> NiatelemetryMdsNeighbors GetNiatelemetryMdsNeighborsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.MdsNeighbors' resource.
 
@@ -8310,10 +8411,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMdsNeighborsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMdsNeighborsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryMdsNeighborsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8339,6 +8443,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryMdsNeighbor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -8444,7 +8551,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryMsoContractDetailsByMoid
 
-> NiatelemetryMsoContractDetails GetNiatelemetryMsoContractDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryMsoContractDetails GetNiatelemetryMsoContractDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.MsoContractDetails' resource.
 
@@ -8462,10 +8569,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoContractDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoContractDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryMsoContractDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8491,6 +8601,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryMsoContract
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -8596,7 +8709,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryMsoEpgDetailsByMoid
 
-> NiatelemetryMsoEpgDetails GetNiatelemetryMsoEpgDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryMsoEpgDetails GetNiatelemetryMsoEpgDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.MsoEpgDetails' resource.
 
@@ -8614,10 +8727,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoEpgDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoEpgDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryMsoEpgDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8643,6 +8759,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryMsoEpgDetai
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -8748,7 +8867,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryMsoSchemaDetailsByMoid
 
-> NiatelemetryMsoSchemaDetails GetNiatelemetryMsoSchemaDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryMsoSchemaDetails GetNiatelemetryMsoSchemaDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.MsoSchemaDetails' resource.
 
@@ -8766,10 +8885,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoSchemaDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoSchemaDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryMsoSchemaDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8795,6 +8917,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryMsoSchemaDe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -8900,7 +9025,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryMsoSiteDetailsByMoid
 
-> NiatelemetryMsoSiteDetails GetNiatelemetryMsoSiteDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryMsoSiteDetails GetNiatelemetryMsoSiteDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.MsoSiteDetails' resource.
 
@@ -8918,10 +9043,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoSiteDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoSiteDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryMsoSiteDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8947,6 +9075,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryMsoSiteDeta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -9052,7 +9183,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryMsoTenantDetailsByMoid
 
-> NiatelemetryMsoTenantDetails GetNiatelemetryMsoTenantDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryMsoTenantDetails GetNiatelemetryMsoTenantDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.MsoTenantDetails' resource.
 
@@ -9070,10 +9201,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoTenantDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryMsoTenantDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryMsoTenantDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9099,6 +9233,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryMsoTenantDe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -9204,7 +9341,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNexusCloudAccountByMoid
 
-> NiatelemetryNexusCloudAccount GetNiatelemetryNexusCloudAccountByMoid(ctx, moid).Execute()
+> NiatelemetryNexusCloudAccount GetNiatelemetryNexusCloudAccountByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NexusCloudAccount' resource.
 
@@ -9222,10 +9359,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusCloudAccountByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusCloudAccountByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNexusCloudAccountByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9251,6 +9391,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNexusCloudA
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -9356,7 +9499,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNexusCloudSiteByMoid
 
-> NiatelemetryNexusCloudSite GetNiatelemetryNexusCloudSiteByMoid(ctx, moid).Execute()
+> NiatelemetryNexusCloudSite GetNiatelemetryNexusCloudSiteByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NexusCloudSite' resource.
 
@@ -9374,10 +9517,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusCloudSiteByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusCloudSiteByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNexusCloudSiteByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9403,6 +9549,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNexusCloudS
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -9508,7 +9657,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNexusDashboardControllerDetailsByMoid
 
-> NiatelemetryNexusDashboardControllerDetails GetNiatelemetryNexusDashboardControllerDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryNexusDashboardControllerDetails GetNiatelemetryNexusDashboardControllerDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NexusDashboardControllerDetails' resource.
 
@@ -9526,10 +9675,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusDashboardControllerDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusDashboardControllerDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNexusDashboardControllerDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9555,6 +9707,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNexusDashbo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -9660,7 +9815,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNexusDashboardDetailsByMoid
 
-> NiatelemetryNexusDashboardDetails GetNiatelemetryNexusDashboardDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryNexusDashboardDetails GetNiatelemetryNexusDashboardDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NexusDashboardDetails' resource.
 
@@ -9678,10 +9833,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusDashboardDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusDashboardDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNexusDashboardDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9707,6 +9865,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNexusDashbo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -9812,7 +9973,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNexusDashboardMemoryDetailsByMoid
 
-> NiatelemetryNexusDashboardMemoryDetails GetNiatelemetryNexusDashboardMemoryDetailsByMoid(ctx, moid).Execute()
+> NiatelemetryNexusDashboardMemoryDetails GetNiatelemetryNexusDashboardMemoryDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NexusDashboardMemoryDetails' resource.
 
@@ -9830,10 +9991,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusDashboardMemoryDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusDashboardMemoryDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNexusDashboardMemoryDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9859,6 +10023,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNexusDashbo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -9964,7 +10131,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNexusDashboardsByMoid
 
-> NiatelemetryNexusDashboards GetNiatelemetryNexusDashboardsByMoid(ctx, moid).Execute()
+> NiatelemetryNexusDashboards GetNiatelemetryNexusDashboardsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NexusDashboards' resource.
 
@@ -9982,10 +10149,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusDashboardsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNexusDashboardsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNexusDashboardsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -10011,6 +10181,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNexusDashbo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -10116,7 +10289,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNiaFeatureUsageByMoid
 
-> NiatelemetryNiaFeatureUsage GetNiatelemetryNiaFeatureUsageByMoid(ctx, moid).Execute()
+> NiatelemetryNiaFeatureUsage GetNiatelemetryNiaFeatureUsageByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NiaFeatureUsage' resource.
 
@@ -10134,10 +10307,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaFeatureUsageByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaFeatureUsageByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNiaFeatureUsageByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -10163,6 +10339,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNiaFeatureU
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -10268,7 +10447,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNiaInventoryByMoid
 
-> NiatelemetryNiaInventory GetNiatelemetryNiaInventoryByMoid(ctx, moid).Execute()
+> NiatelemetryNiaInventory GetNiatelemetryNiaInventoryByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NiaInventory' resource.
 
@@ -10286,10 +10465,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaInventoryByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaInventoryByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNiaInventoryByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -10315,6 +10497,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNiaInventor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -10336,7 +10521,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNiaInventoryDcnmByMoid
 
-> NiatelemetryNiaInventoryDcnm GetNiatelemetryNiaInventoryDcnmByMoid(ctx, moid).Execute()
+> NiatelemetryNiaInventoryDcnm GetNiatelemetryNiaInventoryDcnmByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NiaInventoryDcnm' resource.
 
@@ -10354,10 +10539,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaInventoryDcnmByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaInventoryDcnmByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNiaInventoryDcnmByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -10383,6 +10571,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNiaInventor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -10488,7 +10679,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNiaInventoryFabricByMoid
 
-> NiatelemetryNiaInventoryFabric GetNiatelemetryNiaInventoryFabricByMoid(ctx, moid).Execute()
+> NiatelemetryNiaInventoryFabric GetNiatelemetryNiaInventoryFabricByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NiaInventoryFabric' resource.
 
@@ -10506,10 +10697,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaInventoryFabricByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaInventoryFabricByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNiaInventoryFabricByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -10535,6 +10729,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNiaInventor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -10724,7 +10921,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNiaLicenseStateByMoid
 
-> NiatelemetryNiaLicenseState GetNiatelemetryNiaLicenseStateByMoid(ctx, moid).Execute()
+> NiatelemetryNiaLicenseState GetNiatelemetryNiaLicenseStateByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.NiaLicenseState' resource.
 
@@ -10742,10 +10939,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaLicenseStateByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiaLicenseStateByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNiaLicenseStateByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -10771,6 +10971,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNiaLicenseS
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -10876,7 +11079,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryNiccByMoid
 
-> NiatelemetryNicc GetNiatelemetryNiccByMoid(ctx, moid).Execute()
+> NiatelemetryNicc GetNiatelemetryNiccByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.Nicc' resource.
 
@@ -10894,10 +11097,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiccByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryNiccByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryNiccByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -10923,6 +11129,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryNiccByMoidR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -11028,7 +11237,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryPasswordStrengthCheckByMoid
 
-> NiatelemetryPasswordStrengthCheck GetNiatelemetryPasswordStrengthCheckByMoid(ctx, moid).Execute()
+> NiatelemetryPasswordStrengthCheck GetNiatelemetryPasswordStrengthCheckByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.PasswordStrengthCheck' resource.
 
@@ -11046,10 +11255,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryPasswordStrengthCheckByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryPasswordStrengthCheckByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryPasswordStrengthCheckByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -11075,6 +11287,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryPasswordStr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -11180,7 +11395,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryPodCommPoliciesByMoid
 
-> NiatelemetryPodCommPolicies GetNiatelemetryPodCommPoliciesByMoid(ctx, moid).Execute()
+> NiatelemetryPodCommPolicies GetNiatelemetryPodCommPoliciesByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.PodCommPolicies' resource.
 
@@ -11198,10 +11413,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryPodCommPoliciesByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryPodCommPoliciesByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryPodCommPoliciesByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -11227,6 +11445,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryPodCommPoli
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -11332,7 +11553,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryPodSnmpPoliciesByMoid
 
-> NiatelemetryPodSnmpPolicies GetNiatelemetryPodSnmpPoliciesByMoid(ctx, moid).Execute()
+> NiatelemetryPodSnmpPolicies GetNiatelemetryPodSnmpPoliciesByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.PodSnmpPolicies' resource.
 
@@ -11350,10 +11571,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryPodSnmpPoliciesByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryPodSnmpPoliciesByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryPodSnmpPoliciesByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -11379,6 +11603,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryPodSnmpPoli
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -11484,7 +11711,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryPodTimeServerPoliciesByMoid
 
-> NiatelemetryPodTimeServerPolicies GetNiatelemetryPodTimeServerPoliciesByMoid(ctx, moid).Execute()
+> NiatelemetryPodTimeServerPolicies GetNiatelemetryPodTimeServerPoliciesByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.PodTimeServerPolicies' resource.
 
@@ -11502,10 +11729,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryPodTimeServerPoliciesByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryPodTimeServerPoliciesByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryPodTimeServerPoliciesByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -11531,6 +11761,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryPodTimeServ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -11636,7 +11869,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetrySiteInventoryByMoid
 
-> NiatelemetrySiteInventory GetNiatelemetrySiteInventoryByMoid(ctx, moid).Execute()
+> NiatelemetrySiteInventory GetNiatelemetrySiteInventoryByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.SiteInventory' resource.
 
@@ -11654,10 +11887,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySiteInventoryByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySiteInventoryByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetrySiteInventoryByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -11683,6 +11919,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetrySiteInvento
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -11788,7 +12027,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetrySnmpSrcByMoid
 
-> NiatelemetrySnmpSrc GetNiatelemetrySnmpSrcByMoid(ctx, moid).Execute()
+> NiatelemetrySnmpSrc GetNiatelemetrySnmpSrcByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.SnmpSrc' resource.
 
@@ -11806,10 +12045,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySnmpSrcByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySnmpSrcByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetrySnmpSrcByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -11835,6 +12077,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetrySnmpSrcByMo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -11940,7 +12185,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetrySpinePolGrpDetailsByMoid
 
-> NiatelemetrySpinePolGrpDetails GetNiatelemetrySpinePolGrpDetailsByMoid(ctx, moid).Execute()
+> NiatelemetrySpinePolGrpDetails GetNiatelemetrySpinePolGrpDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.SpinePolGrpDetails' resource.
 
@@ -11958,10 +12203,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySpinePolGrpDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySpinePolGrpDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetrySpinePolGrpDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -11987,6 +12235,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetrySpinePolGrp
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -12092,7 +12343,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetrySshVersionTwoByMoid
 
-> NiatelemetrySshVersionTwo GetNiatelemetrySshVersionTwoByMoid(ctx, moid).Execute()
+> NiatelemetrySshVersionTwo GetNiatelemetrySshVersionTwoByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.SshVersionTwo' resource.
 
@@ -12110,10 +12361,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySshVersionTwoByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySshVersionTwoByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetrySshVersionTwoByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -12139,6 +12393,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetrySshVersionT
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -12244,7 +12501,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetrySupervisorModuleDetailsByMoid
 
-> NiatelemetrySupervisorModuleDetails GetNiatelemetrySupervisorModuleDetailsByMoid(ctx, moid).Execute()
+> NiatelemetrySupervisorModuleDetails GetNiatelemetrySupervisorModuleDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.SupervisorModuleDetails' resource.
 
@@ -12262,10 +12519,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySupervisorModuleDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySupervisorModuleDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetrySupervisorModuleDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -12291,6 +12551,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetrySupervisorM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -12396,7 +12659,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetrySyslogRemoteDestByMoid
 
-> NiatelemetrySyslogRemoteDest GetNiatelemetrySyslogRemoteDestByMoid(ctx, moid).Execute()
+> NiatelemetrySyslogRemoteDest GetNiatelemetrySyslogRemoteDestByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.SyslogRemoteDest' resource.
 
@@ -12414,10 +12677,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySyslogRemoteDestByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySyslogRemoteDestByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetrySyslogRemoteDestByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -12443,6 +12709,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetrySyslogRemot
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -12548,7 +12817,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetrySyslogSysMsgByMoid
 
-> NiatelemetrySyslogSysMsg GetNiatelemetrySyslogSysMsgByMoid(ctx, moid).Execute()
+> NiatelemetrySyslogSysMsg GetNiatelemetrySyslogSysMsgByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.SyslogSysMsg' resource.
 
@@ -12566,10 +12835,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySyslogSysMsgByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySyslogSysMsgByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetrySyslogSysMsgByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -12595,6 +12867,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetrySyslogSysMs
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -12616,7 +12891,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetrySyslogSysMsgFacFilterByMoid
 
-> NiatelemetrySyslogSysMsgFacFilter GetNiatelemetrySyslogSysMsgFacFilterByMoid(ctx, moid).Execute()
+> NiatelemetrySyslogSysMsgFacFilter GetNiatelemetrySyslogSysMsgFacFilterByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.SyslogSysMsgFacFilter' resource.
 
@@ -12634,10 +12909,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySyslogSysMsgFacFilterByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySyslogSysMsgFacFilterByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetrySyslogSysMsgFacFilterByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -12663,6 +12941,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetrySyslogSysMs
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -12852,7 +13133,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetrySystemControllerDetailsByMoid
 
-> NiatelemetrySystemControllerDetails GetNiatelemetrySystemControllerDetailsByMoid(ctx, moid).Execute()
+> NiatelemetrySystemControllerDetails GetNiatelemetrySystemControllerDetailsByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.SystemControllerDetails' resource.
 
@@ -12870,10 +13151,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySystemControllerDetailsByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetrySystemControllerDetailsByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetrySystemControllerDetailsByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -12899,6 +13183,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetrySystemContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -13004,7 +13291,7 @@ Name | Type | Description  | Notes
 
 ## GetNiatelemetryTenantByMoid
 
-> NiatelemetryTenant GetNiatelemetryTenantByMoid(ctx, moid).Execute()
+> NiatelemetryTenant GetNiatelemetryTenantByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'niatelemetry.Tenant' resource.
 
@@ -13022,10 +13309,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryTenantByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.NiatelemetryApi.GetNiatelemetryTenantByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.GetNiatelemetryTenantByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -13051,6 +13341,9 @@ Other parameters are passed through a pointer to a apiGetNiatelemetryTenantByMoi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -13148,438 +13441,6 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchNiatelemetryNexusCloudAccount
-
-> NiatelemetryNexusCloudAccount PatchNiatelemetryNexusCloudAccount(ctx, moid).NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount).IfMatch(ifMatch).Execute()
-
-Update a 'niatelemetry.NexusCloudAccount' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	niatelemetryNexusCloudAccount := *openapiclient.NewNiatelemetryNexusCloudAccount("ClassId_example", "ObjectType_example") // NiatelemetryNexusCloudAccount | The 'niatelemetry.NexusCloudAccount' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.PatchNiatelemetryNexusCloudAccount(context.Background(), moid).NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.PatchNiatelemetryNexusCloudAccount``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchNiatelemetryNexusCloudAccount`: NiatelemetryNexusCloudAccount
-	fmt.Fprintf(os.Stdout, "Response from `NiatelemetryApi.PatchNiatelemetryNexusCloudAccount`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchNiatelemetryNexusCloudAccountRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **niatelemetryNexusCloudAccount** | [**NiatelemetryNexusCloudAccount**](NiatelemetryNexusCloudAccount.md) | The &#39;niatelemetry.NexusCloudAccount&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**NiatelemetryNexusCloudAccount**](NiatelemetryNexusCloudAccount.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchNiatelemetryNexusCloudSite
-
-> NiatelemetryNexusCloudSite PatchNiatelemetryNexusCloudSite(ctx, moid).NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite).IfMatch(ifMatch).Execute()
-
-Update a 'niatelemetry.NexusCloudSite' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	niatelemetryNexusCloudSite := *openapiclient.NewNiatelemetryNexusCloudSite("ClassId_example", "ObjectType_example") // NiatelemetryNexusCloudSite | The 'niatelemetry.NexusCloudSite' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.PatchNiatelemetryNexusCloudSite(context.Background(), moid).NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.PatchNiatelemetryNexusCloudSite``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchNiatelemetryNexusCloudSite`: NiatelemetryNexusCloudSite
-	fmt.Fprintf(os.Stdout, "Response from `NiatelemetryApi.PatchNiatelemetryNexusCloudSite`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchNiatelemetryNexusCloudSiteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **niatelemetryNexusCloudSite** | [**NiatelemetryNexusCloudSite**](NiatelemetryNexusCloudSite.md) | The &#39;niatelemetry.NexusCloudSite&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**NiatelemetryNexusCloudSite**](NiatelemetryNexusCloudSite.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchNiatelemetryNiaInventory
-
-> NiatelemetryNiaInventory PatchNiatelemetryNiaInventory(ctx, moid).NiatelemetryNiaInventory(niatelemetryNiaInventory).IfMatch(ifMatch).Execute()
-
-Update a 'niatelemetry.NiaInventory' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	niatelemetryNiaInventory := *openapiclient.NewNiatelemetryNiaInventory("ClassId_example", "ObjectType_example") // NiatelemetryNiaInventory | The 'niatelemetry.NiaInventory' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.PatchNiatelemetryNiaInventory(context.Background(), moid).NiatelemetryNiaInventory(niatelemetryNiaInventory).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.PatchNiatelemetryNiaInventory``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchNiatelemetryNiaInventory`: NiatelemetryNiaInventory
-	fmt.Fprintf(os.Stdout, "Response from `NiatelemetryApi.PatchNiatelemetryNiaInventory`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchNiatelemetryNiaInventoryRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **niatelemetryNiaInventory** | [**NiatelemetryNiaInventory**](NiatelemetryNiaInventory.md) | The &#39;niatelemetry.NiaInventory&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**NiatelemetryNiaInventory**](NiatelemetryNiaInventory.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateNiatelemetryNexusCloudAccount
-
-> NiatelemetryNexusCloudAccount UpdateNiatelemetryNexusCloudAccount(ctx, moid).NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount).IfMatch(ifMatch).Execute()
-
-Update a 'niatelemetry.NexusCloudAccount' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	niatelemetryNexusCloudAccount := *openapiclient.NewNiatelemetryNexusCloudAccount("ClassId_example", "ObjectType_example") // NiatelemetryNexusCloudAccount | The 'niatelemetry.NexusCloudAccount' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.UpdateNiatelemetryNexusCloudAccount(context.Background(), moid).NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.UpdateNiatelemetryNexusCloudAccount``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateNiatelemetryNexusCloudAccount`: NiatelemetryNexusCloudAccount
-	fmt.Fprintf(os.Stdout, "Response from `NiatelemetryApi.UpdateNiatelemetryNexusCloudAccount`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateNiatelemetryNexusCloudAccountRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **niatelemetryNexusCloudAccount** | [**NiatelemetryNexusCloudAccount**](NiatelemetryNexusCloudAccount.md) | The &#39;niatelemetry.NexusCloudAccount&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**NiatelemetryNexusCloudAccount**](NiatelemetryNexusCloudAccount.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateNiatelemetryNexusCloudSite
-
-> NiatelemetryNexusCloudSite UpdateNiatelemetryNexusCloudSite(ctx, moid).NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite).IfMatch(ifMatch).Execute()
-
-Update a 'niatelemetry.NexusCloudSite' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	niatelemetryNexusCloudSite := *openapiclient.NewNiatelemetryNexusCloudSite("ClassId_example", "ObjectType_example") // NiatelemetryNexusCloudSite | The 'niatelemetry.NexusCloudSite' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.UpdateNiatelemetryNexusCloudSite(context.Background(), moid).NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.UpdateNiatelemetryNexusCloudSite``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateNiatelemetryNexusCloudSite`: NiatelemetryNexusCloudSite
-	fmt.Fprintf(os.Stdout, "Response from `NiatelemetryApi.UpdateNiatelemetryNexusCloudSite`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateNiatelemetryNexusCloudSiteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **niatelemetryNexusCloudSite** | [**NiatelemetryNexusCloudSite**](NiatelemetryNexusCloudSite.md) | The &#39;niatelemetry.NexusCloudSite&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**NiatelemetryNexusCloudSite**](NiatelemetryNexusCloudSite.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateNiatelemetryNiaInventory
-
-> NiatelemetryNiaInventory UpdateNiatelemetryNiaInventory(ctx, moid).NiatelemetryNiaInventory(niatelemetryNiaInventory).IfMatch(ifMatch).Execute()
-
-Update a 'niatelemetry.NiaInventory' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	niatelemetryNiaInventory := *openapiclient.NewNiatelemetryNiaInventory("ClassId_example", "ObjectType_example") // NiatelemetryNiaInventory | The 'niatelemetry.NiaInventory' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NiatelemetryApi.UpdateNiatelemetryNiaInventory(context.Background(), moid).NiatelemetryNiaInventory(niatelemetryNiaInventory).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NiatelemetryApi.UpdateNiatelemetryNiaInventory``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateNiatelemetryNiaInventory`: NiatelemetryNiaInventory
-	fmt.Fprintf(os.Stdout, "Response from `NiatelemetryApi.UpdateNiatelemetryNiaInventory`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateNiatelemetryNiaInventoryRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **niatelemetryNiaInventory** | [**NiatelemetryNiaInventory**](NiatelemetryNiaInventory.md) | The &#39;niatelemetry.NiaInventory&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**NiatelemetryNiaInventory**](NiatelemetryNiaInventory.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

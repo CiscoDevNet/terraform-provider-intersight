@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | The limit spec type. | 
 **Limit** | **int32** | How many rows to return. If not specified, all rows will be returned. | 
-**Columns** | [**[]TelemetryDruidOrderByColumnSpec**](TelemetryDruidOrderByColumnSpec.md) |  | 
+**Columns** | [**[]TelemetryDruidOrderByColumnSpec**](TelemetryDruidOrderByColumnSpec.md) | Optional list of columns to order by. | 
 
 ## Methods
 

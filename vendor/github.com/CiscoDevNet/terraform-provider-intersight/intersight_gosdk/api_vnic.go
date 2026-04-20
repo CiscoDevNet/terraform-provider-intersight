@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -4887,6 +4887,27 @@ type ApiGetVnicEthAdapterPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthAdapterPolicyByMoidRequest) Select_(select_ string) ApiGetVnicEthAdapterPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthAdapterPolicyByMoidRequest) Expand(expand string) ApiGetVnicEthAdapterPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthAdapterPolicyByMoidRequest) At(at string) ApiGetVnicEthAdapterPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthAdapterPolicyByMoidRequest) Execute() (*VnicEthAdapterPolicy, *http.Response, error) {
@@ -4931,6 +4952,18 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyByMoidExecute(r ApiGetVnicEthAda
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5041,6 +5074,27 @@ type ApiGetVnicEthAdapterPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthAdapterPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicEthAdapterPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthAdapterPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicEthAdapterPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthAdapterPolicyInventoryByMoidRequest) At(at string) ApiGetVnicEthAdapterPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthAdapterPolicyInventoryByMoidRequest) Execute() (*VnicEthAdapterPolicyInventory, *http.Response, error) {
@@ -5085,6 +5139,18 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryByMoidExecute(r ApiGetV
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5745,6 +5811,27 @@ type ApiGetVnicEthIfByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthIfByMoidRequest) Select_(select_ string) ApiGetVnicEthIfByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthIfByMoidRequest) Expand(expand string) ApiGetVnicEthIfByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthIfByMoidRequest) At(at string) ApiGetVnicEthIfByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthIfByMoidRequest) Execute() (*VnicEthIf, *http.Response, error) {
@@ -5789,6 +5876,18 @@ func (a *VnicApiService) GetVnicEthIfByMoidExecute(r ApiGetVnicEthIfByMoidReques
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5899,6 +5998,27 @@ type ApiGetVnicEthIfInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthIfInventoryByMoidRequest) Select_(select_ string) ApiGetVnicEthIfInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthIfInventoryByMoidRequest) Expand(expand string) ApiGetVnicEthIfInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthIfInventoryByMoidRequest) At(at string) ApiGetVnicEthIfInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthIfInventoryByMoidRequest) Execute() (*VnicEthIfInventory, *http.Response, error) {
@@ -5943,6 +6063,18 @@ func (a *VnicApiService) GetVnicEthIfInventoryByMoidExecute(r ApiGetVnicEthIfInv
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6603,6 +6735,27 @@ type ApiGetVnicEthNetworkPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthNetworkPolicyByMoidRequest) Select_(select_ string) ApiGetVnicEthNetworkPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthNetworkPolicyByMoidRequest) Expand(expand string) ApiGetVnicEthNetworkPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthNetworkPolicyByMoidRequest) At(at string) ApiGetVnicEthNetworkPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthNetworkPolicyByMoidRequest) Execute() (*VnicEthNetworkPolicy, *http.Response, error) {
@@ -6647,6 +6800,18 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyByMoidExecute(r ApiGetVnicEthNet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6757,6 +6922,27 @@ type ApiGetVnicEthNetworkPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthNetworkPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicEthNetworkPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthNetworkPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicEthNetworkPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthNetworkPolicyInventoryByMoidRequest) At(at string) ApiGetVnicEthNetworkPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthNetworkPolicyInventoryByMoidRequest) Execute() (*VnicEthNetworkPolicyInventory, *http.Response, error) {
@@ -6801,6 +6987,18 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryByMoidExecute(r ApiGetV
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7461,6 +7659,27 @@ type ApiGetVnicEthQosPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthQosPolicyByMoidRequest) Select_(select_ string) ApiGetVnicEthQosPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthQosPolicyByMoidRequest) Expand(expand string) ApiGetVnicEthQosPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthQosPolicyByMoidRequest) At(at string) ApiGetVnicEthQosPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthQosPolicyByMoidRequest) Execute() (*VnicEthQosPolicy, *http.Response, error) {
@@ -7505,6 +7724,18 @@ func (a *VnicApiService) GetVnicEthQosPolicyByMoidExecute(r ApiGetVnicEthQosPoli
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7615,6 +7846,27 @@ type ApiGetVnicEthQosPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthQosPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicEthQosPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthQosPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicEthQosPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthQosPolicyInventoryByMoidRequest) At(at string) ApiGetVnicEthQosPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthQosPolicyInventoryByMoidRequest) Execute() (*VnicEthQosPolicyInventory, *http.Response, error) {
@@ -7659,6 +7911,18 @@ func (a *VnicApiService) GetVnicEthQosPolicyInventoryByMoidExecute(r ApiGetVnicE
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8319,6 +8583,27 @@ type ApiGetVnicEthVethInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthVethInventoryByMoidRequest) Select_(select_ string) ApiGetVnicEthVethInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthVethInventoryByMoidRequest) Expand(expand string) ApiGetVnicEthVethInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthVethInventoryByMoidRequest) At(at string) ApiGetVnicEthVethInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthVethInventoryByMoidRequest) Execute() (*VnicEthVethInventory, *http.Response, error) {
@@ -8363,6 +8648,18 @@ func (a *VnicApiService) GetVnicEthVethInventoryByMoidExecute(r ApiGetVnicEthVet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8748,6 +9045,27 @@ type ApiGetVnicEthVnicInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthVnicInventoryByMoidRequest) Select_(select_ string) ApiGetVnicEthVnicInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthVnicInventoryByMoidRequest) Expand(expand string) ApiGetVnicEthVnicInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthVnicInventoryByMoidRequest) At(at string) ApiGetVnicEthVnicInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicEthVnicInventoryByMoidRequest) Execute() (*VnicEthVnicInventory, *http.Response, error) {
@@ -8792,6 +9110,18 @@ func (a *VnicApiService) GetVnicEthVnicInventoryByMoidExecute(r ApiGetVnicEthVni
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9177,6 +9507,27 @@ type ApiGetVnicFcAdapterPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcAdapterPolicyByMoidRequest) Select_(select_ string) ApiGetVnicFcAdapterPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcAdapterPolicyByMoidRequest) Expand(expand string) ApiGetVnicFcAdapterPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcAdapterPolicyByMoidRequest) At(at string) ApiGetVnicFcAdapterPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcAdapterPolicyByMoidRequest) Execute() (*VnicFcAdapterPolicy, *http.Response, error) {
@@ -9221,6 +9572,18 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyByMoidExecute(r ApiGetVnicFcAdapt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9331,6 +9694,27 @@ type ApiGetVnicFcAdapterPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcAdapterPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicFcAdapterPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcAdapterPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicFcAdapterPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcAdapterPolicyInventoryByMoidRequest) At(at string) ApiGetVnicFcAdapterPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcAdapterPolicyInventoryByMoidRequest) Execute() (*VnicFcAdapterPolicyInventory, *http.Response, error) {
@@ -9375,6 +9759,18 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryByMoidExecute(r ApiGetVn
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10035,6 +10431,27 @@ type ApiGetVnicFcIfByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcIfByMoidRequest) Select_(select_ string) ApiGetVnicFcIfByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcIfByMoidRequest) Expand(expand string) ApiGetVnicFcIfByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcIfByMoidRequest) At(at string) ApiGetVnicFcIfByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcIfByMoidRequest) Execute() (*VnicFcIf, *http.Response, error) {
@@ -10079,6 +10496,18 @@ func (a *VnicApiService) GetVnicFcIfByMoidExecute(r ApiGetVnicFcIfByMoidRequest)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10189,6 +10618,27 @@ type ApiGetVnicFcIfInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcIfInventoryByMoidRequest) Select_(select_ string) ApiGetVnicFcIfInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcIfInventoryByMoidRequest) Expand(expand string) ApiGetVnicFcIfInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcIfInventoryByMoidRequest) At(at string) ApiGetVnicFcIfInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcIfInventoryByMoidRequest) Execute() (*VnicFcIfInventory, *http.Response, error) {
@@ -10233,6 +10683,18 @@ func (a *VnicApiService) GetVnicFcIfInventoryByMoidExecute(r ApiGetVnicFcIfInven
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10893,6 +11355,27 @@ type ApiGetVnicFcNetworkPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcNetworkPolicyByMoidRequest) Select_(select_ string) ApiGetVnicFcNetworkPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcNetworkPolicyByMoidRequest) Expand(expand string) ApiGetVnicFcNetworkPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcNetworkPolicyByMoidRequest) At(at string) ApiGetVnicFcNetworkPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcNetworkPolicyByMoidRequest) Execute() (*VnicFcNetworkPolicy, *http.Response, error) {
@@ -10937,6 +11420,18 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyByMoidExecute(r ApiGetVnicFcNetwo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11047,6 +11542,27 @@ type ApiGetVnicFcNetworkPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcNetworkPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicFcNetworkPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcNetworkPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicFcNetworkPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcNetworkPolicyInventoryByMoidRequest) At(at string) ApiGetVnicFcNetworkPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcNetworkPolicyInventoryByMoidRequest) Execute() (*VnicFcNetworkPolicyInventory, *http.Response, error) {
@@ -11091,6 +11607,18 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryByMoidExecute(r ApiGetVn
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11751,6 +12279,27 @@ type ApiGetVnicFcQosPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcQosPolicyByMoidRequest) Select_(select_ string) ApiGetVnicFcQosPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcQosPolicyByMoidRequest) Expand(expand string) ApiGetVnicFcQosPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcQosPolicyByMoidRequest) At(at string) ApiGetVnicFcQosPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcQosPolicyByMoidRequest) Execute() (*VnicFcQosPolicy, *http.Response, error) {
@@ -11795,6 +12344,18 @@ func (a *VnicApiService) GetVnicFcQosPolicyByMoidExecute(r ApiGetVnicFcQosPolicy
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11905,6 +12466,27 @@ type ApiGetVnicFcQosPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcQosPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicFcQosPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcQosPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicFcQosPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcQosPolicyInventoryByMoidRequest) At(at string) ApiGetVnicFcQosPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcQosPolicyInventoryByMoidRequest) Execute() (*VnicFcQosPolicyInventory, *http.Response, error) {
@@ -11949,6 +12531,18 @@ func (a *VnicApiService) GetVnicFcQosPolicyInventoryByMoidExecute(r ApiGetVnicFc
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12609,6 +13203,27 @@ type ApiGetVnicFcVethInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcVethInventoryByMoidRequest) Select_(select_ string) ApiGetVnicFcVethInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcVethInventoryByMoidRequest) Expand(expand string) ApiGetVnicFcVethInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcVethInventoryByMoidRequest) At(at string) ApiGetVnicFcVethInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcVethInventoryByMoidRequest) Execute() (*VnicFcVethInventory, *http.Response, error) {
@@ -12653,6 +13268,18 @@ func (a *VnicApiService) GetVnicFcVethInventoryByMoidExecute(r ApiGetVnicFcVethI
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13038,6 +13665,27 @@ type ApiGetVnicFcVhbaPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcVhbaPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicFcVhbaPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcVhbaPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicFcVhbaPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcVhbaPolicyInventoryByMoidRequest) At(at string) ApiGetVnicFcVhbaPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicFcVhbaPolicyInventoryByMoidRequest) Execute() (*VnicFcVhbaPolicyInventory, *http.Response, error) {
@@ -13082,6 +13730,18 @@ func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryByMoidExecute(r ApiGetVnicF
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13467,6 +14127,27 @@ type ApiGetVnicIscsiAdapterPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicIscsiAdapterPolicyByMoidRequest) Select_(select_ string) ApiGetVnicIscsiAdapterPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicIscsiAdapterPolicyByMoidRequest) Expand(expand string) ApiGetVnicIscsiAdapterPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicIscsiAdapterPolicyByMoidRequest) At(at string) ApiGetVnicIscsiAdapterPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicIscsiAdapterPolicyByMoidRequest) Execute() (*VnicIscsiAdapterPolicy, *http.Response, error) {
@@ -13511,6 +14192,18 @@ func (a *VnicApiService) GetVnicIscsiAdapterPolicyByMoidExecute(r ApiGetVnicIscs
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13621,6 +14314,27 @@ type ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest) At(at string) ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest) Execute() (*VnicIscsiAdapterPolicyInventory, *http.Response, error) {
@@ -13665,6 +14379,18 @@ func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14325,6 +15051,27 @@ type ApiGetVnicIscsiBootPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicIscsiBootPolicyByMoidRequest) Select_(select_ string) ApiGetVnicIscsiBootPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicIscsiBootPolicyByMoidRequest) Expand(expand string) ApiGetVnicIscsiBootPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicIscsiBootPolicyByMoidRequest) At(at string) ApiGetVnicIscsiBootPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicIscsiBootPolicyByMoidRequest) Execute() (*VnicIscsiBootPolicy, *http.Response, error) {
@@ -14369,6 +15116,18 @@ func (a *VnicApiService) GetVnicIscsiBootPolicyByMoidExecute(r ApiGetVnicIscsiBo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14479,6 +15238,27 @@ type ApiGetVnicIscsiBootPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicIscsiBootPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicIscsiBootPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicIscsiBootPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicIscsiBootPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicIscsiBootPolicyInventoryByMoidRequest) At(at string) ApiGetVnicIscsiBootPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicIscsiBootPolicyInventoryByMoidRequest) Execute() (*VnicIscsiBootPolicyInventory, *http.Response, error) {
@@ -14523,6 +15303,18 @@ func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryByMoidExecute(r ApiGetVn
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15183,6 +15975,27 @@ type ApiGetVnicIscsiStaticTargetPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicIscsiStaticTargetPolicyByMoidRequest) Select_(select_ string) ApiGetVnicIscsiStaticTargetPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicIscsiStaticTargetPolicyByMoidRequest) Expand(expand string) ApiGetVnicIscsiStaticTargetPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicIscsiStaticTargetPolicyByMoidRequest) At(at string) ApiGetVnicIscsiStaticTargetPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicIscsiStaticTargetPolicyByMoidRequest) Execute() (*VnicIscsiStaticTargetPolicy, *http.Response, error) {
@@ -15227,6 +16040,18 @@ func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyByMoidExecute(r ApiGetVni
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15337,6 +16162,27 @@ type ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest) At(at string) ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest) Execute() (*VnicIscsiStaticTargetPolicyInventory, *http.Response, error) {
@@ -15381,6 +16227,18 @@ func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16041,6 +16899,27 @@ type ApiGetVnicLanConnectivityPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicLanConnectivityPolicyByMoidRequest) Select_(select_ string) ApiGetVnicLanConnectivityPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicLanConnectivityPolicyByMoidRequest) Expand(expand string) ApiGetVnicLanConnectivityPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicLanConnectivityPolicyByMoidRequest) At(at string) ApiGetVnicLanConnectivityPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicLanConnectivityPolicyByMoidRequest) Execute() (*VnicLanConnectivityPolicy, *http.Response, error) {
@@ -16085,6 +16964,18 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoidExecute(r ApiGetVnicL
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16195,6 +17086,27 @@ type ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest) At(at string) ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest) Execute() (*VnicLanConnectivityPolicyInventory, *http.Response, error) {
@@ -16239,6 +17151,18 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16899,6 +17823,27 @@ type ApiGetVnicLanSettingsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicLanSettingsByMoidRequest) Select_(select_ string) ApiGetVnicLanSettingsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicLanSettingsByMoidRequest) Expand(expand string) ApiGetVnicLanSettingsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicLanSettingsByMoidRequest) At(at string) ApiGetVnicLanSettingsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicLanSettingsByMoidRequest) Execute() (*VnicLanSettings, *http.Response, error) {
@@ -16943,6 +17888,18 @@ func (a *VnicApiService) GetVnicLanSettingsByMoidExecute(r ApiGetVnicLanSettings
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17328,6 +18285,27 @@ type ApiGetVnicLcpStatusByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicLcpStatusByMoidRequest) Select_(select_ string) ApiGetVnicLcpStatusByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicLcpStatusByMoidRequest) Expand(expand string) ApiGetVnicLcpStatusByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicLcpStatusByMoidRequest) At(at string) ApiGetVnicLcpStatusByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicLcpStatusByMoidRequest) Execute() (*VnicLcpStatus, *http.Response, error) {
@@ -17372,6 +18350,18 @@ func (a *VnicApiService) GetVnicLcpStatusByMoidExecute(r ApiGetVnicLcpStatusByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17757,6 +18747,27 @@ type ApiGetVnicSanConnectivityPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicSanConnectivityPolicyByMoidRequest) Select_(select_ string) ApiGetVnicSanConnectivityPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicSanConnectivityPolicyByMoidRequest) Expand(expand string) ApiGetVnicSanConnectivityPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicSanConnectivityPolicyByMoidRequest) At(at string) ApiGetVnicSanConnectivityPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicSanConnectivityPolicyByMoidRequest) Execute() (*VnicSanConnectivityPolicy, *http.Response, error) {
@@ -17801,6 +18812,18 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoidExecute(r ApiGetVnicS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17911,6 +18934,27 @@ type ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest) Expand(expand string) ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest) At(at string) ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest) Execute() (*VnicSanConnectivityPolicyInventory, *http.Response, error) {
@@ -17955,6 +18999,18 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18615,6 +19671,27 @@ type ApiGetVnicSanSettingsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicSanSettingsByMoidRequest) Select_(select_ string) ApiGetVnicSanSettingsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicSanSettingsByMoidRequest) Expand(expand string) ApiGetVnicSanSettingsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicSanSettingsByMoidRequest) At(at string) ApiGetVnicSanSettingsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicSanSettingsByMoidRequest) Execute() (*VnicSanSettings, *http.Response, error) {
@@ -18659,6 +19736,18 @@ func (a *VnicApiService) GetVnicSanSettingsByMoidExecute(r ApiGetVnicSanSettings
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19044,6 +20133,27 @@ type ApiGetVnicScpStatusByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicScpStatusByMoidRequest) Select_(select_ string) ApiGetVnicScpStatusByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicScpStatusByMoidRequest) Expand(expand string) ApiGetVnicScpStatusByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicScpStatusByMoidRequest) At(at string) ApiGetVnicScpStatusByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicScpStatusByMoidRequest) Execute() (*VnicScpStatus, *http.Response, error) {
@@ -19088,6 +20198,18 @@ func (a *VnicApiService) GetVnicScpStatusByMoidExecute(r ApiGetVnicScpStatusByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19473,6 +20595,27 @@ type ApiGetVnicServiceEthIfByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicServiceEthIfByMoidRequest) Select_(select_ string) ApiGetVnicServiceEthIfByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicServiceEthIfByMoidRequest) Expand(expand string) ApiGetVnicServiceEthIfByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicServiceEthIfByMoidRequest) At(at string) ApiGetVnicServiceEthIfByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicServiceEthIfByMoidRequest) Execute() (*VnicServiceEthIf, *http.Response, error) {
@@ -19517,6 +20660,18 @@ func (a *VnicApiService) GetVnicServiceEthIfByMoidExecute(r ApiGetVnicServiceEth
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19627,6 +20782,27 @@ type ApiGetVnicServiceEthIfInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicServiceEthIfInventoryByMoidRequest) Select_(select_ string) ApiGetVnicServiceEthIfInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicServiceEthIfInventoryByMoidRequest) Expand(expand string) ApiGetVnicServiceEthIfInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicServiceEthIfInventoryByMoidRequest) At(at string) ApiGetVnicServiceEthIfInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicServiceEthIfInventoryByMoidRequest) Execute() (*VnicServiceEthIfInventory, *http.Response, error) {
@@ -19671,6 +20847,18 @@ func (a *VnicApiService) GetVnicServiceEthIfInventoryByMoidExecute(r ApiGetVnicS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -20331,6 +21519,27 @@ type ApiGetVnicVhbaTemplateByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicVhbaTemplateByMoidRequest) Select_(select_ string) ApiGetVnicVhbaTemplateByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicVhbaTemplateByMoidRequest) Expand(expand string) ApiGetVnicVhbaTemplateByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicVhbaTemplateByMoidRequest) At(at string) ApiGetVnicVhbaTemplateByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicVhbaTemplateByMoidRequest) Execute() (*VnicVhbaTemplate, *http.Response, error) {
@@ -20375,6 +21584,18 @@ func (a *VnicApiService) GetVnicVhbaTemplateByMoidExecute(r ApiGetVnicVhbaTempla
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -20760,6 +21981,27 @@ type ApiGetVnicVifIdPoolByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicVifIdPoolByMoidRequest) Select_(select_ string) ApiGetVnicVifIdPoolByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicVifIdPoolByMoidRequest) Expand(expand string) ApiGetVnicVifIdPoolByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicVifIdPoolByMoidRequest) At(at string) ApiGetVnicVifIdPoolByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicVifIdPoolByMoidRequest) Execute() (*VnicVifIdPool, *http.Response, error) {
@@ -20804,6 +22046,18 @@ func (a *VnicApiService) GetVnicVifIdPoolByMoidExecute(r ApiGetVnicVifIdPoolByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -21189,6 +22443,27 @@ type ApiGetVnicVnicTemplateByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VnicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicVnicTemplateByMoidRequest) Select_(select_ string) ApiGetVnicVnicTemplateByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicVnicTemplateByMoidRequest) Expand(expand string) ApiGetVnicVnicTemplateByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicVnicTemplateByMoidRequest) At(at string) ApiGetVnicVnicTemplateByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVnicVnicTemplateByMoidRequest) Execute() (*VnicVnicTemplate, *http.Response, error) {
@@ -21233,6 +22508,18 @@ func (a *VnicApiService) GetVnicVnicTemplateByMoidExecute(r ApiGetVnicVnicTempla
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -24078,182 +25365,6 @@ func (a *VnicApiService) PatchVnicVhbaTemplateExecute(r ApiPatchVnicVhbaTemplate
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPatchVnicVifIdPoolRequest struct {
-	ctx           context.Context
-	ApiService    *VnicApiService
-	moid          string
-	vnicVifIdPool *VnicVifIdPool
-	ifMatch       *string
-}
-
-// The &#39;vnic.VifIdPool&#39; resource to update.
-func (r ApiPatchVnicVifIdPoolRequest) VnicVifIdPool(vnicVifIdPool VnicVifIdPool) ApiPatchVnicVifIdPoolRequest {
-	r.vnicVifIdPool = &vnicVifIdPool
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchVnicVifIdPoolRequest) IfMatch(ifMatch string) ApiPatchVnicVifIdPoolRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchVnicVifIdPoolRequest) Execute() (*VnicVifIdPool, *http.Response, error) {
-	return r.ApiService.PatchVnicVifIdPoolExecute(r)
-}
-
-/*
-PatchVnicVifIdPool Update a 'vnic.VifIdPool' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchVnicVifIdPoolRequest
-*/
-func (a *VnicApiService) PatchVnicVifIdPool(ctx context.Context, moid string) ApiPatchVnicVifIdPoolRequest {
-	return ApiPatchVnicVifIdPoolRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return VnicVifIdPool
-func (a *VnicApiService) PatchVnicVifIdPoolExecute(r ApiPatchVnicVifIdPoolRequest) (*VnicVifIdPool, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *VnicVifIdPool
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicVifIdPool")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/vnic/VifIdPools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.vnicVifIdPool == nil {
-		return localVarReturnValue, nil, reportError("vnicVifIdPool is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.vnicVifIdPool
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiPatchVnicVnicTemplateRequest struct {
 	ctx              context.Context
 	ApiService       *VnicApiService
@@ -26805,182 +27916,6 @@ func (a *VnicApiService) UpdateVnicVhbaTemplateExecute(r ApiUpdateVnicVhbaTempla
 	}
 	// body params
 	localVarPostBody = r.vnicVhbaTemplate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateVnicVifIdPoolRequest struct {
-	ctx           context.Context
-	ApiService    *VnicApiService
-	moid          string
-	vnicVifIdPool *VnicVifIdPool
-	ifMatch       *string
-}
-
-// The &#39;vnic.VifIdPool&#39; resource to update.
-func (r ApiUpdateVnicVifIdPoolRequest) VnicVifIdPool(vnicVifIdPool VnicVifIdPool) ApiUpdateVnicVifIdPoolRequest {
-	r.vnicVifIdPool = &vnicVifIdPool
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateVnicVifIdPoolRequest) IfMatch(ifMatch string) ApiUpdateVnicVifIdPoolRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateVnicVifIdPoolRequest) Execute() (*VnicVifIdPool, *http.Response, error) {
-	return r.ApiService.UpdateVnicVifIdPoolExecute(r)
-}
-
-/*
-UpdateVnicVifIdPool Update a 'vnic.VifIdPool' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateVnicVifIdPoolRequest
-*/
-func (a *VnicApiService) UpdateVnicVifIdPool(ctx context.Context, moid string) ApiUpdateVnicVifIdPoolRequest {
-	return ApiUpdateVnicVifIdPoolRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return VnicVifIdPool
-func (a *VnicApiService) UpdateVnicVifIdPoolExecute(r ApiUpdateVnicVifIdPoolRequest) (*VnicVifIdPool, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *VnicVifIdPool
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicVifIdPool")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/vnic/VifIdPools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.vnicVifIdPool == nil {
-		return localVarReturnValue, nil, reportError("vnicVifIdPool is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.vnicVifIdPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

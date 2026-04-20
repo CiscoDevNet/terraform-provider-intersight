@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**QueryType** | **string** |  | 
+**QueryType** | **string** | The type of druid query. | 
 **DataSource** | [**TelemetryDruidDataSource**](TelemetryDruidDataSource.md) |  | 
 **Dimensions** | [**[]TelemetryDruidDimensionSpec**](TelemetryDruidDimensionSpec.md) | A JSON list of dimensions to do the groupBy over; or see DimensionSpec for ways to extract dimensions.. | 
 **LimitSpec** | Pointer to [**TelemetryDruidDefaultLimitSpec**](TelemetryDruidDefaultLimitSpec.md) |  | [optional] 

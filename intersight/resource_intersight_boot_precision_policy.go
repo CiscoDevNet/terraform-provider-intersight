@@ -162,6 +162,11 @@ func resourceBootPrecisionPolicy() *schema.Resource {
 					}
 					return
 				}},
+			"enable_boot_migration_support": {
+				Description: "Flag to denote if migration is enabled for the boot devices.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"enforce_uefi_secure_boot": {
 				Description: "If UEFI secure boot is enabled, the boot mode is set to UEFI by default. Secure boot enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM).",
 				Type:        schema.TypeBool,
@@ -738,6 +743,11 @@ func resourceBootPrecisionPolicyCreate(c context.Context, d *schema.ResourceData
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_boot_migration_support"); ok {
+		x := (v.(bool))
+		o.SetEnableBootMigrationSupport(x)
+	}
+
 	if v, ok := d.GetOkExists("enforce_uefi_secure_boot"); ok {
 		x := (v.(bool))
 		o.SetEnforceUefiSecureBoot(x)
@@ -1021,6 +1031,10 @@ func resourceBootPrecisionPolicyRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in BootPrecisionPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("enable_boot_migration_support", (s.GetEnableBootMigrationSupport())); err != nil {
+		return diag.Errorf("error occurred while setting property EnableBootMigrationSupport in BootPrecisionPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("enforce_uefi_secure_boot", (s.GetEnforceUefiSecureBoot())); err != nil {
 		return diag.Errorf("error occurred while setting property EnforceUefiSecureBoot in BootPrecisionPolicy object: %s", err.Error())
 	}
@@ -1147,6 +1161,12 @@ func resourceBootPrecisionPolicyUpdate(c context.Context, d *schema.ResourceData
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("enable_boot_migration_support") {
+		v := d.Get("enable_boot_migration_support")
+		x := (v.(bool))
+		o.SetEnableBootMigrationSupport(x)
 	}
 
 	if d.HasChange("enforce_uefi_secure_boot") {

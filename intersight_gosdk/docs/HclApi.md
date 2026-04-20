@@ -5,9 +5,9 @@ All URIs are relative to *https://intersight.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateHclCompatibilityStatus**](HclApi.md#CreateHclCompatibilityStatus) | **Post** /api/v1/hcl/CompatibilityStatuses | Create a &#39;hcl.CompatibilityStatus&#39; resource.
-[**CreateHclHyperflexSoftwareCompatibilityInfo**](HclApi.md#CreateHclHyperflexSoftwareCompatibilityInfo) | **Post** /api/v1/hcl/HyperflexSoftwareCompatibilityInfos | Create a &#39;hcl.HyperflexSoftwareCompatibilityInfo&#39; resource.
 [**CreateHclSupportedDriverName**](HclApi.md#CreateHclSupportedDriverName) | **Post** /api/v1/hcl/SupportedDriverNames | Create a &#39;hcl.SupportedDriverName&#39; resource.
-[**DeleteHclHyperflexSoftwareCompatibilityInfo**](HclApi.md#DeleteHclHyperflexSoftwareCompatibilityInfo) | **Delete** /api/v1/hcl/HyperflexSoftwareCompatibilityInfos/{Moid} | Delete a &#39;hcl.HyperflexSoftwareCompatibilityInfo&#39; resource.
+[**GetHclDataImportLogByMoid**](HclApi.md#GetHclDataImportLogByMoid) | **Get** /api/v1/hcl/DataImportLogs/{Moid} | Read a &#39;hcl.DataImportLog&#39; resource.
+[**GetHclDataImportLogList**](HclApi.md#GetHclDataImportLogList) | **Get** /api/v1/hcl/DataImportLogs | Read a &#39;hcl.DataImportLog&#39; resource.
 [**GetHclDriverImageByMoid**](HclApi.md#GetHclDriverImageByMoid) | **Get** /api/v1/hcl/DriverImages/{Moid} | Read a &#39;hcl.DriverImage&#39; resource.
 [**GetHclDriverImageList**](HclApi.md#GetHclDriverImageList) | **Get** /api/v1/hcl/DriverImages | Read a &#39;hcl.DriverImage&#39; resource.
 [**GetHclExemptedCatalogByMoid**](HclApi.md#GetHclExemptedCatalogByMoid) | **Get** /api/v1/hcl/ExemptedCatalogs/{Moid} | Read a &#39;hcl.ExemptedCatalog&#39; resource.
@@ -24,8 +24,6 @@ Method | HTTP request | Description
 [**GetHclServerCatalogList**](HclApi.md#GetHclServerCatalogList) | **Get** /api/v1/hcl/ServerCatalogs | Read a &#39;hcl.ServerCatalog&#39; resource.
 [**GetHclServerHwCatalogInfoByMoid**](HclApi.md#GetHclServerHwCatalogInfoByMoid) | **Get** /api/v1/hcl/ServerHwCatalogInfos/{Moid} | Read a &#39;hcl.ServerHwCatalogInfo&#39; resource.
 [**GetHclServerHwCatalogInfoList**](HclApi.md#GetHclServerHwCatalogInfoList) | **Get** /api/v1/hcl/ServerHwCatalogInfos | Read a &#39;hcl.ServerHwCatalogInfo&#39; resource.
-[**PatchHclHyperflexSoftwareCompatibilityInfo**](HclApi.md#PatchHclHyperflexSoftwareCompatibilityInfo) | **Patch** /api/v1/hcl/HyperflexSoftwareCompatibilityInfos/{Moid} | Update a &#39;hcl.HyperflexSoftwareCompatibilityInfo&#39; resource.
-[**UpdateHclHyperflexSoftwareCompatibilityInfo**](HclApi.md#UpdateHclHyperflexSoftwareCompatibilityInfo) | **Post** /api/v1/hcl/HyperflexSoftwareCompatibilityInfos/{Moid} | Update a &#39;hcl.HyperflexSoftwareCompatibilityInfo&#39; resource.
 
 
 
@@ -82,74 +80,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HclCompatibilityStatus**](HclCompatibilityStatus.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateHclHyperflexSoftwareCompatibilityInfo
-
-> HclHyperflexSoftwareCompatibilityInfo CreateHclHyperflexSoftwareCompatibilityInfo(ctx).HclHyperflexSoftwareCompatibilityInfo(hclHyperflexSoftwareCompatibilityInfo).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	hclHyperflexSoftwareCompatibilityInfo := *openapiclient.NewHclHyperflexSoftwareCompatibilityInfo("ClassId_example", "ObjectType_example") // HclHyperflexSoftwareCompatibilityInfo | The 'hcl.HyperflexSoftwareCompatibilityInfo' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.CreateHclHyperflexSoftwareCompatibilityInfo(context.Background()).HclHyperflexSoftwareCompatibilityInfo(hclHyperflexSoftwareCompatibilityInfo).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.CreateHclHyperflexSoftwareCompatibilityInfo``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateHclHyperflexSoftwareCompatibilityInfo`: HclHyperflexSoftwareCompatibilityInfo
-	fmt.Fprintf(os.Stdout, "Response from `HclApi.CreateHclHyperflexSoftwareCompatibilityInfo`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateHclHyperflexSoftwareCompatibilityInfoRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **hclHyperflexSoftwareCompatibilityInfo** | [**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md) | The &#39;hcl.HyperflexSoftwareCompatibilityInfo&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md)
 
 ### Authorization
 
@@ -233,11 +163,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteHclHyperflexSoftwareCompatibilityInfo
+## GetHclDataImportLogByMoid
 
-> DeleteHclHyperflexSoftwareCompatibilityInfo(ctx, moid).Execute()
+> HclDataImportLog GetHclDataImportLogByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
-Delete a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
+Read a 'hcl.DataImportLog' resource.
 
 ### Example
 
@@ -253,14 +183,19 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.HclApi.DeleteHclHyperflexSoftwareCompatibilityInfo(context.Background(), moid).Execute()
+	resp, r, err := apiClient.HclApi.GetHclDataImportLogByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.DeleteHclHyperflexSoftwareCompatibilityInfo``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclDataImportLogByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetHclDataImportLogByMoid`: HclDataImportLog
+	fmt.Fprintf(os.Stdout, "Response from `HclApi.GetHclDataImportLogByMoid`: %v\n", resp)
 }
 ```
 
@@ -274,16 +209,19 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteHclHyperflexSoftwareCompatibilityInfoRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetHclDataImportLogByMoidRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
- (empty response body)
+[**HclDataImportLog**](HclDataImportLog.md)
 
 ### Authorization
 
@@ -292,7 +230,91 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHclDataImportLogList
+
+> HclDataImportLogResponse GetHclDataImportLogList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hcl.DataImportLog' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+	orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+	top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+	skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+	count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+	inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+	tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.HclApi.GetHclDataImportLogList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclDataImportLogList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetHclDataImportLogList`: HclDataImportLogResponse
+	fmt.Fprintf(os.Stdout, "Response from `HclApi.GetHclDataImportLogList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHclDataImportLogListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HclDataImportLogResponse**](HclDataImportLogResponse.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -301,7 +323,7 @@ Name | Type | Description  | Notes
 
 ## GetHclDriverImageByMoid
 
-> HclDriverImage GetHclDriverImageByMoid(ctx, moid).Execute()
+> HclDriverImage GetHclDriverImageByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'hcl.DriverImage' resource.
 
@@ -319,10 +341,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.GetHclDriverImageByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.HclApi.GetHclDriverImageByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclDriverImageByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -348,6 +373,9 @@ Other parameters are passed through a pointer to a apiGetHclDriverImageByMoidReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -453,7 +481,7 @@ Name | Type | Description  | Notes
 
 ## GetHclExemptedCatalogByMoid
 
-> HclExemptedCatalog GetHclExemptedCatalogByMoid(ctx, moid).Execute()
+> HclExemptedCatalog GetHclExemptedCatalogByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'hcl.ExemptedCatalog' resource.
 
@@ -471,10 +499,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.GetHclExemptedCatalogByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.HclApi.GetHclExemptedCatalogByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclExemptedCatalogByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -500,6 +531,9 @@ Other parameters are passed through a pointer to a apiGetHclExemptedCatalogByMoi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -605,7 +639,7 @@ Name | Type | Description  | Notes
 
 ## GetHclHwCatalogInfoByMoid
 
-> HclHwCatalogInfo GetHclHwCatalogInfoByMoid(ctx, moid).Execute()
+> HclHwCatalogInfo GetHclHwCatalogInfoByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'hcl.HwCatalogInfo' resource.
 
@@ -623,10 +657,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.GetHclHwCatalogInfoByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.HclApi.GetHclHwCatalogInfoByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclHwCatalogInfoByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -652,6 +689,9 @@ Other parameters are passed through a pointer to a apiGetHclHwCatalogInfoByMoidR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -757,7 +797,7 @@ Name | Type | Description  | Notes
 
 ## GetHclHyperflexSoftwareCompatibilityInfoByMoid
 
-> HclHyperflexSoftwareCompatibilityInfo GetHclHyperflexSoftwareCompatibilityInfoByMoid(ctx, moid).Execute()
+> HclHyperflexSoftwareCompatibilityInfo GetHclHyperflexSoftwareCompatibilityInfoByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
@@ -775,10 +815,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.GetHclHyperflexSoftwareCompatibilityInfoByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.HclApi.GetHclHyperflexSoftwareCompatibilityInfoByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclHyperflexSoftwareCompatibilityInfoByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -804,6 +847,9 @@ Other parameters are passed through a pointer to a apiGetHclHyperflexSoftwareCom
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -909,7 +955,7 @@ Name | Type | Description  | Notes
 
 ## GetHclOperatingSystemByMoid
 
-> HclOperatingSystem GetHclOperatingSystemByMoid(ctx, moid).Execute()
+> HclOperatingSystem GetHclOperatingSystemByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'hcl.OperatingSystem' resource.
 
@@ -927,10 +973,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.GetHclOperatingSystemByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.HclApi.GetHclOperatingSystemByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclOperatingSystemByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -956,6 +1005,9 @@ Other parameters are passed through a pointer to a apiGetHclOperatingSystemByMoi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1061,7 +1113,7 @@ Name | Type | Description  | Notes
 
 ## GetHclOperatingSystemVendorByMoid
 
-> HclOperatingSystemVendor GetHclOperatingSystemVendorByMoid(ctx, moid).Execute()
+> HclOperatingSystemVendor GetHclOperatingSystemVendorByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'hcl.OperatingSystemVendor' resource.
 
@@ -1079,10 +1131,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.GetHclOperatingSystemVendorByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.HclApi.GetHclOperatingSystemVendorByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclOperatingSystemVendorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1108,6 +1163,9 @@ Other parameters are passed through a pointer to a apiGetHclOperatingSystemVendo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1213,7 +1271,7 @@ Name | Type | Description  | Notes
 
 ## GetHclServerCatalogByMoid
 
-> HclServerCatalog GetHclServerCatalogByMoid(ctx, moid).Execute()
+> HclServerCatalog GetHclServerCatalogByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'hcl.ServerCatalog' resource.
 
@@ -1231,10 +1289,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.GetHclServerCatalogByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.HclApi.GetHclServerCatalogByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclServerCatalogByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1260,6 +1321,9 @@ Other parameters are passed through a pointer to a apiGetHclServerCatalogByMoidR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1365,7 +1429,7 @@ Name | Type | Description  | Notes
 
 ## GetHclServerHwCatalogInfoByMoid
 
-> HclServerHwCatalogInfo GetHclServerHwCatalogInfoByMoid(ctx, moid).Execute()
+> HclServerHwCatalogInfo GetHclServerHwCatalogInfoByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'hcl.ServerHwCatalogInfo' resource.
 
@@ -1383,10 +1447,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.GetHclServerHwCatalogInfoByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.HclApi.GetHclServerHwCatalogInfoByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.GetHclServerHwCatalogInfoByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1412,6 +1479,9 @@ Other parameters are passed through a pointer to a apiGetHclServerHwCatalogInfoB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1509,150 +1579,6 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchHclHyperflexSoftwareCompatibilityInfo
-
-> HclHyperflexSoftwareCompatibilityInfo PatchHclHyperflexSoftwareCompatibilityInfo(ctx, moid).HclHyperflexSoftwareCompatibilityInfo(hclHyperflexSoftwareCompatibilityInfo).IfMatch(ifMatch).Execute()
-
-Update a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	hclHyperflexSoftwareCompatibilityInfo := *openapiclient.NewHclHyperflexSoftwareCompatibilityInfo("ClassId_example", "ObjectType_example") // HclHyperflexSoftwareCompatibilityInfo | The 'hcl.HyperflexSoftwareCompatibilityInfo' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.PatchHclHyperflexSoftwareCompatibilityInfo(context.Background(), moid).HclHyperflexSoftwareCompatibilityInfo(hclHyperflexSoftwareCompatibilityInfo).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.PatchHclHyperflexSoftwareCompatibilityInfo``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchHclHyperflexSoftwareCompatibilityInfo`: HclHyperflexSoftwareCompatibilityInfo
-	fmt.Fprintf(os.Stdout, "Response from `HclApi.PatchHclHyperflexSoftwareCompatibilityInfo`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchHclHyperflexSoftwareCompatibilityInfoRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **hclHyperflexSoftwareCompatibilityInfo** | [**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md) | The &#39;hcl.HyperflexSoftwareCompatibilityInfo&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateHclHyperflexSoftwareCompatibilityInfo
-
-> HclHyperflexSoftwareCompatibilityInfo UpdateHclHyperflexSoftwareCompatibilityInfo(ctx, moid).HclHyperflexSoftwareCompatibilityInfo(hclHyperflexSoftwareCompatibilityInfo).IfMatch(ifMatch).Execute()
-
-Update a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	hclHyperflexSoftwareCompatibilityInfo := *openapiclient.NewHclHyperflexSoftwareCompatibilityInfo("ClassId_example", "ObjectType_example") // HclHyperflexSoftwareCompatibilityInfo | The 'hcl.HyperflexSoftwareCompatibilityInfo' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HclApi.UpdateHclHyperflexSoftwareCompatibilityInfo(context.Background(), moid).HclHyperflexSoftwareCompatibilityInfo(hclHyperflexSoftwareCompatibilityInfo).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `HclApi.UpdateHclHyperflexSoftwareCompatibilityInfo``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateHclHyperflexSoftwareCompatibilityInfo`: HclHyperflexSoftwareCompatibilityInfo
-	fmt.Fprintf(os.Stdout, "Response from `HclApi.UpdateHclHyperflexSoftwareCompatibilityInfo`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateHclHyperflexSoftwareCompatibilityInfoRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **hclHyperflexSoftwareCompatibilityInfo** | [**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md) | The &#39;hcl.HyperflexSoftwareCompatibilityInfo&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -35,6 +35,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) The description for the subscription. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `enable_tls`:(bool) When true, TLS with custom certificate validation is enabled for this webhook subscription. Thecertificate relationship must be set to a TrustPoint when enableTls is true. Only applicable forwebhook-type subscriptions; used for appliance deployments with private CAs. When false or unset,default TLS behavior (public CA trust) is used. SaaS typically leaves this false or unset. 
 * `enabled`:(bool) Subscription can be switched on/off without necessity to change the subscriptionsettings: notification methods, conditions, etc.Ex.: Subscription MO can be configured, but switched off. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

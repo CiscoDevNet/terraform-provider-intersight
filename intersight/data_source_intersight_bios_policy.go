@@ -240,6 +240,11 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cbs_cmn_cpu_frequency_control": {
+			Description: "BIOS Token for setting CPU Frequency Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnCpuFrequencyControl token.\n* `disabled` - Value - disabled for configuring CbsCmnCpuFrequencyControl token.\n* `enabled` - Value - enabled for configuring CbsCmnCpuFrequencyControl token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cbs_cmn_cpu_gen_downcore_ctrl": {
 			Description: "BIOS Token for setting Downcore Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnCpuGenDowncoreCtrl token.\n* `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCmnCpuGenDowncoreCtrl token.\n* `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCmnCpuGenDowncoreCtrl token.\n* `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token.\n* `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCmnCpuGenDowncoreCtrl token.\n* `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token.\n* `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token.",
 			Type:        schema.TypeString,
@@ -2428,6 +2433,11 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"speculative_lock_enable": {
+			Description: "BIOS Token for setting Speculative Lock configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"sr_iov": {
 			Description: "BIOS Token for setting SR-IOV Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
@@ -3066,6 +3076,11 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("cbs_cmn_cpu_cpb"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuCpb(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmn_cpu_frequency_control"); ok {
+		x := (v.(string))
+		o.SetCbsCmnCpuFrequencyControl(x)
 	}
 
 	if v, ok := d.GetOk("cbs_cmn_cpu_gen_downcore_ctrl"); ok {
@@ -5292,6 +5307,11 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetSparingMode(x)
 	}
 
+	if v, ok := d.GetOk("speculative_lock_enable"); ok {
+		x := (v.(string))
+		o.SetSpeculativeLockEnable(x)
+	}
+
 	if v, ok := d.GetOk("sr_iov"); ok {
 		x := (v.(string))
 		o.SetSrIov(x)
@@ -5682,6 +5702,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["cbs_cmn_apbdis_df_pstate_rs"] = (s.GetCbsCmnApbdisDfPstateRs())
 				temp["cbs_cmn_cpu_avx512"] = (s.GetCbsCmnCpuAvx512())
 				temp["cbs_cmn_cpu_cpb"] = (s.GetCbsCmnCpuCpb())
+				temp["cbs_cmn_cpu_frequency_control"] = (s.GetCbsCmnCpuFrequencyControl())
 				temp["cbs_cmn_cpu_gen_downcore_ctrl"] = (s.GetCbsCmnCpuGenDowncoreCtrl())
 				temp["cbs_cmn_cpu_global_cstate_ctrl"] = (s.GetCbsCmnCpuGlobalCstateCtrl())
 				temp["cbs_cmn_cpu_l1stream_hw_prefetcher"] = (s.GetCbsCmnCpuL1streamHwPrefetcher())
@@ -6102,6 +6123,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["snoopy_mode_for2lm"] = (s.GetSnoopyModeFor2lm())
 				temp["snoopy_mode_for_ad"] = (s.GetSnoopyModeForAd())
 				temp["sparing_mode"] = (s.GetSparingMode())
+				temp["speculative_lock_enable"] = (s.GetSpeculativeLockEnable())
 				temp["sr_iov"] = (s.GetSrIov())
 				temp["streamer_prefetch"] = (s.GetStreamerPrefetch())
 				temp["svm_mode"] = (s.GetSvmMode())

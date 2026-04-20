@@ -265,7 +265,6 @@ func resourceAssetTarget() *schema.Resource {
 						},
 					},
 				},
-				ForceNew: true,
 			},
 			"assist": {
 				Description: "A reference to a assetTarget resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -310,6 +309,17 @@ func resourceAssetTarget() *schema.Resource {
 			},
 			"claimed_by_user_name": {
 				Description: "The name or email id of the user who claimed the target.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"claimed_time": {
+				Description: "The date at which the target was claimed to this account. For pre-provisioned targets this is the time at which the claim was completed.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -766,7 +776,7 @@ func resourceAssetTarget() *schema.Resource {
 					return
 				}},
 			"status": {
-				Description: "Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target.\n* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.\n* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.\n* `NotConnected` - Intersight is unable to establish a connection to the target.\n* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.\n* `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported.\n* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight.\n* `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.",
+				Description: "Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target.\n* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.\n* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.\n* `NotConnected` - Intersight is unable to establish a connection to the target.\n* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.\n* `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported.\n* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight.\n* `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.\n* `PreClaimed` - Target has been pre-claimed and is pending claim completion. Pre-claimed targets are pre-provisioned before endpoint is available to connect to Intersight, once target connects the claim can be completed by providing the security token to the pre-claim API.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -1810,6 +1820,10 @@ func resourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta int
 
 	if err := d.Set("claimed_by_user_name", (s.GetClaimedByUserName())); err != nil {
 		return diag.Errorf("error occurred while setting property ClaimedByUserName in AssetTarget object: %s", err.Error())
+	}
+
+	if err := d.Set("claimed_time", (s.GetClaimedTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property ClaimedTime in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {

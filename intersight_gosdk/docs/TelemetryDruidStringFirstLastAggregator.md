@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | The aggregator type. | 
-**Name** | **string** | Output name for the minimum/maximum timestamp value. | 
+**Name** | **string** | Output name for the first or last value. | 
 **FieldName** | **string** | Name of the metric column. | 
-**MaxStringBytes** | Pointer to **int32** |  | [optional] [default to 1024]
+**MaxStringBytes** | Pointer to **int32** | Size in bytes limit on aggregation size. | [optional] [default to 1024]
 
 ## Methods
 

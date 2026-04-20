@@ -31,6 +31,71 @@ func getWorkloadWorkloadInstanceSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"alarm_summary": {
+			Description: "A summary of active and acknowledged alarms for this workload instance, grouped by severity (for example, Critical, Major, Minor, Warning, Info). This summary includes both suppressed and unsuppressed alarms.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"critical": {
+						Description: "The count of alarms that have severity type Critical.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"health": {
+						Description: "Health of the managed end point. The highest severity computed from alarmSummary property is set as the health.\n* `Healthy` - The Enum value represents that the entity is healthy.\n* `Warning` - The Enum value Warning represents that the entity has one or more active warnings on it.\n* `Critical` - The Enum value Critical represents that the entity is in a critical state.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"info": {
+						Description: "The count of alarms that have severity type Info.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"suppressed": {
+						Description: "The flag that indicates whether suppression is enabled or not in the entity.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"suppressed_critical": {
+						Description: "The count of active suppressed alarms that have severity type Critical.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_info": {
+						Description: "The count of active suppressed alarms that have severity type Info.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_warning": {
+						Description: "The count of active suppressed alarms that have severity type Warning.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"warning": {
+						Description: "The count of alarms that have severity type Warning.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -996,6 +1061,37 @@ func dataSourceWorkloadWorkloadInstanceRead(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("alarm_summary"); ok {
+		p := make([]models.ComputeAlarmSummary, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ComputeAlarmSummary{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("compute.AlarmSummary")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAlarmSummary(x)
+		}
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1748,6 +1844,8 @@ func dataSourceWorkloadWorkloadInstanceRead(c context.Context, d *schema.Resourc
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["alarm_summary"] = flattenMapComputeAlarmSummary(s.GetAlarmSummary(), d)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 

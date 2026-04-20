@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,27 @@ type ApiGetDnacDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacDeviceByMoidRequest) Select_(select_ string) ApiGetDnacDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacDeviceByMoidRequest) Expand(expand string) ApiGetDnacDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacDeviceByMoidRequest) At(at string) ApiGetDnacDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacDeviceByMoidRequest) Execute() (*DnacDevice, *http.Response, error) {
@@ -71,6 +92,18 @@ func (a *DnacApiService) GetDnacDeviceByMoidExecute(r ApiGetDnacDeviceByMoidRequ
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -181,6 +214,27 @@ type ApiGetDnacDeviceInterfaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacDeviceInterfaceByMoidRequest) Select_(select_ string) ApiGetDnacDeviceInterfaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacDeviceInterfaceByMoidRequest) Expand(expand string) ApiGetDnacDeviceInterfaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacDeviceInterfaceByMoidRequest) At(at string) ApiGetDnacDeviceInterfaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacDeviceInterfaceByMoidRequest) Execute() (*DnacDeviceInterface, *http.Response, error) {
@@ -225,6 +279,18 @@ func (a *DnacApiService) GetDnacDeviceInterfaceByMoidExecute(r ApiGetDnacDeviceI
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -885,6 +951,27 @@ type ApiGetDnacExternalBorderNodeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacExternalBorderNodeByMoidRequest) Select_(select_ string) ApiGetDnacExternalBorderNodeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacExternalBorderNodeByMoidRequest) Expand(expand string) ApiGetDnacExternalBorderNodeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacExternalBorderNodeByMoidRequest) At(at string) ApiGetDnacExternalBorderNodeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacExternalBorderNodeByMoidRequest) Execute() (*DnacExternalBorderNode, *http.Response, error) {
@@ -929,6 +1016,18 @@ func (a *DnacApiService) GetDnacExternalBorderNodeByMoidExecute(r ApiGetDnacExte
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1039,6 +1138,27 @@ type ApiGetDnacExternalBorderNodeInterfaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacExternalBorderNodeInterfaceByMoidRequest) Select_(select_ string) ApiGetDnacExternalBorderNodeInterfaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacExternalBorderNodeInterfaceByMoidRequest) Expand(expand string) ApiGetDnacExternalBorderNodeInterfaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacExternalBorderNodeInterfaceByMoidRequest) At(at string) ApiGetDnacExternalBorderNodeInterfaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacExternalBorderNodeInterfaceByMoidRequest) Execute() (*DnacExternalBorderNodeInterface, *http.Response, error) {
@@ -1083,6 +1203,18 @@ func (a *DnacApiService) GetDnacExternalBorderNodeInterfaceByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1743,6 +1875,27 @@ type ApiGetDnacFabricSiteByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacFabricSiteByMoidRequest) Select_(select_ string) ApiGetDnacFabricSiteByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacFabricSiteByMoidRequest) Expand(expand string) ApiGetDnacFabricSiteByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacFabricSiteByMoidRequest) At(at string) ApiGetDnacFabricSiteByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacFabricSiteByMoidRequest) Execute() (*DnacFabricSite, *http.Response, error) {
@@ -1787,6 +1940,18 @@ func (a *DnacApiService) GetDnacFabricSiteByMoidExecute(r ApiGetDnacFabricSiteBy
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2172,6 +2337,27 @@ type ApiGetDnacSiteByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacSiteByMoidRequest) Select_(select_ string) ApiGetDnacSiteByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacSiteByMoidRequest) Expand(expand string) ApiGetDnacSiteByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacSiteByMoidRequest) At(at string) ApiGetDnacSiteByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacSiteByMoidRequest) Execute() (*DnacSite, *http.Response, error) {
@@ -2216,6 +2402,18 @@ func (a *DnacApiService) GetDnacSiteByMoidExecute(r ApiGetDnacSiteByMoidRequest)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2326,6 +2524,27 @@ type ApiGetDnacSiteIpPoolByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacSiteIpPoolByMoidRequest) Select_(select_ string) ApiGetDnacSiteIpPoolByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacSiteIpPoolByMoidRequest) Expand(expand string) ApiGetDnacSiteIpPoolByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacSiteIpPoolByMoidRequest) At(at string) ApiGetDnacSiteIpPoolByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacSiteIpPoolByMoidRequest) Execute() (*DnacSiteIpPool, *http.Response, error) {
@@ -2370,6 +2589,18 @@ func (a *DnacApiService) GetDnacSiteIpPoolByMoidExecute(r ApiGetDnacSiteIpPoolBy
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3030,6 +3261,27 @@ type ApiGetDnacTemplateByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacTemplateByMoidRequest) Select_(select_ string) ApiGetDnacTemplateByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacTemplateByMoidRequest) Expand(expand string) ApiGetDnacTemplateByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacTemplateByMoidRequest) At(at string) ApiGetDnacTemplateByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacTemplateByMoidRequest) Execute() (*DnacTemplate, *http.Response, error) {
@@ -3074,6 +3326,18 @@ func (a *DnacApiService) GetDnacTemplateByMoidExecute(r ApiGetDnacTemplateByMoid
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3459,6 +3723,27 @@ type ApiGetDnacTransitByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacTransitByMoidRequest) Select_(select_ string) ApiGetDnacTransitByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacTransitByMoidRequest) Expand(expand string) ApiGetDnacTransitByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacTransitByMoidRequest) At(at string) ApiGetDnacTransitByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacTransitByMoidRequest) Execute() (*DnacTransit, *http.Response, error) {
@@ -3503,6 +3788,18 @@ func (a *DnacApiService) GetDnacTransitByMoidExecute(r ApiGetDnacTransitByMoidRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3888,6 +4185,27 @@ type ApiGetDnacVirtualNetworkFabricSiteByMoidRequest struct {
 	ctx        context.Context
 	ApiService *DnacApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetDnacVirtualNetworkFabricSiteByMoidRequest) Select_(select_ string) ApiGetDnacVirtualNetworkFabricSiteByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetDnacVirtualNetworkFabricSiteByMoidRequest) Expand(expand string) ApiGetDnacVirtualNetworkFabricSiteByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetDnacVirtualNetworkFabricSiteByMoidRequest) At(at string) ApiGetDnacVirtualNetworkFabricSiteByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetDnacVirtualNetworkFabricSiteByMoidRequest) Execute() (*DnacVirtualNetworkFabricSite, *http.Response, error) {
@@ -3932,6 +4250,18 @@ func (a *DnacApiService) GetDnacVirtualNetworkFabricSiteByMoidExecute(r ApiGetDn
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

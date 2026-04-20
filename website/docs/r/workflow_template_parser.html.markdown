@@ -3,12 +3,20 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_template_parser"
 description: |-
-        The template parser that will parse the template to get all the placeholders.
+        The TemplateParser object is designed to parse templates and extract placeholders within the workflow system. It plays a crucial role in template management and execution, supporting dynamic and customizable workflows.
+        #### Purpose
+        TemplateParser is responsible for parsing templates to identify and manage placeholders, ensuring that appropriate values can be provided for each. It extracts and organizes placeholders to enable dynamic data binding and template customization while also validating template syntax to ensure compliance with predefined standards, promoting consistency and reliability across workflows.
+        #### Key Concepts
+        - **Placeholder Encryption:** Recognizes and secure placeholders, and values provided will be encrypted enhancing data protection within workflows.
 
 ---
 
 # Resource: intersight_workflow_template_parser
-The template parser that will parse the template to get all the placeholders.
+The TemplateParser object is designed to parse templates and extract placeholders within the workflow system. It plays a crucial role in template management and execution, supporting dynamic and customizable workflows.  
+#### Purpose 
+TemplateParser is responsible for parsing templates to identify and manage placeholders, ensuring that appropriate values can be provided for each. It extracts and organizes placeholders to enable dynamic data binding and template customization while also validating template syntax to ensure compliance with predefined standards, promoting consistency and reliability across workflows.
+#### Key Concepts  
+- **Placeholder Encryption:** Recognizes and secure placeholders, and values provided will be encrypted enhancing data protection within workflows.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

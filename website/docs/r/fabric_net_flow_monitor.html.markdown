@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_net_flow_monitor"
 description: |-
-        A NetFlow monitor combines a NetFlow record and a NetFlow exporter, and is used to monitor traffic on the interface where it is applied.
+        The NetFlowMonitor object is the orchestrating element that applies monitoring logic to the network. It functions as the operational bridge, linking data collection definitions with export configurations to enable active traffic analysis on specific interfaces.
+        ### Purpose
+        A NetFlowMonitor serves as the deployment mechanism for telemetry. By combining a NetFlowRecord with one or more NetFlowExporters, it creates a complete monitoring profile that can be applied to virtual or physical interfaces to track real-time traffic patterns.
+        ### Key Concepts
+        *   **Functional Association:** Binds a single data template (Record) to specific delivery destinations (Exporters), creating a unified monitoring workflow.
+        *   **Interface Application:** Acts as the primary object referenced when enabling NetFlow on network interfaces or vNICs.
+        *   **Scalable Export:** Supports association with multiple exporters, allowing the same flow data to be sent to different collectors for redundancy or specialized analysis.
+        *   **Usage Tracking:** Maintains visibility into how many network components are actively utilizing the monitor, aiding in fabric-wide resource management.
 
 ---
 
 # Resource: intersight_fabric_net_flow_monitor
-A NetFlow monitor combines a NetFlow record and a NetFlow exporter, and is used to monitor traffic on the interface where it is applied.
+The NetFlowMonitor object is the orchestrating element that applies monitoring logic to the network. It functions as the operational bridge, linking data collection definitions with export configurations to enable active traffic analysis on specific interfaces.
+ ### Purpose
+ A NetFlowMonitor serves as the deployment mechanism for telemetry. By combining a NetFlowRecord with one or more NetFlowExporters, it creates a complete monitoring profile that can be applied to virtual or physical interfaces to track real-time traffic patterns.
+ ### Key Concepts
+ *   **Functional Association:** Binds a single data template (Record) to specific delivery destinations (Exporters), creating a unified monitoring workflow.
+ *   **Interface Application:** Acts as the primary object referenced when enabling NetFlow on network interfaces or vNICs.
+ *   **Scalable Export:** Supports association with multiple exporters, allowing the same flow data to be sent to different collectors for redundancy or specialized analysis.
+ *   **Usage Tracking:** Maintains visibility into how many network components are actively utilizing the monitor, aiding in fabric-wide resource management.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

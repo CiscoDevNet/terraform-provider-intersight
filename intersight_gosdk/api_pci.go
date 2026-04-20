@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,27 @@ type ApiGetPciCoprocessorCardByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciCoprocessorCardByMoidRequest) Select_(select_ string) ApiGetPciCoprocessorCardByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciCoprocessorCardByMoidRequest) Expand(expand string) ApiGetPciCoprocessorCardByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciCoprocessorCardByMoidRequest) At(at string) ApiGetPciCoprocessorCardByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciCoprocessorCardByMoidRequest) Execute() (*PciCoprocessorCard, *http.Response, error) {
@@ -71,6 +92,18 @@ func (a *PciApiService) GetPciCoprocessorCardByMoidExecute(r ApiGetPciCoprocesso
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -456,6 +489,27 @@ type ApiGetPciDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciDeviceByMoidRequest) Select_(select_ string) ApiGetPciDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciDeviceByMoidRequest) Expand(expand string) ApiGetPciDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciDeviceByMoidRequest) At(at string) ApiGetPciDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciDeviceByMoidRequest) Execute() (*PciDevice, *http.Response, error) {
@@ -500,6 +554,18 @@ func (a *PciApiService) GetPciDeviceByMoidExecute(r ApiGetPciDeviceByMoidRequest
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -885,6 +951,27 @@ type ApiGetPciEndpointByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciEndpointByMoidRequest) Select_(select_ string) ApiGetPciEndpointByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciEndpointByMoidRequest) Expand(expand string) ApiGetPciEndpointByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciEndpointByMoidRequest) At(at string) ApiGetPciEndpointByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciEndpointByMoidRequest) Execute() (*PciEndpoint, *http.Response, error) {
@@ -929,6 +1016,18 @@ func (a *PciApiService) GetPciEndpointByMoidExecute(r ApiGetPciEndpointByMoidReq
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1314,6 +1413,27 @@ type ApiGetPciLinkByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciLinkByMoidRequest) Select_(select_ string) ApiGetPciLinkByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciLinkByMoidRequest) Expand(expand string) ApiGetPciLinkByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciLinkByMoidRequest) At(at string) ApiGetPciLinkByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciLinkByMoidRequest) Execute() (*PciLink, *http.Response, error) {
@@ -1358,6 +1478,18 @@ func (a *PciApiService) GetPciLinkByMoidExecute(r ApiGetPciLinkByMoidRequest) (*
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1743,6 +1875,27 @@ type ApiGetPciNodeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciNodeByMoidRequest) Select_(select_ string) ApiGetPciNodeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciNodeByMoidRequest) Expand(expand string) ApiGetPciNodeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciNodeByMoidRequest) At(at string) ApiGetPciNodeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciNodeByMoidRequest) Execute() (*PciNode, *http.Response, error) {
@@ -1787,6 +1940,18 @@ func (a *PciApiService) GetPciNodeByMoidExecute(r ApiGetPciNodeByMoidRequest) (*
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2172,6 +2337,27 @@ type ApiGetPciNodeSettingByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciNodeSettingByMoidRequest) Select_(select_ string) ApiGetPciNodeSettingByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciNodeSettingByMoidRequest) Expand(expand string) ApiGetPciNodeSettingByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciNodeSettingByMoidRequest) At(at string) ApiGetPciNodeSettingByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciNodeSettingByMoidRequest) Execute() (*PciNodeSetting, *http.Response, error) {
@@ -2216,6 +2402,18 @@ func (a *PciApiService) GetPciNodeSettingByMoidExecute(r ApiGetPciNodeSettingByM
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2601,6 +2799,27 @@ type ApiGetPciPortByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciPortByMoidRequest) Select_(select_ string) ApiGetPciPortByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciPortByMoidRequest) Expand(expand string) ApiGetPciPortByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciPortByMoidRequest) At(at string) ApiGetPciPortByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciPortByMoidRequest) Execute() (*PciPort, *http.Response, error) {
@@ -2645,6 +2864,18 @@ func (a *PciApiService) GetPciPortByMoidExecute(r ApiGetPciPortByMoidRequest) (*
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3030,6 +3261,27 @@ type ApiGetPciSlotByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciSlotByMoidRequest) Select_(select_ string) ApiGetPciSlotByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciSlotByMoidRequest) Expand(expand string) ApiGetPciSlotByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciSlotByMoidRequest) At(at string) ApiGetPciSlotByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciSlotByMoidRequest) Execute() (*PciSlot, *http.Response, error) {
@@ -3074,6 +3326,18 @@ func (a *PciApiService) GetPciSlotByMoidExecute(r ApiGetPciSlotByMoidRequest) (*
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3459,6 +3723,27 @@ type ApiGetPciSwitchByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciSwitchByMoidRequest) Select_(select_ string) ApiGetPciSwitchByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciSwitchByMoidRequest) Expand(expand string) ApiGetPciSwitchByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciSwitchByMoidRequest) At(at string) ApiGetPciSwitchByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciSwitchByMoidRequest) Execute() (*PciSwitch, *http.Response, error) {
@@ -3503,6 +3788,18 @@ func (a *PciApiService) GetPciSwitchByMoidExecute(r ApiGetPciSwitchByMoidRequest
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3888,6 +4185,27 @@ type ApiGetPciZoneByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PciApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPciZoneByMoidRequest) Select_(select_ string) ApiGetPciZoneByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPciZoneByMoidRequest) Expand(expand string) ApiGetPciZoneByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPciZoneByMoidRequest) At(at string) ApiGetPciZoneByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPciZoneByMoidRequest) Execute() (*PciZone, *http.Response, error) {
@@ -3932,6 +4250,18 @@ func (a *PciApiService) GetPciZoneByMoidExecute(r ApiGetPciZoneByMoidRequest) (*
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

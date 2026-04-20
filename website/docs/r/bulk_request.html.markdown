@@ -15,6 +15,11 @@ It is possible to operate on multiple subpaths relative to the provided URI (For
 perform a PATCH action on multiple objects of a given REST resource type).
 ## Argument Reference
 The following arguments are supported:
+* `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
 * `action_on_error`:(string) The action to be taken when an error occurs during processing of the request.* `Stop` - Stop the processing of the request after the first error.* `Proceed` - Proceed with the processing of the request even when an error occurs. 
 * `actions`:
@@ -42,6 +47,7 @@ This complex property has following sub-properties:
   + `name`:(string)(ReadOnly) The name of the http header. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `value`:(string)(ReadOnly) The value of the http header. 
+* `is_backup_encryption_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'backupEncryptionKey' property has been set. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_sub_requests`:(int)(ReadOnly) The number of sub requests received in this request. 

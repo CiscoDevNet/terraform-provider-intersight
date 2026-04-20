@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | The operational state of the server. | [optional] [readonly] 
 **Operability** | Pointer to **string** | The operability of the server. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type of the registered device - whether managed by UCSM or operating in standalone mode. | [optional] 
+**RecoveryKeyDetails** | Pointer to [**NullableComputeRecoveryKeyDetails**](ComputeRecoveryKeyDetails.md) |  | [optional] 
 **ServiceProfile** | Pointer to **string** | The distinguished name of the service profile to which the server is associated to. It is applicable only for servers which are managed via UCSM. | [optional] [readonly] 
 **TotalMemory** | Pointer to **int64** | The total memory available on the server. | [optional] [readonly] 
 **TunneledKvm** | Pointer to **bool** | The Tunneled vKVM status of the server. | [optional] 
@@ -1051,6 +1052,41 @@ SetPlatformType sets PlatformType field to given value.
 
 HasPlatformType returns a boolean if a field has been set.
 
+### GetRecoveryKeyDetails
+
+`func (o *ComputePhysical) GetRecoveryKeyDetails() ComputeRecoveryKeyDetails`
+
+GetRecoveryKeyDetails returns the RecoveryKeyDetails field if non-nil, zero value otherwise.
+
+### GetRecoveryKeyDetailsOk
+
+`func (o *ComputePhysical) GetRecoveryKeyDetailsOk() (*ComputeRecoveryKeyDetails, bool)`
+
+GetRecoveryKeyDetailsOk returns a tuple with the RecoveryKeyDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecoveryKeyDetails
+
+`func (o *ComputePhysical) SetRecoveryKeyDetails(v ComputeRecoveryKeyDetails)`
+
+SetRecoveryKeyDetails sets RecoveryKeyDetails field to given value.
+
+### HasRecoveryKeyDetails
+
+`func (o *ComputePhysical) HasRecoveryKeyDetails() bool`
+
+HasRecoveryKeyDetails returns a boolean if a field has been set.
+
+### SetRecoveryKeyDetailsNil
+
+`func (o *ComputePhysical) SetRecoveryKeyDetailsNil(b bool)`
+
+ SetRecoveryKeyDetailsNil sets the value for RecoveryKeyDetails to be an explicit nil
+
+### UnsetRecoveryKeyDetails
+`func (o *ComputePhysical) UnsetRecoveryKeyDetails()`
+
+UnsetRecoveryKeyDetails ensures that no value is present for RecoveryKeyDetails, not even an explicit nil
 ### GetServiceProfile
 
 `func (o *ComputePhysical) GetServiceProfile() string`

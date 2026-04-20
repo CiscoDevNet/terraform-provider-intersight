@@ -35,18 +35,6 @@ func Test_intersight_ResourceApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ResourceApiService CreateResourceMembership", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.ResourceApi.CreateResourceMembership(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test ResourceApiService CreateResourceReservation", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -84,19 +72,6 @@ func Test_intersight_ResourceApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ResourceApiService DeleteResourceGroupMember", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.ResourceApi.DeleteResourceGroupMember(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test ResourceApiService DeleteResourceReservation", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -117,19 +92,6 @@ func Test_intersight_ResourceApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.ResourceApi.DeleteResourceSelectionCriteria(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ResourceApiService DeleteResourceSharedResourcesInfoHolder", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.ResourceApi.DeleteResourceSharedResourcesInfoHolder(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

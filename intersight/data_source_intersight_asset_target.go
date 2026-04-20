@@ -230,6 +230,11 @@ func getAssetTargetSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"claimed_time": {
+			Description: "The date at which the target was claimed to this account. For pre-provisioned targets this is the time at which the claim was completed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -575,7 +580,7 @@ func getAssetTargetSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target.\n* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.\n* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.\n* `NotConnected` - Intersight is unable to establish a connection to the target.\n* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.\n* `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported.\n* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight.\n* `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.",
+			Description: "Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target.\n* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.\n* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.\n* `NotConnected` - Intersight is unable to establish a connection to the target.\n* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.\n* `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported.\n* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight.\n* `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.\n* `PreClaimed` - Target has been pre-claimed and is pending claim completion. Pre-claimed targets are pre-provisioned before endpoint is available to connect to Intersight, once target connects the claim can be completed by providing the security token to the pre-claim API.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1127,6 +1132,12 @@ func dataSourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta i
 	if v, ok := d.GetOk("claimed_by_user_name"); ok {
 		x := (v.(string))
 		o.SetClaimedByUserName(x)
+	}
+
+	if v, ok := d.GetOk("claimed_time"); ok {
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
+		o.SetClaimedTime(x)
 	}
 
 	if v, ok := d.GetOk("class_id"); ok {
@@ -1868,6 +1879,8 @@ func dataSourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta i
 
 				temp["assist"] = flattenMapAssetTargetRelationship(s.GetAssist(), d)
 				temp["claimed_by_user_name"] = (s.GetClaimedByUserName())
+
+				temp["claimed_time"] = (s.GetClaimedTime()).String()
 				temp["class_id"] = (s.GetClassId())
 
 				temp["connections"] = flattenListAssetConnection(s.GetConnections(), d)

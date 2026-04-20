@@ -47,18 +47,6 @@ func Test_intersight_StorageApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test StorageApiService CreateStorageNetAppVolumeSnapshot", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.StorageApi.CreateStorageNetAppVolumeSnapshot(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test StorageApiService CreateStorageStoragePolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -91,19 +79,6 @@ func Test_intersight_StorageApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.StorageApi.DeleteStorageDriveSecurityPolicy(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test StorageApiService DeleteStorageNetAppVolumeSnapshot", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.StorageApi.DeleteStorageNetAppVolumeSnapshot(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -3767,20 +3742,6 @@ func Test_intersight_StorageApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test StorageApiService PatchStorageNetAppVolumeSnapshot", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.StorageApi.PatchStorageNetAppVolumeSnapshot(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test StorageApiService PatchStoragePhysicalDisk", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -4180,20 +4141,6 @@ func Test_intersight_StorageApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.StorageApi.UpdateStorageNetAppCluster(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test StorageApiService UpdateStorageNetAppVolumeSnapshot", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.StorageApi.UpdateStorageNetAppVolumeSnapshot(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

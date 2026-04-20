@@ -1146,20 +1146,7 @@ func resourceHyperflexCapabilityInfoUpdate(c context.Context, d *schema.Resource
 func resourceHyperflexCapabilityInfoDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var de diag.Diagnostics
-	conn := meta.(*Config)
-	p := conn.ApiClient.HyperflexApi.DeleteHyperflexCapabilityInfo(conn.ctx, d.Id())
-	_, deleteErr := p.Execute()
-	if deleteErr != nil {
-		errorType := fmt.Sprintf("%T", deleteErr)
-		if strings.Contains(deleteErr.Error(), "404") {
-			de = append(de, diag.Diagnostic{Summary: "HyperflexCapabilityInfoDelete: HyperflexCapabilityInfo object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
-			return de
-		}
-		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(*models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while deleting HyperflexCapabilityInfo object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
-		}
-		return diag.Errorf("error occurred while deleting HyperflexCapabilityInfo object: %s", deleteErr.Error())
-	}
+	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "HyperflexCapabilityInfo does not allow delete functionality"}
+	de = append(de, warning)
 	return de
 }

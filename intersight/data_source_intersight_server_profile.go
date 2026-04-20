@@ -545,6 +545,55 @@ func getServerProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"incomplete_policies": {
+			Description: "An array of relationships to policyAbstractPolicy resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"initial_auto_deploy_config_complete": {
+			Description: "Used with initialAutoDeployState to indicate if the server profile is ready for auto-deploy for the first time. The default value is false.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"initial_auto_deploy_mode": {
+			Description: "Automatically performs an initial deployment when a server is assigned. Subsequent changes require manual redeployment.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"initial_auto_deploy_state": {
+			Description: "The auto-deploy state of the server profile. It is used to track the state of the auto-deploy process.\n* `None` - Default value for Auto-deploy state when it is not configured and old server profiles.\n* `Pending` - Server profile is ready for autodeploy but not yet scheduled for deployment.\n* `AutoDeployPending` - AutoDeployPending is set when auto-deploy is yet to be scheduled.\n* `AutoDeployInProgress` - AutoDeployInProgress is set when auto-deploy action is in progress.\n* `AutoActivationPending` - AutoActivationPending is set when auto-deploy is yet to be scheduled.\n* `AutoActivationInProgress` - AutoActivationInProgress set when auto-deploy-activate action is in progress.\n* `Completed` - Completed states that all the auto deploy actions are completed successfully.\n* `Failed` - Failed states that one of the auto deploy actions failed.\n* `Unsupported` - Unsupported for direct server assignment and unassigned profiles.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"internal_reservation_references": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -2407,6 +2456,61 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("incomplete_policies"); ok {
+		x := make([]models.PolicyAbstractPolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
+		}
+		o.SetIncompletePolicies(x)
+	}
+
+	if v, ok := d.GetOkExists("initial_auto_deploy_config_complete"); ok {
+		x := (v.(bool))
+		o.SetInitialAutoDeployConfigComplete(x)
+	}
+
+	if v, ok := d.GetOkExists("initial_auto_deploy_mode"); ok {
+		x := (v.(bool))
+		o.SetInitialAutoDeployMode(x)
+	}
+
+	if v, ok := d.GetOk("initial_auto_deploy_state"); ok {
+		x := (v.(string))
+		o.SetInitialAutoDeployState(x)
+	}
+
 	if v, ok := d.GetOk("internal_reservation_references"); ok {
 		x := make([]models.PoolReservationReference, 0)
 		s := v.([]interface{})
@@ -3765,6 +3869,11 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["deployed_switches"] = (s.GetDeployedSwitches())
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["incomplete_policies"] = flattenListPolicyAbstractPolicyRelationship(s.GetIncompletePolicies(), d)
+				temp["initial_auto_deploy_config_complete"] = (s.GetInitialAutoDeployConfigComplete())
+				temp["initial_auto_deploy_mode"] = (s.GetInitialAutoDeployMode())
+				temp["initial_auto_deploy_state"] = (s.GetInitialAutoDeployState())
 
 				temp["internal_reservation_references"] = flattenListPoolReservationReference(s.GetInternalReservationReferences(), d)
 				temp["is_pmc_deployed_secure_passphrase_set"] = (s.GetIsPmcDeployedSecurePassphraseSet())

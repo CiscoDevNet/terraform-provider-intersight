@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -28,16 +28,22 @@ type FcNeighbor struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// This field defines if neighbor is a switch or an NPV device. * `Switch` - Switch type neighbors of an interface. * `NPV` - N Port Virtualization neighbors of an interface.
+	// This field defines if neighbor is a switch, storage or an NPV device. * `Switch` - Switch type neighbors of an interface. * `NPV` - N Port Virtualization neighbors of an interface. * `Storage` - Storage type neighbors of an interface.
 	PeerDeviceCapability *string `json:"PeerDeviceCapability,omitempty"`
 	// Interface through which the relationship is established.
 	PeerInterface *string `json:"PeerInterface,omitempty"`
 	// IP address of the peer switch.
 	PeerIpAddress *string `json:"PeerIpAddress,omitempty"`
+	// World Wide Name of the neighbor port.
+	PeerPortWwn *string `json:"PeerPortWwn,omitempty"`
 	// Device Id of the neighbor switch.
 	PeerSwitchName *string `json:"PeerSwitchName,omitempty"`
 	// World Wide Name of the neighbor switch.
-	PeerWwn              *string                            `json:"PeerWwn,omitempty"`
+	PeerWwn *string `json:"PeerWwn,omitempty"`
+	// Vendor name for the neighboring storage device. Available only for Storage neighbors.
+	Vendor *string `json:"Vendor,omitempty"`
+	// VSAN associated with this neighbor port.
+	Vsan                 *int64                             `json:"Vsan,omitempty"`
 	FcPhysicalPort       NullableFcPhysicalPortRelationship `json:"FcPhysicalPort,omitempty"`
 	FcPortChannel        NullableFcPortChannelRelationship  `json:"FcPortChannel,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -222,6 +228,38 @@ func (o *FcNeighbor) SetPeerIpAddress(v string) {
 	o.PeerIpAddress = &v
 }
 
+// GetPeerPortWwn returns the PeerPortWwn field value if set, zero value otherwise.
+func (o *FcNeighbor) GetPeerPortWwn() string {
+	if o == nil || IsNil(o.PeerPortWwn) {
+		var ret string
+		return ret
+	}
+	return *o.PeerPortWwn
+}
+
+// GetPeerPortWwnOk returns a tuple with the PeerPortWwn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcNeighbor) GetPeerPortWwnOk() (*string, bool) {
+	if o == nil || IsNil(o.PeerPortWwn) {
+		return nil, false
+	}
+	return o.PeerPortWwn, true
+}
+
+// HasPeerPortWwn returns a boolean if a field has been set.
+func (o *FcNeighbor) HasPeerPortWwn() bool {
+	if o != nil && !IsNil(o.PeerPortWwn) {
+		return true
+	}
+
+	return false
+}
+
+// SetPeerPortWwn gets a reference to the given string and assigns it to the PeerPortWwn field.
+func (o *FcNeighbor) SetPeerPortWwn(v string) {
+	o.PeerPortWwn = &v
+}
+
 // GetPeerSwitchName returns the PeerSwitchName field value if set, zero value otherwise.
 func (o *FcNeighbor) GetPeerSwitchName() string {
 	if o == nil || IsNil(o.PeerSwitchName) {
@@ -284,6 +322,70 @@ func (o *FcNeighbor) HasPeerWwn() bool {
 // SetPeerWwn gets a reference to the given string and assigns it to the PeerWwn field.
 func (o *FcNeighbor) SetPeerWwn(v string) {
 	o.PeerWwn = &v
+}
+
+// GetVendor returns the Vendor field value if set, zero value otherwise.
+func (o *FcNeighbor) GetVendor() string {
+	if o == nil || IsNil(o.Vendor) {
+		var ret string
+		return ret
+	}
+	return *o.Vendor
+}
+
+// GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcNeighbor) GetVendorOk() (*string, bool) {
+	if o == nil || IsNil(o.Vendor) {
+		return nil, false
+	}
+	return o.Vendor, true
+}
+
+// HasVendor returns a boolean if a field has been set.
+func (o *FcNeighbor) HasVendor() bool {
+	if o != nil && !IsNil(o.Vendor) {
+		return true
+	}
+
+	return false
+}
+
+// SetVendor gets a reference to the given string and assigns it to the Vendor field.
+func (o *FcNeighbor) SetVendor(v string) {
+	o.Vendor = &v
+}
+
+// GetVsan returns the Vsan field value if set, zero value otherwise.
+func (o *FcNeighbor) GetVsan() int64 {
+	if o == nil || IsNil(o.Vsan) {
+		var ret int64
+		return ret
+	}
+	return *o.Vsan
+}
+
+// GetVsanOk returns a tuple with the Vsan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcNeighbor) GetVsanOk() (*int64, bool) {
+	if o == nil || IsNil(o.Vsan) {
+		return nil, false
+	}
+	return o.Vsan, true
+}
+
+// HasVsan returns a boolean if a field has been set.
+func (o *FcNeighbor) HasVsan() bool {
+	if o != nil && !IsNil(o.Vsan) {
+		return true
+	}
+
+	return false
+}
+
+// SetVsan gets a reference to the given int64 and assigns it to the Vsan field.
+func (o *FcNeighbor) SetVsan(v int64) {
+	o.Vsan = &v
 }
 
 // GetFcPhysicalPort returns the FcPhysicalPort field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -407,11 +509,20 @@ func (o FcNeighbor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PeerIpAddress) {
 		toSerialize["PeerIpAddress"] = o.PeerIpAddress
 	}
+	if !IsNil(o.PeerPortWwn) {
+		toSerialize["PeerPortWwn"] = o.PeerPortWwn
+	}
 	if !IsNil(o.PeerSwitchName) {
 		toSerialize["PeerSwitchName"] = o.PeerSwitchName
 	}
 	if !IsNil(o.PeerWwn) {
 		toSerialize["PeerWwn"] = o.PeerWwn
+	}
+	if !IsNil(o.Vendor) {
+		toSerialize["Vendor"] = o.Vendor
+	}
+	if !IsNil(o.Vsan) {
+		toSerialize["Vsan"] = o.Vsan
 	}
 	if o.FcPhysicalPort.IsSet() {
 		toSerialize["FcPhysicalPort"] = o.FcPhysicalPort.Get()
@@ -474,16 +585,22 @@ func (o *FcNeighbor) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// This field defines if neighbor is a switch or an NPV device. * `Switch` - Switch type neighbors of an interface. * `NPV` - N Port Virtualization neighbors of an interface.
+		// This field defines if neighbor is a switch, storage or an NPV device. * `Switch` - Switch type neighbors of an interface. * `NPV` - N Port Virtualization neighbors of an interface. * `Storage` - Storage type neighbors of an interface.
 		PeerDeviceCapability *string `json:"PeerDeviceCapability,omitempty"`
 		// Interface through which the relationship is established.
 		PeerInterface *string `json:"PeerInterface,omitempty"`
 		// IP address of the peer switch.
 		PeerIpAddress *string `json:"PeerIpAddress,omitempty"`
+		// World Wide Name of the neighbor port.
+		PeerPortWwn *string `json:"PeerPortWwn,omitempty"`
 		// Device Id of the neighbor switch.
 		PeerSwitchName *string `json:"PeerSwitchName,omitempty"`
 		// World Wide Name of the neighbor switch.
-		PeerWwn        *string                            `json:"PeerWwn,omitempty"`
+		PeerWwn *string `json:"PeerWwn,omitempty"`
+		// Vendor name for the neighboring storage device. Available only for Storage neighbors.
+		Vendor *string `json:"Vendor,omitempty"`
+		// VSAN associated with this neighbor port.
+		Vsan           *int64                             `json:"Vsan,omitempty"`
 		FcPhysicalPort NullableFcPhysicalPortRelationship `json:"FcPhysicalPort,omitempty"`
 		FcPortChannel  NullableFcPortChannelRelationship  `json:"FcPortChannel,omitempty"`
 	}
@@ -498,8 +615,11 @@ func (o *FcNeighbor) UnmarshalJSON(data []byte) (err error) {
 		varFcNeighbor.PeerDeviceCapability = varFcNeighborWithoutEmbeddedStruct.PeerDeviceCapability
 		varFcNeighbor.PeerInterface = varFcNeighborWithoutEmbeddedStruct.PeerInterface
 		varFcNeighbor.PeerIpAddress = varFcNeighborWithoutEmbeddedStruct.PeerIpAddress
+		varFcNeighbor.PeerPortWwn = varFcNeighborWithoutEmbeddedStruct.PeerPortWwn
 		varFcNeighbor.PeerSwitchName = varFcNeighborWithoutEmbeddedStruct.PeerSwitchName
 		varFcNeighbor.PeerWwn = varFcNeighborWithoutEmbeddedStruct.PeerWwn
+		varFcNeighbor.Vendor = varFcNeighborWithoutEmbeddedStruct.Vendor
+		varFcNeighbor.Vsan = varFcNeighborWithoutEmbeddedStruct.Vsan
 		varFcNeighbor.FcPhysicalPort = varFcNeighborWithoutEmbeddedStruct.FcPhysicalPort
 		varFcNeighbor.FcPortChannel = varFcNeighborWithoutEmbeddedStruct.FcPortChannel
 		*o = FcNeighbor(varFcNeighbor)
@@ -524,8 +644,11 @@ func (o *FcNeighbor) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "PeerDeviceCapability")
 		delete(additionalProperties, "PeerInterface")
 		delete(additionalProperties, "PeerIpAddress")
+		delete(additionalProperties, "PeerPortWwn")
 		delete(additionalProperties, "PeerSwitchName")
 		delete(additionalProperties, "PeerWwn")
+		delete(additionalProperties, "Vendor")
+		delete(additionalProperties, "Vsan")
 		delete(additionalProperties, "FcPhysicalPort")
 		delete(additionalProperties, "FcPortChannel")
 

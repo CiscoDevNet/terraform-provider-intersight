@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "apic.FabricLeafNodeDetails"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "apic.FabricLeafNodeDetails"]
-**Id** | Pointer to **string** | Id of an leaf node within the Cisco Application Policy Infrastructure Controller (APIC). | [optional] 
-**Name** | Pointer to **string** | Name of an leaf node within the Cisco Application Policy Infrastructure Controller (APIC). | [optional] 
+**Id** | Pointer to **string** | Leaf node ID in Cisco Application Policy Infrastructure Controller (APIC). | [optional] 
+**Name** | Pointer to **string** | Leaf node name in Cisco Application Policy Infrastructure Controller (APIC). | [optional] 
 
 ## Methods
 

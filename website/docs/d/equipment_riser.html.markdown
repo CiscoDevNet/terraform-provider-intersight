@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_riser"
 description: |-
-        This represents Riser of Server which holds the manageable sub components.
+        The equipment.Riser object represents a server riser assembly that provides physical expansion capability and a mounting/connection point for manageable sub-components. In practice, risers commonly expose PCIe expansion options and may also represent specialized backplane-style assemblies depending on the platform.
+        #### Purpose
+        equipment.Riser inventories a riser's identity and characteristics so consumers can understand what expansion/backplane hardware is present in a server and how it contributes to the system's physical configuration.
+        #### Key Concepts
+        - **Expansion topology element:** Represents a physical assembly that enables/hosts expansion connectivity.
+        - **Variant coverage:** Can represent standard PCIe risers as well as platform-specific riser/backplane variants.
+        - **Hardware characterization:** Conveys high-level attributes such as form factor and PCIe generation for capability awareness.
+        - **Server association:** Anchored under a compute blade or rack unit to map risers to the server they belong to.
 
 ---
 
 # Data Source: intersight_equipment_riser
-This represents Riser of Server which holds the manageable sub components.
+The equipment.Riser object represents a server riser assembly that provides physical expansion capability and a mounting/connection point for manageable sub-components. In practice, risers commonly expose PCIe expansion options and may also represent specialized backplane-style assemblies depending on the platform.
+#### Purpose
+equipment.Riser inventories a riser's identity and characteristics so consumers can understand what expansion/backplane hardware is present in a server and how it contributes to the system's physical configuration.
+#### Key Concepts
+- **Expansion topology element:** Represents a physical assembly that enables/hosts expansion connectivity.
+- **Variant coverage:** Can represent standard PCIe risers as well as platform-specific riser/backplane variants.
+- **Hardware characterization:** Conveys high-level attributes such as form factor and PCIe generation for capability awareness.
+- **Server association:** Anchored under a compute blade or rack unit to map risers to the server they belong to.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

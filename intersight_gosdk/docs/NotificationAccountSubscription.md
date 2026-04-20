@@ -7,10 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "notification.AccountSubscription"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "notification.AccountSubscription"]
 **Description** | Pointer to **string** | The description for the subscription. | [optional] 
+**EnableTls** | Pointer to **bool** | When true, TLS with custom certificate validation is enabled for this webhook subscription. The certificate relationship must be set to a TrustPoint when enableTls is true. Only applicable for webhook-type subscriptions; used for appliance deployments with private CAs. When false or unset, default TLS behavior (public CA trust) is used. SaaS typically leaves this false or unset. | [optional] [default to false]
 **Name** | Pointer to **string** | The name of the subscription. | [optional] 
 **Type** | Pointer to **string** | The chosen subscription type imposes it is own validation rules. When &#39;email&#39; type is chosen, actions array can contain only one entry and it is entry should be of can be only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition types should be unique. When the &#39;webhook&#39; type is chosen, the actions array can contain only one entry and it is entry should be of can be only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them should be of type notification.MoCondition. * &#x60;email&#x60; - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions. * &#x60;webhook&#x60; - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions. | [optional] [default to "email"]
 **Verify** | Pointer to **string** | Used to verify the actions of the Subscription MO. For a &#39;webhook&#39; type Ping event is sent to verify that the webhook server is accessible. For an &#39;email&#39; type there will be a verification email sent. * &#x60;none&#x60; - No actions will be verified. Default value. * &#x60;all&#x60; - All actions will be re-verified. The previous state of the verification will be preserved. | [optional] [default to "none"]
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Certificate** | Pointer to [**NullableIamTrustPointRelationship**](IamTrustPointRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -95,6 +97,31 @@ SetDescription sets Description field to given value.
 `func (o *NotificationAccountSubscription) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetEnableTls
+
+`func (o *NotificationAccountSubscription) GetEnableTls() bool`
+
+GetEnableTls returns the EnableTls field if non-nil, zero value otherwise.
+
+### GetEnableTlsOk
+
+`func (o *NotificationAccountSubscription) GetEnableTlsOk() (*bool, bool)`
+
+GetEnableTlsOk returns a tuple with the EnableTls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableTls
+
+`func (o *NotificationAccountSubscription) SetEnableTls(v bool)`
+
+SetEnableTls sets EnableTls field to given value.
+
+### HasEnableTls
+
+`func (o *NotificationAccountSubscription) HasEnableTls() bool`
+
+HasEnableTls returns a boolean if a field has been set.
 
 ### GetName
 
@@ -206,6 +233,41 @@ HasAccount returns a boolean if a field has been set.
 `func (o *NotificationAccountSubscription) UnsetAccount()`
 
 UnsetAccount ensures that no value is present for Account, not even an explicit nil
+### GetCertificate
+
+`func (o *NotificationAccountSubscription) GetCertificate() IamTrustPointRelationship`
+
+GetCertificate returns the Certificate field if non-nil, zero value otherwise.
+
+### GetCertificateOk
+
+`func (o *NotificationAccountSubscription) GetCertificateOk() (*IamTrustPointRelationship, bool)`
+
+GetCertificateOk returns a tuple with the Certificate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificate
+
+`func (o *NotificationAccountSubscription) SetCertificate(v IamTrustPointRelationship)`
+
+SetCertificate sets Certificate field to given value.
+
+### HasCertificate
+
+`func (o *NotificationAccountSubscription) HasCertificate() bool`
+
+HasCertificate returns a boolean if a field has been set.
+
+### SetCertificateNil
+
+`func (o *NotificationAccountSubscription) SetCertificateNil(b bool)`
+
+ SetCertificateNil sets the value for Certificate to be an explicit nil
+
+### UnsetCertificate
+`func (o *NotificationAccountSubscription) UnsetCertificate()`
+
+UnsetCertificate ensures that no value is present for Certificate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

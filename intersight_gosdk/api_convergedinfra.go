@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,27 @@ type ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest) Select_(select_ string) ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest) Expand(expand string) ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest) At(at string) ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest) Execute() (*ConvergedinfraAdapterComplianceDetails, *http.Response, error) {
@@ -71,6 +92,18 @@ func (a *ConvergedinfraApiService) GetConvergedinfraAdapterComplianceDetailsByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -456,6 +489,27 @@ type ApiGetConvergedinfraPodByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetConvergedinfraPodByMoidRequest) Select_(select_ string) ApiGetConvergedinfraPodByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetConvergedinfraPodByMoidRequest) Expand(expand string) ApiGetConvergedinfraPodByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetConvergedinfraPodByMoidRequest) At(at string) ApiGetConvergedinfraPodByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetConvergedinfraPodByMoidRequest) Execute() (*ConvergedinfraPod, *http.Response, error) {
@@ -500,6 +554,18 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoidExecute(r ApiGetCon
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -610,6 +676,27 @@ type ApiGetConvergedinfraPodComplianceInfoByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetConvergedinfraPodComplianceInfoByMoidRequest) Select_(select_ string) ApiGetConvergedinfraPodComplianceInfoByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetConvergedinfraPodComplianceInfoByMoidRequest) Expand(expand string) ApiGetConvergedinfraPodComplianceInfoByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetConvergedinfraPodComplianceInfoByMoidRequest) At(at string) ApiGetConvergedinfraPodComplianceInfoByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetConvergedinfraPodComplianceInfoByMoidRequest) Execute() (*ConvergedinfraPodComplianceInfo, *http.Response, error) {
@@ -654,6 +741,18 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodComplianceInfoByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1314,6 +1413,27 @@ type ApiGetConvergedinfraServerComplianceDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetConvergedinfraServerComplianceDetailsByMoidRequest) Select_(select_ string) ApiGetConvergedinfraServerComplianceDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetConvergedinfraServerComplianceDetailsByMoidRequest) Expand(expand string) ApiGetConvergedinfraServerComplianceDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetConvergedinfraServerComplianceDetailsByMoidRequest) At(at string) ApiGetConvergedinfraServerComplianceDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetConvergedinfraServerComplianceDetailsByMoidRequest) Execute() (*ConvergedinfraServerComplianceDetails, *http.Response, error) {
@@ -1358,6 +1478,18 @@ func (a *ConvergedinfraApiService) GetConvergedinfraServerComplianceDetailsByMoi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1743,6 +1875,27 @@ type ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest) Select_(select_ string) ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest) Expand(expand string) ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest) At(at string) ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest) Execute() (*ConvergedinfraStorageComplianceDetails, *http.Response, error) {
@@ -1787,6 +1940,18 @@ func (a *ConvergedinfraApiService) GetConvergedinfraStorageComplianceDetailsByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2172,6 +2337,27 @@ type ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest) Select_(select_ string) ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest) Expand(expand string) ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest) At(at string) ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest) Execute() (*ConvergedinfraSwitchComplianceDetails, *http.Response, error) {
@@ -2216,6 +2402,18 @@ func (a *ConvergedinfraApiService) GetConvergedinfraSwitchComplianceDetailsByMoi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

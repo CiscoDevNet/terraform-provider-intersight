@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**CreateSchedulerSchedulePolicy**](SchedulerApi.md#CreateSchedulerSchedulePolicy) | **Post** /api/v1/scheduler/SchedulePolicies | Create a &#39;scheduler.SchedulePolicy&#39; resource.
 [**CreateSchedulerTaskSchedule**](SchedulerApi.md#CreateSchedulerTaskSchedule) | **Post** /api/v1/scheduler/TaskSchedules | Create a &#39;scheduler.TaskSchedule&#39; resource.
 [**DeleteSchedulerSchedulePolicy**](SchedulerApi.md#DeleteSchedulerSchedulePolicy) | **Delete** /api/v1/scheduler/SchedulePolicies/{Moid} | Delete a &#39;scheduler.SchedulePolicy&#39; resource.
-[**DeleteSchedulerTaskResult**](SchedulerApi.md#DeleteSchedulerTaskResult) | **Delete** /api/v1/scheduler/TaskResults/{Moid} | Delete a &#39;scheduler.TaskResult&#39; resource.
 [**DeleteSchedulerTaskSchedule**](SchedulerApi.md#DeleteSchedulerTaskSchedule) | **Delete** /api/v1/scheduler/TaskSchedules/{Moid} | Delete a &#39;scheduler.TaskSchedule&#39; resource.
 [**GetSchedulerSchedulePolicyByMoid**](SchedulerApi.md#GetSchedulerSchedulePolicyByMoid) | **Get** /api/v1/scheduler/SchedulePolicies/{Moid} | Read a &#39;scheduler.SchedulePolicy&#39; resource.
 [**GetSchedulerSchedulePolicyList**](SchedulerApi.md#GetSchedulerSchedulePolicyList) | **Get** /api/v1/scheduler/SchedulePolicies | Read a &#39;scheduler.SchedulePolicy&#39; resource.
@@ -224,72 +223,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteSchedulerTaskResult
-
-> DeleteSchedulerTaskResult(ctx, moid).Execute()
-
-Delete a 'scheduler.TaskResult' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.SchedulerApi.DeleteSchedulerTaskResult(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SchedulerApi.DeleteSchedulerTaskResult``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteSchedulerTaskResultRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteSchedulerTaskSchedule
 
 > DeleteSchedulerTaskSchedule(ctx, moid).Execute()
@@ -358,7 +291,7 @@ Name | Type | Description  | Notes
 
 ## GetSchedulerSchedulePolicyByMoid
 
-> SchedulerSchedulePolicy GetSchedulerSchedulePolicyByMoid(ctx, moid).Execute()
+> SchedulerSchedulePolicy GetSchedulerSchedulePolicyByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'scheduler.SchedulePolicy' resource.
 
@@ -376,10 +309,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SchedulerApi.GetSchedulerSchedulePolicyByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.SchedulerApi.GetSchedulerSchedulePolicyByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SchedulerApi.GetSchedulerSchedulePolicyByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -405,6 +341,9 @@ Other parameters are passed through a pointer to a apiGetSchedulerSchedulePolicy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -510,7 +449,7 @@ Name | Type | Description  | Notes
 
 ## GetSchedulerTaskResultByMoid
 
-> SchedulerTaskResult GetSchedulerTaskResultByMoid(ctx, moid).Execute()
+> SchedulerTaskResult GetSchedulerTaskResultByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'scheduler.TaskResult' resource.
 
@@ -528,10 +467,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SchedulerApi.GetSchedulerTaskResultByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.SchedulerApi.GetSchedulerTaskResultByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SchedulerApi.GetSchedulerTaskResultByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -557,6 +499,9 @@ Other parameters are passed through a pointer to a apiGetSchedulerTaskResultByMo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -662,7 +607,7 @@ Name | Type | Description  | Notes
 
 ## GetSchedulerTaskScheduleByMoid
 
-> SchedulerTaskSchedule GetSchedulerTaskScheduleByMoid(ctx, moid).Execute()
+> SchedulerTaskSchedule GetSchedulerTaskScheduleByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'scheduler.TaskSchedule' resource.
 
@@ -680,10 +625,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SchedulerApi.GetSchedulerTaskScheduleByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.SchedulerApi.GetSchedulerTaskScheduleByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SchedulerApi.GetSchedulerTaskScheduleByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -709,6 +657,9 @@ Other parameters are passed through a pointer to a apiGetSchedulerTaskScheduleBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 

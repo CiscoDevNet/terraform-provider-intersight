@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -37,8 +37,9 @@ type CapabilityDomainPolicyRequirement struct {
 	// Type of the platform for which version compatibility is specified. Example - 3GFI, 4GFI, etc.
 	Model *string `json:"Model,omitempty"`
 	// Policy Name for which version compatibility is specified. Example - snmp.Policy, ldap.Policy.
-	PolicyName           *string `json:"PolicyName,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PolicyName            *string                                   `json:"PolicyName,omitempty"`
+	PortPolicyConstraints NullableCapabilityPortPropertyConstraints `json:"PortPolicyConstraints,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _CapabilityDomainPolicyRequirement CapabilityDomainPolicyRequirement
@@ -338,6 +339,49 @@ func (o *CapabilityDomainPolicyRequirement) SetPolicyName(v string) {
 	o.PolicyName = &v
 }
 
+// GetPortPolicyConstraints returns the PortPolicyConstraints field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilityDomainPolicyRequirement) GetPortPolicyConstraints() CapabilityPortPropertyConstraints {
+	if o == nil || IsNil(o.PortPolicyConstraints.Get()) {
+		var ret CapabilityPortPropertyConstraints
+		return ret
+	}
+	return *o.PortPolicyConstraints.Get()
+}
+
+// GetPortPolicyConstraintsOk returns a tuple with the PortPolicyConstraints field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilityDomainPolicyRequirement) GetPortPolicyConstraintsOk() (*CapabilityPortPropertyConstraints, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PortPolicyConstraints.Get(), o.PortPolicyConstraints.IsSet()
+}
+
+// HasPortPolicyConstraints returns a boolean if a field has been set.
+func (o *CapabilityDomainPolicyRequirement) HasPortPolicyConstraints() bool {
+	if o != nil && o.PortPolicyConstraints.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPortPolicyConstraints gets a reference to the given NullableCapabilityPortPropertyConstraints and assigns it to the PortPolicyConstraints field.
+func (o *CapabilityDomainPolicyRequirement) SetPortPolicyConstraints(v CapabilityPortPropertyConstraints) {
+	o.PortPolicyConstraints.Set(&v)
+}
+
+// SetPortPolicyConstraintsNil sets the value for PortPolicyConstraints to be an explicit nil
+func (o *CapabilityDomainPolicyRequirement) SetPortPolicyConstraintsNil() {
+	o.PortPolicyConstraints.Set(nil)
+}
+
+// UnsetPortPolicyConstraints ensures that no value is present for PortPolicyConstraints, not even an explicit nil
+func (o *CapabilityDomainPolicyRequirement) UnsetPortPolicyConstraints() {
+	o.PortPolicyConstraints.Unset()
+}
+
 func (o CapabilityDomainPolicyRequirement) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -381,6 +425,9 @@ func (o CapabilityDomainPolicyRequirement) ToMap() (map[string]interface{}, erro
 	}
 	if !IsNil(o.PolicyName) {
 		toSerialize["PolicyName"] = o.PolicyName
+	}
+	if o.PortPolicyConstraints.IsSet() {
+		toSerialize["PortPolicyConstraints"] = o.PortPolicyConstraints.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -446,7 +493,8 @@ func (o *CapabilityDomainPolicyRequirement) UnmarshalJSON(data []byte) (err erro
 		// Type of the platform for which version compatibility is specified. Example - 3GFI, 4GFI, etc.
 		Model *string `json:"Model,omitempty"`
 		// Policy Name for which version compatibility is specified. Example - snmp.Policy, ldap.Policy.
-		PolicyName *string `json:"PolicyName,omitempty"`
+		PolicyName            *string                                   `json:"PolicyName,omitempty"`
+		PortPolicyConstraints NullableCapabilityPortPropertyConstraints `json:"PortPolicyConstraints,omitempty"`
 	}
 
 	varCapabilityDomainPolicyRequirementWithoutEmbeddedStruct := CapabilityDomainPolicyRequirementWithoutEmbeddedStruct{}
@@ -462,6 +510,7 @@ func (o *CapabilityDomainPolicyRequirement) UnmarshalJSON(data []byte) (err erro
 		varCapabilityDomainPolicyRequirement.MinVersion = varCapabilityDomainPolicyRequirementWithoutEmbeddedStruct.MinVersion
 		varCapabilityDomainPolicyRequirement.Model = varCapabilityDomainPolicyRequirementWithoutEmbeddedStruct.Model
 		varCapabilityDomainPolicyRequirement.PolicyName = varCapabilityDomainPolicyRequirementWithoutEmbeddedStruct.PolicyName
+		varCapabilityDomainPolicyRequirement.PortPolicyConstraints = varCapabilityDomainPolicyRequirementWithoutEmbeddedStruct.PortPolicyConstraints
 		*o = CapabilityDomainPolicyRequirement(varCapabilityDomainPolicyRequirement)
 	} else {
 		return err
@@ -487,6 +536,7 @@ func (o *CapabilityDomainPolicyRequirement) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "MinVersion")
 		delete(additionalProperties, "Model")
 		delete(additionalProperties, "PolicyName")
+		delete(additionalProperties, "PortPolicyConstraints")
 
 		// remove fields from embedded structs
 		reflectCapabilityCapability := reflect.ValueOf(o.CapabilityCapability)

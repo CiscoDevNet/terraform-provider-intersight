@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -39,8 +39,9 @@ type FabricSwitchControlPolicy struct {
 	// Enable or Disable FC End Host Switching Mode. FC is not supported on Unified Edge, so this setting cannot be configured and is ignored. * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 	FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
 	// Indicates whether the value of the 'aesPrimaryKey' property has been set.
-	IsAesPrimaryKeySet *bool                          `json:"IsAesPrimaryKeySet,omitempty"`
-	MacAgingSettings   NullableFabricMacAgingSettings `json:"MacAgingSettings,omitempty"`
+	IsAesPrimaryKeySet  *bool                             `json:"IsAesPrimaryKeySet,omitempty"`
+	MacAgingSettings    NullableFabricMacAgingSettings    `json:"MacAgingSettings,omitempty"`
+	MacLearningSettings NullableFabricMacLearningSettings `json:"MacLearningSettings,omitempty"`
 	// The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default. The reserved VLAN range is fixed for Unified Edge, so this setting cannot be configured and is ignored.
 	ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
 	// The target platform type of the Switch Control policy. * `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.
@@ -400,6 +401,49 @@ func (o *FabricSwitchControlPolicy) UnsetMacAgingSettings() {
 	o.MacAgingSettings.Unset()
 }
 
+// GetMacLearningSettings returns the MacLearningSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchControlPolicy) GetMacLearningSettings() FabricMacLearningSettings {
+	if o == nil || IsNil(o.MacLearningSettings.Get()) {
+		var ret FabricMacLearningSettings
+		return ret
+	}
+	return *o.MacLearningSettings.Get()
+}
+
+// GetMacLearningSettingsOk returns a tuple with the MacLearningSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchControlPolicy) GetMacLearningSettingsOk() (*FabricMacLearningSettings, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MacLearningSettings.Get(), o.MacLearningSettings.IsSet()
+}
+
+// HasMacLearningSettings returns a boolean if a field has been set.
+func (o *FabricSwitchControlPolicy) HasMacLearningSettings() bool {
+	if o != nil && o.MacLearningSettings.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMacLearningSettings gets a reference to the given NullableFabricMacLearningSettings and assigns it to the MacLearningSettings field.
+func (o *FabricSwitchControlPolicy) SetMacLearningSettings(v FabricMacLearningSettings) {
+	o.MacLearningSettings.Set(&v)
+}
+
+// SetMacLearningSettingsNil sets the value for MacLearningSettings to be an explicit nil
+func (o *FabricSwitchControlPolicy) SetMacLearningSettingsNil() {
+	o.MacLearningSettings.Set(nil)
+}
+
+// UnsetMacLearningSettings ensures that no value is present for MacLearningSettings, not even an explicit nil
+func (o *FabricSwitchControlPolicy) UnsetMacLearningSettings() {
+	o.MacLearningSettings.Unset()
+}
+
 // GetReservedVlanStartId returns the ReservedVlanStartId field value if set, zero value otherwise.
 func (o *FabricSwitchControlPolicy) GetReservedVlanStartId() int64 {
 	if o == nil || IsNil(o.ReservedVlanStartId) {
@@ -662,6 +706,9 @@ func (o FabricSwitchControlPolicy) ToMap() (map[string]interface{}, error) {
 	if o.MacAgingSettings.IsSet() {
 		toSerialize["MacAgingSettings"] = o.MacAgingSettings.Get()
 	}
+	if o.MacLearningSettings.IsSet() {
+		toSerialize["MacLearningSettings"] = o.MacLearningSettings.Get()
+	}
 	if !IsNil(o.ReservedVlanStartId) {
 		toSerialize["ReservedVlanStartId"] = o.ReservedVlanStartId
 	}
@@ -746,8 +793,9 @@ func (o *FabricSwitchControlPolicy) UnmarshalJSON(data []byte) (err error) {
 		// Enable or Disable FC End Host Switching Mode. FC is not supported on Unified Edge, so this setting cannot be configured and is ignored. * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 		FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
 		// Indicates whether the value of the 'aesPrimaryKey' property has been set.
-		IsAesPrimaryKeySet *bool                          `json:"IsAesPrimaryKeySet,omitempty"`
-		MacAgingSettings   NullableFabricMacAgingSettings `json:"MacAgingSettings,omitempty"`
+		IsAesPrimaryKeySet  *bool                             `json:"IsAesPrimaryKeySet,omitempty"`
+		MacAgingSettings    NullableFabricMacAgingSettings    `json:"MacAgingSettings,omitempty"`
+		MacLearningSettings NullableFabricMacLearningSettings `json:"MacLearningSettings,omitempty"`
 		// The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default. The reserved VLAN range is fixed for Unified Edge, so this setting cannot be configured and is ignored.
 		ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
 		// The target platform type of the Switch Control policy. * `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.
@@ -774,6 +822,7 @@ func (o *FabricSwitchControlPolicy) UnmarshalJSON(data []byte) (err error) {
 		varFabricSwitchControlPolicy.FcSwitchingMode = varFabricSwitchControlPolicyWithoutEmbeddedStruct.FcSwitchingMode
 		varFabricSwitchControlPolicy.IsAesPrimaryKeySet = varFabricSwitchControlPolicyWithoutEmbeddedStruct.IsAesPrimaryKeySet
 		varFabricSwitchControlPolicy.MacAgingSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.MacAgingSettings
+		varFabricSwitchControlPolicy.MacLearningSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.MacLearningSettings
 		varFabricSwitchControlPolicy.ReservedVlanStartId = varFabricSwitchControlPolicyWithoutEmbeddedStruct.ReservedVlanStartId
 		varFabricSwitchControlPolicy.TargetPlatform = varFabricSwitchControlPolicyWithoutEmbeddedStruct.TargetPlatform
 		varFabricSwitchControlPolicy.UdldSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.UdldSettings
@@ -806,6 +855,7 @@ func (o *FabricSwitchControlPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "FcSwitchingMode")
 		delete(additionalProperties, "IsAesPrimaryKeySet")
 		delete(additionalProperties, "MacAgingSettings")
+		delete(additionalProperties, "MacLearningSettings")
 		delete(additionalProperties, "ReservedVlanStartId")
 		delete(additionalProperties, "TargetPlatform")
 		delete(additionalProperties, "UdldSettings")

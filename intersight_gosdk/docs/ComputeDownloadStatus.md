@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **DownloadStage** | Pointer to **string** | The image download stages. Example:downloading, flashing. | [optional] [readonly] 
 **SdCardDownloadError** | Pointer to **string** | The error message from the endpoint during the SD card download. | [optional] [readonly] 
 **HostOp** | Pointer to [**NullableComputeHostUtilityOperationRelationship**](ComputeHostUtilityOperationRelationship.md) |  | [optional] 
+**MigrationKeyDetails** | Pointer to [**NullableServerMigrationKeyDetailsRelationship**](ServerMigrationKeyDetailsRelationship.md) |  | [optional] 
 **Workflow** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
@@ -207,6 +208,41 @@ HasHostOp returns a boolean if a field has been set.
 `func (o *ComputeDownloadStatus) UnsetHostOp()`
 
 UnsetHostOp ensures that no value is present for HostOp, not even an explicit nil
+### GetMigrationKeyDetails
+
+`func (o *ComputeDownloadStatus) GetMigrationKeyDetails() ServerMigrationKeyDetailsRelationship`
+
+GetMigrationKeyDetails returns the MigrationKeyDetails field if non-nil, zero value otherwise.
+
+### GetMigrationKeyDetailsOk
+
+`func (o *ComputeDownloadStatus) GetMigrationKeyDetailsOk() (*ServerMigrationKeyDetailsRelationship, bool)`
+
+GetMigrationKeyDetailsOk returns a tuple with the MigrationKeyDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMigrationKeyDetails
+
+`func (o *ComputeDownloadStatus) SetMigrationKeyDetails(v ServerMigrationKeyDetailsRelationship)`
+
+SetMigrationKeyDetails sets MigrationKeyDetails field to given value.
+
+### HasMigrationKeyDetails
+
+`func (o *ComputeDownloadStatus) HasMigrationKeyDetails() bool`
+
+HasMigrationKeyDetails returns a boolean if a field has been set.
+
+### SetMigrationKeyDetailsNil
+
+`func (o *ComputeDownloadStatus) SetMigrationKeyDetailsNil(b bool)`
+
+ SetMigrationKeyDetailsNil sets the value for MigrationKeyDetails to be an explicit nil
+
+### UnsetMigrationKeyDetails
+`func (o *ComputeDownloadStatus) UnsetMigrationKeyDetails()`
+
+UnsetMigrationKeyDetails ensures that no value is present for MigrationKeyDetails, not even an explicit nil
 ### GetWorkflow
 
 `func (o *ComputeDownloadStatus) GetWorkflow() WorkflowWorkflowInfoRelationship`

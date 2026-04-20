@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -127,6 +127,8 @@ type NetworkElement struct {
 	SwitchProfileName *string `json:"SwitchProfileName,omitempty"`
 	// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices. * `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller.
 	SwitchType *string `json:"SwitchType,omitempty"`
+	// World Wide Name of the switch.
+	SwitchWwn *string `json:"SwitchWwn,omitempty"`
 	// System up time of the switch.
 	SystemUpTime *string `json:"SystemUpTime,omitempty"`
 	// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
@@ -1889,6 +1891,38 @@ func (o *NetworkElement) SetSwitchType(v string) {
 	o.SwitchType = &v
 }
 
+// GetSwitchWwn returns the SwitchWwn field value if set, zero value otherwise.
+func (o *NetworkElement) GetSwitchWwn() string {
+	if o == nil || IsNil(o.SwitchWwn) {
+		var ret string
+		return ret
+	}
+	return *o.SwitchWwn
+}
+
+// GetSwitchWwnOk returns a tuple with the SwitchWwn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetSwitchWwnOk() (*string, bool) {
+	if o == nil || IsNil(o.SwitchWwn) {
+		return nil, false
+	}
+	return o.SwitchWwn, true
+}
+
+// HasSwitchWwn returns a boolean if a field has been set.
+func (o *NetworkElement) HasSwitchWwn() bool {
+	if o != nil && !IsNil(o.SwitchWwn) {
+		return true
+	}
+
+	return false
+}
+
+// SetSwitchWwn gets a reference to the given string and assigns it to the SwitchWwn field.
+func (o *NetworkElement) SetSwitchWwn(v string) {
+	o.SwitchWwn = &v
+}
+
 // GetSystemUpTime returns the SystemUpTime field value if set, zero value otherwise.
 func (o *NetworkElement) GetSystemUpTime() string {
 	if o == nil || IsNil(o.SystemUpTime) {
@@ -3540,6 +3574,9 @@ func (o NetworkElement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SwitchType) {
 		toSerialize["SwitchType"] = o.SwitchType
 	}
+	if !IsNil(o.SwitchWwn) {
+		toSerialize["SwitchWwn"] = o.SwitchWwn
+	}
 	if !IsNil(o.SystemUpTime) {
 		toSerialize["SystemUpTime"] = o.SystemUpTime
 	}
@@ -3817,6 +3854,8 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		SwitchProfileName *string `json:"SwitchProfileName,omitempty"`
 		// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices. * `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller.
 		SwitchType *string `json:"SwitchType,omitempty"`
+		// World Wide Name of the switch.
+		SwitchWwn *string `json:"SwitchWwn,omitempty"`
 		// System up time of the switch.
 		SystemUpTime *string `json:"SystemUpTime,omitempty"`
 		// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
@@ -3944,6 +3983,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElement.SwitchId = varNetworkElementWithoutEmbeddedStruct.SwitchId
 		varNetworkElement.SwitchProfileName = varNetworkElementWithoutEmbeddedStruct.SwitchProfileName
 		varNetworkElement.SwitchType = varNetworkElementWithoutEmbeddedStruct.SwitchType
+		varNetworkElement.SwitchWwn = varNetworkElementWithoutEmbeddedStruct.SwitchWwn
 		varNetworkElement.SystemUpTime = varNetworkElementWithoutEmbeddedStruct.SystemUpTime
 		varNetworkElement.Thermal = varNetworkElementWithoutEmbeddedStruct.Thermal
 		varNetworkElement.TotalMemory = varNetworkElementWithoutEmbeddedStruct.TotalMemory
@@ -4053,6 +4093,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "SwitchId")
 		delete(additionalProperties, "SwitchProfileName")
 		delete(additionalProperties, "SwitchType")
+		delete(additionalProperties, "SwitchWwn")
 		delete(additionalProperties, "SystemUpTime")
 		delete(additionalProperties, "Thermal")
 		delete(additionalProperties, "TotalMemory")

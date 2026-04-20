@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_password_history_setting_collection"
 description: |-
-        Password history settings for endpoint users.
+        The PasswordHistorySettingCollection object is a centralized management entity designed to track and enforce password history across the system. It addresses the challenges of maintaining consistent password policies in distributed server environments.
+        #### Purpose
+        The primary purpose of this object is to eliminate inconsistencies that occur when password history is managed at the individual server level. By centralizing this data, the system can reliably prevent the reuse of previous passwords, regardless of which policy or server the user is interacting with.
+        #### Key Concepts
+        - **Centralized Enforcement:** Moves password history logic from individual endpoints to a central collection, ensuring uniform enforcement across the account.
+        - **Scalability:** Avoids the performance and storage issues associated with local history tracking on hardware endpoints.
+        - **Lifecycle Awareness:** Includes mechanisms to identify orphaned history records when associated policies or servers are deleted, ensuring data hygiene.
+        - **Cross-Object Relationships:** Links password history to accounts, profiles, policies, and physical servers to provide a holistic view of user security.
 
 ---
 
 # Data Source: intersight_iam_password_history_setting_collection
-Password history settings for endpoint users.
+The PasswordHistorySettingCollection object is a centralized management entity designed to track and enforce password history across the system. It addresses the challenges of maintaining consistent password policies in distributed server environments.
+#### Purpose
+The primary purpose of this object is to eliminate inconsistencies that occur when password history is managed at the individual server level. By centralizing this data, the system can reliably prevent the reuse of previous passwords, regardless of which policy or server the user is interacting with.
+#### Key Concepts
+- **Centralized Enforcement:** Moves password history logic from individual endpoints to a central collection, ensuring uniform enforcement across the account.
+- **Scalability:** Avoids the performance and storage issues associated with local history tracking on hardware endpoints.
+- **Lifecycle Awareness:** Includes mechanisms to identify "orphaned" history records when associated policies or servers are deleted, ensuring data hygiene.
+- **Cross-Object Relationships:** Links password history to accounts, profiles, policies, and physical servers to provide a holistic view of user security.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

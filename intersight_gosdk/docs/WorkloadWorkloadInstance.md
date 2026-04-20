@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workload.WorkloadInstance"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workload.WorkloadInstance"]
 **Action** | Pointer to **string** | The action to be performed on the workload instance. * &#x60;None&#x60; - Absence of any action on the workload instance. * &#x60;Suspend&#x60; - Pauses the execution of the workload instance, temporarily stopping its operations without permanently removing it. * &#x60;Resume&#x60; - Restarts a suspended workload instance, allowing it to continue operations from where it left off. * &#x60;Deploy&#x60; - Initiates the deployment of the workload instance, provisioning the necessary resources and starting its execution. * &#x60;Retry&#x60; - Attempts to re-deploy the workload instance, either due to a previous failure or to apply changes made to the instance. * &#x60;RetryAll&#x60; - Attempts to re-deploy all workload instances associated with the same deployment, either due to a previous failure or to apply changes made to the instances. * &#x60;Attach&#x60; - Associates the workload instance with its assigned resources, allowing it to utilize the resources for its operations. * &#x60;Detach&#x60; - Disassociates the workload instance from its assigned resources, preventing it from using the resources for its operations. * &#x60;UnAssign&#x60; - Detaches assigned resources from the workload instance while keeping the instance active. | [optional] [default to "None"]
+**AlarmSummary** | Pointer to [**NullableComputeAlarmSummary**](ComputeAlarmSummary.md) |  | [optional] 
 **AssignedResources** | Pointer to [**[]WorkloadAssignedResource**](WorkloadAssignedResource.md) |  | [optional] 
 **ChangeTypes** | Pointer to **[]string** |  | [optional] 
 **Conformance** | Pointer to **string** | The conformance status of the deployment. * &#x60;Ok&#x60; - The deployment conforms to the preferred version of the workload. * &#x60;NonConformant&#x60; - The deployment does not conform to the preferred version of the workload. | [optional] [readonly] [default to "Ok"]
@@ -107,6 +108,41 @@ SetAction sets Action field to given value.
 
 HasAction returns a boolean if a field has been set.
 
+### GetAlarmSummary
+
+`func (o *WorkloadWorkloadInstance) GetAlarmSummary() ComputeAlarmSummary`
+
+GetAlarmSummary returns the AlarmSummary field if non-nil, zero value otherwise.
+
+### GetAlarmSummaryOk
+
+`func (o *WorkloadWorkloadInstance) GetAlarmSummaryOk() (*ComputeAlarmSummary, bool)`
+
+GetAlarmSummaryOk returns a tuple with the AlarmSummary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlarmSummary
+
+`func (o *WorkloadWorkloadInstance) SetAlarmSummary(v ComputeAlarmSummary)`
+
+SetAlarmSummary sets AlarmSummary field to given value.
+
+### HasAlarmSummary
+
+`func (o *WorkloadWorkloadInstance) HasAlarmSummary() bool`
+
+HasAlarmSummary returns a boolean if a field has been set.
+
+### SetAlarmSummaryNil
+
+`func (o *WorkloadWorkloadInstance) SetAlarmSummaryNil(b bool)`
+
+ SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+
+### UnsetAlarmSummary
+`func (o *WorkloadWorkloadInstance) UnsetAlarmSummary()`
+
+UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
 ### GetAssignedResources
 
 `func (o *WorkloadWorkloadInstance) GetAssignedResources() []WorkloadAssignedResource`

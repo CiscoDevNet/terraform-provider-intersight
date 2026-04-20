@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -16,12 +16,13 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // checks if the AssetTarget type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetTarget{}
 
-// AssetTarget The Target object represents an entity managed by Intersight. It encompasses both physical and software entities, such as UCS servers or cloud accounts, and serves as the cornerstone for target management within Intersight's ecosystem. #### Purpose Target serves as the interface for managing entities within Intersight, offering a comprehensive view of the status and capabilities of each managed entity. It supports the establishment of connections, monitoring, and service enablement, facilitating effective management of diverse targets. #### Key Concepts - **Type and Status Management:** Defines the type of the managed entity and provides insights into its connection and operational status. - **Service Integration:** Supports the enablement of services for the target, facilitating comprehensive management and optimization. - **Connection and Authentication:** Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities.
+// AssetTarget The Target object represents an entity managed by Intersight. It encompasses both physical and software entities, such as UCS servers or cloud accounts, and serves as the cornerstone for target management within Intersight's ecosystem. #### Purpose Target serves as the interface for managing entities within Intersight, offering a comprehensive view of the status and capabilities of each managed entity. It supports the establishment of connections, monitoring, and service enablement, facilitating effective management of diverse targets. #### Key Concepts - **Type and Status Management:** Defines the type of the managed entity and provides insights into its connection and operational status. - **Service Integration:** Supports the enablement of services for the target, facilitating comprehensive management and optimization. - **Connection and Authentication:** Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities. - **Pre-provisioning Workflow**: Enables a \"claim-before-connect\" workflow, allowing system targets to be created and configured in anticipation of physical hardware deployment. It allows administrators to prepare the environment for new devices, ensuring that once a physical endpoint is connected, the transition to a fully managed state is secure and efficient. Pre provisioned Targets can complete their claim with by updating the associated asset.PreClaim object with the security token of the connected device.
 type AssetTarget struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -30,8 +31,10 @@ type AssetTarget struct {
 	ObjectType   string                    `json:"ObjectType"`
 	AlarmSummary NullableAssetAlarmSummary `json:"AlarmSummary,omitempty"`
 	// The name or email id of the user who claimed the target.
-	ClaimedByUserName *string           `json:"ClaimedByUserName,omitempty"`
-	Connections       []AssetConnection `json:"Connections,omitempty"`
+	ClaimedByUserName *string `json:"ClaimedByUserName,omitempty"`
+	// The date at which the target was claimed to this account. For pre-provisioned targets this is the time at which the claim was completed.
+	ClaimedTime *time.Time        `json:"ClaimedTime,omitempty"`
+	Connections []AssetConnection `json:"Connections,omitempty"`
 	// The Device Connector version for target types which are managed by via embedded Device Connector.
 	ConnectorVersion *string `json:"ConnectorVersion,omitempty"`
 	// ExternalIpAddress is applicable for targets which are managed via an Intersight Device Connector. The value is the IP Address of the target as seen from Intersight. It is either the IP Address of the managed target's interface which has a route to the internet or a NAT IP Address when the target is deployed in a private network.
@@ -45,7 +48,7 @@ type AssetTarget struct {
 	// For targets which are managed by an embedded Intersight Device Connector, this field indicates that an administrator of the target has disabled management operations of the Device Connector and only monitoring is permitted.
 	ReadOnly *bool          `json:"ReadOnly,omitempty"`
 	Services []AssetService `json:"Services,omitempty"`
-	// Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target. * `` - The target details have been persisted but Intersight has not yet attempted to connect to the target. * `Connected` - Intersight is able to establish a connection to the target and initiate management activities. * `NotConnected` - Intersight is unable to establish a connection to the target. * `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established. * `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported. * `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight. * `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.
+	// Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target. * `` - The target details have been persisted but Intersight has not yet attempted to connect to the target. * `Connected` - Intersight is able to establish a connection to the target and initiate management activities. * `NotConnected` - Intersight is unable to establish a connection to the target. * `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established. * `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported. * `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight. * `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect. * `PreClaimed` - Target has been pre-claimed and is pending claim completion. Pre-claimed targets are pre-provisioned before endpoint is available to connect to Intersight, once target connects the claim can be completed by providing the security token to the pre-claim API.
 	Status *string `json:"Status,omitempty"`
 	// StatusErrorReason provides additional context for the Status.
 	StatusErrorReason *string  `json:"StatusErrorReason,omitempty"`
@@ -230,6 +233,38 @@ func (o *AssetTarget) HasClaimedByUserName() bool {
 // SetClaimedByUserName gets a reference to the given string and assigns it to the ClaimedByUserName field.
 func (o *AssetTarget) SetClaimedByUserName(v string) {
 	o.ClaimedByUserName = &v
+}
+
+// GetClaimedTime returns the ClaimedTime field value if set, zero value otherwise.
+func (o *AssetTarget) GetClaimedTime() time.Time {
+	if o == nil || IsNil(o.ClaimedTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ClaimedTime
+}
+
+// GetClaimedTimeOk returns a tuple with the ClaimedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetTarget) GetClaimedTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ClaimedTime) {
+		return nil, false
+	}
+	return o.ClaimedTime, true
+}
+
+// HasClaimedTime returns a boolean if a field has been set.
+func (o *AssetTarget) HasClaimedTime() bool {
+	if o != nil && !IsNil(o.ClaimedTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetClaimedTime gets a reference to the given time.Time and assigns it to the ClaimedTime field.
+func (o *AssetTarget) SetClaimedTime(v time.Time) {
+	o.ClaimedTime = &v
 }
 
 // GetConnections returns the Connections field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1051,6 +1086,9 @@ func (o AssetTarget) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ClaimedByUserName) {
 		toSerialize["ClaimedByUserName"] = o.ClaimedByUserName
 	}
+	if !IsNil(o.ClaimedTime) {
+		toSerialize["ClaimedTime"] = o.ClaimedTime
+	}
 	if o.Connections != nil {
 		toSerialize["Connections"] = o.Connections
 	}
@@ -1174,8 +1212,10 @@ func (o *AssetTarget) UnmarshalJSON(data []byte) (err error) {
 		ObjectType   string                    `json:"ObjectType"`
 		AlarmSummary NullableAssetAlarmSummary `json:"AlarmSummary,omitempty"`
 		// The name or email id of the user who claimed the target.
-		ClaimedByUserName *string           `json:"ClaimedByUserName,omitempty"`
-		Connections       []AssetConnection `json:"Connections,omitempty"`
+		ClaimedByUserName *string `json:"ClaimedByUserName,omitempty"`
+		// The date at which the target was claimed to this account. For pre-provisioned targets this is the time at which the claim was completed.
+		ClaimedTime *time.Time        `json:"ClaimedTime,omitempty"`
+		Connections []AssetConnection `json:"Connections,omitempty"`
 		// The Device Connector version for target types which are managed by via embedded Device Connector.
 		ConnectorVersion *string `json:"ConnectorVersion,omitempty"`
 		// ExternalIpAddress is applicable for targets which are managed via an Intersight Device Connector. The value is the IP Address of the target as seen from Intersight. It is either the IP Address of the managed target's interface which has a route to the internet or a NAT IP Address when the target is deployed in a private network.
@@ -1189,7 +1229,7 @@ func (o *AssetTarget) UnmarshalJSON(data []byte) (err error) {
 		// For targets which are managed by an embedded Intersight Device Connector, this field indicates that an administrator of the target has disabled management operations of the Device Connector and only monitoring is permitted.
 		ReadOnly *bool          `json:"ReadOnly,omitempty"`
 		Services []AssetService `json:"Services,omitempty"`
-		// Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target. * `` - The target details have been persisted but Intersight has not yet attempted to connect to the target. * `Connected` - Intersight is able to establish a connection to the target and initiate management activities. * `NotConnected` - Intersight is unable to establish a connection to the target. * `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established. * `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported. * `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight. * `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.
+		// Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target. * `` - The target details have been persisted but Intersight has not yet attempted to connect to the target. * `Connected` - Intersight is able to establish a connection to the target and initiate management activities. * `NotConnected` - Intersight is unable to establish a connection to the target. * `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established. * `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported. * `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight. * `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect. * `PreClaimed` - Target has been pre-claimed and is pending claim completion. Pre-claimed targets are pre-provisioned before endpoint is available to connect to Intersight, once target connects the claim can be completed by providing the security token to the pre-claim API.
 		Status *string `json:"Status,omitempty"`
 		// StatusErrorReason provides additional context for the Status.
 		StatusErrorReason *string  `json:"StatusErrorReason,omitempty"`
@@ -1218,6 +1258,7 @@ func (o *AssetTarget) UnmarshalJSON(data []byte) (err error) {
 		varAssetTarget.ObjectType = varAssetTargetWithoutEmbeddedStruct.ObjectType
 		varAssetTarget.AlarmSummary = varAssetTargetWithoutEmbeddedStruct.AlarmSummary
 		varAssetTarget.ClaimedByUserName = varAssetTargetWithoutEmbeddedStruct.ClaimedByUserName
+		varAssetTarget.ClaimedTime = varAssetTargetWithoutEmbeddedStruct.ClaimedTime
 		varAssetTarget.Connections = varAssetTargetWithoutEmbeddedStruct.Connections
 		varAssetTarget.ConnectorVersion = varAssetTargetWithoutEmbeddedStruct.ConnectorVersion
 		varAssetTarget.ExternalIpAddress = varAssetTargetWithoutEmbeddedStruct.ExternalIpAddress
@@ -1261,6 +1302,7 @@ func (o *AssetTarget) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlarmSummary")
 		delete(additionalProperties, "ClaimedByUserName")
+		delete(additionalProperties, "ClaimedTime")
 		delete(additionalProperties, "Connections")
 		delete(additionalProperties, "ConnectorVersion")
 		delete(additionalProperties, "ExternalIpAddress")

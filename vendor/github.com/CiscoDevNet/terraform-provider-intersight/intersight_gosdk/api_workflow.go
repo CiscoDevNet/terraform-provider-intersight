@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -1936,188 +1936,6 @@ func (a *WorkflowApiService) CreateWorkflowServiceItemDefinitionExecute(r ApiCre
 	}
 	// body params
 	localVarPostBody = r.workflowServiceItemDefinition
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest struct {
-	ctx                                      context.Context
-	ApiService                               *WorkflowApiService
-	workflowServiceItemHealthCheckDefinition *WorkflowServiceItemHealthCheckDefinition
-	ifMatch                                  *string
-	ifNoneMatch                              *string
-}
-
-// The &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource to create.
-func (r ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest) WorkflowServiceItemHealthCheckDefinition(workflowServiceItemHealthCheckDefinition WorkflowServiceItemHealthCheckDefinition) ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest {
-	r.workflowServiceItemHealthCheckDefinition = &workflowServiceItemHealthCheckDefinition
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest) IfMatch(ifMatch string) ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest) IfNoneMatch(ifNoneMatch string) ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest) Execute() (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
-	return r.ApiService.CreateWorkflowServiceItemHealthCheckDefinitionExecute(r)
-}
-
-/*
-CreateWorkflowServiceItemHealthCheckDefinition Create a 'workflow.ServiceItemHealthCheckDefinition' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest
-*/
-func (a *WorkflowApiService) CreateWorkflowServiceItemHealthCheckDefinition(ctx context.Context) ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest {
-	return ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return WorkflowServiceItemHealthCheckDefinition
-func (a *WorkflowApiService) CreateWorkflowServiceItemHealthCheckDefinitionExecute(r ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest) (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *WorkflowServiceItemHealthCheckDefinition
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.CreateWorkflowServiceItemHealthCheckDefinition")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/workflow/ServiceItemHealthCheckDefinitions"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.workflowServiceItemHealthCheckDefinition == nil {
-		return localVarReturnValue, nil, reportError("workflowServiceItemHealthCheckDefinition is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.workflowServiceItemHealthCheckDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -5589,148 +5407,6 @@ func (a *WorkflowApiService) DeleteWorkflowServiceItemDefinitionExecute(r ApiDel
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest struct {
-	ctx        context.Context
-	ApiService *WorkflowApiService
-	moid       string
-}
-
-func (r ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteWorkflowServiceItemHealthCheckDefinitionExecute(r)
-}
-
-/*
-DeleteWorkflowServiceItemHealthCheckDefinition Delete a 'workflow.ServiceItemHealthCheckDefinition' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest
-*/
-func (a *WorkflowApiService) DeleteWorkflowServiceItemHealthCheckDefinition(ctx context.Context, moid string) ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest {
-	return ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *WorkflowApiService) DeleteWorkflowServiceItemHealthCheckDefinitionExecute(r ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.DeleteWorkflowServiceItemHealthCheckDefinition")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiDeleteWorkflowServiceItemInstanceRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
@@ -6871,6 +6547,27 @@ type ApiGetWorkflowAnsibleBatchExecutorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowAnsibleBatchExecutorByMoidRequest) Select_(select_ string) ApiGetWorkflowAnsibleBatchExecutorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowAnsibleBatchExecutorByMoidRequest) Expand(expand string) ApiGetWorkflowAnsibleBatchExecutorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowAnsibleBatchExecutorByMoidRequest) At(at string) ApiGetWorkflowAnsibleBatchExecutorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowAnsibleBatchExecutorByMoidRequest) Execute() (*WorkflowAnsibleBatchExecutor, *http.Response, error) {
@@ -6915,6 +6612,18 @@ func (a *WorkflowApiService) GetWorkflowAnsibleBatchExecutorByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7300,6 +7009,27 @@ type ApiGetWorkflowBatchApiExecutorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowBatchApiExecutorByMoidRequest) Select_(select_ string) ApiGetWorkflowBatchApiExecutorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowBatchApiExecutorByMoidRequest) Expand(expand string) ApiGetWorkflowBatchApiExecutorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowBatchApiExecutorByMoidRequest) At(at string) ApiGetWorkflowBatchApiExecutorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowBatchApiExecutorByMoidRequest) Execute() (*WorkflowBatchApiExecutor, *http.Response, error) {
@@ -7344,6 +7074,18 @@ func (a *WorkflowApiService) GetWorkflowBatchApiExecutorByMoidExecute(r ApiGetWo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7729,6 +7471,27 @@ type ApiGetWorkflowCatalogByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowCatalogByMoidRequest) Select_(select_ string) ApiGetWorkflowCatalogByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowCatalogByMoidRequest) Expand(expand string) ApiGetWorkflowCatalogByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowCatalogByMoidRequest) At(at string) ApiGetWorkflowCatalogByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowCatalogByMoidRequest) Execute() (*WorkflowCatalog, *http.Response, error) {
@@ -7773,6 +7536,18 @@ func (a *WorkflowApiService) GetWorkflowCatalogByMoidExecute(r ApiGetWorkflowCat
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7883,6 +7658,27 @@ type ApiGetWorkflowCatalogItemDefinitionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowCatalogItemDefinitionByMoidRequest) Select_(select_ string) ApiGetWorkflowCatalogItemDefinitionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowCatalogItemDefinitionByMoidRequest) Expand(expand string) ApiGetWorkflowCatalogItemDefinitionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowCatalogItemDefinitionByMoidRequest) At(at string) ApiGetWorkflowCatalogItemDefinitionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowCatalogItemDefinitionByMoidRequest) Execute() (*WorkflowCatalogItemDefinition, *http.Response, error) {
@@ -7927,6 +7723,18 @@ func (a *WorkflowApiService) GetWorkflowCatalogItemDefinitionByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8587,6 +8395,27 @@ type ApiGetWorkflowCatalogServiceRequestByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowCatalogServiceRequestByMoidRequest) Select_(select_ string) ApiGetWorkflowCatalogServiceRequestByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowCatalogServiceRequestByMoidRequest) Expand(expand string) ApiGetWorkflowCatalogServiceRequestByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowCatalogServiceRequestByMoidRequest) At(at string) ApiGetWorkflowCatalogServiceRequestByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowCatalogServiceRequestByMoidRequest) Execute() (*WorkflowCatalogServiceRequest, *http.Response, error) {
@@ -8631,6 +8460,18 @@ func (a *WorkflowApiService) GetWorkflowCatalogServiceRequestByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9016,6 +8857,27 @@ type ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) Select_(select_ string) ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) Expand(expand string) ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) At(at string) ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) Execute() (*WorkflowCustomDataTypeDefinition, *http.Response, error) {
@@ -9060,6 +8922,18 @@ func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9445,6 +9319,27 @@ type ApiGetWorkflowErrorResponseHandlerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowErrorResponseHandlerByMoidRequest) Select_(select_ string) ApiGetWorkflowErrorResponseHandlerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowErrorResponseHandlerByMoidRequest) Expand(expand string) ApiGetWorkflowErrorResponseHandlerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowErrorResponseHandlerByMoidRequest) At(at string) ApiGetWorkflowErrorResponseHandlerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowErrorResponseHandlerByMoidRequest) Execute() (*WorkflowErrorResponseHandler, *http.Response, error) {
@@ -9489,6 +9384,18 @@ func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9874,6 +9781,27 @@ type ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest) Select_(select_ string) ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest) Expand(expand string) ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest) At(at string) ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest) Execute() (*WorkflowPowerShellBatchApiExecutor, *http.Response, error) {
@@ -9918,6 +9846,18 @@ func (a *WorkflowApiService) GetWorkflowPowerShellBatchApiExecutorByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10303,6 +10243,27 @@ type ApiGetWorkflowRollbackWorkflowByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowRollbackWorkflowByMoidRequest) Select_(select_ string) ApiGetWorkflowRollbackWorkflowByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowRollbackWorkflowByMoidRequest) Expand(expand string) ApiGetWorkflowRollbackWorkflowByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowRollbackWorkflowByMoidRequest) At(at string) ApiGetWorkflowRollbackWorkflowByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowRollbackWorkflowByMoidRequest) Execute() (*WorkflowRollbackWorkflow, *http.Response, error) {
@@ -10347,6 +10308,18 @@ func (a *WorkflowApiService) GetWorkflowRollbackWorkflowByMoidExecute(r ApiGetWo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10732,6 +10705,27 @@ type ApiGetWorkflowServiceItemActionDefinitionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowServiceItemActionDefinitionByMoidRequest) Select_(select_ string) ApiGetWorkflowServiceItemActionDefinitionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowServiceItemActionDefinitionByMoidRequest) Expand(expand string) ApiGetWorkflowServiceItemActionDefinitionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowServiceItemActionDefinitionByMoidRequest) At(at string) ApiGetWorkflowServiceItemActionDefinitionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowServiceItemActionDefinitionByMoidRequest) Execute() (*WorkflowServiceItemActionDefinition, *http.Response, error) {
@@ -10776,6 +10770,18 @@ func (a *WorkflowApiService) GetWorkflowServiceItemActionDefinitionByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11161,6 +11167,27 @@ type ApiGetWorkflowServiceItemActionInstanceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowServiceItemActionInstanceByMoidRequest) Select_(select_ string) ApiGetWorkflowServiceItemActionInstanceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowServiceItemActionInstanceByMoidRequest) Expand(expand string) ApiGetWorkflowServiceItemActionInstanceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowServiceItemActionInstanceByMoidRequest) At(at string) ApiGetWorkflowServiceItemActionInstanceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowServiceItemActionInstanceByMoidRequest) Execute() (*WorkflowServiceItemActionInstance, *http.Response, error) {
@@ -11205,6 +11232,18 @@ func (a *WorkflowApiService) GetWorkflowServiceItemActionInstanceByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11590,6 +11629,27 @@ type ApiGetWorkflowServiceItemAttributeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowServiceItemAttributeByMoidRequest) Select_(select_ string) ApiGetWorkflowServiceItemAttributeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowServiceItemAttributeByMoidRequest) Expand(expand string) ApiGetWorkflowServiceItemAttributeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowServiceItemAttributeByMoidRequest) At(at string) ApiGetWorkflowServiceItemAttributeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowServiceItemAttributeByMoidRequest) Execute() (*WorkflowServiceItemAttribute, *http.Response, error) {
@@ -11634,6 +11694,18 @@ func (a *WorkflowApiService) GetWorkflowServiceItemAttributeByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12019,6 +12091,27 @@ type ApiGetWorkflowServiceItemDefinitionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowServiceItemDefinitionByMoidRequest) Select_(select_ string) ApiGetWorkflowServiceItemDefinitionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowServiceItemDefinitionByMoidRequest) Expand(expand string) ApiGetWorkflowServiceItemDefinitionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowServiceItemDefinitionByMoidRequest) At(at string) ApiGetWorkflowServiceItemDefinitionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowServiceItemDefinitionByMoidRequest) Execute() (*WorkflowServiceItemDefinition, *http.Response, error) {
@@ -12063,6 +12156,18 @@ func (a *WorkflowApiService) GetWorkflowServiceItemDefinitionByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12448,6 +12553,27 @@ type ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest) Select_(select_ string) ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest) Expand(expand string) ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest) At(at string) ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest) Execute() (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
@@ -12492,6 +12618,18 @@ func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckDefinitionByMoidEx
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12877,6 +13015,27 @@ type ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest) Select_(select_ string) ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest) Expand(expand string) ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest) At(at string) ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest) Execute() (*WorkflowServiceItemHealthCheckExecution, *http.Response, error) {
@@ -12921,6 +13080,18 @@ func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckExecutionByMoidExe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13306,6 +13477,27 @@ type ApiGetWorkflowServiceItemInstanceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowServiceItemInstanceByMoidRequest) Select_(select_ string) ApiGetWorkflowServiceItemInstanceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowServiceItemInstanceByMoidRequest) Expand(expand string) ApiGetWorkflowServiceItemInstanceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowServiceItemInstanceByMoidRequest) At(at string) ApiGetWorkflowServiceItemInstanceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowServiceItemInstanceByMoidRequest) Execute() (*WorkflowServiceItemInstance, *http.Response, error) {
@@ -13350,6 +13542,18 @@ func (a *WorkflowApiService) GetWorkflowServiceItemInstanceByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13735,6 +13939,27 @@ type ApiGetWorkflowServiceItemOutputByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowServiceItemOutputByMoidRequest) Select_(select_ string) ApiGetWorkflowServiceItemOutputByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowServiceItemOutputByMoidRequest) Expand(expand string) ApiGetWorkflowServiceItemOutputByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowServiceItemOutputByMoidRequest) At(at string) ApiGetWorkflowServiceItemOutputByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowServiceItemOutputByMoidRequest) Execute() (*WorkflowServiceItemOutput, *http.Response, error) {
@@ -13779,6 +14004,18 @@ func (a *WorkflowApiService) GetWorkflowServiceItemOutputByMoidExecute(r ApiGetW
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14164,6 +14401,27 @@ type ApiGetWorkflowSshBatchExecutorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowSshBatchExecutorByMoidRequest) Select_(select_ string) ApiGetWorkflowSshBatchExecutorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowSshBatchExecutorByMoidRequest) Expand(expand string) ApiGetWorkflowSshBatchExecutorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowSshBatchExecutorByMoidRequest) At(at string) ApiGetWorkflowSshBatchExecutorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowSshBatchExecutorByMoidRequest) Execute() (*WorkflowSshBatchExecutor, *http.Response, error) {
@@ -14208,6 +14466,18 @@ func (a *WorkflowApiService) GetWorkflowSshBatchExecutorByMoidExecute(r ApiGetWo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14593,6 +14863,27 @@ type ApiGetWorkflowTaskDebugLogByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowTaskDebugLogByMoidRequest) Select_(select_ string) ApiGetWorkflowTaskDebugLogByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowTaskDebugLogByMoidRequest) Expand(expand string) ApiGetWorkflowTaskDebugLogByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowTaskDebugLogByMoidRequest) At(at string) ApiGetWorkflowTaskDebugLogByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowTaskDebugLogByMoidRequest) Execute() (*WorkflowTaskDebugLog, *http.Response, error) {
@@ -14637,6 +14928,18 @@ func (a *WorkflowApiService) GetWorkflowTaskDebugLogByMoidExecute(r ApiGetWorkfl
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15022,6 +15325,27 @@ type ApiGetWorkflowTaskDefinitionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowTaskDefinitionByMoidRequest) Select_(select_ string) ApiGetWorkflowTaskDefinitionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowTaskDefinitionByMoidRequest) Expand(expand string) ApiGetWorkflowTaskDefinitionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowTaskDefinitionByMoidRequest) At(at string) ApiGetWorkflowTaskDefinitionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowTaskDefinitionByMoidRequest) Execute() (*WorkflowTaskDefinition, *http.Response, error) {
@@ -15066,6 +15390,18 @@ func (a *WorkflowApiService) GetWorkflowTaskDefinitionByMoidExecute(r ApiGetWork
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15451,6 +15787,27 @@ type ApiGetWorkflowTaskInfoByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowTaskInfoByMoidRequest) Select_(select_ string) ApiGetWorkflowTaskInfoByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowTaskInfoByMoidRequest) Expand(expand string) ApiGetWorkflowTaskInfoByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowTaskInfoByMoidRequest) At(at string) ApiGetWorkflowTaskInfoByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowTaskInfoByMoidRequest) Execute() (*WorkflowTaskInfo, *http.Response, error) {
@@ -15495,6 +15852,18 @@ func (a *WorkflowApiService) GetWorkflowTaskInfoByMoidExecute(r ApiGetWorkflowTa
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15880,6 +16249,27 @@ type ApiGetWorkflowTaskMetadataByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowTaskMetadataByMoidRequest) Select_(select_ string) ApiGetWorkflowTaskMetadataByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowTaskMetadataByMoidRequest) Expand(expand string) ApiGetWorkflowTaskMetadataByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowTaskMetadataByMoidRequest) At(at string) ApiGetWorkflowTaskMetadataByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowTaskMetadataByMoidRequest) Execute() (*WorkflowTaskMetadata, *http.Response, error) {
@@ -15924,6 +16314,18 @@ func (a *WorkflowApiService) GetWorkflowTaskMetadataByMoidExecute(r ApiGetWorkfl
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16309,6 +16711,27 @@ type ApiGetWorkflowTemplateFunctionMetaByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowTemplateFunctionMetaByMoidRequest) Select_(select_ string) ApiGetWorkflowTemplateFunctionMetaByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowTemplateFunctionMetaByMoidRequest) Expand(expand string) ApiGetWorkflowTemplateFunctionMetaByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowTemplateFunctionMetaByMoidRequest) At(at string) ApiGetWorkflowTemplateFunctionMetaByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowTemplateFunctionMetaByMoidRequest) Execute() (*WorkflowTemplateFunctionMeta, *http.Response, error) {
@@ -16353,6 +16776,18 @@ func (a *WorkflowApiService) GetWorkflowTemplateFunctionMetaByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16738,6 +17173,27 @@ type ApiGetWorkflowUiDisplayMetadataByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowUiDisplayMetadataByMoidRequest) Select_(select_ string) ApiGetWorkflowUiDisplayMetadataByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowUiDisplayMetadataByMoidRequest) Expand(expand string) ApiGetWorkflowUiDisplayMetadataByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowUiDisplayMetadataByMoidRequest) At(at string) ApiGetWorkflowUiDisplayMetadataByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowUiDisplayMetadataByMoidRequest) Execute() (*WorkflowUiDisplayMetadata, *http.Response, error) {
@@ -16782,6 +17238,18 @@ func (a *WorkflowApiService) GetWorkflowUiDisplayMetadataByMoidExecute(r ApiGetW
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17167,6 +17635,27 @@ type ApiGetWorkflowVariableByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowVariableByMoidRequest) Select_(select_ string) ApiGetWorkflowVariableByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowVariableByMoidRequest) Expand(expand string) ApiGetWorkflowVariableByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowVariableByMoidRequest) At(at string) ApiGetWorkflowVariableByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowVariableByMoidRequest) Execute() (*WorkflowVariable, *http.Response, error) {
@@ -17211,6 +17700,18 @@ func (a *WorkflowApiService) GetWorkflowVariableByMoidExecute(r ApiGetWorkflowVa
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17596,6 +18097,27 @@ type ApiGetWorkflowWorkflowDefinitionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowWorkflowDefinitionByMoidRequest) Select_(select_ string) ApiGetWorkflowWorkflowDefinitionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowWorkflowDefinitionByMoidRequest) Expand(expand string) ApiGetWorkflowWorkflowDefinitionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowWorkflowDefinitionByMoidRequest) At(at string) ApiGetWorkflowWorkflowDefinitionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowWorkflowDefinitionByMoidRequest) Execute() (*WorkflowWorkflowDefinition, *http.Response, error) {
@@ -17640,6 +18162,18 @@ func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18025,6 +18559,27 @@ type ApiGetWorkflowWorkflowInfoByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowWorkflowInfoByMoidRequest) Select_(select_ string) ApiGetWorkflowWorkflowInfoByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowWorkflowInfoByMoidRequest) Expand(expand string) ApiGetWorkflowWorkflowInfoByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowWorkflowInfoByMoidRequest) At(at string) ApiGetWorkflowWorkflowInfoByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowWorkflowInfoByMoidRequest) Execute() (*WorkflowWorkflowInfo, *http.Response, error) {
@@ -18069,6 +18624,18 @@ func (a *WorkflowApiService) GetWorkflowWorkflowInfoByMoidExecute(r ApiGetWorkfl
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18454,6 +19021,27 @@ type ApiGetWorkflowWorkflowMetadataByMoidRequest struct {
 	ctx        context.Context
 	ApiService *WorkflowApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetWorkflowWorkflowMetadataByMoidRequest) Select_(select_ string) ApiGetWorkflowWorkflowMetadataByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetWorkflowWorkflowMetadataByMoidRequest) Expand(expand string) ApiGetWorkflowWorkflowMetadataByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetWorkflowWorkflowMetadataByMoidRequest) At(at string) ApiGetWorkflowWorkflowMetadataByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetWorkflowWorkflowMetadataByMoidRequest) Execute() (*WorkflowWorkflowMetadata, *http.Response, error) {
@@ -18498,6 +19086,18 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetadataByMoidExecute(r ApiGetWo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -20726,182 +21326,6 @@ func (a *WorkflowApiService) PatchWorkflowServiceItemDefinitionExecute(r ApiPatc
 	}
 	// body params
 	localVarPostBody = r.workflowServiceItemDefinition
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest struct {
-	ctx                                      context.Context
-	ApiService                               *WorkflowApiService
-	moid                                     string
-	workflowServiceItemHealthCheckDefinition *WorkflowServiceItemHealthCheckDefinition
-	ifMatch                                  *string
-}
-
-// The &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource to update.
-func (r ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest) WorkflowServiceItemHealthCheckDefinition(workflowServiceItemHealthCheckDefinition WorkflowServiceItemHealthCheckDefinition) ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest {
-	r.workflowServiceItemHealthCheckDefinition = &workflowServiceItemHealthCheckDefinition
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest) IfMatch(ifMatch string) ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest) Execute() (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
-	return r.ApiService.PatchWorkflowServiceItemHealthCheckDefinitionExecute(r)
-}
-
-/*
-PatchWorkflowServiceItemHealthCheckDefinition Update a 'workflow.ServiceItemHealthCheckDefinition' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest
-*/
-func (a *WorkflowApiService) PatchWorkflowServiceItemHealthCheckDefinition(ctx context.Context, moid string) ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest {
-	return ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return WorkflowServiceItemHealthCheckDefinition
-func (a *WorkflowApiService) PatchWorkflowServiceItemHealthCheckDefinitionExecute(r ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest) (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *WorkflowServiceItemHealthCheckDefinition
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.PatchWorkflowServiceItemHealthCheckDefinition")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.workflowServiceItemHealthCheckDefinition == nil {
-		return localVarReturnValue, nil, reportError("workflowServiceItemHealthCheckDefinition is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.workflowServiceItemHealthCheckDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -24422,182 +24846,6 @@ func (a *WorkflowApiService) UpdateWorkflowServiceItemDefinitionExecute(r ApiUpd
 	}
 	// body params
 	localVarPostBody = r.workflowServiceItemDefinition
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest struct {
-	ctx                                      context.Context
-	ApiService                               *WorkflowApiService
-	moid                                     string
-	workflowServiceItemHealthCheckDefinition *WorkflowServiceItemHealthCheckDefinition
-	ifMatch                                  *string
-}
-
-// The &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource to update.
-func (r ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest) WorkflowServiceItemHealthCheckDefinition(workflowServiceItemHealthCheckDefinition WorkflowServiceItemHealthCheckDefinition) ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest {
-	r.workflowServiceItemHealthCheckDefinition = &workflowServiceItemHealthCheckDefinition
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest) IfMatch(ifMatch string) ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest) Execute() (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
-	return r.ApiService.UpdateWorkflowServiceItemHealthCheckDefinitionExecute(r)
-}
-
-/*
-UpdateWorkflowServiceItemHealthCheckDefinition Update a 'workflow.ServiceItemHealthCheckDefinition' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest
-*/
-func (a *WorkflowApiService) UpdateWorkflowServiceItemHealthCheckDefinition(ctx context.Context, moid string) ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest {
-	return ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return WorkflowServiceItemHealthCheckDefinition
-func (a *WorkflowApiService) UpdateWorkflowServiceItemHealthCheckDefinitionExecute(r ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest) (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *WorkflowServiceItemHealthCheckDefinition
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.UpdateWorkflowServiceItemHealthCheckDefinition")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.workflowServiceItemHealthCheckDefinition == nil {
-		return localVarReturnValue, nil, reportError("workflowServiceItemHealthCheckDefinition is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.workflowServiceItemHealthCheckDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

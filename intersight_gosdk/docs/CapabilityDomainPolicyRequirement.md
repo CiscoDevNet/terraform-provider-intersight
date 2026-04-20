@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **MinVersion** | Pointer to **string** | Minimum Version from which policy is supported. | [optional] [readonly] 
 **Model** | Pointer to **string** | Type of the platform for which version compatibility is specified. Example - 3GFI, 4GFI, etc. | [optional] [readonly] 
 **PolicyName** | Pointer to **string** | Policy Name for which version compatibility is specified. Example - snmp.Policy, ldap.Policy. | [optional] [readonly] 
+**PortPolicyConstraints** | Pointer to [**NullableCapabilityPortPropertyConstraints**](CapabilityPortPropertyConstraints.md) |  | [optional] 
 
 ## Methods
 
@@ -242,6 +243,41 @@ SetPolicyName sets PolicyName field to given value.
 
 HasPolicyName returns a boolean if a field has been set.
 
+### GetPortPolicyConstraints
+
+`func (o *CapabilityDomainPolicyRequirement) GetPortPolicyConstraints() CapabilityPortPropertyConstraints`
+
+GetPortPolicyConstraints returns the PortPolicyConstraints field if non-nil, zero value otherwise.
+
+### GetPortPolicyConstraintsOk
+
+`func (o *CapabilityDomainPolicyRequirement) GetPortPolicyConstraintsOk() (*CapabilityPortPropertyConstraints, bool)`
+
+GetPortPolicyConstraintsOk returns a tuple with the PortPolicyConstraints field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortPolicyConstraints
+
+`func (o *CapabilityDomainPolicyRequirement) SetPortPolicyConstraints(v CapabilityPortPropertyConstraints)`
+
+SetPortPolicyConstraints sets PortPolicyConstraints field to given value.
+
+### HasPortPolicyConstraints
+
+`func (o *CapabilityDomainPolicyRequirement) HasPortPolicyConstraints() bool`
+
+HasPortPolicyConstraints returns a boolean if a field has been set.
+
+### SetPortPolicyConstraintsNil
+
+`func (o *CapabilityDomainPolicyRequirement) SetPortPolicyConstraintsNil(b bool)`
+
+ SetPortPolicyConstraintsNil sets the value for PortPolicyConstraints to be an explicit nil
+
+### UnsetPortPolicyConstraints
+`func (o *CapabilityDomainPolicyRequirement) UnsetPortPolicyConstraints()`
+
+UnsetPortPolicyConstraints ensures that no value is present for PortPolicyConstraints, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -31,10 +31,12 @@ Method | HTTP request | Description
 [**PatchWorkloadWorkloadDefinition**](WorkloadApi.md#PatchWorkloadWorkloadDefinition) | **Patch** /api/v1/workload/WorkloadDefinitions/{Moid} | Update a &#39;workload.WorkloadDefinition&#39; resource.
 [**PatchWorkloadWorkloadDeployment**](WorkloadApi.md#PatchWorkloadWorkloadDeployment) | **Patch** /api/v1/workload/WorkloadDeployments/{Moid} | Update a &#39;workload.WorkloadDeployment&#39; resource.
 [**PatchWorkloadWorkloadInstance**](WorkloadApi.md#PatchWorkloadWorkloadInstance) | **Patch** /api/v1/workload/WorkloadInstances/{Moid} | Update a &#39;workload.WorkloadInstance&#39; resource.
+[**PatchWorkloadWorkloadMetadata**](WorkloadApi.md#PatchWorkloadWorkloadMetadata) | **Patch** /api/v1/workload/WorkloadMetadata/{Moid} | Update a &#39;workload.WorkloadMetadata&#39; resource.
 [**UpdateWorkloadBlueprint**](WorkloadApi.md#UpdateWorkloadBlueprint) | **Post** /api/v1/workload/Blueprints/{Moid} | Update a &#39;workload.Blueprint&#39; resource.
 [**UpdateWorkloadWorkloadDefinition**](WorkloadApi.md#UpdateWorkloadWorkloadDefinition) | **Post** /api/v1/workload/WorkloadDefinitions/{Moid} | Update a &#39;workload.WorkloadDefinition&#39; resource.
 [**UpdateWorkloadWorkloadDeployment**](WorkloadApi.md#UpdateWorkloadWorkloadDeployment) | **Post** /api/v1/workload/WorkloadDeployments/{Moid} | Update a &#39;workload.WorkloadDeployment&#39; resource.
 [**UpdateWorkloadWorkloadInstance**](WorkloadApi.md#UpdateWorkloadWorkloadInstance) | **Post** /api/v1/workload/WorkloadInstances/{Moid} | Update a &#39;workload.WorkloadInstance&#39; resource.
+[**UpdateWorkloadWorkloadMetadata**](WorkloadApi.md#UpdateWorkloadWorkloadMetadata) | **Post** /api/v1/workload/WorkloadMetadata/{Moid} | Update a &#39;workload.WorkloadMetadata&#39; resource.
 
 
 
@@ -642,7 +644,7 @@ Name | Type | Description  | Notes
 
 ## GetWorkloadBlueprintByMoid
 
-> WorkloadBlueprint GetWorkloadBlueprintByMoid(ctx, moid).Execute()
+> WorkloadBlueprint GetWorkloadBlueprintByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'workload.Blueprint' resource.
 
@@ -660,10 +662,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WorkloadApi.GetWorkloadBlueprintByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.WorkloadApi.GetWorkloadBlueprintByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WorkloadApi.GetWorkloadBlueprintByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -689,6 +694,9 @@ Other parameters are passed through a pointer to a apiGetWorkloadBlueprintByMoid
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -794,7 +802,7 @@ Name | Type | Description  | Notes
 
 ## GetWorkloadClearWorkloadTagByMoid
 
-> WorkloadClearWorkloadTag GetWorkloadClearWorkloadTagByMoid(ctx, moid).Execute()
+> WorkloadClearWorkloadTag GetWorkloadClearWorkloadTagByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'workload.ClearWorkloadTag' resource.
 
@@ -812,10 +820,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WorkloadApi.GetWorkloadClearWorkloadTagByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.WorkloadApi.GetWorkloadClearWorkloadTagByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WorkloadApi.GetWorkloadClearWorkloadTagByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -841,6 +852,9 @@ Other parameters are passed through a pointer to a apiGetWorkloadClearWorkloadTa
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -946,7 +960,7 @@ Name | Type | Description  | Notes
 
 ## GetWorkloadDeploymentInputByMoid
 
-> WorkloadDeploymentInput GetWorkloadDeploymentInputByMoid(ctx, moid).Execute()
+> WorkloadDeploymentInput GetWorkloadDeploymentInputByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'workload.DeploymentInput' resource.
 
@@ -964,10 +978,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WorkloadApi.GetWorkloadDeploymentInputByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.WorkloadApi.GetWorkloadDeploymentInputByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WorkloadApi.GetWorkloadDeploymentInputByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -993,6 +1010,9 @@ Other parameters are passed through a pointer to a apiGetWorkloadDeploymentInput
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1098,7 +1118,7 @@ Name | Type | Description  | Notes
 
 ## GetWorkloadWorkloadDefinitionByMoid
 
-> WorkloadWorkloadDefinition GetWorkloadWorkloadDefinitionByMoid(ctx, moid).Execute()
+> WorkloadWorkloadDefinition GetWorkloadWorkloadDefinitionByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'workload.WorkloadDefinition' resource.
 
@@ -1116,10 +1136,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WorkloadApi.GetWorkloadWorkloadDefinitionByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.WorkloadApi.GetWorkloadWorkloadDefinitionByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WorkloadApi.GetWorkloadWorkloadDefinitionByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1145,6 +1168,9 @@ Other parameters are passed through a pointer to a apiGetWorkloadWorkloadDefinit
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1250,7 +1276,7 @@ Name | Type | Description  | Notes
 
 ## GetWorkloadWorkloadDeploymentByMoid
 
-> WorkloadWorkloadDeployment GetWorkloadWorkloadDeploymentByMoid(ctx, moid).Execute()
+> WorkloadWorkloadDeployment GetWorkloadWorkloadDeploymentByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'workload.WorkloadDeployment' resource.
 
@@ -1268,10 +1294,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WorkloadApi.GetWorkloadWorkloadDeploymentByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.WorkloadApi.GetWorkloadWorkloadDeploymentByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WorkloadApi.GetWorkloadWorkloadDeploymentByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1297,6 +1326,9 @@ Other parameters are passed through a pointer to a apiGetWorkloadWorkloadDeploym
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1402,7 +1434,7 @@ Name | Type | Description  | Notes
 
 ## GetWorkloadWorkloadInstanceByMoid
 
-> WorkloadWorkloadInstance GetWorkloadWorkloadInstanceByMoid(ctx, moid).Execute()
+> WorkloadWorkloadInstance GetWorkloadWorkloadInstanceByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'workload.WorkloadInstance' resource.
 
@@ -1420,10 +1452,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WorkloadApi.GetWorkloadWorkloadInstanceByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.WorkloadApi.GetWorkloadWorkloadInstanceByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WorkloadApi.GetWorkloadWorkloadInstanceByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1449,6 +1484,9 @@ Other parameters are passed through a pointer to a apiGetWorkloadWorkloadInstanc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1554,7 +1592,7 @@ Name | Type | Description  | Notes
 
 ## GetWorkloadWorkloadMetadataByMoid
 
-> WorkloadWorkloadMetadata GetWorkloadWorkloadMetadataByMoid(ctx, moid).Execute()
+> WorkloadWorkloadMetadata GetWorkloadWorkloadMetadataByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'workload.WorkloadMetadata' resource.
 
@@ -1572,10 +1610,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WorkloadApi.GetWorkloadWorkloadMetadataByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.WorkloadApi.GetWorkloadWorkloadMetadataByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WorkloadApi.GetWorkloadWorkloadMetadataByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1601,6 +1642,9 @@ Other parameters are passed through a pointer to a apiGetWorkloadWorkloadMetadat
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1992,6 +2036,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchWorkloadWorkloadMetadata
+
+> WorkloadWorkloadMetadata PatchWorkloadWorkloadMetadata(ctx, moid).WorkloadWorkloadMetadata(workloadWorkloadMetadata).IfMatch(ifMatch).Execute()
+
+Update a 'workload.WorkloadMetadata' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	workloadWorkloadMetadata := *openapiclient.NewWorkloadWorkloadMetadata("ClassId_example", "ObjectType_example") // WorkloadWorkloadMetadata | The 'workload.WorkloadMetadata' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WorkloadApi.PatchWorkloadWorkloadMetadata(context.Background(), moid).WorkloadWorkloadMetadata(workloadWorkloadMetadata).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WorkloadApi.PatchWorkloadWorkloadMetadata``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchWorkloadWorkloadMetadata`: WorkloadWorkloadMetadata
+	fmt.Fprintf(os.Stdout, "Response from `WorkloadApi.PatchWorkloadWorkloadMetadata`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchWorkloadWorkloadMetadataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workloadWorkloadMetadata** | [**WorkloadWorkloadMetadata**](WorkloadWorkloadMetadata.md) | The &#39;workload.WorkloadMetadata&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkloadWorkloadMetadata**](WorkloadWorkloadMetadata.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateWorkloadBlueprint
 
 > WorkloadBlueprint UpdateWorkloadBlueprint(ctx, moid).WorkloadBlueprint(workloadBlueprint).IfMatch(ifMatch).Execute()
@@ -2265,6 +2381,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkloadWorkloadInstance**](WorkloadWorkloadInstance.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateWorkloadWorkloadMetadata
+
+> WorkloadWorkloadMetadata UpdateWorkloadWorkloadMetadata(ctx, moid).WorkloadWorkloadMetadata(workloadWorkloadMetadata).IfMatch(ifMatch).Execute()
+
+Update a 'workload.WorkloadMetadata' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	workloadWorkloadMetadata := *openapiclient.NewWorkloadWorkloadMetadata("ClassId_example", "ObjectType_example") // WorkloadWorkloadMetadata | The 'workload.WorkloadMetadata' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WorkloadApi.UpdateWorkloadWorkloadMetadata(context.Background(), moid).WorkloadWorkloadMetadata(workloadWorkloadMetadata).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WorkloadApi.UpdateWorkloadWorkloadMetadata``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateWorkloadWorkloadMetadata`: WorkloadWorkloadMetadata
+	fmt.Fprintf(os.Stdout, "Response from `WorkloadApi.UpdateWorkloadWorkloadMetadata`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateWorkloadWorkloadMetadataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workloadWorkloadMetadata** | [**WorkloadWorkloadMetadata**](WorkloadWorkloadMetadata.md) | The &#39;workload.WorkloadMetadata&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkloadWorkloadMetadata**](WorkloadWorkloadMetadata.md)
 
 ### Authorization
 

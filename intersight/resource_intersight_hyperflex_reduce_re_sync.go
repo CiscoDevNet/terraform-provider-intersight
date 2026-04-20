@@ -935,20 +935,7 @@ func resourceHyperflexReduceReSyncUpdate(c context.Context, d *schema.ResourceDa
 func resourceHyperflexReduceReSyncDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var de diag.Diagnostics
-	conn := meta.(*Config)
-	p := conn.ApiClient.HyperflexApi.DeleteHyperflexReduceReSync(conn.ctx, d.Id())
-	_, deleteErr := p.Execute()
-	if deleteErr != nil {
-		errorType := fmt.Sprintf("%T", deleteErr)
-		if strings.Contains(deleteErr.Error(), "404") {
-			de = append(de, diag.Diagnostic{Summary: "HyperflexReduceReSyncDelete: HyperflexReduceReSync object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
-			return de
-		}
-		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(*models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while deleting HyperflexReduceReSync object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
-		}
-		return diag.Errorf("error occurred while deleting HyperflexReduceReSync object: %s", deleteErr.Error())
-	}
+	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "HyperflexReduceReSync does not allow delete functionality"}
+	de = append(de, warning)
 	return de
 }

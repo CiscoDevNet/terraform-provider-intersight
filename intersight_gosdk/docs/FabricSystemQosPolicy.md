@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SystemQosPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SystemQosPolicy"]
 **Classes** | Pointer to [**[]FabricQosClass**](FabricQosClass.md) |  | [optional] 
+**PfcWatchdog** | Pointer to [**NullableFabricPfcWatchDog**](FabricPfcWatchDog.md) |  | [optional] 
 **TargetPlatform** | Pointer to **string** | The target platform type of the system QoS policy. * &#x60;UCS Domain&#x60; - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * &#x60;Unified Edge&#x60; - Profile/policy type for network, management and chassis configuration on Unified Edge. | [optional] [default to "UCS Domain"]
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]FabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) | An array of relationships to fabricBaseSwitchProfile resources. | [optional] 
@@ -105,6 +106,41 @@ HasClasses returns a boolean if a field has been set.
 `func (o *FabricSystemQosPolicy) UnsetClasses()`
 
 UnsetClasses ensures that no value is present for Classes, not even an explicit nil
+### GetPfcWatchdog
+
+`func (o *FabricSystemQosPolicy) GetPfcWatchdog() FabricPfcWatchDog`
+
+GetPfcWatchdog returns the PfcWatchdog field if non-nil, zero value otherwise.
+
+### GetPfcWatchdogOk
+
+`func (o *FabricSystemQosPolicy) GetPfcWatchdogOk() (*FabricPfcWatchDog, bool)`
+
+GetPfcWatchdogOk returns a tuple with the PfcWatchdog field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPfcWatchdog
+
+`func (o *FabricSystemQosPolicy) SetPfcWatchdog(v FabricPfcWatchDog)`
+
+SetPfcWatchdog sets PfcWatchdog field to given value.
+
+### HasPfcWatchdog
+
+`func (o *FabricSystemQosPolicy) HasPfcWatchdog() bool`
+
+HasPfcWatchdog returns a boolean if a field has been set.
+
+### SetPfcWatchdogNil
+
+`func (o *FabricSystemQosPolicy) SetPfcWatchdogNil(b bool)`
+
+ SetPfcWatchdogNil sets the value for PfcWatchdog to be an explicit nil
+
+### UnsetPfcWatchdog
+`func (o *FabricSystemQosPolicy) UnsetPfcWatchdog()`
+
+UnsetPfcWatchdog ensures that no value is present for PfcWatchdog, not even an explicit nil
 ### GetTargetPlatform
 
 `func (o *FabricSystemQosPolicy) GetTargetPlatform() string`

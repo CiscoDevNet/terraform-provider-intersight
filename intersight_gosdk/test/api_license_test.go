@@ -527,20 +527,6 @@ func Test_intersight_LicenseApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test LicenseApiService PatchLicenseErpLicenseCount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.LicenseApi.PatchLicenseErpLicenseCount(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test LicenseApiService PatchLicenseIksCustomerOp", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -716,20 +702,6 @@ func Test_intersight_LicenseApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.LicenseApi.UpdateLicenseErpCustomerOp(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test LicenseApiService UpdateLicenseErpLicenseCount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.LicenseApi.UpdateLicenseErpLicenseCount(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

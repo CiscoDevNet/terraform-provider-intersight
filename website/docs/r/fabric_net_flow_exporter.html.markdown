@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_net_flow_exporter"
 description: |-
-        Netflow Exporter configuration, it exports netflow information in the form of flow record to netflow collector.
+        The NetFlowExporter object manages the transmission of captured flow data to external analysis systems. It formalizes the connection parameters and protocol behaviors required to export telemetry from the network fabric to a NetFlow collector.
+        ### Purpose
+        The NetFlowExporter defines the where and how of data delivery. It encapsulates the destination details, source interface requirements, and the timing intervals for metadata synchronization, ensuring that the collector receives flow information in a reliable and interpretable format.
+        ### Key Concepts
+        *   **Collector Connectivity:** Specifies the destination IP and UDP port for the NetFlow collector, which processes and stores the exported records.
+        *   **Transmission Control:** Manages Quality of Service (QoS) through DSCP markings and defines the source interface to ensure export packets are correctly routed.
+        *   **Template Management:** Controls the frequency at which data templates and metadata (such as interface tables and exporter statistics) are sent to the collector to maintain data integrity.
+        *   **Standardized Export:** Utilizes industry-standard versions (such as Version 9) to ensure compatibility with a wide range of third-party monitoring tools.
 
 ---
 
 # Resource: intersight_fabric_net_flow_exporter
-Netflow Exporter configuration, it exports netflow information in the form of flow record to netflow collector.
+The NetFlowExporter object manages the transmission of captured flow data to external analysis systems. It formalizes the connection parameters and protocol behaviors required to export telemetry from the network fabric to a NetFlow collector.
+### Purpose
+The NetFlowExporter defines the "where" and "how" of data delivery. It encapsulates the destination details, source interface requirements, and the timing intervals for metadata synchronization, ensuring that the collector receives flow information in a reliable and interpretable format.
+### Key Concepts
+*   **Collector Connectivity:** Specifies the destination IP and UDP port for the NetFlow collector, which processes and stores the exported records.
+*   **Transmission Control:** Manages Quality of Service (QoS) through DSCP markings and defines the source interface to ensure export packets are correctly routed.
+*   **Template Management:** Controls the frequency at which data templates and metadata (such as interface tables and exporter statistics) are sent to the collector to maintain data integrity.
+*   **Standardized Export:** Utilizes industry-standard versions (such as Version 9) to ensure compatibility with a wide range of third-party monitoring tools.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

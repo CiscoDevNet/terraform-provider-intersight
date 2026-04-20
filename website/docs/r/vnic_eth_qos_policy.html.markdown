@@ -59,7 +59,7 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `mtu`:(int) The Maximum Transmission Unit (MTU) or packet size that the virtual interface accepts. 
+* `mtu`:(int) The Maximum Transmission Unit (MTU) or packet size that the virtual interface accepts.Only 5th Gen Adapters and above with firmware version 5.4.2.15 and later support MTU size greater than 9000. 
 * `name`:(string) Name of the concrete policy. 
 * `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:

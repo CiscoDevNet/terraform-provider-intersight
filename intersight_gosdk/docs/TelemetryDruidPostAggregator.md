@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** | The post-aggregator type. | 
 **Fields** | Pointer to [**[]TelemetryDruidPostAggregator**](TelemetryDruidPostAggregator.md) | Fields processed by post aggregator | [optional] 
 **Name** | Pointer to **string** | Output name for the post-aggregator. | [optional] 
-**Fn** | Pointer to **string** |  | [optional] 
+**Fn** | Pointer to **string** | A post-aggregation arithmetic function. | [optional] 
 **Ordering** | Pointer to **string** | Expression post-aggregators may specify an ordering, which defines the order of resulting values when sorting results. If no ordering (or null) is specified, the default floating point ordering is used. numericFirst ordering always returns finite values first, followed by NaN, and infinite values last. | [optional] 
 **Expression** | Pointer to **string** | The Druid expression. | [optional] 
 **FieldName** | Pointer to **string** | The name field value of the hyperUnique aggregator. | [optional] 

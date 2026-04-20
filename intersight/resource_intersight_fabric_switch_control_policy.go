@@ -201,6 +201,41 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 					},
 				},
 			},
+			"mac_learning_settings": {
+				Description: "Settings to control mac learning options.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "fabric.MacLearningSettings",
+						},
+						"disabled_vlans": {
+							Description:  "List of VLANs for which MAC learning is disabled. Applicable only when Fabric Interconnect is in Ethernet Switching Mode.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+							Optional:     true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "fabric.MacLearningSettings",
+						},
+					},
+				},
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -856,6 +891,43 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("mac_learning_settings"); ok {
+		p := make([]models.FabricMacLearningSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewFabricMacLearningSettingsWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.MacLearningSettings")
+			if v, ok := l["disabled_vlans"]; ok {
+				{
+					x := (v.(string))
+					o.SetDisabledVlans(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMacLearningSettings(x)
+		}
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -1187,6 +1259,10 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property MacAgingSettings in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("mac_learning_settings", flattenMapFabricMacLearningSettings(s.GetMacLearningSettings(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property MacLearningSettings in FabricSwitchControlPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in FabricSwitchControlPolicy object: %s", err.Error())
 	}
@@ -1351,6 +1427,44 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 		if len(p) > 0 {
 			x := p[0]
 			o.SetMacAgingSettings(x)
+		}
+	}
+
+	if d.HasChange("mac_learning_settings") {
+		v := d.Get("mac_learning_settings")
+		p := make([]models.FabricMacLearningSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FabricMacLearningSettings{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.MacLearningSettings")
+			if v, ok := l["disabled_vlans"]; ok {
+				{
+					x := (v.(string))
+					o.SetDisabledVlans(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMacLearningSettings(x)
 		}
 	}
 

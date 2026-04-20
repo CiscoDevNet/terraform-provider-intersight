@@ -3,12 +3,22 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_template_evaluation"
 description: |-
-        Executes a given template and returns the result.
+        The TemplateEvaluation object focuses on the execution and evaluation of templates within the workflow system. This provides mechanisms to dynamically generate and execute templates based on predefined stages and input data.
+        #### Purpose
+        TemplateEvaluation is designed to execute templates and generate results based on defined transformation stages and input values. It enables dynamic execution, allowing templates to run with varying input parameters, thereby enhancing flexibility and adaptability in workflow design.
+        #### Key Concepts
+        - **Transformation Stages:** Utilizes a series of transformation stages to construct and execute templates, supporting complex workflow logic.
+        - **Data Integration:** Integrates with various workflow data types, providing a robust framework for data manipulation and template execution.
 
 ---
 
 # Resource: intersight_workflow_template_evaluation
-Executes a given template and returns the result.
+The TemplateEvaluation object focuses on the execution and evaluation of templates within the workflow system. This provides mechanisms to dynamically generate and execute templates based on predefined stages and input data.  
+#### Purpose  
+TemplateEvaluation is designed to execute templates and generate results based on defined transformation stages and input values. It enables dynamic execution, allowing templates to run with varying input parameters, thereby enhancing flexibility and adaptability in workflow design.
+#### Key Concepts  
+- **Transformation Stages:** Utilizes a series of transformation stages to construct and execute templates, supporting complex workflow logic. 
+- **Data Integration:** Integrates with various workflow data types, providing a robust framework for data manipulation and template execution.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

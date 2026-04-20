@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**QueryType** | **string** |  | 
+**QueryType** | **string** | The type of druid query. | 
 **DataSource** | [**TelemetryDruidDataSource**](TelemetryDruidDataSource.md) |  | 
 **Bound** | Pointer to **string** | Optional, set to maxTime or minTime to return only the latest or earliest timestamp. Default to returning both if not set. | [optional] 
 **Filter** | Pointer to [**TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | [optional] 

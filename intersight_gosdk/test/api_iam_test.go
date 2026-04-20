@@ -35,18 +35,6 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test IamApiService CreateIamAccountExperience", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.IamApi.CreateIamAccountExperience(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test IamApiService CreateIamApiKey", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2229,20 +2217,6 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test IamApiService PatchIamAccountExperience", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.IamApi.PatchIamAccountExperience(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test IamApiService PatchIamApiKey", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2726,20 +2700,6 @@ func Test_intersight_IamApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.IamApi.UpdateIamAccount(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test IamApiService UpdateIamAccountExperience", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.IamApi.UpdateIamAccountExperience(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

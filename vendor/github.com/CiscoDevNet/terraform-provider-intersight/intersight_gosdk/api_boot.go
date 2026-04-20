@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -351,6 +351,27 @@ type ApiGetBootCddDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootCddDeviceByMoidRequest) Select_(select_ string) ApiGetBootCddDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootCddDeviceByMoidRequest) Expand(expand string) ApiGetBootCddDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootCddDeviceByMoidRequest) At(at string) ApiGetBootCddDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootCddDeviceByMoidRequest) Execute() (*BootCddDevice, *http.Response, error) {
@@ -395,6 +416,18 @@ func (a *BootApiService) GetBootCddDeviceByMoidExecute(r ApiGetBootCddDeviceByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -780,6 +813,27 @@ type ApiGetBootDeviceBootModeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootDeviceBootModeByMoidRequest) Select_(select_ string) ApiGetBootDeviceBootModeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootDeviceBootModeByMoidRequest) Expand(expand string) ApiGetBootDeviceBootModeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootDeviceBootModeByMoidRequest) At(at string) ApiGetBootDeviceBootModeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootDeviceBootModeByMoidRequest) Execute() (*BootDeviceBootMode, *http.Response, error) {
@@ -824,6 +878,18 @@ func (a *BootApiService) GetBootDeviceBootModeByMoidExecute(r ApiGetBootDeviceBo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1209,6 +1275,27 @@ type ApiGetBootDeviceBootSecurityByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootDeviceBootSecurityByMoidRequest) Select_(select_ string) ApiGetBootDeviceBootSecurityByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootDeviceBootSecurityByMoidRequest) Expand(expand string) ApiGetBootDeviceBootSecurityByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootDeviceBootSecurityByMoidRequest) At(at string) ApiGetBootDeviceBootSecurityByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootDeviceBootSecurityByMoidRequest) Execute() (*BootDeviceBootSecurity, *http.Response, error) {
@@ -1253,6 +1340,18 @@ func (a *BootApiService) GetBootDeviceBootSecurityByMoidExecute(r ApiGetBootDevi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1638,6 +1737,27 @@ type ApiGetBootHddDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootHddDeviceByMoidRequest) Select_(select_ string) ApiGetBootHddDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootHddDeviceByMoidRequest) Expand(expand string) ApiGetBootHddDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootHddDeviceByMoidRequest) At(at string) ApiGetBootHddDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootHddDeviceByMoidRequest) Execute() (*BootHddDevice, *http.Response, error) {
@@ -1682,6 +1802,18 @@ func (a *BootApiService) GetBootHddDeviceByMoidExecute(r ApiGetBootHddDeviceByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2067,6 +2199,27 @@ type ApiGetBootIscsiDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootIscsiDeviceByMoidRequest) Select_(select_ string) ApiGetBootIscsiDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootIscsiDeviceByMoidRequest) Expand(expand string) ApiGetBootIscsiDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootIscsiDeviceByMoidRequest) At(at string) ApiGetBootIscsiDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootIscsiDeviceByMoidRequest) Execute() (*BootIscsiDevice, *http.Response, error) {
@@ -2111,6 +2264,18 @@ func (a *BootApiService) GetBootIscsiDeviceByMoidExecute(r ApiGetBootIscsiDevice
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2496,6 +2661,27 @@ type ApiGetBootNvmeDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootNvmeDeviceByMoidRequest) Select_(select_ string) ApiGetBootNvmeDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootNvmeDeviceByMoidRequest) Expand(expand string) ApiGetBootNvmeDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootNvmeDeviceByMoidRequest) At(at string) ApiGetBootNvmeDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootNvmeDeviceByMoidRequest) Execute() (*BootNvmeDevice, *http.Response, error) {
@@ -2540,6 +2726,18 @@ func (a *BootApiService) GetBootNvmeDeviceByMoidExecute(r ApiGetBootNvmeDeviceBy
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2925,6 +3123,27 @@ type ApiGetBootPchStorageDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootPchStorageDeviceByMoidRequest) Select_(select_ string) ApiGetBootPchStorageDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootPchStorageDeviceByMoidRequest) Expand(expand string) ApiGetBootPchStorageDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootPchStorageDeviceByMoidRequest) At(at string) ApiGetBootPchStorageDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootPchStorageDeviceByMoidRequest) Execute() (*BootPchStorageDevice, *http.Response, error) {
@@ -2969,6 +3188,18 @@ func (a *BootApiService) GetBootPchStorageDeviceByMoidExecute(r ApiGetBootPchSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3354,6 +3585,27 @@ type ApiGetBootPrecisionPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootPrecisionPolicyByMoidRequest) Select_(select_ string) ApiGetBootPrecisionPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootPrecisionPolicyByMoidRequest) Expand(expand string) ApiGetBootPrecisionPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootPrecisionPolicyByMoidRequest) At(at string) ApiGetBootPrecisionPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootPrecisionPolicyByMoidRequest) Execute() (*BootPrecisionPolicy, *http.Response, error) {
@@ -3398,6 +3650,18 @@ func (a *BootApiService) GetBootPrecisionPolicyByMoidExecute(r ApiGetBootPrecisi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3783,6 +4047,27 @@ type ApiGetBootPxeDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootPxeDeviceByMoidRequest) Select_(select_ string) ApiGetBootPxeDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootPxeDeviceByMoidRequest) Expand(expand string) ApiGetBootPxeDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootPxeDeviceByMoidRequest) At(at string) ApiGetBootPxeDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootPxeDeviceByMoidRequest) Execute() (*BootPxeDevice, *http.Response, error) {
@@ -3827,6 +4112,18 @@ func (a *BootApiService) GetBootPxeDeviceByMoidExecute(r ApiGetBootPxeDeviceByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4212,6 +4509,27 @@ type ApiGetBootSanDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootSanDeviceByMoidRequest) Select_(select_ string) ApiGetBootSanDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootSanDeviceByMoidRequest) Expand(expand string) ApiGetBootSanDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootSanDeviceByMoidRequest) At(at string) ApiGetBootSanDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootSanDeviceByMoidRequest) Execute() (*BootSanDevice, *http.Response, error) {
@@ -4256,6 +4574,18 @@ func (a *BootApiService) GetBootSanDeviceByMoidExecute(r ApiGetBootSanDeviceByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4641,6 +4971,27 @@ type ApiGetBootSdDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootSdDeviceByMoidRequest) Select_(select_ string) ApiGetBootSdDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootSdDeviceByMoidRequest) Expand(expand string) ApiGetBootSdDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootSdDeviceByMoidRequest) At(at string) ApiGetBootSdDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootSdDeviceByMoidRequest) Execute() (*BootSdDevice, *http.Response, error) {
@@ -4685,6 +5036,18 @@ func (a *BootApiService) GetBootSdDeviceByMoidExecute(r ApiGetBootSdDeviceByMoid
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5070,6 +5433,27 @@ type ApiGetBootUefiShellDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootUefiShellDeviceByMoidRequest) Select_(select_ string) ApiGetBootUefiShellDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootUefiShellDeviceByMoidRequest) Expand(expand string) ApiGetBootUefiShellDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootUefiShellDeviceByMoidRequest) At(at string) ApiGetBootUefiShellDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootUefiShellDeviceByMoidRequest) Execute() (*BootUefiShellDevice, *http.Response, error) {
@@ -5114,6 +5498,18 @@ func (a *BootApiService) GetBootUefiShellDeviceByMoidExecute(r ApiGetBootUefiShe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5499,6 +5895,27 @@ type ApiGetBootUsbDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootUsbDeviceByMoidRequest) Select_(select_ string) ApiGetBootUsbDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootUsbDeviceByMoidRequest) Expand(expand string) ApiGetBootUsbDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootUsbDeviceByMoidRequest) At(at string) ApiGetBootUsbDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootUsbDeviceByMoidRequest) Execute() (*BootUsbDevice, *http.Response, error) {
@@ -5543,6 +5960,18 @@ func (a *BootApiService) GetBootUsbDeviceByMoidExecute(r ApiGetBootUsbDeviceByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5928,6 +6357,27 @@ type ApiGetBootVmediaDeviceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetBootVmediaDeviceByMoidRequest) Select_(select_ string) ApiGetBootVmediaDeviceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetBootVmediaDeviceByMoidRequest) Expand(expand string) ApiGetBootVmediaDeviceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetBootVmediaDeviceByMoidRequest) At(at string) ApiGetBootVmediaDeviceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetBootVmediaDeviceByMoidRequest) Execute() (*BootVmediaDevice, *http.Response, error) {
@@ -5972,6 +6422,18 @@ func (a *BootApiService) GetBootVmediaDeviceByMoidExecute(r ApiGetBootVmediaDevi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

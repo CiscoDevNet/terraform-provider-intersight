@@ -59,6 +59,18 @@ func Test_intersight_AssetApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test AssetApiService CreateAssetPreClaim", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.AssetApi.CreateAssetPreClaim(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AssetApiService CreateAssetTarget", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -67,45 +79,6 @@ func Test_intersight_AssetApiService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AssetApiService DeleteAssetClusterMember", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.AssetApi.DeleteAssetClusterMember(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AssetApiService DeleteAssetDeployment", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.AssetApi.DeleteAssetDeployment(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AssetApiService DeleteAssetDeploymentDevice", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.AssetApi.DeleteAssetDeploymentDevice(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -123,32 +96,6 @@ func Test_intersight_AssetApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test AssetApiService DeleteAssetDeviceContractInformation", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.AssetApi.DeleteAssetDeviceContractInformation(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AssetApiService DeleteAssetDeviceRegistration", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.AssetApi.DeleteAssetDeviceRegistration(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test AssetApiService DeleteAssetGeoLocation", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -156,32 +103,6 @@ func Test_intersight_AssetApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.AssetApi.DeleteAssetGeoLocation(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AssetApiService DeleteAssetSubscription", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.AssetApi.DeleteAssetSubscription(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AssetApiService DeleteAssetSubscriptionAccount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.AssetApi.DeleteAssetSubscriptionAccount(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -569,6 +490,20 @@ func Test_intersight_AssetApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test AssetApiService PatchAssetPreClaim", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.AssetApi.PatchAssetPreClaim(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AssetApiService PatchAssetTarget", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -632,6 +567,20 @@ func Test_intersight_AssetApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.AssetApi.UpdateAssetGeoLocation(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AssetApiService UpdateAssetPreClaim", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.AssetApi.UpdateAssetPreClaim(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

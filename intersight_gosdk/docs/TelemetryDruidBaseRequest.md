@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**QueryType** | **string** |  | 
+**QueryType** | **string** | The type of druid query. | 
 
 ## Methods
 

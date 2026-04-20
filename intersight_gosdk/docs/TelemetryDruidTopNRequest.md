@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**QueryType** | **string** |  | 
+**QueryType** | **string** | The type of druid query. | 
 **DataSource** | [**TelemetryDruidDataSource**](TelemetryDruidDataSource.md) |  | 
 **Intervals** | **[]string** | A JSON Object representing ISO-8601 Intervals. This defines the time ranges to run the query over. | 
 **Granularity** | [**TelemetryDruidGranularity**](TelemetryDruidGranularity.md) |  | 

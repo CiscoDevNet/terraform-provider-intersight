@@ -23,19 +23,6 @@ func Test_intersight_MetaApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test MetaApiService DeleteMetaDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.MetaApi.DeleteMetaDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test MetaApiService GetMetaDefinitionByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

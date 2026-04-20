@@ -3,12 +3,22 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_task_debug_log"
 description: |-
-        Debug information captured during task execution, when the enable debug flag is set at the workflow definition level.
+        The TaskDebugLog object provides detailed debugging information for task execution within workflows. It serves as a critical tool for isolating and resolving task failures, enhancing workflow reliability.
+        #### Purpose
+        TaskDebugLog is designed to capture detailed debugging information during task execution, helping with troubleshooting and performance optimization. This provides insights into task execution failures, enabling quick identification of root causes and corrective actions. Additionally, it tracks task retry attempts, offering valuable data for analyzing execution patterns and improving overall reliability.
+        #### Key Concepts
+        - **Debug Information:** Offers detailed logs of task execution, supporting deep analysis and resolution of workflow issues.
+        - **Relationship Mapping:** Links task debug logs to specific workflow instances, ensuring contextual understanding and traceability.
 
 ---
 
 # Data Source: intersight_workflow_task_debug_log
-Debug information captured during task execution, when the enable debug flag is set at the workflow definition level.
+The TaskDebugLog object provides detailed debugging information for task execution within workflows. It serves as a critical tool for isolating and resolving task failures, enhancing workflow reliability. 
+#### Purpose 
+TaskDebugLog is designed to capture detailed debugging information during task execution, helping with troubleshooting and performance optimization. This provides insights into task execution failures, enabling quick identification of root causes and corrective actions. Additionally, it tracks task retry attempts, offering valuable data for analyzing execution patterns and improving overall reliability.
+#### Key Concepts  
+- **Debug Information:** Offers detailed logs of task execution, supporting deep analysis and resolution of workflow issues. 
+- **Relationship Mapping:** Links task debug logs to specific workflow instances, ensuring contextual understanding and traceability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

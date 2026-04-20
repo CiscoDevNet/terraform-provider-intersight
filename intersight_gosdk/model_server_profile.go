@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -33,7 +33,13 @@ type ServerProfile struct {
 	// The status of the server profile indicating if deployment has been initiated on both fabric interconnects or not. * `None` - Switch profiles not deployed on either of the switches. * `Complete` - Both switch profiles of the cluster profile are deployed. * `Partial` - Only one of the switch profiles of the cluster profile is deployed.
 	DeployStatus *string `json:"DeployStatus,omitempty"`
 	// The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins. * `None` - Server profile configuration not deployed on either of the fabric interconnects. * `AB` - Server profile configuration deployed on both fabric interconnects. * `A` - Server profile configuration deployed on fabric interconnect A only. * `B` - Server profile configuration deployed on fabric interconnect B only.
-	DeployedSwitches              *string                    `json:"DeployedSwitches,omitempty"`
+	DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
+	// Used with initialAutoDeployState to indicate if the server profile is ready for auto-deploy for the first time. The default value is false.
+	InitialAutoDeployConfigComplete *bool `json:"InitialAutoDeployConfigComplete,omitempty"`
+	// Automatically performs an initial deployment when a server is assigned. Subsequent changes require manual redeployment.
+	InitialAutoDeployMode *bool `json:"InitialAutoDeployMode,omitempty"`
+	// The auto-deploy state of the server profile. It is used to track the state of the auto-deploy process. * `None` - Default value for Auto-deploy state when it is not configured and old server profiles. * `Pending` - Server profile is ready for autodeploy but not yet scheduled for deployment. * `AutoDeployPending` - AutoDeployPending is set when auto-deploy is yet to be scheduled. * `AutoDeployInProgress` - AutoDeployInProgress is set when auto-deploy action is in progress. * `AutoActivationPending` - AutoActivationPending is set when auto-deploy is yet to be scheduled. * `AutoActivationInProgress` - AutoActivationInProgress set when auto-deploy-activate action is in progress. * `Completed` - Completed states that all the auto deploy actions are completed successfully. * `Failed` - Failed states that one of the auto deploy actions failed. * `Unsupported` - Unsupported for direct server assignment and unassigned profiles.
+	InitialAutoDeployState        *string                    `json:"InitialAutoDeployState,omitempty"`
 	InternalReservationReferences []PoolReservationReference `json:"InternalReservationReferences,omitempty"`
 	// Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.
 	IsPmcDeployedSecurePassphraseSet *bool                          `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
@@ -317,6 +323,102 @@ func (o *ServerProfile) HasDeployedSwitches() bool {
 // SetDeployedSwitches gets a reference to the given string and assigns it to the DeployedSwitches field.
 func (o *ServerProfile) SetDeployedSwitches(v string) {
 	o.DeployedSwitches = &v
+}
+
+// GetInitialAutoDeployConfigComplete returns the InitialAutoDeployConfigComplete field value if set, zero value otherwise.
+func (o *ServerProfile) GetInitialAutoDeployConfigComplete() bool {
+	if o == nil || IsNil(o.InitialAutoDeployConfigComplete) {
+		var ret bool
+		return ret
+	}
+	return *o.InitialAutoDeployConfigComplete
+}
+
+// GetInitialAutoDeployConfigCompleteOk returns a tuple with the InitialAutoDeployConfigComplete field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetInitialAutoDeployConfigCompleteOk() (*bool, bool) {
+	if o == nil || IsNil(o.InitialAutoDeployConfigComplete) {
+		return nil, false
+	}
+	return o.InitialAutoDeployConfigComplete, true
+}
+
+// HasInitialAutoDeployConfigComplete returns a boolean if a field has been set.
+func (o *ServerProfile) HasInitialAutoDeployConfigComplete() bool {
+	if o != nil && !IsNil(o.InitialAutoDeployConfigComplete) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialAutoDeployConfigComplete gets a reference to the given bool and assigns it to the InitialAutoDeployConfigComplete field.
+func (o *ServerProfile) SetInitialAutoDeployConfigComplete(v bool) {
+	o.InitialAutoDeployConfigComplete = &v
+}
+
+// GetInitialAutoDeployMode returns the InitialAutoDeployMode field value if set, zero value otherwise.
+func (o *ServerProfile) GetInitialAutoDeployMode() bool {
+	if o == nil || IsNil(o.InitialAutoDeployMode) {
+		var ret bool
+		return ret
+	}
+	return *o.InitialAutoDeployMode
+}
+
+// GetInitialAutoDeployModeOk returns a tuple with the InitialAutoDeployMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetInitialAutoDeployModeOk() (*bool, bool) {
+	if o == nil || IsNil(o.InitialAutoDeployMode) {
+		return nil, false
+	}
+	return o.InitialAutoDeployMode, true
+}
+
+// HasInitialAutoDeployMode returns a boolean if a field has been set.
+func (o *ServerProfile) HasInitialAutoDeployMode() bool {
+	if o != nil && !IsNil(o.InitialAutoDeployMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialAutoDeployMode gets a reference to the given bool and assigns it to the InitialAutoDeployMode field.
+func (o *ServerProfile) SetInitialAutoDeployMode(v bool) {
+	o.InitialAutoDeployMode = &v
+}
+
+// GetInitialAutoDeployState returns the InitialAutoDeployState field value if set, zero value otherwise.
+func (o *ServerProfile) GetInitialAutoDeployState() string {
+	if o == nil || IsNil(o.InitialAutoDeployState) {
+		var ret string
+		return ret
+	}
+	return *o.InitialAutoDeployState
+}
+
+// GetInitialAutoDeployStateOk returns a tuple with the InitialAutoDeployState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetInitialAutoDeployStateOk() (*string, bool) {
+	if o == nil || IsNil(o.InitialAutoDeployState) {
+		return nil, false
+	}
+	return o.InitialAutoDeployState, true
+}
+
+// HasInitialAutoDeployState returns a boolean if a field has been set.
+func (o *ServerProfile) HasInitialAutoDeployState() bool {
+	if o != nil && !IsNil(o.InitialAutoDeployState) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialAutoDeployState gets a reference to the given string and assigns it to the InitialAutoDeployState field.
+func (o *ServerProfile) SetInitialAutoDeployState(v string) {
+	o.InitialAutoDeployState = &v
 }
 
 // GetInternalReservationReferences returns the InternalReservationReferences field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1340,6 +1442,15 @@ func (o ServerProfile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DeployedSwitches) {
 		toSerialize["DeployedSwitches"] = o.DeployedSwitches
 	}
+	if !IsNil(o.InitialAutoDeployConfigComplete) {
+		toSerialize["InitialAutoDeployConfigComplete"] = o.InitialAutoDeployConfigComplete
+	}
+	if !IsNil(o.InitialAutoDeployMode) {
+		toSerialize["InitialAutoDeployMode"] = o.InitialAutoDeployMode
+	}
+	if !IsNil(o.InitialAutoDeployState) {
+		toSerialize["InitialAutoDeployState"] = o.InitialAutoDeployState
+	}
 	if o.InternalReservationReferences != nil {
 		toSerialize["InternalReservationReferences"] = o.InternalReservationReferences
 	}
@@ -1481,7 +1592,13 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		// The status of the server profile indicating if deployment has been initiated on both fabric interconnects or not. * `None` - Switch profiles not deployed on either of the switches. * `Complete` - Both switch profiles of the cluster profile are deployed. * `Partial` - Only one of the switch profiles of the cluster profile is deployed.
 		DeployStatus *string `json:"DeployStatus,omitempty"`
 		// The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins. * `None` - Server profile configuration not deployed on either of the fabric interconnects. * `AB` - Server profile configuration deployed on both fabric interconnects. * `A` - Server profile configuration deployed on fabric interconnect A only. * `B` - Server profile configuration deployed on fabric interconnect B only.
-		DeployedSwitches              *string                    `json:"DeployedSwitches,omitempty"`
+		DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
+		// Used with initialAutoDeployState to indicate if the server profile is ready for auto-deploy for the first time. The default value is false.
+		InitialAutoDeployConfigComplete *bool `json:"InitialAutoDeployConfigComplete,omitempty"`
+		// Automatically performs an initial deployment when a server is assigned. Subsequent changes require manual redeployment.
+		InitialAutoDeployMode *bool `json:"InitialAutoDeployMode,omitempty"`
+		// The auto-deploy state of the server profile. It is used to track the state of the auto-deploy process. * `None` - Default value for Auto-deploy state when it is not configured and old server profiles. * `Pending` - Server profile is ready for autodeploy but not yet scheduled for deployment. * `AutoDeployPending` - AutoDeployPending is set when auto-deploy is yet to be scheduled. * `AutoDeployInProgress` - AutoDeployInProgress is set when auto-deploy action is in progress. * `AutoActivationPending` - AutoActivationPending is set when auto-deploy is yet to be scheduled. * `AutoActivationInProgress` - AutoActivationInProgress set when auto-deploy-activate action is in progress. * `Completed` - Completed states that all the auto deploy actions are completed successfully. * `Failed` - Failed states that one of the auto deploy actions failed. * `Unsupported` - Unsupported for direct server assignment and unassigned profiles.
+		InitialAutoDeployState        *string                    `json:"InitialAutoDeployState,omitempty"`
 		InternalReservationReferences []PoolReservationReference `json:"InternalReservationReferences,omitempty"`
 		// Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.
 		IsPmcDeployedSecurePassphraseSet *bool                          `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
@@ -1532,6 +1649,9 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		varServerProfile.ConfigChanges = varServerProfileWithoutEmbeddedStruct.ConfigChanges
 		varServerProfile.DeployStatus = varServerProfileWithoutEmbeddedStruct.DeployStatus
 		varServerProfile.DeployedSwitches = varServerProfileWithoutEmbeddedStruct.DeployedSwitches
+		varServerProfile.InitialAutoDeployConfigComplete = varServerProfileWithoutEmbeddedStruct.InitialAutoDeployConfigComplete
+		varServerProfile.InitialAutoDeployMode = varServerProfileWithoutEmbeddedStruct.InitialAutoDeployMode
+		varServerProfile.InitialAutoDeployState = varServerProfileWithoutEmbeddedStruct.InitialAutoDeployState
 		varServerProfile.InternalReservationReferences = varServerProfileWithoutEmbeddedStruct.InternalReservationReferences
 		varServerProfile.IsPmcDeployedSecurePassphraseSet = varServerProfileWithoutEmbeddedStruct.IsPmcDeployedSecurePassphraseSet
 		varServerProfile.LocationDetails = varServerProfileWithoutEmbeddedStruct.LocationDetails
@@ -1582,6 +1702,9 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ConfigChanges")
 		delete(additionalProperties, "DeployStatus")
 		delete(additionalProperties, "DeployedSwitches")
+		delete(additionalProperties, "InitialAutoDeployConfigComplete")
+		delete(additionalProperties, "InitialAutoDeployMode")
+		delete(additionalProperties, "InitialAutoDeployState")
 		delete(additionalProperties, "InternalReservationReferences")
 		delete(additionalProperties, "IsPmcDeployedSecurePassphraseSet")
 		delete(additionalProperties, "LocationDetails")

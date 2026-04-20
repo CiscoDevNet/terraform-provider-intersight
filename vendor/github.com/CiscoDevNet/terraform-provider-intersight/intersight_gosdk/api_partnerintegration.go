@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -1971,6 +1971,27 @@ type ApiGetPartnerintegrationDcLogsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PartnerintegrationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPartnerintegrationDcLogsByMoidRequest) Select_(select_ string) ApiGetPartnerintegrationDcLogsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPartnerintegrationDcLogsByMoidRequest) Expand(expand string) ApiGetPartnerintegrationDcLogsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPartnerintegrationDcLogsByMoidRequest) At(at string) ApiGetPartnerintegrationDcLogsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPartnerintegrationDcLogsByMoidRequest) Execute() (*PartnerintegrationDcLogs, *http.Response, error) {
@@ -2015,6 +2036,18 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationDcLogsByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2400,6 +2433,27 @@ type ApiGetPartnerintegrationDeviceConnectorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PartnerintegrationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPartnerintegrationDeviceConnectorByMoidRequest) Select_(select_ string) ApiGetPartnerintegrationDeviceConnectorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPartnerintegrationDeviceConnectorByMoidRequest) Expand(expand string) ApiGetPartnerintegrationDeviceConnectorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPartnerintegrationDeviceConnectorByMoidRequest) At(at string) ApiGetPartnerintegrationDeviceConnectorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPartnerintegrationDeviceConnectorByMoidRequest) Execute() (*PartnerintegrationDeviceConnector, *http.Response, error) {
@@ -2444,6 +2498,18 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationDeviceConnectorByMoi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2829,6 +2895,27 @@ type ApiGetPartnerintegrationDocIssuesByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PartnerintegrationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPartnerintegrationDocIssuesByMoidRequest) Select_(select_ string) ApiGetPartnerintegrationDocIssuesByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPartnerintegrationDocIssuesByMoidRequest) Expand(expand string) ApiGetPartnerintegrationDocIssuesByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPartnerintegrationDocIssuesByMoidRequest) At(at string) ApiGetPartnerintegrationDocIssuesByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPartnerintegrationDocIssuesByMoidRequest) Execute() (*PartnerintegrationDocIssues, *http.Response, error) {
@@ -2873,6 +2960,18 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationDocIssuesByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3258,6 +3357,27 @@ type ApiGetPartnerintegrationEtlByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PartnerintegrationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPartnerintegrationEtlByMoidRequest) Select_(select_ string) ApiGetPartnerintegrationEtlByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPartnerintegrationEtlByMoidRequest) Expand(expand string) ApiGetPartnerintegrationEtlByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPartnerintegrationEtlByMoidRequest) At(at string) ApiGetPartnerintegrationEtlByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPartnerintegrationEtlByMoidRequest) Execute() (*PartnerintegrationEtl, *http.Response, error) {
@@ -3302,6 +3422,18 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationEtlByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3687,6 +3819,27 @@ type ApiGetPartnerintegrationFileByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PartnerintegrationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPartnerintegrationFileByMoidRequest) Select_(select_ string) ApiGetPartnerintegrationFileByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPartnerintegrationFileByMoidRequest) Expand(expand string) ApiGetPartnerintegrationFileByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPartnerintegrationFileByMoidRequest) At(at string) ApiGetPartnerintegrationFileByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPartnerintegrationFileByMoidRequest) Execute() (*PartnerintegrationFile, *http.Response, error) {
@@ -3731,6 +3884,18 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationFileByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4116,6 +4281,27 @@ type ApiGetPartnerintegrationInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PartnerintegrationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPartnerintegrationInventoryByMoidRequest) Select_(select_ string) ApiGetPartnerintegrationInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPartnerintegrationInventoryByMoidRequest) Expand(expand string) ApiGetPartnerintegrationInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPartnerintegrationInventoryByMoidRequest) At(at string) ApiGetPartnerintegrationInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPartnerintegrationInventoryByMoidRequest) Execute() (*PartnerintegrationInventory, *http.Response, error) {
@@ -4160,6 +4346,18 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationInventoryByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4545,6 +4743,27 @@ type ApiGetPartnerintegrationLogsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PartnerintegrationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPartnerintegrationLogsByMoidRequest) Select_(select_ string) ApiGetPartnerintegrationLogsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPartnerintegrationLogsByMoidRequest) Expand(expand string) ApiGetPartnerintegrationLogsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPartnerintegrationLogsByMoidRequest) At(at string) ApiGetPartnerintegrationLogsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPartnerintegrationLogsByMoidRequest) Execute() (*PartnerintegrationLogs, *http.Response, error) {
@@ -4589,6 +4808,18 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationLogsByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4974,6 +5205,27 @@ type ApiGetPartnerintegrationMetricsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PartnerintegrationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPartnerintegrationMetricsByMoidRequest) Select_(select_ string) ApiGetPartnerintegrationMetricsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPartnerintegrationMetricsByMoidRequest) Expand(expand string) ApiGetPartnerintegrationMetricsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPartnerintegrationMetricsByMoidRequest) At(at string) ApiGetPartnerintegrationMetricsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPartnerintegrationMetricsByMoidRequest) Execute() (*PartnerintegrationMetrics, *http.Response, error) {
@@ -5018,6 +5270,18 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationMetricsByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5403,6 +5667,27 @@ type ApiGetPartnerintegrationModelByMoidRequest struct {
 	ctx        context.Context
 	ApiService *PartnerintegrationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetPartnerintegrationModelByMoidRequest) Select_(select_ string) ApiGetPartnerintegrationModelByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetPartnerintegrationModelByMoidRequest) Expand(expand string) ApiGetPartnerintegrationModelByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetPartnerintegrationModelByMoidRequest) At(at string) ApiGetPartnerintegrationModelByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetPartnerintegrationModelByMoidRequest) Execute() (*PartnerintegrationModel, *http.Response, error) {
@@ -5447,6 +5732,18 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationModelByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

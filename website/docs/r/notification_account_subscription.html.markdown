@@ -41,6 +41,11 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `certificate`:(HashMap) - A reference to a iamTrustPoint resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `condition_operator`:(string) Operation that binds all the different conditions together.* `All` - All is an AND condition applied against the individual conditions.* `Any` - Any is an OR condition applied against the individual conditions. 
 * `conditions`:(Array)
 This complex property has following sub-properties:
@@ -48,6 +53,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) The description for the subscription. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `enable_tls`:(bool) When true, TLS with custom certificate validation is enabled for this webhook subscription. Thecertificate relationship must be set to a TrustPoint when enableTls is true. Only applicable forwebhook-type subscriptions; used for appliance deployments with private CAs. When false or unset,default TLS behavior (public CA trust) is used. SaaS typically leaves this false or unset. 
 * `enabled`:(bool) Subscription can be switched on/off without necessity to change the subscriptionsettings: notification methods, conditions, etc.Ex.: Subscription MO can be configured, but switched off. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -675,6 +675,27 @@ type ApiGetMemoryArrayByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryArrayByMoidRequest) Select_(select_ string) ApiGetMemoryArrayByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryArrayByMoidRequest) Expand(expand string) ApiGetMemoryArrayByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryArrayByMoidRequest) At(at string) ApiGetMemoryArrayByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryArrayByMoidRequest) Execute() (*MemoryArray, *http.Response, error) {
@@ -719,6 +740,18 @@ func (a *MemoryApiService) GetMemoryArrayByMoidExecute(r ApiGetMemoryArrayByMoid
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1104,6 +1137,27 @@ type ApiGetMemoryPersistentMemoryConfigResultByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) Select_(select_ string) ApiGetMemoryPersistentMemoryConfigResultByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) Expand(expand string) ApiGetMemoryPersistentMemoryConfigResultByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) At(at string) ApiGetMemoryPersistentMemoryConfigResultByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) Execute() (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
@@ -1148,6 +1202,18 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1533,6 +1599,27 @@ type ApiGetMemoryPersistentMemoryConfigurationByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) Select_(select_ string) ApiGetMemoryPersistentMemoryConfigurationByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) Expand(expand string) ApiGetMemoryPersistentMemoryConfigurationByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) At(at string) ApiGetMemoryPersistentMemoryConfigurationByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) Execute() (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
@@ -1577,6 +1664,18 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1962,6 +2061,27 @@ type ApiGetMemoryPersistentMemoryNamespaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) Select_(select_ string) ApiGetMemoryPersistentMemoryNamespaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) Expand(expand string) ApiGetMemoryPersistentMemoryNamespaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) At(at string) ApiGetMemoryPersistentMemoryNamespaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) Execute() (*MemoryPersistentMemoryNamespace, *http.Response, error) {
@@ -2006,6 +2126,18 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2116,6 +2248,27 @@ type ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) Select_(select_ string) ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) Expand(expand string) ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) At(at string) ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) Execute() (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
@@ -2160,6 +2313,18 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoidE
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2820,6 +2985,27 @@ type ApiGetMemoryPersistentMemoryPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) Select_(select_ string) ApiGetMemoryPersistentMemoryPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) Expand(expand string) ApiGetMemoryPersistentMemoryPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) At(at string) ApiGetMemoryPersistentMemoryPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) Execute() (*MemoryPersistentMemoryPolicy, *http.Response, error) {
@@ -2864,6 +3050,18 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3249,6 +3447,27 @@ type ApiGetMemoryPersistentMemoryRegionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryPersistentMemoryRegionByMoidRequest) Select_(select_ string) ApiGetMemoryPersistentMemoryRegionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryPersistentMemoryRegionByMoidRequest) Expand(expand string) ApiGetMemoryPersistentMemoryRegionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryPersistentMemoryRegionByMoidRequest) At(at string) ApiGetMemoryPersistentMemoryRegionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryPersistentMemoryRegionByMoidRequest) Execute() (*MemoryPersistentMemoryRegion, *http.Response, error) {
@@ -3293,6 +3512,18 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3678,6 +3909,27 @@ type ApiGetMemoryPersistentMemoryUnitByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryPersistentMemoryUnitByMoidRequest) Select_(select_ string) ApiGetMemoryPersistentMemoryUnitByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryPersistentMemoryUnitByMoidRequest) Expand(expand string) ApiGetMemoryPersistentMemoryUnitByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryPersistentMemoryUnitByMoidRequest) At(at string) ApiGetMemoryPersistentMemoryUnitByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryPersistentMemoryUnitByMoidRequest) Execute() (*MemoryPersistentMemoryUnit, *http.Response, error) {
@@ -3722,6 +3974,18 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoidExecute(r ApiGetMe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4107,6 +4371,27 @@ type ApiGetMemoryPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryPolicyByMoidRequest) Select_(select_ string) ApiGetMemoryPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryPolicyByMoidRequest) Expand(expand string) ApiGetMemoryPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryPolicyByMoidRequest) At(at string) ApiGetMemoryPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryPolicyByMoidRequest) Execute() (*MemoryPolicy, *http.Response, error) {
@@ -4151,6 +4436,18 @@ func (a *MemoryApiService) GetMemoryPolicyByMoidExecute(r ApiGetMemoryPolicyByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4261,6 +4558,27 @@ type ApiGetMemoryPolicyInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryPolicyInventoryByMoidRequest) Select_(select_ string) ApiGetMemoryPolicyInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryPolicyInventoryByMoidRequest) Expand(expand string) ApiGetMemoryPolicyInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryPolicyInventoryByMoidRequest) At(at string) ApiGetMemoryPolicyInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryPolicyInventoryByMoidRequest) Execute() (*MemoryPolicyInventory, *http.Response, error) {
@@ -4305,6 +4623,18 @@ func (a *MemoryApiService) GetMemoryPolicyInventoryByMoidExecute(r ApiGetMemoryP
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4965,6 +5295,27 @@ type ApiGetMemoryUnitByMoidRequest struct {
 	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetMemoryUnitByMoidRequest) Select_(select_ string) ApiGetMemoryUnitByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetMemoryUnitByMoidRequest) Expand(expand string) ApiGetMemoryUnitByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetMemoryUnitByMoidRequest) At(at string) ApiGetMemoryUnitByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetMemoryUnitByMoidRequest) Execute() (*MemoryUnit, *http.Response, error) {
@@ -5009,6 +5360,18 @@ func (a *MemoryApiService) GetMemoryUnitByMoidExecute(r ApiGetMemoryUnitByMoidRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

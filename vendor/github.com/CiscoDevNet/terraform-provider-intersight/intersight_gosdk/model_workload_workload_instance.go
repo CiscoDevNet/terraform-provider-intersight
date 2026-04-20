@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -29,9 +29,10 @@ type WorkloadWorkloadInstance struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The action to be performed on the workload instance. * `None` - Absence of any action on the workload instance. * `Suspend` - Pauses the execution of the workload instance, temporarily stopping its operations without permanently removing it. * `Resume` - Restarts a suspended workload instance, allowing it to continue operations from where it left off. * `Deploy` - Initiates the deployment of the workload instance, provisioning the necessary resources and starting its execution. * `Retry` - Attempts to re-deploy the workload instance, either due to a previous failure or to apply changes made to the instance. * `RetryAll` - Attempts to re-deploy all workload instances associated with the same deployment, either due to a previous failure or to apply changes made to the instances. * `Attach` - Associates the workload instance with its assigned resources, allowing it to utilize the resources for its operations. * `Detach` - Disassociates the workload instance from its assigned resources, preventing it from using the resources for its operations. * `UnAssign` - Detaches assigned resources from the workload instance while keeping the instance active.
-	Action            *string                    `json:"Action,omitempty"`
-	AssignedResources []WorkloadAssignedResource `json:"AssignedResources,omitempty"`
-	ChangeTypes       []string                   `json:"ChangeTypes,omitempty"`
+	Action            *string                     `json:"Action,omitempty"`
+	AlarmSummary      NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
+	AssignedResources []WorkloadAssignedResource  `json:"AssignedResources,omitempty"`
+	ChangeTypes       []string                    `json:"ChangeTypes,omitempty"`
 	// The conformance status of the deployment. * `Ok` - The deployment conforms to the preferred version of the workload. * `NonConformant` - The deployment does not conform to the preferred version of the workload.
 	Conformance *string `json:"Conformance,omitempty"`
 	// The last action performed on the workload instance. * `None` - Absence of any action on the workload instance. * `Suspend` - Pauses the execution of the workload instance, temporarily stopping its operations without permanently removing it. * `Resume` - Restarts a suspended workload instance, allowing it to continue operations from where it left off. * `Deploy` - Initiates the deployment of the workload instance, provisioning the necessary resources and starting its execution. * `Retry` - Attempts to re-deploy the workload instance, either due to a previous failure or to apply changes made to the instance. * `RetryAll` - Attempts to re-deploy all workload instances associated with the same deployment, either due to a previous failure or to apply changes made to the instances. * `Attach` - Associates the workload instance with its assigned resources, allowing it to utilize the resources for its operations. * `Detach` - Disassociates the workload instance from its assigned resources, preventing it from using the resources for its operations. * `UnAssign` - Detaches assigned resources from the workload instance while keeping the instance active.
@@ -171,6 +172,49 @@ func (o *WorkloadWorkloadInstance) HasAction() bool {
 // SetAction gets a reference to the given string and assigns it to the Action field.
 func (o *WorkloadWorkloadInstance) SetAction(v string) {
 	o.Action = &v
+}
+
+// GetAlarmSummary returns the AlarmSummary field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkloadWorkloadInstance) GetAlarmSummary() ComputeAlarmSummary {
+	if o == nil || IsNil(o.AlarmSummary.Get()) {
+		var ret ComputeAlarmSummary
+		return ret
+	}
+	return *o.AlarmSummary.Get()
+}
+
+// GetAlarmSummaryOk returns a tuple with the AlarmSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkloadWorkloadInstance) GetAlarmSummaryOk() (*ComputeAlarmSummary, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AlarmSummary.Get(), o.AlarmSummary.IsSet()
+}
+
+// HasAlarmSummary returns a boolean if a field has been set.
+func (o *WorkloadWorkloadInstance) HasAlarmSummary() bool {
+	if o != nil && o.AlarmSummary.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAlarmSummary gets a reference to the given NullableComputeAlarmSummary and assigns it to the AlarmSummary field.
+func (o *WorkloadWorkloadInstance) SetAlarmSummary(v ComputeAlarmSummary) {
+	o.AlarmSummary.Set(&v)
+}
+
+// SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+func (o *WorkloadWorkloadInstance) SetAlarmSummaryNil() {
+	o.AlarmSummary.Set(nil)
+}
+
+// UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
+func (o *WorkloadWorkloadInstance) UnsetAlarmSummary() {
+	o.AlarmSummary.Unset()
 }
 
 // GetAssignedResources returns the AssignedResources field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -762,6 +806,9 @@ func (o WorkloadWorkloadInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
+	if o.AlarmSummary.IsSet() {
+		toSerialize["AlarmSummary"] = o.AlarmSummary.Get()
+	}
 	if o.AssignedResources != nil {
 		toSerialize["AssignedResources"] = o.AssignedResources
 	}
@@ -863,9 +910,10 @@ func (o *WorkloadWorkloadInstance) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The action to be performed on the workload instance. * `None` - Absence of any action on the workload instance. * `Suspend` - Pauses the execution of the workload instance, temporarily stopping its operations without permanently removing it. * `Resume` - Restarts a suspended workload instance, allowing it to continue operations from where it left off. * `Deploy` - Initiates the deployment of the workload instance, provisioning the necessary resources and starting its execution. * `Retry` - Attempts to re-deploy the workload instance, either due to a previous failure or to apply changes made to the instance. * `RetryAll` - Attempts to re-deploy all workload instances associated with the same deployment, either due to a previous failure or to apply changes made to the instances. * `Attach` - Associates the workload instance with its assigned resources, allowing it to utilize the resources for its operations. * `Detach` - Disassociates the workload instance from its assigned resources, preventing it from using the resources for its operations. * `UnAssign` - Detaches assigned resources from the workload instance while keeping the instance active.
-		Action            *string                    `json:"Action,omitempty"`
-		AssignedResources []WorkloadAssignedResource `json:"AssignedResources,omitempty"`
-		ChangeTypes       []string                   `json:"ChangeTypes,omitempty"`
+		Action            *string                     `json:"Action,omitempty"`
+		AlarmSummary      NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
+		AssignedResources []WorkloadAssignedResource  `json:"AssignedResources,omitempty"`
+		ChangeTypes       []string                    `json:"ChangeTypes,omitempty"`
 		// The conformance status of the deployment. * `Ok` - The deployment conforms to the preferred version of the workload. * `NonConformant` - The deployment does not conform to the preferred version of the workload.
 		Conformance *string `json:"Conformance,omitempty"`
 		// The last action performed on the workload instance. * `None` - Absence of any action on the workload instance. * `Suspend` - Pauses the execution of the workload instance, temporarily stopping its operations without permanently removing it. * `Resume` - Restarts a suspended workload instance, allowing it to continue operations from where it left off. * `Deploy` - Initiates the deployment of the workload instance, provisioning the necessary resources and starting its execution. * `Retry` - Attempts to re-deploy the workload instance, either due to a previous failure or to apply changes made to the instance. * `RetryAll` - Attempts to re-deploy all workload instances associated with the same deployment, either due to a previous failure or to apply changes made to the instances. * `Attach` - Associates the workload instance with its assigned resources, allowing it to utilize the resources for its operations. * `Detach` - Disassociates the workload instance from its assigned resources, preventing it from using the resources for its operations. * `UnAssign` - Detaches assigned resources from the workload instance while keeping the instance active.
@@ -895,6 +943,7 @@ func (o *WorkloadWorkloadInstance) UnmarshalJSON(data []byte) (err error) {
 		varWorkloadWorkloadInstance.ClassId = varWorkloadWorkloadInstanceWithoutEmbeddedStruct.ClassId
 		varWorkloadWorkloadInstance.ObjectType = varWorkloadWorkloadInstanceWithoutEmbeddedStruct.ObjectType
 		varWorkloadWorkloadInstance.Action = varWorkloadWorkloadInstanceWithoutEmbeddedStruct.Action
+		varWorkloadWorkloadInstance.AlarmSummary = varWorkloadWorkloadInstanceWithoutEmbeddedStruct.AlarmSummary
 		varWorkloadWorkloadInstance.AssignedResources = varWorkloadWorkloadInstanceWithoutEmbeddedStruct.AssignedResources
 		varWorkloadWorkloadInstance.ChangeTypes = varWorkloadWorkloadInstanceWithoutEmbeddedStruct.ChangeTypes
 		varWorkloadWorkloadInstance.Conformance = varWorkloadWorkloadInstanceWithoutEmbeddedStruct.Conformance
@@ -930,6 +979,7 @@ func (o *WorkloadWorkloadInstance) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")
+		delete(additionalProperties, "AlarmSummary")
 		delete(additionalProperties, "AssignedResources")
 		delete(additionalProperties, "ChangeTypes")
 		delete(additionalProperties, "Conformance")

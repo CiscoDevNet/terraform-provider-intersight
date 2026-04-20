@@ -682,7 +682,7 @@ func getBulkSubRequestObjSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "The status of the request.\n* `Pending` - Indicates that the request is yet to be processed.\n* `ObjPresenceCheckInProgress` - Indicates that the checking for object presence is in progress.\n* `ObjPresenceCheckInComplete` - Indicates that the request is being processed.\n* `ObjPresenceCheckFailed` - Indicates that the checking for object presence failed.\n* `Processing` - Indicates that the request is being processed.\n* `TimedOut` - Indicates that the request processing timed out.\n* `Failed` - Indicates that the request processing failed.\n* `Completed` - Indicates that the request processing is complete.\n* `Skipped` - Indicates that the request was skipped.",
+			Description: "The status of the request.\n* `Pending` - Indicates that the request is yet to be processed.\n* `ObjPresenceCheckInProgress` - Indicates that the checking for object presence is in progress.\n* `ObjPresenceCheckInComplete` - Indicates that the request is being processed.\n* `ObjPresenceCheckFailed` - Indicates that the checking for object presence failed.\n* `Processing` - Indicates that the request is being processed.\n* `TimedOut` - Indicates that the request processing timed out.\n* `Failed` - Indicates that the request processing failed.\n* `Completed` - Indicates that the request processing is complete.\n* `Partial` - Indicates that the request is partially complete due to an error.\n* `Skipped` - Indicates that the request was skipped.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

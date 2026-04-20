@@ -155,18 +155,6 @@ func Test_intersight_WorkflowApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test WorkflowApiService CreateWorkflowServiceItemHealthCheckDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.WorkflowApi.CreateWorkflowServiceItemHealthCheckDefinition(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test WorkflowApiService CreateWorkflowServiceItemInstance", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -424,19 +412,6 @@ func Test_intersight_WorkflowApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.WorkflowApi.DeleteWorkflowServiceItemDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test WorkflowApiService DeleteWorkflowServiceItemHealthCheckDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.WorkflowApi.DeleteWorkflowServiceItemHealthCheckDefinition(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -1429,20 +1404,6 @@ func Test_intersight_WorkflowApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test WorkflowApiService PatchWorkflowServiceItemHealthCheckDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.WorkflowApi.PatchWorkflowServiceItemHealthCheckDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test WorkflowApiService PatchWorkflowServiceItemInstance", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1716,20 +1677,6 @@ func Test_intersight_WorkflowApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.WorkflowApi.UpdateWorkflowServiceItemDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test WorkflowApiService UpdateWorkflowServiceItemHealthCheckDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.WorkflowApi.UpdateWorkflowServiceItemHealthCheckDefinition(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

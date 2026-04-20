@@ -3,12 +3,22 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_variable"
 description: |-
-        Variables are user-defined entities that can be shared across workflows. They allow users to set a value once and then reference it from different workflows within the same scope. The variables can be of any type that is supported by the workflow system.
+        The Variable object facilitates the management of user-defined entities within workflows, allowing for consistent and reusable data references across different workflow instances.
+        #### Purpose
+        Variable serves as a central component for defining and managing workflow variables, ensuring consistency and efficiency across workflows. It allows users to set and reference variable values in multiple workflows, promoting data consistency and reducing redundancy in workflow design and execution.
+        #### Key Concepts
+        - **Reusable Entities:** Supports the creation of reusable variables, facilitating efficient and scalable workflow design.
+        - **Data Validation:** Ensures that variable values adhere to defined data types, promoting data integrity and reliability.
 
 ---
 
 # Data Source: intersight_workflow_variable
-Variables are user-defined entities that can be shared across workflows. They allow users to set a value once and then reference it from different workflows within the same scope. The variables can be of any type that is supported by the workflow system.
+The Variable object facilitates the management of user-defined entities within workflows, allowing for consistent and reusable data references across different workflow instances.  
+#### Purpose
+Variable serves as a central component for defining and managing workflow variables, ensuring consistency and efficiency across workflows. It allows users to set and reference variable values in multiple workflows, promoting data consistency and reducing redundancy in workflow design and execution.
+#### Key Concepts  
+- **Reusable Entities:** Supports the creation of reusable variables, facilitating efficient and scalable workflow design. 
+- **Data Validation:** Ensures that variable values adhere to defined data types, promoting data integrity and reliability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.IntersightDeviceConnectorConnection"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.IntersightDeviceConnectorConnection"]
+**PreClaim** | Pointer to **bool** | A pre-claim of an embedded target. Does not require a security token to be provided at target create, target will be created in a pre-claim state. | [optional] 
 **SecurityToken** | Pointer to **string** | The SecurityToken object holds a time-limited random string used for claiming a device. It is created implicitly for each device connector at the time of registration, providing a secure mechanism for users to assert administrative access during device claim operations. #### Purpose SecurityToken acts as a temporary credential that proves a user&#39;s administrative access to a device, allowing them to claim the device within Intersight. It strengthens the security of claim operations, preventing unauthorized device claims by restricting access to users who possess the token. #### Key Concepts - **Time-Bound Security:** Tokens are generated with expiration times, ensuring they are only valid for a limited duration to reduce the risk of misuse. - **Claim Validation:** Used during claim operations to validate that the user has the necessary privileges to manage the device. - **Access Control:** Integrates with Intersight&#39;s security model, providing controlled access to device claim functionalities. | [optional] 
 **SerialNumber** | Pointer to **string** | Obtained from the device connector management UI or API (REST endpoint &#39;/connector/DeviceIdentifiers&#39;). | [optional] 
 
@@ -67,6 +68,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetPreClaim
+
+`func (o *AssetIntersightDeviceConnectorConnection) GetPreClaim() bool`
+
+GetPreClaim returns the PreClaim field if non-nil, zero value otherwise.
+
+### GetPreClaimOk
+
+`func (o *AssetIntersightDeviceConnectorConnection) GetPreClaimOk() (*bool, bool)`
+
+GetPreClaimOk returns a tuple with the PreClaim field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreClaim
+
+`func (o *AssetIntersightDeviceConnectorConnection) SetPreClaim(v bool)`
+
+SetPreClaim sets PreClaim field to given value.
+
+### HasPreClaim
+
+`func (o *AssetIntersightDeviceConnectorConnection) HasPreClaim() bool`
+
+HasPreClaim returns a boolean if a field has been set.
 
 ### GetSecurityToken
 

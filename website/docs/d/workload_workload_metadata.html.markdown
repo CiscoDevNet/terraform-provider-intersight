@@ -10,7 +10,7 @@ description: |-
         #### Key Concepts
         - **Deployment Summary Aggregation:** - Maintains real-time aggregated counts of deployment states across all workload deployments associated with the definition.
         - **Conformance Summary Aggregation:** - Tracks conformance states across deployments, helping administrators understand compliance and drift status at the workload definition level.
-        - **Read-Only Reference Data:** - All properties are read-only, as this object serves as a computed aggregation maintained automatically by the system.
+        - **Rename Support:** - Renames a workload definition through the renameRequest property. This updates the definition name and all associated workload objects across all versions of the workload definition.
 
 ---
 
@@ -22,7 +22,7 @@ WorkloadMetadata exists to provide efficient access to aggregated metrics and st
 #### Key Concepts
 - **Deployment Summary Aggregation:** - Maintains real-time aggregated counts of deployment states across all workload deployments associated with the definition.
 - **Conformance Summary Aggregation:** - Tracks conformance states across deployments, helping administrators understand compliance and drift status at the workload definition level.
-- **Read-Only Reference Data:** - All properties are read-only, as this object serves as a computed aggregation maintained automatically by the system.
+- **Rename Support:** - Renames a workload definition through the renameRequest property. This updates the definition name and all associated workload objects across all versions of the workload definition.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

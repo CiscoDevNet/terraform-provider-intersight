@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -34,6 +34,8 @@ type BulkRequest struct {
 	// The timestamp when the request processing completed.
 	CompletionTime *string          `json:"CompletionTime,omitempty"`
 	Headers        []BulkHttpHeader `json:"Headers,omitempty"`
+	// Indicates whether the value of the 'backupEncryptionKey' property has been set.
+	IsBackupEncryptionKeySet *bool `json:"IsBackupEncryptionKeySet,omitempty"`
 	// The number of sub requests received in this request.
 	NumSubRequests *int64 `json:"NumSubRequests,omitempty"`
 	// The moid of the organization under which this request was issued.
@@ -53,7 +55,8 @@ type BulkRequest struct {
 	Uri *string `json:"Uri,omitempty"`
 	// The type of operation to be performed. One of - Post (Create), Patch (Update) or Delete (Remove). The value will be used when there is no override in the SubRequest. * `POST` - Used to create a REST resource. * `PATCH` - Used to update a REST resource. * `DELETE` - Used to delete a REST resource.
 	// Deprecated
-	Verb *string `json:"Verb,omitempty"`
+	Verb    *string                        `json:"Verb,omitempty"`
+	Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to bulkSubRequestObj resources.
 	AsyncResults []BulkSubRequestObjRelationship `json:"AsyncResults,omitempty"`
 	// An array of relationships to bulkSubRequestObj resources.
@@ -282,6 +285,38 @@ func (o *BulkRequest) HasHeaders() bool {
 // SetHeaders gets a reference to the given []BulkHttpHeader and assigns it to the Headers field.
 func (o *BulkRequest) SetHeaders(v []BulkHttpHeader) {
 	o.Headers = v
+}
+
+// GetIsBackupEncryptionKeySet returns the IsBackupEncryptionKeySet field value if set, zero value otherwise.
+func (o *BulkRequest) GetIsBackupEncryptionKeySet() bool {
+	if o == nil || IsNil(o.IsBackupEncryptionKeySet) {
+		var ret bool
+		return ret
+	}
+	return *o.IsBackupEncryptionKeySet
+}
+
+// GetIsBackupEncryptionKeySetOk returns a tuple with the IsBackupEncryptionKeySet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkRequest) GetIsBackupEncryptionKeySetOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsBackupEncryptionKeySet) {
+		return nil, false
+	}
+	return o.IsBackupEncryptionKeySet, true
+}
+
+// HasIsBackupEncryptionKeySet returns a boolean if a field has been set.
+func (o *BulkRequest) HasIsBackupEncryptionKeySet() bool {
+	if o != nil && !IsNil(o.IsBackupEncryptionKeySet) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsBackupEncryptionKeySet gets a reference to the given bool and assigns it to the IsBackupEncryptionKeySet field.
+func (o *BulkRequest) SetIsBackupEncryptionKeySet(v bool) {
+	o.IsBackupEncryptionKeySet = &v
 }
 
 // GetNumSubRequests returns the NumSubRequests field value if set, zero value otherwise.
@@ -612,6 +647,49 @@ func (o *BulkRequest) SetVerb(v string) {
 	o.Verb = &v
 }
 
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BulkRequest) GetAccount() IamAccountRelationship {
+	if o == nil || IsNil(o.Account.Get()) {
+		var ret IamAccountRelationship
+		return ret
+	}
+	return *o.Account.Get()
+}
+
+// GetAccountOk returns a tuple with the Account field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BulkRequest) GetAccountOk() (*IamAccountRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Account.Get(), o.Account.IsSet()
+}
+
+// HasAccount returns a boolean if a field has been set.
+func (o *BulkRequest) HasAccount() bool {
+	if o != nil && o.Account.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
+func (o *BulkRequest) SetAccount(v IamAccountRelationship) {
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *BulkRequest) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *BulkRequest) UnsetAccount() {
+	o.Account.Unset()
+}
+
 // GetAsyncResults returns the AsyncResults field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkRequest) GetAsyncResults() []BulkSubRequestObjRelationship {
 	if o == nil {
@@ -802,6 +880,9 @@ func (o BulkRequest) ToMap() (map[string]interface{}, error) {
 	if o.Headers != nil {
 		toSerialize["Headers"] = o.Headers
 	}
+	if !IsNil(o.IsBackupEncryptionKeySet) {
+		toSerialize["IsBackupEncryptionKeySet"] = o.IsBackupEncryptionKeySet
+	}
 	if !IsNil(o.NumSubRequests) {
 		toSerialize["NumSubRequests"] = o.NumSubRequests
 	}
@@ -831,6 +912,9 @@ func (o BulkRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Verb) {
 		toSerialize["Verb"] = o.Verb
+	}
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 	if o.AsyncResults != nil {
 		toSerialize["AsyncResults"] = o.AsyncResults
@@ -905,6 +989,8 @@ func (o *BulkRequest) UnmarshalJSON(data []byte) (err error) {
 		// The timestamp when the request processing completed.
 		CompletionTime *string          `json:"CompletionTime,omitempty"`
 		Headers        []BulkHttpHeader `json:"Headers,omitempty"`
+		// Indicates whether the value of the 'backupEncryptionKey' property has been set.
+		IsBackupEncryptionKeySet *bool `json:"IsBackupEncryptionKeySet,omitempty"`
 		// The number of sub requests received in this request.
 		NumSubRequests *int64 `json:"NumSubRequests,omitempty"`
 		// The moid of the organization under which this request was issued.
@@ -924,7 +1010,8 @@ func (o *BulkRequest) UnmarshalJSON(data []byte) (err error) {
 		Uri *string `json:"Uri,omitempty"`
 		// The type of operation to be performed. One of - Post (Create), Patch (Update) or Delete (Remove). The value will be used when there is no override in the SubRequest. * `POST` - Used to create a REST resource. * `PATCH` - Used to update a REST resource. * `DELETE` - Used to delete a REST resource.
 		// Deprecated
-		Verb *string `json:"Verb,omitempty"`
+		Verb    *string                        `json:"Verb,omitempty"`
+		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to bulkSubRequestObj resources.
 		AsyncResults []BulkSubRequestObjRelationship `json:"AsyncResults,omitempty"`
 		// An array of relationships to bulkSubRequestObj resources.
@@ -944,6 +1031,7 @@ func (o *BulkRequest) UnmarshalJSON(data []byte) (err error) {
 		varBulkRequest.Actions = varBulkRequestWithoutEmbeddedStruct.Actions
 		varBulkRequest.CompletionTime = varBulkRequestWithoutEmbeddedStruct.CompletionTime
 		varBulkRequest.Headers = varBulkRequestWithoutEmbeddedStruct.Headers
+		varBulkRequest.IsBackupEncryptionKeySet = varBulkRequestWithoutEmbeddedStruct.IsBackupEncryptionKeySet
 		varBulkRequest.NumSubRequests = varBulkRequestWithoutEmbeddedStruct.NumSubRequests
 		varBulkRequest.OrgMoid = varBulkRequestWithoutEmbeddedStruct.OrgMoid
 		varBulkRequest.RequestReceivedTime = varBulkRequestWithoutEmbeddedStruct.RequestReceivedTime
@@ -954,6 +1042,7 @@ func (o *BulkRequest) UnmarshalJSON(data []byte) (err error) {
 		varBulkRequest.StatusMessage = varBulkRequestWithoutEmbeddedStruct.StatusMessage
 		varBulkRequest.Uri = varBulkRequestWithoutEmbeddedStruct.Uri
 		varBulkRequest.Verb = varBulkRequestWithoutEmbeddedStruct.Verb
+		varBulkRequest.Account = varBulkRequestWithoutEmbeddedStruct.Account
 		varBulkRequest.AsyncResults = varBulkRequestWithoutEmbeddedStruct.AsyncResults
 		varBulkRequest.AsyncResultsFailed = varBulkRequestWithoutEmbeddedStruct.AsyncResultsFailed
 		varBulkRequest.Organization = varBulkRequestWithoutEmbeddedStruct.Organization
@@ -981,6 +1070,7 @@ func (o *BulkRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Actions")
 		delete(additionalProperties, "CompletionTime")
 		delete(additionalProperties, "Headers")
+		delete(additionalProperties, "IsBackupEncryptionKeySet")
 		delete(additionalProperties, "NumSubRequests")
 		delete(additionalProperties, "OrgMoid")
 		delete(additionalProperties, "RequestReceivedTime")
@@ -991,6 +1081,7 @@ func (o *BulkRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "StatusMessage")
 		delete(additionalProperties, "Uri")
 		delete(additionalProperties, "Verb")
+		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AsyncResults")
 		delete(additionalProperties, "AsyncResultsFailed")
 		delete(additionalProperties, "Organization")

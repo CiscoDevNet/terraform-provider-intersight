@@ -3,12 +3,20 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_template_function_meta"
 description: |-
-        The function template object.
+        The TemplateFunctionMeta object is a key component within the workflow system, designed to encapsulate the metadata and functionality of template functions.
+        #### Purpose
+        TemplateFunctionMeta serves as the blueprint for defining custom template functions that are supported by the system.
+        #### Key Concepts
+        - **Documentation and Metadata:** Contains comprehensive descriptions and usage examples, aiding in understanding and leveraging template functions effectively.
 
 ---
 
 # Data Source: intersight_workflow_template_function_meta
-The function template object.
+The TemplateFunctionMeta object is a key component within the workflow system, designed to encapsulate the metadata and functionality of template functions.
+#### Purpose  
+TemplateFunctionMeta serves as the blueprint for defining custom template functions that are supported by the system.
+#### Key Concepts 
+- **Documentation and Metadata:** Contains comprehensive descriptions and usage examples, aiding in understanding and leveraging template functions effectively.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

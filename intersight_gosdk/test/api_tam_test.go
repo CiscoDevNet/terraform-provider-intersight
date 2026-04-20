@@ -23,30 +23,6 @@ func Test_intersight_TamApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test TamApiService CreateTamAdvisoryCount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.TamApi.CreateTamAdvisoryCount(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService CreateTamAdvisoryDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.TamApi.CreateTamAdvisoryDefinition(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test TamApiService CreateTamAdvisoryInfo", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -59,56 +35,6 @@ func Test_intersight_TamApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test TamApiService CreateTamAdvisoryInstance", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.TamApi.CreateTamAdvisoryInstance(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService CreateTamSecurityAdvisory", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.TamApi.CreateTamSecurityAdvisory(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService DeleteTamAdvisoryCount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.TamApi.DeleteTamAdvisoryCount(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService DeleteTamAdvisoryDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.TamApi.DeleteTamAdvisoryDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test TamApiService DeleteTamAdvisoryInfo", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -116,32 +42,6 @@ func Test_intersight_TamApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.TamApi.DeleteTamAdvisoryInfo(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService DeleteTamAdvisoryInstance", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.TamApi.DeleteTamAdvisoryInstance(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService DeleteTamSecurityAdvisory", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.TamApi.DeleteTamSecurityAdvisory(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -278,34 +178,6 @@ func Test_intersight_TamApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test TamApiService PatchTamAdvisoryCount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.TamApi.PatchTamAdvisoryCount(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService PatchTamAdvisoryDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.TamApi.PatchTamAdvisoryDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test TamApiService PatchTamAdvisoryInfo", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -320,62 +192,6 @@ func Test_intersight_TamApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test TamApiService PatchTamAdvisoryInstance", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.TamApi.PatchTamAdvisoryInstance(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService PatchTamSecurityAdvisory", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.TamApi.PatchTamSecurityAdvisory(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService UpdateTamAdvisoryCount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.TamApi.UpdateTamAdvisoryCount(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService UpdateTamAdvisoryDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.TamApi.UpdateTamAdvisoryDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test TamApiService UpdateTamAdvisoryInfo", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -383,34 +199,6 @@ func Test_intersight_TamApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.TamApi.UpdateTamAdvisoryInfo(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService UpdateTamAdvisoryInstance", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.TamApi.UpdateTamAdvisoryInstance(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TamApiService UpdateTamSecurityAdvisory", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.TamApi.UpdateTamSecurityAdvisory(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

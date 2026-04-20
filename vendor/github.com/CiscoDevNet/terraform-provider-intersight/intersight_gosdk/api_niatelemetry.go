@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -23,516 +23,31 @@ import (
 // NiatelemetryApiService NiatelemetryApi service
 type NiatelemetryApiService service
 
-type ApiCreateNiatelemetryNexusCloudAccountRequest struct {
-	ctx                           context.Context
-	ApiService                    *NiatelemetryApiService
-	niatelemetryNexusCloudAccount *NiatelemetryNexusCloudAccount
-	ifMatch                       *string
-	ifNoneMatch                   *string
-}
-
-// The &#39;niatelemetry.NexusCloudAccount&#39; resource to create.
-func (r ApiCreateNiatelemetryNexusCloudAccountRequest) NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount NiatelemetryNexusCloudAccount) ApiCreateNiatelemetryNexusCloudAccountRequest {
-	r.niatelemetryNexusCloudAccount = &niatelemetryNexusCloudAccount
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateNiatelemetryNexusCloudAccountRequest) IfMatch(ifMatch string) ApiCreateNiatelemetryNexusCloudAccountRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateNiatelemetryNexusCloudAccountRequest) IfNoneMatch(ifNoneMatch string) ApiCreateNiatelemetryNexusCloudAccountRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateNiatelemetryNexusCloudAccountRequest) Execute() (*NiatelemetryNexusCloudAccount, *http.Response, error) {
-	return r.ApiService.CreateNiatelemetryNexusCloudAccountExecute(r)
-}
-
-/*
-CreateNiatelemetryNexusCloudAccount Create a 'niatelemetry.NexusCloudAccount' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateNiatelemetryNexusCloudAccountRequest
-*/
-func (a *NiatelemetryApiService) CreateNiatelemetryNexusCloudAccount(ctx context.Context) ApiCreateNiatelemetryNexusCloudAccountRequest {
-	return ApiCreateNiatelemetryNexusCloudAccountRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return NiatelemetryNexusCloudAccount
-func (a *NiatelemetryApiService) CreateNiatelemetryNexusCloudAccountExecute(r ApiCreateNiatelemetryNexusCloudAccountRequest) (*NiatelemetryNexusCloudAccount, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *NiatelemetryNexusCloudAccount
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.CreateNiatelemetryNexusCloudAccount")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudAccounts"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.niatelemetryNexusCloudAccount == nil {
-		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudAccount is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.niatelemetryNexusCloudAccount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateNiatelemetryNexusCloudSiteRequest struct {
-	ctx                        context.Context
-	ApiService                 *NiatelemetryApiService
-	niatelemetryNexusCloudSite *NiatelemetryNexusCloudSite
-	ifMatch                    *string
-	ifNoneMatch                *string
-}
-
-// The &#39;niatelemetry.NexusCloudSite&#39; resource to create.
-func (r ApiCreateNiatelemetryNexusCloudSiteRequest) NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite NiatelemetryNexusCloudSite) ApiCreateNiatelemetryNexusCloudSiteRequest {
-	r.niatelemetryNexusCloudSite = &niatelemetryNexusCloudSite
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateNiatelemetryNexusCloudSiteRequest) IfMatch(ifMatch string) ApiCreateNiatelemetryNexusCloudSiteRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateNiatelemetryNexusCloudSiteRequest) IfNoneMatch(ifNoneMatch string) ApiCreateNiatelemetryNexusCloudSiteRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateNiatelemetryNexusCloudSiteRequest) Execute() (*NiatelemetryNexusCloudSite, *http.Response, error) {
-	return r.ApiService.CreateNiatelemetryNexusCloudSiteExecute(r)
-}
-
-/*
-CreateNiatelemetryNexusCloudSite Create a 'niatelemetry.NexusCloudSite' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateNiatelemetryNexusCloudSiteRequest
-*/
-func (a *NiatelemetryApiService) CreateNiatelemetryNexusCloudSite(ctx context.Context) ApiCreateNiatelemetryNexusCloudSiteRequest {
-	return ApiCreateNiatelemetryNexusCloudSiteRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return NiatelemetryNexusCloudSite
-func (a *NiatelemetryApiService) CreateNiatelemetryNexusCloudSiteExecute(r ApiCreateNiatelemetryNexusCloudSiteRequest) (*NiatelemetryNexusCloudSite, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *NiatelemetryNexusCloudSite
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.CreateNiatelemetryNexusCloudSite")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.niatelemetryNexusCloudSite == nil {
-		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudSite is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.niatelemetryNexusCloudSite
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiDeleteNiatelemetryNexusCloudSiteRequest struct {
-	ctx        context.Context
-	ApiService *NiatelemetryApiService
-	moid       string
-}
-
-func (r ApiDeleteNiatelemetryNexusCloudSiteRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteNiatelemetryNexusCloudSiteExecute(r)
-}
-
-/*
-DeleteNiatelemetryNexusCloudSite Delete a 'niatelemetry.NexusCloudSite' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteNiatelemetryNexusCloudSiteRequest
-*/
-func (a *NiatelemetryApiService) DeleteNiatelemetryNexusCloudSite(ctx context.Context, moid string) ApiDeleteNiatelemetryNexusCloudSiteRequest {
-	return ApiDeleteNiatelemetryNexusCloudSiteRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *NiatelemetryApiService) DeleteNiatelemetryNexusCloudSiteExecute(r ApiDeleteNiatelemetryNexusCloudSiteRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.DeleteNiatelemetryNexusCloudSite")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) At(at string) ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) Execute() (*NiatelemetryAaaLdapProviderDetails, *http.Response, error) {
@@ -577,6 +92,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoidExec
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -962,6 +489,27 @@ type ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) At(at string) ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) Execute() (*NiatelemetryAaaRadiusProviderDetails, *http.Response, error) {
@@ -1006,6 +554,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoidEx
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1391,6 +951,27 @@ type ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) At(at string) ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) Execute() (*NiatelemetryAaaTacacsProviderDetails, *http.Response, error) {
@@ -1435,6 +1016,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoidEx
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1820,6 +1413,27 @@ type ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) Execute() (*NiatelemetryApicAppPluginDetails, *http.Response, error) {
@@ -1864,6 +1478,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoidExecut
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2249,6 +1875,27 @@ type ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) Execute() (*NiatelemetryApicCoreFileDetails, *http.Response, error) {
@@ -2293,6 +1940,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2678,6 +2337,27 @@ type ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) At(at string) ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) Execute() (*NiatelemetryApicDbgexpRsExportDest, *http.Response, error) {
@@ -2722,6 +2402,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoidExec
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3107,6 +2799,27 @@ type ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) At(at string) ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) Execute() (*NiatelemetryApicDbgexpRsTsScheduler, *http.Response, error) {
@@ -3151,6 +2864,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoidExe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3536,6 +3261,27 @@ type ApiGetNiatelemetryApicFanDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicFanDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicFanDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicFanDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicFanDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicFanDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicFanDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicFanDetailsByMoidRequest) Execute() (*NiatelemetryApicFanDetails, *http.Response, error) {
@@ -3580,6 +3326,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3965,6 +3723,27 @@ type ApiGetNiatelemetryApicFexDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicFexDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicFexDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicFexDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicFexDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicFexDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicFexDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicFexDetailsByMoidRequest) Execute() (*NiatelemetryApicFexDetails, *http.Response, error) {
@@ -4009,6 +3788,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4394,6 +4185,27 @@ type ApiGetNiatelemetryApicFlashDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicFlashDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicFlashDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicFlashDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) Execute() (*NiatelemetryApicFlashDetails, *http.Response, error) {
@@ -4438,6 +4250,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4823,6 +4647,27 @@ type ApiGetNiatelemetryApicNtpAuthByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicNtpAuthByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicNtpAuthByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicNtpAuthByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicNtpAuthByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicNtpAuthByMoidRequest) At(at string) ApiGetNiatelemetryApicNtpAuthByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicNtpAuthByMoidRequest) Execute() (*NiatelemetryApicNtpAuth, *http.Response, error) {
@@ -4867,6 +4712,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5252,6 +5109,27 @@ type ApiGetNiatelemetryApicPerformanceDataByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicPerformanceDataByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicPerformanceDataByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicPerformanceDataByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicPerformanceDataByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicPerformanceDataByMoidRequest) At(at string) ApiGetNiatelemetryApicPerformanceDataByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicPerformanceDataByMoidRequest) Execute() (*NiatelemetryApicPerformanceData, *http.Response, error) {
@@ -5296,6 +5174,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPerformanceDataByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5681,6 +5571,27 @@ type ApiGetNiatelemetryApicPodDataByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicPodDataByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicPodDataByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicPodDataByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicPodDataByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicPodDataByMoidRequest) At(at string) ApiGetNiatelemetryApicPodDataByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicPodDataByMoidRequest) Execute() (*NiatelemetryApicPodData, *http.Response, error) {
@@ -5725,6 +5636,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPodDataByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6110,6 +6033,27 @@ type ApiGetNiatelemetryApicPsuDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicPsuDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicPsuDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicPsuDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) Execute() (*NiatelemetryApicPsuDetails, *http.Response, error) {
@@ -6154,6 +6098,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6539,6 +6495,27 @@ type ApiGetNiatelemetryApicRealmDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicRealmDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicRealmDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicRealmDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) Execute() (*NiatelemetryApicRealmDetails, *http.Response, error) {
@@ -6583,6 +6560,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6968,6 +6957,27 @@ type ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpClientGrpDetails, *http.Response, error) {
@@ -7012,6 +7022,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoidEx
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7397,6 +7419,27 @@ type ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpCommunityAccessDetails, *http.Response, error) {
@@ -7441,6 +7484,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsBy
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7826,6 +7881,27 @@ type ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpCommunityDetails, *http.Response, error) {
@@ -7870,6 +7946,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoidEx
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8255,6 +8343,27 @@ type ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpTrapDetails, *http.Response, error) {
@@ -8299,6 +8408,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8684,6 +8805,27 @@ type ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpTrapFwdServerDetails, *http.Response, error) {
@@ -8728,6 +8870,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9113,6 +9267,27 @@ type ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpVersionThreeDetails, *http.Response, error) {
@@ -9157,6 +9332,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9542,6 +9729,27 @@ type ApiGetNiatelemetryApicSysLogGrpByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicSysLogGrpByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicSysLogGrpByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) At(at string) ApiGetNiatelemetryApicSysLogGrpByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) Execute() (*NiatelemetryApicSysLogGrp, *http.Response, error) {
@@ -9586,6 +9794,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9971,6 +10191,27 @@ type ApiGetNiatelemetryApicSysLogSrcByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicSysLogSrcByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicSysLogSrcByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) At(at string) ApiGetNiatelemetryApicSysLogSrcByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) Execute() (*NiatelemetryApicSysLogSrc, *http.Response, error) {
@@ -10015,6 +10256,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10400,6 +10653,27 @@ type ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) At(at string) ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) Execute() (*NiatelemetryApicTransceiverDetails, *http.Response, error) {
@@ -10444,6 +10718,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoidExec
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10829,6 +11115,27 @@ type ApiGetNiatelemetryApicUiPageCountsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicUiPageCountsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicUiPageCountsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) At(at string) ApiGetNiatelemetryApicUiPageCountsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) Execute() (*NiatelemetryApicUiPageCounts, *http.Response, error) {
@@ -10873,6 +11180,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11258,6 +11577,27 @@ type ApiGetNiatelemetryApicVisionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryApicVisionByMoidRequest) Select_(select_ string) ApiGetNiatelemetryApicVisionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryApicVisionByMoidRequest) Expand(expand string) ApiGetNiatelemetryApicVisionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryApicVisionByMoidRequest) At(at string) ApiGetNiatelemetryApicVisionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryApicVisionByMoidRequest) Execute() (*NiatelemetryApicVision, *http.Response, error) {
@@ -11302,6 +11642,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicVisionByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11687,6 +12039,27 @@ type ApiGetNiatelemetryAppDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryAppDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryAppDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryAppDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryAppDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryAppDetailsByMoidRequest) At(at string) ApiGetNiatelemetryAppDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryAppDetailsByMoidRequest) Execute() (*NiatelemetryAppDetails, *http.Response, error) {
@@ -11731,6 +12104,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12116,6 +12501,27 @@ type ApiGetNiatelemetryCloudDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryCloudDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryCloudDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryCloudDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryCloudDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryCloudDetailsByMoidRequest) At(at string) ApiGetNiatelemetryCloudDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryCloudDetailsByMoidRequest) Execute() (*NiatelemetryCloudDetails, *http.Response, error) {
@@ -12160,6 +12566,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryCloudDetailsByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12545,6 +12963,27 @@ type ApiGetNiatelemetryCommonPoliciesByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryCommonPoliciesByMoidRequest) Select_(select_ string) ApiGetNiatelemetryCommonPoliciesByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryCommonPoliciesByMoidRequest) Expand(expand string) ApiGetNiatelemetryCommonPoliciesByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryCommonPoliciesByMoidRequest) At(at string) ApiGetNiatelemetryCommonPoliciesByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryCommonPoliciesByMoidRequest) Execute() (*NiatelemetryCommonPolicies, *http.Response, error) {
@@ -12589,6 +13028,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12974,6 +13425,27 @@ type ApiGetNiatelemetryDcnmFanDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryDcnmFanDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryDcnmFanDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) At(at string) ApiGetNiatelemetryDcnmFanDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) Execute() (*NiatelemetryDcnmFanDetails, *http.Response, error) {
@@ -13018,6 +13490,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13403,6 +13887,27 @@ type ApiGetNiatelemetryDcnmFexDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryDcnmFexDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryDcnmFexDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) At(at string) ApiGetNiatelemetryDcnmFexDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) Execute() (*NiatelemetryDcnmFexDetails, *http.Response, error) {
@@ -13447,6 +13952,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13832,6 +14349,27 @@ type ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) At(at string) ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) Execute() (*NiatelemetryDcnmModuleDetails, *http.Response, error) {
@@ -13876,6 +14414,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14261,6 +14811,27 @@ type ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) At(at string) ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) Execute() (*NiatelemetryDcnmPsuDetails, *http.Response, error) {
@@ -14305,6 +14876,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14690,6 +15273,27 @@ type ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) At(at string) ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) Execute() (*NiatelemetryDcnmTransceiverDetails, *http.Response, error) {
@@ -14734,6 +15338,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoidExec
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15119,6 +15735,27 @@ type ApiGetNiatelemetryDomInfoObjectByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryDomInfoObjectByMoidRequest) Select_(select_ string) ApiGetNiatelemetryDomInfoObjectByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryDomInfoObjectByMoidRequest) Expand(expand string) ApiGetNiatelemetryDomInfoObjectByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryDomInfoObjectByMoidRequest) At(at string) ApiGetNiatelemetryDomInfoObjectByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryDomInfoObjectByMoidRequest) Execute() (*NiatelemetryDomInfoObject, *http.Response, error) {
@@ -15163,6 +15800,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryDomInfoObjectByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15548,6 +16197,27 @@ type ApiGetNiatelemetryDomThresInfoObjectByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryDomThresInfoObjectByMoidRequest) Select_(select_ string) ApiGetNiatelemetryDomThresInfoObjectByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryDomThresInfoObjectByMoidRequest) Expand(expand string) ApiGetNiatelemetryDomThresInfoObjectByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryDomThresInfoObjectByMoidRequest) At(at string) ApiGetNiatelemetryDomThresInfoObjectByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryDomThresInfoObjectByMoidRequest) Execute() (*NiatelemetryDomThresInfoObject, *http.Response, error) {
@@ -15592,6 +16262,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryDomThresInfoObjectByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15977,6 +16659,27 @@ type ApiGetNiatelemetryEpgByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryEpgByMoidRequest) Select_(select_ string) ApiGetNiatelemetryEpgByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryEpgByMoidRequest) Expand(expand string) ApiGetNiatelemetryEpgByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryEpgByMoidRequest) At(at string) ApiGetNiatelemetryEpgByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryEpgByMoidRequest) Execute() (*NiatelemetryEpg, *http.Response, error) {
@@ -16021,6 +16724,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatele
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16406,6 +17121,27 @@ type ApiGetNiatelemetryFabricModuleDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryFabricModuleDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryFabricModuleDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) At(at string) ApiGetNiatelemetryFabricModuleDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) Execute() (*NiatelemetryFabricModuleDetails, *http.Response, error) {
@@ -16450,6 +17186,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16835,6 +17583,27 @@ type ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) At(at string) ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) Execute() (*NiatelemetryFabricNodeControlDetails, *http.Response, error) {
@@ -16879,6 +17648,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoidEx
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17264,6 +18045,27 @@ type ApiGetNiatelemetryFabricPodProfileByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryFabricPodProfileByMoidRequest) Select_(select_ string) ApiGetNiatelemetryFabricPodProfileByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryFabricPodProfileByMoidRequest) Expand(expand string) ApiGetNiatelemetryFabricPodProfileByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryFabricPodProfileByMoidRequest) At(at string) ApiGetNiatelemetryFabricPodProfileByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryFabricPodProfileByMoidRequest) Execute() (*NiatelemetryFabricPodProfile, *http.Response, error) {
@@ -17308,6 +18110,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17693,6 +18507,27 @@ type ApiGetNiatelemetryFabricPodSsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryFabricPodSsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryFabricPodSsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryFabricPodSsByMoidRequest) Expand(expand string) ApiGetNiatelemetryFabricPodSsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryFabricPodSsByMoidRequest) At(at string) ApiGetNiatelemetryFabricPodSsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryFabricPodSsByMoidRequest) Execute() (*NiatelemetryFabricPodSs, *http.Response, error) {
@@ -17737,6 +18572,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18122,6 +18969,27 @@ type ApiGetNiatelemetryFaultByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryFaultByMoidRequest) Select_(select_ string) ApiGetNiatelemetryFaultByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryFaultByMoidRequest) Expand(expand string) ApiGetNiatelemetryFaultByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryFaultByMoidRequest) At(at string) ApiGetNiatelemetryFaultByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryFaultByMoidRequest) Execute() (*NiatelemetryFault, *http.Response, error) {
@@ -18166,6 +19034,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiate
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18551,6 +19431,27 @@ type ApiGetNiatelemetryHcloudDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryHcloudDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryHcloudDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryHcloudDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryHcloudDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryHcloudDetailsByMoidRequest) At(at string) ApiGetNiatelemetryHcloudDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryHcloudDetailsByMoidRequest) Execute() (*NiatelemetryHcloudDetails, *http.Response, error) {
@@ -18595,6 +19496,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryHcloudDetailsByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18980,6 +19893,27 @@ type ApiGetNiatelemetryHealthInsightsDataByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryHealthInsightsDataByMoidRequest) Select_(select_ string) ApiGetNiatelemetryHealthInsightsDataByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryHealthInsightsDataByMoidRequest) Expand(expand string) ApiGetNiatelemetryHealthInsightsDataByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryHealthInsightsDataByMoidRequest) At(at string) ApiGetNiatelemetryHealthInsightsDataByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryHealthInsightsDataByMoidRequest) Execute() (*NiatelemetryHealthInsightsData, *http.Response, error) {
@@ -19024,6 +19958,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryHealthInsightsDataByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19409,6 +20355,27 @@ type ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) At(at string) ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) Execute() (*NiatelemetryHttpsAclContractDetails, *http.Response, error) {
@@ -19453,6 +20420,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoidExe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19838,6 +20817,27 @@ type ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) Select_(select_ string) ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) Expand(expand string) ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) At(at string) ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) Execute() (*NiatelemetryHttpsAclContractFilterMap, *http.Response, error) {
@@ -19882,6 +20882,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoidE
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -20267,6 +21279,27 @@ type ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) Select_(select_ string) ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) Expand(expand string) ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) At(at string) ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) Execute() (*NiatelemetryHttpsAclEpgContractMap, *http.Response, error) {
@@ -20311,6 +21344,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoidExec
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -20696,6 +21741,27 @@ type ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) At(at string) ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) Execute() (*NiatelemetryHttpsAclEpgDetails, *http.Response, error) {
@@ -20740,6 +21806,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -21125,6 +22203,27 @@ type ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) At(at string) ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) Execute() (*NiatelemetryHttpsAclFilterDetails, *http.Response, error) {
@@ -21169,6 +22268,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -21554,6 +22665,27 @@ type ApiGetNiatelemetryInsightGroupDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryInsightGroupDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryInsightGroupDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) At(at string) ApiGetNiatelemetryInsightGroupDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) Execute() (*NiatelemetryInsightGroupDetails, *http.Response, error) {
@@ -21598,6 +22730,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -21983,6 +23127,27 @@ type ApiGetNiatelemetryLcByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryLcByMoidRequest) Select_(select_ string) ApiGetNiatelemetryLcByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryLcByMoidRequest) Expand(expand string) ApiGetNiatelemetryLcByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryLcByMoidRequest) At(at string) ApiGetNiatelemetryLcByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryLcByMoidRequest) Execute() (*NiatelemetryLc, *http.Response, error) {
@@ -22027,6 +23192,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelem
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -22412,6 +23589,27 @@ type ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) At(at string) ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) Execute() (*NiatelemetryLeafPolGrpDetails, *http.Response, error) {
@@ -22456,6 +23654,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -22841,6 +24051,27 @@ type ApiGetNiatelemetryMdsNeighborsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryMdsNeighborsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryMdsNeighborsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryMdsNeighborsByMoidRequest) Expand(expand string) ApiGetNiatelemetryMdsNeighborsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryMdsNeighborsByMoidRequest) At(at string) ApiGetNiatelemetryMdsNeighborsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryMdsNeighborsByMoidRequest) Execute() (*NiatelemetryMdsNeighbors, *http.Response, error) {
@@ -22885,6 +24116,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryMdsNeighborsByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -23270,6 +24513,27 @@ type ApiGetNiatelemetryMsoContractDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryMsoContractDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryMsoContractDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) At(at string) ApiGetNiatelemetryMsoContractDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) Execute() (*NiatelemetryMsoContractDetails, *http.Response, error) {
@@ -23314,6 +24578,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -23699,6 +24975,27 @@ type ApiGetNiatelemetryMsoEpgDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryMsoEpgDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryMsoEpgDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) At(at string) ApiGetNiatelemetryMsoEpgDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) Execute() (*NiatelemetryMsoEpgDetails, *http.Response, error) {
@@ -23743,6 +25040,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -24128,6 +25437,27 @@ type ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) At(at string) ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) Execute() (*NiatelemetryMsoSchemaDetails, *http.Response, error) {
@@ -24172,6 +25502,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -24557,6 +25899,27 @@ type ApiGetNiatelemetryMsoSiteDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryMsoSiteDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryMsoSiteDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) At(at string) ApiGetNiatelemetryMsoSiteDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) Execute() (*NiatelemetryMsoSiteDetails, *http.Response, error) {
@@ -24601,6 +25964,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -24986,6 +26361,27 @@ type ApiGetNiatelemetryMsoTenantDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryMsoTenantDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryMsoTenantDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) At(at string) ApiGetNiatelemetryMsoTenantDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) Execute() (*NiatelemetryMsoTenantDetails, *http.Response, error) {
@@ -25030,6 +26426,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -25415,6 +26823,27 @@ type ApiGetNiatelemetryNexusCloudAccountByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNexusCloudAccountByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNexusCloudAccountByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNexusCloudAccountByMoidRequest) Expand(expand string) ApiGetNiatelemetryNexusCloudAccountByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNexusCloudAccountByMoidRequest) At(at string) ApiGetNiatelemetryNexusCloudAccountByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNexusCloudAccountByMoidRequest) Execute() (*NiatelemetryNexusCloudAccount, *http.Response, error) {
@@ -25459,6 +26888,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudAccountByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -25844,6 +27285,27 @@ type ApiGetNiatelemetryNexusCloudSiteByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNexusCloudSiteByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNexusCloudSiteByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNexusCloudSiteByMoidRequest) Expand(expand string) ApiGetNiatelemetryNexusCloudSiteByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNexusCloudSiteByMoidRequest) At(at string) ApiGetNiatelemetryNexusCloudSiteByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNexusCloudSiteByMoidRequest) Execute() (*NiatelemetryNexusCloudSite, *http.Response, error) {
@@ -25888,6 +27350,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudSiteByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -26273,6 +27747,27 @@ type ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) At(at string) ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) Execute() (*NiatelemetryNexusDashboardControllerDetails, *http.Response, error) {
@@ -26317,6 +27812,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -26702,6 +28209,27 @@ type ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) At(at string) ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) Execute() (*NiatelemetryNexusDashboardDetails, *http.Response, error) {
@@ -26746,6 +28274,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -27131,6 +28671,27 @@ type ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) At(at string) ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) Execute() (*NiatelemetryNexusDashboardMemoryDetails, *http.Response, error) {
@@ -27175,6 +28736,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -27560,6 +29133,27 @@ type ApiGetNiatelemetryNexusDashboardsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNexusDashboardsByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNexusDashboardsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNexusDashboardsByMoidRequest) Expand(expand string) ApiGetNiatelemetryNexusDashboardsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNexusDashboardsByMoidRequest) At(at string) ApiGetNiatelemetryNexusDashboardsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNexusDashboardsByMoidRequest) Execute() (*NiatelemetryNexusDashboards, *http.Response, error) {
@@ -27604,6 +29198,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -27989,6 +29595,27 @@ type ApiGetNiatelemetryNiaFeatureUsageByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNiaFeatureUsageByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) Expand(expand string) ApiGetNiatelemetryNiaFeatureUsageByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) At(at string) ApiGetNiatelemetryNiaFeatureUsageByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) Execute() (*NiatelemetryNiaFeatureUsage, *http.Response, error) {
@@ -28033,6 +29660,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -28418,6 +30057,27 @@ type ApiGetNiatelemetryNiaInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNiaInventoryByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNiaInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNiaInventoryByMoidRequest) Expand(expand string) ApiGetNiatelemetryNiaInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNiaInventoryByMoidRequest) At(at string) ApiGetNiatelemetryNiaInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNiaInventoryByMoidRequest) Execute() (*NiatelemetryNiaInventory, *http.Response, error) {
@@ -28462,6 +30122,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -28572,6 +30244,27 @@ type ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) Expand(expand string) ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) At(at string) ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) Execute() (*NiatelemetryNiaInventoryDcnm, *http.Response, error) {
@@ -28616,6 +30309,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -29001,6 +30706,27 @@ type ApiGetNiatelemetryNiaInventoryFabricByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNiaInventoryFabricByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) Expand(expand string) ApiGetNiatelemetryNiaInventoryFabricByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) At(at string) ApiGetNiatelemetryNiaInventoryFabricByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) Execute() (*NiatelemetryNiaInventoryFabric, *http.Response, error) {
@@ -29045,6 +30771,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -29705,6 +31443,27 @@ type ApiGetNiatelemetryNiaLicenseStateByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNiaLicenseStateByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) Expand(expand string) ApiGetNiatelemetryNiaLicenseStateByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) At(at string) ApiGetNiatelemetryNiaLicenseStateByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) Execute() (*NiatelemetryNiaLicenseState, *http.Response, error) {
@@ -29749,6 +31508,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -30134,6 +31905,27 @@ type ApiGetNiatelemetryNiccByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNiccByMoidRequest) Select_(select_ string) ApiGetNiatelemetryNiccByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNiccByMoidRequest) Expand(expand string) ApiGetNiatelemetryNiccByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNiccByMoidRequest) At(at string) ApiGetNiatelemetryNiccByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryNiccByMoidRequest) Execute() (*NiatelemetryNicc, *http.Response, error) {
@@ -30178,6 +31970,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiccByMoidExecute(r ApiGetNiatel
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -30563,6 +32367,27 @@ type ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) Select_(select_ string) ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) Expand(expand string) ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) At(at string) ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) Execute() (*NiatelemetryPasswordStrengthCheck, *http.Response, error) {
@@ -30607,6 +32432,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -30992,6 +32829,27 @@ type ApiGetNiatelemetryPodCommPoliciesByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) Select_(select_ string) ApiGetNiatelemetryPodCommPoliciesByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) Expand(expand string) ApiGetNiatelemetryPodCommPoliciesByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) At(at string) ApiGetNiatelemetryPodCommPoliciesByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) Execute() (*NiatelemetryPodCommPolicies, *http.Response, error) {
@@ -31036,6 +32894,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -31421,6 +33291,27 @@ type ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) Select_(select_ string) ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) Expand(expand string) ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) At(at string) ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) Execute() (*NiatelemetryPodSnmpPolicies, *http.Response, error) {
@@ -31465,6 +33356,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -31850,6 +33753,27 @@ type ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) Select_(select_ string) ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) Expand(expand string) ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) At(at string) ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) Execute() (*NiatelemetryPodTimeServerPolicies, *http.Response, error) {
@@ -31894,6 +33818,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -32279,6 +34215,27 @@ type ApiGetNiatelemetrySiteInventoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetrySiteInventoryByMoidRequest) Select_(select_ string) ApiGetNiatelemetrySiteInventoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetrySiteInventoryByMoidRequest) Expand(expand string) ApiGetNiatelemetrySiteInventoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetrySiteInventoryByMoidRequest) At(at string) ApiGetNiatelemetrySiteInventoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetrySiteInventoryByMoidRequest) Execute() (*NiatelemetrySiteInventory, *http.Response, error) {
@@ -32323,6 +34280,18 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -32708,6 +34677,27 @@ type ApiGetNiatelemetrySnmpSrcByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetrySnmpSrcByMoidRequest) Select_(select_ string) ApiGetNiatelemetrySnmpSrcByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetrySnmpSrcByMoidRequest) Expand(expand string) ApiGetNiatelemetrySnmpSrcByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetrySnmpSrcByMoidRequest) At(at string) ApiGetNiatelemetrySnmpSrcByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetrySnmpSrcByMoidRequest) Execute() (*NiatelemetrySnmpSrc, *http.Response, error) {
@@ -32752,6 +34742,18 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoidExecute(r ApiGetNia
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -33137,6 +35139,27 @@ type ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) At(at string) ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) Execute() (*NiatelemetrySpinePolGrpDetails, *http.Response, error) {
@@ -33181,6 +35204,18 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -33566,6 +35601,27 @@ type ApiGetNiatelemetrySshVersionTwoByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetrySshVersionTwoByMoidRequest) Select_(select_ string) ApiGetNiatelemetrySshVersionTwoByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetrySshVersionTwoByMoidRequest) Expand(expand string) ApiGetNiatelemetrySshVersionTwoByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetrySshVersionTwoByMoidRequest) At(at string) ApiGetNiatelemetrySshVersionTwoByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetrySshVersionTwoByMoidRequest) Execute() (*NiatelemetrySshVersionTwo, *http.Response, error) {
@@ -33610,6 +35666,18 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -33995,6 +36063,27 @@ type ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) At(at string) ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) Execute() (*NiatelemetrySupervisorModuleDetails, *http.Response, error) {
@@ -34039,6 +36128,18 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoidExe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -34424,6 +36525,27 @@ type ApiGetNiatelemetrySyslogRemoteDestByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) Select_(select_ string) ApiGetNiatelemetrySyslogRemoteDestByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) Expand(expand string) ApiGetNiatelemetrySyslogRemoteDestByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) At(at string) ApiGetNiatelemetrySyslogRemoteDestByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) Execute() (*NiatelemetrySyslogRemoteDest, *http.Response, error) {
@@ -34468,6 +36590,18 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -34853,6 +36987,27 @@ type ApiGetNiatelemetrySyslogSysMsgByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) Select_(select_ string) ApiGetNiatelemetrySyslogSysMsgByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) Expand(expand string) ApiGetNiatelemetrySyslogSysMsgByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) At(at string) ApiGetNiatelemetrySyslogSysMsgByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) Execute() (*NiatelemetrySyslogSysMsg, *http.Response, error) {
@@ -34897,6 +37052,18 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -35007,6 +37174,27 @@ type ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) Select_(select_ string) ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) Expand(expand string) ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) At(at string) ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) Execute() (*NiatelemetrySyslogSysMsgFacFilter, *http.Response, error) {
@@ -35051,6 +37239,18 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -35711,6 +37911,27 @@ type ApiGetNiatelemetrySystemControllerDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) Select_(select_ string) ApiGetNiatelemetrySystemControllerDetailsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) Expand(expand string) ApiGetNiatelemetrySystemControllerDetailsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) At(at string) ApiGetNiatelemetrySystemControllerDetailsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) Execute() (*NiatelemetrySystemControllerDetails, *http.Response, error) {
@@ -35755,6 +37976,18 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoidExe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -36140,6 +38373,27 @@ type ApiGetNiatelemetryTenantByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryTenantByMoidRequest) Select_(select_ string) ApiGetNiatelemetryTenantByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryTenantByMoidRequest) Expand(expand string) ApiGetNiatelemetryTenantByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryTenantByMoidRequest) At(at string) ApiGetNiatelemetryTenantByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNiatelemetryTenantByMoidRequest) Execute() (*NiatelemetryTenant, *http.Response, error) {
@@ -36184,6 +38438,18 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiat
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -36476,1062 +38742,6 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatel
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchNiatelemetryNexusCloudAccountRequest struct {
-	ctx                           context.Context
-	ApiService                    *NiatelemetryApiService
-	moid                          string
-	niatelemetryNexusCloudAccount *NiatelemetryNexusCloudAccount
-	ifMatch                       *string
-}
-
-// The &#39;niatelemetry.NexusCloudAccount&#39; resource to update.
-func (r ApiPatchNiatelemetryNexusCloudAccountRequest) NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount NiatelemetryNexusCloudAccount) ApiPatchNiatelemetryNexusCloudAccountRequest {
-	r.niatelemetryNexusCloudAccount = &niatelemetryNexusCloudAccount
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchNiatelemetryNexusCloudAccountRequest) IfMatch(ifMatch string) ApiPatchNiatelemetryNexusCloudAccountRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchNiatelemetryNexusCloudAccountRequest) Execute() (*NiatelemetryNexusCloudAccount, *http.Response, error) {
-	return r.ApiService.PatchNiatelemetryNexusCloudAccountExecute(r)
-}
-
-/*
-PatchNiatelemetryNexusCloudAccount Update a 'niatelemetry.NexusCloudAccount' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchNiatelemetryNexusCloudAccountRequest
-*/
-func (a *NiatelemetryApiService) PatchNiatelemetryNexusCloudAccount(ctx context.Context, moid string) ApiPatchNiatelemetryNexusCloudAccountRequest {
-	return ApiPatchNiatelemetryNexusCloudAccountRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return NiatelemetryNexusCloudAccount
-func (a *NiatelemetryApiService) PatchNiatelemetryNexusCloudAccountExecute(r ApiPatchNiatelemetryNexusCloudAccountRequest) (*NiatelemetryNexusCloudAccount, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *NiatelemetryNexusCloudAccount
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.PatchNiatelemetryNexusCloudAccount")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudAccounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.niatelemetryNexusCloudAccount == nil {
-		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudAccount is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.niatelemetryNexusCloudAccount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchNiatelemetryNexusCloudSiteRequest struct {
-	ctx                        context.Context
-	ApiService                 *NiatelemetryApiService
-	moid                       string
-	niatelemetryNexusCloudSite *NiatelemetryNexusCloudSite
-	ifMatch                    *string
-}
-
-// The &#39;niatelemetry.NexusCloudSite&#39; resource to update.
-func (r ApiPatchNiatelemetryNexusCloudSiteRequest) NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite NiatelemetryNexusCloudSite) ApiPatchNiatelemetryNexusCloudSiteRequest {
-	r.niatelemetryNexusCloudSite = &niatelemetryNexusCloudSite
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchNiatelemetryNexusCloudSiteRequest) IfMatch(ifMatch string) ApiPatchNiatelemetryNexusCloudSiteRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchNiatelemetryNexusCloudSiteRequest) Execute() (*NiatelemetryNexusCloudSite, *http.Response, error) {
-	return r.ApiService.PatchNiatelemetryNexusCloudSiteExecute(r)
-}
-
-/*
-PatchNiatelemetryNexusCloudSite Update a 'niatelemetry.NexusCloudSite' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchNiatelemetryNexusCloudSiteRequest
-*/
-func (a *NiatelemetryApiService) PatchNiatelemetryNexusCloudSite(ctx context.Context, moid string) ApiPatchNiatelemetryNexusCloudSiteRequest {
-	return ApiPatchNiatelemetryNexusCloudSiteRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return NiatelemetryNexusCloudSite
-func (a *NiatelemetryApiService) PatchNiatelemetryNexusCloudSiteExecute(r ApiPatchNiatelemetryNexusCloudSiteRequest) (*NiatelemetryNexusCloudSite, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *NiatelemetryNexusCloudSite
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.PatchNiatelemetryNexusCloudSite")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.niatelemetryNexusCloudSite == nil {
-		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudSite is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.niatelemetryNexusCloudSite
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchNiatelemetryNiaInventoryRequest struct {
-	ctx                      context.Context
-	ApiService               *NiatelemetryApiService
-	moid                     string
-	niatelemetryNiaInventory *NiatelemetryNiaInventory
-	ifMatch                  *string
-}
-
-// The &#39;niatelemetry.NiaInventory&#39; resource to update.
-func (r ApiPatchNiatelemetryNiaInventoryRequest) NiatelemetryNiaInventory(niatelemetryNiaInventory NiatelemetryNiaInventory) ApiPatchNiatelemetryNiaInventoryRequest {
-	r.niatelemetryNiaInventory = &niatelemetryNiaInventory
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchNiatelemetryNiaInventoryRequest) IfMatch(ifMatch string) ApiPatchNiatelemetryNiaInventoryRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchNiatelemetryNiaInventoryRequest) Execute() (*NiatelemetryNiaInventory, *http.Response, error) {
-	return r.ApiService.PatchNiatelemetryNiaInventoryExecute(r)
-}
-
-/*
-PatchNiatelemetryNiaInventory Update a 'niatelemetry.NiaInventory' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchNiatelemetryNiaInventoryRequest
-*/
-func (a *NiatelemetryApiService) PatchNiatelemetryNiaInventory(ctx context.Context, moid string) ApiPatchNiatelemetryNiaInventoryRequest {
-	return ApiPatchNiatelemetryNiaInventoryRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return NiatelemetryNiaInventory
-func (a *NiatelemetryApiService) PatchNiatelemetryNiaInventoryExecute(r ApiPatchNiatelemetryNiaInventoryRequest) (*NiatelemetryNiaInventory, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *NiatelemetryNiaInventory
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.PatchNiatelemetryNiaInventory")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventories/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.niatelemetryNiaInventory == nil {
-		return localVarReturnValue, nil, reportError("niatelemetryNiaInventory is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.niatelemetryNiaInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateNiatelemetryNexusCloudAccountRequest struct {
-	ctx                           context.Context
-	ApiService                    *NiatelemetryApiService
-	moid                          string
-	niatelemetryNexusCloudAccount *NiatelemetryNexusCloudAccount
-	ifMatch                       *string
-}
-
-// The &#39;niatelemetry.NexusCloudAccount&#39; resource to update.
-func (r ApiUpdateNiatelemetryNexusCloudAccountRequest) NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount NiatelemetryNexusCloudAccount) ApiUpdateNiatelemetryNexusCloudAccountRequest {
-	r.niatelemetryNexusCloudAccount = &niatelemetryNexusCloudAccount
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateNiatelemetryNexusCloudAccountRequest) IfMatch(ifMatch string) ApiUpdateNiatelemetryNexusCloudAccountRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateNiatelemetryNexusCloudAccountRequest) Execute() (*NiatelemetryNexusCloudAccount, *http.Response, error) {
-	return r.ApiService.UpdateNiatelemetryNexusCloudAccountExecute(r)
-}
-
-/*
-UpdateNiatelemetryNexusCloudAccount Update a 'niatelemetry.NexusCloudAccount' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateNiatelemetryNexusCloudAccountRequest
-*/
-func (a *NiatelemetryApiService) UpdateNiatelemetryNexusCloudAccount(ctx context.Context, moid string) ApiUpdateNiatelemetryNexusCloudAccountRequest {
-	return ApiUpdateNiatelemetryNexusCloudAccountRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return NiatelemetryNexusCloudAccount
-func (a *NiatelemetryApiService) UpdateNiatelemetryNexusCloudAccountExecute(r ApiUpdateNiatelemetryNexusCloudAccountRequest) (*NiatelemetryNexusCloudAccount, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *NiatelemetryNexusCloudAccount
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.UpdateNiatelemetryNexusCloudAccount")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudAccounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.niatelemetryNexusCloudAccount == nil {
-		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudAccount is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.niatelemetryNexusCloudAccount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateNiatelemetryNexusCloudSiteRequest struct {
-	ctx                        context.Context
-	ApiService                 *NiatelemetryApiService
-	moid                       string
-	niatelemetryNexusCloudSite *NiatelemetryNexusCloudSite
-	ifMatch                    *string
-}
-
-// The &#39;niatelemetry.NexusCloudSite&#39; resource to update.
-func (r ApiUpdateNiatelemetryNexusCloudSiteRequest) NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite NiatelemetryNexusCloudSite) ApiUpdateNiatelemetryNexusCloudSiteRequest {
-	r.niatelemetryNexusCloudSite = &niatelemetryNexusCloudSite
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateNiatelemetryNexusCloudSiteRequest) IfMatch(ifMatch string) ApiUpdateNiatelemetryNexusCloudSiteRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateNiatelemetryNexusCloudSiteRequest) Execute() (*NiatelemetryNexusCloudSite, *http.Response, error) {
-	return r.ApiService.UpdateNiatelemetryNexusCloudSiteExecute(r)
-}
-
-/*
-UpdateNiatelemetryNexusCloudSite Update a 'niatelemetry.NexusCloudSite' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateNiatelemetryNexusCloudSiteRequest
-*/
-func (a *NiatelemetryApiService) UpdateNiatelemetryNexusCloudSite(ctx context.Context, moid string) ApiUpdateNiatelemetryNexusCloudSiteRequest {
-	return ApiUpdateNiatelemetryNexusCloudSiteRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return NiatelemetryNexusCloudSite
-func (a *NiatelemetryApiService) UpdateNiatelemetryNexusCloudSiteExecute(r ApiUpdateNiatelemetryNexusCloudSiteRequest) (*NiatelemetryNexusCloudSite, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *NiatelemetryNexusCloudSite
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.UpdateNiatelemetryNexusCloudSite")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.niatelemetryNexusCloudSite == nil {
-		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudSite is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.niatelemetryNexusCloudSite
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateNiatelemetryNiaInventoryRequest struct {
-	ctx                      context.Context
-	ApiService               *NiatelemetryApiService
-	moid                     string
-	niatelemetryNiaInventory *NiatelemetryNiaInventory
-	ifMatch                  *string
-}
-
-// The &#39;niatelemetry.NiaInventory&#39; resource to update.
-func (r ApiUpdateNiatelemetryNiaInventoryRequest) NiatelemetryNiaInventory(niatelemetryNiaInventory NiatelemetryNiaInventory) ApiUpdateNiatelemetryNiaInventoryRequest {
-	r.niatelemetryNiaInventory = &niatelemetryNiaInventory
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateNiatelemetryNiaInventoryRequest) IfMatch(ifMatch string) ApiUpdateNiatelemetryNiaInventoryRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateNiatelemetryNiaInventoryRequest) Execute() (*NiatelemetryNiaInventory, *http.Response, error) {
-	return r.ApiService.UpdateNiatelemetryNiaInventoryExecute(r)
-}
-
-/*
-UpdateNiatelemetryNiaInventory Update a 'niatelemetry.NiaInventory' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateNiatelemetryNiaInventoryRequest
-*/
-func (a *NiatelemetryApiService) UpdateNiatelemetryNiaInventory(ctx context.Context, moid string) ApiUpdateNiatelemetryNiaInventoryRequest {
-	return ApiUpdateNiatelemetryNiaInventoryRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return NiatelemetryNiaInventory
-func (a *NiatelemetryApiService) UpdateNiatelemetryNiaInventoryExecute(r ApiUpdateNiatelemetryNiaInventoryRequest) (*NiatelemetryNiaInventory, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *NiatelemetryNiaInventory
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.UpdateNiatelemetryNiaInventory")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventories/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.niatelemetryNiaInventory == nil {
-		return localVarReturnValue, nil, reportError("niatelemetryNiaInventory is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.niatelemetryNiaInventory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -533,6 +533,27 @@ type ApiGetVirtualizationEsxiConsoleByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationEsxiConsoleByMoidRequest) Select_(select_ string) ApiGetVirtualizationEsxiConsoleByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationEsxiConsoleByMoidRequest) Expand(expand string) ApiGetVirtualizationEsxiConsoleByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationEsxiConsoleByMoidRequest) At(at string) ApiGetVirtualizationEsxiConsoleByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationEsxiConsoleByMoidRequest) Execute() (*VirtualizationEsxiConsole, *http.Response, error) {
@@ -577,6 +598,18 @@ func (a *VirtualizationApiService) GetVirtualizationEsxiConsoleByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -962,6 +995,27 @@ type ApiGetVirtualizationHostByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationHostByMoidRequest) Select_(select_ string) ApiGetVirtualizationHostByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationHostByMoidRequest) Expand(expand string) ApiGetVirtualizationHostByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationHostByMoidRequest) At(at string) ApiGetVirtualizationHostByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationHostByMoidRequest) Execute() (*VirtualizationHost, *http.Response, error) {
@@ -1006,6 +1060,18 @@ func (a *VirtualizationApiService) GetVirtualizationHostByMoidExecute(r ApiGetVi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1391,6 +1457,27 @@ type ApiGetVirtualizationVirtualMachineByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVirtualMachineByMoidRequest) Select_(select_ string) ApiGetVirtualizationVirtualMachineByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVirtualMachineByMoidRequest) Expand(expand string) ApiGetVirtualizationVirtualMachineByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVirtualMachineByMoidRequest) At(at string) ApiGetVirtualizationVirtualMachineByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVirtualMachineByMoidRequest) Execute() (*VirtualizationVirtualMachine, *http.Response, error) {
@@ -1435,6 +1522,18 @@ func (a *VirtualizationApiService) GetVirtualizationVirtualMachineByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1820,6 +1919,27 @@ type ApiGetVirtualizationVmwareClusterByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareClusterByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareClusterByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareClusterByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareClusterByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareClusterByMoidRequest) At(at string) ApiGetVirtualizationVmwareClusterByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareClusterByMoidRequest) Execute() (*VirtualizationVmwareCluster, *http.Response, error) {
@@ -1864,6 +1984,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareClusterByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2249,6 +2381,27 @@ type ApiGetVirtualizationVmwareDatacenterByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareDatacenterByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareDatacenterByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareDatacenterByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareDatacenterByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareDatacenterByMoidRequest) At(at string) ApiGetVirtualizationVmwareDatacenterByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareDatacenterByMoidRequest) Execute() (*VirtualizationVmwareDatacenter, *http.Response, error) {
@@ -2293,6 +2446,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatacenterByMoidExecut
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2678,6 +2843,27 @@ type ApiGetVirtualizationVmwareDatastoreByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareDatastoreByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareDatastoreByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareDatastoreByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareDatastoreByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareDatastoreByMoidRequest) At(at string) ApiGetVirtualizationVmwareDatastoreByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareDatastoreByMoidRequest) Execute() (*VirtualizationVmwareDatastore, *http.Response, error) {
@@ -2722,6 +2908,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2832,6 +3030,27 @@ type ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest) At(at string) ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest) Execute() (*VirtualizationVmwareDatastoreCluster, *http.Response, error) {
@@ -2876,6 +3095,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreClusterByMoid
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3536,6 +3767,27 @@ type ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest) At(at string) ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest) Execute() (*VirtualizationVmwareDistributedNetwork, *http.Response, error) {
@@ -3580,6 +3832,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3965,6 +4229,27 @@ type ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest) At(at string) ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest) Execute() (*VirtualizationVmwareDistributedSwitch, *http.Response, error) {
@@ -4009,6 +4294,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchByMoi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4394,6 +4691,27 @@ type ApiGetVirtualizationVmwareFolderByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareFolderByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareFolderByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareFolderByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareFolderByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareFolderByMoidRequest) At(at string) ApiGetVirtualizationVmwareFolderByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareFolderByMoidRequest) Execute() (*VirtualizationVmwareFolder, *http.Response, error) {
@@ -4438,6 +4756,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareFolderByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4823,6 +5153,27 @@ type ApiGetVirtualizationVmwareHostByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareHostByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareHostByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareHostByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareHostByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareHostByMoidRequest) At(at string) ApiGetVirtualizationVmwareHostByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareHostByMoidRequest) Execute() (*VirtualizationVmwareHost, *http.Response, error) {
@@ -4867,6 +5218,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareHostByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4977,6 +5340,27 @@ type ApiGetVirtualizationVmwareHostGpuByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareHostGpuByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareHostGpuByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareHostGpuByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareHostGpuByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareHostGpuByMoidRequest) At(at string) ApiGetVirtualizationVmwareHostGpuByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareHostGpuByMoidRequest) Execute() (*VirtualizationVmwareHostGpu, *http.Response, error) {
@@ -5021,6 +5405,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareHostGpuByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5681,6 +6077,27 @@ type ApiGetVirtualizationVmwareKernelNetworkByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareKernelNetworkByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareKernelNetworkByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareKernelNetworkByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareKernelNetworkByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareKernelNetworkByMoidRequest) At(at string) ApiGetVirtualizationVmwareKernelNetworkByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareKernelNetworkByMoidRequest) Execute() (*VirtualizationVmwareKernelNetwork, *http.Response, error) {
@@ -5725,6 +6142,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkByMoidExe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6110,6 +6539,27 @@ type ApiGetVirtualizationVmwareNetworkByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareNetworkByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareNetworkByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareNetworkByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareNetworkByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareNetworkByMoidRequest) At(at string) ApiGetVirtualizationVmwareNetworkByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareNetworkByMoidRequest) Execute() (*VirtualizationVmwareNetwork, *http.Response, error) {
@@ -6154,6 +6604,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6539,6 +7001,27 @@ type ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest) At(at string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest) Execute() (*VirtualizationVmwarePhysicalNetworkInterface, *http.Response, error) {
@@ -6583,6 +7066,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfa
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6968,6 +7463,27 @@ type ApiGetVirtualizationVmwareProactiveHaByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareProactiveHaByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareProactiveHaByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareProactiveHaByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareProactiveHaByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareProactiveHaByMoidRequest) At(at string) ApiGetVirtualizationVmwareProactiveHaByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareProactiveHaByMoidRequest) Execute() (*VirtualizationVmwareProactiveHa, *http.Response, error) {
@@ -7012,6 +7528,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareProactiveHaByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7397,6 +7925,27 @@ type ApiGetVirtualizationVmwareUplinkPortByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareUplinkPortByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareUplinkPortByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareUplinkPortByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareUplinkPortByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareUplinkPortByMoidRequest) At(at string) ApiGetVirtualizationVmwareUplinkPortByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareUplinkPortByMoidRequest) Execute() (*VirtualizationVmwareUplinkPort, *http.Response, error) {
@@ -7441,6 +7990,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortByMoidExecut
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7826,6 +8387,27 @@ type ApiGetVirtualizationVmwareVcenterByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareVcenterByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareVcenterByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareVcenterByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareVcenterByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareVcenterByMoidRequest) At(at string) ApiGetVirtualizationVmwareVcenterByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareVcenterByMoidRequest) Execute() (*VirtualizationVmwareVcenter, *http.Response, error) {
@@ -7870,6 +8452,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVcenterByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8255,6 +8849,27 @@ type ApiGetVirtualizationVmwareVirtualDiskByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareVirtualDiskByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareVirtualDiskByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareVirtualDiskByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareVirtualDiskByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareVirtualDiskByMoidRequest) At(at string) ApiGetVirtualizationVmwareVirtualDiskByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareVirtualDiskByMoidRequest) Execute() (*VirtualizationVmwareVirtualDisk, *http.Response, error) {
@@ -8299,6 +8914,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualDiskByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8684,6 +9311,27 @@ type ApiGetVirtualizationVmwareVirtualMachineByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareVirtualMachineByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareVirtualMachineByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareVirtualMachineByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareVirtualMachineByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareVirtualMachineByMoidRequest) At(at string) ApiGetVirtualizationVmwareVirtualMachineByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareVirtualMachineByMoidRequest) Execute() (*VirtualizationVmwareVirtualMachine, *http.Response, error) {
@@ -8728,6 +9376,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineByMoidEx
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8838,6 +9498,27 @@ type ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest) At(at string) ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest) Execute() (*VirtualizationVmwareVirtualMachineGpu, *http.Response, error) {
@@ -8882,6 +9563,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineGpuByMoi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9542,6 +10235,27 @@ type ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest) At(at string) ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest) Execute() (*VirtualizationVmwareVirtualMachineSnapshot, *http.Response, error) {
@@ -9586,6 +10300,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineSnapshot
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9971,6 +10697,27 @@ type ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest) At(at string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest) Execute() (*VirtualizationVmwareVirtualNetworkInterface, *http.Response, error) {
@@ -10015,6 +10762,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfac
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10400,6 +11159,27 @@ type ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest struct {
 	ctx        context.Context
 	ApiService *VirtualizationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest) Select_(select_ string) ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest) Expand(expand string) ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest) At(at string) ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest) Execute() (*VirtualizationVmwareVirtualSwitch, *http.Response, error) {
@@ -10444,6 +11224,18 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchByMoidExe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

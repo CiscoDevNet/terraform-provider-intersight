@@ -3,12 +3,24 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_rollback_workflow"
 description: |-
-        Rollback workflow contains details about the workflow instance, tasks to be rollback along with the status and workflow instances.
+        The RollbackWorkflow object addresses the management and execution of rollback operations within the workflow system. This provides a structured approach to reverting tasks and sub-workflows workflows, ensuring system stability and reliability.
+        #### Purpose
+        RollbackWorkflow is designed to manage rollback operations within workflows, ensuring controlled and secure recovery processes. It enables the reversal of tasks and sub-workflows to support error correction and system restoration. Additionally, it maintains the relationship between the primary workflow execution and its associated rollback workflows, providing structured management and oversight of rollback activities.
+        #### Key Concepts
+        - **Eligible tasks:** Holds a list of task executions which are eligible for rollback.
+        - **Rollback Strategies:** Implements strategies for rollback, when failure occurs.
+        - **Status Monitoring:** Tracks the status of rollback operations, providing insights into execution progress and outcomes.
 
 ---
 
 # Resource: intersight_workflow_rollback_workflow
-Rollback workflow contains details about the workflow instance, tasks to be rollback along with the status and workflow instances.
+The RollbackWorkflow object addresses the management and execution of rollback operations within the workflow system. This provides a structured approach to reverting tasks and sub-workflows workflows, ensuring system stability and reliability.  
+#### Purpose  
+RollbackWorkflow is designed to manage rollback operations within workflows, ensuring controlled and secure recovery processes. It enables the reversal of tasks and sub-workflows to support error correction and system restoration. Additionally, it maintains the relationship between the primary workflow execution and its associated rollback workflows, providing structured management and oversight of rollback activities.
+#### Key Concepts  
+- **Eligible tasks:** Holds a list of task executions which are eligible for rollback. 
+- **Rollback Strategies:** Implements strategies for rollback, when failure occurs. 
+- **Status Monitoring:** Tracks the status of rollback operations, providing insights into execution progress and outcomes.
 ## Usage Example
 ### Resource Creation
 

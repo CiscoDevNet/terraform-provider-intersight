@@ -109,6 +109,19 @@ func Test_intersight_ServerApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ServerApiService DeleteServerMigrationKeyDetails", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.ServerApi.DeleteServerMigrationKeyDetails(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ServerApiService DeleteServerProfile", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -310,6 +323,32 @@ func Test_intersight_ServerApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ServerApi.GetServerDisruptionList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServerApiService GetServerMigrationKeyDetailsByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ServerApi.GetServerMigrationKeyDetailsByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServerApiService GetServerMigrationKeyDetailsList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ServerApi.GetServerMigrationKeyDetailsList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

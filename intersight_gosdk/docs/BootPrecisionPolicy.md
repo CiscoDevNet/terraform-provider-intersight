@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.PrecisionPolicy"]
 **BootDevices** | Pointer to [**[]BootDeviceBase**](BootDeviceBase.md) |  | [optional] 
 **ConfiguredBootMode** | Pointer to **string** | Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme. To apply this setting, Please reboot the server. * &#x60;Uefi&#x60; - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from. * &#x60;Legacy&#x60; - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader. | [optional] [default to "Uefi"]
+**EnableBootMigrationSupport** | Pointer to **bool** | Flag to denote if migration is enabled for the boot devices. | [optional] 
 **EnforceUefiSecureBoot** | Pointer to **bool** | If UEFI secure boot is enabled, the boot mode is set to UEFI by default. Secure boot enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM). | [optional] [default to false]
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
@@ -130,6 +131,31 @@ SetConfiguredBootMode sets ConfiguredBootMode field to given value.
 `func (o *BootPrecisionPolicy) HasConfiguredBootMode() bool`
 
 HasConfiguredBootMode returns a boolean if a field has been set.
+
+### GetEnableBootMigrationSupport
+
+`func (o *BootPrecisionPolicy) GetEnableBootMigrationSupport() bool`
+
+GetEnableBootMigrationSupport returns the EnableBootMigrationSupport field if non-nil, zero value otherwise.
+
+### GetEnableBootMigrationSupportOk
+
+`func (o *BootPrecisionPolicy) GetEnableBootMigrationSupportOk() (*bool, bool)`
+
+GetEnableBootMigrationSupportOk returns a tuple with the EnableBootMigrationSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableBootMigrationSupport
+
+`func (o *BootPrecisionPolicy) SetEnableBootMigrationSupport(v bool)`
+
+SetEnableBootMigrationSupport sets EnableBootMigrationSupport field to given value.
+
+### HasEnableBootMigrationSupport
+
+`func (o *BootPrecisionPolicy) HasEnableBootMigrationSupport() bool`
+
+HasEnableBootMigrationSupport returns a boolean if a field has been set.
 
 ### GetEnforceUefiSecureBoot
 

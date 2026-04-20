@@ -735,6 +735,58 @@ func resourceWorkloadWorkloadDeployment() *schema.Resource {
 					}
 					return
 				}},
+			"rename_request": {
+				Description: "The request for the renaming operation on the workload deployment object.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"action": {
+							Description:  "The action to be taken for the rename operation on an object.\n* `None` - No action is to be taken for the rename request.\n* `Rename` - The object is to be renamed with the new name in the request.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "Rename"}, false),
+							Optional:     true,
+							Default:      "None",
+						},
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "workload.RenameRequest",
+						},
+						"new_name": {
+							Description: "The new name for the object. This name will be used to rename all objects associated with it.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "workload.RenameRequest",
+						},
+						"status": {
+							Description: "The status of the rename operation for an object.\n* `None` - No rename operation is in progress, the last rename operation succeeded, or rename has not been performed on the object.\n* `Updating` - The object is currently being renamed.\n* `UpdateScheduled` - The rename request for the object has been accepted and will be processed.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+					},
+				},
+			},
 			"resource_pool": {
 				Description: "A reference to a resourcepoolPool resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1810,6 +1862,49 @@ func resourceWorkloadWorkloadDeploymentCreate(c context.Context, d *schema.Resou
 		}
 	}
 
+	if v, ok := d.GetOk("rename_request"); ok {
+		p := make([]models.WorkloadRenameRequest, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewWorkloadRenameRequestWithDefaults()
+			if v, ok := l["action"]; ok {
+				{
+					x := (v.(string))
+					o.SetAction(x)
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workload.RenameRequest")
+			if v, ok := l["new_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetNewName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetRenameRequest(x)
+		}
+	}
+
 	if v, ok := d.GetOk("rollout_strategy"); ok {
 		p := make([]models.WorkloadRolloutStrategy, 0, 1)
 		s := v.([]interface{})
@@ -2227,6 +2322,10 @@ func resourceWorkloadWorkloadDeploymentRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property RefName in WorkloadWorkloadDeployment object: %s", err.Error())
 	}
 
+	if err := d.Set("rename_request", flattenMapWorkloadRenameRequest(s.GetRenameRequest(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property RenameRequest in WorkloadWorkloadDeployment object: %s", err.Error())
+	}
+
 	if err := d.Set("resource_pool", flattenMapResourcepoolPoolRelationship(s.GetResourcePool(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ResourcePool in WorkloadWorkloadDeployment object: %s", err.Error())
 	}
@@ -2625,6 +2724,50 @@ func resourceWorkloadWorkloadDeploymentUpdate(c context.Context, d *schema.Resou
 			x = append(x, *o)
 		}
 		o.SetQualifiers(x)
+	}
+
+	if d.HasChange("rename_request") {
+		v := d.Get("rename_request")
+		p := make([]models.WorkloadRenameRequest, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.WorkloadRenameRequest{}
+			if v, ok := l["action"]; ok {
+				{
+					x := (v.(string))
+					o.SetAction(x)
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workload.RenameRequest")
+			if v, ok := l["new_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetNewName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetRenameRequest(x)
+		}
 	}
 
 	if d.HasChange("rollout_strategy") {

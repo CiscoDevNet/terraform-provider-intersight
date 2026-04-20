@@ -23,43 +23,6 @@ func Test_intersight_NiatelemetryApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test NiatelemetryApiService CreateNiatelemetryNexusCloudAccount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.NiatelemetryApi.CreateNiatelemetryNexusCloudAccount(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NiatelemetryApiService CreateNiatelemetryNexusCloudSite", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.NiatelemetryApi.CreateNiatelemetryNexusCloudSite(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NiatelemetryApiService DeleteNiatelemetryNexusCloudSite", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.NiatelemetryApi.DeleteNiatelemetryNexusCloudSite(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test NiatelemetryApiService GetNiatelemetryAaaLdapProviderDetailsByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2237,90 +2200,6 @@ func Test_intersight_NiatelemetryApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.NiatelemetryApi.GetNiatelemetryTenantList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NiatelemetryApiService PatchNiatelemetryNexusCloudAccount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.NiatelemetryApi.PatchNiatelemetryNexusCloudAccount(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NiatelemetryApiService PatchNiatelemetryNexusCloudSite", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.NiatelemetryApi.PatchNiatelemetryNexusCloudSite(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NiatelemetryApiService PatchNiatelemetryNiaInventory", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.NiatelemetryApi.PatchNiatelemetryNiaInventory(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NiatelemetryApiService UpdateNiatelemetryNexusCloudAccount", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.NiatelemetryApi.UpdateNiatelemetryNexusCloudAccount(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NiatelemetryApiService UpdateNiatelemetryNexusCloudSite", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.NiatelemetryApi.UpdateNiatelemetryNexusCloudSite(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NiatelemetryApiService UpdateNiatelemetryNiaInventory", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.NiatelemetryApi.UpdateNiatelemetryNiaInventory(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

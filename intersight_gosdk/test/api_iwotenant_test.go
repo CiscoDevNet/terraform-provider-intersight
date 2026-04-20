@@ -23,18 +23,6 @@ func Test_intersight_IwotenantApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test IwotenantApiService CreateIwotenantMaintenanceNotification", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.IwotenantApi.CreateIwotenantMaintenanceNotification(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test IwotenantApiService CreateIwotenantMigrate", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -55,32 +43,6 @@ func Test_intersight_IwotenantApiService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test IwotenantApiService DeleteIwotenantMaintenanceNotification", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.IwotenantApi.DeleteIwotenantMaintenanceNotification(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test IwotenantApiService DeleteIwotenantMigrate", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.IwotenantApi.DeleteIwotenantMigrate(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

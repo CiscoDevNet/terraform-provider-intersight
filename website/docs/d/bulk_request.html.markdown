@@ -23,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `completion_time`:(string) The timestamp when the request processing completed. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `is_backup_encryption_key_set`:(bool) Indicates whether the value of the 'backupEncryptionKey' property has been set. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_sub_requests`:(int) The number of sub requests received in this request. 

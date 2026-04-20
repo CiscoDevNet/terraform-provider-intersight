@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,27 @@ type ApiGetApicAciPodByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicAciPodByMoidRequest) Select_(select_ string) ApiGetApicAciPodByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicAciPodByMoidRequest) Expand(expand string) ApiGetApicAciPodByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicAciPodByMoidRequest) At(at string) ApiGetApicAciPodByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicAciPodByMoidRequest) Execute() (*ApicAciPod, *http.Response, error) {
@@ -39,6 +60,8 @@ GetApicAciPodByMoid Read a 'apic.AciPod' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicAciPodByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicAciPodByMoid(ctx context.Context, moid string) ApiGetApicAciPodByMoidRequest {
 	return ApiGetApicAciPodByMoidRequest{
@@ -51,6 +74,8 @@ func (a *ApicApiService) GetApicAciPodByMoid(ctx context.Context, moid string) A
 // Execute executes the request
 //
 //	@return ApicAciPod
+//
+// Deprecated
 func (a *ApicApiService) GetApicAciPodByMoidExecute(r ApiGetApicAciPodByMoidRequest) (*ApicAciPod, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -71,6 +96,18 @@ func (a *ApicApiService) GetApicAciPodByMoidExecute(r ApiGetApicAciPodByMoidRequ
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -268,6 +305,8 @@ GetApicAciPodList Read a 'apic.AciPod' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicAciPodListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicAciPodList(ctx context.Context) ApiGetApicAciPodListRequest {
 	return ApiGetApicAciPodListRequest{
@@ -279,6 +318,8 @@ func (a *ApicApiService) GetApicAciPodList(ctx context.Context) ApiGetApicAciPod
 // Execute executes the request
 //
 //	@return ApicAciPodResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicAciPodListExecute(r ApiGetApicAciPodListRequest) (*ApicAciPodResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -456,6 +497,27 @@ type ApiGetApicApplicationByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicApplicationByMoidRequest) Select_(select_ string) ApiGetApicApplicationByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicApplicationByMoidRequest) Expand(expand string) ApiGetApicApplicationByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicApplicationByMoidRequest) At(at string) ApiGetApicApplicationByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicApplicationByMoidRequest) Execute() (*ApicApplication, *http.Response, error) {
@@ -468,6 +530,8 @@ GetApicApplicationByMoid Read a 'apic.Application' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicApplicationByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicApplicationByMoid(ctx context.Context, moid string) ApiGetApicApplicationByMoidRequest {
 	return ApiGetApicApplicationByMoidRequest{
@@ -480,6 +544,8 @@ func (a *ApicApiService) GetApicApplicationByMoid(ctx context.Context, moid stri
 // Execute executes the request
 //
 //	@return ApicApplication
+//
+// Deprecated
 func (a *ApicApiService) GetApicApplicationByMoidExecute(r ApiGetApicApplicationByMoidRequest) (*ApicApplication, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -500,6 +566,18 @@ func (a *ApicApiService) GetApicApplicationByMoidExecute(r ApiGetApicApplication
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -610,6 +688,27 @@ type ApiGetApicApplicationEndpointGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicApplicationEndpointGroupByMoidRequest) Select_(select_ string) ApiGetApicApplicationEndpointGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicApplicationEndpointGroupByMoidRequest) Expand(expand string) ApiGetApicApplicationEndpointGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicApplicationEndpointGroupByMoidRequest) At(at string) ApiGetApicApplicationEndpointGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicApplicationEndpointGroupByMoidRequest) Execute() (*ApicApplicationEndpointGroup, *http.Response, error) {
@@ -622,6 +721,8 @@ GetApicApplicationEndpointGroupByMoid Read a 'apic.ApplicationEndpointGroup' res
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicApplicationEndpointGroupByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicApplicationEndpointGroupByMoid(ctx context.Context, moid string) ApiGetApicApplicationEndpointGroupByMoidRequest {
 	return ApiGetApicApplicationEndpointGroupByMoidRequest{
@@ -634,6 +735,8 @@ func (a *ApicApiService) GetApicApplicationEndpointGroupByMoid(ctx context.Conte
 // Execute executes the request
 //
 //	@return ApicApplicationEndpointGroup
+//
+// Deprecated
 func (a *ApicApiService) GetApicApplicationEndpointGroupByMoidExecute(r ApiGetApicApplicationEndpointGroupByMoidRequest) (*ApicApplicationEndpointGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -654,6 +757,18 @@ func (a *ApicApiService) GetApicApplicationEndpointGroupByMoidExecute(r ApiGetAp
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -851,6 +966,8 @@ GetApicApplicationEndpointGroupList Read a 'apic.ApplicationEndpointGroup' resou
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicApplicationEndpointGroupListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicApplicationEndpointGroupList(ctx context.Context) ApiGetApicApplicationEndpointGroupListRequest {
 	return ApiGetApicApplicationEndpointGroupListRequest{
@@ -862,6 +979,8 @@ func (a *ApicApiService) GetApicApplicationEndpointGroupList(ctx context.Context
 // Execute executes the request
 //
 //	@return ApicApplicationEndpointGroupResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicApplicationEndpointGroupListExecute(r ApiGetApicApplicationEndpointGroupListRequest) (*ApicApplicationEndpointGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1126,6 +1245,8 @@ GetApicApplicationList Read a 'apic.Application' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicApplicationListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicApplicationList(ctx context.Context) ApiGetApicApplicationListRequest {
 	return ApiGetApicApplicationListRequest{
@@ -1137,6 +1258,8 @@ func (a *ApicApiService) GetApicApplicationList(ctx context.Context) ApiGetApicA
 // Execute executes the request
 //
 //	@return ApicApplicationResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicApplicationListExecute(r ApiGetApicApplicationListRequest) (*ApicApplicationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1314,6 +1437,27 @@ type ApiGetApicBridgeDomainByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicBridgeDomainByMoidRequest) Select_(select_ string) ApiGetApicBridgeDomainByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicBridgeDomainByMoidRequest) Expand(expand string) ApiGetApicBridgeDomainByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicBridgeDomainByMoidRequest) At(at string) ApiGetApicBridgeDomainByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicBridgeDomainByMoidRequest) Execute() (*ApicBridgeDomain, *http.Response, error) {
@@ -1326,6 +1470,8 @@ GetApicBridgeDomainByMoid Read a 'apic.BridgeDomain' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicBridgeDomainByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicBridgeDomainByMoid(ctx context.Context, moid string) ApiGetApicBridgeDomainByMoidRequest {
 	return ApiGetApicBridgeDomainByMoidRequest{
@@ -1338,6 +1484,8 @@ func (a *ApicApiService) GetApicBridgeDomainByMoid(ctx context.Context, moid str
 // Execute executes the request
 //
 //	@return ApicBridgeDomain
+//
+// Deprecated
 func (a *ApicApiService) GetApicBridgeDomainByMoidExecute(r ApiGetApicBridgeDomainByMoidRequest) (*ApicBridgeDomain, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1358,6 +1506,18 @@ func (a *ApicApiService) GetApicBridgeDomainByMoidExecute(r ApiGetApicBridgeDoma
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1555,6 +1715,8 @@ GetApicBridgeDomainList Read a 'apic.BridgeDomain' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicBridgeDomainListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicBridgeDomainList(ctx context.Context) ApiGetApicBridgeDomainListRequest {
 	return ApiGetApicBridgeDomainListRequest{
@@ -1566,6 +1728,8 @@ func (a *ApicApiService) GetApicBridgeDomainList(ctx context.Context) ApiGetApic
 // Execute executes the request
 //
 //	@return ApicBridgeDomainResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicBridgeDomainListExecute(r ApiGetApicBridgeDomainListRequest) (*ApicBridgeDomainResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1743,6 +1907,27 @@ type ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest) Select_(select_ string) ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest) Expand(expand string) ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest) At(at string) ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest) Execute() (*ApicExternalRoutedLayerThreeDomain, *http.Response, error) {
@@ -1755,6 +1940,8 @@ GetApicExternalRoutedLayerThreeDomainByMoid Read a 'apic.ExternalRoutedLayerThre
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainByMoid(ctx context.Context, moid string) ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest {
 	return ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest{
@@ -1767,6 +1954,8 @@ func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainByMoid(ctx context
 // Execute executes the request
 //
 //	@return ApicExternalRoutedLayerThreeDomain
+//
+// Deprecated
 func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainByMoidExecute(r ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest) (*ApicExternalRoutedLayerThreeDomain, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1787,6 +1976,18 @@ func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1984,6 +2185,8 @@ GetApicExternalRoutedLayerThreeDomainList Read a 'apic.ExternalRoutedLayerThreeD
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicExternalRoutedLayerThreeDomainListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainList(ctx context.Context) ApiGetApicExternalRoutedLayerThreeDomainListRequest {
 	return ApiGetApicExternalRoutedLayerThreeDomainListRequest{
@@ -1995,6 +2198,8 @@ func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainList(ctx context.C
 // Execute executes the request
 //
 //	@return ApicExternalRoutedLayerThreeDomainResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainListExecute(r ApiGetApicExternalRoutedLayerThreeDomainListRequest) (*ApicExternalRoutedLayerThreeDomainResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2172,6 +2377,27 @@ type ApiGetApicFabricLeafNodeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicFabricLeafNodeByMoidRequest) Select_(select_ string) ApiGetApicFabricLeafNodeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicFabricLeafNodeByMoidRequest) Expand(expand string) ApiGetApicFabricLeafNodeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicFabricLeafNodeByMoidRequest) At(at string) ApiGetApicFabricLeafNodeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicFabricLeafNodeByMoidRequest) Execute() (*ApicFabricLeafNode, *http.Response, error) {
@@ -2184,6 +2410,8 @@ GetApicFabricLeafNodeByMoid Read a 'apic.FabricLeafNode' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicFabricLeafNodeByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicFabricLeafNodeByMoid(ctx context.Context, moid string) ApiGetApicFabricLeafNodeByMoidRequest {
 	return ApiGetApicFabricLeafNodeByMoidRequest{
@@ -2196,6 +2424,8 @@ func (a *ApicApiService) GetApicFabricLeafNodeByMoid(ctx context.Context, moid s
 // Execute executes the request
 //
 //	@return ApicFabricLeafNode
+//
+// Deprecated
 func (a *ApicApiService) GetApicFabricLeafNodeByMoidExecute(r ApiGetApicFabricLeafNodeByMoidRequest) (*ApicFabricLeafNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2216,6 +2446,18 @@ func (a *ApicApiService) GetApicFabricLeafNodeByMoidExecute(r ApiGetApicFabricLe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2326,6 +2568,27 @@ type ApiGetApicFabricLeafNodeInterfaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicFabricLeafNodeInterfaceByMoidRequest) Select_(select_ string) ApiGetApicFabricLeafNodeInterfaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicFabricLeafNodeInterfaceByMoidRequest) Expand(expand string) ApiGetApicFabricLeafNodeInterfaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicFabricLeafNodeInterfaceByMoidRequest) At(at string) ApiGetApicFabricLeafNodeInterfaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicFabricLeafNodeInterfaceByMoidRequest) Execute() (*ApicFabricLeafNodeInterface, *http.Response, error) {
@@ -2338,6 +2601,8 @@ GetApicFabricLeafNodeInterfaceByMoid Read a 'apic.FabricLeafNodeInterface' resou
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicFabricLeafNodeInterfaceByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicFabricLeafNodeInterfaceByMoid(ctx context.Context, moid string) ApiGetApicFabricLeafNodeInterfaceByMoidRequest {
 	return ApiGetApicFabricLeafNodeInterfaceByMoidRequest{
@@ -2350,6 +2615,8 @@ func (a *ApicApiService) GetApicFabricLeafNodeInterfaceByMoid(ctx context.Contex
 // Execute executes the request
 //
 //	@return ApicFabricLeafNodeInterface
+//
+// Deprecated
 func (a *ApicApiService) GetApicFabricLeafNodeInterfaceByMoidExecute(r ApiGetApicFabricLeafNodeInterfaceByMoidRequest) (*ApicFabricLeafNodeInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2370,6 +2637,18 @@ func (a *ApicApiService) GetApicFabricLeafNodeInterfaceByMoidExecute(r ApiGetApi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2567,6 +2846,8 @@ GetApicFabricLeafNodeInterfaceList Read a 'apic.FabricLeafNodeInterface' resourc
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicFabricLeafNodeInterfaceListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicFabricLeafNodeInterfaceList(ctx context.Context) ApiGetApicFabricLeafNodeInterfaceListRequest {
 	return ApiGetApicFabricLeafNodeInterfaceListRequest{
@@ -2578,6 +2859,8 @@ func (a *ApicApiService) GetApicFabricLeafNodeInterfaceList(ctx context.Context)
 // Execute executes the request
 //
 //	@return ApicFabricLeafNodeInterfaceResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicFabricLeafNodeInterfaceListExecute(r ApiGetApicFabricLeafNodeInterfaceListRequest) (*ApicFabricLeafNodeInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2842,6 +3125,8 @@ GetApicFabricLeafNodeList Read a 'apic.FabricLeafNode' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicFabricLeafNodeListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicFabricLeafNodeList(ctx context.Context) ApiGetApicFabricLeafNodeListRequest {
 	return ApiGetApicFabricLeafNodeListRequest{
@@ -2853,6 +3138,8 @@ func (a *ApicApiService) GetApicFabricLeafNodeList(ctx context.Context) ApiGetAp
 // Execute executes the request
 //
 //	@return ApicFabricLeafNodeResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicFabricLeafNodeListExecute(r ApiGetApicFabricLeafNodeListRequest) (*ApicFabricLeafNodeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3030,6 +3317,27 @@ type ApiGetApicOutByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicOutByMoidRequest) Select_(select_ string) ApiGetApicOutByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicOutByMoidRequest) Expand(expand string) ApiGetApicOutByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicOutByMoidRequest) At(at string) ApiGetApicOutByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicOutByMoidRequest) Execute() (*ApicOut, *http.Response, error) {
@@ -3042,6 +3350,8 @@ GetApicOutByMoid Read a 'apic.Out' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicOutByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicOutByMoid(ctx context.Context, moid string) ApiGetApicOutByMoidRequest {
 	return ApiGetApicOutByMoidRequest{
@@ -3054,6 +3364,8 @@ func (a *ApicApiService) GetApicOutByMoid(ctx context.Context, moid string) ApiG
 // Execute executes the request
 //
 //	@return ApicOut
+//
+// Deprecated
 func (a *ApicApiService) GetApicOutByMoidExecute(r ApiGetApicOutByMoidRequest) (*ApicOut, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3074,6 +3386,18 @@ func (a *ApicApiService) GetApicOutByMoidExecute(r ApiGetApicOutByMoidRequest) (
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3271,6 +3595,8 @@ GetApicOutList Read a 'apic.Out' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicOutListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicOutList(ctx context.Context) ApiGetApicOutListRequest {
 	return ApiGetApicOutListRequest{
@@ -3282,6 +3608,8 @@ func (a *ApicApiService) GetApicOutList(ctx context.Context) ApiGetApicOutListRe
 // Execute executes the request
 //
 //	@return ApicOutResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicOutListExecute(r ApiGetApicOutListRequest) (*ApicOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3459,6 +3787,27 @@ type ApiGetApicSubnetByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicSubnetByMoidRequest) Select_(select_ string) ApiGetApicSubnetByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicSubnetByMoidRequest) Expand(expand string) ApiGetApicSubnetByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicSubnetByMoidRequest) At(at string) ApiGetApicSubnetByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicSubnetByMoidRequest) Execute() (*ApicSubnet, *http.Response, error) {
@@ -3471,6 +3820,8 @@ GetApicSubnetByMoid Read a 'apic.Subnet' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicSubnetByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicSubnetByMoid(ctx context.Context, moid string) ApiGetApicSubnetByMoidRequest {
 	return ApiGetApicSubnetByMoidRequest{
@@ -3483,6 +3834,8 @@ func (a *ApicApiService) GetApicSubnetByMoid(ctx context.Context, moid string) A
 // Execute executes the request
 //
 //	@return ApicSubnet
+//
+// Deprecated
 func (a *ApicApiService) GetApicSubnetByMoidExecute(r ApiGetApicSubnetByMoidRequest) (*ApicSubnet, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3503,6 +3856,18 @@ func (a *ApicApiService) GetApicSubnetByMoidExecute(r ApiGetApicSubnetByMoidRequ
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3700,6 +4065,8 @@ GetApicSubnetList Read a 'apic.Subnet' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicSubnetListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicSubnetList(ctx context.Context) ApiGetApicSubnetListRequest {
 	return ApiGetApicSubnetListRequest{
@@ -3711,6 +4078,8 @@ func (a *ApicApiService) GetApicSubnetList(ctx context.Context) ApiGetApicSubnet
 // Execute executes the request
 //
 //	@return ApicSubnetResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicSubnetListExecute(r ApiGetApicSubnetListRequest) (*ApicSubnetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3888,6 +4257,27 @@ type ApiGetApicTenantByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicTenantByMoidRequest) Select_(select_ string) ApiGetApicTenantByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicTenantByMoidRequest) Expand(expand string) ApiGetApicTenantByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicTenantByMoidRequest) At(at string) ApiGetApicTenantByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicTenantByMoidRequest) Execute() (*ApicTenant, *http.Response, error) {
@@ -3900,6 +4290,8 @@ GetApicTenantByMoid Read a 'apic.Tenant' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicTenantByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicTenantByMoid(ctx context.Context, moid string) ApiGetApicTenantByMoidRequest {
 	return ApiGetApicTenantByMoidRequest{
@@ -3912,6 +4304,8 @@ func (a *ApicApiService) GetApicTenantByMoid(ctx context.Context, moid string) A
 // Execute executes the request
 //
 //	@return ApicTenant
+//
+// Deprecated
 func (a *ApicApiService) GetApicTenantByMoidExecute(r ApiGetApicTenantByMoidRequest) (*ApicTenant, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3932,6 +4326,18 @@ func (a *ApicApiService) GetApicTenantByMoidExecute(r ApiGetApicTenantByMoidRequ
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4129,6 +4535,8 @@ GetApicTenantList Read a 'apic.Tenant' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicTenantListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicTenantList(ctx context.Context) ApiGetApicTenantListRequest {
 	return ApiGetApicTenantListRequest{
@@ -4140,6 +4548,8 @@ func (a *ApicApiService) GetApicTenantList(ctx context.Context) ApiGetApicTenant
 // Execute executes the request
 //
 //	@return ApicTenantResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicTenantListExecute(r ApiGetApicTenantListRequest) (*ApicTenantResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4317,6 +4727,27 @@ type ApiGetApicVpcGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicVpcGroupByMoidRequest) Select_(select_ string) ApiGetApicVpcGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicVpcGroupByMoidRequest) Expand(expand string) ApiGetApicVpcGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicVpcGroupByMoidRequest) At(at string) ApiGetApicVpcGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicVpcGroupByMoidRequest) Execute() (*ApicVpcGroup, *http.Response, error) {
@@ -4329,6 +4760,8 @@ GetApicVpcGroupByMoid Read a 'apic.VpcGroup' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicVpcGroupByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicVpcGroupByMoid(ctx context.Context, moid string) ApiGetApicVpcGroupByMoidRequest {
 	return ApiGetApicVpcGroupByMoidRequest{
@@ -4341,6 +4774,8 @@ func (a *ApicApiService) GetApicVpcGroupByMoid(ctx context.Context, moid string)
 // Execute executes the request
 //
 //	@return ApicVpcGroup
+//
+// Deprecated
 func (a *ApicApiService) GetApicVpcGroupByMoidExecute(r ApiGetApicVpcGroupByMoidRequest) (*ApicVpcGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4361,6 +4796,18 @@ func (a *ApicApiService) GetApicVpcGroupByMoidExecute(r ApiGetApicVpcGroupByMoid
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4558,6 +5005,8 @@ GetApicVpcGroupList Read a 'apic.VpcGroup' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicVpcGroupListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicVpcGroupList(ctx context.Context) ApiGetApicVpcGroupListRequest {
 	return ApiGetApicVpcGroupListRequest{
@@ -4569,6 +5018,8 @@ func (a *ApicApiService) GetApicVpcGroupList(ctx context.Context) ApiGetApicVpcG
 // Execute executes the request
 //
 //	@return ApicVpcGroupResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicVpcGroupListExecute(r ApiGetApicVpcGroupListRequest) (*ApicVpcGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4746,6 +5197,27 @@ type ApiGetApicVrfsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *ApicApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetApicVrfsByMoidRequest) Select_(select_ string) ApiGetApicVrfsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetApicVrfsByMoidRequest) Expand(expand string) ApiGetApicVrfsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetApicVrfsByMoidRequest) At(at string) ApiGetApicVrfsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetApicVrfsByMoidRequest) Execute() (*ApicVrfs, *http.Response, error) {
@@ -4758,6 +5230,8 @@ GetApicVrfsByMoid Read a 'apic.Vrfs' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetApicVrfsByMoidRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicVrfsByMoid(ctx context.Context, moid string) ApiGetApicVrfsByMoidRequest {
 	return ApiGetApicVrfsByMoidRequest{
@@ -4770,6 +5244,8 @@ func (a *ApicApiService) GetApicVrfsByMoid(ctx context.Context, moid string) Api
 // Execute executes the request
 //
 //	@return ApicVrfs
+//
+// Deprecated
 func (a *ApicApiService) GetApicVrfsByMoidExecute(r ApiGetApicVrfsByMoidRequest) (*ApicVrfs, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4790,6 +5266,18 @@ func (a *ApicApiService) GetApicVrfsByMoidExecute(r ApiGetApicVrfsByMoidRequest)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4987,6 +5475,8 @@ GetApicVrfsList Read a 'apic.Vrfs' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetApicVrfsListRequest
+
+Deprecated
 */
 func (a *ApicApiService) GetApicVrfsList(ctx context.Context) ApiGetApicVrfsListRequest {
 	return ApiGetApicVrfsListRequest{
@@ -4998,6 +5488,8 @@ func (a *ApicApiService) GetApicVrfsList(ctx context.Context) ApiGetApicVrfsList
 // Execute executes the request
 //
 //	@return ApicVrfsResponse
+//
+// Deprecated
 func (a *ApicApiService) GetApicVrfsListExecute(r ApiGetApicVrfsListRequest) (*ApicVrfsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

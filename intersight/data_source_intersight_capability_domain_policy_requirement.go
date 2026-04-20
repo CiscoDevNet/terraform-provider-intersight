@@ -269,6 +269,46 @@ func getCapabilityDomainPolicyRequirementSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"port_policy_constraints": {
+			Description: "Port policy specific constraints applicable for this model.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"lag_suspend_individual_port_supported": {
+						Description: "Indicates whether LAG suspend individual port setting is supported on this platform.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"min_bundle_version_for25g_speed": {
+						Description: "Minimum bundle version required to support 25G speed on ports.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"min_switch_version_for25g_speed": {
+						Description: "Minimum switch firmware version required to support 25G speed on ports.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -796,6 +836,37 @@ func dataSourceCapabilityDomainPolicyRequirementRead(c context.Context, d *schem
 		o.SetPolicyName(x)
 	}
 
+	if v, ok := d.GetOk("port_policy_constraints"); ok {
+		p := make([]models.CapabilityPortPropertyConstraints, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CapabilityPortPropertyConstraints{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.PortPropertyConstraints")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPortPolicyConstraints(x)
+		}
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1012,6 +1083,8 @@ func dataSourceCapabilityDomainPolicyRequirementRead(c context.Context, d *schem
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["policy_name"] = (s.GetPolicyName())
+
+				temp["port_policy_constraints"] = flattenMapCapabilityPortPropertyConstraints(s.GetPortPolicyConstraints(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

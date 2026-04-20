@@ -147,9 +147,9 @@ func resourceVnicEthQosPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"mtu": {
-				Description:  "The Maximum Transmission Unit (MTU) or packet size that the virtual interface accepts.",
+				Description:  "The Maximum Transmission Unit (MTU) or packet size that the virtual interface accepts.Only 5th Gen Adapters and above with firmware version 5.4.2.15 and later support MTU size greater than 9000.",
 				Type:         schema.TypeInt,
-				ValidateFunc: validation.IntBetween(1500, 9000),
+				ValidateFunc: validation.IntBetween(1500, 9158),
 				Optional:     true,
 				Default:      1500,
 			},

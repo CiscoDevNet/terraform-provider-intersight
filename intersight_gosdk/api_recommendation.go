@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -577,6 +577,27 @@ type ApiGetRecommendationCapacityRunwayByMoidRequest struct {
 	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetRecommendationCapacityRunwayByMoidRequest) Select_(select_ string) ApiGetRecommendationCapacityRunwayByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetRecommendationCapacityRunwayByMoidRequest) Expand(expand string) ApiGetRecommendationCapacityRunwayByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetRecommendationCapacityRunwayByMoidRequest) At(at string) ApiGetRecommendationCapacityRunwayByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetRecommendationCapacityRunwayByMoidRequest) Execute() (*RecommendationCapacityRunway, *http.Response, error) {
@@ -621,6 +642,18 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1006,6 +1039,27 @@ type ApiGetRecommendationClusterExpansionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetRecommendationClusterExpansionByMoidRequest) Select_(select_ string) ApiGetRecommendationClusterExpansionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetRecommendationClusterExpansionByMoidRequest) Expand(expand string) ApiGetRecommendationClusterExpansionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetRecommendationClusterExpansionByMoidRequest) At(at string) ApiGetRecommendationClusterExpansionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetRecommendationClusterExpansionByMoidRequest) Execute() (*RecommendationClusterExpansion, *http.Response, error) {
@@ -1050,6 +1104,18 @@ func (a *RecommendationApiService) GetRecommendationClusterExpansionByMoidExecut
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1435,6 +1501,27 @@ type ApiGetRecommendationHardwareExpansionRequestByMoidRequest struct {
 	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetRecommendationHardwareExpansionRequestByMoidRequest) Select_(select_ string) ApiGetRecommendationHardwareExpansionRequestByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetRecommendationHardwareExpansionRequestByMoidRequest) Expand(expand string) ApiGetRecommendationHardwareExpansionRequestByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetRecommendationHardwareExpansionRequestByMoidRequest) At(at string) ApiGetRecommendationHardwareExpansionRequestByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetRecommendationHardwareExpansionRequestByMoidRequest) Execute() (*RecommendationHardwareExpansionRequest, *http.Response, error) {
@@ -1479,6 +1566,18 @@ func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestByMo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1589,6 +1688,27 @@ type ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest struct {
 	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest) Select_(select_ string) ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest) Expand(expand string) ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest) At(at string) ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest) Execute() (*RecommendationHardwareExpansionRequestItem, *http.Response, error) {
@@ -1633,6 +1753,18 @@ func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestItem
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2293,6 +2425,27 @@ type ApiGetRecommendationPhysicalItemByMoidRequest struct {
 	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetRecommendationPhysicalItemByMoidRequest) Select_(select_ string) ApiGetRecommendationPhysicalItemByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetRecommendationPhysicalItemByMoidRequest) Expand(expand string) ApiGetRecommendationPhysicalItemByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetRecommendationPhysicalItemByMoidRequest) At(at string) ApiGetRecommendationPhysicalItemByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetRecommendationPhysicalItemByMoidRequest) Execute() (*RecommendationPhysicalItem, *http.Response, error) {
@@ -2337,6 +2490,18 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2722,6 +2887,27 @@ type ApiGetRecommendationPurchaseOrderEstimateByMoidRequest struct {
 	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetRecommendationPurchaseOrderEstimateByMoidRequest) Select_(select_ string) ApiGetRecommendationPurchaseOrderEstimateByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetRecommendationPurchaseOrderEstimateByMoidRequest) Expand(expand string) ApiGetRecommendationPurchaseOrderEstimateByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetRecommendationPurchaseOrderEstimateByMoidRequest) At(at string) ApiGetRecommendationPurchaseOrderEstimateByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetRecommendationPurchaseOrderEstimateByMoidRequest) Execute() (*RecommendationPurchaseOrderEstimate, *http.Response, error) {
@@ -2770,6 +2956,18 @@ func (a *RecommendationApiService) GetRecommendationPurchaseOrderEstimateByMoidE
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3159,6 +3357,27 @@ type ApiGetRecommendationPurchaseOrderListByMoidRequest struct {
 	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetRecommendationPurchaseOrderListByMoidRequest) Select_(select_ string) ApiGetRecommendationPurchaseOrderListByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetRecommendationPurchaseOrderListByMoidRequest) Expand(expand string) ApiGetRecommendationPurchaseOrderListByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetRecommendationPurchaseOrderListByMoidRequest) At(at string) ApiGetRecommendationPurchaseOrderListByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetRecommendationPurchaseOrderListByMoidRequest) Execute() (*RecommendationPurchaseOrderList, *http.Response, error) {
@@ -3203,6 +3422,18 @@ func (a *RecommendationApiService) GetRecommendationPurchaseOrderListByMoidExecu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3588,6 +3819,27 @@ type ApiGetRecommendationSoftwareItemByMoidRequest struct {
 	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetRecommendationSoftwareItemByMoidRequest) Select_(select_ string) ApiGetRecommendationSoftwareItemByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetRecommendationSoftwareItemByMoidRequest) Expand(expand string) ApiGetRecommendationSoftwareItemByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetRecommendationSoftwareItemByMoidRequest) At(at string) ApiGetRecommendationSoftwareItemByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetRecommendationSoftwareItemByMoidRequest) Execute() (*RecommendationSoftwareItem, *http.Response, error) {
@@ -3632,6 +3884,18 @@ func (a *RecommendationApiService) GetRecommendationSoftwareItemByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

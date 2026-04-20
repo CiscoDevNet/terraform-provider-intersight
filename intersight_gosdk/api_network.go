@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,27 @@ type ApiGetNetworkDiscoveredNeighborByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkDiscoveredNeighborByMoidRequest) Select_(select_ string) ApiGetNetworkDiscoveredNeighborByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkDiscoveredNeighborByMoidRequest) Expand(expand string) ApiGetNetworkDiscoveredNeighborByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkDiscoveredNeighborByMoidRequest) At(at string) ApiGetNetworkDiscoveredNeighborByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkDiscoveredNeighborByMoidRequest) Execute() (*NetworkDiscoveredNeighbor, *http.Response, error) {
@@ -71,6 +92,18 @@ func (a *NetworkApiService) GetNetworkDiscoveredNeighborByMoidExecute(r ApiGetNe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -456,6 +489,27 @@ type ApiGetNetworkDnsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkDnsByMoidRequest) Select_(select_ string) ApiGetNetworkDnsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkDnsByMoidRequest) Expand(expand string) ApiGetNetworkDnsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkDnsByMoidRequest) At(at string) ApiGetNetworkDnsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkDnsByMoidRequest) Execute() (*NetworkDns, *http.Response, error) {
@@ -500,6 +554,18 @@ func (a *NetworkApiService) GetNetworkDnsByMoidExecute(r ApiGetNetworkDnsByMoidR
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -885,6 +951,27 @@ type ApiGetNetworkElementByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkElementByMoidRequest) Select_(select_ string) ApiGetNetworkElementByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkElementByMoidRequest) Expand(expand string) ApiGetNetworkElementByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkElementByMoidRequest) At(at string) ApiGetNetworkElementByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkElementByMoidRequest) Execute() (*NetworkElement, *http.Response, error) {
@@ -929,6 +1016,18 @@ func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElemen
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1314,6 +1413,27 @@ type ApiGetNetworkElementSummaryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkElementSummaryByMoidRequest) Select_(select_ string) ApiGetNetworkElementSummaryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkElementSummaryByMoidRequest) Expand(expand string) ApiGetNetworkElementSummaryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkElementSummaryByMoidRequest) At(at string) ApiGetNetworkElementSummaryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkElementSummaryByMoidRequest) Execute() (*NetworkElementSummary, *http.Response, error) {
@@ -1358,6 +1478,18 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetwor
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1743,6 +1875,27 @@ type ApiGetNetworkFcZoneInfoByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkFcZoneInfoByMoidRequest) Select_(select_ string) ApiGetNetworkFcZoneInfoByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkFcZoneInfoByMoidRequest) Expand(expand string) ApiGetNetworkFcZoneInfoByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkFcZoneInfoByMoidRequest) At(at string) ApiGetNetworkFcZoneInfoByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkFcZoneInfoByMoidRequest) Execute() (*NetworkFcZoneInfo, *http.Response, error) {
@@ -1787,6 +1940,18 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZ
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2172,6 +2337,27 @@ type ApiGetNetworkFeatureControlByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkFeatureControlByMoidRequest) Select_(select_ string) ApiGetNetworkFeatureControlByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkFeatureControlByMoidRequest) Expand(expand string) ApiGetNetworkFeatureControlByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkFeatureControlByMoidRequest) At(at string) ApiGetNetworkFeatureControlByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkFeatureControlByMoidRequest) Execute() (*NetworkFeatureControl, *http.Response, error) {
@@ -2216,6 +2402,18 @@ func (a *NetworkApiService) GetNetworkFeatureControlByMoidExecute(r ApiGetNetwor
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2601,6 +2799,27 @@ type ApiGetNetworkInterfaceListByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkInterfaceListByMoidRequest) Select_(select_ string) ApiGetNetworkInterfaceListByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkInterfaceListByMoidRequest) Expand(expand string) ApiGetNetworkInterfaceListByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkInterfaceListByMoidRequest) At(at string) ApiGetNetworkInterfaceListByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkInterfaceListByMoidRequest) Execute() (*NetworkInterfaceList, *http.Response, error) {
@@ -2645,6 +2864,18 @@ func (a *NetworkApiService) GetNetworkInterfaceListByMoidExecute(r ApiGetNetwork
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3030,6 +3261,27 @@ type ApiGetNetworkLicenseFileByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkLicenseFileByMoidRequest) Select_(select_ string) ApiGetNetworkLicenseFileByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkLicenseFileByMoidRequest) Expand(expand string) ApiGetNetworkLicenseFileByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkLicenseFileByMoidRequest) At(at string) ApiGetNetworkLicenseFileByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkLicenseFileByMoidRequest) Execute() (*NetworkLicenseFile, *http.Response, error) {
@@ -3074,6 +3326,18 @@ func (a *NetworkApiService) GetNetworkLicenseFileByMoidExecute(r ApiGetNetworkLi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3459,6 +3723,27 @@ type ApiGetNetworkSupervisorCardByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkSupervisorCardByMoidRequest) Select_(select_ string) ApiGetNetworkSupervisorCardByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkSupervisorCardByMoidRequest) Expand(expand string) ApiGetNetworkSupervisorCardByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkSupervisorCardByMoidRequest) At(at string) ApiGetNetworkSupervisorCardByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkSupervisorCardByMoidRequest) Execute() (*NetworkSupervisorCard, *http.Response, error) {
@@ -3503,6 +3788,18 @@ func (a *NetworkApiService) GetNetworkSupervisorCardByMoidExecute(r ApiGetNetwor
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3888,6 +4185,27 @@ type ApiGetNetworkTelemetryCheckByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkTelemetryCheckByMoidRequest) Select_(select_ string) ApiGetNetworkTelemetryCheckByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkTelemetryCheckByMoidRequest) Expand(expand string) ApiGetNetworkTelemetryCheckByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkTelemetryCheckByMoidRequest) At(at string) ApiGetNetworkTelemetryCheckByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkTelemetryCheckByMoidRequest) Execute() (*NetworkTelemetryCheck, *http.Response, error) {
@@ -3932,6 +4250,18 @@ func (a *NetworkApiService) GetNetworkTelemetryCheckByMoidExecute(r ApiGetNetwor
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4317,6 +4647,27 @@ type ApiGetNetworkVethernetByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkVethernetByMoidRequest) Select_(select_ string) ApiGetNetworkVethernetByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkVethernetByMoidRequest) Expand(expand string) ApiGetNetworkVethernetByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkVethernetByMoidRequest) At(at string) ApiGetNetworkVethernetByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkVethernetByMoidRequest) Execute() (*NetworkVethernet, *http.Response, error) {
@@ -4361,6 +4712,18 @@ func (a *NetworkApiService) GetNetworkVethernetByMoidExecute(r ApiGetNetworkVeth
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4746,6 +5109,27 @@ type ApiGetNetworkVfcByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkVfcByMoidRequest) Select_(select_ string) ApiGetNetworkVfcByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkVfcByMoidRequest) Expand(expand string) ApiGetNetworkVfcByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkVfcByMoidRequest) At(at string) ApiGetNetworkVfcByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkVfcByMoidRequest) Execute() (*NetworkVfc, *http.Response, error) {
@@ -4790,6 +5174,18 @@ func (a *NetworkApiService) GetNetworkVfcByMoidExecute(r ApiGetNetworkVfcByMoidR
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5175,6 +5571,27 @@ type ApiGetNetworkVlanPortInfoByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkVlanPortInfoByMoidRequest) Select_(select_ string) ApiGetNetworkVlanPortInfoByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkVlanPortInfoByMoidRequest) Expand(expand string) ApiGetNetworkVlanPortInfoByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkVlanPortInfoByMoidRequest) At(at string) ApiGetNetworkVlanPortInfoByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkVlanPortInfoByMoidRequest) Execute() (*NetworkVlanPortInfo, *http.Response, error) {
@@ -5219,6 +5636,18 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkV
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5604,6 +6033,27 @@ type ApiGetNetworkVpcDomainByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkVpcDomainByMoidRequest) Select_(select_ string) ApiGetNetworkVpcDomainByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkVpcDomainByMoidRequest) Expand(expand string) ApiGetNetworkVpcDomainByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkVpcDomainByMoidRequest) At(at string) ApiGetNetworkVpcDomainByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkVpcDomainByMoidRequest) Execute() (*NetworkVpcDomain, *http.Response, error) {
@@ -5648,6 +6098,18 @@ func (a *NetworkApiService) GetNetworkVpcDomainByMoidExecute(r ApiGetNetworkVpcD
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6033,6 +6495,27 @@ type ApiGetNetworkVpcMemberByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkVpcMemberByMoidRequest) Select_(select_ string) ApiGetNetworkVpcMemberByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkVpcMemberByMoidRequest) Expand(expand string) ApiGetNetworkVpcMemberByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkVpcMemberByMoidRequest) At(at string) ApiGetNetworkVpcMemberByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkVpcMemberByMoidRequest) Execute() (*NetworkVpcMember, *http.Response, error) {
@@ -6077,6 +6560,18 @@ func (a *NetworkApiService) GetNetworkVpcMemberByMoidExecute(r ApiGetNetworkVpcM
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6462,6 +6957,27 @@ type ApiGetNetworkVpcPeerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkVpcPeerByMoidRequest) Select_(select_ string) ApiGetNetworkVpcPeerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkVpcPeerByMoidRequest) Expand(expand string) ApiGetNetworkVpcPeerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkVpcPeerByMoidRequest) At(at string) ApiGetNetworkVpcPeerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkVpcPeerByMoidRequest) Execute() (*NetworkVpcPeer, *http.Response, error) {
@@ -6506,6 +7022,18 @@ func (a *NetworkApiService) GetNetworkVpcPeerByMoidExecute(r ApiGetNetworkVpcPee
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6891,6 +7419,27 @@ type ApiGetNetworkVrfByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNetworkVrfByMoidRequest) Select_(select_ string) ApiGetNetworkVrfByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNetworkVrfByMoidRequest) Expand(expand string) ApiGetNetworkVrfByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNetworkVrfByMoidRequest) At(at string) ApiGetNetworkVrfByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetNetworkVrfByMoidRequest) Execute() (*NetworkVrf, *http.Response, error) {
@@ -6935,6 +7484,18 @@ func (a *NetworkApiService) GetNetworkVrfByMoidExecute(r ApiGetNetworkVrfByMoidR
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

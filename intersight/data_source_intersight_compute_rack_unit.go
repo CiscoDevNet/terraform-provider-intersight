@@ -1972,6 +1972,96 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"recovery_key_details": {
+			Description: "The boot security key information of the current host operating system.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"recovery_key_end_point_state": {
+						Description: "Recovery key state as per the last endpoint notification.\n* `0` - Migration key retrieval unsupported on the platform, typically due to incompatible server firmware.\n* `1` - Recovery key collection timed out. Review support documentation, fix any issue, and re-trigger Server Profile deployment.\n* `2` - Recovery key collection failed. Review support documentation, fix any issue, and re-trigger Server Profile deployment.\n* `3` - Recovery key rotation timed out. Review support documentation, fix any issue, and re-trigger Server Profile deployment.\n* `4` - Recovery key rotation failed. Review support documentation, fix any issue, and re-trigger Server Profile deployment.\n* `5` - Recovery key is not purged at enpoint.\n* `6` - Recovery key available for retrieval from the endpoint.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"recovery_key_info": {
+						Description: "Recovery key and its associated details shared by the endpoint.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"boot_lun_type": {
+									Description: "Type of Boot LUN used to boot the operating system.\n* `SAN` - Refers to the SAN boot type.\n* `Local` - Refers to the Local boot type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"initiator_addresses": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Schema{
+										Type: schema.TypeString}},
+								"instance_id": {
+									Description: "Unique Identifier that represents the boot lun instance.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"is_key_value_set": {
+									Description: "Indicates whether the value of the 'keyValue' property has been set.",
+									Type:        schema.TypeBool,
+									Optional:    true,
+								},
+								"lun_id": {
+									Description: "Identifies the LUN ID associated with the migration key.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"target_addresses": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Schema{
+										Type: schema.TypeString}},
+							},
+						},
+					},
+					"recovery_key_state": {
+						Description: "Recovery key state is deduced based on the endpoint info and its associated server profile.\n* `KeyNotApplicable` - Recovery key retrieval not applicable on this platform, typically because recovery key collection is not enabled.\n* `KeyNotSupported` - Recovery key retrieval not supported on this platform, typically because server firmware does not support key retrieval.\n* `KeyNotAvailable` - Recovery key has not been collected from end-point. Review support documentation for any issues.\n* `WaitingForKey` - Recovery key rotation in progress. The server boots with the old key, then stores the new key in Intersight. After completion, the state changes to KeyAvailable.\n* `KeyOutOfSync` - Server assignment changed after key availability, causing a recovery key mismatch. Run Server Profile Activate to start key rotation.\n* `KeyAvailable` - Recovery key successfully fetched and securely stored in Intersight.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -4597,6 +4687,37 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOk("recovery_key_details"); ok {
+		p := make([]models.ComputeRecoveryKeyDetails, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ComputeRecoveryKeyDetails{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("compute.RecoveryKeyDetails")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetRecoveryKeyDetails(x)
+		}
+	}
+
 	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
@@ -5273,6 +5394,8 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["psus"] = flattenListEquipmentPsuRelationship(s.GetPsus(), d)
 
 				temp["rack_enclosure_slot"] = flattenMapEquipmentRackEnclosureSlotRelationship(s.GetRackEnclosureSlot(), d)
+
+				temp["recovery_key_details"] = flattenMapComputeRecoveryKeyDetails(s.GetRecoveryKeyDetails(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["revision"] = (s.GetRevision())

@@ -35,54 +35,6 @@ func Test_intersight_SoftwarerepositoryApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SoftwarerepositoryApiService CreateSoftwarerepositoryCategoryMapper", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryCategoryMapper(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService CreateSoftwarerepositoryCategoryMapperModel", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryCategoryMapperModel(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService CreateSoftwarerepositoryCategorySupportConstraint", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryCategorySupportConstraint(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService CreateSoftwarerepositoryCategoryUnsupportedModels", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryCategoryUnsupportedModels(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test SoftwarerepositoryApiService CreateSoftwarerepositoryOperatingSystemFile", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -95,70 +47,6 @@ func Test_intersight_SoftwarerepositoryApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SoftwarerepositoryApiService CreateSoftwarerepositoryRelease", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryRelease(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService DeleteSoftwarerepositoryCategoryMapper", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryCategoryMapper(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService DeleteSoftwarerepositoryCategoryMapperModel", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryCategoryMapperModel(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService DeleteSoftwarerepositoryCategorySupportConstraint", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryCategorySupportConstraint(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService DeleteSoftwarerepositoryCategoryUnsupportedModels", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryCategoryUnsupportedModels(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test SoftwarerepositoryApiService DeleteSoftwarerepositoryOperatingSystemFile", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -166,19 +54,6 @@ func Test_intersight_SoftwarerepositoryApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryOperatingSystemFile(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService DeleteSoftwarerepositoryRelease", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryRelease(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -459,62 +334,6 @@ func Test_intersight_SoftwarerepositoryApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SoftwarerepositoryApiService PatchSoftwarerepositoryCategoryMapper", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.PatchSoftwarerepositoryCategoryMapper(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService PatchSoftwarerepositoryCategoryMapperModel", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.PatchSoftwarerepositoryCategoryMapperModel(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService PatchSoftwarerepositoryCategorySupportConstraint", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.PatchSoftwarerepositoryCategorySupportConstraint(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService PatchSoftwarerepositoryCategoryUnsupportedModels", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.PatchSoftwarerepositoryCategoryUnsupportedModels(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test SoftwarerepositoryApiService PatchSoftwarerepositoryOperatingSystemFile", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -522,20 +341,6 @@ func Test_intersight_SoftwarerepositoryApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.SoftwarerepositoryApi.PatchSoftwarerepositoryOperatingSystemFile(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService PatchSoftwarerepositoryRelease", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.PatchSoftwarerepositoryRelease(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -557,62 +362,6 @@ func Test_intersight_SoftwarerepositoryApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SoftwarerepositoryApiService UpdateSoftwarerepositoryCategoryMapper", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryCategoryMapper(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService UpdateSoftwarerepositoryCategoryMapperModel", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryCategoryMapperModel(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService UpdateSoftwarerepositoryCategorySupportConstraint", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryCategorySupportConstraint(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService UpdateSoftwarerepositoryCategoryUnsupportedModels", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryCategoryUnsupportedModels(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test SoftwarerepositoryApiService UpdateSoftwarerepositoryOperatingSystemFile", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -620,20 +369,6 @@ func Test_intersight_SoftwarerepositoryApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryOperatingSystemFile(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SoftwarerepositoryApiService UpdateSoftwarerepositoryRelease", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryRelease(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -272,6 +272,46 @@ func getFabricSystemQosPolicySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"pfc_watchdog": {
+			Description: "PFC Watchdog configuration.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"is_watchdog_enabled": {
+						Description: "Enables or disables the Priority-based Flow Control (PFC) watchdog feature. When enabled, the watchdog actively monitors PFC pause frames. By default Priority Flow Control is enabled for new QoS policies. Existing policies remain unaffected.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"shutdown_multiplier": {
+						Description: "The Shutdown Multiplier, multiplied by the watchdog timer, determines the total duration a Priority-based Flow Control (PFC)-enabled queue remains in shutdown mode. The maximum Watchdog Shutdown Multiplier is 10. However, if the Watchdog Interval exceeds 500 milliseconds, the Multiplier limit is reduced to 2.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"watchdog_interval": {
+						Description: "Time in milliseconds for the PFC Watchdog. The Watchdog product (Watchdog Interval (in milliseconds) × Shutdown Multiplier) cannot exceed 1000ms.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"profiles": {
 			Description: "An array of relationships to fabricBaseSwitchProfile resources.",
 			Type:        schema.TypeList,
@@ -866,6 +906,55 @@ func dataSourceFabricSystemQosPolicyRead(c context.Context, d *schema.ResourceDa
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("pfc_watchdog"); ok {
+		p := make([]models.FabricPfcWatchDog, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FabricPfcWatchDog{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.PfcWatchDog")
+			if v, ok := l["is_watchdog_enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetIsWatchdogEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["shutdown_multiplier"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetShutdownMultiplier(x)
+				}
+			}
+			if v, ok := l["watchdog_interval"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetWatchdogInterval(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPfcWatchdog(x)
+		}
+	}
+
 	if v, ok := d.GetOk("profiles"); ok {
 		x := make([]models.FabricBaseSwitchProfileRelationship, 0)
 		s := v.([]interface{})
@@ -1124,6 +1213,8 @@ func dataSourceFabricSystemQosPolicyRead(c context.Context, d *schema.ResourceDa
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+
+				temp["pfc_watchdog"] = flattenMapFabricPfcWatchDog(s.GetPfcWatchdog(), d)
 
 				temp["profiles"] = flattenListFabricBaseSwitchProfileRelationship(s.GetProfiles(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

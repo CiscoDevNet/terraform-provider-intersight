@@ -373,6 +373,45 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
 				Optional:     true,
 			},
+			"incomplete_policies": {
+				Description: "An array of relationships to policyAbstractPolicy resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -2115,6 +2154,10 @@ func resourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("hypervisor_mgmt_ip", (s.GetHypervisorMgmtIp())); err != nil {
 		return diag.Errorf("error occurred while setting property HypervisorMgmtIp in HyperflexNodeProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("incomplete_policies", flattenListPolicyAbstractPolicyRelationship(s.GetIncompletePolicies(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property IncompletePolicies in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {

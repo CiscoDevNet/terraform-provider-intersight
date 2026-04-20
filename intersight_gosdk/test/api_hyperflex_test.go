@@ -23,18 +23,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test HyperflexApiService CreateHyperflexAppCatalog", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexAppCatalog(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService CreateHyperflexAutoSupportPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -167,66 +155,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService CreateHyperflexFeatureLimitExternal", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexFeatureLimitExternal(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService CreateHyperflexFeatureLimitInternal", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexFeatureLimitInternal(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService CreateHyperflexHealthCheckDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexHealthCheckDefinition(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService CreateHyperflexHealthCheckPackageChecksum", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexHealthCheckPackageChecksum(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService CreateHyperflexHxdpVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexHxdpVersion(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService CreateHyperflexKeyEncryptionKey", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -299,83 +227,11 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService CreateHyperflexServerFirmwareVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexServerFirmwareVersion(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService CreateHyperflexServerFirmwareVersionEntry", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexServerFirmwareVersionEntry(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService CreateHyperflexServerModel", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexServerModel(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService CreateHyperflexServiceAuthToken", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexServiceAuthToken(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService CreateHyperflexSoftwareDistributionComponent", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexSoftwareDistributionComponent(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService CreateHyperflexSoftwareDistributionEntry", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexSoftwareDistributionEntry(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService CreateHyperflexSoftwareDistributionVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HyperflexApi.CreateHyperflexSoftwareDistributionVersion(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -467,19 +323,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService DeleteHyperflexAppCatalog", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexAppCatalog(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService DeleteHyperflexAutoSupportPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -500,19 +343,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexBackupCluster(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexCapabilityInfo", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexCapabilityInfo(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -649,71 +479,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService DeleteHyperflexFeatureLimitExternal", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexFeatureLimitExternal(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexFeatureLimitInternal", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexFeatureLimitInternal(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexHealthCheckDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexHealthCheckDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexHealthCheckPackageChecksum", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexHealthCheckPackageChecksum(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexHxdpVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexHxdpVersion(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService DeleteHyperflexKeyEncryptionKey", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -779,58 +544,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService DeleteHyperflexReduceReSync", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexReduceReSync(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexServerFirmwareVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexServerFirmwareVersion(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexServerFirmwareVersionEntry", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexServerFirmwareVersionEntry(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexServerModel", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexServerModel(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService DeleteHyperflexServiceAuthToken", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -838,45 +551,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexServiceAuthToken(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexSoftwareDistributionComponent", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexSoftwareDistributionComponent(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexSoftwareDistributionEntry", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexSoftwareDistributionEntry(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService DeleteHyperflexSoftwareDistributionVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.HyperflexApi.DeleteHyperflexSoftwareDistributionVersion(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -2755,20 +2429,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService PatchHyperflexAppCatalog", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexAppCatalog(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService PatchHyperflexAutoSupportPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2951,76 +2611,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService PatchHyperflexFeatureLimitExternal", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexFeatureLimitExternal(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService PatchHyperflexFeatureLimitInternal", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexFeatureLimitInternal(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService PatchHyperflexHealthCheckDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexHealthCheckDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService PatchHyperflexHealthCheckPackageChecksum", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexHealthCheckPackageChecksum(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService PatchHyperflexHxdpVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexHxdpVersion(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService PatchHyperflexHypervisorHost", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -3175,48 +2765,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService PatchHyperflexServerFirmwareVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexServerFirmwareVersion(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService PatchHyperflexServerFirmwareVersionEntry", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexServerFirmwareVersionEntry(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService PatchHyperflexServerModel", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexServerModel(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService PatchHyperflexServiceAuthToken", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -3224,48 +2772,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexServiceAuthToken(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService PatchHyperflexSoftwareDistributionComponent", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexSoftwareDistributionComponent(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService PatchHyperflexSoftwareDistributionEntry", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexSoftwareDistributionEntry(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService PatchHyperflexSoftwareDistributionVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexSoftwareDistributionVersion(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -3364,20 +2870,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.HyperflexApi.PatchHyperflexVolume(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexAppCatalog", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexAppCatalog(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -3567,76 +3059,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService UpdateHyperflexFeatureLimitExternal", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexFeatureLimitExternal(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexFeatureLimitInternal", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexFeatureLimitInternal(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexHealthCheckDefinition", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexHealthCheckDefinition(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexHealthCheckPackageChecksum", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexHealthCheckPackageChecksum(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexHxdpVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexHxdpVersion(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService UpdateHyperflexHypervisorHost", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -3791,48 +3213,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HyperflexApiService UpdateHyperflexServerFirmwareVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexServerFirmwareVersion(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexServerFirmwareVersionEntry", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexServerFirmwareVersionEntry(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexServerModel", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexServerModel(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HyperflexApiService UpdateHyperflexServiceAuthToken", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -3840,48 +3220,6 @@ func Test_intersight_HyperflexApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexServiceAuthToken(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexSoftwareDistributionComponent", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexSoftwareDistributionComponent(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexSoftwareDistributionEntry", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexSoftwareDistributionEntry(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HyperflexApiService UpdateHyperflexSoftwareDistributionVersion", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HyperflexApi.UpdateHyperflexSoftwareDistributionVersion(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

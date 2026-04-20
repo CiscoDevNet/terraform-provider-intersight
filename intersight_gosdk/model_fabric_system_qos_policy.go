@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -27,8 +27,9 @@ type FabricSystemQosPolicy struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string           `json:"ObjectType"`
-	Classes    []FabricQosClass `json:"Classes,omitempty"`
+	ObjectType  string                    `json:"ObjectType"`
+	Classes     []FabricQosClass          `json:"Classes,omitempty"`
+	PfcWatchdog NullableFabricPfcWatchDog `json:"PfcWatchdog,omitempty"`
 	// The target platform type of the system QoS policy. * `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.
 	TargetPlatform *string                                      `json:"TargetPlatform,omitempty"`
 	Organization   NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -155,6 +156,49 @@ func (o *FabricSystemQosPolicy) HasClasses() bool {
 // SetClasses gets a reference to the given []FabricQosClass and assigns it to the Classes field.
 func (o *FabricSystemQosPolicy) SetClasses(v []FabricQosClass) {
 	o.Classes = v
+}
+
+// GetPfcWatchdog returns the PfcWatchdog field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSystemQosPolicy) GetPfcWatchdog() FabricPfcWatchDog {
+	if o == nil || IsNil(o.PfcWatchdog.Get()) {
+		var ret FabricPfcWatchDog
+		return ret
+	}
+	return *o.PfcWatchdog.Get()
+}
+
+// GetPfcWatchdogOk returns a tuple with the PfcWatchdog field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSystemQosPolicy) GetPfcWatchdogOk() (*FabricPfcWatchDog, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PfcWatchdog.Get(), o.PfcWatchdog.IsSet()
+}
+
+// HasPfcWatchdog returns a boolean if a field has been set.
+func (o *FabricSystemQosPolicy) HasPfcWatchdog() bool {
+	if o != nil && o.PfcWatchdog.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPfcWatchdog gets a reference to the given NullableFabricPfcWatchDog and assigns it to the PfcWatchdog field.
+func (o *FabricSystemQosPolicy) SetPfcWatchdog(v FabricPfcWatchDog) {
+	o.PfcWatchdog.Set(&v)
+}
+
+// SetPfcWatchdogNil sets the value for PfcWatchdog to be an explicit nil
+func (o *FabricSystemQosPolicy) SetPfcWatchdogNil() {
+	o.PfcWatchdog.Set(nil)
+}
+
+// UnsetPfcWatchdog ensures that no value is present for PfcWatchdog, not even an explicit nil
+func (o *FabricSystemQosPolicy) UnsetPfcWatchdog() {
+	o.PfcWatchdog.Unset()
 }
 
 // GetTargetPlatform returns the TargetPlatform field value if set, zero value otherwise.
@@ -294,6 +338,9 @@ func (o FabricSystemQosPolicy) ToMap() (map[string]interface{}, error) {
 	if o.Classes != nil {
 		toSerialize["Classes"] = o.Classes
 	}
+	if o.PfcWatchdog.IsSet() {
+		toSerialize["PfcWatchdog"] = o.PfcWatchdog.Get()
+	}
 	if !IsNil(o.TargetPlatform) {
 		toSerialize["TargetPlatform"] = o.TargetPlatform
 	}
@@ -357,8 +404,9 @@ func (o *FabricSystemQosPolicy) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string           `json:"ObjectType"`
-		Classes    []FabricQosClass `json:"Classes,omitempty"`
+		ObjectType  string                    `json:"ObjectType"`
+		Classes     []FabricQosClass          `json:"Classes,omitempty"`
+		PfcWatchdog NullableFabricPfcWatchDog `json:"PfcWatchdog,omitempty"`
 		// The target platform type of the system QoS policy. * `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.
 		TargetPlatform *string                                      `json:"TargetPlatform,omitempty"`
 		Organization   NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -374,6 +422,7 @@ func (o *FabricSystemQosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varFabricSystemQosPolicy.ClassId = varFabricSystemQosPolicyWithoutEmbeddedStruct.ClassId
 		varFabricSystemQosPolicy.ObjectType = varFabricSystemQosPolicyWithoutEmbeddedStruct.ObjectType
 		varFabricSystemQosPolicy.Classes = varFabricSystemQosPolicyWithoutEmbeddedStruct.Classes
+		varFabricSystemQosPolicy.PfcWatchdog = varFabricSystemQosPolicyWithoutEmbeddedStruct.PfcWatchdog
 		varFabricSystemQosPolicy.TargetPlatform = varFabricSystemQosPolicyWithoutEmbeddedStruct.TargetPlatform
 		varFabricSystemQosPolicy.Organization = varFabricSystemQosPolicyWithoutEmbeddedStruct.Organization
 		varFabricSystemQosPolicy.Profiles = varFabricSystemQosPolicyWithoutEmbeddedStruct.Profiles
@@ -397,6 +446,7 @@ func (o *FabricSystemQosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Classes")
+		delete(additionalProperties, "PfcWatchdog")
 		delete(additionalProperties, "TargetPlatform")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Profiles")

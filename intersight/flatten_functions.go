@@ -507,18 +507,6 @@ func flattenListAssetDeploymentDeviceRelationship(p []models.AssetDeploymentDevi
 	}
 	return assetdeploymentdevicerelationships
 }
-func flattenListAssetDeviceRegistrationRelationship(p []models.AssetDeviceRegistrationRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var assetdeviceregistrationrelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		assetdeviceregistrationrelationship := flattenMoMoRef(item)
-		assetdeviceregistrationrelationships = append(assetdeviceregistrationrelationships, assetdeviceregistrationrelationship)
-	}
-	return assetdeviceregistrationrelationships
-}
 func flattenListAssetMeteringType(p []models.AssetMeteringType, d *schema.ResourceData) []map[string]interface{} {
 	var assetmeteringtypes []map[string]interface{}
 	if len(p) == 0 {
@@ -3510,6 +3498,23 @@ func flattenListHclOperatingSystemRelationship(p []models.HclOperatingSystemRela
 	}
 	return hcloperatingsystemrelationships
 }
+func flattenListHclServerConfiguration(p []models.HclServerConfiguration, d *schema.ResourceData) []map[string]interface{} {
+	var hclserverconfigurations []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hclserverconfiguration := make(map[string]interface{})
+		hclserverconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hclserverconfiguration["class_id"] = item.GetClassId()
+		hclserverconfiguration["object_type"] = item.GetObjectType()
+		hclserverconfiguration["server_pid"] = item.GetServerPid()
+		hclserverconfiguration["ucs_version"] = item.GetUcsVersion()
+		hclserverconfiguration["version_type"] = item.GetVersionType()
+		hclserverconfigurations = append(hclserverconfigurations, hclserverconfiguration)
+	}
+	return hclserverconfigurations
+}
 func flattenListHclServerHwCatalogInfoRelationship(p []models.HclServerHwCatalogInfoRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var hclserverhwcataloginforelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -5595,18 +5600,6 @@ func flattenListInventoryJobInfo(p []models.InventoryJobInfo, d *schema.Resource
 	}
 	return inventoryjobinfos
 }
-func flattenListIppoolBlockLeaseRelationship(p []models.IppoolBlockLeaseRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var ippoolblockleaserelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		ippoolblockleaserelationship := flattenMoMoRef(item)
-		ippoolblockleaserelationships = append(ippoolblockleaserelationships, ippoolblockleaserelationship)
-	}
-	return ippoolblockleaserelationships
-}
 func flattenListIppoolIpLeaseRelationship(p []models.IppoolIpLeaseRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var ippoolipleaserelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -5784,429 +5777,6 @@ func flattenListIqnpoolReservationRelationship(p []models.IqnpoolReservationRela
 		iqnpoolreservationrelationships = append(iqnpoolreservationrelationships, iqnpoolreservationrelationship)
 	}
 	return iqnpoolreservationrelationships
-}
-func flattenListKubernetesAciCniProfileRelationship(p []models.KubernetesAciCniProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesacicniprofilerelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		kubernetesacicniprofilerelationship := flattenMoMoRef(item)
-		kubernetesacicniprofilerelationships = append(kubernetesacicniprofilerelationships, kubernetesacicniprofilerelationship)
-	}
-	return kubernetesacicniprofilerelationships
-}
-func flattenListKubernetesAciCniTenantClusterAllocationRelationship(p []models.KubernetesAciCniTenantClusterAllocationRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesacicnitenantclusterallocationrelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		kubernetesacicnitenantclusterallocationrelationship := flattenMoMoRef(item)
-		kubernetesacicnitenantclusterallocationrelationships = append(kubernetesacicnitenantclusterallocationrelationships, kubernetesacicnitenantclusterallocationrelationship)
-	}
-	return kubernetesacicnitenantclusterallocationrelationships
-}
-func flattenListKubernetesAddon(p []models.KubernetesAddon, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesaddons []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		kubernetesaddon := make(map[string]interface{})
-		kubernetesaddon["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		addons_x, _ := d.GetOk("addons")
-		kubernetesaddon["addon_configuration"] = (func(p models.KubernetesAddonConfiguration, v interface{}) []map[string]interface{} {
-			var kubernetesaddonconfigurations []map[string]interface{}
-			var ret models.KubernetesAddonConfiguration
-			if reflect.DeepEqual(ret, p) {
-				return nil
-			}
-			item := p
-			kubernetesaddonconfiguration := make(map[string]interface{})
-			kubernetesaddonconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			kubernetesaddonconfiguration["class_id"] = item.GetClassId()
-			kubernetesaddonconfiguration["install_strategy"] = item.GetInstallStrategy()
-			kubernetesaddonconfiguration["object_type"] = item.GetObjectType()
-
-			var addon_configuration_x interface{}
-			if isNonEmptySliceOfMaps(v) {
-				addon_configuration_x = v.([]interface{})[0].(map[string]interface{})["addon_configuration"]
-			}
-
-			kubernetesaddonconfiguration["override_sets"] = (func(p []models.KubernetesKeyValue, v interface{}) []map[string]interface{} {
-				var kuberneteskeyvalues []map[string]interface{}
-				if len(p) == 0 {
-					return nil
-				}
-				for _, item := range p {
-					kuberneteskeyvalue := make(map[string]interface{})
-					kuberneteskeyvalue["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-					kuberneteskeyvalue["class_id"] = item.GetClassId()
-					kuberneteskeyvalue["key"] = item.GetKey()
-					kuberneteskeyvalue["object_type"] = item.GetObjectType()
-					kuberneteskeyvalue["value"] = item.GetValue()
-					kuberneteskeyvalues = append(kuberneteskeyvalues, kuberneteskeyvalue)
-				}
-				return kuberneteskeyvalues
-			})(item.GetOverrideSets(), addon_configuration_x)
-			kubernetesaddonconfiguration["overrides"] = item.GetOverrides()
-			kubernetesaddonconfiguration["release_name"] = item.GetReleaseName()
-			kubernetesaddonconfiguration["release_namespace"] = item.GetReleaseNamespace()
-			kubernetesaddonconfiguration["upgrade_strategy"] = item.GetUpgradeStrategy()
-
-			kubernetesaddonconfigurations = append(kubernetesaddonconfigurations, kubernetesaddonconfiguration)
-			return kubernetesaddonconfigurations
-		})(item.GetAddonConfiguration(), addons_x)
-		kubernetesaddon["addon_policy"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
-			var momorefs []map[string]interface{}
-			var ret models.MoMoRef
-			if reflect.DeepEqual(ret, p) {
-				return nil
-			}
-			item := p
-			momoref := make(map[string]interface{})
-			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			momoref["class_id"] = item.GetClassId()
-			momoref["moid"] = item.GetMoid()
-			momoref["object_type"] = item.GetObjectType()
-			momoref["selector"] = item.GetSelector()
-
-			momorefs = append(momorefs, momoref)
-			return momorefs
-		})(item.GetAddonPolicy(), addons_x)
-		kubernetesaddon["class_id"] = item.GetClassId()
-		kubernetesaddon["name"] = item.GetName()
-		kubernetesaddon["object_type"] = item.GetObjectType()
-		kubernetesaddons = append(kubernetesaddons, kubernetesaddon)
-	}
-	return kubernetesaddons
-}
-func flattenListKubernetesAddonVersionReference(p []models.KubernetesAddonVersionReference, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesaddonversionreferences []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		kubernetesaddonversionreference := make(map[string]interface{})
-		kubernetesaddonversionreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		kubernetesaddonversionreference["class_id"] = item.GetClassId()
-		kubernetesaddonversionreference["name"] = item.GetName()
-		kubernetesaddonversionreference["object_type"] = item.GetObjectType()
-		kubernetesaddonversionreference["nr_version"] = item.GetVersion()
-		kubernetesaddonversionreferences = append(kubernetesaddonversionreferences, kubernetesaddonversionreference)
-	}
-	return kubernetesaddonversionreferences
-}
-func flattenListKubernetesClusterProfileRelationship(p []models.KubernetesClusterProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesclusterprofilerelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		kubernetesclusterprofilerelationship := flattenMoMoRef(item)
-		kubernetesclusterprofilerelationships = append(kubernetesclusterprofilerelationships, kubernetesclusterprofilerelationship)
-	}
-	return kubernetesclusterprofilerelationships
-}
-func flattenListKubernetesConfigResultEntryRelationship(p []models.KubernetesConfigResultEntryRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesconfigresultentryrelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		kubernetesconfigresultentryrelationship := flattenMoMoRef(item)
-		kubernetesconfigresultentryrelationships = append(kubernetesconfigresultentryrelationships, kubernetesconfigresultentryrelationship)
-	}
-	return kubernetesconfigresultentryrelationships
-}
-func flattenListKubernetesEssentialAddon(p []models.KubernetesEssentialAddon, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesessentialaddons []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		kubernetesessentialaddon := make(map[string]interface{})
-		kubernetesessentialaddon["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		essential_addons_x, _ := d.GetOk("essential_addons")
-		kubernetesessentialaddon["addon_configuration"] = (func(p models.KubernetesAddonConfiguration, v interface{}) []map[string]interface{} {
-			var kubernetesaddonconfigurations []map[string]interface{}
-			var ret models.KubernetesAddonConfiguration
-			if reflect.DeepEqual(ret, p) {
-				return nil
-			}
-			item := p
-			kubernetesaddonconfiguration := make(map[string]interface{})
-			kubernetesaddonconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			kubernetesaddonconfiguration["class_id"] = item.GetClassId()
-			kubernetesaddonconfiguration["install_strategy"] = item.GetInstallStrategy()
-			kubernetesaddonconfiguration["object_type"] = item.GetObjectType()
-
-			var addon_configuration_x interface{}
-			if isNonEmptySliceOfMaps(v) {
-				addon_configuration_x = v.([]interface{})[0].(map[string]interface{})["addon_configuration"]
-			}
-
-			kubernetesaddonconfiguration["override_sets"] = (func(p []models.KubernetesKeyValue, v interface{}) []map[string]interface{} {
-				var kuberneteskeyvalues []map[string]interface{}
-				if len(p) == 0 {
-					return nil
-				}
-				for _, item := range p {
-					kuberneteskeyvalue := make(map[string]interface{})
-					kuberneteskeyvalue["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-					kuberneteskeyvalue["class_id"] = item.GetClassId()
-					kuberneteskeyvalue["key"] = item.GetKey()
-					kuberneteskeyvalue["object_type"] = item.GetObjectType()
-					kuberneteskeyvalue["value"] = item.GetValue()
-					kuberneteskeyvalues = append(kuberneteskeyvalues, kuberneteskeyvalue)
-				}
-				return kuberneteskeyvalues
-			})(item.GetOverrideSets(), addon_configuration_x)
-			kubernetesaddonconfiguration["overrides"] = item.GetOverrides()
-			kubernetesaddonconfiguration["release_name"] = item.GetReleaseName()
-			kubernetesaddonconfiguration["release_namespace"] = item.GetReleaseNamespace()
-			kubernetesaddonconfiguration["upgrade_strategy"] = item.GetUpgradeStrategy()
-
-			kubernetesaddonconfigurations = append(kubernetesaddonconfigurations, kubernetesaddonconfiguration)
-			return kubernetesaddonconfigurations
-		})(item.GetAddonConfiguration(), essential_addons_x)
-		kubernetesessentialaddon["addon_definition"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
-			var momorefs []map[string]interface{}
-			var ret models.MoMoRef
-			if reflect.DeepEqual(ret, p) {
-				return nil
-			}
-			item := p
-			momoref := make(map[string]interface{})
-			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			momoref["class_id"] = item.GetClassId()
-			momoref["moid"] = item.GetMoid()
-			momoref["object_type"] = item.GetObjectType()
-			momoref["selector"] = item.GetSelector()
-
-			momorefs = append(momorefs, momoref)
-			return momorefs
-		})(item.GetAddonDefinition(), essential_addons_x)
-		kubernetesessentialaddon["class_id"] = item.GetClassId()
-		kubernetesessentialaddon["name"] = item.GetName()
-		kubernetesessentialaddon["object_type"] = item.GetObjectType()
-		kubernetesessentialaddons = append(kubernetesessentialaddons, kubernetesessentialaddon)
-	}
-	return kubernetesessentialaddons
-}
-func flattenListKubernetesEthernet(p []models.KubernetesEthernet, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesethernets []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		kubernetesethernet := make(map[string]interface{})
-		kubernetesethernet["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		kubernetesethernet["addresses"] = item.GetAddresses()
-		kubernetesethernet["class_id"] = item.GetClassId()
-		kubernetesethernet["gateway"] = item.GetGateway()
-		interfaces_x, _ := d.GetOk("interfaces")
-		kubernetesethernet["ip_v4_configs"] = (func(p []models.KubernetesIpV4Config, v interface{}) []map[string]interface{} {
-			var kubernetesipv4configs []map[string]interface{}
-			if len(p) == 0 {
-				return nil
-			}
-			for _, item := range p {
-				kubernetesipv4config := make(map[string]interface{})
-				kubernetesipv4config["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-				kubernetesipv4config["class_id"] = item.GetClassId()
-				kubernetesipv4config["ip"] = item.GetIp()
-
-				var ip_v4_configs_x interface{}
-				if isNonEmptySliceOfMaps(v) {
-					ip_v4_configs_x = v.([]interface{})[len(kubernetesipv4configs)].(map[string]interface{})["ip_v4_configs"]
-				}
-
-				kubernetesipv4config["lease"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
-					var momorefs []map[string]interface{}
-					var ret models.MoMoRef
-					if reflect.DeepEqual(ret, p) {
-						return nil
-					}
-					item := p
-					momoref := make(map[string]interface{})
-					momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-					momoref["class_id"] = item.GetClassId()
-					momoref["moid"] = item.GetMoid()
-					momoref["object_type"] = item.GetObjectType()
-					momoref["selector"] = item.GetSelector()
-
-					momorefs = append(momorefs, momoref)
-					return momorefs
-				})(item.GetLease(), ip_v4_configs_x)
-				kubernetesipv4config["object_type"] = item.GetObjectType()
-				kubernetesipv4configs = append(kubernetesipv4configs, kubernetesipv4config)
-			}
-			return kubernetesipv4configs
-		})(item.GetIpV4Configs(), interfaces_x)
-		kubernetesethernet["matcher"] = (func(p models.KubernetesEthernetMatcher, v interface{}) []map[string]interface{} {
-			var kubernetesethernetmatchers []map[string]interface{}
-			var ret models.KubernetesEthernetMatcher
-			if reflect.DeepEqual(ret, p) {
-				return nil
-			}
-			item := p
-			kubernetesethernetmatcher := make(map[string]interface{})
-			kubernetesethernetmatcher["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			kubernetesethernetmatcher["class_id"] = item.GetClassId()
-			kubernetesethernetmatcher["object_type"] = item.GetObjectType()
-			kubernetesethernetmatcher["type"] = item.GetType()
-			kubernetesethernetmatcher["value"] = item.GetValue()
-
-			kubernetesethernetmatchers = append(kubernetesethernetmatchers, kubernetesethernetmatcher)
-			return kubernetesethernetmatchers
-		})(item.GetMatcher(), interfaces_x)
-		kubernetesethernet["mtu"] = item.GetMtu()
-		kubernetesethernet["name"] = item.GetName()
-		kubernetesethernet["object_type"] = item.GetObjectType()
-		kubernetesethernet["provider_name"] = item.GetProviderName()
-		kubernetesethernet["routes"] = (func(p []models.KubernetesRoute, v interface{}) []map[string]interface{} {
-			var kubernetesroutes []map[string]interface{}
-			if len(p) == 0 {
-				return nil
-			}
-			for _, item := range p {
-				kubernetesroute := make(map[string]interface{})
-				kubernetesroute["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-				kubernetesroute["class_id"] = item.GetClassId()
-				kubernetesroute["object_type"] = item.GetObjectType()
-				kubernetesroute["to"] = item.GetTo()
-				kubernetesroute["via"] = item.GetVia()
-				kubernetesroutes = append(kubernetesroutes, kubernetesroute)
-			}
-			return kubernetesroutes
-		})(item.GetRoutes(), interfaces_x)
-		kubernetesethernets = append(kubernetesethernets, kubernetesethernet)
-	}
-	return kubernetesethernets
-}
-func flattenListKubernetesNodeAddress(p []models.KubernetesNodeAddress, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodeaddresss []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		kubernetesnodeaddress := make(map[string]interface{})
-		kubernetesnodeaddress["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		kubernetesnodeaddress["address"] = item.GetAddress()
-		kubernetesnodeaddress["class_id"] = item.GetClassId()
-		kubernetesnodeaddress["object_type"] = item.GetObjectType()
-		kubernetesnodeaddress["type"] = item.GetType()
-		kubernetesnodeaddresss = append(kubernetesnodeaddresss, kubernetesnodeaddress)
-	}
-	return kubernetesnodeaddresss
-}
-func flattenListKubernetesNodeGroupLabel(p []models.KubernetesNodeGroupLabel, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodegrouplabels []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		kubernetesnodegrouplabel := make(map[string]interface{})
-		kubernetesnodegrouplabel["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		kubernetesnodegrouplabel["class_id"] = item.GetClassId()
-		kubernetesnodegrouplabel["key"] = item.GetKey()
-		kubernetesnodegrouplabel["object_type"] = item.GetObjectType()
-		kubernetesnodegrouplabel["value"] = item.GetValue()
-		kubernetesnodegrouplabels = append(kubernetesnodegrouplabels, kubernetesnodegrouplabel)
-	}
-	return kubernetesnodegrouplabels
-}
-func flattenListKubernetesNodeGroupProfileRelationship(p []models.KubernetesNodeGroupProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodegroupprofilerelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		kubernetesnodegroupprofilerelationship := flattenMoMoRef(item)
-		kubernetesnodegroupprofilerelationships = append(kubernetesnodegroupprofilerelationships, kubernetesnodegroupprofilerelationship)
-	}
-	return kubernetesnodegroupprofilerelationships
-}
-func flattenListKubernetesNodeGroupTaint(p []models.KubernetesNodeGroupTaint, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodegrouptaints []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		kubernetesnodegrouptaint := make(map[string]interface{})
-		kubernetesnodegrouptaint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		kubernetesnodegrouptaint["class_id"] = item.GetClassId()
-		kubernetesnodegrouptaint["effect"] = item.GetEffect()
-		kubernetesnodegrouptaint["key"] = item.GetKey()
-		kubernetesnodegrouptaint["object_type"] = item.GetObjectType()
-		kubernetesnodegrouptaint["value"] = item.GetValue()
-		kubernetesnodegrouptaints = append(kubernetesnodegrouptaints, kubernetesnodegrouptaint)
-	}
-	return kubernetesnodegrouptaints
-}
-func flattenListKubernetesNodeProfileRelationship(p []models.KubernetesNodeProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodeprofilerelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		kubernetesnodeprofilerelationship := flattenMoMoRef(item)
-		kubernetesnodeprofilerelationships = append(kubernetesnodeprofilerelationships, kubernetesnodeprofilerelationship)
-	}
-	return kubernetesnodeprofilerelationships
-}
-func flattenListKubernetesNodeStatus(p []models.KubernetesNodeStatus, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodestatuss []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		kubernetesnodestatus := make(map[string]interface{})
-		kubernetesnodestatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		kubernetesnodestatus["class_id"] = item.GetClassId()
-		kubernetesnodestatus["object_type"] = item.GetObjectType()
-		kubernetesnodestatus["status"] = item.GetStatus()
-		kubernetesnodestatus["type"] = item.GetType()
-		kubernetesnodestatuss = append(kubernetesnodestatuss, kubernetesnodestatus)
-	}
-	return kubernetesnodestatuss
-}
-func flattenListKubernetesTaint(p []models.KubernetesTaint, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetestaints []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		kubernetestaint := make(map[string]interface{})
-		kubernetestaint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		kubernetestaint["class_id"] = item.GetClassId()
-		kubernetestaint["effect"] = item.GetEffect()
-		kubernetestaint["key"] = item.GetKey()
-		kubernetestaint["object_type"] = item.GetObjectType()
-		kubernetestaint["value"] = item.GetValue()
-		kubernetestaints = append(kubernetestaints, kubernetestaint)
-	}
-	return kubernetestaints
-}
-func flattenListKubernetesVirtualMachineInfrastructureProviderRelationship(p []models.KubernetesVirtualMachineInfrastructureProviderRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesvirtualmachineinfrastructureproviderrelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		kubernetesvirtualmachineinfrastructureproviderrelationship := flattenMoMoRef(item)
-		kubernetesvirtualmachineinfrastructureproviderrelationships = append(kubernetesvirtualmachineinfrastructureproviderrelationships, kubernetesvirtualmachineinfrastructureproviderrelationship)
-	}
-	return kubernetesvirtualmachineinfrastructureproviderrelationships
 }
 func flattenListLicenseLicenseInfoRelationship(p []models.LicenseLicenseInfoRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var licenselicenseinforelationships []map[string]interface{}
@@ -6542,7 +6112,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 		mobasemo := make(map[string]interface{})
 		mobasemo["account_moid"] = item.GetAccountMoid()
 		mobasemo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		sources_x, _ := d.GetOk("sources")
+		targets_x, _ := d.GetOk("targets")
 		mobasemo["ancestors"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -6554,7 +6124,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetAncestors(), sources_x)
+		})(item.GetAncestors(), targets_x)
 		mobasemo["class_id"] = item.GetClassId()
 		mobasemo["create_time"] = item.GetCreateTime().String()
 		mobasemo["domain_group_moid"] = item.GetDomainGroupMoid()
@@ -6579,7 +6149,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			return mobasemorelationships
-		})(item.GetParent(), sources_x)
+		})(item.GetParent(), targets_x)
 		mobasemo["permission_resources"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -6591,7 +6161,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetPermissionResources(), sources_x)
+		})(item.GetPermissionResources(), targets_x)
 		mobasemo["shared_scope"] = item.GetSharedScope()
 		mobasemo["tags"] = (func(p []models.MoTag, v interface{}) []map[string]interface{} {
 			var motags []map[string]interface{}
@@ -6648,7 +6218,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				motags = append(motags, motag)
 			}
 			return motags
-		})(item.GetTags(), sources_x)
+		})(item.GetTags(), targets_x)
 		mobasemo["version_context"] = (func(p models.MoVersionContext, v interface{}) []map[string]interface{} {
 			var moversioncontexts []map[string]interface{}
 			var ret models.MoVersionContext
@@ -6706,7 +6276,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			moversioncontexts = append(moversioncontexts, moversioncontext)
 			return moversioncontexts
-		})(item.GetVersionContext(), sources_x)
+		})(item.GetVersionContext(), targets_x)
 		mobasemos = append(mobasemos, mobasemo)
 	}
 	return mobasemos
@@ -10511,7 +10081,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		type_definition_x, _ := d.GetOk("type_definition")
+		input_definition_x, _ := d.GetOk("input_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -10529,7 +10099,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), type_definition_x)
+		})(item.GetDefault(), input_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -10547,7 +10117,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), type_definition_x)
+		})(item.GetDisplayMeta(), input_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()
@@ -12954,24 +12524,6 @@ func flattenMapBulkApiResult(p models.BulkApiResult, d *schema.ResourceData) []m
 	bulkapiresults = append(bulkapiresults, bulkapiresult)
 	return bulkapiresults
 }
-func flattenMapBulkExportRelationship(p models.BulkExportRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var bulkexportrelationships []map[string]interface{}
-	var ret models.BulkExportRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	bulkexportrelationship := make(map[string]interface{})
-	bulkexportrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	bulkexportrelationship["class_id"] = item.GetClassId()
-	bulkexportrelationship["moid"] = item.GetMoid()
-	bulkexportrelationship["object_type"] = item.GetObjectType()
-	bulkexportrelationship["selector"] = item.GetSelector()
-
-	bulkexportrelationships = append(bulkexportrelationships, bulkexportrelationship)
-	return bulkexportrelationships
-}
 func flattenMapBulkExportedItemRelationship(p models.BulkExportedItemRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var bulkexporteditemrelationships []map[string]interface{}
 	var ret models.BulkExportedItemRelationship
@@ -13151,6 +12703,24 @@ func flattenMapCapabilityPcIdRange(p models.CapabilityPcIdRange, d *schema.Resou
 
 	capabilitypcidranges = append(capabilitypcidranges, capabilitypcidrange)
 	return capabilitypcidranges
+}
+func flattenMapCapabilityPortPropertyConstraints(p models.CapabilityPortPropertyConstraints, d *schema.ResourceData) []map[string]interface{} {
+	var capabilityportpropertyconstraintss []map[string]interface{}
+	var ret models.CapabilityPortPropertyConstraints
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	capabilityportpropertyconstraints := make(map[string]interface{})
+	capabilityportpropertyconstraints["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	capabilityportpropertyconstraints["class_id"] = item.GetClassId()
+	capabilityportpropertyconstraints["lag_suspend_individual_port_supported"] = item.GetLagSuspendIndividualPortSupported()
+	capabilityportpropertyconstraints["min_bundle_version_for25g_speed"] = item.GetMinBundleVersionFor25gSpeed()
+	capabilityportpropertyconstraints["min_switch_version_for25g_speed"] = item.GetMinSwitchVersionFor25gSpeed()
+	capabilityportpropertyconstraints["object_type"] = item.GetObjectType()
+
+	capabilityportpropertyconstraintss = append(capabilityportpropertyconstraintss, capabilityportpropertyconstraints)
+	return capabilityportpropertyconstraintss
 }
 func flattenMapCapabilitySwitchNetworkLimits(p models.CapabilitySwitchNetworkLimits, d *schema.ResourceData) []map[string]interface{} {
 	var capabilityswitchnetworklimitss []map[string]interface{}
@@ -13798,6 +13368,27 @@ func flattenMapComputeHostUtilityOperationConfguration(p models.ComputeHostUtili
 	computehostutilityoperationconfgurations = append(computehostutilityoperationconfgurations, computehostutilityoperationconfguration)
 	return computehostutilityoperationconfgurations
 }
+func flattenMapComputeMigrationKeyInfo(p models.ComputeMigrationKeyInfo, d *schema.ResourceData) []map[string]interface{} {
+	var computemigrationkeyinfos []map[string]interface{}
+	var ret models.ComputeMigrationKeyInfo
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	computemigrationkeyinfo := make(map[string]interface{})
+	computemigrationkeyinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	computemigrationkeyinfo["boot_lun_type"] = item.GetBootLunType()
+	computemigrationkeyinfo["class_id"] = item.GetClassId()
+	computemigrationkeyinfo["initiator_addresses"] = item.GetInitiatorAddresses()
+	computemigrationkeyinfo["instance_id"] = item.GetInstanceId()
+	computemigrationkeyinfo["is_key_value_set"] = item.GetIsKeyValueSet()
+	computemigrationkeyinfo["lun_id"] = item.GetLunId()
+	computemigrationkeyinfo["object_type"] = item.GetObjectType()
+	computemigrationkeyinfo["target_addresses"] = item.GetTargetAddresses()
+
+	computemigrationkeyinfos = append(computemigrationkeyinfos, computemigrationkeyinfo)
+	return computemigrationkeyinfos
+}
 func flattenMapComputePersistentMemoryOperation(p models.ComputePersistentMemoryOperation, d *schema.ResourceData) []map[string]interface{} {
 	var computepersistentmemoryoperations []map[string]interface{}
 	var ret models.ComputePersistentMemoryOperation
@@ -13913,6 +13504,45 @@ func flattenMapComputeRackUnitRelationship(p models.ComputeRackUnitRelationship,
 
 	computerackunitrelationships = append(computerackunitrelationships, computerackunitrelationship)
 	return computerackunitrelationships
+}
+func flattenMapComputeRecoveryKeyDetails(p models.ComputeRecoveryKeyDetails, d *schema.ResourceData) []map[string]interface{} {
+	var computerecoverykeydetailss []map[string]interface{}
+	var ret models.ComputeRecoveryKeyDetails
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	computerecoverykeydetails := make(map[string]interface{})
+	computerecoverykeydetails["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	computerecoverykeydetails["class_id"] = item.GetClassId()
+	computerecoverykeydetails["object_type"] = item.GetObjectType()
+	computerecoverykeydetails["recovery_key_end_point_state"] = item.GetRecoveryKeyEndPointState()
+	recovery_key_details_x, _ := d.GetOk("recovery_key_details")
+	computerecoverykeydetails["recovery_key_info"] = (func(p models.ComputeMigrationKeyInfo, v interface{}) []map[string]interface{} {
+		var computemigrationkeyinfos []map[string]interface{}
+		var ret models.ComputeMigrationKeyInfo
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		computemigrationkeyinfo := make(map[string]interface{})
+		computemigrationkeyinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		computemigrationkeyinfo["boot_lun_type"] = item.GetBootLunType()
+		computemigrationkeyinfo["class_id"] = item.GetClassId()
+		computemigrationkeyinfo["initiator_addresses"] = item.GetInitiatorAddresses()
+		computemigrationkeyinfo["instance_id"] = item.GetInstanceId()
+		computemigrationkeyinfo["is_key_value_set"] = item.GetIsKeyValueSet()
+		computemigrationkeyinfo["lun_id"] = item.GetLunId()
+		computemigrationkeyinfo["object_type"] = item.GetObjectType()
+		computemigrationkeyinfo["target_addresses"] = item.GetTargetAddresses()
+
+		computemigrationkeyinfos = append(computemigrationkeyinfos, computemigrationkeyinfo)
+		return computemigrationkeyinfos
+	})(item.GetRecoveryKeyInfo(), recovery_key_details_x)
+	computerecoverykeydetails["recovery_key_state"] = item.GetRecoveryKeyState()
+
+	computerecoverykeydetailss = append(computerecoverykeydetailss, computerecoverykeydetails)
+	return computerecoverykeydetailss
 }
 func flattenMapComputeServerConfig(p models.ComputeServerConfig, d *schema.ResourceData) []map[string]interface{} {
 	var computeserverconfigs []map[string]interface{}
@@ -15196,6 +14826,22 @@ func flattenMapFabricMacAgingSettings(p models.FabricMacAgingSettings, d *schema
 	fabricmacagingsettingss = append(fabricmacagingsettingss, fabricmacagingsettings)
 	return fabricmacagingsettingss
 }
+func flattenMapFabricMacLearningSettings(p models.FabricMacLearningSettings, d *schema.ResourceData) []map[string]interface{} {
+	var fabricmaclearningsettingss []map[string]interface{}
+	var ret models.FabricMacLearningSettings
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	fabricmaclearningsettings := make(map[string]interface{})
+	fabricmaclearningsettings["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricmaclearningsettings["class_id"] = item.GetClassId()
+	fabricmaclearningsettings["disabled_vlans"] = item.GetDisabledVlans()
+	fabricmaclearningsettings["object_type"] = item.GetObjectType()
+
+	fabricmaclearningsettingss = append(fabricmaclearningsettingss, fabricmaclearningsettings)
+	return fabricmaclearningsettingss
+}
 func flattenMapFabricMacSecEaPol(p models.FabricMacSecEaPol, d *schema.ResourceData) []map[string]interface{} {
 	var fabricmacseceapols []map[string]interface{}
 	var ret models.FabricMacSecEaPol
@@ -15284,6 +14930,24 @@ func flattenMapFabricNetFlowRecordRelationship(p models.FabricNetFlowRecordRelat
 
 	fabricnetflowrecordrelationships = append(fabricnetflowrecordrelationships, fabricnetflowrecordrelationship)
 	return fabricnetflowrecordrelationships
+}
+func flattenMapFabricPfcWatchDog(p models.FabricPfcWatchDog, d *schema.ResourceData) []map[string]interface{} {
+	var fabricpfcwatchdogs []map[string]interface{}
+	var ret models.FabricPfcWatchDog
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	fabricpfcwatchdog := make(map[string]interface{})
+	fabricpfcwatchdog["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricpfcwatchdog["class_id"] = item.GetClassId()
+	fabricpfcwatchdog["is_watchdog_enabled"] = item.GetIsWatchdogEnabled()
+	fabricpfcwatchdog["object_type"] = item.GetObjectType()
+	fabricpfcwatchdog["shutdown_multiplier"] = item.GetShutdownMultiplier()
+	fabricpfcwatchdog["watchdog_interval"] = item.GetWatchdogInterval()
+
+	fabricpfcwatchdogs = append(fabricpfcwatchdogs, fabricpfcwatchdog)
+	return fabricpfcwatchdogs
 }
 func flattenMapFabricPortPolicyRelationship(p models.FabricPortPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var fabricportpolicyrelationships []map[string]interface{}
@@ -17205,7 +16869,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 	hyperflexipaddrrange["class_id"] = item.GetClassId()
 	hyperflexipaddrrange["end_addr"] = item.GetEndAddr()
 	hyperflexipaddrrange["gateway"] = item.GetGateway()
-	data_ip_range_x, _ := d.GetOk("data_ip_range")
+	kvm_ip_range_x, _ := d.GetOk("kvm_ip_range")
 	hyperflexipaddrrange["ip_addr_blocks"] = (func(p []models.CommIpV4AddressBlock, v interface{}) []map[string]interface{} {
 		var commipv4addressblocks []map[string]interface{}
 		if len(p) == 0 {
@@ -17221,7 +16885,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 			commipv4addressblocks = append(commipv4addressblocks, commipv4addressblock)
 		}
 		return commipv4addressblocks
-	})(item.GetIpAddrBlocks(), data_ip_range_x)
+	})(item.GetIpAddrBlocks(), kvm_ip_range_x)
 	hyperflexipaddrrange["netmask"] = item.GetNetmask()
 	hyperflexipaddrrange["object_type"] = item.GetObjectType()
 	hyperflexipaddrrange["start_addr"] = item.GetStartAddr()
@@ -19391,1009 +19055,6 @@ func flattenMapIssueCondition(p models.IssueCondition, d *schema.ResourceData) [
 
 	issueconditions = append(issueconditions, issuecondition)
 	return issueconditions
-}
-func flattenMapKubernetesAciCniProfileRelationship(p models.KubernetesAciCniProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesacicniprofilerelationships []map[string]interface{}
-	var ret models.KubernetesAciCniProfileRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesacicniprofilerelationship := make(map[string]interface{})
-	kubernetesacicniprofilerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesacicniprofilerelationship["class_id"] = item.GetClassId()
-	kubernetesacicniprofilerelationship["moid"] = item.GetMoid()
-	kubernetesacicniprofilerelationship["object_type"] = item.GetObjectType()
-	kubernetesacicniprofilerelationship["selector"] = item.GetSelector()
-
-	kubernetesacicniprofilerelationships = append(kubernetesacicniprofilerelationships, kubernetesacicniprofilerelationship)
-	return kubernetesacicniprofilerelationships
-}
-func flattenMapKubernetesActionInfo(p models.KubernetesActionInfo, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesactioninfos []map[string]interface{}
-	var ret models.KubernetesActionInfo
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesactioninfo := make(map[string]interface{})
-	kubernetesactioninfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesactioninfo["class_id"] = item.GetClassId()
-	kubernetesactioninfo["failure_reason"] = item.GetFailureReason()
-	kubernetesactioninfo["name"] = item.GetName()
-	kubernetesactioninfo["object_type"] = item.GetObjectType()
-	kubernetesactioninfo["status"] = item.GetStatus()
-
-	kubernetesactioninfos = append(kubernetesactioninfos, kubernetesactioninfo)
-	return kubernetesactioninfos
-}
-func flattenMapKubernetesAddonConfiguration(p models.KubernetesAddonConfiguration, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesaddonconfigurations []map[string]interface{}
-	var ret models.KubernetesAddonConfiguration
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesaddonconfiguration := make(map[string]interface{})
-	kubernetesaddonconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesaddonconfiguration["class_id"] = item.GetClassId()
-	kubernetesaddonconfiguration["install_strategy"] = item.GetInstallStrategy()
-	kubernetesaddonconfiguration["object_type"] = item.GetObjectType()
-	addon_configuration_x, _ := d.GetOk("addon_configuration")
-	kubernetesaddonconfiguration["override_sets"] = (func(p []models.KubernetesKeyValue, v interface{}) []map[string]interface{} {
-		var kuberneteskeyvalues []map[string]interface{}
-		if len(p) == 0 {
-			return nil
-		}
-		for _, item := range p {
-			kuberneteskeyvalue := make(map[string]interface{})
-			kuberneteskeyvalue["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			kuberneteskeyvalue["class_id"] = item.GetClassId()
-			kuberneteskeyvalue["key"] = item.GetKey()
-			kuberneteskeyvalue["object_type"] = item.GetObjectType()
-			kuberneteskeyvalue["value"] = item.GetValue()
-			kuberneteskeyvalues = append(kuberneteskeyvalues, kuberneteskeyvalue)
-		}
-		return kuberneteskeyvalues
-	})(item.GetOverrideSets(), addon_configuration_x)
-	kubernetesaddonconfiguration["overrides"] = item.GetOverrides()
-	kubernetesaddonconfiguration["release_name"] = item.GetReleaseName()
-	kubernetesaddonconfiguration["release_namespace"] = item.GetReleaseNamespace()
-	kubernetesaddonconfiguration["upgrade_strategy"] = item.GetUpgradeStrategy()
-
-	kubernetesaddonconfigurations = append(kubernetesaddonconfigurations, kubernetesaddonconfiguration)
-	return kubernetesaddonconfigurations
-}
-func flattenMapKubernetesAddonDefinitionRelationship(p models.KubernetesAddonDefinitionRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesaddondefinitionrelationships []map[string]interface{}
-	var ret models.KubernetesAddonDefinitionRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesaddondefinitionrelationship := make(map[string]interface{})
-	kubernetesaddondefinitionrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesaddondefinitionrelationship["class_id"] = item.GetClassId()
-	kubernetesaddondefinitionrelationship["moid"] = item.GetMoid()
-	kubernetesaddondefinitionrelationship["object_type"] = item.GetObjectType()
-	kubernetesaddondefinitionrelationship["selector"] = item.GetSelector()
-
-	kubernetesaddondefinitionrelationships = append(kubernetesaddondefinitionrelationships, kubernetesaddondefinitionrelationship)
-	return kubernetesaddondefinitionrelationships
-}
-func flattenMapKubernetesBaremetalNetworkInfo(p models.KubernetesBaremetalNetworkInfo, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesbaremetalnetworkinfos []map[string]interface{}
-	var ret models.KubernetesBaremetalNetworkInfo
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesbaremetalnetworkinfo := make(map[string]interface{})
-	kubernetesbaremetalnetworkinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesbaremetalnetworkinfo["class_id"] = item.GetClassId()
-	network_info_x, _ := d.GetOk("network_info")
-	kubernetesbaremetalnetworkinfo["ethernets"] = (func(p []models.KubernetesEthernet, v interface{}) []map[string]interface{} {
-		var kubernetesethernets []map[string]interface{}
-		if len(p) == 0 {
-			return nil
-		}
-		for _, item := range p {
-			kubernetesethernet := make(map[string]interface{})
-			kubernetesethernet["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			kubernetesethernet["addresses"] = item.GetAddresses()
-			kubernetesethernet["class_id"] = item.GetClassId()
-			kubernetesethernet["gateway"] = item.GetGateway()
-
-			var ethernets_x interface{}
-			if isNonEmptySliceOfMaps(v) {
-				ethernets_x = v.([]interface{})[len(kubernetesethernets)].(map[string]interface{})["ethernets"]
-			}
-
-			kubernetesethernet["ip_v4_configs"] = (func(p []models.KubernetesIpV4Config, v interface{}) []map[string]interface{} {
-				var kubernetesipv4configs []map[string]interface{}
-				if len(p) == 0 {
-					return nil
-				}
-				for _, item := range p {
-					kubernetesipv4config := make(map[string]interface{})
-					kubernetesipv4config["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-					kubernetesipv4config["class_id"] = item.GetClassId()
-					kubernetesipv4config["ip"] = item.GetIp()
-
-					var ip_v4_configs_x interface{}
-					if isNonEmptySliceOfMaps(v) {
-						ip_v4_configs_x = v.([]interface{})[len(kubernetesipv4configs)].(map[string]interface{})["ip_v4_configs"]
-					}
-
-					kubernetesipv4config["lease"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
-						var momorefs []map[string]interface{}
-						var ret models.MoMoRef
-						if reflect.DeepEqual(ret, p) {
-							return nil
-						}
-						item := p
-						momoref := make(map[string]interface{})
-						momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-						momoref["class_id"] = item.GetClassId()
-						momoref["moid"] = item.GetMoid()
-						momoref["object_type"] = item.GetObjectType()
-						momoref["selector"] = item.GetSelector()
-
-						momorefs = append(momorefs, momoref)
-						return momorefs
-					})(item.GetLease(), ip_v4_configs_x)
-					kubernetesipv4config["object_type"] = item.GetObjectType()
-					kubernetesipv4configs = append(kubernetesipv4configs, kubernetesipv4config)
-				}
-				return kubernetesipv4configs
-			})(item.GetIpV4Configs(), ethernets_x)
-			kubernetesethernet["matcher"] = (func(p models.KubernetesEthernetMatcher, v interface{}) []map[string]interface{} {
-				var kubernetesethernetmatchers []map[string]interface{}
-				var ret models.KubernetesEthernetMatcher
-				if reflect.DeepEqual(ret, p) {
-					return nil
-				}
-				item := p
-				kubernetesethernetmatcher := make(map[string]interface{})
-				kubernetesethernetmatcher["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-				kubernetesethernetmatcher["class_id"] = item.GetClassId()
-				kubernetesethernetmatcher["object_type"] = item.GetObjectType()
-				kubernetesethernetmatcher["type"] = item.GetType()
-				kubernetesethernetmatcher["value"] = item.GetValue()
-
-				kubernetesethernetmatchers = append(kubernetesethernetmatchers, kubernetesethernetmatcher)
-				return kubernetesethernetmatchers
-			})(item.GetMatcher(), ethernets_x)
-			kubernetesethernet["mtu"] = item.GetMtu()
-			kubernetesethernet["name"] = item.GetName()
-			kubernetesethernet["object_type"] = item.GetObjectType()
-			kubernetesethernet["provider_name"] = item.GetProviderName()
-			kubernetesethernet["routes"] = (func(p []models.KubernetesRoute, v interface{}) []map[string]interface{} {
-				var kubernetesroutes []map[string]interface{}
-				if len(p) == 0 {
-					return nil
-				}
-				for _, item := range p {
-					kubernetesroute := make(map[string]interface{})
-					kubernetesroute["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-					kubernetesroute["class_id"] = item.GetClassId()
-					kubernetesroute["object_type"] = item.GetObjectType()
-					kubernetesroute["to"] = item.GetTo()
-					kubernetesroute["via"] = item.GetVia()
-					kubernetesroutes = append(kubernetesroutes, kubernetesroute)
-				}
-				return kubernetesroutes
-			})(item.GetRoutes(), ethernets_x)
-			kubernetesethernets = append(kubernetesethernets, kubernetesethernet)
-		}
-		return kubernetesethernets
-	})(item.GetEthernets(), network_info_x)
-	kubernetesbaremetalnetworkinfo["object_type"] = item.GetObjectType()
-	kubernetesbaremetalnetworkinfo["ovsbonds"] = (func(p []models.KubernetesOvsBond, v interface{}) []map[string]interface{} {
-		var kubernetesovsbonds []map[string]interface{}
-		if len(p) == 0 {
-			return nil
-		}
-		for _, item := range p {
-			kubernetesovsbond := make(map[string]interface{})
-			kubernetesovsbond["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			kubernetesovsbond["addresses"] = item.GetAddresses()
-			kubernetesovsbond["class_id"] = item.GetClassId()
-			kubernetesovsbond["gateway"] = item.GetGateway()
-			kubernetesovsbond["interfaces"] = item.GetInterfaces()
-
-			var ovsbonds_x interface{}
-			if isNonEmptySliceOfMaps(v) {
-				ovsbonds_x = v.([]interface{})[len(kubernetesovsbonds)].(map[string]interface{})["ovsbonds"]
-			}
-
-			kubernetesovsbond["ip_v4_configs"] = (func(p []models.KubernetesIpV4Config, v interface{}) []map[string]interface{} {
-				var kubernetesipv4configs []map[string]interface{}
-				if len(p) == 0 {
-					return nil
-				}
-				for _, item := range p {
-					kubernetesipv4config := make(map[string]interface{})
-					kubernetesipv4config["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-					kubernetesipv4config["class_id"] = item.GetClassId()
-					kubernetesipv4config["ip"] = item.GetIp()
-
-					var ip_v4_configs_x interface{}
-					if isNonEmptySliceOfMaps(v) {
-						ip_v4_configs_x = v.([]interface{})[len(kubernetesipv4configs)].(map[string]interface{})["ip_v4_configs"]
-					}
-
-					kubernetesipv4config["lease"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
-						var momorefs []map[string]interface{}
-						var ret models.MoMoRef
-						if reflect.DeepEqual(ret, p) {
-							return nil
-						}
-						item := p
-						momoref := make(map[string]interface{})
-						momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-						momoref["class_id"] = item.GetClassId()
-						momoref["moid"] = item.GetMoid()
-						momoref["object_type"] = item.GetObjectType()
-						momoref["selector"] = item.GetSelector()
-
-						momorefs = append(momorefs, momoref)
-						return momorefs
-					})(item.GetLease(), ip_v4_configs_x)
-					kubernetesipv4config["object_type"] = item.GetObjectType()
-					kubernetesipv4configs = append(kubernetesipv4configs, kubernetesipv4config)
-				}
-				return kubernetesipv4configs
-			})(item.GetIpV4Configs(), ovsbonds_x)
-			kubernetesovsbond["mtu"] = item.GetMtu()
-			kubernetesovsbond["name"] = item.GetName()
-			kubernetesovsbond["object_type"] = item.GetObjectType()
-			kubernetesovsbond["routes"] = (func(p []models.KubernetesRoute, v interface{}) []map[string]interface{} {
-				var kubernetesroutes []map[string]interface{}
-				if len(p) == 0 {
-					return nil
-				}
-				for _, item := range p {
-					kubernetesroute := make(map[string]interface{})
-					kubernetesroute["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-					kubernetesroute["class_id"] = item.GetClassId()
-					kubernetesroute["object_type"] = item.GetObjectType()
-					kubernetesroute["to"] = item.GetTo()
-					kubernetesroute["via"] = item.GetVia()
-					kubernetesroutes = append(kubernetesroutes, kubernetesroute)
-				}
-				return kubernetesroutes
-			})(item.GetRoutes(), ovsbonds_x)
-			kubernetesovsbond["vlan"] = item.GetVlan()
-			kubernetesovsbonds = append(kubernetesovsbonds, kubernetesovsbond)
-		}
-		return kubernetesovsbonds
-	})(item.GetOvsbonds(), network_info_x)
-
-	kubernetesbaremetalnetworkinfos = append(kubernetesbaremetalnetworkinfos, kubernetesbaremetalnetworkinfo)
-	return kubernetesbaremetalnetworkinfos
-}
-func flattenMapKubernetesBaseInfrastructureProviderRelationship(p models.KubernetesBaseInfrastructureProviderRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesbaseinfrastructureproviderrelationships []map[string]interface{}
-	var ret models.KubernetesBaseInfrastructureProviderRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesbaseinfrastructureproviderrelationship := make(map[string]interface{})
-	kubernetesbaseinfrastructureproviderrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesbaseinfrastructureproviderrelationship["class_id"] = item.GetClassId()
-	kubernetesbaseinfrastructureproviderrelationship["moid"] = item.GetMoid()
-	kubernetesbaseinfrastructureproviderrelationship["object_type"] = item.GetObjectType()
-	kubernetesbaseinfrastructureproviderrelationship["selector"] = item.GetSelector()
-
-	kubernetesbaseinfrastructureproviderrelationships = append(kubernetesbaseinfrastructureproviderrelationships, kubernetesbaseinfrastructureproviderrelationship)
-	return kubernetesbaseinfrastructureproviderrelationships
-}
-func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVirtualMachineInfraConfig, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesbasevirtualmachineinfraconfigs []map[string]interface{}
-	var ret models.KubernetesBaseVirtualMachineInfraConfig
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesbasevirtualmachineinfraconfig := make(map[string]interface{})
-	kubernetesbasevirtualmachineinfraconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesbasevirtualmachineinfraconfig["class_id"] = item.GetClassId()
-	kubernetesbasevirtualmachineinfraconfig["interfaces"] = item.GetInterfaces()
-	infra_config_x, _ := d.GetOk("infra_config")
-	kubernetesbasevirtualmachineinfraconfig["network_interfaces"] = (func(p []models.KubernetesNetworkInterfaceSpec, v interface{}) []map[string]interface{} {
-		var kubernetesnetworkinterfacespecs []map[string]interface{}
-		if len(p) == 0 {
-			return nil
-		}
-		for _, item := range p {
-			kubernetesnetworkinterfacespec := make(map[string]interface{})
-			kubernetesnetworkinterfacespec["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			kubernetesnetworkinterfacespec["class_id"] = item.GetClassId()
-			kubernetesnetworkinterfacespec["mtu"] = item.GetMtu()
-			kubernetesnetworkinterfacespec["name"] = item.GetName()
-			kubernetesnetworkinterfacespec["object_type"] = item.GetObjectType()
-
-			var network_interfaces_x interface{}
-			if isNonEmptySliceOfMaps(v) {
-				network_interfaces_x = v.([]interface{})[len(kubernetesnetworkinterfacespecs)].(map[string]interface{})["network_interfaces"]
-			}
-
-			kubernetesnetworkinterfacespec["pools"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
-				var momorefs []map[string]interface{}
-				if len(p) == 0 {
-					return nil
-				}
-				for _, item := range p {
-					momoref := make(map[string]interface{})
-					momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-					momoref["class_id"] = item.GetClassId()
-					momoref["moid"] = item.GetMoid()
-					momoref["object_type"] = item.GetObjectType()
-					momoref["selector"] = item.GetSelector()
-					momorefs = append(momorefs, momoref)
-				}
-				return momorefs
-			})(item.GetPools(), network_interfaces_x)
-			kubernetesnetworkinterfacespec["provider_name"] = item.GetProviderName()
-			kubernetesnetworkinterfacespec["vrf"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
-				var momorefs []map[string]interface{}
-				var ret models.MoMoRef
-				if reflect.DeepEqual(ret, p) {
-					return nil
-				}
-				item := p
-				momoref := make(map[string]interface{})
-				momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-				momoref["class_id"] = item.GetClassId()
-				momoref["moid"] = item.GetMoid()
-				momoref["object_type"] = item.GetObjectType()
-				momoref["selector"] = item.GetSelector()
-
-				momorefs = append(momorefs, momoref)
-				return momorefs
-			})(item.GetVrf(), network_interfaces_x)
-			kubernetesnetworkinterfacespecs = append(kubernetesnetworkinterfacespecs, kubernetesnetworkinterfacespec)
-		}
-		return kubernetesnetworkinterfacespecs
-	})(item.GetNetworkInterfaces(), infra_config_x)
-	kubernetesbasevirtualmachineinfraconfig["object_type"] = item.GetObjectType()
-
-	kubernetesbasevirtualmachineinfraconfigs = append(kubernetesbasevirtualmachineinfraconfigs, kubernetesbasevirtualmachineinfraconfig)
-	return kubernetesbasevirtualmachineinfraconfigs
-}
-func flattenMapKubernetesCatalogRelationship(p models.KubernetesCatalogRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetescatalogrelationships []map[string]interface{}
-	var ret models.KubernetesCatalogRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetescatalogrelationship := make(map[string]interface{})
-	kubernetescatalogrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetescatalogrelationship["class_id"] = item.GetClassId()
-	kubernetescatalogrelationship["moid"] = item.GetMoid()
-	kubernetescatalogrelationship["object_type"] = item.GetObjectType()
-	kubernetescatalogrelationship["selector"] = item.GetSelector()
-
-	kubernetescatalogrelationships = append(kubernetescatalogrelationships, kubernetescatalogrelationship)
-	return kubernetescatalogrelationships
-}
-func flattenMapKubernetesClusterRelationship(p models.KubernetesClusterRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesclusterrelationships []map[string]interface{}
-	var ret models.KubernetesClusterRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesclusterrelationship := make(map[string]interface{})
-	kubernetesclusterrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesclusterrelationship["class_id"] = item.GetClassId()
-	kubernetesclusterrelationship["moid"] = item.GetMoid()
-	kubernetesclusterrelationship["object_type"] = item.GetObjectType()
-	kubernetesclusterrelationship["selector"] = item.GetSelector()
-
-	kubernetesclusterrelationships = append(kubernetesclusterrelationships, kubernetesclusterrelationship)
-	return kubernetesclusterrelationships
-}
-func flattenMapKubernetesClusterAddonProfileRelationship(p models.KubernetesClusterAddonProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesclusteraddonprofilerelationships []map[string]interface{}
-	var ret models.KubernetesClusterAddonProfileRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesclusteraddonprofilerelationship := make(map[string]interface{})
-	kubernetesclusteraddonprofilerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesclusteraddonprofilerelationship["class_id"] = item.GetClassId()
-	kubernetesclusteraddonprofilerelationship["moid"] = item.GetMoid()
-	kubernetesclusteraddonprofilerelationship["object_type"] = item.GetObjectType()
-	kubernetesclusteraddonprofilerelationship["selector"] = item.GetSelector()
-
-	kubernetesclusteraddonprofilerelationships = append(kubernetesclusteraddonprofilerelationships, kubernetesclusteraddonprofilerelationship)
-	return kubernetesclusteraddonprofilerelationships
-}
-func flattenMapKubernetesClusterCertificateConfiguration(p models.KubernetesClusterCertificateConfiguration, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesclustercertificateconfigurations []map[string]interface{}
-	var ret models.KubernetesClusterCertificateConfiguration
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesclustercertificateconfiguration := make(map[string]interface{})
-	kubernetesclustercertificateconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesclustercertificateconfiguration["ca_cert"] = item.GetCaCert()
-
-	ca_key_x, exists := d.GetOk("cert_config")
-	if exists && ca_key_x != nil {
-		ca_key_y := ca_key_x.([]interface{})[0].(map[string]interface{})
-		kubernetesclustercertificateconfiguration["ca_key"] = ca_key_y["ca_key"]
-	}
-	kubernetesclustercertificateconfiguration["class_id"] = item.GetClassId()
-	kubernetesclustercertificateconfiguration["etcd_cert"] = item.GetEtcdCert()
-	kubernetesclustercertificateconfiguration["etcd_encryption_key"] = item.GetEtcdEncryptionKey()
-
-	etcd_key_x, exists := d.GetOk("cert_config")
-	if exists && etcd_key_x != nil {
-		etcd_key_y := etcd_key_x.([]interface{})[0].(map[string]interface{})
-		kubernetesclustercertificateconfiguration["etcd_key"] = etcd_key_y["etcd_key"]
-	}
-	kubernetesclustercertificateconfiguration["front_proxy_cert"] = item.GetFrontProxyCert()
-
-	front_proxy_key_x, exists := d.GetOk("cert_config")
-	if exists && front_proxy_key_x != nil {
-		front_proxy_key_y := front_proxy_key_x.([]interface{})[0].(map[string]interface{})
-		kubernetesclustercertificateconfiguration["front_proxy_key"] = front_proxy_key_y["front_proxy_key"]
-	}
-	kubernetesclustercertificateconfiguration["object_type"] = item.GetObjectType()
-
-	sa_private_key_x, exists := d.GetOk("cert_config")
-	if exists && sa_private_key_x != nil {
-		sa_private_key_y := sa_private_key_x.([]interface{})[0].(map[string]interface{})
-		kubernetesclustercertificateconfiguration["sa_private_key"] = sa_private_key_y["sa_private_key"]
-	}
-	kubernetesclustercertificateconfiguration["sa_public_key"] = item.GetSaPublicKey()
-
-	kubernetesclustercertificateconfigurations = append(kubernetesclustercertificateconfigurations, kubernetesclustercertificateconfiguration)
-	return kubernetesclustercertificateconfigurations
-}
-func flattenMapKubernetesClusterManagementConfig(p models.KubernetesClusterManagementConfig, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesclustermanagementconfigs []map[string]interface{}
-	var ret models.KubernetesClusterManagementConfig
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesclustermanagementconfig := make(map[string]interface{})
-	kubernetesclustermanagementconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesclustermanagementconfig["class_id"] = item.GetClassId()
-	kubernetesclustermanagementconfig["is_tac_passwd_set"] = item.GetIsTacPasswdSet()
-	kubernetesclustermanagementconfig["load_balancer_count"] = item.GetLoadBalancerCount()
-	kubernetesclustermanagementconfig["load_balancers"] = item.GetLoadBalancers()
-	kubernetesclustermanagementconfig["master_vip"] = item.GetMasterVip()
-	kubernetesclustermanagementconfig["object_type"] = item.GetObjectType()
-	kubernetesclustermanagementconfig["ssh_keys"] = item.GetSshKeys()
-	kubernetesclustermanagementconfig["ssh_user"] = item.GetSshUser()
-
-	tac_passwd_x, exists := d.GetOk("management_config")
-	if exists && tac_passwd_x != nil {
-		tac_passwd_y := tac_passwd_x.([]interface{})[0].(map[string]interface{})
-		kubernetesclustermanagementconfig["tac_passwd"] = tac_passwd_y["tac_passwd"]
-	}
-
-	kubernetesclustermanagementconfigs = append(kubernetesclustermanagementconfigs, kubernetesclustermanagementconfig)
-	return kubernetesclustermanagementconfigs
-}
-func flattenMapKubernetesClusterProfileRelationship(p models.KubernetesClusterProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesclusterprofilerelationships []map[string]interface{}
-	var ret models.KubernetesClusterProfileRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesclusterprofilerelationship := make(map[string]interface{})
-	kubernetesclusterprofilerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesclusterprofilerelationship["class_id"] = item.GetClassId()
-	kubernetesclusterprofilerelationship["moid"] = item.GetMoid()
-	kubernetesclusterprofilerelationship["object_type"] = item.GetObjectType()
-	kubernetesclusterprofilerelationship["selector"] = item.GetSelector()
-
-	kubernetesclusterprofilerelationships = append(kubernetesclusterprofilerelationships, kubernetesclusterprofilerelationship)
-	return kubernetesclusterprofilerelationships
-}
-func flattenMapKubernetesCniConfig(p models.KubernetesCniConfig, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetescniconfigs []map[string]interface{}
-	var ret models.KubernetesCniConfig
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetescniconfig := make(map[string]interface{})
-	kubernetescniconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetescniconfig["class_id"] = item.GetClassId()
-	kubernetescniconfig["object_type"] = item.GetObjectType()
-	kubernetescniconfig["registry"] = item.GetRegistry()
-	kubernetescniconfig["nr_version"] = item.GetVersion()
-
-	kubernetescniconfigs = append(kubernetescniconfigs, kubernetescniconfig)
-	return kubernetescniconfigs
-}
-func flattenMapKubernetesConfigResultRelationship(p models.KubernetesConfigResultRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesconfigresultrelationships []map[string]interface{}
-	var ret models.KubernetesConfigResultRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesconfigresultrelationship := make(map[string]interface{})
-	kubernetesconfigresultrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesconfigresultrelationship["class_id"] = item.GetClassId()
-	kubernetesconfigresultrelationship["moid"] = item.GetMoid()
-	kubernetesconfigresultrelationship["object_type"] = item.GetObjectType()
-	kubernetesconfigresultrelationship["selector"] = item.GetSelector()
-
-	kubernetesconfigresultrelationships = append(kubernetesconfigresultrelationships, kubernetesconfigresultrelationship)
-	return kubernetesconfigresultrelationships
-}
-func flattenMapKubernetesConfiguration(p models.KubernetesConfiguration, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesconfigurations []map[string]interface{}
-	var ret models.KubernetesConfiguration
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesconfiguration := make(map[string]interface{})
-	kubernetesconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesconfiguration["class_id"] = item.GetClassId()
-	kubernetesconfiguration["kube_config"] = item.GetKubeConfig()
-	kubernetesconfiguration["object_type"] = item.GetObjectType()
-
-	kubernetesconfigurations = append(kubernetesconfigurations, kubernetesconfiguration)
-	return kubernetesconfigurations
-}
-func flattenMapKubernetesContainerRuntimePolicyRelationship(p models.KubernetesContainerRuntimePolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetescontainerruntimepolicyrelationships []map[string]interface{}
-	var ret models.KubernetesContainerRuntimePolicyRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetescontainerruntimepolicyrelationship := make(map[string]interface{})
-	kubernetescontainerruntimepolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetescontainerruntimepolicyrelationship["class_id"] = item.GetClassId()
-	kubernetescontainerruntimepolicyrelationship["moid"] = item.GetMoid()
-	kubernetescontainerruntimepolicyrelationship["object_type"] = item.GetObjectType()
-	kubernetescontainerruntimepolicyrelationship["selector"] = item.GetSelector()
-
-	kubernetescontainerruntimepolicyrelationships = append(kubernetescontainerruntimepolicyrelationships, kubernetescontainerruntimepolicyrelationship)
-	return kubernetescontainerruntimepolicyrelationships
-}
-func flattenMapKubernetesDaemonSetStatus(p models.KubernetesDaemonSetStatus, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesdaemonsetstatuss []map[string]interface{}
-	var ret models.KubernetesDaemonSetStatus
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesdaemonsetstatus := make(map[string]interface{})
-	kubernetesdaemonsetstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesdaemonsetstatus["class_id"] = item.GetClassId()
-	kubernetesdaemonsetstatus["current_number_scheduled"] = item.GetCurrentNumberScheduled()
-	kubernetesdaemonsetstatus["desired_number_scheduled"] = item.GetDesiredNumberScheduled()
-	kubernetesdaemonsetstatus["number_available"] = item.GetNumberAvailable()
-	kubernetesdaemonsetstatus["number_misscheduled"] = item.GetNumberMisscheduled()
-	kubernetesdaemonsetstatus["number_ready"] = item.GetNumberReady()
-	kubernetesdaemonsetstatus["object_type"] = item.GetObjectType()
-	kubernetesdaemonsetstatus["observed_generation"] = item.GetObservedGeneration()
-	kubernetesdaemonsetstatus["updated_number_scheduled"] = item.GetUpdatedNumberScheduled()
-
-	kubernetesdaemonsetstatuss = append(kubernetesdaemonsetstatuss, kubernetesdaemonsetstatus)
-	return kubernetesdaemonsetstatuss
-}
-func flattenMapKubernetesDeploymentStatus(p models.KubernetesDeploymentStatus, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesdeploymentstatuss []map[string]interface{}
-	var ret models.KubernetesDeploymentStatus
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesdeploymentstatus := make(map[string]interface{})
-	kubernetesdeploymentstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesdeploymentstatus["available_replicas"] = item.GetAvailableReplicas()
-	kubernetesdeploymentstatus["class_id"] = item.GetClassId()
-	kubernetesdeploymentstatus["object_type"] = item.GetObjectType()
-	kubernetesdeploymentstatus["observed_generation"] = item.GetObservedGeneration()
-	kubernetesdeploymentstatus["ready_replicas"] = item.GetReadyReplicas()
-	kubernetesdeploymentstatus["replicas"] = item.GetReplicas()
-	kubernetesdeploymentstatus["updated_replicas"] = item.GetUpdatedReplicas()
-
-	kubernetesdeploymentstatuss = append(kubernetesdeploymentstatuss, kubernetesdeploymentstatus)
-	return kubernetesdeploymentstatuss
-}
-func flattenMapKubernetesHttpProxyPolicyRelationship(p models.KubernetesHttpProxyPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kuberneteshttpproxypolicyrelationships []map[string]interface{}
-	var ret models.KubernetesHttpProxyPolicyRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kuberneteshttpproxypolicyrelationship := make(map[string]interface{})
-	kuberneteshttpproxypolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kuberneteshttpproxypolicyrelationship["class_id"] = item.GetClassId()
-	kuberneteshttpproxypolicyrelationship["moid"] = item.GetMoid()
-	kuberneteshttpproxypolicyrelationship["object_type"] = item.GetObjectType()
-	kuberneteshttpproxypolicyrelationship["selector"] = item.GetSelector()
-
-	kuberneteshttpproxypolicyrelationships = append(kuberneteshttpproxypolicyrelationships, kuberneteshttpproxypolicyrelationship)
-	return kuberneteshttpproxypolicyrelationships
-}
-func flattenMapKubernetesIngressStatus(p models.KubernetesIngressStatus, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesingressstatuss []map[string]interface{}
-	var ret models.KubernetesIngressStatus
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesingressstatus := make(map[string]interface{})
-	kubernetesingressstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesingressstatus["class_id"] = item.GetClassId()
-	status_x, _ := d.GetOk("status")
-	kubernetesingressstatus["load_balancer"] = (func(p models.KubernetesLoadBalancer, v interface{}) []map[string]interface{} {
-		var kubernetesloadbalancers []map[string]interface{}
-		var ret models.KubernetesLoadBalancer
-		if reflect.DeepEqual(ret, p) {
-			return nil
-		}
-		item := p
-		kubernetesloadbalancer := make(map[string]interface{})
-		kubernetesloadbalancer["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		kubernetesloadbalancer["class_id"] = item.GetClassId()
-		kubernetesloadbalancer["ip_addresses"] = item.GetIpAddresses()
-		kubernetesloadbalancer["object_type"] = item.GetObjectType()
-
-		kubernetesloadbalancers = append(kubernetesloadbalancers, kubernetesloadbalancer)
-		return kubernetesloadbalancers
-	})(item.GetLoadBalancer(), status_x)
-	kubernetesingressstatus["object_type"] = item.GetObjectType()
-
-	kubernetesingressstatuss = append(kubernetesingressstatuss, kubernetesingressstatus)
-	return kubernetesingressstatuss
-}
-func flattenMapKubernetesNetworkPolicyRelationship(p models.KubernetesNetworkPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnetworkpolicyrelationships []map[string]interface{}
-	var ret models.KubernetesNetworkPolicyRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesnetworkpolicyrelationship := make(map[string]interface{})
-	kubernetesnetworkpolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesnetworkpolicyrelationship["class_id"] = item.GetClassId()
-	kubernetesnetworkpolicyrelationship["moid"] = item.GetMoid()
-	kubernetesnetworkpolicyrelationship["object_type"] = item.GetObjectType()
-	kubernetesnetworkpolicyrelationship["selector"] = item.GetSelector()
-
-	kubernetesnetworkpolicyrelationships = append(kubernetesnetworkpolicyrelationships, kubernetesnetworkpolicyrelationship)
-	return kubernetesnetworkpolicyrelationships
-}
-func flattenMapKubernetesNodeGroupProfileRelationship(p models.KubernetesNodeGroupProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodegroupprofilerelationships []map[string]interface{}
-	var ret models.KubernetesNodeGroupProfileRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesnodegroupprofilerelationship := make(map[string]interface{})
-	kubernetesnodegroupprofilerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesnodegroupprofilerelationship["class_id"] = item.GetClassId()
-	kubernetesnodegroupprofilerelationship["moid"] = item.GetMoid()
-	kubernetesnodegroupprofilerelationship["object_type"] = item.GetObjectType()
-	kubernetesnodegroupprofilerelationship["selector"] = item.GetSelector()
-
-	kubernetesnodegroupprofilerelationships = append(kubernetesnodegroupprofilerelationships, kubernetesnodegroupprofilerelationship)
-	return kubernetesnodegroupprofilerelationships
-}
-func flattenMapKubernetesNodeInfo(p models.KubernetesNodeInfo, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodeinfos []map[string]interface{}
-	var ret models.KubernetesNodeInfo
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesnodeinfo := make(map[string]interface{})
-	kubernetesnodeinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesnodeinfo["architecture"] = item.GetArchitecture()
-	kubernetesnodeinfo["boot_id"] = item.GetBootId()
-	kubernetesnodeinfo["class_id"] = item.GetClassId()
-	kubernetesnodeinfo["container_runtime_version"] = item.GetContainerRuntimeVersion()
-	kubernetesnodeinfo["kernel_version"] = item.GetKernelVersion()
-	kubernetesnodeinfo["kube_proxy_version"] = item.GetKubeProxyVersion()
-	kubernetesnodeinfo["kubelet_version"] = item.GetKubeletVersion()
-	kubernetesnodeinfo["machine_id"] = item.GetMachineId()
-	kubernetesnodeinfo["object_type"] = item.GetObjectType()
-	kubernetesnodeinfo["operating_system"] = item.GetOperatingSystem()
-	kubernetesnodeinfo["os_image"] = item.GetOsImage()
-	kubernetesnodeinfo["system_uuid"] = item.GetSystemUuid()
-
-	kubernetesnodeinfos = append(kubernetesnodeinfos, kubernetesnodeinfo)
-	return kubernetesnodeinfos
-}
-func flattenMapKubernetesNodeProfileRelationship(p models.KubernetesNodeProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodeprofilerelationships []map[string]interface{}
-	var ret models.KubernetesNodeProfileRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesnodeprofilerelationship := make(map[string]interface{})
-	kubernetesnodeprofilerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesnodeprofilerelationship["class_id"] = item.GetClassId()
-	kubernetesnodeprofilerelationship["moid"] = item.GetMoid()
-	kubernetesnodeprofilerelationship["object_type"] = item.GetObjectType()
-	kubernetesnodeprofilerelationship["selector"] = item.GetSelector()
-
-	kubernetesnodeprofilerelationships = append(kubernetesnodeprofilerelationships, kubernetesnodeprofilerelationship)
-	return kubernetesnodeprofilerelationships
-}
-func flattenMapKubernetesNodeSpec(p models.KubernetesNodeSpec, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesnodespecs []map[string]interface{}
-	var ret models.KubernetesNodeSpec
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesnodespec := make(map[string]interface{})
-	kubernetesnodespec["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesnodespec["class_id"] = item.GetClassId()
-	kubernetesnodespec["object_type"] = item.GetObjectType()
-	kubernetesnodespec["pod_cidr"] = item.GetPodCidr()
-	kubernetesnodespec["provider_id"] = item.GetProviderId()
-
-	kubernetesnodespecs = append(kubernetesnodespecs, kubernetesnodespec)
-	return kubernetesnodespecs
-}
-func flattenMapKubernetesObjectMeta(p models.KubernetesObjectMeta, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesobjectmetas []map[string]interface{}
-	var ret models.KubernetesObjectMeta
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesobjectmeta := make(map[string]interface{})
-	kubernetesobjectmeta["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesobjectmeta["class_id"] = item.GetClassId()
-	kubernetesobjectmeta["creation_timestamp"] = item.GetCreationTimestamp()
-	kubernetesobjectmeta["name"] = item.GetName()
-	kubernetesobjectmeta["namespace"] = item.GetNamespace()
-	kubernetesobjectmeta["object_type"] = item.GetObjectType()
-	kubernetesobjectmeta["resource_version"] = item.GetResourceVersion()
-	kubernetesobjectmeta["uuid"] = item.GetUuid()
-
-	kubernetesobjectmetas = append(kubernetesobjectmetas, kubernetesobjectmeta)
-	return kubernetesobjectmetas
-}
-func flattenMapKubernetesPodStatus(p models.KubernetesPodStatus, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetespodstatuss []map[string]interface{}
-	var ret models.KubernetesPodStatus
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetespodstatus := make(map[string]interface{})
-	kubernetespodstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetespodstatus["class_id"] = item.GetClassId()
-	kubernetespodstatus["host_ip"] = item.GetHostIp()
-	kubernetespodstatus["object_type"] = item.GetObjectType()
-	kubernetespodstatus["phase"] = item.GetPhase()
-	kubernetespodstatus["pod_ip"] = item.GetPodIp()
-	kubernetespodstatus["qos_class"] = item.GetQosClass()
-	kubernetespodstatus["start_time"] = item.GetStartTime()
-
-	kubernetespodstatuss = append(kubernetespodstatuss, kubernetespodstatus)
-	return kubernetespodstatuss
-}
-func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesproxyconfigs []map[string]interface{}
-	var ret models.KubernetesProxyConfig
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesproxyconfig := make(map[string]interface{})
-	kubernetesproxyconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesproxyconfig["class_id"] = item.GetClassId()
-	kubernetesproxyconfig["hostname"] = item.GetHostname()
-	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
-	kubernetesproxyconfig["object_type"] = item.GetObjectType()
-
-	password_x, exists := d.GetOk("docker_http_proxy")
-	if exists && password_x != nil {
-		password_y := password_x.([]interface{})[0].(map[string]interface{})
-		kubernetesproxyconfig["password"] = password_y["password"]
-	}
-	kubernetesproxyconfig["port"] = item.GetPort()
-	kubernetesproxyconfig["protocol"] = item.GetProtocol()
-	kubernetesproxyconfig["username"] = item.GetUsername()
-
-	kubernetesproxyconfigs = append(kubernetesproxyconfigs, kubernetesproxyconfig)
-	return kubernetesproxyconfigs
-}
-func flattenMapKubernetesServiceStatus(p models.KubernetesServiceStatus, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesservicestatuss []map[string]interface{}
-	var ret models.KubernetesServiceStatus
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesservicestatus := make(map[string]interface{})
-	kubernetesservicestatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesservicestatus["class_id"] = item.GetClassId()
-	status_x, _ := d.GetOk("status")
-	kubernetesservicestatus["load_balancer"] = (func(p models.KubernetesLoadBalancer, v interface{}) []map[string]interface{} {
-		var kubernetesloadbalancers []map[string]interface{}
-		var ret models.KubernetesLoadBalancer
-		if reflect.DeepEqual(ret, p) {
-			return nil
-		}
-		item := p
-		kubernetesloadbalancer := make(map[string]interface{})
-		kubernetesloadbalancer["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		kubernetesloadbalancer["class_id"] = item.GetClassId()
-		kubernetesloadbalancer["ip_addresses"] = item.GetIpAddresses()
-		kubernetesloadbalancer["object_type"] = item.GetObjectType()
-
-		kubernetesloadbalancers = append(kubernetesloadbalancers, kubernetesloadbalancer)
-		return kubernetesloadbalancers
-	})(item.GetLoadBalancer(), status_x)
-	kubernetesservicestatus["object_type"] = item.GetObjectType()
-
-	kubernetesservicestatuss = append(kubernetesservicestatuss, kubernetesservicestatus)
-	return kubernetesservicestatuss
-}
-func flattenMapKubernetesStatefulSetStatus(p models.KubernetesStatefulSetStatus, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesstatefulsetstatuss []map[string]interface{}
-	var ret models.KubernetesStatefulSetStatus
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	kubernetesstatefulsetstatus := make(map[string]interface{})
-	kubernetesstatefulsetstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesstatefulsetstatus["available_replicas"] = item.GetAvailableReplicas()
-	kubernetesstatefulsetstatus["class_id"] = item.GetClassId()
-	kubernetesstatefulsetstatus["collision_count"] = item.GetCollisionCount()
-	kubernetesstatefulsetstatus["current_revision"] = item.GetCurrentRevision()
-	kubernetesstatefulsetstatus["object_type"] = item.GetObjectType()
-	kubernetesstatefulsetstatus["observed_generation"] = item.GetObservedGeneration()
-	kubernetesstatefulsetstatus["ready_replicas"] = item.GetReadyReplicas()
-	kubernetesstatefulsetstatus["replicas"] = item.GetReplicas()
-	kubernetesstatefulsetstatus["update_revision"] = item.GetUpdateRevision()
-	kubernetesstatefulsetstatus["updated_replicas"] = item.GetUpdatedReplicas()
-
-	kubernetesstatefulsetstatuss = append(kubernetesstatefulsetstatuss, kubernetesstatefulsetstatus)
-	return kubernetesstatefulsetstatuss
-}
-func flattenMapKubernetesSysConfigPolicyRelationship(p models.KubernetesSysConfigPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetessysconfigpolicyrelationships []map[string]interface{}
-	var ret models.KubernetesSysConfigPolicyRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetessysconfigpolicyrelationship := make(map[string]interface{})
-	kubernetessysconfigpolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetessysconfigpolicyrelationship["class_id"] = item.GetClassId()
-	kubernetessysconfigpolicyrelationship["moid"] = item.GetMoid()
-	kubernetessysconfigpolicyrelationship["object_type"] = item.GetObjectType()
-	kubernetessysconfigpolicyrelationship["selector"] = item.GetSelector()
-
-	kubernetessysconfigpolicyrelationships = append(kubernetessysconfigpolicyrelationships, kubernetessysconfigpolicyrelationship)
-	return kubernetessysconfigpolicyrelationships
-}
-func flattenMapKubernetesTrustedRegistriesPolicyRelationship(p models.KubernetesTrustedRegistriesPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetestrustedregistriespolicyrelationships []map[string]interface{}
-	var ret models.KubernetesTrustedRegistriesPolicyRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetestrustedregistriespolicyrelationship := make(map[string]interface{})
-	kubernetestrustedregistriespolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetestrustedregistriespolicyrelationship["class_id"] = item.GetClassId()
-	kubernetestrustedregistriespolicyrelationship["moid"] = item.GetMoid()
-	kubernetestrustedregistriespolicyrelationship["object_type"] = item.GetObjectType()
-	kubernetestrustedregistriespolicyrelationship["selector"] = item.GetSelector()
-
-	kubernetestrustedregistriespolicyrelationships = append(kubernetestrustedregistriespolicyrelationships, kubernetestrustedregistriespolicyrelationship)
-	return kubernetestrustedregistriespolicyrelationships
-}
-func flattenMapKubernetesVersionRelationship(p models.KubernetesVersionRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesversionrelationships []map[string]interface{}
-	var ret models.KubernetesVersionRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesversionrelationship := make(map[string]interface{})
-	kubernetesversionrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesversionrelationship["class_id"] = item.GetClassId()
-	kubernetesversionrelationship["moid"] = item.GetMoid()
-	kubernetesversionrelationship["object_type"] = item.GetObjectType()
-	kubernetesversionrelationship["selector"] = item.GetSelector()
-
-	kubernetesversionrelationships = append(kubernetesversionrelationships, kubernetesversionrelationship)
-	return kubernetesversionrelationships
-}
-func flattenMapKubernetesVersionPolicyRelationship(p models.KubernetesVersionPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesversionpolicyrelationships []map[string]interface{}
-	var ret models.KubernetesVersionPolicyRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesversionpolicyrelationship := make(map[string]interface{})
-	kubernetesversionpolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesversionpolicyrelationship["class_id"] = item.GetClassId()
-	kubernetesversionpolicyrelationship["moid"] = item.GetMoid()
-	kubernetesversionpolicyrelationship["object_type"] = item.GetObjectType()
-	kubernetesversionpolicyrelationship["selector"] = item.GetSelector()
-
-	kubernetesversionpolicyrelationships = append(kubernetesversionpolicyrelationships, kubernetesversionpolicyrelationship)
-	return kubernetesversionpolicyrelationships
-}
-func flattenMapKubernetesVirtualMachineInfraConfigPolicyRelationship(p models.KubernetesVirtualMachineInfraConfigPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesvirtualmachineinfraconfigpolicyrelationships []map[string]interface{}
-	var ret models.KubernetesVirtualMachineInfraConfigPolicyRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesvirtualmachineinfraconfigpolicyrelationship := make(map[string]interface{})
-	kubernetesvirtualmachineinfraconfigpolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesvirtualmachineinfraconfigpolicyrelationship["class_id"] = item.GetClassId()
-	kubernetesvirtualmachineinfraconfigpolicyrelationship["moid"] = item.GetMoid()
-	kubernetesvirtualmachineinfraconfigpolicyrelationship["object_type"] = item.GetObjectType()
-	kubernetesvirtualmachineinfraconfigpolicyrelationship["selector"] = item.GetSelector()
-
-	kubernetesvirtualmachineinfraconfigpolicyrelationships = append(kubernetesvirtualmachineinfraconfigpolicyrelationships, kubernetesvirtualmachineinfraconfigpolicyrelationship)
-	return kubernetesvirtualmachineinfraconfigpolicyrelationships
-}
-func flattenMapKubernetesVirtualMachineInstanceTypeRelationship(p models.KubernetesVirtualMachineInstanceTypeRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var kubernetesvirtualmachineinstancetyperelationships []map[string]interface{}
-	var ret models.KubernetesVirtualMachineInstanceTypeRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	kubernetesvirtualmachineinstancetyperelationship := make(map[string]interface{})
-	kubernetesvirtualmachineinstancetyperelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	kubernetesvirtualmachineinstancetyperelationship["class_id"] = item.GetClassId()
-	kubernetesvirtualmachineinstancetyperelationship["moid"] = item.GetMoid()
-	kubernetesvirtualmachineinstancetyperelationship["object_type"] = item.GetObjectType()
-	kubernetesvirtualmachineinstancetyperelationship["selector"] = item.GetSelector()
-
-	kubernetesvirtualmachineinstancetyperelationships = append(kubernetesvirtualmachineinstancetyperelationships, kubernetesvirtualmachineinstancetyperelationship)
-	return kubernetesvirtualmachineinstancetyperelationships
 }
 func flattenMapKvmSessionRelationship(p models.KvmSessionRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var kvmsessionrelationships []map[string]interface{}
@@ -23535,6 +22196,24 @@ func flattenMapServerDiagnosticsRelationship(p models.ServerDiagnosticsRelations
 	serverdiagnosticsrelationships = append(serverdiagnosticsrelationships, serverdiagnosticsrelationship)
 	return serverdiagnosticsrelationships
 }
+func flattenMapServerMigrationKeyDetailsRelationship(p models.ServerMigrationKeyDetailsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var servermigrationkeydetailsrelationships []map[string]interface{}
+	var ret models.ServerMigrationKeyDetailsRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	servermigrationkeydetailsrelationship := make(map[string]interface{})
+	servermigrationkeydetailsrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	servermigrationkeydetailsrelationship["class_id"] = item.GetClassId()
+	servermigrationkeydetailsrelationship["moid"] = item.GetMoid()
+	servermigrationkeydetailsrelationship["object_type"] = item.GetObjectType()
+	servermigrationkeydetailsrelationship["selector"] = item.GetSelector()
+
+	servermigrationkeydetailsrelationships = append(servermigrationkeydetailsrelationships, servermigrationkeydetailsrelationship)
+	return servermigrationkeydetailsrelationships
+}
 func flattenMapServerProfileRelationship(p models.ServerProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var serverprofilerelationships []map[string]interface{}
 	var ret models.ServerProfileRelationship
@@ -23624,24 +22303,6 @@ func flattenMapSoftwareHyperflexDistributableRelationship(p models.SoftwareHyper
 
 	softwarehyperflexdistributablerelationships = append(softwarehyperflexdistributablerelationships, softwarehyperflexdistributablerelationship)
 	return softwarehyperflexdistributablerelationships
-}
-func flattenMapSoftwareSolutionDistributableRelationship(p models.SoftwareSolutionDistributableRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var softwaresolutiondistributablerelationships []map[string]interface{}
-	var ret models.SoftwareSolutionDistributableRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	softwaresolutiondistributablerelationship := make(map[string]interface{})
-	softwaresolutiondistributablerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	softwaresolutiondistributablerelationship["class_id"] = item.GetClassId()
-	softwaresolutiondistributablerelationship["moid"] = item.GetMoid()
-	softwaresolutiondistributablerelationship["object_type"] = item.GetObjectType()
-	softwaresolutiondistributablerelationship["selector"] = item.GetSelector()
-
-	softwaresolutiondistributablerelationships = append(softwaresolutiondistributablerelationships, softwaresolutiondistributablerelationship)
-	return softwaresolutiondistributablerelationships
 }
 func flattenMapSoftwarerepositoryCatalogRelationship(p models.SoftwarerepositoryCatalogRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var softwarerepositorycatalogrelationships []map[string]interface{}
@@ -25622,24 +24283,6 @@ func flattenMapVirtualizationStorageCapacity(p models.VirtualizationStorageCapac
 
 	virtualizationstoragecapacitys = append(virtualizationstoragecapacitys, virtualizationstoragecapacity)
 	return virtualizationstoragecapacitys
-}
-func flattenMapVirtualizationVirtualMachineRelationship(p models.VirtualizationVirtualMachineRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var virtualizationvirtualmachinerelationships []map[string]interface{}
-	var ret models.VirtualizationVirtualMachineRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	virtualizationvirtualmachinerelationship := make(map[string]interface{})
-	virtualizationvirtualmachinerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	virtualizationvirtualmachinerelationship["class_id"] = item.GetClassId()
-	virtualizationvirtualmachinerelationship["moid"] = item.GetMoid()
-	virtualizationvirtualmachinerelationship["object_type"] = item.GetObjectType()
-	virtualizationvirtualmachinerelationship["selector"] = item.GetSelector()
-
-	virtualizationvirtualmachinerelationships = append(virtualizationvirtualmachinerelationships, virtualizationvirtualmachinerelationship)
-	return virtualizationvirtualmachinerelationships
 }
 func flattenMapVirtualizationVmwareClusterRelationship(p models.VirtualizationVmwareClusterRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationvmwareclusterrelationships []map[string]interface{}
@@ -28079,6 +26722,24 @@ func flattenMapWorkloadDeploymentInputRelationship(p models.WorkloadDeploymentIn
 
 	workloaddeploymentinputrelationships = append(workloaddeploymentinputrelationships, workloaddeploymentinputrelationship)
 	return workloaddeploymentinputrelationships
+}
+func flattenMapWorkloadRenameRequest(p models.WorkloadRenameRequest, d *schema.ResourceData) []map[string]interface{} {
+	var workloadrenamerequests []map[string]interface{}
+	var ret models.WorkloadRenameRequest
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	workloadrenamerequest := make(map[string]interface{})
+	workloadrenamerequest["action"] = item.GetAction()
+	workloadrenamerequest["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workloadrenamerequest["class_id"] = item.GetClassId()
+	workloadrenamerequest["new_name"] = item.GetNewName()
+	workloadrenamerequest["object_type"] = item.GetObjectType()
+	workloadrenamerequest["status"] = item.GetStatus()
+
+	workloadrenamerequests = append(workloadrenamerequests, workloadrenamerequest)
+	return workloadrenamerequests
 }
 func flattenMapWorkloadRolloutStrategy(p models.WorkloadRolloutStrategy, d *schema.ResourceData) []map[string]interface{} {
 	var workloadrolloutstrategys []map[string]interface{}

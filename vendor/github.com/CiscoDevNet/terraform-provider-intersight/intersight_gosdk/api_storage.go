@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -298,188 +298,6 @@ func (a *StorageApiService) CreateStorageDriveSecurityPolicyExecute(r ApiCreateS
 	}
 	// body params
 	localVarPostBody = r.storageDriveSecurityPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateStorageNetAppVolumeSnapshotRequest struct {
-	ctx                         context.Context
-	ApiService                  *StorageApiService
-	storageNetAppVolumeSnapshot *StorageNetAppVolumeSnapshot
-	ifMatch                     *string
-	ifNoneMatch                 *string
-}
-
-// The &#39;storage.NetAppVolumeSnapshot&#39; resource to create.
-func (r ApiCreateStorageNetAppVolumeSnapshotRequest) StorageNetAppVolumeSnapshot(storageNetAppVolumeSnapshot StorageNetAppVolumeSnapshot) ApiCreateStorageNetAppVolumeSnapshotRequest {
-	r.storageNetAppVolumeSnapshot = &storageNetAppVolumeSnapshot
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiCreateStorageNetAppVolumeSnapshotRequest) IfMatch(ifMatch string) ApiCreateStorageNetAppVolumeSnapshotRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
-func (r ApiCreateStorageNetAppVolumeSnapshotRequest) IfNoneMatch(ifNoneMatch string) ApiCreateStorageNetAppVolumeSnapshotRequest {
-	r.ifNoneMatch = &ifNoneMatch
-	return r
-}
-
-func (r ApiCreateStorageNetAppVolumeSnapshotRequest) Execute() (*StorageNetAppVolumeSnapshot, *http.Response, error) {
-	return r.ApiService.CreateStorageNetAppVolumeSnapshotExecute(r)
-}
-
-/*
-CreateStorageNetAppVolumeSnapshot Create a 'storage.NetAppVolumeSnapshot' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateStorageNetAppVolumeSnapshotRequest
-*/
-func (a *StorageApiService) CreateStorageNetAppVolumeSnapshot(ctx context.Context) ApiCreateStorageNetAppVolumeSnapshotRequest {
-	return ApiCreateStorageNetAppVolumeSnapshotRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return StorageNetAppVolumeSnapshot
-func (a *StorageApiService) CreateStorageNetAppVolumeSnapshotExecute(r ApiCreateStorageNetAppVolumeSnapshotRequest) (*StorageNetAppVolumeSnapshot, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *StorageNetAppVolumeSnapshot
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.CreateStorageNetAppVolumeSnapshot")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/storage/NetAppVolumeSnapshots"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.storageNetAppVolumeSnapshot == nil {
-		return localVarReturnValue, nil, reportError("storageNetAppVolumeSnapshot is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.storageNetAppVolumeSnapshot
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1035,148 +853,6 @@ func (a *StorageApiService) DeleteStorageDriveSecurityPolicyExecute(r ApiDeleteS
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeleteStorageNetAppVolumeSnapshotRequest struct {
-	ctx        context.Context
-	ApiService *StorageApiService
-	moid       string
-}
-
-func (r ApiDeleteStorageNetAppVolumeSnapshotRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteStorageNetAppVolumeSnapshotExecute(r)
-}
-
-/*
-DeleteStorageNetAppVolumeSnapshot Delete a 'storage.NetAppVolumeSnapshot' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteStorageNetAppVolumeSnapshotRequest
-*/
-func (a *StorageApiService) DeleteStorageNetAppVolumeSnapshot(ctx context.Context, moid string) ApiDeleteStorageNetAppVolumeSnapshotRequest {
-	return ApiDeleteStorageNetAppVolumeSnapshotRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-func (a *StorageApiService) DeleteStorageNetAppVolumeSnapshotExecute(r ApiDeleteStorageNetAppVolumeSnapshotRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.DeleteStorageNetAppVolumeSnapshot")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/storage/NetAppVolumeSnapshots/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiDeleteStorageStoragePolicyRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
@@ -1323,6 +999,27 @@ type ApiGetStorageBatteryBackupUnitByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageBatteryBackupUnitByMoidRequest) Select_(select_ string) ApiGetStorageBatteryBackupUnitByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageBatteryBackupUnitByMoidRequest) Expand(expand string) ApiGetStorageBatteryBackupUnitByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageBatteryBackupUnitByMoidRequest) At(at string) ApiGetStorageBatteryBackupUnitByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageBatteryBackupUnitByMoidRequest) Execute() (*StorageBatteryBackupUnit, *http.Response, error) {
@@ -1367,6 +1064,18 @@ func (a *StorageApiService) GetStorageBatteryBackupUnitByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1752,6 +1461,27 @@ type ApiGetStorageControllerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageControllerByMoidRequest) Select_(select_ string) ApiGetStorageControllerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageControllerByMoidRequest) Expand(expand string) ApiGetStorageControllerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageControllerByMoidRequest) At(at string) ApiGetStorageControllerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageControllerByMoidRequest) Execute() (*StorageController, *http.Response, error) {
@@ -1796,6 +1526,18 @@ func (a *StorageApiService) GetStorageControllerByMoidExecute(r ApiGetStorageCon
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1906,6 +1648,27 @@ type ApiGetStorageControllerDriveByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageControllerDriveByMoidRequest) Select_(select_ string) ApiGetStorageControllerDriveByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageControllerDriveByMoidRequest) Expand(expand string) ApiGetStorageControllerDriveByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageControllerDriveByMoidRequest) At(at string) ApiGetStorageControllerDriveByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageControllerDriveByMoidRequest) Execute() (*StorageControllerDrive, *http.Response, error) {
@@ -1950,6 +1713,18 @@ func (a *StorageApiService) GetStorageControllerDriveByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2610,6 +2385,27 @@ type ApiGetStorageDiskGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageDiskGroupByMoidRequest) Select_(select_ string) ApiGetStorageDiskGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageDiskGroupByMoidRequest) Expand(expand string) ApiGetStorageDiskGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageDiskGroupByMoidRequest) At(at string) ApiGetStorageDiskGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageDiskGroupByMoidRequest) Execute() (*StorageDiskGroup, *http.Response, error) {
@@ -2654,6 +2450,18 @@ func (a *StorageApiService) GetStorageDiskGroupByMoidExecute(r ApiGetStorageDisk
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3039,6 +2847,27 @@ type ApiGetStorageDiskSlotByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageDiskSlotByMoidRequest) Select_(select_ string) ApiGetStorageDiskSlotByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageDiskSlotByMoidRequest) Expand(expand string) ApiGetStorageDiskSlotByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageDiskSlotByMoidRequest) At(at string) ApiGetStorageDiskSlotByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageDiskSlotByMoidRequest) Execute() (*StorageDiskSlot, *http.Response, error) {
@@ -3083,6 +2912,18 @@ func (a *StorageApiService) GetStorageDiskSlotByMoidExecute(r ApiGetStorageDiskS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3468,6 +3309,27 @@ type ApiGetStorageDriveGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageDriveGroupByMoidRequest) Select_(select_ string) ApiGetStorageDriveGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageDriveGroupByMoidRequest) Expand(expand string) ApiGetStorageDriveGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageDriveGroupByMoidRequest) At(at string) ApiGetStorageDriveGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageDriveGroupByMoidRequest) Execute() (*StorageDriveGroup, *http.Response, error) {
@@ -3512,6 +3374,18 @@ func (a *StorageApiService) GetStorageDriveGroupByMoidExecute(r ApiGetStorageDri
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3897,6 +3771,27 @@ type ApiGetStorageDriveSecurityPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageDriveSecurityPolicyByMoidRequest) Select_(select_ string) ApiGetStorageDriveSecurityPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageDriveSecurityPolicyByMoidRequest) Expand(expand string) ApiGetStorageDriveSecurityPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageDriveSecurityPolicyByMoidRequest) At(at string) ApiGetStorageDriveSecurityPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageDriveSecurityPolicyByMoidRequest) Execute() (*StorageDriveSecurityPolicy, *http.Response, error) {
@@ -3941,6 +3836,18 @@ func (a *StorageApiService) GetStorageDriveSecurityPolicyByMoidExecute(r ApiGetS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4326,6 +4233,27 @@ type ApiGetStorageEnclosureByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageEnclosureByMoidRequest) Select_(select_ string) ApiGetStorageEnclosureByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageEnclosureByMoidRequest) Expand(expand string) ApiGetStorageEnclosureByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageEnclosureByMoidRequest) At(at string) ApiGetStorageEnclosureByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageEnclosureByMoidRequest) Execute() (*StorageEnclosure, *http.Response, error) {
@@ -4370,6 +4298,18 @@ func (a *StorageApiService) GetStorageEnclosureByMoidExecute(r ApiGetStorageEncl
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4480,6 +4420,27 @@ type ApiGetStorageEnclosureDiskByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageEnclosureDiskByMoidRequest) Select_(select_ string) ApiGetStorageEnclosureDiskByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageEnclosureDiskByMoidRequest) Expand(expand string) ApiGetStorageEnclosureDiskByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageEnclosureDiskByMoidRequest) At(at string) ApiGetStorageEnclosureDiskByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageEnclosureDiskByMoidRequest) Execute() (*StorageEnclosureDisk, *http.Response, error) {
@@ -4524,6 +4485,18 @@ func (a *StorageApiService) GetStorageEnclosureDiskByMoidExecute(r ApiGetStorage
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4909,6 +4882,27 @@ type ApiGetStorageEnclosureDiskSlotEpByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) Select_(select_ string) ApiGetStorageEnclosureDiskSlotEpByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) Expand(expand string) ApiGetStorageEnclosureDiskSlotEpByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) At(at string) ApiGetStorageEnclosureDiskSlotEpByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) Execute() (*StorageEnclosureDiskSlotEp, *http.Response, error) {
@@ -4953,6 +4947,18 @@ func (a *StorageApiService) GetStorageEnclosureDiskSlotEpByMoidExecute(r ApiGetS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5613,6 +5619,27 @@ type ApiGetStorageFileItemByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageFileItemByMoidRequest) Select_(select_ string) ApiGetStorageFileItemByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageFileItemByMoidRequest) Expand(expand string) ApiGetStorageFileItemByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageFileItemByMoidRequest) At(at string) ApiGetStorageFileItemByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageFileItemByMoidRequest) Execute() (*StorageFileItem, *http.Response, error) {
@@ -5657,6 +5684,18 @@ func (a *StorageApiService) GetStorageFileItemByMoidExecute(r ApiGetStorageFileI
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6042,6 +6081,27 @@ type ApiGetStorageFlexFlashControllerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageFlexFlashControllerByMoidRequest) Select_(select_ string) ApiGetStorageFlexFlashControllerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageFlexFlashControllerByMoidRequest) Expand(expand string) ApiGetStorageFlexFlashControllerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageFlexFlashControllerByMoidRequest) At(at string) ApiGetStorageFlexFlashControllerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageFlexFlashControllerByMoidRequest) Execute() (*StorageFlexFlashController, *http.Response, error) {
@@ -6086,6 +6146,18 @@ func (a *StorageApiService) GetStorageFlexFlashControllerByMoidExecute(r ApiGetS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6471,6 +6543,27 @@ type ApiGetStorageFlexFlashControllerPropsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageFlexFlashControllerPropsByMoidRequest) Select_(select_ string) ApiGetStorageFlexFlashControllerPropsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageFlexFlashControllerPropsByMoidRequest) Expand(expand string) ApiGetStorageFlexFlashControllerPropsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageFlexFlashControllerPropsByMoidRequest) At(at string) ApiGetStorageFlexFlashControllerPropsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageFlexFlashControllerPropsByMoidRequest) Execute() (*StorageFlexFlashControllerProps, *http.Response, error) {
@@ -6515,6 +6608,18 @@ func (a *StorageApiService) GetStorageFlexFlashControllerPropsByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6900,6 +7005,27 @@ type ApiGetStorageFlexFlashPhysicalDriveByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) Select_(select_ string) ApiGetStorageFlexFlashPhysicalDriveByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) Expand(expand string) ApiGetStorageFlexFlashPhysicalDriveByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) At(at string) ApiGetStorageFlexFlashPhysicalDriveByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) Execute() (*StorageFlexFlashPhysicalDrive, *http.Response, error) {
@@ -6944,6 +7070,18 @@ func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7329,6 +7467,27 @@ type ApiGetStorageFlexFlashVirtualDriveByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) Select_(select_ string) ApiGetStorageFlexFlashVirtualDriveByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) Expand(expand string) ApiGetStorageFlexFlashVirtualDriveByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) At(at string) ApiGetStorageFlexFlashVirtualDriveByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) Execute() (*StorageFlexFlashVirtualDrive, *http.Response, error) {
@@ -7373,6 +7532,18 @@ func (a *StorageApiService) GetStorageFlexFlashVirtualDriveByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7758,6 +7929,27 @@ type ApiGetStorageFlexUtilControllerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageFlexUtilControllerByMoidRequest) Select_(select_ string) ApiGetStorageFlexUtilControllerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageFlexUtilControllerByMoidRequest) Expand(expand string) ApiGetStorageFlexUtilControllerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageFlexUtilControllerByMoidRequest) At(at string) ApiGetStorageFlexUtilControllerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageFlexUtilControllerByMoidRequest) Execute() (*StorageFlexUtilController, *http.Response, error) {
@@ -7802,6 +7994,18 @@ func (a *StorageApiService) GetStorageFlexUtilControllerByMoidExecute(r ApiGetSt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8187,6 +8391,27 @@ type ApiGetStorageFlexUtilPhysicalDriveByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) Select_(select_ string) ApiGetStorageFlexUtilPhysicalDriveByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) Expand(expand string) ApiGetStorageFlexUtilPhysicalDriveByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) At(at string) ApiGetStorageFlexUtilPhysicalDriveByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) Execute() (*StorageFlexUtilPhysicalDrive, *http.Response, error) {
@@ -8231,6 +8456,18 @@ func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8616,6 +8853,27 @@ type ApiGetStorageFlexUtilVirtualDriveByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) Select_(select_ string) ApiGetStorageFlexUtilVirtualDriveByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) Expand(expand string) ApiGetStorageFlexUtilVirtualDriveByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) At(at string) ApiGetStorageFlexUtilVirtualDriveByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) Execute() (*StorageFlexUtilVirtualDrive, *http.Response, error) {
@@ -8660,6 +8918,18 @@ func (a *StorageApiService) GetStorageFlexUtilVirtualDriveByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9045,6 +9315,27 @@ type ApiGetStorageHitachiArrayByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiArrayByMoidRequest) Select_(select_ string) ApiGetStorageHitachiArrayByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiArrayByMoidRequest) Expand(expand string) ApiGetStorageHitachiArrayByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiArrayByMoidRequest) At(at string) ApiGetStorageHitachiArrayByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiArrayByMoidRequest) Execute() (*StorageHitachiArray, *http.Response, error) {
@@ -9089,6 +9380,18 @@ func (a *StorageApiService) GetStorageHitachiArrayByMoidExecute(r ApiGetStorageH
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9474,6 +9777,27 @@ type ApiGetStorageHitachiControllerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiControllerByMoidRequest) Select_(select_ string) ApiGetStorageHitachiControllerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiControllerByMoidRequest) Expand(expand string) ApiGetStorageHitachiControllerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiControllerByMoidRequest) At(at string) ApiGetStorageHitachiControllerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiControllerByMoidRequest) Execute() (*StorageHitachiController, *http.Response, error) {
@@ -9518,6 +9842,18 @@ func (a *StorageApiService) GetStorageHitachiControllerByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9903,6 +10239,27 @@ type ApiGetStorageHitachiDiskByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiDiskByMoidRequest) Select_(select_ string) ApiGetStorageHitachiDiskByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiDiskByMoidRequest) Expand(expand string) ApiGetStorageHitachiDiskByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiDiskByMoidRequest) At(at string) ApiGetStorageHitachiDiskByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiDiskByMoidRequest) Execute() (*StorageHitachiDisk, *http.Response, error) {
@@ -9947,6 +10304,18 @@ func (a *StorageApiService) GetStorageHitachiDiskByMoidExecute(r ApiGetStorageHi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10332,6 +10701,27 @@ type ApiGetStorageHitachiExternalParityGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiExternalParityGroupByMoidRequest) Select_(select_ string) ApiGetStorageHitachiExternalParityGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiExternalParityGroupByMoidRequest) Expand(expand string) ApiGetStorageHitachiExternalParityGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiExternalParityGroupByMoidRequest) At(at string) ApiGetStorageHitachiExternalParityGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiExternalParityGroupByMoidRequest) Execute() (*StorageHitachiExternalParityGroup, *http.Response, error) {
@@ -10376,6 +10766,18 @@ func (a *StorageApiService) GetStorageHitachiExternalParityGroupByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10761,6 +11163,27 @@ type ApiGetStorageHitachiExternalPathGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiExternalPathGroupByMoidRequest) Select_(select_ string) ApiGetStorageHitachiExternalPathGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiExternalPathGroupByMoidRequest) Expand(expand string) ApiGetStorageHitachiExternalPathGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiExternalPathGroupByMoidRequest) At(at string) ApiGetStorageHitachiExternalPathGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiExternalPathGroupByMoidRequest) Execute() (*StorageHitachiExternalPathGroup, *http.Response, error) {
@@ -10805,6 +11228,18 @@ func (a *StorageApiService) GetStorageHitachiExternalPathGroupByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11190,6 +11625,27 @@ type ApiGetStorageHitachiExternalStorageLunByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiExternalStorageLunByMoidRequest) Select_(select_ string) ApiGetStorageHitachiExternalStorageLunByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiExternalStorageLunByMoidRequest) Expand(expand string) ApiGetStorageHitachiExternalStorageLunByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiExternalStorageLunByMoidRequest) At(at string) ApiGetStorageHitachiExternalStorageLunByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiExternalStorageLunByMoidRequest) Execute() (*StorageHitachiExternalStorageLun, *http.Response, error) {
@@ -11234,6 +11690,18 @@ func (a *StorageApiService) GetStorageHitachiExternalStorageLunByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11619,6 +12087,27 @@ type ApiGetStorageHitachiExternalStoragePortByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiExternalStoragePortByMoidRequest) Select_(select_ string) ApiGetStorageHitachiExternalStoragePortByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiExternalStoragePortByMoidRequest) Expand(expand string) ApiGetStorageHitachiExternalStoragePortByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiExternalStoragePortByMoidRequest) At(at string) ApiGetStorageHitachiExternalStoragePortByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiExternalStoragePortByMoidRequest) Execute() (*StorageHitachiExternalStoragePort, *http.Response, error) {
@@ -11663,6 +12152,18 @@ func (a *StorageApiService) GetStorageHitachiExternalStoragePortByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12048,6 +12549,27 @@ type ApiGetStorageHitachiHostByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiHostByMoidRequest) Select_(select_ string) ApiGetStorageHitachiHostByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiHostByMoidRequest) Expand(expand string) ApiGetStorageHitachiHostByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiHostByMoidRequest) At(at string) ApiGetStorageHitachiHostByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiHostByMoidRequest) Execute() (*StorageHitachiHost, *http.Response, error) {
@@ -12092,6 +12614,18 @@ func (a *StorageApiService) GetStorageHitachiHostByMoidExecute(r ApiGetStorageHi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12477,6 +13011,27 @@ type ApiGetStorageHitachiHostLunByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiHostLunByMoidRequest) Select_(select_ string) ApiGetStorageHitachiHostLunByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiHostLunByMoidRequest) Expand(expand string) ApiGetStorageHitachiHostLunByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiHostLunByMoidRequest) At(at string) ApiGetStorageHitachiHostLunByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiHostLunByMoidRequest) Execute() (*StorageHitachiHostLun, *http.Response, error) {
@@ -12521,6 +13076,18 @@ func (a *StorageApiService) GetStorageHitachiHostLunByMoidExecute(r ApiGetStorag
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12906,6 +13473,27 @@ type ApiGetStorageHitachiNvmSubsystemByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiNvmSubsystemByMoidRequest) Select_(select_ string) ApiGetStorageHitachiNvmSubsystemByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiNvmSubsystemByMoidRequest) Expand(expand string) ApiGetStorageHitachiNvmSubsystemByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiNvmSubsystemByMoidRequest) At(at string) ApiGetStorageHitachiNvmSubsystemByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiNvmSubsystemByMoidRequest) Execute() (*StorageHitachiNvmSubsystem, *http.Response, error) {
@@ -12950,6 +13538,18 @@ func (a *StorageApiService) GetStorageHitachiNvmSubsystemByMoidExecute(r ApiGetS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13335,6 +13935,27 @@ type ApiGetStorageHitachiParityGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiParityGroupByMoidRequest) Select_(select_ string) ApiGetStorageHitachiParityGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiParityGroupByMoidRequest) Expand(expand string) ApiGetStorageHitachiParityGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiParityGroupByMoidRequest) At(at string) ApiGetStorageHitachiParityGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiParityGroupByMoidRequest) Execute() (*StorageHitachiParityGroup, *http.Response, error) {
@@ -13379,6 +14000,18 @@ func (a *StorageApiService) GetStorageHitachiParityGroupByMoidExecute(r ApiGetSt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -13764,6 +14397,27 @@ type ApiGetStorageHitachiPoolByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiPoolByMoidRequest) Select_(select_ string) ApiGetStorageHitachiPoolByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiPoolByMoidRequest) Expand(expand string) ApiGetStorageHitachiPoolByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiPoolByMoidRequest) At(at string) ApiGetStorageHitachiPoolByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiPoolByMoidRequest) Execute() (*StorageHitachiPool, *http.Response, error) {
@@ -13808,6 +14462,18 @@ func (a *StorageApiService) GetStorageHitachiPoolByMoidExecute(r ApiGetStorageHi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14193,6 +14859,27 @@ type ApiGetStorageHitachiPortByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiPortByMoidRequest) Select_(select_ string) ApiGetStorageHitachiPortByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiPortByMoidRequest) Expand(expand string) ApiGetStorageHitachiPortByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiPortByMoidRequest) At(at string) ApiGetStorageHitachiPortByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiPortByMoidRequest) Execute() (*StorageHitachiPort, *http.Response, error) {
@@ -14237,6 +14924,18 @@ func (a *StorageApiService) GetStorageHitachiPortByMoidExecute(r ApiGetStorageHi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -14622,6 +15321,27 @@ type ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest) Select_(select_ string) ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest) Expand(expand string) ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest) At(at string) ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest) Execute() (*StorageHitachiRemoteCopyPairGad, *http.Response, error) {
@@ -14666,6 +15386,18 @@ func (a *StorageApiService) GetStorageHitachiRemoteCopyPairGadByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15051,6 +15783,27 @@ type ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest) Select_(select_ string) ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest) Expand(expand string) ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest) At(at string) ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest) Execute() (*StorageHitachiRemoteCopyPairTc, *http.Response, error) {
@@ -15095,6 +15848,18 @@ func (a *StorageApiService) GetStorageHitachiRemoteCopyPairTcByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15480,6 +16245,27 @@ type ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest) Select_(select_ string) ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest) Expand(expand string) ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest) At(at string) ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest) Execute() (*StorageHitachiRemoteCopyPairUr, *http.Response, error) {
@@ -15524,6 +16310,18 @@ func (a *StorageApiService) GetStorageHitachiRemoteCopyPairUrByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15909,6 +16707,27 @@ type ApiGetStorageHitachiRemoteReplicationByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiRemoteReplicationByMoidRequest) Select_(select_ string) ApiGetStorageHitachiRemoteReplicationByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiRemoteReplicationByMoidRequest) Expand(expand string) ApiGetStorageHitachiRemoteReplicationByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiRemoteReplicationByMoidRequest) At(at string) ApiGetStorageHitachiRemoteReplicationByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiRemoteReplicationByMoidRequest) Execute() (*StorageHitachiRemoteReplication, *http.Response, error) {
@@ -15953,6 +16772,18 @@ func (a *StorageApiService) GetStorageHitachiRemoteReplicationByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16338,6 +17169,27 @@ type ApiGetStorageHitachiSnapshotByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiSnapshotByMoidRequest) Select_(select_ string) ApiGetStorageHitachiSnapshotByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiSnapshotByMoidRequest) Expand(expand string) ApiGetStorageHitachiSnapshotByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiSnapshotByMoidRequest) At(at string) ApiGetStorageHitachiSnapshotByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiSnapshotByMoidRequest) Execute() (*StorageHitachiSnapshot, *http.Response, error) {
@@ -16382,6 +17234,18 @@ func (a *StorageApiService) GetStorageHitachiSnapshotByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -16767,6 +17631,27 @@ type ApiGetStorageHitachiVolumeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiVolumeByMoidRequest) Select_(select_ string) ApiGetStorageHitachiVolumeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiVolumeByMoidRequest) Expand(expand string) ApiGetStorageHitachiVolumeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiVolumeByMoidRequest) At(at string) ApiGetStorageHitachiVolumeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiVolumeByMoidRequest) Execute() (*StorageHitachiVolume, *http.Response, error) {
@@ -16811,6 +17696,18 @@ func (a *StorageApiService) GetStorageHitachiVolumeByMoidExecute(r ApiGetStorage
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17196,6 +18093,27 @@ type ApiGetStorageHitachiVolumeMigrationPairByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHitachiVolumeMigrationPairByMoidRequest) Select_(select_ string) ApiGetStorageHitachiVolumeMigrationPairByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHitachiVolumeMigrationPairByMoidRequest) Expand(expand string) ApiGetStorageHitachiVolumeMigrationPairByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHitachiVolumeMigrationPairByMoidRequest) At(at string) ApiGetStorageHitachiVolumeMigrationPairByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHitachiVolumeMigrationPairByMoidRequest) Execute() (*StorageHitachiVolumeMigrationPair, *http.Response, error) {
@@ -17240,6 +18158,18 @@ func (a *StorageApiService) GetStorageHitachiVolumeMigrationPairByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -17625,6 +18555,27 @@ type ApiGetStorageHyperFlexStorageContainerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHyperFlexStorageContainerByMoidRequest) Select_(select_ string) ApiGetStorageHyperFlexStorageContainerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHyperFlexStorageContainerByMoidRequest) Expand(expand string) ApiGetStorageHyperFlexStorageContainerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHyperFlexStorageContainerByMoidRequest) At(at string) ApiGetStorageHyperFlexStorageContainerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHyperFlexStorageContainerByMoidRequest) Execute() (*StorageHyperFlexStorageContainer, *http.Response, error) {
@@ -17669,6 +18620,18 @@ func (a *StorageApiService) GetStorageHyperFlexStorageContainerByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18054,6 +19017,27 @@ type ApiGetStorageHyperFlexVolumeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageHyperFlexVolumeByMoidRequest) Select_(select_ string) ApiGetStorageHyperFlexVolumeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageHyperFlexVolumeByMoidRequest) Expand(expand string) ApiGetStorageHyperFlexVolumeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageHyperFlexVolumeByMoidRequest) At(at string) ApiGetStorageHyperFlexVolumeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageHyperFlexVolumeByMoidRequest) Execute() (*StorageHyperFlexVolume, *http.Response, error) {
@@ -18098,6 +19082,18 @@ func (a *StorageApiService) GetStorageHyperFlexVolumeByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18483,6 +19479,27 @@ type ApiGetStorageItemByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageItemByMoidRequest) Select_(select_ string) ApiGetStorageItemByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageItemByMoidRequest) Expand(expand string) ApiGetStorageItemByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageItemByMoidRequest) At(at string) ApiGetStorageItemByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageItemByMoidRequest) Execute() (*StorageItem, *http.Response, error) {
@@ -18527,6 +19544,18 @@ func (a *StorageApiService) GetStorageItemByMoidExecute(r ApiGetStorageItemByMoi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -18912,6 +19941,27 @@ type ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest) Select_(select_ string) ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest) Expand(expand string) ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest) At(at string) ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest) Execute() (*StorageKnoxSecureDriveConfiguration, *http.Response, error) {
@@ -18956,6 +20006,18 @@ func (a *StorageApiService) GetStorageKnoxSecureDriveConfigurationByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19341,6 +20403,27 @@ type ApiGetStorageNetAppAggregateByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppAggregateByMoidRequest) Select_(select_ string) ApiGetStorageNetAppAggregateByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppAggregateByMoidRequest) Expand(expand string) ApiGetStorageNetAppAggregateByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppAggregateByMoidRequest) At(at string) ApiGetStorageNetAppAggregateByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppAggregateByMoidRequest) Execute() (*StorageNetAppAggregate, *http.Response, error) {
@@ -19385,6 +20468,18 @@ func (a *StorageApiService) GetStorageNetAppAggregateByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -19495,6 +20590,27 @@ type ApiGetStorageNetAppAggregateEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppAggregateEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppAggregateEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppAggregateEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppAggregateEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppAggregateEventByMoidRequest) At(at string) ApiGetStorageNetAppAggregateEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppAggregateEventByMoidRequest) Execute() (*StorageNetAppAggregateEvent, *http.Response, error) {
@@ -19539,6 +20655,18 @@ func (a *StorageApiService) GetStorageNetAppAggregateEventByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -20199,6 +21327,27 @@ type ApiGetStorageNetAppBaseDiskByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppBaseDiskByMoidRequest) Select_(select_ string) ApiGetStorageNetAppBaseDiskByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppBaseDiskByMoidRequest) Expand(expand string) ApiGetStorageNetAppBaseDiskByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppBaseDiskByMoidRequest) At(at string) ApiGetStorageNetAppBaseDiskByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppBaseDiskByMoidRequest) Execute() (*StorageNetAppBaseDisk, *http.Response, error) {
@@ -20243,6 +21392,18 @@ func (a *StorageApiService) GetStorageNetAppBaseDiskByMoidExecute(r ApiGetStorag
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -20628,6 +21789,27 @@ type ApiGetStorageNetAppCifsServiceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppCifsServiceByMoidRequest) Select_(select_ string) ApiGetStorageNetAppCifsServiceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppCifsServiceByMoidRequest) Expand(expand string) ApiGetStorageNetAppCifsServiceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppCifsServiceByMoidRequest) At(at string) ApiGetStorageNetAppCifsServiceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppCifsServiceByMoidRequest) Execute() (*StorageNetAppCifsService, *http.Response, error) {
@@ -20672,6 +21854,18 @@ func (a *StorageApiService) GetStorageNetAppCifsServiceByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -21057,6 +22251,27 @@ type ApiGetStorageNetAppCifsShareByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppCifsShareByMoidRequest) Select_(select_ string) ApiGetStorageNetAppCifsShareByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppCifsShareByMoidRequest) Expand(expand string) ApiGetStorageNetAppCifsShareByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppCifsShareByMoidRequest) At(at string) ApiGetStorageNetAppCifsShareByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppCifsShareByMoidRequest) Execute() (*StorageNetAppCifsShare, *http.Response, error) {
@@ -21101,6 +22316,18 @@ func (a *StorageApiService) GetStorageNetAppCifsShareByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -21486,6 +22713,27 @@ type ApiGetStorageNetAppCloudTargetByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppCloudTargetByMoidRequest) Select_(select_ string) ApiGetStorageNetAppCloudTargetByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppCloudTargetByMoidRequest) Expand(expand string) ApiGetStorageNetAppCloudTargetByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppCloudTargetByMoidRequest) At(at string) ApiGetStorageNetAppCloudTargetByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppCloudTargetByMoidRequest) Execute() (*StorageNetAppCloudTarget, *http.Response, error) {
@@ -21530,6 +22778,18 @@ func (a *StorageApiService) GetStorageNetAppCloudTargetByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -21915,6 +23175,27 @@ type ApiGetStorageNetAppClusterByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppClusterByMoidRequest) Select_(select_ string) ApiGetStorageNetAppClusterByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppClusterByMoidRequest) Expand(expand string) ApiGetStorageNetAppClusterByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppClusterByMoidRequest) At(at string) ApiGetStorageNetAppClusterByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppClusterByMoidRequest) Execute() (*StorageNetAppCluster, *http.Response, error) {
@@ -21959,6 +23240,18 @@ func (a *StorageApiService) GetStorageNetAppClusterByMoidExecute(r ApiGetStorage
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -22069,6 +23362,27 @@ type ApiGetStorageNetAppClusterEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppClusterEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppClusterEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppClusterEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppClusterEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppClusterEventByMoidRequest) At(at string) ApiGetStorageNetAppClusterEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppClusterEventByMoidRequest) Execute() (*StorageNetAppClusterEvent, *http.Response, error) {
@@ -22113,6 +23427,18 @@ func (a *StorageApiService) GetStorageNetAppClusterEventByMoidExecute(r ApiGetSt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -22773,6 +24099,27 @@ type ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest) Select_(select_ string) ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest) Expand(expand string) ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest) At(at string) ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest) Execute() (*StorageNetAppClusterSnapMirrorPolicy, *http.Response, error) {
@@ -22817,6 +24164,18 @@ func (a *StorageApiService) GetStorageNetAppClusterSnapMirrorPolicyByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -23202,6 +24561,27 @@ type ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest) Select_(select_ string) ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest) Expand(expand string) ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest) At(at string) ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest) Execute() (*StorageNetAppClusterSnapshotPolicy, *http.Response, error) {
@@ -23246,6 +24626,18 @@ func (a *StorageApiService) GetStorageNetAppClusterSnapshotPolicyByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -23631,6 +25023,27 @@ type ApiGetStorageNetAppDataIpInterfaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppDataIpInterfaceByMoidRequest) Select_(select_ string) ApiGetStorageNetAppDataIpInterfaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppDataIpInterfaceByMoidRequest) Expand(expand string) ApiGetStorageNetAppDataIpInterfaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppDataIpInterfaceByMoidRequest) At(at string) ApiGetStorageNetAppDataIpInterfaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppDataIpInterfaceByMoidRequest) Execute() (*StorageNetAppDataIpInterface, *http.Response, error) {
@@ -23675,6 +25088,18 @@ func (a *StorageApiService) GetStorageNetAppDataIpInterfaceByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -23785,6 +25210,27 @@ type ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest) At(at string) ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest) Execute() (*StorageNetAppDataIpInterfaceEvent, *http.Response, error) {
@@ -23829,6 +25275,18 @@ func (a *StorageApiService) GetStorageNetAppDataIpInterfaceEventByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -24489,6 +25947,27 @@ type ApiGetStorageNetAppDiskEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppDiskEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppDiskEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppDiskEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppDiskEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppDiskEventByMoidRequest) At(at string) ApiGetStorageNetAppDiskEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppDiskEventByMoidRequest) Execute() (*StorageNetAppDiskEvent, *http.Response, error) {
@@ -24533,6 +26012,18 @@ func (a *StorageApiService) GetStorageNetAppDiskEventByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -24918,6 +26409,27 @@ type ApiGetStorageNetAppEthernetPortByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppEthernetPortByMoidRequest) Select_(select_ string) ApiGetStorageNetAppEthernetPortByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppEthernetPortByMoidRequest) Expand(expand string) ApiGetStorageNetAppEthernetPortByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppEthernetPortByMoidRequest) At(at string) ApiGetStorageNetAppEthernetPortByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppEthernetPortByMoidRequest) Execute() (*StorageNetAppEthernetPort, *http.Response, error) {
@@ -24962,6 +26474,18 @@ func (a *StorageApiService) GetStorageNetAppEthernetPortByMoidExecute(r ApiGetSt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -25072,6 +26596,27 @@ type ApiGetStorageNetAppEthernetPortEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppEthernetPortEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppEthernetPortEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppEthernetPortEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppEthernetPortEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppEthernetPortEventByMoidRequest) At(at string) ApiGetStorageNetAppEthernetPortEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppEthernetPortEventByMoidRequest) Execute() (*StorageNetAppEthernetPortEvent, *http.Response, error) {
@@ -25116,6 +26661,18 @@ func (a *StorageApiService) GetStorageNetAppEthernetPortEventByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -25776,6 +27333,27 @@ type ApiGetStorageNetAppExportPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppExportPolicyByMoidRequest) Select_(select_ string) ApiGetStorageNetAppExportPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppExportPolicyByMoidRequest) Expand(expand string) ApiGetStorageNetAppExportPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppExportPolicyByMoidRequest) At(at string) ApiGetStorageNetAppExportPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppExportPolicyByMoidRequest) Execute() (*StorageNetAppExportPolicy, *http.Response, error) {
@@ -25820,6 +27398,18 @@ func (a *StorageApiService) GetStorageNetAppExportPolicyByMoidExecute(r ApiGetSt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -26205,6 +27795,27 @@ type ApiGetStorageNetAppFcInterfaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppFcInterfaceByMoidRequest) Select_(select_ string) ApiGetStorageNetAppFcInterfaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppFcInterfaceByMoidRequest) Expand(expand string) ApiGetStorageNetAppFcInterfaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppFcInterfaceByMoidRequest) At(at string) ApiGetStorageNetAppFcInterfaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppFcInterfaceByMoidRequest) Execute() (*StorageNetAppFcInterface, *http.Response, error) {
@@ -26249,6 +27860,18 @@ func (a *StorageApiService) GetStorageNetAppFcInterfaceByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -26359,6 +27982,27 @@ type ApiGetStorageNetAppFcInterfaceEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppFcInterfaceEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppFcInterfaceEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppFcInterfaceEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppFcInterfaceEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppFcInterfaceEventByMoidRequest) At(at string) ApiGetStorageNetAppFcInterfaceEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppFcInterfaceEventByMoidRequest) Execute() (*StorageNetAppFcInterfaceEvent, *http.Response, error) {
@@ -26403,6 +28047,18 @@ func (a *StorageApiService) GetStorageNetAppFcInterfaceEventByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -27063,6 +28719,27 @@ type ApiGetStorageNetAppFcPortByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppFcPortByMoidRequest) Select_(select_ string) ApiGetStorageNetAppFcPortByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppFcPortByMoidRequest) Expand(expand string) ApiGetStorageNetAppFcPortByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppFcPortByMoidRequest) At(at string) ApiGetStorageNetAppFcPortByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppFcPortByMoidRequest) Execute() (*StorageNetAppFcPort, *http.Response, error) {
@@ -27107,6 +28784,18 @@ func (a *StorageApiService) GetStorageNetAppFcPortByMoidExecute(r ApiGetStorageN
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -27217,6 +28906,27 @@ type ApiGetStorageNetAppFcPortEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppFcPortEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppFcPortEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppFcPortEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppFcPortEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppFcPortEventByMoidRequest) At(at string) ApiGetStorageNetAppFcPortEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppFcPortEventByMoidRequest) Execute() (*StorageNetAppFcPortEvent, *http.Response, error) {
@@ -27261,6 +28971,18 @@ func (a *StorageApiService) GetStorageNetAppFcPortEventByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -27921,6 +29643,27 @@ type ApiGetStorageNetAppInitiatorGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppInitiatorGroupByMoidRequest) Select_(select_ string) ApiGetStorageNetAppInitiatorGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppInitiatorGroupByMoidRequest) Expand(expand string) ApiGetStorageNetAppInitiatorGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppInitiatorGroupByMoidRequest) At(at string) ApiGetStorageNetAppInitiatorGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppInitiatorGroupByMoidRequest) Execute() (*StorageNetAppInitiatorGroup, *http.Response, error) {
@@ -27965,6 +29708,18 @@ func (a *StorageApiService) GetStorageNetAppInitiatorGroupByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -28350,6 +30105,27 @@ type ApiGetStorageNetAppIpInterfaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppIpInterfaceByMoidRequest) Select_(select_ string) ApiGetStorageNetAppIpInterfaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppIpInterfaceByMoidRequest) Expand(expand string) ApiGetStorageNetAppIpInterfaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppIpInterfaceByMoidRequest) At(at string) ApiGetStorageNetAppIpInterfaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppIpInterfaceByMoidRequest) Execute() (*StorageNetAppIpInterface, *http.Response, error) {
@@ -28398,6 +30174,18 @@ func (a *StorageApiService) GetStorageNetAppIpInterfaceByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -28508,6 +30296,27 @@ type ApiGetStorageNetAppIpInterfaceEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppIpInterfaceEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppIpInterfaceEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppIpInterfaceEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppIpInterfaceEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppIpInterfaceEventByMoidRequest) At(at string) ApiGetStorageNetAppIpInterfaceEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppIpInterfaceEventByMoidRequest) Execute() (*StorageNetAppIpInterfaceEvent, *http.Response, error) {
@@ -28552,6 +30361,18 @@ func (a *StorageApiService) GetStorageNetAppIpInterfaceEventByMoidExecute(r ApiG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -29216,6 +31037,27 @@ type ApiGetStorageNetAppIscsiServiceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppIscsiServiceByMoidRequest) Select_(select_ string) ApiGetStorageNetAppIscsiServiceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppIscsiServiceByMoidRequest) Expand(expand string) ApiGetStorageNetAppIscsiServiceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppIscsiServiceByMoidRequest) At(at string) ApiGetStorageNetAppIscsiServiceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppIscsiServiceByMoidRequest) Execute() (*StorageNetAppIscsiService, *http.Response, error) {
@@ -29260,6 +31102,18 @@ func (a *StorageApiService) GetStorageNetAppIscsiServiceByMoidExecute(r ApiGetSt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -29645,6 +31499,27 @@ type ApiGetStorageNetAppLicenseByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppLicenseByMoidRequest) Select_(select_ string) ApiGetStorageNetAppLicenseByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppLicenseByMoidRequest) Expand(expand string) ApiGetStorageNetAppLicenseByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppLicenseByMoidRequest) At(at string) ApiGetStorageNetAppLicenseByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppLicenseByMoidRequest) Execute() (*StorageNetAppLicense, *http.Response, error) {
@@ -29689,6 +31564,18 @@ func (a *StorageApiService) GetStorageNetAppLicenseByMoidExecute(r ApiGetStorage
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -30074,6 +31961,27 @@ type ApiGetStorageNetAppLunByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppLunByMoidRequest) Select_(select_ string) ApiGetStorageNetAppLunByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppLunByMoidRequest) Expand(expand string) ApiGetStorageNetAppLunByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppLunByMoidRequest) At(at string) ApiGetStorageNetAppLunByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppLunByMoidRequest) Execute() (*StorageNetAppLun, *http.Response, error) {
@@ -30118,6 +32026,18 @@ func (a *StorageApiService) GetStorageNetAppLunByMoidExecute(r ApiGetStorageNetA
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -30228,6 +32148,27 @@ type ApiGetStorageNetAppLunEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppLunEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppLunEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppLunEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppLunEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppLunEventByMoidRequest) At(at string) ApiGetStorageNetAppLunEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppLunEventByMoidRequest) Execute() (*StorageNetAppLunEvent, *http.Response, error) {
@@ -30272,6 +32213,18 @@ func (a *StorageApiService) GetStorageNetAppLunEventByMoidExecute(r ApiGetStorag
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -30932,6 +32885,27 @@ type ApiGetStorageNetAppLunMapByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppLunMapByMoidRequest) Select_(select_ string) ApiGetStorageNetAppLunMapByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppLunMapByMoidRequest) Expand(expand string) ApiGetStorageNetAppLunMapByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppLunMapByMoidRequest) At(at string) ApiGetStorageNetAppLunMapByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppLunMapByMoidRequest) Execute() (*StorageNetAppLunMap, *http.Response, error) {
@@ -30976,6 +32950,18 @@ func (a *StorageApiService) GetStorageNetAppLunMapByMoidExecute(r ApiGetStorageN
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -31361,6 +33347,27 @@ type ApiGetStorageNetAppNamespaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppNamespaceByMoidRequest) Select_(select_ string) ApiGetStorageNetAppNamespaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppNamespaceByMoidRequest) Expand(expand string) ApiGetStorageNetAppNamespaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppNamespaceByMoidRequest) At(at string) ApiGetStorageNetAppNamespaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppNamespaceByMoidRequest) Execute() (*StorageNetAppNamespace, *http.Response, error) {
@@ -31405,6 +33412,18 @@ func (a *StorageApiService) GetStorageNetAppNamespaceByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -31790,6 +33809,27 @@ type ApiGetStorageNetAppNfsClientByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppNfsClientByMoidRequest) Select_(select_ string) ApiGetStorageNetAppNfsClientByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppNfsClientByMoidRequest) Expand(expand string) ApiGetStorageNetAppNfsClientByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppNfsClientByMoidRequest) At(at string) ApiGetStorageNetAppNfsClientByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppNfsClientByMoidRequest) Execute() (*StorageNetAppNfsClient, *http.Response, error) {
@@ -31834,6 +33874,18 @@ func (a *StorageApiService) GetStorageNetAppNfsClientByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -32219,6 +34271,27 @@ type ApiGetStorageNetAppNfsServiceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppNfsServiceByMoidRequest) Select_(select_ string) ApiGetStorageNetAppNfsServiceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppNfsServiceByMoidRequest) Expand(expand string) ApiGetStorageNetAppNfsServiceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppNfsServiceByMoidRequest) At(at string) ApiGetStorageNetAppNfsServiceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppNfsServiceByMoidRequest) Execute() (*StorageNetAppNfsService, *http.Response, error) {
@@ -32263,6 +34336,18 @@ func (a *StorageApiService) GetStorageNetAppNfsServiceByMoidExecute(r ApiGetStor
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -32648,6 +34733,27 @@ type ApiGetStorageNetAppNodeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppNodeByMoidRequest) Select_(select_ string) ApiGetStorageNetAppNodeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppNodeByMoidRequest) Expand(expand string) ApiGetStorageNetAppNodeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppNodeByMoidRequest) At(at string) ApiGetStorageNetAppNodeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppNodeByMoidRequest) Execute() (*StorageNetAppNode, *http.Response, error) {
@@ -32692,6 +34798,18 @@ func (a *StorageApiService) GetStorageNetAppNodeByMoidExecute(r ApiGetStorageNet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -32802,6 +34920,27 @@ type ApiGetStorageNetAppNodeCdpNeighborByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppNodeCdpNeighborByMoidRequest) Select_(select_ string) ApiGetStorageNetAppNodeCdpNeighborByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppNodeCdpNeighborByMoidRequest) Expand(expand string) ApiGetStorageNetAppNodeCdpNeighborByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppNodeCdpNeighborByMoidRequest) At(at string) ApiGetStorageNetAppNodeCdpNeighborByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppNodeCdpNeighborByMoidRequest) Execute() (*StorageNetAppNodeCdpNeighbor, *http.Response, error) {
@@ -32846,6 +34985,18 @@ func (a *StorageApiService) GetStorageNetAppNodeCdpNeighborByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -33231,6 +35382,27 @@ type ApiGetStorageNetAppNodeEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppNodeEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppNodeEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppNodeEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppNodeEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppNodeEventByMoidRequest) At(at string) ApiGetStorageNetAppNodeEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppNodeEventByMoidRequest) Execute() (*StorageNetAppNodeEvent, *http.Response, error) {
@@ -33275,6 +35447,18 @@ func (a *StorageApiService) GetStorageNetAppNodeEventByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -33935,6 +36119,27 @@ type ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest) Select_(select_ string) ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest) Expand(expand string) ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest) At(at string) ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest) Execute() (*StorageNetAppNonDataIpInterface, *http.Response, error) {
@@ -33979,6 +36184,18 @@ func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceByMoidExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -34089,6 +36306,27 @@ type ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest) At(at string) ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest) Execute() (*StorageNetAppNonDataIpInterfaceEvent, *http.Response, error) {
@@ -34133,6 +36371,18 @@ func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceEventByMoidExecute
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -34793,6 +37043,27 @@ type ApiGetStorageNetAppNtpServerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppNtpServerByMoidRequest) Select_(select_ string) ApiGetStorageNetAppNtpServerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppNtpServerByMoidRequest) Expand(expand string) ApiGetStorageNetAppNtpServerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppNtpServerByMoidRequest) At(at string) ApiGetStorageNetAppNtpServerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppNtpServerByMoidRequest) Execute() (*StorageNetAppNtpServer, *http.Response, error) {
@@ -34837,6 +37108,18 @@ func (a *StorageApiService) GetStorageNetAppNtpServerByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -35222,6 +37505,27 @@ type ApiGetStorageNetAppQtreeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppQtreeByMoidRequest) Select_(select_ string) ApiGetStorageNetAppQtreeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppQtreeByMoidRequest) Expand(expand string) ApiGetStorageNetAppQtreeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppQtreeByMoidRequest) At(at string) ApiGetStorageNetAppQtreeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppQtreeByMoidRequest) Execute() (*StorageNetAppQtree, *http.Response, error) {
@@ -35266,6 +37570,18 @@ func (a *StorageApiService) GetStorageNetAppQtreeByMoidExecute(r ApiGetStorageNe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -35651,6 +37967,27 @@ type ApiGetStorageNetAppScheduleByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppScheduleByMoidRequest) Select_(select_ string) ApiGetStorageNetAppScheduleByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppScheduleByMoidRequest) Expand(expand string) ApiGetStorageNetAppScheduleByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppScheduleByMoidRequest) At(at string) ApiGetStorageNetAppScheduleByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppScheduleByMoidRequest) Execute() (*StorageNetAppSchedule, *http.Response, error) {
@@ -35695,6 +38032,18 @@ func (a *StorageApiService) GetStorageNetAppScheduleByMoidExecute(r ApiGetStorag
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -36080,6 +38429,27 @@ type ApiGetStorageNetAppSensorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppSensorByMoidRequest) Select_(select_ string) ApiGetStorageNetAppSensorByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppSensorByMoidRequest) Expand(expand string) ApiGetStorageNetAppSensorByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppSensorByMoidRequest) At(at string) ApiGetStorageNetAppSensorByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppSensorByMoidRequest) Execute() (*StorageNetAppSensor, *http.Response, error) {
@@ -36124,6 +38494,18 @@ func (a *StorageApiService) GetStorageNetAppSensorByMoidExecute(r ApiGetStorageN
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -36509,6 +38891,27 @@ type ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest) Select_(select_ string) ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest) Expand(expand string) ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest) At(at string) ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest) Execute() (*StorageNetAppSnapMirrorRelationship, *http.Response, error) {
@@ -36553,6 +38956,18 @@ func (a *StorageApiService) GetStorageNetAppSnapMirrorRelationshipByMoidExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -36938,6 +39353,27 @@ type ApiGetStorageNetAppStorageVmByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppStorageVmByMoidRequest) Select_(select_ string) ApiGetStorageNetAppStorageVmByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppStorageVmByMoidRequest) Expand(expand string) ApiGetStorageNetAppStorageVmByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppStorageVmByMoidRequest) At(at string) ApiGetStorageNetAppStorageVmByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppStorageVmByMoidRequest) Execute() (*StorageNetAppStorageVm, *http.Response, error) {
@@ -36982,6 +39418,18 @@ func (a *StorageApiService) GetStorageNetAppStorageVmByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -37367,6 +39815,27 @@ type ApiGetStorageNetAppSvmEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppSvmEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppSvmEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppSvmEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppSvmEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppSvmEventByMoidRequest) At(at string) ApiGetStorageNetAppSvmEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppSvmEventByMoidRequest) Execute() (*StorageNetAppSvmEvent, *http.Response, error) {
@@ -37411,6 +39880,18 @@ func (a *StorageApiService) GetStorageNetAppSvmEventByMoidExecute(r ApiGetStorag
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -37796,6 +40277,27 @@ type ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest) Select_(select_ string) ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest) Expand(expand string) ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest) At(at string) ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest) Execute() (*StorageNetAppSvmSnapMirrorPolicy, *http.Response, error) {
@@ -37840,6 +40342,18 @@ func (a *StorageApiService) GetStorageNetAppSvmSnapMirrorPolicyByMoidExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -38225,6 +40739,27 @@ type ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest) Select_(select_ string) ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest) Expand(expand string) ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest) At(at string) ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest) Execute() (*StorageNetAppSvmSnapshotPolicy, *http.Response, error) {
@@ -38269,6 +40804,18 @@ func (a *StorageApiService) GetStorageNetAppSvmSnapshotPolicyByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -38654,6 +41201,27 @@ type ApiGetStorageNetAppVolumeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppVolumeByMoidRequest) Select_(select_ string) ApiGetStorageNetAppVolumeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppVolumeByMoidRequest) Expand(expand string) ApiGetStorageNetAppVolumeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppVolumeByMoidRequest) At(at string) ApiGetStorageNetAppVolumeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppVolumeByMoidRequest) Execute() (*StorageNetAppVolume, *http.Response, error) {
@@ -38698,6 +41266,18 @@ func (a *StorageApiService) GetStorageNetAppVolumeByMoidExecute(r ApiGetStorageN
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -38808,6 +41388,27 @@ type ApiGetStorageNetAppVolumeEventByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppVolumeEventByMoidRequest) Select_(select_ string) ApiGetStorageNetAppVolumeEventByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppVolumeEventByMoidRequest) Expand(expand string) ApiGetStorageNetAppVolumeEventByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppVolumeEventByMoidRequest) At(at string) ApiGetStorageNetAppVolumeEventByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppVolumeEventByMoidRequest) Execute() (*StorageNetAppVolumeEvent, *http.Response, error) {
@@ -38852,6 +41453,18 @@ func (a *StorageApiService) GetStorageNetAppVolumeEventByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -39512,6 +42125,27 @@ type ApiGetStorageNetAppVolumeSnapshotByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNetAppVolumeSnapshotByMoidRequest) Select_(select_ string) ApiGetStorageNetAppVolumeSnapshotByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNetAppVolumeSnapshotByMoidRequest) Expand(expand string) ApiGetStorageNetAppVolumeSnapshotByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNetAppVolumeSnapshotByMoidRequest) At(at string) ApiGetStorageNetAppVolumeSnapshotByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNetAppVolumeSnapshotByMoidRequest) Execute() (*StorageNetAppVolumeSnapshot, *http.Response, error) {
@@ -39556,6 +42190,18 @@ func (a *StorageApiService) GetStorageNetAppVolumeSnapshotByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -39941,6 +42587,27 @@ type ApiGetStorageNvmeRaidConfigurationByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageNvmeRaidConfigurationByMoidRequest) Select_(select_ string) ApiGetStorageNvmeRaidConfigurationByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageNvmeRaidConfigurationByMoidRequest) Expand(expand string) ApiGetStorageNvmeRaidConfigurationByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageNvmeRaidConfigurationByMoidRequest) At(at string) ApiGetStorageNvmeRaidConfigurationByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageNvmeRaidConfigurationByMoidRequest) Execute() (*StorageNvmeRaidConfiguration, *http.Response, error) {
@@ -39985,6 +42652,18 @@ func (a *StorageApiService) GetStorageNvmeRaidConfigurationByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -40370,6 +43049,27 @@ type ApiGetStoragePhysicalDiskByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePhysicalDiskByMoidRequest) Select_(select_ string) ApiGetStoragePhysicalDiskByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePhysicalDiskByMoidRequest) Expand(expand string) ApiGetStoragePhysicalDiskByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePhysicalDiskByMoidRequest) At(at string) ApiGetStoragePhysicalDiskByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePhysicalDiskByMoidRequest) Execute() (*StoragePhysicalDisk, *http.Response, error) {
@@ -40414,6 +43114,18 @@ func (a *StorageApiService) GetStoragePhysicalDiskByMoidExecute(r ApiGetStorageP
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -40524,6 +43236,27 @@ type ApiGetStoragePhysicalDiskExtensionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePhysicalDiskExtensionByMoidRequest) Select_(select_ string) ApiGetStoragePhysicalDiskExtensionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePhysicalDiskExtensionByMoidRequest) Expand(expand string) ApiGetStoragePhysicalDiskExtensionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePhysicalDiskExtensionByMoidRequest) At(at string) ApiGetStoragePhysicalDiskExtensionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePhysicalDiskExtensionByMoidRequest) Execute() (*StoragePhysicalDiskExtension, *http.Response, error) {
@@ -40568,6 +43301,18 @@ func (a *StorageApiService) GetStoragePhysicalDiskExtensionByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -41228,6 +43973,27 @@ type ApiGetStoragePhysicalDiskUsageByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePhysicalDiskUsageByMoidRequest) Select_(select_ string) ApiGetStoragePhysicalDiskUsageByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePhysicalDiskUsageByMoidRequest) Expand(expand string) ApiGetStoragePhysicalDiskUsageByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePhysicalDiskUsageByMoidRequest) At(at string) ApiGetStoragePhysicalDiskUsageByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePhysicalDiskUsageByMoidRequest) Execute() (*StoragePhysicalDiskUsage, *http.Response, error) {
@@ -41272,6 +44038,18 @@ func (a *StorageApiService) GetStoragePhysicalDiskUsageByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -41657,6 +44435,27 @@ type ApiGetStoragePureArrayAlertsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureArrayAlertsByMoidRequest) Select_(select_ string) ApiGetStoragePureArrayAlertsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureArrayAlertsByMoidRequest) Expand(expand string) ApiGetStoragePureArrayAlertsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureArrayAlertsByMoidRequest) At(at string) ApiGetStoragePureArrayAlertsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureArrayAlertsByMoidRequest) Execute() (*StoragePureArrayAlerts, *http.Response, error) {
@@ -41701,6 +44500,18 @@ func (a *StorageApiService) GetStoragePureArrayAlertsByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -42086,6 +44897,27 @@ type ApiGetStoragePureArrayByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureArrayByMoidRequest) Select_(select_ string) ApiGetStoragePureArrayByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureArrayByMoidRequest) Expand(expand string) ApiGetStoragePureArrayByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureArrayByMoidRequest) At(at string) ApiGetStoragePureArrayByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureArrayByMoidRequest) Execute() (*StoragePureArray, *http.Response, error) {
@@ -42130,6 +44962,18 @@ func (a *StorageApiService) GetStoragePureArrayByMoidExecute(r ApiGetStoragePure
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -42515,6 +45359,27 @@ type ApiGetStoragePureControllerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureControllerByMoidRequest) Select_(select_ string) ApiGetStoragePureControllerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureControllerByMoidRequest) Expand(expand string) ApiGetStoragePureControllerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureControllerByMoidRequest) At(at string) ApiGetStoragePureControllerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureControllerByMoidRequest) Execute() (*StoragePureController, *http.Response, error) {
@@ -42559,6 +45424,18 @@ func (a *StorageApiService) GetStoragePureControllerByMoidExecute(r ApiGetStorag
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -42944,6 +45821,27 @@ type ApiGetStoragePureDirectoryByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureDirectoryByMoidRequest) Select_(select_ string) ApiGetStoragePureDirectoryByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureDirectoryByMoidRequest) Expand(expand string) ApiGetStoragePureDirectoryByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureDirectoryByMoidRequest) At(at string) ApiGetStoragePureDirectoryByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureDirectoryByMoidRequest) Execute() (*StoragePureDirectory, *http.Response, error) {
@@ -42988,6 +45886,18 @@ func (a *StorageApiService) GetStoragePureDirectoryByMoidExecute(r ApiGetStorage
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -43098,6 +46008,27 @@ type ApiGetStoragePureDirectoryExportByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureDirectoryExportByMoidRequest) Select_(select_ string) ApiGetStoragePureDirectoryExportByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureDirectoryExportByMoidRequest) Expand(expand string) ApiGetStoragePureDirectoryExportByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureDirectoryExportByMoidRequest) At(at string) ApiGetStoragePureDirectoryExportByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureDirectoryExportByMoidRequest) Execute() (*StoragePureDirectoryExport, *http.Response, error) {
@@ -43142,6 +46073,18 @@ func (a *StorageApiService) GetStoragePureDirectoryExportByMoidExecute(r ApiGetS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -43802,6 +46745,27 @@ type ApiGetStoragePureDirectoryPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureDirectoryPolicyByMoidRequest) Select_(select_ string) ApiGetStoragePureDirectoryPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureDirectoryPolicyByMoidRequest) Expand(expand string) ApiGetStoragePureDirectoryPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureDirectoryPolicyByMoidRequest) At(at string) ApiGetStoragePureDirectoryPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureDirectoryPolicyByMoidRequest) Execute() (*StoragePureDirectoryPolicy, *http.Response, error) {
@@ -43846,6 +46810,18 @@ func (a *StorageApiService) GetStoragePureDirectoryPolicyByMoidExecute(r ApiGetS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -44231,6 +47207,27 @@ type ApiGetStoragePureDirectoryQuotaByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureDirectoryQuotaByMoidRequest) Select_(select_ string) ApiGetStoragePureDirectoryQuotaByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureDirectoryQuotaByMoidRequest) Expand(expand string) ApiGetStoragePureDirectoryQuotaByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureDirectoryQuotaByMoidRequest) At(at string) ApiGetStoragePureDirectoryQuotaByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureDirectoryQuotaByMoidRequest) Execute() (*StoragePureDirectoryQuota, *http.Response, error) {
@@ -44275,6 +47272,18 @@ func (a *StorageApiService) GetStoragePureDirectoryQuotaByMoidExecute(r ApiGetSt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -44660,6 +47669,27 @@ type ApiGetStoragePureDirectorySnapshotByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureDirectorySnapshotByMoidRequest) Select_(select_ string) ApiGetStoragePureDirectorySnapshotByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureDirectorySnapshotByMoidRequest) Expand(expand string) ApiGetStoragePureDirectorySnapshotByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureDirectorySnapshotByMoidRequest) At(at string) ApiGetStoragePureDirectorySnapshotByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureDirectorySnapshotByMoidRequest) Execute() (*StoragePureDirectorySnapshot, *http.Response, error) {
@@ -44704,6 +47734,18 @@ func (a *StorageApiService) GetStoragePureDirectorySnapshotByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -45089,6 +48131,27 @@ type ApiGetStoragePureDiskByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureDiskByMoidRequest) Select_(select_ string) ApiGetStoragePureDiskByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureDiskByMoidRequest) Expand(expand string) ApiGetStoragePureDiskByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureDiskByMoidRequest) At(at string) ApiGetStoragePureDiskByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureDiskByMoidRequest) Execute() (*StoragePureDisk, *http.Response, error) {
@@ -45133,6 +48196,18 @@ func (a *StorageApiService) GetStoragePureDiskByMoidExecute(r ApiGetStoragePureD
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -45518,6 +48593,27 @@ type ApiGetStoragePureFileSystemsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureFileSystemsByMoidRequest) Select_(select_ string) ApiGetStoragePureFileSystemsByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureFileSystemsByMoidRequest) Expand(expand string) ApiGetStoragePureFileSystemsByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureFileSystemsByMoidRequest) At(at string) ApiGetStoragePureFileSystemsByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureFileSystemsByMoidRequest) Execute() (*StoragePureFileSystems, *http.Response, error) {
@@ -45562,6 +48658,18 @@ func (a *StorageApiService) GetStoragePureFileSystemsByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -45947,6 +49055,27 @@ type ApiGetStoragePureHostByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureHostByMoidRequest) Select_(select_ string) ApiGetStoragePureHostByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureHostByMoidRequest) Expand(expand string) ApiGetStoragePureHostByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureHostByMoidRequest) At(at string) ApiGetStoragePureHostByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureHostByMoidRequest) Execute() (*StoragePureHost, *http.Response, error) {
@@ -45991,6 +49120,18 @@ func (a *StorageApiService) GetStoragePureHostByMoidExecute(r ApiGetStoragePureH
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -46101,6 +49242,27 @@ type ApiGetStoragePureHostGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureHostGroupByMoidRequest) Select_(select_ string) ApiGetStoragePureHostGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureHostGroupByMoidRequest) Expand(expand string) ApiGetStoragePureHostGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureHostGroupByMoidRequest) At(at string) ApiGetStoragePureHostGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureHostGroupByMoidRequest) Execute() (*StoragePureHostGroup, *http.Response, error) {
@@ -46145,6 +49307,18 @@ func (a *StorageApiService) GetStoragePureHostGroupByMoidExecute(r ApiGetStorage
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -46805,6 +49979,27 @@ type ApiGetStoragePureHostLunByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureHostLunByMoidRequest) Select_(select_ string) ApiGetStoragePureHostLunByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureHostLunByMoidRequest) Expand(expand string) ApiGetStoragePureHostLunByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureHostLunByMoidRequest) At(at string) ApiGetStoragePureHostLunByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureHostLunByMoidRequest) Execute() (*StoragePureHostLun, *http.Response, error) {
@@ -46849,6 +50044,18 @@ func (a *StorageApiService) GetStoragePureHostLunByMoidExecute(r ApiGetStoragePu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -47234,6 +50441,27 @@ type ApiGetStoragePureManagementAccessPolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureManagementAccessPolicyByMoidRequest) Select_(select_ string) ApiGetStoragePureManagementAccessPolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureManagementAccessPolicyByMoidRequest) Expand(expand string) ApiGetStoragePureManagementAccessPolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureManagementAccessPolicyByMoidRequest) At(at string) ApiGetStoragePureManagementAccessPolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureManagementAccessPolicyByMoidRequest) Execute() (*StoragePureManagementAccessPolicy, *http.Response, error) {
@@ -47278,6 +50506,18 @@ func (a *StorageApiService) GetStoragePureManagementAccessPolicyByMoidExecute(r 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -47663,6 +50903,27 @@ type ApiGetStoragePureNfsPolicyRuleByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureNfsPolicyRuleByMoidRequest) Select_(select_ string) ApiGetStoragePureNfsPolicyRuleByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureNfsPolicyRuleByMoidRequest) Expand(expand string) ApiGetStoragePureNfsPolicyRuleByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureNfsPolicyRuleByMoidRequest) At(at string) ApiGetStoragePureNfsPolicyRuleByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureNfsPolicyRuleByMoidRequest) Execute() (*StoragePureNfsPolicyRule, *http.Response, error) {
@@ -47707,6 +50968,18 @@ func (a *StorageApiService) GetStoragePureNfsPolicyRuleByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -48092,6 +51365,27 @@ type ApiGetStoragePurePodByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePurePodByMoidRequest) Select_(select_ string) ApiGetStoragePurePodByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePurePodByMoidRequest) Expand(expand string) ApiGetStoragePurePodByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePurePodByMoidRequest) At(at string) ApiGetStoragePurePodByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePurePodByMoidRequest) Execute() (*StoragePurePod, *http.Response, error) {
@@ -48136,6 +51430,18 @@ func (a *StorageApiService) GetStoragePurePodByMoidExecute(r ApiGetStoragePurePo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -48521,6 +51827,27 @@ type ApiGetStoragePurePortByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePurePortByMoidRequest) Select_(select_ string) ApiGetStoragePurePortByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePurePortByMoidRequest) Expand(expand string) ApiGetStoragePurePortByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePurePortByMoidRequest) At(at string) ApiGetStoragePurePortByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePurePortByMoidRequest) Execute() (*StoragePurePort, *http.Response, error) {
@@ -48565,6 +51892,18 @@ func (a *StorageApiService) GetStoragePurePortByMoidExecute(r ApiGetStoragePureP
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -48950,6 +52289,27 @@ type ApiGetStoragePureProtectionGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureProtectionGroupByMoidRequest) Select_(select_ string) ApiGetStoragePureProtectionGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureProtectionGroupByMoidRequest) Expand(expand string) ApiGetStoragePureProtectionGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureProtectionGroupByMoidRequest) At(at string) ApiGetStoragePureProtectionGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureProtectionGroupByMoidRequest) Execute() (*StoragePureProtectionGroup, *http.Response, error) {
@@ -48994,6 +52354,18 @@ func (a *StorageApiService) GetStoragePureProtectionGroupByMoidExecute(r ApiGetS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -49379,6 +52751,27 @@ type ApiGetStoragePureProtectionGroupSnapshotByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) Select_(select_ string) ApiGetStoragePureProtectionGroupSnapshotByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) Expand(expand string) ApiGetStoragePureProtectionGroupSnapshotByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) At(at string) ApiGetStoragePureProtectionGroupSnapshotByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) Execute() (*StoragePureProtectionGroupSnapshot, *http.Response, error) {
@@ -49423,6 +52816,18 @@ func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotByMoidExecute(r
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -49808,6 +53213,27 @@ type ApiGetStoragePureQuotaPolicyRuleByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureQuotaPolicyRuleByMoidRequest) Select_(select_ string) ApiGetStoragePureQuotaPolicyRuleByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureQuotaPolicyRuleByMoidRequest) Expand(expand string) ApiGetStoragePureQuotaPolicyRuleByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureQuotaPolicyRuleByMoidRequest) At(at string) ApiGetStoragePureQuotaPolicyRuleByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureQuotaPolicyRuleByMoidRequest) Execute() (*StoragePureQuotaPolicyRule, *http.Response, error) {
@@ -49852,6 +53278,18 @@ func (a *StorageApiService) GetStoragePureQuotaPolicyRuleByMoidExecute(r ApiGetS
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -50237,6 +53675,27 @@ type ApiGetStoragePureRealmByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureRealmByMoidRequest) Select_(select_ string) ApiGetStoragePureRealmByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureRealmByMoidRequest) Expand(expand string) ApiGetStoragePureRealmByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureRealmByMoidRequest) At(at string) ApiGetStoragePureRealmByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureRealmByMoidRequest) Execute() (*StoragePureRealm, *http.Response, error) {
@@ -50281,6 +53740,18 @@ func (a *StorageApiService) GetStoragePureRealmByMoidExecute(r ApiGetStoragePure
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -50666,6 +54137,27 @@ type ApiGetStoragePureReplicationScheduleByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureReplicationScheduleByMoidRequest) Select_(select_ string) ApiGetStoragePureReplicationScheduleByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureReplicationScheduleByMoidRequest) Expand(expand string) ApiGetStoragePureReplicationScheduleByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureReplicationScheduleByMoidRequest) At(at string) ApiGetStoragePureReplicationScheduleByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureReplicationScheduleByMoidRequest) Execute() (*StoragePureReplicationSchedule, *http.Response, error) {
@@ -50710,6 +54202,18 @@ func (a *StorageApiService) GetStoragePureReplicationScheduleByMoidExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -51095,6 +54599,27 @@ type ApiGetStoragePureSmbPolicyRuleByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureSmbPolicyRuleByMoidRequest) Select_(select_ string) ApiGetStoragePureSmbPolicyRuleByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureSmbPolicyRuleByMoidRequest) Expand(expand string) ApiGetStoragePureSmbPolicyRuleByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureSmbPolicyRuleByMoidRequest) At(at string) ApiGetStoragePureSmbPolicyRuleByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureSmbPolicyRuleByMoidRequest) Execute() (*StoragePureSmbPolicyRule, *http.Response, error) {
@@ -51139,6 +54664,18 @@ func (a *StorageApiService) GetStoragePureSmbPolicyRuleByMoidExecute(r ApiGetSto
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -51524,6 +55061,27 @@ type ApiGetStoragePureSnapshotScheduleByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureSnapshotScheduleByMoidRequest) Select_(select_ string) ApiGetStoragePureSnapshotScheduleByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureSnapshotScheduleByMoidRequest) Expand(expand string) ApiGetStoragePureSnapshotScheduleByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureSnapshotScheduleByMoidRequest) At(at string) ApiGetStoragePureSnapshotScheduleByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureSnapshotScheduleByMoidRequest) Execute() (*StoragePureSnapshotSchedule, *http.Response, error) {
@@ -51568,6 +55126,18 @@ func (a *StorageApiService) GetStoragePureSnapshotScheduleByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -51953,6 +55523,27 @@ type ApiGetStoragePureTargetArrayByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureTargetArrayByMoidRequest) Select_(select_ string) ApiGetStoragePureTargetArrayByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureTargetArrayByMoidRequest) Expand(expand string) ApiGetStoragePureTargetArrayByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureTargetArrayByMoidRequest) At(at string) ApiGetStoragePureTargetArrayByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureTargetArrayByMoidRequest) Execute() (*StoragePureTargetArray, *http.Response, error) {
@@ -51997,6 +55588,18 @@ func (a *StorageApiService) GetStoragePureTargetArrayByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -52382,6 +55985,27 @@ type ApiGetStoragePureVolumeByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureVolumeByMoidRequest) Select_(select_ string) ApiGetStoragePureVolumeByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureVolumeByMoidRequest) Expand(expand string) ApiGetStoragePureVolumeByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureVolumeByMoidRequest) At(at string) ApiGetStoragePureVolumeByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureVolumeByMoidRequest) Execute() (*StoragePureVolume, *http.Response, error) {
@@ -52426,6 +56050,18 @@ func (a *StorageApiService) GetStoragePureVolumeByMoidExecute(r ApiGetStoragePur
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -52536,6 +56172,27 @@ type ApiGetStoragePureVolumeGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureVolumeGroupByMoidRequest) Select_(select_ string) ApiGetStoragePureVolumeGroupByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureVolumeGroupByMoidRequest) Expand(expand string) ApiGetStoragePureVolumeGroupByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureVolumeGroupByMoidRequest) At(at string) ApiGetStoragePureVolumeGroupByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureVolumeGroupByMoidRequest) Execute() (*StoragePureVolumeGroup, *http.Response, error) {
@@ -52580,6 +56237,18 @@ func (a *StorageApiService) GetStoragePureVolumeGroupByMoidExecute(r ApiGetStora
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -53240,6 +56909,27 @@ type ApiGetStoragePureVolumeSnapshotByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStoragePureVolumeSnapshotByMoidRequest) Select_(select_ string) ApiGetStoragePureVolumeSnapshotByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStoragePureVolumeSnapshotByMoidRequest) Expand(expand string) ApiGetStoragePureVolumeSnapshotByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStoragePureVolumeSnapshotByMoidRequest) At(at string) ApiGetStoragePureVolumeSnapshotByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStoragePureVolumeSnapshotByMoidRequest) Execute() (*StoragePureVolumeSnapshot, *http.Response, error) {
@@ -53284,6 +56974,18 @@ func (a *StorageApiService) GetStoragePureVolumeSnapshotByMoidExecute(r ApiGetSt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -53669,6 +57371,27 @@ type ApiGetStorageSasExpanderByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageSasExpanderByMoidRequest) Select_(select_ string) ApiGetStorageSasExpanderByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageSasExpanderByMoidRequest) Expand(expand string) ApiGetStorageSasExpanderByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageSasExpanderByMoidRequest) At(at string) ApiGetStorageSasExpanderByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageSasExpanderByMoidRequest) Execute() (*StorageSasExpander, *http.Response, error) {
@@ -53713,6 +57436,18 @@ func (a *StorageApiService) GetStorageSasExpanderByMoidExecute(r ApiGetStorageSa
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -54098,6 +57833,27 @@ type ApiGetStorageSasPortByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageSasPortByMoidRequest) Select_(select_ string) ApiGetStorageSasPortByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageSasPortByMoidRequest) Expand(expand string) ApiGetStorageSasPortByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageSasPortByMoidRequest) At(at string) ApiGetStorageSasPortByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageSasPortByMoidRequest) Execute() (*StorageSasPort, *http.Response, error) {
@@ -54142,6 +57898,18 @@ func (a *StorageApiService) GetStorageSasPortByMoidExecute(r ApiGetStorageSasPor
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -54527,6 +58295,27 @@ type ApiGetStorageSpanByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageSpanByMoidRequest) Select_(select_ string) ApiGetStorageSpanByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageSpanByMoidRequest) Expand(expand string) ApiGetStorageSpanByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageSpanByMoidRequest) At(at string) ApiGetStorageSpanByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageSpanByMoidRequest) Execute() (*StorageSpan, *http.Response, error) {
@@ -54571,6 +58360,18 @@ func (a *StorageApiService) GetStorageSpanByMoidExecute(r ApiGetStorageSpanByMoi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -54956,6 +58757,27 @@ type ApiGetStorageStoragePolicyByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageStoragePolicyByMoidRequest) Select_(select_ string) ApiGetStorageStoragePolicyByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageStoragePolicyByMoidRequest) Expand(expand string) ApiGetStorageStoragePolicyByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageStoragePolicyByMoidRequest) At(at string) ApiGetStorageStoragePolicyByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageStoragePolicyByMoidRequest) Execute() (*StorageStoragePolicy, *http.Response, error) {
@@ -55000,6 +58822,18 @@ func (a *StorageApiService) GetStorageStoragePolicyByMoidExecute(r ApiGetStorage
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -55385,6 +59219,27 @@ type ApiGetStorageVdMemberEpByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageVdMemberEpByMoidRequest) Select_(select_ string) ApiGetStorageVdMemberEpByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageVdMemberEpByMoidRequest) Expand(expand string) ApiGetStorageVdMemberEpByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageVdMemberEpByMoidRequest) At(at string) ApiGetStorageVdMemberEpByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageVdMemberEpByMoidRequest) Execute() (*StorageVdMemberEp, *http.Response, error) {
@@ -55429,6 +59284,18 @@ func (a *StorageApiService) GetStorageVdMemberEpByMoidExecute(r ApiGetStorageVdM
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -55814,6 +59681,27 @@ type ApiGetStorageVirtualDriveByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageVirtualDriveByMoidRequest) Select_(select_ string) ApiGetStorageVirtualDriveByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageVirtualDriveByMoidRequest) Expand(expand string) ApiGetStorageVirtualDriveByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageVirtualDriveByMoidRequest) At(at string) ApiGetStorageVirtualDriveByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageVirtualDriveByMoidRequest) Execute() (*StorageVirtualDrive, *http.Response, error) {
@@ -55858,6 +59746,18 @@ func (a *StorageApiService) GetStorageVirtualDriveByMoidExecute(r ApiGetStorageV
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -55968,6 +59868,27 @@ type ApiGetStorageVirtualDriveContainerByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageVirtualDriveContainerByMoidRequest) Select_(select_ string) ApiGetStorageVirtualDriveContainerByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageVirtualDriveContainerByMoidRequest) Expand(expand string) ApiGetStorageVirtualDriveContainerByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageVirtualDriveContainerByMoidRequest) At(at string) ApiGetStorageVirtualDriveContainerByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageVirtualDriveContainerByMoidRequest) Execute() (*StorageVirtualDriveContainer, *http.Response, error) {
@@ -56012,6 +59933,18 @@ func (a *StorageApiService) GetStorageVirtualDriveContainerByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -56397,6 +60330,27 @@ type ApiGetStorageVirtualDriveExtensionByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageVirtualDriveExtensionByMoidRequest) Select_(select_ string) ApiGetStorageVirtualDriveExtensionByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageVirtualDriveExtensionByMoidRequest) Expand(expand string) ApiGetStorageVirtualDriveExtensionByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageVirtualDriveExtensionByMoidRequest) At(at string) ApiGetStorageVirtualDriveExtensionByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageVirtualDriveExtensionByMoidRequest) Execute() (*StorageVirtualDriveExtension, *http.Response, error) {
@@ -56441,6 +60395,18 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionByMoidExecute(r ApiGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -56826,6 +60792,27 @@ type ApiGetStorageVirtualDriveIdentityByMoidRequest struct {
 	ctx        context.Context
 	ApiService *StorageApiService
 	moid       string
+	select_    *string
+	expand     *string
+	at         *string
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetStorageVirtualDriveIdentityByMoidRequest) Select_(select_ string) ApiGetStorageVirtualDriveIdentityByMoidRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetStorageVirtualDriveIdentityByMoidRequest) Expand(expand string) ApiGetStorageVirtualDriveIdentityByMoidRequest {
+	r.expand = &expand
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetStorageVirtualDriveIdentityByMoidRequest) At(at string) ApiGetStorageVirtualDriveIdentityByMoidRequest {
+	r.at = &at
+	return r
 }
 
 func (r ApiGetStorageVirtualDriveIdentityByMoidRequest) Execute() (*StorageVirtualDriveIdentity, *http.Response, error) {
@@ -56870,6 +60857,18 @@ func (a *StorageApiService) GetStorageVirtualDriveIdentityByMoidExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.select_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
+	} else {
+		var defaultValue string = ""
+		r.select_ = &defaultValue
+	}
+	if r.expand != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
+	}
+	if r.at != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -60429,182 +64428,6 @@ func (a *StorageApiService) PatchStorageNetAppClusterExecute(r ApiPatchStorageNe
 	}
 	// body params
 	localVarPostBody = r.storageNetAppCluster
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPatchStorageNetAppVolumeSnapshotRequest struct {
-	ctx                         context.Context
-	ApiService                  *StorageApiService
-	moid                        string
-	storageNetAppVolumeSnapshot *StorageNetAppVolumeSnapshot
-	ifMatch                     *string
-}
-
-// The &#39;storage.NetAppVolumeSnapshot&#39; resource to update.
-func (r ApiPatchStorageNetAppVolumeSnapshotRequest) StorageNetAppVolumeSnapshot(storageNetAppVolumeSnapshot StorageNetAppVolumeSnapshot) ApiPatchStorageNetAppVolumeSnapshotRequest {
-	r.storageNetAppVolumeSnapshot = &storageNetAppVolumeSnapshot
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiPatchStorageNetAppVolumeSnapshotRequest) IfMatch(ifMatch string) ApiPatchStorageNetAppVolumeSnapshotRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiPatchStorageNetAppVolumeSnapshotRequest) Execute() (*StorageNetAppVolumeSnapshot, *http.Response, error) {
-	return r.ApiService.PatchStorageNetAppVolumeSnapshotExecute(r)
-}
-
-/*
-PatchStorageNetAppVolumeSnapshot Update a 'storage.NetAppVolumeSnapshot' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchStorageNetAppVolumeSnapshotRequest
-*/
-func (a *StorageApiService) PatchStorageNetAppVolumeSnapshot(ctx context.Context, moid string) ApiPatchStorageNetAppVolumeSnapshotRequest {
-	return ApiPatchStorageNetAppVolumeSnapshotRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return StorageNetAppVolumeSnapshot
-func (a *StorageApiService) PatchStorageNetAppVolumeSnapshotExecute(r ApiPatchStorageNetAppVolumeSnapshotRequest) (*StorageNetAppVolumeSnapshot, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *StorageNetAppVolumeSnapshot
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageNetAppVolumeSnapshot")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/storage/NetAppVolumeSnapshots/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.storageNetAppVolumeSnapshot == nil {
-		return localVarReturnValue, nil, reportError("storageNetAppVolumeSnapshot is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.storageNetAppVolumeSnapshot
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -65709,182 +69532,6 @@ func (a *StorageApiService) UpdateStorageNetAppClusterExecute(r ApiUpdateStorage
 	}
 	// body params
 	localVarPostBody = r.storageNetAppCluster
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateStorageNetAppVolumeSnapshotRequest struct {
-	ctx                         context.Context
-	ApiService                  *StorageApiService
-	moid                        string
-	storageNetAppVolumeSnapshot *StorageNetAppVolumeSnapshot
-	ifMatch                     *string
-}
-
-// The &#39;storage.NetAppVolumeSnapshot&#39; resource to update.
-func (r ApiUpdateStorageNetAppVolumeSnapshotRequest) StorageNetAppVolumeSnapshot(storageNetAppVolumeSnapshot StorageNetAppVolumeSnapshot) ApiUpdateStorageNetAppVolumeSnapshotRequest {
-	r.storageNetAppVolumeSnapshot = &storageNetAppVolumeSnapshot
-	return r
-}
-
-// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
-func (r ApiUpdateStorageNetAppVolumeSnapshotRequest) IfMatch(ifMatch string) ApiUpdateStorageNetAppVolumeSnapshotRequest {
-	r.ifMatch = &ifMatch
-	return r
-}
-
-func (r ApiUpdateStorageNetAppVolumeSnapshotRequest) Execute() (*StorageNetAppVolumeSnapshot, *http.Response, error) {
-	return r.ApiService.UpdateStorageNetAppVolumeSnapshotExecute(r)
-}
-
-/*
-UpdateStorageNetAppVolumeSnapshot Update a 'storage.NetAppVolumeSnapshot' resource.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateStorageNetAppVolumeSnapshotRequest
-*/
-func (a *StorageApiService) UpdateStorageNetAppVolumeSnapshot(ctx context.Context, moid string) ApiUpdateStorageNetAppVolumeSnapshotRequest {
-	return ApiUpdateStorageNetAppVolumeSnapshotRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-// Execute executes the request
-//
-//	@return StorageNetAppVolumeSnapshot
-func (a *StorageApiService) UpdateStorageNetAppVolumeSnapshotExecute(r ApiUpdateStorageNetAppVolumeSnapshotRequest) (*StorageNetAppVolumeSnapshot, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *StorageNetAppVolumeSnapshot
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageNetAppVolumeSnapshot")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/storage/NetAppVolumeSnapshots/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterValueToString(r.moid, "moid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.storageNetAppVolumeSnapshot == nil {
-		return localVarReturnValue, nil, reportError("storageNetAppVolumeSnapshot is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
-	}
-	// body params
-	localVarPostBody = r.storageNetAppVolumeSnapshot
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

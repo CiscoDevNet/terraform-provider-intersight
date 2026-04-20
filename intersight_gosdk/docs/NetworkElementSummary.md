@@ -74,6 +74,7 @@ Name | Type | Description | Notes
 **SwitchId** | Pointer to **string** | The Switch Id of the network Element. | [optional] [readonly] 
 **SwitchProfileName** | Pointer to **string** | The name of switch profile associated with the switch. | [optional] [readonly] 
 **SwitchType** | Pointer to **string** | The Switch type that the network element is a part of. * &#x60;FabricInterconnect&#x60; - The default Switch type of UCSM and IMM mode devices. * &#x60;NexusDevice&#x60; - Switch type of Nexus devices. * &#x60;MDSDevice&#x60; - Switch type of Nexus MDS devices. * &#x60;EdgeChassisManagementController&#x60; - Switch type of Edge Chassis Management Controller. | [optional] [readonly] [default to "FabricInterconnect"]
+**SwitchWwn** | Pointer to **string** | World Wide Name of the switch. | [optional] [readonly] 
 **SystemUpTime** | Pointer to **string** | System up time of the switch. | [optional] 
 **Thermal** | Pointer to **string** | The Thermal status of the fabric interconnect. * &#x60;unknown&#x60; - The default state of the sensor (in case no data is received). * &#x60;ok&#x60; - State of the sensor indicating the sensor&#39;s temperature range is okay. * &#x60;upper-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely high above normal range. * &#x60;upper-critical&#x60; - State of the sensor indicating that the temperature is above normal range. * &#x60;upper-non-critical&#x60; - State of the sensor indicating that the temperature is a little above the normal range. * &#x60;lower-non-critical&#x60; - State of the sensor indicating that the temperature is a little below the normal range. * &#x60;lower-critical&#x60; - State of the sensor indicating that the temperature is below normal range. * &#x60;lower-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely below normal range. | [optional] [default to "unknown"]
 **TotalMemory** | Pointer to **int64** | Total available memory on this switch platform. | [optional] [readonly] 
@@ -1862,6 +1863,31 @@ SetSwitchType sets SwitchType field to given value.
 `func (o *NetworkElementSummary) HasSwitchType() bool`
 
 HasSwitchType returns a boolean if a field has been set.
+
+### GetSwitchWwn
+
+`func (o *NetworkElementSummary) GetSwitchWwn() string`
+
+GetSwitchWwn returns the SwitchWwn field if non-nil, zero value otherwise.
+
+### GetSwitchWwnOk
+
+`func (o *NetworkElementSummary) GetSwitchWwnOk() (*string, bool)`
+
+GetSwitchWwnOk returns a tuple with the SwitchWwn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSwitchWwn
+
+`func (o *NetworkElementSummary) SetSwitchWwn(v string)`
+
+SetSwitchWwn sets SwitchWwn field to given value.
+
+### HasSwitchWwn
+
+`func (o *NetworkElementSummary) HasSwitchWwn() bool`
+
+HasSwitchWwn returns a boolean if a field has been set.
 
 ### GetSystemUpTime
 

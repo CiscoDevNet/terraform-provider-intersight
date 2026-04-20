@@ -35,18 +35,6 @@ func Test_intersight_HclApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HclApiService CreateHclHyperflexSoftwareCompatibilityInfo", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.HclApi.CreateHclHyperflexSoftwareCompatibilityInfo(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test HclApiService CreateHclSupportedDriverName", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -59,15 +47,28 @@ func Test_intersight_HclApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HclApiService DeleteHclHyperflexSoftwareCompatibilityInfo", func(t *testing.T) {
+	t.Run("Test HclApiService GetHclDataImportLogByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		var moid string
 
-		httpRes, err := apiClient.HclApi.DeleteHclHyperflexSoftwareCompatibilityInfo(context.Background(), moid).Execute()
+		resp, httpRes, err := apiClient.HclApi.GetHclDataImportLogByMoid(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test HclApiService GetHclDataImportLogList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.HclApi.GetHclDataImportLogList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -273,34 +274,6 @@ func Test_intersight_HclApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HclApi.GetHclServerHwCatalogInfoList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HclApiService PatchHclHyperflexSoftwareCompatibilityInfo", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HclApi.PatchHclHyperflexSoftwareCompatibilityInfo(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HclApiService UpdateHclHyperflexSoftwareCompatibilityInfo", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.HclApi.UpdateHclHyperflexSoftwareCompatibilityInfo(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

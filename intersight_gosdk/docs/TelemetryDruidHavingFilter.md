@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** | The having filter type. | 
 **Filter** | [**TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | 
 **Aggregation** | **string** | aggregate metric | 
-**Value** | **float64** |  | 
+**Value** | **float64** | Value for the filter to match. | 
 **Dimension** | **string** | dimension | 
 
 ## Methods

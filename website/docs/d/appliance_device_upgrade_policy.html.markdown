@@ -6,7 +6,7 @@ description: |-
         The DeviceUpgradePolicy object defines the upgrade policies of Intersight Appliances, guiding the automated and scheduled distribution of software updates.
         #### Purpose
         DeviceUpgradePolicy establishes comprehensive rules for software upgrades, ensuring systematic and controlled deployment across appliances.
-        ####Key Concepts
+        #### Key Concepts
         - **Automation Control:** Provides settings for auto-upgrade initiation, allowing flexibility in update scheduling and execution.
         - **Metadata Synchronization:** Supports immediate or scheduled metadata file syncing, enhancing data consistency and appliance performance.
         - **Blackout Management:** Enables definition of blackout periods to prevent upgrades during specific times, maintaining operational stability.
@@ -17,7 +17,7 @@ description: |-
 The DeviceUpgradePolicy object defines the upgrade policies of Intersight Appliances, guiding the automated and scheduled distribution of software updates.
 #### Purpose
 DeviceUpgradePolicy establishes comprehensive rules for software upgrades, ensuring systematic and controlled deployment across appliances.
-####Key Concepts
+#### Key Concepts
 - **Automation Control:** Provides settings for auto-upgrade initiation, allowing flexibility in update scheduling and execution.
 - **Metadata Synchronization:** Supports immediate or scheduled metadata file syncing, enhancing data consistency and appliance performance.
 - **Blackout Management:** Enables definition of blackout periods to prevent upgrades during specific times, maintaining operational stability.

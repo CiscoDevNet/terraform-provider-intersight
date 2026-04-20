@@ -4,11 +4,8 @@ All URIs are relative to *https://intersight.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateIwotenantMaintenanceNotification**](IwotenantApi.md#CreateIwotenantMaintenanceNotification) | **Post** /api/v1/iwotenant/MaintenanceNotifications | Create a &#39;iwotenant.MaintenanceNotification&#39; resource.
 [**CreateIwotenantMigrate**](IwotenantApi.md#CreateIwotenantMigrate) | **Post** /api/v1/iwotenant/Migrates | Create a &#39;iwotenant.Migrate&#39; resource.
 [**CreateIwotenantTenantCustomization**](IwotenantApi.md#CreateIwotenantTenantCustomization) | **Post** /api/v1/iwotenant/TenantCustomizations | Create a &#39;iwotenant.TenantCustomization&#39; resource.
-[**DeleteIwotenantMaintenanceNotification**](IwotenantApi.md#DeleteIwotenantMaintenanceNotification) | **Delete** /api/v1/iwotenant/MaintenanceNotifications/{Moid} | Delete a &#39;iwotenant.MaintenanceNotification&#39; resource.
-[**DeleteIwotenantMigrate**](IwotenantApi.md#DeleteIwotenantMigrate) | **Delete** /api/v1/iwotenant/Migrates/{Moid} | Delete a &#39;iwotenant.Migrate&#39; resource.
 [**DeleteIwotenantTenantCustomization**](IwotenantApi.md#DeleteIwotenantTenantCustomization) | **Delete** /api/v1/iwotenant/TenantCustomizations/{Moid} | Delete a &#39;iwotenant.TenantCustomization&#39; resource.
 [**GetIwotenantMaintenanceNotificationByMoid**](IwotenantApi.md#GetIwotenantMaintenanceNotificationByMoid) | **Get** /api/v1/iwotenant/MaintenanceNotifications/{Moid} | Read a &#39;iwotenant.MaintenanceNotification&#39; resource.
 [**GetIwotenantMaintenanceNotificationList**](IwotenantApi.md#GetIwotenantMaintenanceNotificationList) | **Get** /api/v1/iwotenant/MaintenanceNotifications | Read a &#39;iwotenant.MaintenanceNotification&#39; resource.
@@ -23,74 +20,6 @@ Method | HTTP request | Description
 [**UpdateIwotenantMigrate**](IwotenantApi.md#UpdateIwotenantMigrate) | **Post** /api/v1/iwotenant/Migrates/{Moid} | Update a &#39;iwotenant.Migrate&#39; resource.
 [**UpdateIwotenantTenantCustomization**](IwotenantApi.md#UpdateIwotenantTenantCustomization) | **Post** /api/v1/iwotenant/TenantCustomizations/{Moid} | Update a &#39;iwotenant.TenantCustomization&#39; resource.
 
-
-
-## CreateIwotenantMaintenanceNotification
-
-> IwotenantMaintenanceNotification CreateIwotenantMaintenanceNotification(ctx).IwotenantMaintenanceNotification(iwotenantMaintenanceNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'iwotenant.MaintenanceNotification' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	iwotenantMaintenanceNotification := *openapiclient.NewIwotenantMaintenanceNotification("ClassId_example", "ObjectType_example") // IwotenantMaintenanceNotification | The 'iwotenant.MaintenanceNotification' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IwotenantApi.CreateIwotenantMaintenanceNotification(context.Background()).IwotenantMaintenanceNotification(iwotenantMaintenanceNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `IwotenantApi.CreateIwotenantMaintenanceNotification``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateIwotenantMaintenanceNotification`: IwotenantMaintenanceNotification
-	fmt.Fprintf(os.Stdout, "Response from `IwotenantApi.CreateIwotenantMaintenanceNotification`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateIwotenantMaintenanceNotificationRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **iwotenantMaintenanceNotification** | [**IwotenantMaintenanceNotification**](IwotenantMaintenanceNotification.md) | The &#39;iwotenant.MaintenanceNotification&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**IwotenantMaintenanceNotification**](IwotenantMaintenanceNotification.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## CreateIwotenantMigrate
@@ -229,138 +158,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteIwotenantMaintenanceNotification
-
-> DeleteIwotenantMaintenanceNotification(ctx, moid).Execute()
-
-Delete a 'iwotenant.MaintenanceNotification' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.IwotenantApi.DeleteIwotenantMaintenanceNotification(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `IwotenantApi.DeleteIwotenantMaintenanceNotification``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteIwotenantMaintenanceNotificationRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteIwotenantMigrate
-
-> DeleteIwotenantMigrate(ctx, moid).Execute()
-
-Delete a 'iwotenant.Migrate' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.IwotenantApi.DeleteIwotenantMigrate(context.Background(), moid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `IwotenantApi.DeleteIwotenantMigrate``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteIwotenantMigrateRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteIwotenantTenantCustomization
 
 > DeleteIwotenantTenantCustomization(ctx, moid).Execute()
@@ -429,7 +226,7 @@ Name | Type | Description  | Notes
 
 ## GetIwotenantMaintenanceNotificationByMoid
 
-> IwotenantMaintenanceNotification GetIwotenantMaintenanceNotificationByMoid(ctx, moid).Execute()
+> IwotenantMaintenanceNotification GetIwotenantMaintenanceNotificationByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'iwotenant.MaintenanceNotification' resource.
 
@@ -447,10 +244,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IwotenantApi.GetIwotenantMaintenanceNotificationByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.IwotenantApi.GetIwotenantMaintenanceNotificationByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IwotenantApi.GetIwotenantMaintenanceNotificationByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -476,6 +276,9 @@ Other parameters are passed through a pointer to a apiGetIwotenantMaintenanceNot
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -581,7 +384,7 @@ Name | Type | Description  | Notes
 
 ## GetIwotenantMigrateByMoid
 
-> IwotenantMigrate GetIwotenantMigrateByMoid(ctx, moid).Execute()
+> IwotenantMigrate GetIwotenantMigrateByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'iwotenant.Migrate' resource.
 
@@ -599,10 +402,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IwotenantApi.GetIwotenantMigrateByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.IwotenantApi.GetIwotenantMigrateByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IwotenantApi.GetIwotenantMigrateByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -628,6 +434,9 @@ Other parameters are passed through a pointer to a apiGetIwotenantMigrateByMoidR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -733,7 +542,7 @@ Name | Type | Description  | Notes
 
 ## GetIwotenantTenantCustomizationByMoid
 
-> IwotenantTenantCustomization GetIwotenantTenantCustomizationByMoid(ctx, moid).Execute()
+> IwotenantTenantCustomization GetIwotenantTenantCustomizationByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'iwotenant.TenantCustomization' resource.
 
@@ -751,10 +560,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IwotenantApi.GetIwotenantTenantCustomizationByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.IwotenantApi.GetIwotenantTenantCustomizationByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IwotenantApi.GetIwotenantTenantCustomizationByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -780,6 +592,9 @@ Other parameters are passed through a pointer to a apiGetIwotenantTenantCustomiz
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -885,7 +700,7 @@ Name | Type | Description  | Notes
 
 ## GetIwotenantTenantStatusByMoid
 
-> IwotenantTenantStatus GetIwotenantTenantStatusByMoid(ctx, moid).Execute()
+> IwotenantTenantStatus GetIwotenantTenantStatusByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'iwotenant.TenantStatus' resource.
 
@@ -903,10 +718,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IwotenantApi.GetIwotenantTenantStatusByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.IwotenantApi.GetIwotenantTenantStatusByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IwotenantApi.GetIwotenantTenantStatusByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -932,6 +750,9 @@ Other parameters are passed through a pointer to a apiGetIwotenantTenantStatusBy
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 

@@ -3,12 +3,24 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_net_flow_record"
 description: |-
-        The NetFlow record represents a single network flow, containing key attributes (source/destination address, protocol, tos) and statistics collected like packet count, byte count and timestamp.
+        The NetFlowRecord object is a fundamental component of the network telemetry system, designed to define the specific structure and attributes of the traffic data to be collected. It acts as a template that determines which characteristics of a network flow are tracked and recorded.
+        ### Purpose
+        A NetFlowRecord defines the what of network monitoring. It specifies the criteria used to identify unique flows and the statistics to be gathered for those flows. By configuring a record, administrators can customize visibility into IPv4, IPv6, or Layer 2 traffic based on organizational requirements.
+        ### Key Concepts
+        *   **Flow Identification (Keys):** Uses specific packet fields—such as source/destination addresses, ports, and protocols—to distinguish one network flow from another.
+        *   **Telemetry Collection (Non-Keys):** Captures operational data including packet and byte counters, as well as system timestamps for flow start and end times.
+        *   **Protocol Versatility:** Supports multiple network layers, allowing for specialized monitoring of different traffic types (L2, IPv4, and IPv6).
 
 ---
 
 # Resource: intersight_fabric_net_flow_record
-The NetFlow record represents a single network flow, containing key attributes (source/destination address, protocol, tos) and statistics collected like packet count, byte count and timestamp.
+The NetFlowRecord object is a fundamental component of the network telemetry system, designed to define the specific structure and attributes of the traffic data to be collected. It acts as a template that determines which characteristics of a network flow are tracked and recorded.
+### Purpose
+A NetFlowRecord defines the "what" of network monitoring. It specifies the criteria used to identify unique flows and the statistics to be gathered for those flows. By configuring a record, administrators can customize visibility into IPv4, IPv6, or Layer 2 traffic based on organizational requirements.
+### Key Concepts
+*   **Flow Identification (Keys):** Uses specific packet fields—such as source/destination addresses, ports, and protocols—to distinguish one network flow from another.
+*   **Telemetry Collection (Non-Keys):** Captures operational data including packet and byte counters, as well as system timestamps for flow start and end times.
+*   **Protocol Versatility:** Supports multiple network layers, allowing for specialized monitoring of different traffic types (L2, IPv4, and IPv6).
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

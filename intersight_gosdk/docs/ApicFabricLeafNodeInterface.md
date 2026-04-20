@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "apic.FabricLeafNodeInterface"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "apic.FabricLeafNodeInterface"]
-**Dn** | Pointer to **string** | Distinguished Name (DN) of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI. | [optional] 
-**FabricLeafNodeDn** | Pointer to **string** | Fabric Leaf Node Distinguished Name. | [optional] 
-**FabricLeafNodeId** | Pointer to **string** | Fabric Leaf Node Identification Number. | [optional] 
-**Name** | Pointer to **string** | Name of an object within the Cisco Application Policy Infrastructure Controller. | [optional] 
+**Dn** | Pointer to **string** | Distinguished Name (DN) of an object in Cisco Application Policy Infrastructure Controller (APIC) GUI. | [optional] 
+**FabricLeafNodeDn** | Pointer to **string** | Fabric leaf node Distinguished Name (DN). | [optional] 
+**FabricLeafNodeId** | Pointer to **string** | Fabric leaf node identification number. | [optional] 
+**Name** | Pointer to **string** | Object name in Cisco Application Policy Infrastructure Controller (APIC). | [optional] 
 **FabricLeafNode** | Pointer to [**NullableApicFabricLeafNodeRelationship**](ApicFabricLeafNodeRelationship.md) |  | [optional] 
 
 ## Methods

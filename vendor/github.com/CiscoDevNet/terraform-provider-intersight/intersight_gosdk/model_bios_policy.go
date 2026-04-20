@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -100,6 +100,8 @@ type BiosPolicy struct {
 	CbsCmnCpuAvx512 *string `json:"CbsCmnCpuAvx512,omitempty"`
 	// BIOS Token for setting Core Performance Boost configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuCpb token. * `disabled` - Value - disabled for configuring CbsCmnCpuCpb token.
 	CbsCmnCpuCpb *string `json:"CbsCmnCpuCpb,omitempty"`
+	// BIOS Token for setting CPU Frequency Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuFrequencyControl token. * `disabled` - Value - disabled for configuring CbsCmnCpuFrequencyControl token. * `enabled` - Value - enabled for configuring CbsCmnCpuFrequencyControl token.
+	CbsCmnCpuFrequencyControl *string `json:"CbsCmnCpuFrequencyControl,omitempty"`
 	// BIOS Token for setting Downcore Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuGenDowncoreCtrl token. * `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCmnCpuGenDowncoreCtrl token. * `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCmnCpuGenDowncoreCtrl token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCmnCpuGenDowncoreCtrl token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token.
 	CbsCmnCpuGenDowncoreCtrl *string `json:"CbsCmnCpuGenDowncoreCtrl,omitempty"`
 	// BIOS Token for setting Global C State Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuGlobalCstateCtrl token. * `disabled` - Value - disabled for configuring CbsCmnCpuGlobalCstateCtrl token. * `enabled` - Value - enabled for configuring CbsCmnCpuGlobalCstateCtrl token.
@@ -900,6 +902,8 @@ type BiosPolicy struct {
 	SnoopyModeForAd *string `json:"SnoopyModeForAd,omitempty"`
 	// BIOS Token for setting Sparing Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `dimm-sparing` - Value - dimm-sparing for configuring SparingMode token. * `rank-sparing` - Value - rank-sparing for configuring SparingMode token.
 	SparingMode *string `json:"SparingMode,omitempty"`
+	// BIOS Token for setting Speculative Lock configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SpeculativeLockEnable *string `json:"SpeculativeLockEnable,omitempty"`
 	// BIOS Token for setting SR-IOV Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SrIov *string `json:"SrIov,omitempty"`
 	// BIOS Token for setting DCU Streamer Prefetch configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring StreamerPrefetch token. * `disabled` - Value - disabled for configuring StreamerPrefetch token. * `enabled` - Value - enabled for configuring StreamerPrefetch token.
@@ -1055,6 +1059,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.CbsCmnCpuAvx512 = &cbsCmnCpuAvx512
 	var cbsCmnCpuCpb string = "platform-default"
 	this.CbsCmnCpuCpb = &cbsCmnCpuCpb
+	var cbsCmnCpuFrequencyControl string = "platform-default"
+	this.CbsCmnCpuFrequencyControl = &cbsCmnCpuFrequencyControl
 	var cbsCmnCpuGenDowncoreCtrl string = "platform-default"
 	this.CbsCmnCpuGenDowncoreCtrl = &cbsCmnCpuGenDowncoreCtrl
 	var cbsCmnCpuGlobalCstateCtrl string = "platform-default"
@@ -1855,6 +1861,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.SnoopyModeForAd = &snoopyModeForAd
 	var sparingMode string = "platform-default"
 	this.SparingMode = &sparingMode
+	var speculativeLockEnable string = "platform-default"
+	this.SpeculativeLockEnable = &speculativeLockEnable
 	var srIov string = "platform-default"
 	this.SrIov = &srIov
 	var streamerPrefetch string = "platform-default"
@@ -2005,6 +2013,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.CbsCmnCpuAvx512 = &cbsCmnCpuAvx512
 	var cbsCmnCpuCpb string = "platform-default"
 	this.CbsCmnCpuCpb = &cbsCmnCpuCpb
+	var cbsCmnCpuFrequencyControl string = "platform-default"
+	this.CbsCmnCpuFrequencyControl = &cbsCmnCpuFrequencyControl
 	var cbsCmnCpuGenDowncoreCtrl string = "platform-default"
 	this.CbsCmnCpuGenDowncoreCtrl = &cbsCmnCpuGenDowncoreCtrl
 	var cbsCmnCpuGlobalCstateCtrl string = "platform-default"
@@ -2805,6 +2815,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.SnoopyModeForAd = &snoopyModeForAd
 	var sparingMode string = "platform-default"
 	this.SparingMode = &sparingMode
+	var speculativeLockEnable string = "platform-default"
+	this.SpeculativeLockEnable = &speculativeLockEnable
 	var srIov string = "platform-default"
 	this.SrIov = &srIov
 	var streamerPrefetch string = "platform-default"
@@ -4082,6 +4094,38 @@ func (o *BiosPolicy) HasCbsCmnCpuCpb() bool {
 // SetCbsCmnCpuCpb gets a reference to the given string and assigns it to the CbsCmnCpuCpb field.
 func (o *BiosPolicy) SetCbsCmnCpuCpb(v string) {
 	o.CbsCmnCpuCpb = &v
+}
+
+// GetCbsCmnCpuFrequencyControl returns the CbsCmnCpuFrequencyControl field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnCpuFrequencyControl() string {
+	if o == nil || IsNil(o.CbsCmnCpuFrequencyControl) {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnCpuFrequencyControl
+}
+
+// GetCbsCmnCpuFrequencyControlOk returns a tuple with the CbsCmnCpuFrequencyControl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnCpuFrequencyControlOk() (*string, bool) {
+	if o == nil || IsNil(o.CbsCmnCpuFrequencyControl) {
+		return nil, false
+	}
+	return o.CbsCmnCpuFrequencyControl, true
+}
+
+// HasCbsCmnCpuFrequencyControl returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnCpuFrequencyControl() bool {
+	if o != nil && !IsNil(o.CbsCmnCpuFrequencyControl) {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnCpuFrequencyControl gets a reference to the given string and assigns it to the CbsCmnCpuFrequencyControl field.
+func (o *BiosPolicy) SetCbsCmnCpuFrequencyControl(v string) {
+	o.CbsCmnCpuFrequencyControl = &v
 }
 
 // GetCbsCmnCpuGenDowncoreCtrl returns the CbsCmnCpuGenDowncoreCtrl field value if set, zero value otherwise.
@@ -16884,6 +16928,38 @@ func (o *BiosPolicy) SetSparingMode(v string) {
 	o.SparingMode = &v
 }
 
+// GetSpeculativeLockEnable returns the SpeculativeLockEnable field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSpeculativeLockEnable() string {
+	if o == nil || IsNil(o.SpeculativeLockEnable) {
+		var ret string
+		return ret
+	}
+	return *o.SpeculativeLockEnable
+}
+
+// GetSpeculativeLockEnableOk returns a tuple with the SpeculativeLockEnable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSpeculativeLockEnableOk() (*string, bool) {
+	if o == nil || IsNil(o.SpeculativeLockEnable) {
+		return nil, false
+	}
+	return o.SpeculativeLockEnable, true
+}
+
+// HasSpeculativeLockEnable returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSpeculativeLockEnable() bool {
+	if o != nil && !IsNil(o.SpeculativeLockEnable) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpeculativeLockEnable gets a reference to the given string and assigns it to the SpeculativeLockEnable field.
+func (o *BiosPolicy) SetSpeculativeLockEnable(v string) {
+	o.SpeculativeLockEnable = &v
+}
+
 // GetSrIov returns the SrIov field value if set, zero value otherwise.
 func (o *BiosPolicy) GetSrIov() string {
 	if o == nil || IsNil(o.SrIov) {
@@ -18153,6 +18229,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CbsCmnCpuCpb) {
 		toSerialize["CbsCmnCpuCpb"] = o.CbsCmnCpuCpb
 	}
+	if !IsNil(o.CbsCmnCpuFrequencyControl) {
+		toSerialize["CbsCmnCpuFrequencyControl"] = o.CbsCmnCpuFrequencyControl
+	}
 	if !IsNil(o.CbsCmnCpuGenDowncoreCtrl) {
 		toSerialize["CbsCmnCpuGenDowncoreCtrl"] = o.CbsCmnCpuGenDowncoreCtrl
 	}
@@ -19353,6 +19432,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SparingMode) {
 		toSerialize["SparingMode"] = o.SparingMode
 	}
+	if !IsNil(o.SpeculativeLockEnable) {
+		toSerialize["SpeculativeLockEnable"] = o.SpeculativeLockEnable
+	}
 	if !IsNil(o.SrIov) {
 		toSerialize["SrIov"] = o.SrIov
 	}
@@ -19585,6 +19667,8 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		CbsCmnCpuAvx512 *string `json:"CbsCmnCpuAvx512,omitempty"`
 		// BIOS Token for setting Core Performance Boost configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuCpb token. * `disabled` - Value - disabled for configuring CbsCmnCpuCpb token.
 		CbsCmnCpuCpb *string `json:"CbsCmnCpuCpb,omitempty"`
+		// BIOS Token for setting CPU Frequency Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuFrequencyControl token. * `disabled` - Value - disabled for configuring CbsCmnCpuFrequencyControl token. * `enabled` - Value - enabled for configuring CbsCmnCpuFrequencyControl token.
+		CbsCmnCpuFrequencyControl *string `json:"CbsCmnCpuFrequencyControl,omitempty"`
 		// BIOS Token for setting Downcore Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuGenDowncoreCtrl token. * `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCmnCpuGenDowncoreCtrl token. * `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCmnCpuGenDowncoreCtrl token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCmnCpuGenDowncoreCtrl token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token.
 		CbsCmnCpuGenDowncoreCtrl *string `json:"CbsCmnCpuGenDowncoreCtrl,omitempty"`
 		// BIOS Token for setting Global C State Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuGlobalCstateCtrl token. * `disabled` - Value - disabled for configuring CbsCmnCpuGlobalCstateCtrl token. * `enabled` - Value - enabled for configuring CbsCmnCpuGlobalCstateCtrl token.
@@ -20385,6 +20469,8 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		SnoopyModeForAd *string `json:"SnoopyModeForAd,omitempty"`
 		// BIOS Token for setting Sparing Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `dimm-sparing` - Value - dimm-sparing for configuring SparingMode token. * `rank-sparing` - Value - rank-sparing for configuring SparingMode token.
 		SparingMode *string `json:"SparingMode,omitempty"`
+		// BIOS Token for setting Speculative Lock configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SpeculativeLockEnable *string `json:"SpeculativeLockEnable,omitempty"`
 		// BIOS Token for setting SR-IOV Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SrIov *string `json:"SrIov,omitempty"`
 		// BIOS Token for setting DCU Streamer Prefetch configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring StreamerPrefetch token. * `disabled` - Value - disabled for configuring StreamerPrefetch token. * `enabled` - Value - enabled for configuring StreamerPrefetch token.
@@ -20500,6 +20586,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.CbsCmnApbdisDfPstateRs = varBiosPolicyWithoutEmbeddedStruct.CbsCmnApbdisDfPstateRs
 		varBiosPolicy.CbsCmnCpuAvx512 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuAvx512
 		varBiosPolicy.CbsCmnCpuCpb = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuCpb
+		varBiosPolicy.CbsCmnCpuFrequencyControl = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuFrequencyControl
 		varBiosPolicy.CbsCmnCpuGenDowncoreCtrl = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuGenDowncoreCtrl
 		varBiosPolicy.CbsCmnCpuGlobalCstateCtrl = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuGlobalCstateCtrl
 		varBiosPolicy.CbsCmnCpuL1streamHwPrefetcher = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuL1streamHwPrefetcher
@@ -20900,6 +20987,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.SnoopyModeFor2lm = varBiosPolicyWithoutEmbeddedStruct.SnoopyModeFor2lm
 		varBiosPolicy.SnoopyModeForAd = varBiosPolicyWithoutEmbeddedStruct.SnoopyModeForAd
 		varBiosPolicy.SparingMode = varBiosPolicyWithoutEmbeddedStruct.SparingMode
+		varBiosPolicy.SpeculativeLockEnable = varBiosPolicyWithoutEmbeddedStruct.SpeculativeLockEnable
 		varBiosPolicy.SrIov = varBiosPolicyWithoutEmbeddedStruct.SrIov
 		varBiosPolicy.StreamerPrefetch = varBiosPolicyWithoutEmbeddedStruct.StreamerPrefetch
 		varBiosPolicy.SvmMode = varBiosPolicyWithoutEmbeddedStruct.SvmMode
@@ -20990,6 +21078,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "CbsCmnApbdisDfPstateRs")
 		delete(additionalProperties, "CbsCmnCpuAvx512")
 		delete(additionalProperties, "CbsCmnCpuCpb")
+		delete(additionalProperties, "CbsCmnCpuFrequencyControl")
 		delete(additionalProperties, "CbsCmnCpuGenDowncoreCtrl")
 		delete(additionalProperties, "CbsCmnCpuGlobalCstateCtrl")
 		delete(additionalProperties, "CbsCmnCpuL1streamHwPrefetcher")
@@ -21390,6 +21479,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "SnoopyModeFor2lm")
 		delete(additionalProperties, "SnoopyModeForAd")
 		delete(additionalProperties, "SparingMode")
+		delete(additionalProperties, "SpeculativeLockEnable")
 		delete(additionalProperties, "SrIov")
 		delete(additionalProperties, "StreamerPrefetch")
 		delete(additionalProperties, "SvmMode")

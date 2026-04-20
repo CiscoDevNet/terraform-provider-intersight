@@ -3,12 +3,22 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_ui_display_metadata"
 description: |-
-        User Interface visual layout meta data is captured in this object. This can capture form layout and view layout.
+        The UiDisplayMetadata object captures the visual layout metadata for user interfaces in workflow systems. It focuses on defining form and view layouts, contributing to user-friendly and efficient workflow interactions.
+        #### Purpose
+        UiDisplayMetadata is responsible for managing the visual presentation of workflow interfaces, including both input forms and data views. It facilitates UI layout configuration to enhance user interaction, streamline navigation, and improve data visualization within workflows, ensuring a consistent and intuitive user experience.
+        #### Key concepts
+        - **Form and View Integration:** Provides metadata for input forms and views, promoting cohesive and intuitive user experiences.
+        - **Customizability:** Offers flexibility in UI design, allowing workflows to adapt to varying user and organizational needs.
 
 ---
 
 # Data Source: intersight_workflow_ui_display_metadata
-User Interface visual layout meta data is captured in this object. This can capture form layout and view layout.
+The UiDisplayMetadata object captures the visual layout metadata for user interfaces in workflow systems. It focuses on defining form and view layouts, contributing to user-friendly and efficient workflow interactions. 
+#### Purpose  
+UiDisplayMetadata is responsible for managing the visual presentation of workflow interfaces, including both input forms and data views. It facilitates UI layout configuration to enhance user interaction, streamline navigation, and improve data visualization within workflows, ensuring a consistent and intuitive user experience.
+#### Key concepts 
+- **Form and View Integration:** Provides metadata for input forms and views, promoting cohesive and intuitive user experiences. 
+- **Customizability:** Offers flexibility in UI design, allowing workflows to adapt to varying user and organizational needs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **CbsCmnApbdisDfPstateRs** | Pointer to **string** | BIOS Token for setting Fixed SOC P-State SP5 F19h configuration (0 - 2 P State). | [optional] [default to "platform-default"]
 **CbsCmnCpuAvx512** | Pointer to **string** | BIOS Token for setting AVX512 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuAvx512 token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuAvx512 token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuAvx512 token. | [optional] [default to "platform-default"]
 **CbsCmnCpuCpb** | Pointer to **string** | BIOS Token for setting Core Performance Boost configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuCpb token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuCpb token. | [optional] [default to "platform-default"]
+**CbsCmnCpuFrequencyControl** | Pointer to **string** | BIOS Token for setting CPU Frequency Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuFrequencyControl token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuFrequencyControl token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuFrequencyControl token. | [optional] [default to "platform-default"]
 **CbsCmnCpuGenDowncoreCtrl** | Pointer to **string** | BIOS Token for setting Downcore Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;TWO (1 + 1)&#x60; - Value - TWO (1 + 1) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;FOUR (2 + 2)&#x60; - Value - FOUR (2 + 2) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;TWO (2 + 0)&#x60; - Value - TWO (2 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;SIX (3 + 3)&#x60; - Value - SIX (3 + 3) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;THREE (3 + 0)&#x60; - Value - THREE (3 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;FOUR (4 + 0)&#x60; - Value - FOUR (4 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. | [optional] [default to "platform-default"]
 **CbsCmnCpuGlobalCstateCtrl** | Pointer to **string** | BIOS Token for setting Global C State Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuGlobalCstateCtrl token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuGlobalCstateCtrl token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuGlobalCstateCtrl token. | [optional] [default to "platform-default"]
 **CbsCmnCpuL1streamHwPrefetcher** | Pointer to **string** | BIOS Token for setting L1 Stream HW Prefetcher configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuL1streamHwPrefetcher token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuL1streamHwPrefetcher token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuL1streamHwPrefetcher token. | [optional] [default to "platform-default"]
@@ -442,6 +443,7 @@ Name | Type | Description | Notes
 **SnoopyModeFor2lm** | Pointer to **string** | BIOS Token for setting Snoopy Mode for 2LM configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **SnoopyModeForAd** | Pointer to **string** | BIOS Token for setting Snoopy Mode for AD configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **SparingMode** | Pointer to **string** | BIOS Token for setting Sparing Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;dimm-sparing&#x60; - Value - dimm-sparing for configuring SparingMode token. * &#x60;rank-sparing&#x60; - Value - rank-sparing for configuring SparingMode token. | [optional] [default to "platform-default"]
+**SpeculativeLockEnable** | Pointer to **string** | BIOS Token for setting Speculative Lock configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **SrIov** | Pointer to **string** | BIOS Token for setting SR-IOV Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **StreamerPrefetch** | Pointer to **string** | BIOS Token for setting DCU Streamer Prefetch configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring StreamerPrefetch token. * &#x60;disabled&#x60; - Value - disabled for configuring StreamerPrefetch token. * &#x60;enabled&#x60; - Value - enabled for configuring StreamerPrefetch token. | [optional] [default to "platform-default"]
 **SvmMode** | Pointer to **string** | BIOS Token for setting SVM Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
@@ -1436,6 +1438,31 @@ SetCbsCmnCpuCpb sets CbsCmnCpuCpb field to given value.
 `func (o *BiosPolicy) HasCbsCmnCpuCpb() bool`
 
 HasCbsCmnCpuCpb returns a boolean if a field has been set.
+
+### GetCbsCmnCpuFrequencyControl
+
+`func (o *BiosPolicy) GetCbsCmnCpuFrequencyControl() string`
+
+GetCbsCmnCpuFrequencyControl returns the CbsCmnCpuFrequencyControl field if non-nil, zero value otherwise.
+
+### GetCbsCmnCpuFrequencyControlOk
+
+`func (o *BiosPolicy) GetCbsCmnCpuFrequencyControlOk() (*string, bool)`
+
+GetCbsCmnCpuFrequencyControlOk returns a tuple with the CbsCmnCpuFrequencyControl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnCpuFrequencyControl
+
+`func (o *BiosPolicy) SetCbsCmnCpuFrequencyControl(v string)`
+
+SetCbsCmnCpuFrequencyControl sets CbsCmnCpuFrequencyControl field to given value.
+
+### HasCbsCmnCpuFrequencyControl
+
+`func (o *BiosPolicy) HasCbsCmnCpuFrequencyControl() bool`
+
+HasCbsCmnCpuFrequencyControl returns a boolean if a field has been set.
 
 ### GetCbsCmnCpuGenDowncoreCtrl
 
@@ -11436,6 +11463,31 @@ SetSparingMode sets SparingMode field to given value.
 `func (o *BiosPolicy) HasSparingMode() bool`
 
 HasSparingMode returns a boolean if a field has been set.
+
+### GetSpeculativeLockEnable
+
+`func (o *BiosPolicy) GetSpeculativeLockEnable() string`
+
+GetSpeculativeLockEnable returns the SpeculativeLockEnable field if non-nil, zero value otherwise.
+
+### GetSpeculativeLockEnableOk
+
+`func (o *BiosPolicy) GetSpeculativeLockEnableOk() (*string, bool)`
+
+GetSpeculativeLockEnableOk returns a tuple with the SpeculativeLockEnable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpeculativeLockEnable
+
+`func (o *BiosPolicy) SetSpeculativeLockEnable(v string)`
+
+SetSpeculativeLockEnable sets SpeculativeLockEnable field to given value.
+
+### HasSpeculativeLockEnable
+
+`func (o *BiosPolicy) HasSpeculativeLockEnable() bool`
+
+HasSpeculativeLockEnable returns a boolean if a field has been set.
 
 ### GetSrIov
 

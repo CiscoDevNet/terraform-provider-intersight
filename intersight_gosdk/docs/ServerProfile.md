@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
 **DeployStatus** | Pointer to **string** | The status of the server profile indicating if deployment has been initiated on both fabric interconnects or not. * &#x60;None&#x60; - Switch profiles not deployed on either of the switches. * &#x60;Complete&#x60; - Both switch profiles of the cluster profile are deployed. * &#x60;Partial&#x60; - Only one of the switch profiles of the cluster profile is deployed. | [optional] [readonly] [default to "None"]
 **DeployedSwitches** | Pointer to **string** | The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins. * &#x60;None&#x60; - Server profile configuration not deployed on either of the fabric interconnects. * &#x60;AB&#x60; - Server profile configuration deployed on both fabric interconnects. * &#x60;A&#x60; - Server profile configuration deployed on fabric interconnect A only. * &#x60;B&#x60; - Server profile configuration deployed on fabric interconnect B only. | [optional] [readonly] [default to "None"]
+**InitialAutoDeployConfigComplete** | Pointer to **bool** | Used with initialAutoDeployState to indicate if the server profile is ready for auto-deploy for the first time. The default value is false. | [optional] 
+**InitialAutoDeployMode** | Pointer to **bool** | Automatically performs an initial deployment when a server is assigned. Subsequent changes require manual redeployment. | [optional] 
+**InitialAutoDeployState** | Pointer to **string** | The auto-deploy state of the server profile. It is used to track the state of the auto-deploy process. * &#x60;None&#x60; - Default value for Auto-deploy state when it is not configured and old server profiles. * &#x60;Pending&#x60; - Server profile is ready for autodeploy but not yet scheduled for deployment. * &#x60;AutoDeployPending&#x60; - AutoDeployPending is set when auto-deploy is yet to be scheduled. * &#x60;AutoDeployInProgress&#x60; - AutoDeployInProgress is set when auto-deploy action is in progress. * &#x60;AutoActivationPending&#x60; - AutoActivationPending is set when auto-deploy is yet to be scheduled. * &#x60;AutoActivationInProgress&#x60; - AutoActivationInProgress set when auto-deploy-activate action is in progress. * &#x60;Completed&#x60; - Completed states that all the auto deploy actions are completed successfully. * &#x60;Failed&#x60; - Failed states that one of the auto deploy actions failed. * &#x60;Unsupported&#x60; - Unsupported for direct server assignment and unassigned profiles. | [optional] [readonly] [default to "None"]
 **InternalReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
 **IsPmcDeployedSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;pmcDeployedSecurePassphrase&#39; property has been set. | [optional] [readonly] [default to false]
 **LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
@@ -216,6 +219,81 @@ SetDeployedSwitches sets DeployedSwitches field to given value.
 `func (o *ServerProfile) HasDeployedSwitches() bool`
 
 HasDeployedSwitches returns a boolean if a field has been set.
+
+### GetInitialAutoDeployConfigComplete
+
+`func (o *ServerProfile) GetInitialAutoDeployConfigComplete() bool`
+
+GetInitialAutoDeployConfigComplete returns the InitialAutoDeployConfigComplete field if non-nil, zero value otherwise.
+
+### GetInitialAutoDeployConfigCompleteOk
+
+`func (o *ServerProfile) GetInitialAutoDeployConfigCompleteOk() (*bool, bool)`
+
+GetInitialAutoDeployConfigCompleteOk returns a tuple with the InitialAutoDeployConfigComplete field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitialAutoDeployConfigComplete
+
+`func (o *ServerProfile) SetInitialAutoDeployConfigComplete(v bool)`
+
+SetInitialAutoDeployConfigComplete sets InitialAutoDeployConfigComplete field to given value.
+
+### HasInitialAutoDeployConfigComplete
+
+`func (o *ServerProfile) HasInitialAutoDeployConfigComplete() bool`
+
+HasInitialAutoDeployConfigComplete returns a boolean if a field has been set.
+
+### GetInitialAutoDeployMode
+
+`func (o *ServerProfile) GetInitialAutoDeployMode() bool`
+
+GetInitialAutoDeployMode returns the InitialAutoDeployMode field if non-nil, zero value otherwise.
+
+### GetInitialAutoDeployModeOk
+
+`func (o *ServerProfile) GetInitialAutoDeployModeOk() (*bool, bool)`
+
+GetInitialAutoDeployModeOk returns a tuple with the InitialAutoDeployMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitialAutoDeployMode
+
+`func (o *ServerProfile) SetInitialAutoDeployMode(v bool)`
+
+SetInitialAutoDeployMode sets InitialAutoDeployMode field to given value.
+
+### HasInitialAutoDeployMode
+
+`func (o *ServerProfile) HasInitialAutoDeployMode() bool`
+
+HasInitialAutoDeployMode returns a boolean if a field has been set.
+
+### GetInitialAutoDeployState
+
+`func (o *ServerProfile) GetInitialAutoDeployState() string`
+
+GetInitialAutoDeployState returns the InitialAutoDeployState field if non-nil, zero value otherwise.
+
+### GetInitialAutoDeployStateOk
+
+`func (o *ServerProfile) GetInitialAutoDeployStateOk() (*string, bool)`
+
+GetInitialAutoDeployStateOk returns a tuple with the InitialAutoDeployState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitialAutoDeployState
+
+`func (o *ServerProfile) SetInitialAutoDeployState(v string)`
+
+SetInitialAutoDeployState sets InitialAutoDeployState field to given value.
+
+### HasInitialAutoDeployState
+
+`func (o *ServerProfile) HasInitialAutoDeployState() bool`
+
+HasInitialAutoDeployState returns a boolean if a field has been set.
 
 ### GetInternalReservationReferences
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026030305
+API version: 1.0.11-2026041816
 Contact: intersight@cisco.com
 */
 
@@ -30,13 +30,16 @@ type NotificationAccountSubscription struct {
 	ObjectType string `json:"ObjectType"`
 	// The description for the subscription.
 	Description *string `json:"Description,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_.\\\\- ]{1,128}$"`
+	// When true, TLS with custom certificate validation is enabled for this webhook subscription. The certificate relationship must be set to a TrustPoint when enableTls is true. Only applicable for webhook-type subscriptions; used for appliance deployments with private CAs. When false or unset, default TLS behavior (public CA trust) is used. SaaS typically leaves this false or unset.
+	EnableTls *bool `json:"EnableTls,omitempty"`
 	// The name of the subscription.
 	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_.-]{1,64}$"`
 	// The chosen subscription type imposes it is own validation rules. When 'email' type is chosen, actions array can contain only one entry and it is entry should be of can be only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition types should be unique. When the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can be only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them should be of type notification.MoCondition. * `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions. * `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions.
 	Type *string `json:"Type,omitempty"`
 	// Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verify that the webhook server is accessible. For an 'email' type there will be a verification email sent. * `none` - No actions will be verified. Default value. * `all` - All actions will be re-verified. The previous state of the verification will be preserved.
-	Verify               *string                        `json:"Verify,omitempty"`
-	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
+	Verify               *string                           `json:"Verify,omitempty"`
+	Account              NullableIamAccountRelationship    `json:"Account,omitempty"`
+	Certificate          NullableIamTrustPointRelationship `json:"Certificate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -52,6 +55,8 @@ func NewNotificationAccountSubscription(classId string, objectType string) *Noti
 	this.ObjectType = objectType
 	var conditionOperator string = "All"
 	this.ConditionOperator = &conditionOperator
+	var enableTls bool = false
+	this.EnableTls = &enableTls
 	var type_ string = "email"
 	this.Type = &type_
 	var verify string = "none"
@@ -68,6 +73,8 @@ func NewNotificationAccountSubscriptionWithDefaults() *NotificationAccountSubscr
 	this.ClassId = classId
 	var objectType string = "notification.AccountSubscription"
 	this.ObjectType = objectType
+	var enableTls bool = false
+	this.EnableTls = &enableTls
 	var type_ string = "email"
 	this.Type = &type_
 	var verify string = "none"
@@ -163,6 +170,38 @@ func (o *NotificationAccountSubscription) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *NotificationAccountSubscription) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetEnableTls returns the EnableTls field value if set, zero value otherwise.
+func (o *NotificationAccountSubscription) GetEnableTls() bool {
+	if o == nil || IsNil(o.EnableTls) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableTls
+}
+
+// GetEnableTlsOk returns a tuple with the EnableTls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationAccountSubscription) GetEnableTlsOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnableTls) {
+		return nil, false
+	}
+	return o.EnableTls, true
+}
+
+// HasEnableTls returns a boolean if a field has been set.
+func (o *NotificationAccountSubscription) HasEnableTls() bool {
+	if o != nil && !IsNil(o.EnableTls) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableTls gets a reference to the given bool and assigns it to the EnableTls field.
+func (o *NotificationAccountSubscription) SetEnableTls(v bool) {
+	o.EnableTls = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -304,6 +343,49 @@ func (o *NotificationAccountSubscription) UnsetAccount() {
 	o.Account.Unset()
 }
 
+// GetCertificate returns the Certificate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NotificationAccountSubscription) GetCertificate() IamTrustPointRelationship {
+	if o == nil || IsNil(o.Certificate.Get()) {
+		var ret IamTrustPointRelationship
+		return ret
+	}
+	return *o.Certificate.Get()
+}
+
+// GetCertificateOk returns a tuple with the Certificate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NotificationAccountSubscription) GetCertificateOk() (*IamTrustPointRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Certificate.Get(), o.Certificate.IsSet()
+}
+
+// HasCertificate returns a boolean if a field has been set.
+func (o *NotificationAccountSubscription) HasCertificate() bool {
+	if o != nil && o.Certificate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCertificate gets a reference to the given NullableIamTrustPointRelationship and assigns it to the Certificate field.
+func (o *NotificationAccountSubscription) SetCertificate(v IamTrustPointRelationship) {
+	o.Certificate.Set(&v)
+}
+
+// SetCertificateNil sets the value for Certificate to be an explicit nil
+func (o *NotificationAccountSubscription) SetCertificateNil() {
+	o.Certificate.Set(nil)
+}
+
+// UnsetCertificate ensures that no value is present for Certificate, not even an explicit nil
+func (o *NotificationAccountSubscription) UnsetCertificate() {
+	o.Certificate.Unset()
+}
+
 func (o NotificationAccountSubscription) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -333,6 +415,9 @@ func (o NotificationAccountSubscription) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
+	if !IsNil(o.EnableTls) {
+		toSerialize["EnableTls"] = o.EnableTls
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
@@ -344,6 +429,9 @@ func (o NotificationAccountSubscription) ToMap() (map[string]interface{}, error)
 	}
 	if o.Account.IsSet() {
 		toSerialize["Account"] = o.Account.Get()
+	}
+	if o.Certificate.IsSet() {
+		toSerialize["Certificate"] = o.Certificate.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -402,13 +490,16 @@ func (o *NotificationAccountSubscription) UnmarshalJSON(data []byte) (err error)
 		ObjectType string `json:"ObjectType"`
 		// The description for the subscription.
 		Description *string `json:"Description,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_.\\\\- ]{1,128}$"`
+		// When true, TLS with custom certificate validation is enabled for this webhook subscription. The certificate relationship must be set to a TrustPoint when enableTls is true. Only applicable for webhook-type subscriptions; used for appliance deployments with private CAs. When false or unset, default TLS behavior (public CA trust) is used. SaaS typically leaves this false or unset.
+		EnableTls *bool `json:"EnableTls,omitempty"`
 		// The name of the subscription.
 		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_.-]{1,64}$"`
 		// The chosen subscription type imposes it is own validation rules. When 'email' type is chosen, actions array can contain only one entry and it is entry should be of can be only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition types should be unique. When the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can be only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them should be of type notification.MoCondition. * `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions. * `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions.
 		Type *string `json:"Type,omitempty"`
 		// Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verify that the webhook server is accessible. For an 'email' type there will be a verification email sent. * `none` - No actions will be verified. Default value. * `all` - All actions will be re-verified. The previous state of the verification will be preserved.
-		Verify  *string                        `json:"Verify,omitempty"`
-		Account NullableIamAccountRelationship `json:"Account,omitempty"`
+		Verify      *string                           `json:"Verify,omitempty"`
+		Account     NullableIamAccountRelationship    `json:"Account,omitempty"`
+		Certificate NullableIamTrustPointRelationship `json:"Certificate,omitempty"`
 	}
 
 	varNotificationAccountSubscriptionWithoutEmbeddedStruct := NotificationAccountSubscriptionWithoutEmbeddedStruct{}
@@ -419,10 +510,12 @@ func (o *NotificationAccountSubscription) UnmarshalJSON(data []byte) (err error)
 		varNotificationAccountSubscription.ClassId = varNotificationAccountSubscriptionWithoutEmbeddedStruct.ClassId
 		varNotificationAccountSubscription.ObjectType = varNotificationAccountSubscriptionWithoutEmbeddedStruct.ObjectType
 		varNotificationAccountSubscription.Description = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Description
+		varNotificationAccountSubscription.EnableTls = varNotificationAccountSubscriptionWithoutEmbeddedStruct.EnableTls
 		varNotificationAccountSubscription.Name = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Name
 		varNotificationAccountSubscription.Type = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Type
 		varNotificationAccountSubscription.Verify = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Verify
 		varNotificationAccountSubscription.Account = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Account
+		varNotificationAccountSubscription.Certificate = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Certificate
 		*o = NotificationAccountSubscription(varNotificationAccountSubscription)
 	} else {
 		return err
@@ -443,10 +536,12 @@ func (o *NotificationAccountSubscription) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "EnableTls")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Verify")
 		delete(additionalProperties, "Account")
+		delete(additionalProperties, "Certificate")
 
 		// remove fields from embedded structs
 		reflectNotificationSubscription := reflect.ValueOf(o.NotificationSubscription)

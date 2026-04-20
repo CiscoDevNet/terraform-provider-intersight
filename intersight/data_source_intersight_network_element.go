@@ -1626,6 +1626,11 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"switch_wwn": {
+			Description: "World Wide Name of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"system_up_time": {
 			Description: "System up time of the switch.",
 			Type:        schema.TypeString,
@@ -3887,6 +3892,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		o.SetSwitchType(x)
 	}
 
+	if v, ok := d.GetOk("switch_wwn"); ok {
+		x := (v.(string))
+		o.SetSwitchWwn(x)
+	}
+
 	if v, ok := d.GetOk("system_up_time"); ok {
 		x := (v.(string))
 		o.SetSystemUpTime(x)
@@ -4566,6 +4576,7 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["switch_id"] = (s.GetSwitchId())
 				temp["switch_profile_name"] = (s.GetSwitchProfileName())
 				temp["switch_type"] = (s.GetSwitchType())
+				temp["switch_wwn"] = (s.GetSwitchWwn())
 				temp["system_up_time"] = (s.GetSystemUpTime())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

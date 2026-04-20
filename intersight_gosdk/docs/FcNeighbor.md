@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fc.Neighbor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fc.Neighbor"]
-**PeerDeviceCapability** | Pointer to **string** | This field defines if neighbor is a switch or an NPV device. * &#x60;Switch&#x60; - Switch type neighbors of an interface. * &#x60;NPV&#x60; - N Port Virtualization neighbors of an interface. | [optional] [readonly] [default to "Switch"]
+**PeerDeviceCapability** | Pointer to **string** | This field defines if neighbor is a switch, storage or an NPV device. * &#x60;Switch&#x60; - Switch type neighbors of an interface. * &#x60;NPV&#x60; - N Port Virtualization neighbors of an interface. * &#x60;Storage&#x60; - Storage type neighbors of an interface. | [optional] [readonly] [default to "Switch"]
 **PeerInterface** | Pointer to **string** | Interface through which the relationship is established. | [optional] [readonly] 
 **PeerIpAddress** | Pointer to **string** | IP address of the peer switch. | [optional] [readonly] 
+**PeerPortWwn** | Pointer to **string** | World Wide Name of the neighbor port. | [optional] [readonly] 
 **PeerSwitchName** | Pointer to **string** | Device Id of the neighbor switch. | [optional] [readonly] 
 **PeerWwn** | Pointer to **string** | World Wide Name of the neighbor switch. | [optional] [readonly] 
+**Vendor** | Pointer to **string** | Vendor name for the neighboring storage device. Available only for Storage neighbors. | [optional] [readonly] 
+**Vsan** | Pointer to **int64** | VSAN associated with this neighbor port. | [optional] [readonly] 
 **FcPhysicalPort** | Pointer to [**NullableFcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) |  | [optional] 
 **FcPortChannel** | Pointer to [**NullableFcPortChannelRelationship**](FcPortChannelRelationship.md) |  | [optional] 
 
@@ -148,6 +151,31 @@ SetPeerIpAddress sets PeerIpAddress field to given value.
 
 HasPeerIpAddress returns a boolean if a field has been set.
 
+### GetPeerPortWwn
+
+`func (o *FcNeighbor) GetPeerPortWwn() string`
+
+GetPeerPortWwn returns the PeerPortWwn field if non-nil, zero value otherwise.
+
+### GetPeerPortWwnOk
+
+`func (o *FcNeighbor) GetPeerPortWwnOk() (*string, bool)`
+
+GetPeerPortWwnOk returns a tuple with the PeerPortWwn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeerPortWwn
+
+`func (o *FcNeighbor) SetPeerPortWwn(v string)`
+
+SetPeerPortWwn sets PeerPortWwn field to given value.
+
+### HasPeerPortWwn
+
+`func (o *FcNeighbor) HasPeerPortWwn() bool`
+
+HasPeerPortWwn returns a boolean if a field has been set.
+
 ### GetPeerSwitchName
 
 `func (o *FcNeighbor) GetPeerSwitchName() string`
@@ -197,6 +225,56 @@ SetPeerWwn sets PeerWwn field to given value.
 `func (o *FcNeighbor) HasPeerWwn() bool`
 
 HasPeerWwn returns a boolean if a field has been set.
+
+### GetVendor
+
+`func (o *FcNeighbor) GetVendor() string`
+
+GetVendor returns the Vendor field if non-nil, zero value otherwise.
+
+### GetVendorOk
+
+`func (o *FcNeighbor) GetVendorOk() (*string, bool)`
+
+GetVendorOk returns a tuple with the Vendor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVendor
+
+`func (o *FcNeighbor) SetVendor(v string)`
+
+SetVendor sets Vendor field to given value.
+
+### HasVendor
+
+`func (o *FcNeighbor) HasVendor() bool`
+
+HasVendor returns a boolean if a field has been set.
+
+### GetVsan
+
+`func (o *FcNeighbor) GetVsan() int64`
+
+GetVsan returns the Vsan field if non-nil, zero value otherwise.
+
+### GetVsanOk
+
+`func (o *FcNeighbor) GetVsanOk() (*int64, bool)`
+
+GetVsanOk returns a tuple with the Vsan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVsan
+
+`func (o *FcNeighbor) SetVsan(v int64)`
+
+SetVsan sets Vsan field to given value.
+
+### HasVsan
+
+`func (o *FcNeighbor) HasVsan() bool`
+
+HasVsan returns a boolean if a field has been set.
 
 ### GetFcPhysicalPort
 

@@ -43,7 +43,6 @@ Method | HTTP request | Description
 [**PatchLicenseAccountLicenseData**](LicenseApi.md#PatchLicenseAccountLicenseData) | **Patch** /api/v1/license/AccountLicenseData/{Moid} | Update a &#39;license.AccountLicenseData&#39; resource.
 [**PatchLicenseCustomerOp**](LicenseApi.md#PatchLicenseCustomerOp) | **Patch** /api/v1/license/CustomerOps/{Moid} | Update a &#39;license.CustomerOp&#39; resource.
 [**PatchLicenseErpCustomerOp**](LicenseApi.md#PatchLicenseErpCustomerOp) | **Patch** /api/v1/license/ErpCustomerOps/{Moid} | Update a &#39;license.ErpCustomerOp&#39; resource.
-[**PatchLicenseErpLicenseCount**](LicenseApi.md#PatchLicenseErpLicenseCount) | **Patch** /api/v1/license/ErpLicenseCounts/{Moid} | Update a &#39;license.ErpLicenseCount&#39; resource.
 [**PatchLicenseIksCustomerOp**](LicenseApi.md#PatchLicenseIksCustomerOp) | **Patch** /api/v1/license/IksCustomerOps/{Moid} | Update a &#39;license.IksCustomerOp&#39; resource.
 [**PatchLicenseIksLicenseCount**](LicenseApi.md#PatchLicenseIksLicenseCount) | **Patch** /api/v1/license/IksLicenseCounts/{Moid} | Update a &#39;license.IksLicenseCount&#39; resource.
 [**PatchLicenseIncCustomerOp**](LicenseApi.md#PatchLicenseIncCustomerOp) | **Patch** /api/v1/license/IncCustomerOps/{Moid} | Update a &#39;license.IncCustomerOp&#39; resource.
@@ -57,7 +56,6 @@ Method | HTTP request | Description
 [**UpdateLicenseAccountLicenseData**](LicenseApi.md#UpdateLicenseAccountLicenseData) | **Post** /api/v1/license/AccountLicenseData/{Moid} | Update a &#39;license.AccountLicenseData&#39; resource.
 [**UpdateLicenseCustomerOp**](LicenseApi.md#UpdateLicenseCustomerOp) | **Post** /api/v1/license/CustomerOps/{Moid} | Update a &#39;license.CustomerOp&#39; resource.
 [**UpdateLicenseErpCustomerOp**](LicenseApi.md#UpdateLicenseErpCustomerOp) | **Post** /api/v1/license/ErpCustomerOps/{Moid} | Update a &#39;license.ErpCustomerOp&#39; resource.
-[**UpdateLicenseErpLicenseCount**](LicenseApi.md#UpdateLicenseErpLicenseCount) | **Post** /api/v1/license/ErpLicenseCounts/{Moid} | Update a &#39;license.ErpLicenseCount&#39; resource.
 [**UpdateLicenseIksCustomerOp**](LicenseApi.md#UpdateLicenseIksCustomerOp) | **Post** /api/v1/license/IksCustomerOps/{Moid} | Update a &#39;license.IksCustomerOp&#39; resource.
 [**UpdateLicenseIksLicenseCount**](LicenseApi.md#UpdateLicenseIksLicenseCount) | **Post** /api/v1/license/IksLicenseCounts/{Moid} | Update a &#39;license.IksLicenseCount&#39; resource.
 [**UpdateLicenseIncCustomerOp**](LicenseApi.md#UpdateLicenseIncCustomerOp) | **Post** /api/v1/license/IncCustomerOps/{Moid} | Update a &#39;license.IncCustomerOp&#39; resource.
@@ -481,7 +479,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseAccountLicenseDataByMoid
 
-> LicenseAccountLicenseData GetLicenseAccountLicenseDataByMoid(ctx, moid).Execute()
+> LicenseAccountLicenseData GetLicenseAccountLicenseDataByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.AccountLicenseData' resource.
 
@@ -499,10 +497,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseAccountLicenseDataByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseAccountLicenseDataByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseAccountLicenseDataByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -528,6 +529,9 @@ Other parameters are passed through a pointer to a apiGetLicenseAccountLicenseDa
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -633,7 +637,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseCustomerOpByMoid
 
-> LicenseCustomerOp GetLicenseCustomerOpByMoid(ctx, moid).Execute()
+> LicenseCustomerOp GetLicenseCustomerOpByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.CustomerOp' resource.
 
@@ -651,10 +655,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseCustomerOpByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseCustomerOpByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseCustomerOpByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -680,6 +687,9 @@ Other parameters are passed through a pointer to a apiGetLicenseCustomerOpByMoid
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -785,7 +795,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseErpCustomerOpByMoid
 
-> LicenseErpCustomerOp GetLicenseErpCustomerOpByMoid(ctx, moid).Execute()
+> LicenseErpCustomerOp GetLicenseErpCustomerOpByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.ErpCustomerOp' resource.
 
@@ -803,10 +813,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseErpCustomerOpByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseErpCustomerOpByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseErpCustomerOpByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -832,6 +845,9 @@ Other parameters are passed through a pointer to a apiGetLicenseErpCustomerOpByM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -937,7 +953,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseErpLicenseCountByMoid
 
-> LicenseErpLicenseCount GetLicenseErpLicenseCountByMoid(ctx, moid).Execute()
+> LicenseErpLicenseCount GetLicenseErpLicenseCountByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.ErpLicenseCount' resource.
 
@@ -955,10 +971,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseErpLicenseCountByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseErpLicenseCountByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseErpLicenseCountByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -984,6 +1003,9 @@ Other parameters are passed through a pointer to a apiGetLicenseErpLicenseCountB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1089,7 +1111,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseIksCustomerOpByMoid
 
-> LicenseIksCustomerOp GetLicenseIksCustomerOpByMoid(ctx, moid).Execute()
+> LicenseIksCustomerOp GetLicenseIksCustomerOpByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.IksCustomerOp' resource.
 
@@ -1107,10 +1129,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseIksCustomerOpByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseIksCustomerOpByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseIksCustomerOpByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1136,6 +1161,9 @@ Other parameters are passed through a pointer to a apiGetLicenseIksCustomerOpByM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1241,7 +1269,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseIksLicenseCountByMoid
 
-> LicenseIksLicenseCount GetLicenseIksLicenseCountByMoid(ctx, moid).Execute()
+> LicenseIksLicenseCount GetLicenseIksLicenseCountByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.IksLicenseCount' resource.
 
@@ -1259,10 +1287,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseIksLicenseCountByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseIksLicenseCountByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseIksLicenseCountByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1288,6 +1319,9 @@ Other parameters are passed through a pointer to a apiGetLicenseIksLicenseCountB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1393,7 +1427,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseIncCustomerOpByMoid
 
-> LicenseIncCustomerOp GetLicenseIncCustomerOpByMoid(ctx, moid).Execute()
+> LicenseIncCustomerOp GetLicenseIncCustomerOpByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.IncCustomerOp' resource.
 
@@ -1411,10 +1445,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseIncCustomerOpByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseIncCustomerOpByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseIncCustomerOpByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1440,6 +1477,9 @@ Other parameters are passed through a pointer to a apiGetLicenseIncCustomerOpByM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1545,7 +1585,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseIncLicenseCountByMoid
 
-> LicenseIncLicenseCount GetLicenseIncLicenseCountByMoid(ctx, moid).Execute()
+> LicenseIncLicenseCount GetLicenseIncLicenseCountByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.IncLicenseCount' resource.
 
@@ -1563,10 +1603,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseIncLicenseCountByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseIncLicenseCountByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseIncLicenseCountByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1592,6 +1635,9 @@ Other parameters are passed through a pointer to a apiGetLicenseIncLicenseCountB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1697,7 +1743,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseIwoCustomerOpByMoid
 
-> LicenseIwoCustomerOp GetLicenseIwoCustomerOpByMoid(ctx, moid).Execute()
+> LicenseIwoCustomerOp GetLicenseIwoCustomerOpByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.IwoCustomerOp' resource.
 
@@ -1715,10 +1761,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseIwoCustomerOpByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseIwoCustomerOpByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseIwoCustomerOpByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1744,6 +1793,9 @@ Other parameters are passed through a pointer to a apiGetLicenseIwoCustomerOpByM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -1849,7 +1901,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseIwoLicenseCountByMoid
 
-> LicenseIwoLicenseCount GetLicenseIwoLicenseCountByMoid(ctx, moid).Execute()
+> LicenseIwoLicenseCount GetLicenseIwoLicenseCountByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.IwoLicenseCount' resource.
 
@@ -1867,10 +1919,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseIwoLicenseCountByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseIwoLicenseCountByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseIwoLicenseCountByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1896,6 +1951,9 @@ Other parameters are passed through a pointer to a apiGetLicenseIwoLicenseCountB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2001,7 +2059,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseLicenseInfoByMoid
 
-> LicenseLicenseInfo GetLicenseLicenseInfoByMoid(ctx, moid).Execute()
+> LicenseLicenseInfo GetLicenseLicenseInfoByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.LicenseInfo' resource.
 
@@ -2019,10 +2077,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseLicenseInfoByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseLicenseInfoByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseLicenseInfoByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2048,6 +2109,9 @@ Other parameters are passed through a pointer to a apiGetLicenseLicenseInfoByMoi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2153,7 +2217,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseLicenseInfoViewByMoid
 
-> LicenseLicenseInfoView GetLicenseLicenseInfoViewByMoid(ctx, moid).Execute()
+> LicenseLicenseInfoView GetLicenseLicenseInfoViewByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.LicenseInfoView' resource.
 
@@ -2171,10 +2235,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseLicenseInfoViewByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseLicenseInfoViewByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseLicenseInfoViewByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2200,6 +2267,9 @@ Other parameters are passed through a pointer to a apiGetLicenseLicenseInfoViewB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2305,7 +2375,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseLicenseRegistrationStatusByMoid
 
-> LicenseLicenseRegistrationStatus GetLicenseLicenseRegistrationStatusByMoid(ctx, moid).Execute()
+> LicenseLicenseRegistrationStatus GetLicenseLicenseRegistrationStatusByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.LicenseRegistrationStatus' resource.
 
@@ -2323,10 +2393,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseLicenseRegistrationStatusByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseLicenseRegistrationStatusByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseLicenseRegistrationStatusByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2352,6 +2425,9 @@ Other parameters are passed through a pointer to a apiGetLicenseLicenseRegistrat
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2457,7 +2533,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseLicenseReservationOpByMoid
 
-> LicenseLicenseReservationOp GetLicenseLicenseReservationOpByMoid(ctx, moid).Execute()
+> LicenseLicenseReservationOp GetLicenseLicenseReservationOpByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.LicenseReservationOp' resource.
 
@@ -2475,10 +2551,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseLicenseReservationOpByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseLicenseReservationOpByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseLicenseReservationOpByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2504,6 +2583,9 @@ Other parameters are passed through a pointer to a apiGetLicenseLicenseReservati
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2609,7 +2691,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseSmartlicenseTokenByMoid
 
-> LicenseSmartlicenseToken GetLicenseSmartlicenseTokenByMoid(ctx, moid).Execute()
+> LicenseSmartlicenseToken GetLicenseSmartlicenseTokenByMoid(ctx, moid).Select_(select_).Expand(expand).At(at).Execute()
 
 Read a 'license.SmartlicenseToken' resource.
 
@@ -2627,10 +2709,13 @@ import (
 
 func main() {
 	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.GetLicenseSmartlicenseTokenByMoid(context.Background(), moid).Execute()
+	resp, r, err := apiClient.LicenseApi.GetLicenseSmartlicenseTokenByMoid(context.Background(), moid).Select_(select_).Expand(expand).At(at).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.GetLicenseSmartlicenseTokenByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2656,6 +2741,9 @@ Other parameters are passed through a pointer to a apiGetLicenseSmartlicenseToke
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
 
 ### Return type
 
@@ -2960,78 +3048,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LicenseErpCustomerOp**](LicenseErpCustomerOp.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchLicenseErpLicenseCount
-
-> LicenseErpLicenseCount PatchLicenseErpLicenseCount(ctx, moid).LicenseErpLicenseCount(licenseErpLicenseCount).IfMatch(ifMatch).Execute()
-
-Update a 'license.ErpLicenseCount' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	licenseErpLicenseCount := *openapiclient.NewLicenseErpLicenseCount("ClassId_example", "ObjectType_example") // LicenseErpLicenseCount | The 'license.ErpLicenseCount' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.PatchLicenseErpLicenseCount(context.Background(), moid).LicenseErpLicenseCount(licenseErpLicenseCount).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.PatchLicenseErpLicenseCount``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchLicenseErpLicenseCount`: LicenseErpLicenseCount
-	fmt.Fprintf(os.Stdout, "Response from `LicenseApi.PatchLicenseErpLicenseCount`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchLicenseErpLicenseCountRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **licenseErpLicenseCount** | [**LicenseErpLicenseCount**](LicenseErpLicenseCount.md) | The &#39;license.ErpLicenseCount&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**LicenseErpLicenseCount**](LicenseErpLicenseCount.md)
 
 ### Authorization
 
@@ -3968,78 +3984,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LicenseErpCustomerOp**](LicenseErpCustomerOp.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateLicenseErpLicenseCount
-
-> LicenseErpLicenseCount UpdateLicenseErpLicenseCount(ctx, moid).LicenseErpLicenseCount(licenseErpLicenseCount).IfMatch(ifMatch).Execute()
-
-Update a 'license.ErpLicenseCount' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	licenseErpLicenseCount := *openapiclient.NewLicenseErpLicenseCount("ClassId_example", "ObjectType_example") // LicenseErpLicenseCount | The 'license.ErpLicenseCount' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseApi.UpdateLicenseErpLicenseCount(context.Background(), moid).LicenseErpLicenseCount(licenseErpLicenseCount).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `LicenseApi.UpdateLicenseErpLicenseCount``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateLicenseErpLicenseCount`: LicenseErpLicenseCount
-	fmt.Fprintf(os.Stdout, "Response from `LicenseApi.UpdateLicenseErpLicenseCount`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateLicenseErpLicenseCountRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **licenseErpLicenseCount** | [**LicenseErpLicenseCount**](LicenseErpLicenseCount.md) | The &#39;license.ErpLicenseCount&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**LicenseErpLicenseCount**](LicenseErpLicenseCount.md)
 
 ### Authorization
 

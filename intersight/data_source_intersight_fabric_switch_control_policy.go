@@ -145,6 +145,36 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"mac_learning_settings": {
+			Description: "Settings to control mac learning options.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"disabled_vlans": {
+						Description: "List of VLANs for which MAC learning is disabled. Applicable only when Fabric Interconnect is in Ethernet Switching Mode.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -752,6 +782,43 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("mac_learning_settings"); ok {
+		p := make([]models.FabricMacLearningSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FabricMacLearningSettings{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.MacLearningSettings")
+			if v, ok := l["disabled_vlans"]; ok {
+				{
+					x := (v.(string))
+					o.SetDisabledVlans(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMacLearningSettings(x)
+		}
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
@@ -1214,6 +1281,8 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["is_aes_primary_key_set"] = (s.GetIsAesPrimaryKeySet())
 
 				temp["mac_aging_settings"] = flattenMapFabricMacAgingSettings(s.GetMacAgingSettings(), d)
+
+				temp["mac_learning_settings"] = flattenMapFabricMacLearningSettings(s.GetMacLearningSettings(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

@@ -374,6 +374,20 @@ func Test_intersight_WorkloadApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test WorkloadApiService PatchWorkloadWorkloadMetadata", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.WorkloadApi.PatchWorkloadWorkloadMetadata(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test WorkloadApiService UpdateWorkloadBlueprint", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -423,6 +437,20 @@ func Test_intersight_WorkloadApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.WorkloadApi.UpdateWorkloadWorkloadInstance(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WorkloadApiService UpdateWorkloadWorkloadMetadata", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.WorkloadApi.UpdateWorkloadWorkloadMetadata(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -147,6 +147,46 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 					},
 				},
 			},
+			"certificate": {
+				Description: "A reference to a iamTrustPoint resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -215,6 +255,12 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 					}
 					return
 				}},
+			"enable_tls": {
+				Description: "When true, TLS with custom certificate validation is enabled for this webhook subscription. The\ncertificate relationship must be set to a TrustPoint when enableTls is true. Only applicable for\nwebhook-type subscriptions; used for appliance deployments with private CAs. When false or unset,\ndefault TLS behavior (public CA trust) is used. SaaS typically leaves this false or unset.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"enabled": {
 				Description: "Subscription can be switched on/off without necessity to change the subscription\nsettings: notification methods, conditions, etc.\nEx.: Subscription MO can be configured, but switched off.",
 				Type:        schema.TypeBool,
@@ -701,6 +747,49 @@ func resourceNotificationAccountSubscriptionCreate(c context.Context, d *schema.
 		}
 	}
 
+	if v, ok := d.GetOk("certificate"); ok {
+		p := make([]models.IamTrustPointRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamTrustPointRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCertificate(x)
+		}
+	}
+
 	o.SetClassId("notification.AccountSubscription")
 
 	if v, ok := d.GetOk("condition_operator"); ok {
@@ -741,6 +830,11 @@ func resourceNotificationAccountSubscriptionCreate(c context.Context, d *schema.
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOkExists("enable_tls"); ok {
+		x := (v.(bool))
+		o.SetEnableTls(x)
 	}
 
 	if v, ok := d.GetOkExists("enabled"); ok {
@@ -914,6 +1008,10 @@ func resourceNotificationAccountSubscriptionRead(c context.Context, d *schema.Re
 		return diag.Errorf("error occurred while setting property Ancestors in NotificationAccountSubscription object: %s", err.Error())
 	}
 
+	if err := d.Set("certificate", flattenMapIamTrustPointRelationship(s.GetCertificate(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Certificate in NotificationAccountSubscription object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in NotificationAccountSubscription object: %s", err.Error())
 	}
@@ -936,6 +1034,10 @@ func resourceNotificationAccountSubscriptionRead(c context.Context, d *schema.Re
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in NotificationAccountSubscription object: %s", err.Error())
+	}
+
+	if err := d.Set("enable_tls", (s.GetEnableTls())); err != nil {
+		return diag.Errorf("error occurred while setting property EnableTls in NotificationAccountSubscription object: %s", err.Error())
 	}
 
 	if err := d.Set("enabled", (s.GetEnabled())); err != nil {
@@ -1040,6 +1142,50 @@ func resourceNotificationAccountSubscriptionUpdate(c context.Context, d *schema.
 		}
 	}
 
+	if d.HasChange("certificate") {
+		v := d.Get("certificate")
+		p := make([]models.IamTrustPointRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamTrustPointRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCertificate(x)
+		}
+	}
+
 	o.SetClassId("notification.AccountSubscription")
 
 	if d.HasChange("condition_operator") {
@@ -1081,6 +1227,12 @@ func resourceNotificationAccountSubscriptionUpdate(c context.Context, d *schema.
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("enable_tls") {
+		v := d.Get("enable_tls")
+		x := (v.(bool))
+		o.SetEnableTls(x)
 	}
 
 	if d.HasChange("enabled") {

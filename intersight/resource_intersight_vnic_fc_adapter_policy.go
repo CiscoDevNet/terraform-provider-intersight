@@ -272,7 +272,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 			"lun_count": {
 				Description:  "The maximum number of LUNs that the Fibre Channel driver will export or show. The maximum number of LUNs is usually controlled by the operating system running on the server. Lun Count value can exceed 1024 only for vHBA of type 'FC Initiator' and on servers having supported firmware version.",
 				Type:         schema.TypeInt,
-				ValidateFunc: validation.IntBetween(1, 4096),
+				ValidateFunc: validation.IntBetween(1, 16384),
 				Optional:     true,
 				Default:      1024,
 			},

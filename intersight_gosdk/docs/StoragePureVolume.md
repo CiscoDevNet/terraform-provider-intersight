@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureVolume"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureVolume"]
 **Created** | Pointer to **time.Time** | Creation time of the volume. | [optional] [readonly] 
+**NxVmDiskId** | Pointer to **string** | Nutanix disk UUID (extId) from owner_disk_id tag value. | [optional] [readonly] 
+**NxVmId** | Pointer to **string** | Nutanix VM UUID (extId) from owner_id tag value. | [optional] [readonly] 
 **PodName** | Pointer to **string** | A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays. | [optional] [readonly] 
 **RealmName** | Pointer to **string** | A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance. | [optional] [readonly] 
 **Serial** | Pointer to **string** | Serial number of the volume. | [optional] [readonly] 
@@ -100,6 +102,56 @@ SetCreated sets Created field to given value.
 `func (o *StoragePureVolume) HasCreated() bool`
 
 HasCreated returns a boolean if a field has been set.
+
+### GetNxVmDiskId
+
+`func (o *StoragePureVolume) GetNxVmDiskId() string`
+
+GetNxVmDiskId returns the NxVmDiskId field if non-nil, zero value otherwise.
+
+### GetNxVmDiskIdOk
+
+`func (o *StoragePureVolume) GetNxVmDiskIdOk() (*string, bool)`
+
+GetNxVmDiskIdOk returns a tuple with the NxVmDiskId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxVmDiskId
+
+`func (o *StoragePureVolume) SetNxVmDiskId(v string)`
+
+SetNxVmDiskId sets NxVmDiskId field to given value.
+
+### HasNxVmDiskId
+
+`func (o *StoragePureVolume) HasNxVmDiskId() bool`
+
+HasNxVmDiskId returns a boolean if a field has been set.
+
+### GetNxVmId
+
+`func (o *StoragePureVolume) GetNxVmId() string`
+
+GetNxVmId returns the NxVmId field if non-nil, zero value otherwise.
+
+### GetNxVmIdOk
+
+`func (o *StoragePureVolume) GetNxVmIdOk() (*string, bool)`
+
+GetNxVmIdOk returns a tuple with the NxVmId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxVmId
+
+`func (o *StoragePureVolume) SetNxVmId(v string)`
+
+SetNxVmId sets NxVmId field to given value.
+
+### HasNxVmId
+
+`func (o *StoragePureVolume) HasNxVmId() bool`
+
+HasNxVmId returns a boolean if a field has been set.
 
 ### GetPodName
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | The having filter type. | 
 **Dimension** | **string** | dimension | 
-**Value** | **float64** |  | 
+**Value** | **float64** | Value for the filter to match. | 
 
 ## Methods
 
