@@ -100,8 +100,10 @@ resource "intersight_bulk_mo_cloner" "clone_server1"{
                class_id = "server.Profile"
                object_type = "server.Profile"
                additional_properties = jsonencode({
-                Name = "demotesting_DERIVED-4"
+                Name = "demotesting_DERIVED-6"
                 Description = "Sample description"
+				        TargetPlatform = "FIAttached"
+                ServerFamily = "ALL"
                })
                tags = []
        }
@@ -109,8 +111,9 @@ resource "intersight_bulk_mo_cloner" "clone_server1"{
 
 resource "intersight_server_profile" "server_profile"{
 	depends_on = [intersight_bulk_mo_cloner.clone_server1]
-	name = "demotesting_DERIVED-4"
+	name = "demotesting_DERIVED-6"
 	description = "Sample description"
+	target_platform = "FIAttached"
   organization {
      object_type = "organization.Organization"
      moid        = data.intersight_organization_organization.default.results.0.moid
@@ -120,6 +123,7 @@ resource "intersight_server_profile" "server_profile"{
 resource "intersight_server_profile" "server_profile1"{
 	name = "demotesting_DERIVED-5"
 	description = "Sample description"
+	target_platform = "FIAttached"
   organization {
      object_type = "organization.Organization"
      moid        = data.intersight_organization_organization.default.results.0.moid

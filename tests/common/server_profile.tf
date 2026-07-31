@@ -1,6 +1,8 @@
 
 resource "intersight_server_profile" "server1" {
   name   = "server1"
+  target_platform = "Standalone"
+  server_family   = "UCSC2XX/4XX"
   action = "No-op"
   tags {
     key   = "server"
