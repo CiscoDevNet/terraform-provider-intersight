@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resourcepool.Pool"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resourcepool.Pool"]
 **Action** | Pointer to **string** | The pool is evaluated for resources with associated policies based on action. This action will help users to re-sync the resources for a pool. * &#x60;None&#x60; - The pool will not be considered for evaluation. * &#x60;ReEvaluate&#x60; - The resources in the pool will be re-evaluated against the server pool qualification associated with it. | [optional] [default to "None"]
+**ExportedSelectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **PoolType** | Pointer to **string** | The resource management type in the pool, it can be either static or dynamic. * &#x60;Static&#x60; - The resources in the pool will not be changed until user manually update it. * &#x60;Dynamic&#x60; - The resources in the pool will be updated dynamically based on the condition. * &#x60;Hybrid&#x60; - The resources in the pool can be added by the user statically or dynamically, based on the matching conditions of the qualification policy. If the pool contains both statically added resources and resources added based on the qualification policy, the pool type can be classified as hybrid. | [optional] [default to "Static"]
 **ResourceEvaluationStatus** | Pointer to [**NullableResourcepoolResourceEvaluationStatus**](ResourcepoolResourceEvaluationStatus.md) |  | [optional] 
 **ResourcePoolParameters** | Pointer to [**NullableResourcepoolResourcePoolParameters**](ResourcepoolResourcePoolParameters.md) |  | [optional] 
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 **Selectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **QualificationPolicies** | Pointer to [**[]ResourceAbstractResourceQualificationPolicyRelationship**](ResourceAbstractResourceQualificationPolicyRelationship.md) | An array of relationships to resourceAbstractResourceQualificationPolicy resources. | [optional] 
+**Reservations** | Pointer to [**[]ResourcepoolReservationRelationship**](ResourcepoolReservationRelationship.md) | An array of relationships to resourcepoolReservation resources. | [optional] 
 
 ## Methods
 
@@ -99,6 +101,41 @@ SetAction sets Action field to given value.
 
 HasAction returns a boolean if a field has been set.
 
+### GetExportedSelectors
+
+`func (o *ResourcepoolPool) GetExportedSelectors() []ResourceSelector`
+
+GetExportedSelectors returns the ExportedSelectors field if non-nil, zero value otherwise.
+
+### GetExportedSelectorsOk
+
+`func (o *ResourcepoolPool) GetExportedSelectorsOk() (*[]ResourceSelector, bool)`
+
+GetExportedSelectorsOk returns a tuple with the ExportedSelectors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExportedSelectors
+
+`func (o *ResourcepoolPool) SetExportedSelectors(v []ResourceSelector)`
+
+SetExportedSelectors sets ExportedSelectors field to given value.
+
+### HasExportedSelectors
+
+`func (o *ResourcepoolPool) HasExportedSelectors() bool`
+
+HasExportedSelectors returns a boolean if a field has been set.
+
+### SetExportedSelectorsNil
+
+`func (o *ResourcepoolPool) SetExportedSelectorsNil(b bool)`
+
+ SetExportedSelectorsNil sets the value for ExportedSelectors to be an explicit nil
+
+### UnsetExportedSelectors
+`func (o *ResourcepoolPool) UnsetExportedSelectors()`
+
+UnsetExportedSelectors ensures that no value is present for ExportedSelectors, not even an explicit nil
 ### GetPoolType
 
 `func (o *ResourcepoolPool) GetPoolType() string`
@@ -324,6 +361,41 @@ HasQualificationPolicies returns a boolean if a field has been set.
 `func (o *ResourcepoolPool) UnsetQualificationPolicies()`
 
 UnsetQualificationPolicies ensures that no value is present for QualificationPolicies, not even an explicit nil
+### GetReservations
+
+`func (o *ResourcepoolPool) GetReservations() []ResourcepoolReservationRelationship`
+
+GetReservations returns the Reservations field if non-nil, zero value otherwise.
+
+### GetReservationsOk
+
+`func (o *ResourcepoolPool) GetReservationsOk() (*[]ResourcepoolReservationRelationship, bool)`
+
+GetReservationsOk returns a tuple with the Reservations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservations
+
+`func (o *ResourcepoolPool) SetReservations(v []ResourcepoolReservationRelationship)`
+
+SetReservations sets Reservations field to given value.
+
+### HasReservations
+
+`func (o *ResourcepoolPool) HasReservations() bool`
+
+HasReservations returns a boolean if a field has been set.
+
+### SetReservationsNil
+
+`func (o *ResourcepoolPool) SetReservationsNil(b bool)`
+
+ SetReservationsNil sets the value for Reservations to be an explicit nil
+
+### UnsetReservations
+`func (o *ResourcepoolPool) UnsetReservations()`
+
+UnsetReservations ensures that no value is present for Reservations, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_switch"
 description: |-
-        The VMware Virtual Switch object is represented here.
+        The VmwareVirtualSwitch object characterizes the VMware Virtual Switch entity, detailing attributes for network management and configuration.
+        #### Purpose
+        VmwareVirtualSwitch serves as the foundational component for managing virtual network configurations, optimizing network resource allocation and control within VMware environments.
+        #### Key Concepts
+        - **Network Management:** Supports configuration of networks, physical interfaces, and security policies, enhancing network efficiency and performance.
+        - **Operational Settings:** Includes features for teaming, failover, and security policies, ensuring resilient and adaptive network operations.
+        - **Integration:** Connects with hosts and datacenters, facilitating cohesive network management and resource distribution.
+        - **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_switch
-The VMware Virtual Switch object is represented here.
+The VmwareVirtualSwitch object characterizes the VMware Virtual Switch entity, detailing attributes for network management and configuration.
+#### Purpose
+VmwareVirtualSwitch serves as the foundational component for managing virtual network configurations, optimizing network resource allocation and control within VMware environments.
+#### Key Concepts
+- **Network Management:** Supports configuration of networks, physical interfaces, and security policies, enhancing network efficiency and performance.
+- **Operational Settings:** Includes features for teaming, failover, and security policies, ensuring resilient and adaptive network operations.
+- **Integration:** Connects with hosts and datacenters, facilitating cohesive network management and resource distribution.
+- **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_external_path_group"
 description: |-
-        A external path group in Hitachi storage array.
+        The HitachiExternalPathGroup object represents an external path group within the Hitachi storage array, providing functionalities for managing path settings and attributes.
+        #### Purpose
+        HitachiExternalPathGroup is designed to handle external path group operations, supporting the configuration and monitoring of path settings and serial numbers.
+        #### Key Concepts
+        - **Path Management:** Defines path group numbers, serial numbers, and product IDs for external path groups.
+        - **Privilege Sets:** Ensures secure access and management of external path group entities with defined privilege sets.
+        - **Licensing:** Supports operations under specified entitlements, complying with licensing requirements.
 
 ---
 
 # Data Source: intersight_storage_hitachi_external_path_group
-A external path group in Hitachi storage array.
+The HitachiExternalPathGroup object represents an external path group within the Hitachi storage array, providing functionalities for managing path settings and attributes.
+#### Purpose
+HitachiExternalPathGroup is designed to handle external path group operations, supporting the configuration and monitoring of path settings and serial numbers.
+#### Key Concepts
+- **Path Management:** Defines path group numbers, serial numbers, and product IDs for external path groups.
+- **Privilege Sets:** Ensures secure access and management of external path group entities with defined privilege sets.
+- **Licensing:** Supports operations under specified entitlements, complying with licensing requirements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

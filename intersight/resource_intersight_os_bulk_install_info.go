@@ -1491,7 +1491,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetClassId("os.BulkInstallInfo")
 
-	if v, ok := d.GetOk("configuration_file"); ok {
+	if v, ok := d.GetOkExists("configuration_file"); ok {
 		p := make([]models.OsConfigurationFileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1539,19 +1539,19 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 		o.SetFileContent(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
 	o.SetObjectType("os.BulkInstallInfo")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1594,7 +1594,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("os_image"); ok {
+	if v, ok := d.GetOkExists("os_image"); ok {
 		p := make([]models.SoftwarerepositoryOperatingSystemFileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1637,7 +1637,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("scu_image"); ok {
+	if v, ok := d.GetOkExists("scu_image"); ok {
 		p := make([]models.FirmwareServerConfigurationUtilityDistributableRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1783,7 +1783,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("servers"); ok {
+	if v, ok := d.GetOkExists("servers"); ok {
 		x := make([]models.ComputePhysicalRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

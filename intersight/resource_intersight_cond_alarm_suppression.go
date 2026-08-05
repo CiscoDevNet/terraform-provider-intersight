@@ -866,7 +866,7 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 		o.SetEndDate(x)
 	}
 
-	if v, ok := d.GetOk("entity"); ok {
+	if v, ok := d.GetOkExists("entity"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -909,7 +909,7 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

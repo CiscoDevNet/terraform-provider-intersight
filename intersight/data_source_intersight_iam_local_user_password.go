@@ -165,6 +165,11 @@ func getIamLocalUserPasswordSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"password_expires_in_days": {
+			Description: "The passwordExpiresInDays attribute indicates the number of days remaining until a user's password expires,\nwith negative values meaning the password has already expired and zero indicating expiration today.\nThis value is dynamically calculated based on the time since the last password change and the maximum\nallowed password age defined by the password policy. No migration code or default value is required\nduring system upgrades because the value is computed in real-time, and initially, the password age\nproperty defaults to zero, ensuring no passwords are mistakenly marked as expired.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -655,6 +660,11 @@ func dataSourceIamLocalUserPasswordRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOkExists("password_expires_in_days"); ok {
+		x := int64(v.(int))
+		o.SetPasswordExpiresInDays(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -947,6 +957,7 @@ func dataSourceIamLocalUserPasswordRead(c context.Context, d *schema.ResourceDat
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["password_expires_in_days"] = (s.GetPasswordExpiresInDays())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

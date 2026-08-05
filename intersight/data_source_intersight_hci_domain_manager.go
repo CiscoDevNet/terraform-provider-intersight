@@ -157,6 +157,11 @@ func getHciDomainManagerSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"lcm_connectivity_type": {
+			Description: "The LCM (Life Cycle Manager) connectivity type. Possible values: CONNECTED_SITE (has internet connectivity), DARKSITE_DIRECT_UPLOAD (no external connectivity with direct upload), DARKSITE_WEB_SERVER (no external connectivity with darksite webserver).",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"licenses": {
 			Description: "An array of relationships to hciLicense resources.",
 			Type:        schema.TypeList,
@@ -719,6 +724,11 @@ func dataSourceHciDomainManagerRead(c context.Context, d *schema.ResourceData, m
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("lcm_connectivity_type"); ok {
+		x := (v.(string))
+		o.SetLcmConnectivityType(x)
+	}
+
 	if v, ok := d.GetOk("licenses"); ok {
 		x := make([]models.HciLicenseRelationship, 0)
 		s := v.([]interface{})
@@ -1130,6 +1140,7 @@ func dataSourceHciDomainManagerRead(c context.Context, d *schema.ResourceData, m
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["lcm_connectivity_type"] = (s.GetLcmConnectivityType())
 
 				temp["licenses"] = flattenListHciLicenseRelationship(s.GetLicenses(), d)
 

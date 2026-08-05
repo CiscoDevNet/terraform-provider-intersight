@@ -359,6 +359,18 @@ func Test_intersight_FabricApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FabricApiService CreateFabricSecureRouterRole", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.CreateFabricSecureRouterRole(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FabricApiService CreateFabricServerRole", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -908,6 +920,19 @@ func Test_intersight_FabricApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.FabricApi.DeleteFabricSanPinGroup(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService DeleteFabricSecureRouterRole", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.FabricApi.DeleteFabricSecureRouterRole(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -2019,6 +2044,32 @@ func Test_intersight_FabricApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FabricApiService GetFabricSecureRouterRoleByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricSecureRouterRoleByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService GetFabricSecureRouterRoleList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricSecureRouterRoleList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FabricApiService GetFabricServerRoleByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2931,6 +2982,20 @@ func Test_intersight_FabricApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FabricApiService PatchFabricSecureRouterRole", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.PatchFabricSecureRouterRole(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FabricApiService PatchFabricServerRole", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -3498,6 +3563,20 @@ func Test_intersight_FabricApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.FabricApi.UpdateFabricSanPinGroup(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService UpdateFabricSecureRouterRole", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.UpdateFabricSecureRouterRole(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

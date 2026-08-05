@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_remote_replication"
 description: |-
-        A remote copy pair entity in Hitachi storage array.
+        The HitachiRemoteReplication object represents a remote copy pair entity within the Hitachi storage array, providing essential functionalities for replication operations.
+        #### Purpose
+        HitachiRemoteReplication serves as a critical component for managing remote replication operations, supporting the configuration and monitoring of copy pairs.
+        #### Key Concepts
+        - **Replication Management:** Defines replication types, journal IDs, and status information for remote copy pairs.
+        - **Privilege Sets:** Ensures secure access and management of replication entities with defined privilege sets.
+        - **Licensing:** Operates under specified entitlements, supporting authorized replication operations.
 
 ---
 
 # Data Source: intersight_storage_hitachi_remote_replication
-A remote copy pair entity in Hitachi storage array.
+The HitachiRemoteReplication object represents a remote copy pair entity within the Hitachi storage array, providing essential functionalities for replication operations.
+#### Purpose
+HitachiRemoteReplication serves as a critical component for managing remote replication operations, supporting the configuration and monitoring of copy pairs.
+#### Key Concepts
+- **Replication Management:** Defines replication types, journal IDs, and status information for remote copy pairs.
+- **Privilege Sets:** Ensures secure access and management of replication entities with defined privilege sets.
+- **Licensing:** Operates under specified entitlements, supporting authorized replication operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

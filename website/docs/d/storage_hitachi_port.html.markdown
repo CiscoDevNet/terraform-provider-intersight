@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_port"
 description: |-
-        Port entity in Hitachi storage array.
+        The HitachiPort object encapsulates the characteristics of a port entity within a Hitachi storage array. It is essential for managing port configurations and security settings, supporting effective storage network operations.
+        #### Purpose
+        HitachiPort is vital to managing ports within Hitachi arrays. This provides control over port settings and security, ensuring reliable and secure network communication.
+        #### Key Concepts
+        - **Port Configuration:** Details settings and properties of storage ports, supporting efficient network management.
+        - **Security Settings:** Implements security measures for ports, enhancing protection against unauthorized access.
+        - **Network Management:** Facilitates management of network addresses and configurations, ensuring streamlined communication.
+        - **Access Control:** Utilizes privilege sets to ensure secure and authorized operations on ports.
 
 ---
 
 # Data Source: intersight_storage_hitachi_port
-Port entity in Hitachi storage array.
+The HitachiPort object encapsulates the characteristics of a port entity within a Hitachi storage array. It is essential for managing port configurations and security settings, supporting effective storage network operations.
+#### Purpose
+HitachiPort is vital to managing ports within Hitachi arrays. This provides control over port settings and security, ensuring reliable and secure network communication.
+#### Key Concepts
+- **Port Configuration:** Details settings and properties of storage ports, supporting efficient network management.
+- **Security Settings:** Implements security measures for ports, enhancing protection against unauthorized access.
+- **Network Management:** Facilitates management of network addresses and configurations, ensuring streamlined communication.
+- **Access Control:** Utilizes privilege sets to ensure secure and authorized operations on ports.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

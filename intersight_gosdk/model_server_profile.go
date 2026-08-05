@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -46,14 +46,16 @@ type ServerProfile struct {
 	LocationDetails                  NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 	OverriddenList                   []string                       `json:"OverriddenList,omitempty"`
 	// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
-	PmcDeployedSecurePassphrase *string                    `json:"PmcDeployedSecurePassphrase,omitempty"`
-	PostDeployAction            []string                   `json:"PostDeployAction,omitempty"`
-	ReservationReferences       []PoolReservationReference `json:"ReservationReferences,omitempty"`
+	PmcDeployedSecurePassphrase *string                        `json:"PmcDeployedSecurePassphrase,omitempty"`
+	PostDeployAction            []string                       `json:"PostDeployAction,omitempty"`
+	ReservationReferences       []PoolReservationReference     `json:"ReservationReferences,omitempty"`
+	ScheduledServerAssignment   NullableServerServerAssignment `json:"ScheduledServerAssignment,omitempty"`
 	// Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `None` - No server is assigned to the server profile. * `Static` - Server is directly assigned to server profile using assign server. * `Pool` - Server is assigned from a resource pool.
 	ServerAssignmentMode *string `json:"ServerAssignmentMode,omitempty"`
 	// Serial number of the server that would be assigned to this pre-assigned Server Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
 	ServerPreAssignBySerial *string                            `json:"ServerPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
 	ServerPreAssignBySlot   NullableServerServerAssignTypeSlot `json:"ServerPreAssignBySlot,omitempty"`
+	ServerReservation       *ResourcepoolReservationReference  `json:"ServerReservation,omitempty"`
 	// The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.
 	StaticUuidAddress  *string                 `json:"StaticUuidAddress,omitempty" validate:"regexp=^$|^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"`
 	TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
@@ -94,6 +96,8 @@ func NewServerProfile(classId string, objectType string) *ServerProfile {
 	this.Type = &type_
 	var action string = "No-op"
 	this.Action = &action
+	var serverFamily string = "Unspecified"
+	this.ServerFamily = &serverFamily
 	var targetPlatform string = "Standalone"
 	this.TargetPlatform = &targetPlatform
 	var uuidAddressType string = "NONE"
@@ -660,6 +664,49 @@ func (o *ServerProfile) SetReservationReferences(v []PoolReservationReference) {
 	o.ReservationReferences = v
 }
 
+// GetScheduledServerAssignment returns the ScheduledServerAssignment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServerProfile) GetScheduledServerAssignment() ServerServerAssignment {
+	if o == nil || IsNil(o.ScheduledServerAssignment.Get()) {
+		var ret ServerServerAssignment
+		return ret
+	}
+	return *o.ScheduledServerAssignment.Get()
+}
+
+// GetScheduledServerAssignmentOk returns a tuple with the ScheduledServerAssignment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServerProfile) GetScheduledServerAssignmentOk() (*ServerServerAssignment, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ScheduledServerAssignment.Get(), o.ScheduledServerAssignment.IsSet()
+}
+
+// HasScheduledServerAssignment returns a boolean if a field has been set.
+func (o *ServerProfile) HasScheduledServerAssignment() bool {
+	if o != nil && o.ScheduledServerAssignment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledServerAssignment gets a reference to the given NullableServerServerAssignment and assigns it to the ScheduledServerAssignment field.
+func (o *ServerProfile) SetScheduledServerAssignment(v ServerServerAssignment) {
+	o.ScheduledServerAssignment.Set(&v)
+}
+
+// SetScheduledServerAssignmentNil sets the value for ScheduledServerAssignment to be an explicit nil
+func (o *ServerProfile) SetScheduledServerAssignmentNil() {
+	o.ScheduledServerAssignment.Set(nil)
+}
+
+// UnsetScheduledServerAssignment ensures that no value is present for ScheduledServerAssignment, not even an explicit nil
+func (o *ServerProfile) UnsetScheduledServerAssignment() {
+	o.ScheduledServerAssignment.Unset()
+}
+
 // GetServerAssignmentMode returns the ServerAssignmentMode field value if set, zero value otherwise.
 func (o *ServerProfile) GetServerAssignmentMode() string {
 	if o == nil || IsNil(o.ServerAssignmentMode) {
@@ -765,6 +812,38 @@ func (o *ServerProfile) SetServerPreAssignBySlotNil() {
 // UnsetServerPreAssignBySlot ensures that no value is present for ServerPreAssignBySlot, not even an explicit nil
 func (o *ServerProfile) UnsetServerPreAssignBySlot() {
 	o.ServerPreAssignBySlot.Unset()
+}
+
+// GetServerReservation returns the ServerReservation field value if set, zero value otherwise.
+func (o *ServerProfile) GetServerReservation() ResourcepoolReservationReference {
+	if o == nil || IsNil(o.ServerReservation) {
+		var ret ResourcepoolReservationReference
+		return ret
+	}
+	return *o.ServerReservation
+}
+
+// GetServerReservationOk returns a tuple with the ServerReservation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetServerReservationOk() (*ResourcepoolReservationReference, bool) {
+	if o == nil || IsNil(o.ServerReservation) {
+		return nil, false
+	}
+	return o.ServerReservation, true
+}
+
+// HasServerReservation returns a boolean if a field has been set.
+func (o *ServerProfile) HasServerReservation() bool {
+	if o != nil && !IsNil(o.ServerReservation) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerReservation gets a reference to the given ResourcepoolReservationReference and assigns it to the ServerReservation field.
+func (o *ServerProfile) SetServerReservation(v ResourcepoolReservationReference) {
+	o.ServerReservation = &v
 }
 
 // GetStaticUuidAddress returns the StaticUuidAddress field value if set, zero value otherwise.
@@ -1472,6 +1551,9 @@ func (o ServerProfile) ToMap() (map[string]interface{}, error) {
 	if o.ReservationReferences != nil {
 		toSerialize["ReservationReferences"] = o.ReservationReferences
 	}
+	if o.ScheduledServerAssignment.IsSet() {
+		toSerialize["ScheduledServerAssignment"] = o.ScheduledServerAssignment.Get()
+	}
 	if !IsNil(o.ServerAssignmentMode) {
 		toSerialize["ServerAssignmentMode"] = o.ServerAssignmentMode
 	}
@@ -1480,6 +1562,9 @@ func (o ServerProfile) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ServerPreAssignBySlot.IsSet() {
 		toSerialize["ServerPreAssignBySlot"] = o.ServerPreAssignBySlot.Get()
+	}
+	if !IsNil(o.ServerReservation) {
+		toSerialize["ServerReservation"] = o.ServerReservation
 	}
 	if !IsNil(o.StaticUuidAddress) {
 		toSerialize["StaticUuidAddress"] = o.StaticUuidAddress
@@ -1605,14 +1690,16 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		LocationDetails                  NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 		OverriddenList                   []string                       `json:"OverriddenList,omitempty"`
 		// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
-		PmcDeployedSecurePassphrase *string                    `json:"PmcDeployedSecurePassphrase,omitempty"`
-		PostDeployAction            []string                   `json:"PostDeployAction,omitempty"`
-		ReservationReferences       []PoolReservationReference `json:"ReservationReferences,omitempty"`
+		PmcDeployedSecurePassphrase *string                        `json:"PmcDeployedSecurePassphrase,omitempty"`
+		PostDeployAction            []string                       `json:"PostDeployAction,omitempty"`
+		ReservationReferences       []PoolReservationReference     `json:"ReservationReferences,omitempty"`
+		ScheduledServerAssignment   NullableServerServerAssignment `json:"ScheduledServerAssignment,omitempty"`
 		// Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `None` - No server is assigned to the server profile. * `Static` - Server is directly assigned to server profile using assign server. * `Pool` - Server is assigned from a resource pool.
 		ServerAssignmentMode *string `json:"ServerAssignmentMode,omitempty"`
 		// Serial number of the server that would be assigned to this pre-assigned Server Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
 		ServerPreAssignBySerial *string                            `json:"ServerPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
 		ServerPreAssignBySlot   NullableServerServerAssignTypeSlot `json:"ServerPreAssignBySlot,omitempty"`
+		ServerReservation       *ResourcepoolReservationReference  `json:"ServerReservation,omitempty"`
 		// The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.
 		StaticUuidAddress  *string                 `json:"StaticUuidAddress,omitempty" validate:"regexp=^$|^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"`
 		TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
@@ -1659,9 +1746,11 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		varServerProfile.PmcDeployedSecurePassphrase = varServerProfileWithoutEmbeddedStruct.PmcDeployedSecurePassphrase
 		varServerProfile.PostDeployAction = varServerProfileWithoutEmbeddedStruct.PostDeployAction
 		varServerProfile.ReservationReferences = varServerProfileWithoutEmbeddedStruct.ReservationReferences
+		varServerProfile.ScheduledServerAssignment = varServerProfileWithoutEmbeddedStruct.ScheduledServerAssignment
 		varServerProfile.ServerAssignmentMode = varServerProfileWithoutEmbeddedStruct.ServerAssignmentMode
 		varServerProfile.ServerPreAssignBySerial = varServerProfileWithoutEmbeddedStruct.ServerPreAssignBySerial
 		varServerProfile.ServerPreAssignBySlot = varServerProfileWithoutEmbeddedStruct.ServerPreAssignBySlot
+		varServerProfile.ServerReservation = varServerProfileWithoutEmbeddedStruct.ServerReservation
 		varServerProfile.StaticUuidAddress = varServerProfileWithoutEmbeddedStruct.StaticUuidAddress
 		varServerProfile.TemplateActions = varServerProfileWithoutEmbeddedStruct.TemplateActions
 		varServerProfile.TemplateSyncErrors = varServerProfileWithoutEmbeddedStruct.TemplateSyncErrors
@@ -1712,9 +1801,11 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "PmcDeployedSecurePassphrase")
 		delete(additionalProperties, "PostDeployAction")
 		delete(additionalProperties, "ReservationReferences")
+		delete(additionalProperties, "ScheduledServerAssignment")
 		delete(additionalProperties, "ServerAssignmentMode")
 		delete(additionalProperties, "ServerPreAssignBySerial")
 		delete(additionalProperties, "ServerPreAssignBySlot")
+		delete(additionalProperties, "ServerReservation")
 		delete(additionalProperties, "StaticUuidAddress")
 		delete(additionalProperties, "TemplateActions")
 		delete(additionalProperties, "TemplateSyncErrors")

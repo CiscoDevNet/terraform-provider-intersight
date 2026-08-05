@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Gateway** | Pointer to **string** | Default gateway configured on the peer node. | [optional] 
 **Hostip** | Pointer to **string** | Publicly accessible IP of the peer node. | [optional] 
 **Hostname** | Pointer to **string** | Publicly accessible FQDN of the peer node. | [optional] 
+**HypervisorType** | Pointer to **string** | The hypervisor type of the node. * &#x60;ESXi&#x60; - VMware ESXi hypervisor type.Indicates the appliance node is running on a VMware ESXi virtualization platform. * &#x60;Hyper-V&#x60; - Microsoft Hyper-V hypervisor type.Indicates the appliance node is running on a Microsoft Hyper-V virtualization platform. * &#x60;KVM&#x60; - Kernel-based Virtual Machine hypervisor type.Indicates the appliance node is running on a KVM virtualization platform. | [optional] [default to "ESXi"]
 **InstallerVersion** | Pointer to **string** | Installer version used to install on peer node. | [optional] 
 **NodeId** | Pointer to **int64** | System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance starting with a value of 0. | [optional] [readonly] 
 **NodeType** | Pointer to **string** | The node type of Intersight Virtual Appliance. * &#x60;standalone&#x60; - Single Node Intersight Virtual Appliance. * &#x60;management&#x60; - Management node type when Intersight Virtual Appliance is running as management-worker deployment. * &#x60;hamanagement&#x60; - Management node type when Intersight Virtual Appliance is running as multi node HA deployment. * &#x60;metrics&#x60; - Metrics node when Intersight Virtual Appliance is running management-metrics node. | [optional] [default to "standalone"]
@@ -211,6 +212,31 @@ SetHostname sets Hostname field to given value.
 `func (o *ApplianceClusterInfo) HasHostname() bool`
 
 HasHostname returns a boolean if a field has been set.
+
+### GetHypervisorType
+
+`func (o *ApplianceClusterInfo) GetHypervisorType() string`
+
+GetHypervisorType returns the HypervisorType field if non-nil, zero value otherwise.
+
+### GetHypervisorTypeOk
+
+`func (o *ApplianceClusterInfo) GetHypervisorTypeOk() (*string, bool)`
+
+GetHypervisorTypeOk returns a tuple with the HypervisorType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHypervisorType
+
+`func (o *ApplianceClusterInfo) SetHypervisorType(v string)`
+
+SetHypervisorType sets HypervisorType field to given value.
+
+### HasHypervisorType
+
+`func (o *ApplianceClusterInfo) HasHypervisorType() bool`
+
+HasHypervisorType returns a boolean if a field has been set.
 
 ### GetInstallerVersion
 

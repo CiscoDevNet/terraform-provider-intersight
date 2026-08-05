@@ -3,12 +3,24 @@ subcategory: "iaas"
 layout: "intersight"
 page_title: "Intersight: intersight_iaas_ucsd_managed_infra"
 description: |-
-        Describes about UCSD Managed infrastructure statistics.
+        The UcsdManagedInfra object is critical for overseeing UCS Director (UCSD) managed infrastructure, providing statistics and insights into managed resources.
+        #### Purpose
+        UcsdManagedInfra offers a detailed view of infrastructure components managed by UCSD, supporting effective resource management and planning.
+        #### Key Concepts
+        - **Infrastructure Statistics:** Captures data on infrastructure components like hosts and virtual machines, aiding in system oversight.
+        - **Resource Management:** Provides insights into user accounts and groups, supporting efficient resource allocation.
+        - **Read-Only Access:** Ensures infrastructure data is available for review without modification.
 
 ---
 
 # Data Source: intersight_iaas_ucsd_managed_infra
-Describes about UCSD Managed infrastructure statistics.
+The UcsdManagedInfra object is critical for overseeing UCS Director (UCSD) managed infrastructure, providing statistics and insights into managed resources.
+#### Purpose
+UcsdManagedInfra offers a detailed view of infrastructure components managed by UCSD, supporting effective resource management and planning.
+#### Key Concepts
+- **Infrastructure Statistics:** Captures data on infrastructure components like hosts and virtual machines, aiding in system oversight. 
+- **Resource Management:** Provides insights into user accounts and groups, supporting efficient resource allocation. 
+- **Read-Only Access:** Ensures infrastructure data is available for review without modification.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

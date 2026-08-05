@@ -16,11 +16,16 @@ import (
 
 func getEtherHostPortSchema() map[string]*schema.Schema {
 	var schemaMap = make(map[string]*schema.Schema)
-	schemaMap = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
+	schemaMap = map[string]*schema.Schema{"access_vlan": {
+		Description: "Access VLAN for this port.",
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"account_moid": {
+			Description: "The Account ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"acknowledged_peer_interface": {
 			Description: "A reference to a portInterfaceBase resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -61,6 +66,11 @@ func getEtherHostPortSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"admin_fec": {
+			Description: "Administratively configured FEC mode for this port.\n* `` - Default value for FEC state.\n* `Not Supported` - FEC is not supported on this port.\n* `Disabled` - FEC is disabled on this port.\n* `Auto` - FEC mode is automatically negotiated between link partners.\n* `Cl74` - FEC is configured to use the IEEE Clause 74 (FireCode) standard.\n* `RS-IEEE(Cl108)` - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard.\n* `KP` - FEC is configured to use the KP (Backplane Ethernet) FEC mode.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"admin_state": {
 			Description: "Administratively configured state (enabled/disabled) for this port.",
 			Type:        schema.TypeString,
@@ -69,6 +79,11 @@ func getEtherHostPortSchema() map[string]*schema.Schema {
 		"aggregate_port_id": {
 			Description: "Breakout port member in the fabric extender.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"allowed_vlans": {
+			Description: "Allowed VLANs on this port.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"ancestors": {
@@ -225,8 +240,18 @@ func getEtherHostPortSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"native_vlan": {
+			Description: "Native VLAN for this port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"oper_fec": {
+			Description: "Operational FEC mode for this port.\n* `` - Default value for FEC state.\n* `Not Supported` - FEC is not supported on this port.\n* `Disabled` - FEC is disabled on this port.\n* `Auto` - FEC mode is automatically negotiated between link partners.\n* `Cl74` - FEC is configured to use the IEEE Clause 74 (FireCode) standard.\n* `RS-IEEE(Cl108)` - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard.\n* `KP` - FEC is configured to use the KP (Backplane Ethernet) FEC mode.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -242,6 +267,11 @@ func getEtherHostPortSchema() map[string]*schema.Schema {
 		},
 		"oper_state_qual": {
 			Description: "Reason for this port's Operational state.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"oper_vlans": {
+			Description: "Operational VLANs on this port.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -690,6 +720,11 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.EtherHostPort{}
+	if v, ok := d.GetOk("access_vlan"); ok {
+		x := (v.(string))
+		o.SetAccessVlan(x)
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
@@ -747,6 +782,11 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOk("admin_fec"); ok {
+		x := (v.(string))
+		o.SetAdminFec(x)
+	}
+
 	if v, ok := d.GetOk("admin_state"); ok {
 		x := (v.(string))
 		o.SetAdminState(x)
@@ -755,6 +795,11 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 	if v, ok := d.GetOkExists("aggregate_port_id"); ok {
 		x := int64(v.(int))
 		o.SetAggregatePortId(x)
+	}
+
+	if v, ok := d.GetOk("allowed_vlans"); ok {
+		x := (v.(string))
+		o.SetAllowedVlans(x)
 	}
 
 	if v, ok := d.GetOk("ancestors"); ok {
@@ -935,9 +980,19 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("native_vlan"); ok {
+		x := (v.(string))
+		o.SetNativeVlan(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+
+	if v, ok := d.GetOk("oper_fec"); ok {
+		x := (v.(string))
+		o.SetOperFec(x)
 	}
 
 	if v, ok := d.GetOk("oper_speed"); ok {
@@ -953,6 +1008,11 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 	if v, ok := d.GetOk("oper_state_qual"); ok {
 		x := (v.(string))
 		o.SetOperStateQual(x)
+	}
+
+	if v, ok := d.GetOk("oper_vlans"); ok {
+		x := (v.(string))
+		o.SetOperVlans(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1380,12 +1440,15 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 			for k := 0; k < len(results); k++ {
 				var s = results[k]
 				var temp = make(map[string]interface{})
+				temp["access_vlan"] = (s.GetAccessVlan())
 				temp["account_moid"] = (s.GetAccountMoid())
 
 				temp["acknowledged_peer_interface"] = flattenMapPortInterfaceBaseRelationship(s.GetAcknowledgedPeerInterface(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["admin_fec"] = (s.GetAdminFec())
 				temp["admin_state"] = (s.GetAdminState())
 				temp["aggregate_port_id"] = (s.GetAggregatePortId())
+				temp["allowed_vlans"] = (s.GetAllowedVlans())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
@@ -1404,10 +1467,13 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 				temp["mode"] = (s.GetMode())
 				temp["module_id"] = (s.GetModuleId())
 				temp["moid"] = (s.GetMoid())
+				temp["native_vlan"] = (s.GetNativeVlan())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_fec"] = (s.GetOperFec())
 				temp["oper_speed"] = (s.GetOperSpeed())
 				temp["oper_state"] = (s.GetOperState())
 				temp["oper_state_qual"] = (s.GetOperStateQual())
+				temp["oper_vlans"] = (s.GetOperVlans())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)

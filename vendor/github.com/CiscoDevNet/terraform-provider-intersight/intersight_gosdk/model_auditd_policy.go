@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -32,6 +32,7 @@ type AuditdPolicy struct {
 	AdminState *string `json:"AdminState,omitempty"`
 	// The log level for the AuditD feature. The default value is \"notifications\". * `notifications` - Generated logs are of Notification level, providing information about normal but significant system events requiring awareness. * `emergencies` - Generated logs will be of Emergency log level, indicating a critical and unstable system state. * `alerts` - Generated logs are of Alert level, indicating critical issues needing immediate attention to prevent system disruption. * `critical` - Generated logs are of Critical level, signaling severe issues that may cause system failure if not addressed immediately. * `errors` - Generated logs are of Error level, indicating significant problems that affect functionality but do not cause system failure. * `warnings` - Generated logs are of Warning level, highlighting potential issues that require attention but do not yet impact functionality. * `information` - Generated logs are of Information level, detailing routine operational messages without indicating any issues or errors. * `debugging` - Generated logs are of Debugging level, providing detailed information to help diagnose and troubleshoot system issues.
 	AuditdLogLevel *string                                      `json:"AuditdLogLevel,omitempty"`
+	LogMonitor     NullableAuditdLogMonitorType                 `json:"LogMonitor,omitempty"`
 	Organization   NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to fabricBaseSwitchProfile resources.
 	Profiles             []FabricBaseSwitchProfileRelationship `json:"Profiles,omitempty"`
@@ -193,6 +194,49 @@ func (o *AuditdPolicy) SetAuditdLogLevel(v string) {
 	o.AuditdLogLevel = &v
 }
 
+// GetLogMonitor returns the LogMonitor field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AuditdPolicy) GetLogMonitor() AuditdLogMonitorType {
+	if o == nil || IsNil(o.LogMonitor.Get()) {
+		var ret AuditdLogMonitorType
+		return ret
+	}
+	return *o.LogMonitor.Get()
+}
+
+// GetLogMonitorOk returns a tuple with the LogMonitor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AuditdPolicy) GetLogMonitorOk() (*AuditdLogMonitorType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LogMonitor.Get(), o.LogMonitor.IsSet()
+}
+
+// HasLogMonitor returns a boolean if a field has been set.
+func (o *AuditdPolicy) HasLogMonitor() bool {
+	if o != nil && o.LogMonitor.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLogMonitor gets a reference to the given NullableAuditdLogMonitorType and assigns it to the LogMonitor field.
+func (o *AuditdPolicy) SetLogMonitor(v AuditdLogMonitorType) {
+	o.LogMonitor.Set(&v)
+}
+
+// SetLogMonitorNil sets the value for LogMonitor to be an explicit nil
+func (o *AuditdPolicy) SetLogMonitorNil() {
+	o.LogMonitor.Set(nil)
+}
+
+// UnsetLogMonitor ensures that no value is present for LogMonitor, not even an explicit nil
+func (o *AuditdPolicy) UnsetLogMonitor() {
+	o.LogMonitor.Unset()
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AuditdPolicy) GetOrganization() OrganizationOrganizationRelationship {
 	if o == nil || IsNil(o.Organization.Get()) {
@@ -301,6 +345,9 @@ func (o AuditdPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AuditdLogLevel) {
 		toSerialize["AuditdLogLevel"] = o.AuditdLogLevel
 	}
+	if o.LogMonitor.IsSet() {
+		toSerialize["LogMonitor"] = o.LogMonitor.Get()
+	}
 	if o.Organization.IsSet() {
 		toSerialize["Organization"] = o.Organization.Get()
 	}
@@ -366,6 +413,7 @@ func (o *AuditdPolicy) UnmarshalJSON(data []byte) (err error) {
 		AdminState *string `json:"AdminState,omitempty"`
 		// The log level for the AuditD feature. The default value is \"notifications\". * `notifications` - Generated logs are of Notification level, providing information about normal but significant system events requiring awareness. * `emergencies` - Generated logs will be of Emergency log level, indicating a critical and unstable system state. * `alerts` - Generated logs are of Alert level, indicating critical issues needing immediate attention to prevent system disruption. * `critical` - Generated logs are of Critical level, signaling severe issues that may cause system failure if not addressed immediately. * `errors` - Generated logs are of Error level, indicating significant problems that affect functionality but do not cause system failure. * `warnings` - Generated logs are of Warning level, highlighting potential issues that require attention but do not yet impact functionality. * `information` - Generated logs are of Information level, detailing routine operational messages without indicating any issues or errors. * `debugging` - Generated logs are of Debugging level, providing detailed information to help diagnose and troubleshoot system issues.
 		AuditdLogLevel *string                                      `json:"AuditdLogLevel,omitempty"`
+		LogMonitor     NullableAuditdLogMonitorType                 `json:"LogMonitor,omitempty"`
 		Organization   NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to fabricBaseSwitchProfile resources.
 		Profiles []FabricBaseSwitchProfileRelationship `json:"Profiles,omitempty"`
@@ -380,6 +428,7 @@ func (o *AuditdPolicy) UnmarshalJSON(data []byte) (err error) {
 		varAuditdPolicy.ObjectType = varAuditdPolicyWithoutEmbeddedStruct.ObjectType
 		varAuditdPolicy.AdminState = varAuditdPolicyWithoutEmbeddedStruct.AdminState
 		varAuditdPolicy.AuditdLogLevel = varAuditdPolicyWithoutEmbeddedStruct.AuditdLogLevel
+		varAuditdPolicy.LogMonitor = varAuditdPolicyWithoutEmbeddedStruct.LogMonitor
 		varAuditdPolicy.Organization = varAuditdPolicyWithoutEmbeddedStruct.Organization
 		varAuditdPolicy.Profiles = varAuditdPolicyWithoutEmbeddedStruct.Profiles
 		*o = AuditdPolicy(varAuditdPolicy)
@@ -403,6 +452,7 @@ func (o *AuditdPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminState")
 		delete(additionalProperties, "AuditdLogLevel")
+		delete(additionalProperties, "LogMonitor")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Profiles")
 

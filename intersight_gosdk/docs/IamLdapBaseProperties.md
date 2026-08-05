@@ -7,19 +7,20 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LdapBaseProperties"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LdapBaseProperties"]
 **Attribute** | Pointer to **string** | Role and locale information of the user. | [optional] 
-**BaseDn** | Pointer to **string** | Base Distinguished Name (DN). Starting point from where server will search for users and groups. | [optional] 
-**BindDn** | Pointer to **string** | Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers. | [optional] 
+**BaseDn** | Pointer to **string** | Base Distinguished Name (DN), the starting point for searching users and groups. | [optional] 
+**BindDn** | Pointer to **string** | Distinguished Name (DN) used to authenticate against LDAP servers. | [optional] 
 **BindMethod** | Pointer to **string** | Authentication method to access LDAP servers. * &#x60;LoginCredentials&#x60; - Requires the user credentials. If the bind process fails, then user is denied access. * &#x60;Anonymous&#x60; - Requires no username and password. If this option is selected and the LDAP server is configured for Anonymous logins, then the user gains access. * &#x60;ConfiguredCredentials&#x60; - Requires a known set of credentials to be specified for the initial bind process. If the initial bind process succeeds, then the distinguished name (DN) of the user name is queried and re-used for the re-binding process. If the re-binding process fails, then the user is denied access. | [optional] [default to "LoginCredentials"]
 **Domain** | Pointer to **string** | The IPv4 domain that all users must be in. | [optional] 
-**EnableEncryption** | Pointer to **bool** | If enabled, the endpoint encrypts all information it sends to the LDAP server. | [optional] 
+**EnableEncryption** | Pointer to **bool** | If enabled, the endpoint encrypts all information sent to the LDAP server. | [optional] 
 **EnableGroupAuthorization** | Pointer to **bool** | If enabled, user authorization is also done at the group level for LDAP users not in the local user database. | [optional] 
-**EnableNestedGroupSearch** | Pointer to **bool** | If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively. | [optional] [default to false]
+**EnableNestedGroupSearch** | Pointer to **bool** | If enabled, an extended search walks the ancestry chain to the root and returns all groups and subgroups recursively. | [optional] [default to false]
 **Filter** | Pointer to **string** | Criteria to identify entries in search requests. | [optional] 
 **GroupAttribute** | Pointer to **string** | Groups to which an LDAP entry belongs. | [optional] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **NestedGroupSearchDepth** | Pointer to **int64** | Search depth to look for a nested LDAP group in an LDAP group map. | [optional] [default to 128]
-**Password** | Pointer to **string** | The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters. | [optional] 
+**Password** | Pointer to **string** | The password for the initial bind process. Must not contain spaces, tabs, or line breaks, and cannot exceed 254 characters. | [optional] 
 **Timeout** | Pointer to **int64** | LDAP authentication timeout duration, in seconds. | [optional] [default to 0]
+**UserSearchAttribute** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -430,6 +431,41 @@ SetTimeout sets Timeout field to given value.
 
 HasTimeout returns a boolean if a field has been set.
 
+### GetUserSearchAttribute
+
+`func (o *IamLdapBaseProperties) GetUserSearchAttribute() []string`
+
+GetUserSearchAttribute returns the UserSearchAttribute field if non-nil, zero value otherwise.
+
+### GetUserSearchAttributeOk
+
+`func (o *IamLdapBaseProperties) GetUserSearchAttributeOk() (*[]string, bool)`
+
+GetUserSearchAttributeOk returns a tuple with the UserSearchAttribute field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserSearchAttribute
+
+`func (o *IamLdapBaseProperties) SetUserSearchAttribute(v []string)`
+
+SetUserSearchAttribute sets UserSearchAttribute field to given value.
+
+### HasUserSearchAttribute
+
+`func (o *IamLdapBaseProperties) HasUserSearchAttribute() bool`
+
+HasUserSearchAttribute returns a boolean if a field has been set.
+
+### SetUserSearchAttributeNil
+
+`func (o *IamLdapBaseProperties) SetUserSearchAttributeNil(b bool)`
+
+ SetUserSearchAttributeNil sets the value for UserSearchAttribute to be an explicit nil
+
+### UnsetUserSearchAttribute
+`func (o *IamLdapBaseProperties) UnsetUserSearchAttribute()`
+
+UnsetUserSearchAttribute ensures that no value is present for UserSearchAttribute, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

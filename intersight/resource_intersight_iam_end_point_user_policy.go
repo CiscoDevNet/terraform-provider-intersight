@@ -25,6 +25,20 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
+			"account_lockout_duration": {
+				Description:  "Timeout duration specifies the duration (in seconds) after which a locked account is automatically unlocked. - Set to 0 when accountUnlockMode is Manual. - Set a value between 1 and 604800 when accountUnlockMode is Automatic.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 604800),
+				Optional:     true,
+				Default:      300,
+			},
+			"account_lockout_threshold": {
+				Description:  "Set Account Lockout Threshold for endpoint users.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 65535),
+				Optional:     true,
+				Default:      5,
+			},
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
 				Type:        schema.TypeString,
@@ -36,6 +50,13 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 					}
 					return
 				}},
+			"account_unlock_mode": {
+				Description:  "Account unlock method specifies how the account is unlocked after it is locked: - Manual: Account must be manually unlocked by an administrator. - Automatic: Account unlocks automatically after a timeout duration.\n* `Automatic` - Set Automatic on the selected end point.\n* `Manual` - Set Manual on the selected end point.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Automatic", "Manual"}, false),
+				Optional:     true,
+				Default:      "Automatic",
+			},
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -734,6 +755,20 @@ func resourceIamEndPointUserPolicyCreate(c context.Context, d *schema.ResourceDa
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamEndPointUserPolicyWithDefaults()
+	if v, ok := d.GetOkExists("account_lockout_duration"); ok {
+		x := int64(v.(int))
+		o.SetAccountLockoutDuration(x)
+	}
+
+	if v, ok := d.GetOkExists("account_lockout_threshold"); ok {
+		x := int64(v.(int))
+		o.SetAccountLockoutThreshold(x)
+	}
+
+	if v, ok := d.GetOk("account_unlock_mode"); ok {
+		x := (v.(string))
+		o.SetAccountUnlockMode(x)
+	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -793,7 +828,7 @@ func resourceIamEndPointUserPolicyCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -805,7 +840,7 @@ func resourceIamEndPointUserPolicyCreate(c context.Context, d *schema.ResourceDa
 
 	o.SetObjectType("iam.EndPointUserPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1108,8 +1143,20 @@ func resourceIamEndPointUserPolicyRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while fetching IamEndPointUserPolicy: %s", responseErr.Error())
 	}
 
+	if err := d.Set("account_lockout_duration", (s.GetAccountLockoutDuration())); err != nil {
+		return diag.Errorf("error occurred while setting property AccountLockoutDuration in IamEndPointUserPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("account_lockout_threshold", (s.GetAccountLockoutThreshold())); err != nil {
+		return diag.Errorf("error occurred while setting property AccountLockoutThreshold in IamEndPointUserPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("account_moid", (s.GetAccountMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property AccountMoid in IamEndPointUserPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("account_unlock_mode", (s.GetAccountUnlockMode())); err != nil {
+		return diag.Errorf("error occurred while setting property AccountUnlockMode in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
@@ -1202,6 +1249,23 @@ func resourceIamEndPointUserPolicyUpdate(c context.Context, d *schema.ResourceDa
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamEndPointUserPolicy{}
+	if d.HasChange("account_lockout_duration") {
+		v := d.Get("account_lockout_duration")
+		x := int64(v.(int))
+		o.SetAccountLockoutDuration(x)
+	}
+
+	if d.HasChange("account_lockout_threshold") {
+		v := d.Get("account_lockout_threshold")
+		x := int64(v.(int))
+		o.SetAccountLockoutThreshold(x)
+	}
+
+	if d.HasChange("account_unlock_mode") {
+		v := d.Get("account_unlock_mode")
+		x := (v.(string))
+		o.SetAccountUnlockMode(x)
+	}
 
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")

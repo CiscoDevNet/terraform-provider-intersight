@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "uuidpool.UuidLease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "uuidpool.UuidLease"]
+**PreferredUuid** | Pointer to **string** | The preferred UUID can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that UUID if it is available in the pool. If the specified preferred UUID is not in the range of the pool or if it is already leased or reserved, then the next available UUID from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred UUID property. When the preferred UUID property is specified in conjunction with &#39;migrate&#39; property, existing static or dynamic lease will be replaced by the new lease. Migration also supported only for dynamic lease requests. | [optional] 
 **Reservation** | Pointer to [**UuidpoolReservationReference**](UuidpoolReservationReference.md) |  | [optional] 
 **Uuid** | Pointer to **string** | UUID Prefix+Suffix numbers. | [optional] 
 **AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
@@ -71,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetPreferredUuid
+
+`func (o *UuidpoolUuidLease) GetPreferredUuid() string`
+
+GetPreferredUuid returns the PreferredUuid field if non-nil, zero value otherwise.
+
+### GetPreferredUuidOk
+
+`func (o *UuidpoolUuidLease) GetPreferredUuidOk() (*string, bool)`
+
+GetPreferredUuidOk returns a tuple with the PreferredUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreferredUuid
+
+`func (o *UuidpoolUuidLease) SetPreferredUuid(v string)`
+
+SetPreferredUuid sets PreferredUuid field to given value.
+
+### HasPreferredUuid
+
+`func (o *UuidpoolUuidLease) HasPreferredUuid() bool`
+
+HasPreferredUuid returns a boolean if a field has been set.
 
 ### GetReservation
 

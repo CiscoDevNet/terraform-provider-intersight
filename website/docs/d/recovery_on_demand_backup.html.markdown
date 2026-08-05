@@ -3,12 +3,24 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_on_demand_backup"
 description: |-
-        On-demand backup request handler for endpoint.
+        The OnDemandBackup object is tailored for initiating and managing immediate backup operations on endpoints. It caters to scenarios requiring quick and responsive data protection measures.
+        #### Purpose
+        The OnDemandBackup object enables immediate, unscheduled backup operations tailored to current needs and conditions. It ensures swift and effective execution of backups, supporting urgent and flexible data protection requirements.
+        #### Key Concepts
+        - **Flexibility:** Provides mechanisms for instant backup execution, enhancing responsiveness to changing conditions.
+        - **Access Control:** Implements privilege sets to restrict execution to authorized users.
+        - **Relationship Management:** Integrates with device registration systems to maintain a seamless backup operation framework.
 
 ---
 
 # Data Source: intersight_recovery_on_demand_backup
-On-demand backup request handler for endpoint.
+The OnDemandBackup object is tailored for initiating and managing immediate backup operations on endpoints. It caters to scenarios requiring quick and responsive data protection measures.
+#### Purpose
+The OnDemandBackup object enables immediate, unscheduled backup operations tailored to current needs and conditions. It ensures swift and effective execution of backups, supporting urgent and flexible data protection requirements.
+#### Key Concepts
+- **Flexibility:** Provides mechanisms for instant backup execution, enhancing responsiveness to changing conditions.
+- **Access Control:** Implements privilege sets to restrict execution to authorized users.
+- **Relationship Management:** Integrates with device registration systems to maintain a seamless backup operation framework.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

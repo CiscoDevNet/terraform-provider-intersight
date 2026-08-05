@@ -1059,7 +1059,7 @@ func resourceIamAccountCreate(c context.Context, d *schema.ResourceData, meta in
 
 	o.SetClassId("iam.Account")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

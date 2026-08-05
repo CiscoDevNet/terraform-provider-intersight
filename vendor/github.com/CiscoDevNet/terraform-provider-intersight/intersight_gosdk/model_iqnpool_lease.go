@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -35,7 +35,9 @@ type IqnpoolLease struct {
 	// Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
 	IqnPrefix *string `json:"IqnPrefix,omitempty"`
 	// Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
-	IqnSuffix            *string                               `json:"IqnSuffix,omitempty"`
+	IqnSuffix *string `json:"IqnSuffix,omitempty"`
+	// The preferred IQN address can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that IQN address if it is available in the pool. If the specified preferred IQN address is not in the range of the pool or if it is already leased or reserved, then the next available IQN address from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred IQN address property. When the preferred IQN address property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be replaced by the new lease. Migration is supported only for dynamic lease requests.
+	PreferredIqnAddress  *string                               `json:"PreferredIqnAddress,omitempty" validate:"regexp=^$|^(?:iqn\\\\.[0-9]{4}-[0-9]{2}(?:\\\\.[A-Za-z](?:[A-Za-z0-9\\\\-]*[A-Za-z0-9])?)+(?::.*)?|eui\\\\.[0-9A-Fa-f]{16})"`
 	Reservation          *IqnpoolReservationReference          `json:"Reservation,omitempty"`
 	AssignedToEntity     NullableMoBaseMoRelationship          `json:"AssignedToEntity,omitempty"`
 	Pool                 NullableIqnpoolPoolRelationship       `json:"Pool,omitempty"`
@@ -259,6 +261,38 @@ func (o *IqnpoolLease) HasIqnSuffix() bool {
 // SetIqnSuffix gets a reference to the given string and assigns it to the IqnSuffix field.
 func (o *IqnpoolLease) SetIqnSuffix(v string) {
 	o.IqnSuffix = &v
+}
+
+// GetPreferredIqnAddress returns the PreferredIqnAddress field value if set, zero value otherwise.
+func (o *IqnpoolLease) GetPreferredIqnAddress() string {
+	if o == nil || IsNil(o.PreferredIqnAddress) {
+		var ret string
+		return ret
+	}
+	return *o.PreferredIqnAddress
+}
+
+// GetPreferredIqnAddressOk returns a tuple with the PreferredIqnAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IqnpoolLease) GetPreferredIqnAddressOk() (*string, bool) {
+	if o == nil || IsNil(o.PreferredIqnAddress) {
+		return nil, false
+	}
+	return o.PreferredIqnAddress, true
+}
+
+// HasPreferredIqnAddress returns a boolean if a field has been set.
+func (o *IqnpoolLease) HasPreferredIqnAddress() bool {
+	if o != nil && !IsNil(o.PreferredIqnAddress) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreferredIqnAddress gets a reference to the given string and assigns it to the PreferredIqnAddress field.
+func (o *IqnpoolLease) SetPreferredIqnAddress(v string) {
+	o.PreferredIqnAddress = &v
 }
 
 // GetReservation returns the Reservation field value if set, zero value otherwise.
@@ -503,6 +537,9 @@ func (o IqnpoolLease) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IqnSuffix) {
 		toSerialize["IqnSuffix"] = o.IqnSuffix
 	}
+	if !IsNil(o.PreferredIqnAddress) {
+		toSerialize["PreferredIqnAddress"] = o.PreferredIqnAddress
+	}
 	if !IsNil(o.Reservation) {
 		toSerialize["Reservation"] = o.Reservation
 	}
@@ -580,12 +617,14 @@ func (o *IqnpoolLease) UnmarshalJSON(data []byte) (err error) {
 		// Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
 		IqnPrefix *string `json:"IqnPrefix,omitempty"`
 		// Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
-		IqnSuffix        *string                               `json:"IqnSuffix,omitempty"`
-		Reservation      *IqnpoolReservationReference          `json:"Reservation,omitempty"`
-		AssignedToEntity NullableMoBaseMoRelationship          `json:"AssignedToEntity,omitempty"`
-		Pool             NullableIqnpoolPoolRelationship       `json:"Pool,omitempty"`
-		PoolMember       NullableIqnpoolPoolMemberRelationship `json:"PoolMember,omitempty"`
-		Universe         NullableIqnpoolUniverseRelationship   `json:"Universe,omitempty"`
+		IqnSuffix *string `json:"IqnSuffix,omitempty"`
+		// The preferred IQN address can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that IQN address if it is available in the pool. If the specified preferred IQN address is not in the range of the pool or if it is already leased or reserved, then the next available IQN address from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred IQN address property. When the preferred IQN address property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be replaced by the new lease. Migration is supported only for dynamic lease requests.
+		PreferredIqnAddress *string                               `json:"PreferredIqnAddress,omitempty" validate:"regexp=^$|^(?:iqn\\\\.[0-9]{4}-[0-9]{2}(?:\\\\.[A-Za-z](?:[A-Za-z0-9\\\\-]*[A-Za-z0-9])?)+(?::.*)?|eui\\\\.[0-9A-Fa-f]{16})"`
+		Reservation         *IqnpoolReservationReference          `json:"Reservation,omitempty"`
+		AssignedToEntity    NullableMoBaseMoRelationship          `json:"AssignedToEntity,omitempty"`
+		Pool                NullableIqnpoolPoolRelationship       `json:"Pool,omitempty"`
+		PoolMember          NullableIqnpoolPoolMemberRelationship `json:"PoolMember,omitempty"`
+		Universe            NullableIqnpoolUniverseRelationship   `json:"Universe,omitempty"`
 	}
 
 	varIqnpoolLeaseWithoutEmbeddedStruct := IqnpoolLeaseWithoutEmbeddedStruct{}
@@ -599,6 +638,7 @@ func (o *IqnpoolLease) UnmarshalJSON(data []byte) (err error) {
 		varIqnpoolLease.IqnNumber = varIqnpoolLeaseWithoutEmbeddedStruct.IqnNumber
 		varIqnpoolLease.IqnPrefix = varIqnpoolLeaseWithoutEmbeddedStruct.IqnPrefix
 		varIqnpoolLease.IqnSuffix = varIqnpoolLeaseWithoutEmbeddedStruct.IqnSuffix
+		varIqnpoolLease.PreferredIqnAddress = varIqnpoolLeaseWithoutEmbeddedStruct.PreferredIqnAddress
 		varIqnpoolLease.Reservation = varIqnpoolLeaseWithoutEmbeddedStruct.Reservation
 		varIqnpoolLease.AssignedToEntity = varIqnpoolLeaseWithoutEmbeddedStruct.AssignedToEntity
 		varIqnpoolLease.Pool = varIqnpoolLeaseWithoutEmbeddedStruct.Pool
@@ -627,6 +667,7 @@ func (o *IqnpoolLease) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "IqnNumber")
 		delete(additionalProperties, "IqnPrefix")
 		delete(additionalProperties, "IqnSuffix")
+		delete(additionalProperties, "PreferredIqnAddress")
 		delete(additionalProperties, "Reservation")
 		delete(additionalProperties, "AssignedToEntity")
 		delete(additionalProperties, "Pool")

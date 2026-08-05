@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_controller"
 description: |-
-        A storage controller entity in Hitachi storage array.
+        The HitachiController object represents a storage controller entity within a Hitachi storage array. It is essential for managing controller configurations and relationships, supporting effective storage system operations.
+        #### Purpose
+        HitachiController is crucial for managing controllers within Hitachi arrays. This provides insights into controller settings and relationships, facilitating streamlined storage system management.
+        #### Key Concepts
+        - **Controller Configuration:** Details settings and properties of storage controllers, supporting efficient management and monitoring.
+        - **Device Registration:** Connects controllers to device registration objects, ensuring seamless integration within the Intersight system.
+        - **Array Management:** Links controllers to storage arrays, supporting comprehensive system operations and resource allocation.
+        - **Access Control:** Utilizes privilege sets to ensure secure and authorized operations on controllers.
 
 ---
 
 # Data Source: intersight_storage_hitachi_controller
-A storage controller entity in Hitachi storage array.
+The HitachiController object represents a storage controller entity within a Hitachi storage array. It is essential for managing controller configurations and relationships, supporting effective storage system operations.
+#### Purpose
+HitachiController is crucial for managing controllers within Hitachi arrays. This provides insights into controller settings and relationships, facilitating streamlined storage system management.
+#### Key Concepts
+- **Controller Configuration:** Details settings and properties of storage controllers, supporting efficient management and monitoring.
+- **Device Registration:** Connects controllers to device registration objects, ensuring seamless integration within the Intersight system.
+- **Array Management:** Links controllers to storage arrays, supporting comprehensive system operations and resource allocation.
+- **Access Control:** Utilizes privilege sets to ensure secure and authorized operations on controllers.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

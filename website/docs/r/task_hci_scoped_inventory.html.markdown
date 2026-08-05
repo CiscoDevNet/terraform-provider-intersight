@@ -3,12 +3,20 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_hci_scoped_inventory"
 description: |-
-        API to trigger on-demand inventory collection.
+        The HciScopedInventory object is a trigger for on-demand inventory collection for the specified set of managed objects.
+        #### Purpose
+        The HciScopedInventory object facilitates the on-demand collection of inventory data from registered devices. It acts as a trigger for inventory updates, ensuring that the system reflects the current state of managed assets.
+        #### Key Concepts
+        - **Inventory Collection:** Initiates on-demand inventory collection processes to ensure data accuracy.
 
 ---
 
 # Resource: intersight_task_hci_scoped_inventory
-API to trigger on-demand inventory collection.
+The HciScopedInventory object is a trigger for on-demand inventory collection for the specified set of managed objects.
+#### Purpose
+The HciScopedInventory object facilitates the on-demand collection of inventory data from registered devices. It acts as a trigger for inventory updates, ensuring that the system reflects the current state of managed assets.
+#### Key Concepts
+- **Inventory Collection:** Initiates on-demand inventory collection processes to ensure data accuracy.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

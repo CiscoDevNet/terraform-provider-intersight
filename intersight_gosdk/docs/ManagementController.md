@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **ManagementInterfaces** | Pointer to [**[]ManagementInterfaceRelationship**](ManagementInterfaceRelationship.md) | An array of relationships to managementInterface resources. | [optional] [readonly] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**NetworkSecureRouter** | Pointer to [**NullableNetworkSecureRouterRelationship**](NetworkSecureRouterRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 **StorageSasExpander** | Pointer to [**NullableStorageSasExpanderRelationship**](StorageSasExpanderRelationship.md) |  | [optional] 
@@ -570,6 +571,41 @@ HasNetworkElement returns a boolean if a field has been set.
 `func (o *ManagementController) UnsetNetworkElement()`
 
 UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+### GetNetworkSecureRouter
+
+`func (o *ManagementController) GetNetworkSecureRouter() NetworkSecureRouterRelationship`
+
+GetNetworkSecureRouter returns the NetworkSecureRouter field if non-nil, zero value otherwise.
+
+### GetNetworkSecureRouterOk
+
+`func (o *ManagementController) GetNetworkSecureRouterOk() (*NetworkSecureRouterRelationship, bool)`
+
+GetNetworkSecureRouterOk returns a tuple with the NetworkSecureRouter field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkSecureRouter
+
+`func (o *ManagementController) SetNetworkSecureRouter(v NetworkSecureRouterRelationship)`
+
+SetNetworkSecureRouter sets NetworkSecureRouter field to given value.
+
+### HasNetworkSecureRouter
+
+`func (o *ManagementController) HasNetworkSecureRouter() bool`
+
+HasNetworkSecureRouter returns a boolean if a field has been set.
+
+### SetNetworkSecureRouterNil
+
+`func (o *ManagementController) SetNetworkSecureRouterNil(b bool)`
+
+ SetNetworkSecureRouterNil sets the value for NetworkSecureRouter to be an explicit nil
+
+### UnsetNetworkSecureRouter
+`func (o *ManagementController) UnsetNetworkSecureRouter()`
+
+UnsetNetworkSecureRouter ensures that no value is present for NetworkSecureRouter, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *ManagementController) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

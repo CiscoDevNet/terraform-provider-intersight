@@ -3,7 +3,7 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_local_user_password"
 description: |-
-        LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context.
+        LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context. This model is applicable only to Intersight Appliance deployments.
         #### Purpose
         It enforces secure password-change operations for local users while keeping reset flows separate.
         #### Key Concepts
@@ -15,7 +15,7 @@ description: |-
 ---
 
 # Data Source: intersight_iam_local_user_password
-LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context.
+LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context. This model is applicable only to Intersight Appliance deployments.
 #### Purpose
 It enforces secure password-change operations for local users while keeping reset flows separate.
 #### Key Concepts
@@ -40,5 +40,6 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `need_password_reset`:(bool) Indicates whether the user should be prompted to reset their password. 
 * `new_password`:(string) New password that the user's password should be changed to. 
+* `password_expires_in_days`:(int) The passwordExpiresInDays attribute indicates the number of days remaining until a user's password expires,with negative values meaning the password has already expired and zero indicating expiration today.This value is dynamically calculated based on the time since the last password change and the maximumallowed password age defined by the password policy. No migration code or default value is requiredduring system upgrades because the value is computed in real-time, and initially, the password ageproperty defaults to zero, ensuring no passwords are mistakenly marked as expired. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
  

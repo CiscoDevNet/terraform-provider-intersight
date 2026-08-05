@@ -3,16 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_backup"
 description: |-
-        Backup tracks all backup requests to create a full system backup of the Intersight
-        Appliance. There will be only one Backup managed object with a 'Started' state at
-        any time. All other Backup managed objects will be in terminal states.
+        The Backup object is essential for managing system backups, ensuring data integrity and continuity through structured backup requests and processes.
+        #### Purpose
+        The Backup object oversees the creation and tracking of system backups, facilitating comprehensive data protection strategies through monitored backup operations.
+        #### Key Concepts
+        - **Managed States:** Enables tracking of backup states from initiation to completion, ensuring the integrity and availability of system data.
+        - **Single Active Instance:** Maintains one active backup instance at any given time to streamline operations and avoid conflicts.
+        - **Manual and Scheduled Modes:** Supports both manual and scheduled backup requests, accommodating diverse operational needs.
+        - **Account Relationships:** Integrates with account management for secure and organized backup processes.
 
 ---
 
 # Resource: intersight_appliance_backup
-Backup tracks all backup requests to create a full system backup of the Intersight
-Appliance. There will be only one Backup managed object with a 'Started' state at
-any time. All other Backup managed objects will be in terminal states.
+The Backup object is essential for managing system backups, ensuring data integrity and continuity through structured backup requests and processes.
+#### Purpose
+The Backup object oversees the creation and tracking of system backups, facilitating comprehensive data protection strategies through monitored backup operations.
+#### Key Concepts
+- **Managed States:** Enables tracking of backup states from initiation to completion, ensuring the integrity and availability of system data.
+- **Single Active Instance:** Maintains one active backup instance at any given time to streamline operations and avoid conflicts.
+- **Manual and Scheduled Modes:** Supports both manual and scheduled backup requests, accommodating diverse operational needs.
+- **Account Relationships:** Integrates with account management for secure and organized backup processes.
 ## Usage Example
 ### Resource Creation
 
@@ -49,11 +59,13 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `backup_download_url`:(string)(ReadOnly) Download URL for the backup artifact when available. Only populated for successful local-protocol backups; empty for remote-protocol backups. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `elapsed_time`:(int)(ReadOnly) Elapsed time in seconds since the backup process has started. 
 * `end_time`:(string)(ReadOnly) End date and time of the backup process. 
 * `filename`:(string) Backup filename to backup or restore. 
+* `force_delete`:(bool) Set to true to allow deletion of the oldest local backup when local backup retention limit is reached. If false and retention count is reached, the backup operation fails. 
 * `is_manual`:(bool)(ReadOnly) If true, represents a manual backup. Else represents a scheduled backup. 
 * `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
 * `messages`:
@@ -73,10 +85,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `protocol`:(string) Communication protocol used by the file server (e.g. scp, sftp, or CIFS).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.* `cifs` - Common Internet File System (CIFS) Protocol to access file server. 
-* `remote_host`:(string) Hostname of the remote file server. 
-* `remote_path`:(string) File server directory or share name to copy the file. 
-* `remote_port`:(int) Remote TCP port on the file server (e.g. 22 for scp). 
+* `protocol`:(string) Communication protocol used by backup and restore workflow (e.g. scp, sftp, cifs, or local).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.* `cifs` - Common Internet File System (CIFS) Protocol to access file server.* `local` - Backup file is stored in Intersight Appliance. 
+* `remote_host`:(string) Hostname of the remote file server. Not required when protocol is local. 
+* `remote_path`:(string) File server directory or share name to copy the file. Not required when protocol is local. 
+* `remote_port`:(int) Remote TCP port on the file server (e.g. 22 for scp). Not required when protocol is local. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `start_time`:(string)(ReadOnly) Start date and time of the backup process. 
 * `status`:(string)(ReadOnly) Status of the backup managed object.* `Started` - Backup or restore process has started.* `Created` - Backup or restore is in created state.* `Failed` - Backup or restore process has failed.* `Completed` - Backup or restore process has completed.* `Copied` - Backup file has been copied.* `Cleanup Failed` - Cleanup of the old backup has failed. 
@@ -97,7 +109,8 @@ This complex property has following sub-properties:
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
-* `username`:(string) Username to authenticate the fileserver. 
+* `use_policy_settings`:(bool) Set to true to inherit credentials, protocol, and file server settings from the appliance backup policy. If false, use explicit settings provided in this backup object. 
+* `username`:(string) Username to authenticate the fileserver. Not required when protocol is local. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

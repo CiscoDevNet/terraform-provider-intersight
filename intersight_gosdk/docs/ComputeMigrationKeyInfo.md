@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **IsKeyValueSet** | Pointer to **bool** | Indicates whether the value of the &#39;keyValue&#39; property has been set. | [optional] [readonly] [default to false]
 **LunId** | Pointer to **int64** | Identifies the LUN ID associated with the migration key. | [optional] [readonly] 
 **TargetAddresses** | Pointer to **[]string** |  | [optional] 
+**TpmSerial** | Pointer to **string** | Serial Id of the associated TPM module in the server. | [optional] [readonly] 
 
 ## Methods
 
@@ -242,6 +243,31 @@ HasTargetAddresses returns a boolean if a field has been set.
 `func (o *ComputeMigrationKeyInfo) UnsetTargetAddresses()`
 
 UnsetTargetAddresses ensures that no value is present for TargetAddresses, not even an explicit nil
+### GetTpmSerial
+
+`func (o *ComputeMigrationKeyInfo) GetTpmSerial() string`
+
+GetTpmSerial returns the TpmSerial field if non-nil, zero value otherwise.
+
+### GetTpmSerialOk
+
+`func (o *ComputeMigrationKeyInfo) GetTpmSerialOk() (*string, bool)`
+
+GetTpmSerialOk returns a tuple with the TpmSerial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTpmSerial
+
+`func (o *ComputeMigrationKeyInfo) SetTpmSerial(v string)`
+
+SetTpmSerial sets TpmSerial field to given value.
+
+### HasTpmSerial
+
+`func (o *ComputeMigrationKeyInfo) HasTpmSerial() bool`
+
+HasTpmSerial returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -884,7 +884,7 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetKvmSessionId(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -896,7 +896,7 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetOneTimePassword(x)
 	}
 
-	if v, ok := d.GetOk("server"); ok {
+	if v, ok := d.GetOkExists("server"); ok {
 		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1022,7 +1022,7 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if v, ok := d.GetOk("tunnel"); ok {
+	if v, ok := d.GetOkExists("tunnel"); ok {
 		p := make([]models.KvmTunnelRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

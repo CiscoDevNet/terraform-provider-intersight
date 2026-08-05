@@ -3,14 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster"
 description: |-
-        A HyperFlex cluster. Contains inventory information concerning the health, software versions, storage, and nodes
-        of the cluster.
+        The Cluster object represents a HyperFlex cluster and is a comprehensive model encapsulating the cluster's inventory, health, software versions, storage, and nodes. It is a central element in managing and monitoring the overall state and functionality of a HyperFlex system.
+        #### Purpose
+        The Cluster object is designed to provide a detailed representation of a HyperFlex cluster, offering insights into its operational status, configurations, and capabilities. It serves as a vital tool for administrators to manage and optimize cluster resources effectively.
+        #### Key Concepts
+        - **Cluster Inventory:** Captures extensive details about the cluster's hardware and software components, including storage and node configurations.
+        - **Health Monitoring:** Provides insights into the cluster's health status, enabling proactive management and maintenance.
+        - **Configuration Management:** Facilitates the management of cluster settings, ensuring that configurations align with operational requirements and best practices.
+        - **Integration:** Acts as a hub for integrating various cluster-related services and functionalities, supporting efficient cluster operations.
 
 ---
 
 # Data Source: intersight_hyperflex_cluster
-A HyperFlex cluster. Contains inventory information concerning the health, software versions, storage, and nodes
-of the cluster.
+The Cluster object represents a HyperFlex cluster and is a comprehensive model encapsulating the cluster's inventory, health, software versions, storage, and nodes. It is a central element in managing and monitoring the overall state and functionality of a HyperFlex system.
+#### Purpose
+The Cluster object is designed to provide a detailed representation of a HyperFlex cluster, offering insights into its operational status, configurations, and capabilities. It serves as a vital tool for administrators to manage and optimize cluster resources effectively.
+#### Key Concepts
+- **Cluster Inventory:** Captures extensive details about the cluster's hardware and software components, including storage and node configurations.
+- **Health Monitoring:** Provides insights into the cluster's health status, enabling proactive management and maintenance.
+- **Configuration Management:** Facilitates the management of cluster settings, ensuring that configurations align with operational requirements and best practices.
+- **Integration:** Acts as a hub for integrating various cluster-related services and functionalities, supporting efficient cluster operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

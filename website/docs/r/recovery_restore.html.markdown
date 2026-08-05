@@ -3,12 +3,24 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_restore"
 description: |-
-        Triggers a restore operation on the target endpoint.
+        The Restore object is a critical component of the backup and restoration framework, focusing on the execution and management of restore operations on various instances of UCS Director only. This provides a structured approach to trigger and monitor restore workflows, ensuring efficient recovery processes.
+        #### Purpose
+        The Restore object initiates and tracks restore operations on target endpoints. It facilitates the start of restore workflows and provides mechanisms to monitor their progress and status, ensuring smooth execution and reliable system recovery.
+        #### Key Concepts
+        - **Workflow Integration:** The Restore object is closely integrated with workflow systems, allowing for automated execution and tracking of restore processes.
+        - **Access Control:** Implemented with privilege sets to ensure that only authorized users can initiate, read, or update restore operations.
+        - **Relationship Management:** Establishes connections with related objects, such as device registration and workflow instances, to maintain a cohesive recovery strategy.
 
 ---
 
 # Resource: intersight_recovery_restore
-Triggers a restore operation on the target endpoint.
+The Restore object is a critical component of the backup and restoration framework, focusing on the execution and management of restore operations on various instances of UCS Director only. This provides a structured approach to trigger and monitor restore workflows, ensuring efficient recovery processes.
+#### Purpose
+The Restore object initiates and tracks restore operations on target endpoints. It facilitates the start of restore workflows and provides mechanisms to monitor their progress and status, ensuring smooth execution and reliable system recovery.
+#### Key Concepts
+- **Workflow Integration:** The Restore object is closely integrated with workflow systems, allowing for automated execution and tracking of restore processes.
+- **Access Control:** Implemented with privilege sets to ensure that only authorized users can initiate, read, or update restore operations.
+- **Relationship Management:** Establishes connections with related objects, such as device registration and workflow instances, to maintain a cohesive recovery strategy.
 ## Usage Example
 ### Resource Creation
 

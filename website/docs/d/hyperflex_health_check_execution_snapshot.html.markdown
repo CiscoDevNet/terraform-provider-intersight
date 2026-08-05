@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_health_check_execution_snapshot"
 description: |-
-        Last known health check execution results of a health check Definition.
+        The HealthCheckExecutionSnapshot object is an essential component of the HyperFlex health monitoring system, capturing the results and status of the most recent health check execution on a HyperFlex cluster. This provides a comprehensive snapshot of the health check's performance and outcome, ensuring that administrators have access to up-to-date information about the cluster's health.
+        #### Purpose
+        The HealthCheckExecutionSnapshot serves as a repository for the latest health check results, enabling quick access to execution data that informs maintenance and troubleshooting activities. It is designed to facilitate efficient health assessments and promote proactive system management.
+        #### Key Concepts
+        - **Execution State Tracking:** Captures the final status of health check executions, indicating whether operations succeeded, failed, or encountered issues.
+        - **Cluster Health Monitoring:** Provides a consolidated view of health check results, helping administrators identify potential problems and areas requiring attention.
+        - **Access Control:** Privilege sets ensure that only authorized users can read and manage execution snapshots, safeguarding sensitive health data.
+        - **Integration with Health Check Definitions:** Tightly linked to health check definitions, offering insights into specific checks executed and their impact on cluster health.
 
 ---
 
 # Data Source: intersight_hyperflex_health_check_execution_snapshot
-Last known health check execution results of a health check Definition.
+The HealthCheckExecutionSnapshot object is an essential component of the HyperFlex health monitoring system, capturing the results and status of the most recent health check execution on a HyperFlex cluster. This provides a comprehensive snapshot of the health check's performance and outcome, ensuring that administrators have access to up-to-date information about the cluster's health.
+#### Purpose
+The HealthCheckExecutionSnapshot serves as a repository for the latest health check results, enabling quick access to execution data that informs maintenance and troubleshooting activities. It is designed to facilitate efficient health assessments and promote proactive system management.
+#### Key Concepts
+- **Execution State Tracking:** Captures the final status of health check executions, indicating whether operations succeeded, failed, or encountered issues.
+- **Cluster Health Monitoring:** Provides a consolidated view of health check results, helping administrators identify potential problems and areas requiring attention.
+- **Access Control:** Privilege sets ensure that only authorized users can read and manage execution snapshots, safeguarding sensitive health data.
+- **Integration with Health Check Definitions:** Tightly linked to health check definitions, offering insights into specific checks executed and their impact on cluster health.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

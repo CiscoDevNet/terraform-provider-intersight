@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the IaasLicenseUtilizationInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IaasLicenseUtilizationInfo{}
 
-// IaasLicenseUtilizationInfo License list with the Utilization info for UCSD.
+// IaasLicenseUtilizationInfo ### Overview The LicenseUtilizationInfo object is crucial for managing and understanding the utilization of licenses within the UCS Director (UCSD). This provides a comprehensive view of license details and their actual usage, enabling efficient resource management and planning.    #### Purpose   The LicenseUtilizationInfo object helps administrators track and optimize the use of licenses associated with various features in UCSD. It ensures that license limits are adhered to while providing insights into actual usage patterns.    #### Key Concepts   - **License Tracking:** - Offers a clear view of the licenses available and used within the system, aiding compliance and optimization.  - **Usage Insights:** - Provides actionable data on how licenses are being utilized, supporting informed decision-making for resource allocation.  - **Read-Only Access:** - Ensures that the information is accessible for review without modification, maintaining integrity and compliance.
 type IaasLicenseUtilizationInfo struct {
 	MoBaseComplexType
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

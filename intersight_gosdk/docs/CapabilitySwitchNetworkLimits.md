@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **MaximumPrimaryVlan** | Pointer to **int64** | Maximum configurable Primary Private VLANs on Switch/Fabric-Interconnect. | [optional] 
 **MaximumSecondaryVlan** | Pointer to **int64** | Maximum configurable Secondary Private VLANs on Switch/Fabric-Interconnect. | [optional] 
 **MaximumSecondaryVlanPerPrimary** | Pointer to **int64** | Maximum configurable Secondary VLANs per each Primary VLAN on Switch/Fabric-Interconnect. | [optional] 
+**MaximumSecureRouterPorts** | Pointer to **int64** | Maximum configurable Secure Router ports on Switch/Fabric-Interconnect. | [optional] 
 **MaximumVifs** | Pointer to **int64** | Maximum allowes VIFs on Switch/Fabric-Interconnect. | [optional] 
 **MaximumVlans** | Pointer to **int64** | Maximum configurable VLANs on Switch/Fabric-Interconnect. | [optional] 
 **MinimumActiveFans** | Pointer to **int64** | Minimum required fans in &#39;active&#39; state for this Switch/Fabric-Interconnect. | [optional] 
@@ -380,6 +381,31 @@ SetMaximumSecondaryVlanPerPrimary sets MaximumSecondaryVlanPerPrimary field to g
 `func (o *CapabilitySwitchNetworkLimits) HasMaximumSecondaryVlanPerPrimary() bool`
 
 HasMaximumSecondaryVlanPerPrimary returns a boolean if a field has been set.
+
+### GetMaximumSecureRouterPorts
+
+`func (o *CapabilitySwitchNetworkLimits) GetMaximumSecureRouterPorts() int64`
+
+GetMaximumSecureRouterPorts returns the MaximumSecureRouterPorts field if non-nil, zero value otherwise.
+
+### GetMaximumSecureRouterPortsOk
+
+`func (o *CapabilitySwitchNetworkLimits) GetMaximumSecureRouterPortsOk() (*int64, bool)`
+
+GetMaximumSecureRouterPortsOk returns a tuple with the MaximumSecureRouterPorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaximumSecureRouterPorts
+
+`func (o *CapabilitySwitchNetworkLimits) SetMaximumSecureRouterPorts(v int64)`
+
+SetMaximumSecureRouterPorts sets MaximumSecureRouterPorts field to given value.
+
+### HasMaximumSecureRouterPorts
+
+`func (o *CapabilitySwitchNetworkLimits) HasMaximumSecureRouterPorts() bool`
+
+HasMaximumSecureRouterPorts returns a boolean if a field has been set.
 
 ### GetMaximumVifs
 

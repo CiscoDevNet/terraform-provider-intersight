@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -30,10 +30,12 @@ type IamLocalUserPasswordPolicy struct {
 	ObjectType string `json:"ObjectType"`
 	// Determines if the user lock out feature must be enabled for the local admin user.
 	EnableLockOutForAdminUser *bool `json:"EnableLockOutForAdminUser,omitempty"`
-	// Seconds are tracked for consecutive incorrect login attempts. Users will be locked out if they exceed the max number of incorrect login attempts during this duration.
+	// The duration, in seconds, within which consecutive incorrect login attempts are counted. The system locks out the account if the number of incorrect attempts exceeds the maximum allowed value during this window.
 	FailedLoginTrackerWindow *int64 `json:"FailedLoginTrackerWindow,omitempty"`
 	// The time period, in seconds, during which a user account will remain locked.
 	LockOutTimePeriod *int64 `json:"LockOutTimePeriod,omitempty"`
+	// Maximum number of days a password can be used before it must be changed. Set to 0 to disable password expiration.
+	MaxDaysAllowedWithSamePassword *int64 `json:"MaxDaysAllowedWithSamePassword,omitempty"`
 	// Users will be locked out after exceeding the max consecutive incorrect login attempts allowed within the configured time duration.
 	MaxFailedLoginsAllowed *int64 `json:"MaxFailedLoginsAllowed,omitempty"`
 	// Minimum number of characters different from previous password.
@@ -72,6 +74,8 @@ func NewIamLocalUserPasswordPolicy(classId string, objectType string) *IamLocalU
 	this.FailedLoginTrackerWindow = &failedLoginTrackerWindow
 	var lockOutTimePeriod int64 = 900
 	this.LockOutTimePeriod = &lockOutTimePeriod
+	var maxDaysAllowedWithSamePassword int64 = 0
+	this.MaxDaysAllowedWithSamePassword = &maxDaysAllowedWithSamePassword
 	var maxFailedLoginsAllowed int64 = 5
 	this.MaxFailedLoginsAllowed = &maxFailedLoginsAllowed
 	var minCharDifference int64 = 0
@@ -108,6 +112,8 @@ func NewIamLocalUserPasswordPolicyWithDefaults() *IamLocalUserPasswordPolicy {
 	this.FailedLoginTrackerWindow = &failedLoginTrackerWindow
 	var lockOutTimePeriod int64 = 900
 	this.LockOutTimePeriod = &lockOutTimePeriod
+	var maxDaysAllowedWithSamePassword int64 = 0
+	this.MaxDaysAllowedWithSamePassword = &maxDaysAllowedWithSamePassword
 	var maxFailedLoginsAllowed int64 = 5
 	this.MaxFailedLoginsAllowed = &maxFailedLoginsAllowed
 	var minCharDifference int64 = 0
@@ -281,6 +287,38 @@ func (o *IamLocalUserPasswordPolicy) HasLockOutTimePeriod() bool {
 // SetLockOutTimePeriod gets a reference to the given int64 and assigns it to the LockOutTimePeriod field.
 func (o *IamLocalUserPasswordPolicy) SetLockOutTimePeriod(v int64) {
 	o.LockOutTimePeriod = &v
+}
+
+// GetMaxDaysAllowedWithSamePassword returns the MaxDaysAllowedWithSamePassword field value if set, zero value otherwise.
+func (o *IamLocalUserPasswordPolicy) GetMaxDaysAllowedWithSamePassword() int64 {
+	if o == nil || IsNil(o.MaxDaysAllowedWithSamePassword) {
+		var ret int64
+		return ret
+	}
+	return *o.MaxDaysAllowedWithSamePassword
+}
+
+// GetMaxDaysAllowedWithSamePasswordOk returns a tuple with the MaxDaysAllowedWithSamePassword field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPasswordPolicy) GetMaxDaysAllowedWithSamePasswordOk() (*int64, bool) {
+	if o == nil || IsNil(o.MaxDaysAllowedWithSamePassword) {
+		return nil, false
+	}
+	return o.MaxDaysAllowedWithSamePassword, true
+}
+
+// HasMaxDaysAllowedWithSamePassword returns a boolean if a field has been set.
+func (o *IamLocalUserPasswordPolicy) HasMaxDaysAllowedWithSamePassword() bool {
+	if o != nil && !IsNil(o.MaxDaysAllowedWithSamePassword) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDaysAllowedWithSamePassword gets a reference to the given int64 and assigns it to the MaxDaysAllowedWithSamePassword field.
+func (o *IamLocalUserPasswordPolicy) SetMaxDaysAllowedWithSamePassword(v int64) {
+	o.MaxDaysAllowedWithSamePassword = &v
 }
 
 // GetMaxFailedLoginsAllowed returns the MaxFailedLoginsAllowed field value if set, zero value otherwise.
@@ -649,6 +687,9 @@ func (o IamLocalUserPasswordPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LockOutTimePeriod) {
 		toSerialize["LockOutTimePeriod"] = o.LockOutTimePeriod
 	}
+	if !IsNil(o.MaxDaysAllowedWithSamePassword) {
+		toSerialize["MaxDaysAllowedWithSamePassword"] = o.MaxDaysAllowedWithSamePassword
+	}
 	if !IsNil(o.MaxFailedLoginsAllowed) {
 		toSerialize["MaxFailedLoginsAllowed"] = o.MaxFailedLoginsAllowed
 	}
@@ -736,10 +777,12 @@ func (o *IamLocalUserPasswordPolicy) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Determines if the user lock out feature must be enabled for the local admin user.
 		EnableLockOutForAdminUser *bool `json:"EnableLockOutForAdminUser,omitempty"`
-		// Seconds are tracked for consecutive incorrect login attempts. Users will be locked out if they exceed the max number of incorrect login attempts during this duration.
+		// The duration, in seconds, within which consecutive incorrect login attempts are counted. The system locks out the account if the number of incorrect attempts exceeds the maximum allowed value during this window.
 		FailedLoginTrackerWindow *int64 `json:"FailedLoginTrackerWindow,omitempty"`
 		// The time period, in seconds, during which a user account will remain locked.
 		LockOutTimePeriod *int64 `json:"LockOutTimePeriod,omitempty"`
+		// Maximum number of days a password can be used before it must be changed. Set to 0 to disable password expiration.
+		MaxDaysAllowedWithSamePassword *int64 `json:"MaxDaysAllowedWithSamePassword,omitempty"`
 		// Users will be locked out after exceeding the max consecutive incorrect login attempts allowed within the configured time duration.
 		MaxFailedLoginsAllowed *int64 `json:"MaxFailedLoginsAllowed,omitempty"`
 		// Minimum number of characters different from previous password.
@@ -771,6 +814,7 @@ func (o *IamLocalUserPasswordPolicy) UnmarshalJSON(data []byte) (err error) {
 		varIamLocalUserPasswordPolicy.EnableLockOutForAdminUser = varIamLocalUserPasswordPolicyWithoutEmbeddedStruct.EnableLockOutForAdminUser
 		varIamLocalUserPasswordPolicy.FailedLoginTrackerWindow = varIamLocalUserPasswordPolicyWithoutEmbeddedStruct.FailedLoginTrackerWindow
 		varIamLocalUserPasswordPolicy.LockOutTimePeriod = varIamLocalUserPasswordPolicyWithoutEmbeddedStruct.LockOutTimePeriod
+		varIamLocalUserPasswordPolicy.MaxDaysAllowedWithSamePassword = varIamLocalUserPasswordPolicyWithoutEmbeddedStruct.MaxDaysAllowedWithSamePassword
 		varIamLocalUserPasswordPolicy.MaxFailedLoginsAllowed = varIamLocalUserPasswordPolicyWithoutEmbeddedStruct.MaxFailedLoginsAllowed
 		varIamLocalUserPasswordPolicy.MinCharDifference = varIamLocalUserPasswordPolicyWithoutEmbeddedStruct.MinCharDifference
 		varIamLocalUserPasswordPolicy.MinDaysBetweenPasswordChange = varIamLocalUserPasswordPolicyWithoutEmbeddedStruct.MinDaysBetweenPasswordChange
@@ -803,6 +847,7 @@ func (o *IamLocalUserPasswordPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "EnableLockOutForAdminUser")
 		delete(additionalProperties, "FailedLoginTrackerWindow")
 		delete(additionalProperties, "LockOutTimePeriod")
+		delete(additionalProperties, "MaxDaysAllowedWithSamePassword")
 		delete(additionalProperties, "MaxFailedLoginsAllowed")
 		delete(additionalProperties, "MinCharDifference")
 		delete(additionalProperties, "MinDaysBetweenPasswordChange")

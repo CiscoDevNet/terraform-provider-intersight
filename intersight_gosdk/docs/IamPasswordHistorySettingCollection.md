@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.PasswordHistorySettingCollection"]
 **Orphaned** | Pointer to **bool** | Orphaned indicates whether policy, server or profile changed or deleted related to this object. Such objects would be marked as orphaned for deletion. | [optional] [readonly] [default to false]
 **PasswordHistoryObjects** | Pointer to [**[]IamPasswordHistorySetting**](IamPasswordHistorySetting.md) |  | [optional] 
+**PasswordHistoryWindow** | Pointer to **int64** | The password history window size (number of previous passwords to remember) that is currently in effect. Used to detect policy changes at deploy time so the stored history can be renormalized if the window has changed. | [optional] [readonly] [default to 0]
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **Policy** | Pointer to [**NullableIamEndPointUserPolicyRelationship**](IamEndPointUserPolicyRelationship.md) |  | [optional] 
 **Profile** | Pointer to [**NullablePolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) |  | [optional] 
@@ -132,6 +133,31 @@ HasPasswordHistoryObjects returns a boolean if a field has been set.
 `func (o *IamPasswordHistorySettingCollection) UnsetPasswordHistoryObjects()`
 
 UnsetPasswordHistoryObjects ensures that no value is present for PasswordHistoryObjects, not even an explicit nil
+### GetPasswordHistoryWindow
+
+`func (o *IamPasswordHistorySettingCollection) GetPasswordHistoryWindow() int64`
+
+GetPasswordHistoryWindow returns the PasswordHistoryWindow field if non-nil, zero value otherwise.
+
+### GetPasswordHistoryWindowOk
+
+`func (o *IamPasswordHistorySettingCollection) GetPasswordHistoryWindowOk() (*int64, bool)`
+
+GetPasswordHistoryWindowOk returns a tuple with the PasswordHistoryWindow field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPasswordHistoryWindow
+
+`func (o *IamPasswordHistorySettingCollection) SetPasswordHistoryWindow(v int64)`
+
+SetPasswordHistoryWindow sets PasswordHistoryWindow field to given value.
+
+### HasPasswordHistoryWindow
+
+`func (o *IamPasswordHistorySettingCollection) HasPasswordHistoryWindow() bool`
+
+HasPasswordHistoryWindow returns a boolean if a field has been set.
+
 ### GetAccount
 
 `func (o *IamPasswordHistorySettingCollection) GetAccount() IamAccountRelationship`

@@ -3,7 +3,7 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_local_user_password"
 description: |-
-        LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context.
+        LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context. This model is applicable only to Intersight Appliance deployments.
         #### Purpose
         It enforces secure password-change operations for local users while keeping reset flows separate.
         #### Key Concepts
@@ -15,7 +15,7 @@ description: |-
 ---
 
 # Resource: intersight_iam_local_user_password
-LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context.
+LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context. This model is applicable only to Intersight Appliance deployments.
 #### Purpose
 It enforces secure password-change operations for local users while keeping reset flows separate.
 #### Key Concepts
@@ -49,6 +49,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `password_expires_in_days`:(int)(ReadOnly) The passwordExpiresInDays attribute indicates the number of days remaining until a user's password expires,with negative values meaning the password has already expired and zero indicating expiration today.This value is dynamically calculated based on the time since the last password change and the maximumallowed password age defined by the password policy. No migration code or default value is requiredduring system upgrades because the value is computed in real-time, and initially, the password ageproperty defaults to zero, ensuring no passwords are mistakenly marked as expired. 
 * `permission_resources`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

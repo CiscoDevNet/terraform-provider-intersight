@@ -727,7 +727,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -739,7 +739,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 
 	o.SetObjectType("recovery.ScheduleConfigPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

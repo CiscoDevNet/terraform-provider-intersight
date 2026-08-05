@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -141,13 +142,13 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Optional:     true,
 						},
 						"base_dn": {
-							Description:  "Base Distinguished Name (DN). Starting point from where server will search for users and groups.",
+							Description:  "Base Distinguished Name (DN), the starting point for searching users and groups.",
 							Type:         schema.TypeString,
 							ValidateFunc: StringLenMaximum(254),
 							Optional:     true,
 						},
 						"bind_dn": {
-							Description:  "Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers.",
+							Description:  "Distinguished Name (DN) used to authenticate against LDAP servers.",
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringLenBetween(0, 254),
 							Optional:     true,
@@ -172,7 +173,7 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Optional:     true,
 						},
 						"enable_encryption": {
-							Description: "If enabled, the endpoint encrypts all information it sends to the LDAP server.",
+							Description: "If enabled, the endpoint encrypts all information sent to the LDAP server.",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
@@ -182,7 +183,7 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"enable_nested_group_search": {
-							Description: "If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively.",
+							Description: "If enabled, an extended search walks the ancestry chain to the root and returns all groups and subgroups recursively.",
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Default:     false,
@@ -224,7 +225,7 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Default:     "iam.LdapBaseProperties",
 						},
 						"password": {
-							Description:  "The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters.",
+							Description:  "The password for the initial bind process. Must not contain spaces, tabs, or line breaks, and cannot exceed 254 characters.",
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[\\S+]{0,254}$"), ""),
 							Optional:     true,
@@ -236,6 +237,14 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Optional:     true,
 							Default:      0,
 						},
+						"user_search_attribute": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							}},
 					},
 				},
 			},
@@ -1077,6 +1086,20 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					o.SetTimeout(x)
 				}
 			}
+			if v, ok := l["user_search_attribute"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetUserSearchAttribute(x)
+					}
+				}
+			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
@@ -1193,7 +1216,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1205,7 +1228,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 
 	o.SetObjectType("iam.LdapPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1755,6 +1778,20 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 				{
 					x := int64(v.(int))
 					o.SetTimeout(x)
+				}
+			}
+			if v, ok := l["user_search_attribute"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetUserSearchAttribute(x)
+					}
 				}
 			}
 			p = append(p, *o)

@@ -432,6 +432,13 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 							Optional:    true,
 							Default:     "workflow.CustomDataTypeProperties",
 						},
+						"support_status": {
+							Description:  "Supported status of the definition.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Supported", "Beta", "Deprecated"}, false),
+							Optional:     true,
+							Default:      "Supported",
+						},
 					},
 				},
 			},
@@ -900,7 +907,7 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 		}
 	}
 
-	if v, ok := d.GetOk("catalog"); ok {
+	if v, ok := d.GetOkExists("catalog"); ok {
 		p := make([]models.WorkflowCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -960,12 +967,12 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 		o.SetLabel(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
@@ -1061,6 +1068,12 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["support_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetSupportStatus(x)
 				}
 			}
 			p = append(p, *o)
@@ -1637,6 +1650,12 @@ func resourceWorkflowCustomDataTypeDefinitionUpdate(c context.Context, d *schema
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["support_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetSupportStatus(x)
 				}
 			}
 			p = append(p, *o)

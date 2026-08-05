@@ -4,7 +4,6 @@ layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_config_result"
 description: |-
         ConfigResult is designed to provide feedback on profile configuration processes, offering insights into the state and outcomes of validation and deployment operations.
-        
         #### Purpose
         ConfigResult is designed to provide feedback on profile configuration processes, offering insights into the state and outcomes of validation and deployment operations.
         #### Key Concepts
@@ -17,7 +16,6 @@ description: |-
 
 # Data Source: intersight_hyperflex_config_result
 ConfigResult is designed to provide feedback on profile configuration processes, offering insights into the state and outcomes of validation and deployment operations.
- 
 #### Purpose
 ConfigResult is designed to provide feedback on profile configuration processes, offering insights into the state and outcomes of validation and deployment operations.
 #### Key Concepts

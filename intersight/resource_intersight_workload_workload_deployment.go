@@ -922,7 +922,7 @@ func resourceWorkloadWorkloadDeployment() *schema.Resource {
 				Description: "The starting index used to generate the suffix for the workload instance name.",
 				Type:        schema.TypeInt,
 				Optional:    true,
-				Default:     1,
+				Computed:    true,
 				ForceNew:    true,
 			},
 			"status": {
@@ -1514,7 +1514,7 @@ func resourceWorkloadWorkloadDeployment() *schema.Resource {
 			"workload_instance_prefix": {
 				Description:  "The prefix to be used for naming workload instances created by this deployment. Prefix can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), or an underscore (_). This prefix must be unique within the organization.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,31}$"), ""),
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9-_]{0,31}$"), ""),
 				Optional:     true,
 			},
 		},
@@ -1777,19 +1777,19 @@ func resourceWorkloadWorkloadDeploymentCreate(c context.Context, d *schema.Resou
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
 	o.SetObjectType("workload.WorkloadDeployment")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

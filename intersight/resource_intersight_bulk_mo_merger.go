@@ -169,7 +169,7 @@ func resourceBulkMoMerger() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Merge", "Replace"}, false),
 				Optional:     true,
-				Default:      "Merge",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"mod_time": {
@@ -3055,19 +3055,19 @@ func resourceBulkMoMergerCreate(c context.Context, d *schema.ResourceData, meta 
 
 	o.SetClassId("bulk.MoMerger")
 
-	if v, ok := d.GetOk("merge_action"); ok {
+	if v, ok := d.GetOkExists("merge_action"); ok {
 		x := (v.(string))
 		o.SetMergeAction(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("bulk.MoMerger")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3338,7 +3338,7 @@ func resourceBulkMoMergerCreate(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if v, ok := d.GetOk("target_config"); ok {
+	if v, ok := d.GetOkExists("target_config"); ok {
 		p := make([]models.MoBaseMo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3574,7 +3574,7 @@ func resourceBulkMoMergerCreate(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if v, ok := d.GetOk("workflow_name_suffix"); ok {
+	if v, ok := d.GetOkExists("workflow_name_suffix"); ok {
 		x := (v.(string))
 		o.SetWorkflowNameSuffix(x)
 	}

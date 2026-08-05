@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the HciCluster type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HciCluster{}
 
-// HciCluster A HCI cluster reported by Prism Central.
+// HciCluster The Cluster object represents a cluster, as reported by Nutanix Prism Central. This provides a structured representation of clusters, including their configuration and operational status. #### Purpose   The Cluster object serves as a central point of information for understanding the characteristics of Nutanix clusters. It enables administrators to monitor cluster status and configuration. #### Key Concepts - **Configuration Details:** Provides insights into cluster attributes, including software and hardware configurations, license.  - **Performance Monitoring:** Tracks key performance indicators such as VM count, upgrade status, and resource utilization.
 type HciCluster struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -46,6 +46,8 @@ type HciCluster struct {
 	ClusterExtId       *string           `json:"ClusterExtId,omitempty"`
 	ClusterFunction    []string          `json:"ClusterFunction,omitempty"`
 	ClusterSoftwareMap []HciSoftwareType `json:"ClusterSoftwareMap,omitempty"`
+	// The type of the cluster. Possible values: - HYPER_CONVERGED: Traditional HCI cluster using local storage. - COMPUTE: Cluster using external storage.
+	ClusterType *string `json:"ClusterType,omitempty"`
 	// The name of the default container created as part of cluster creation.
 	ContainerName *string `json:"ContainerName,omitempty"`
 	// The CPU capacity in Hz of the cluster.
@@ -102,19 +104,22 @@ type HciCluster struct {
 	StorageUsageBytes *int64 `json:"StorageUsageBytes,omitempty"`
 	// The timezone of the cluster.
 	Timezone *string `json:"Timezone,omitempty"`
-	// The upgrade status of a cluster includes the following known values: PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED, FAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster.
+	// The upgrade status of a cluster includes the following known values PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED, FAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster.
 	UpgradeStatus *string `json:"UpgradeStatus,omitempty"`
 	// The number of VMs running on this cluster.
-	VmCount       *int64                               `json:"VmCount,omitempty"`
-	Compliance    NullableHciComplianceRelationship    `json:"Compliance,omitempty"`
-	DomainManager NullableHciDomainManagerRelationship `json:"DomainManager,omitempty"`
-	Entitlement   NullableHciEntitlementRelationship   `json:"Entitlement,omitempty"`
+	VmCount          *int64                                  `json:"VmCount,omitempty"`
+	ClusterOperation NullableHciClusterOperationRelationship `json:"ClusterOperation,omitempty"`
+	Compliance       NullableHciComplianceRelationship       `json:"Compliance,omitempty"`
+	DomainManager    NullableHciDomainManagerRelationship    `json:"DomainManager,omitempty"`
+	Entitlement      NullableHciEntitlementRelationship      `json:"Entitlement,omitempty"`
 	// An array of relationships to hciNode resources.
 	Nodes []HciNodeRelationship `json:"Nodes,omitempty"`
 	// An array of relationships to hciPhysicalGpu resources.
 	PhysicalGpus     []HciPhysicalGpuRelationship                `json:"PhysicalGpus,omitempty"`
 	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	Violation        NullableHciViolationRelationship            `json:"Violation,omitempty"`
+	// An array of relationships to hciStorageContainer resources.
+	StorageContainers []HciStorageContainerRelationship `json:"StorageContainers,omitempty"`
+	Violation         NullableHciViolationRelationship  `json:"Violation,omitempty"`
 	// An array of relationships to hciVirtualGpu resources.
 	VirtualGpus []HciVirtualGpuRelationship `json:"VirtualGpus,omitempty"`
 	// An array of relationships to hciBaseVm resources.
@@ -579,6 +584,38 @@ func (o *HciCluster) HasClusterSoftwareMap() bool {
 // SetClusterSoftwareMap gets a reference to the given []HciSoftwareType and assigns it to the ClusterSoftwareMap field.
 func (o *HciCluster) SetClusterSoftwareMap(v []HciSoftwareType) {
 	o.ClusterSoftwareMap = v
+}
+
+// GetClusterType returns the ClusterType field value if set, zero value otherwise.
+func (o *HciCluster) GetClusterType() string {
+	if o == nil || IsNil(o.ClusterType) {
+		var ret string
+		return ret
+	}
+	return *o.ClusterType
+}
+
+// GetClusterTypeOk returns a tuple with the ClusterType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HciCluster) GetClusterTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.ClusterType) {
+		return nil, false
+	}
+	return o.ClusterType, true
+}
+
+// HasClusterType returns a boolean if a field has been set.
+func (o *HciCluster) HasClusterType() bool {
+	if o != nil && !IsNil(o.ClusterType) {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterType gets a reference to the given string and assigns it to the ClusterType field.
+func (o *HciCluster) SetClusterType(v string) {
+	o.ClusterType = &v
 }
 
 // GetContainerName returns the ContainerName field value if set, zero value otherwise.
@@ -1771,6 +1808,49 @@ func (o *HciCluster) SetVmCount(v int64) {
 	o.VmCount = &v
 }
 
+// GetClusterOperation returns the ClusterOperation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HciCluster) GetClusterOperation() HciClusterOperationRelationship {
+	if o == nil || IsNil(o.ClusterOperation.Get()) {
+		var ret HciClusterOperationRelationship
+		return ret
+	}
+	return *o.ClusterOperation.Get()
+}
+
+// GetClusterOperationOk returns a tuple with the ClusterOperation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HciCluster) GetClusterOperationOk() (*HciClusterOperationRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ClusterOperation.Get(), o.ClusterOperation.IsSet()
+}
+
+// HasClusterOperation returns a boolean if a field has been set.
+func (o *HciCluster) HasClusterOperation() bool {
+	if o != nil && o.ClusterOperation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterOperation gets a reference to the given NullableHciClusterOperationRelationship and assigns it to the ClusterOperation field.
+func (o *HciCluster) SetClusterOperation(v HciClusterOperationRelationship) {
+	o.ClusterOperation.Set(&v)
+}
+
+// SetClusterOperationNil sets the value for ClusterOperation to be an explicit nil
+func (o *HciCluster) SetClusterOperationNil() {
+	o.ClusterOperation.Set(nil)
+}
+
+// UnsetClusterOperation ensures that no value is present for ClusterOperation, not even an explicit nil
+func (o *HciCluster) UnsetClusterOperation() {
+	o.ClusterOperation.Unset()
+}
+
 // GetCompliance returns the Compliance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HciCluster) GetCompliance() HciComplianceRelationship {
 	if o == nil || IsNil(o.Compliance.Get()) {
@@ -2009,6 +2089,39 @@ func (o *HciCluster) UnsetRegisteredDevice() {
 	o.RegisteredDevice.Unset()
 }
 
+// GetStorageContainers returns the StorageContainers field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HciCluster) GetStorageContainers() []HciStorageContainerRelationship {
+	if o == nil {
+		var ret []HciStorageContainerRelationship
+		return ret
+	}
+	return o.StorageContainers
+}
+
+// GetStorageContainersOk returns a tuple with the StorageContainers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HciCluster) GetStorageContainersOk() ([]HciStorageContainerRelationship, bool) {
+	if o == nil || IsNil(o.StorageContainers) {
+		return nil, false
+	}
+	return o.StorageContainers, true
+}
+
+// HasStorageContainers returns a boolean if a field has been set.
+func (o *HciCluster) HasStorageContainers() bool {
+	if o != nil && !IsNil(o.StorageContainers) {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageContainers gets a reference to the given []HciStorageContainerRelationship and assigns it to the StorageContainers field.
+func (o *HciCluster) SetStorageContainers(v []HciStorageContainerRelationship) {
+	o.StorageContainers = v
+}
+
 // GetViolation returns the Violation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HciCluster) GetViolation() HciViolationRelationship {
 	if o == nil || IsNil(o.Violation.Get()) {
@@ -2177,6 +2290,9 @@ func (o HciCluster) ToMap() (map[string]interface{}, error) {
 	if o.ClusterSoftwareMap != nil {
 		toSerialize["ClusterSoftwareMap"] = o.ClusterSoftwareMap
 	}
+	if !IsNil(o.ClusterType) {
+		toSerialize["ClusterType"] = o.ClusterType
+	}
 	if !IsNil(o.ContainerName) {
 		toSerialize["ContainerName"] = o.ContainerName
 	}
@@ -2282,6 +2398,9 @@ func (o HciCluster) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VmCount) {
 		toSerialize["VmCount"] = o.VmCount
 	}
+	if o.ClusterOperation.IsSet() {
+		toSerialize["ClusterOperation"] = o.ClusterOperation.Get()
+	}
 	if o.Compliance.IsSet() {
 		toSerialize["Compliance"] = o.Compliance.Get()
 	}
@@ -2299,6 +2418,9 @@ func (o HciCluster) ToMap() (map[string]interface{}, error) {
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
+	}
+	if o.StorageContainers != nil {
+		toSerialize["StorageContainers"] = o.StorageContainers
 	}
 	if o.Violation.IsSet() {
 		toSerialize["Violation"] = o.Violation.Get()
@@ -2382,6 +2504,8 @@ func (o *HciCluster) UnmarshalJSON(data []byte) (err error) {
 		ClusterExtId       *string           `json:"ClusterExtId,omitempty"`
 		ClusterFunction    []string          `json:"ClusterFunction,omitempty"`
 		ClusterSoftwareMap []HciSoftwareType `json:"ClusterSoftwareMap,omitempty"`
+		// The type of the cluster. Possible values: - HYPER_CONVERGED: Traditional HCI cluster using local storage. - COMPUTE: Cluster using external storage.
+		ClusterType *string `json:"ClusterType,omitempty"`
 		// The name of the default container created as part of cluster creation.
 		ContainerName *string `json:"ContainerName,omitempty"`
 		// The CPU capacity in Hz of the cluster.
@@ -2438,19 +2562,22 @@ func (o *HciCluster) UnmarshalJSON(data []byte) (err error) {
 		StorageUsageBytes *int64 `json:"StorageUsageBytes,omitempty"`
 		// The timezone of the cluster.
 		Timezone *string `json:"Timezone,omitempty"`
-		// The upgrade status of a cluster includes the following known values: PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED, FAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster.
+		// The upgrade status of a cluster includes the following known values PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED, FAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster.
 		UpgradeStatus *string `json:"UpgradeStatus,omitempty"`
 		// The number of VMs running on this cluster.
-		VmCount       *int64                               `json:"VmCount,omitempty"`
-		Compliance    NullableHciComplianceRelationship    `json:"Compliance,omitempty"`
-		DomainManager NullableHciDomainManagerRelationship `json:"DomainManager,omitempty"`
-		Entitlement   NullableHciEntitlementRelationship   `json:"Entitlement,omitempty"`
+		VmCount          *int64                                  `json:"VmCount,omitempty"`
+		ClusterOperation NullableHciClusterOperationRelationship `json:"ClusterOperation,omitempty"`
+		Compliance       NullableHciComplianceRelationship       `json:"Compliance,omitempty"`
+		DomainManager    NullableHciDomainManagerRelationship    `json:"DomainManager,omitempty"`
+		Entitlement      NullableHciEntitlementRelationship      `json:"Entitlement,omitempty"`
 		// An array of relationships to hciNode resources.
 		Nodes []HciNodeRelationship `json:"Nodes,omitempty"`
 		// An array of relationships to hciPhysicalGpu resources.
 		PhysicalGpus     []HciPhysicalGpuRelationship                `json:"PhysicalGpus,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		Violation        NullableHciViolationRelationship            `json:"Violation,omitempty"`
+		// An array of relationships to hciStorageContainer resources.
+		StorageContainers []HciStorageContainerRelationship `json:"StorageContainers,omitempty"`
+		Violation         NullableHciViolationRelationship  `json:"Violation,omitempty"`
 		// An array of relationships to hciVirtualGpu resources.
 		VirtualGpus []HciVirtualGpuRelationship `json:"VirtualGpus,omitempty"`
 		// An array of relationships to hciBaseVm resources.
@@ -2475,6 +2602,7 @@ func (o *HciCluster) UnmarshalJSON(data []byte) (err error) {
 		varHciCluster.ClusterExtId = varHciClusterWithoutEmbeddedStruct.ClusterExtId
 		varHciCluster.ClusterFunction = varHciClusterWithoutEmbeddedStruct.ClusterFunction
 		varHciCluster.ClusterSoftwareMap = varHciClusterWithoutEmbeddedStruct.ClusterSoftwareMap
+		varHciCluster.ClusterType = varHciClusterWithoutEmbeddedStruct.ClusterType
 		varHciCluster.ContainerName = varHciClusterWithoutEmbeddedStruct.ContainerName
 		varHciCluster.CpuCapacityHz = varHciClusterWithoutEmbeddedStruct.CpuCapacityHz
 		varHciCluster.CpuUsageHz = varHciClusterWithoutEmbeddedStruct.CpuUsageHz
@@ -2510,12 +2638,14 @@ func (o *HciCluster) UnmarshalJSON(data []byte) (err error) {
 		varHciCluster.Timezone = varHciClusterWithoutEmbeddedStruct.Timezone
 		varHciCluster.UpgradeStatus = varHciClusterWithoutEmbeddedStruct.UpgradeStatus
 		varHciCluster.VmCount = varHciClusterWithoutEmbeddedStruct.VmCount
+		varHciCluster.ClusterOperation = varHciClusterWithoutEmbeddedStruct.ClusterOperation
 		varHciCluster.Compliance = varHciClusterWithoutEmbeddedStruct.Compliance
 		varHciCluster.DomainManager = varHciClusterWithoutEmbeddedStruct.DomainManager
 		varHciCluster.Entitlement = varHciClusterWithoutEmbeddedStruct.Entitlement
 		varHciCluster.Nodes = varHciClusterWithoutEmbeddedStruct.Nodes
 		varHciCluster.PhysicalGpus = varHciClusterWithoutEmbeddedStruct.PhysicalGpus
 		varHciCluster.RegisteredDevice = varHciClusterWithoutEmbeddedStruct.RegisteredDevice
+		varHciCluster.StorageContainers = varHciClusterWithoutEmbeddedStruct.StorageContainers
 		varHciCluster.Violation = varHciClusterWithoutEmbeddedStruct.Violation
 		varHciCluster.VirtualGpus = varHciClusterWithoutEmbeddedStruct.VirtualGpus
 		varHciCluster.Vms = varHciClusterWithoutEmbeddedStruct.Vms
@@ -2549,6 +2679,7 @@ func (o *HciCluster) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClusterExtId")
 		delete(additionalProperties, "ClusterFunction")
 		delete(additionalProperties, "ClusterSoftwareMap")
+		delete(additionalProperties, "ClusterType")
 		delete(additionalProperties, "ContainerName")
 		delete(additionalProperties, "CpuCapacityHz")
 		delete(additionalProperties, "CpuUsageHz")
@@ -2584,12 +2715,14 @@ func (o *HciCluster) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Timezone")
 		delete(additionalProperties, "UpgradeStatus")
 		delete(additionalProperties, "VmCount")
+		delete(additionalProperties, "ClusterOperation")
 		delete(additionalProperties, "Compliance")
 		delete(additionalProperties, "DomainManager")
 		delete(additionalProperties, "Entitlement")
 		delete(additionalProperties, "Nodes")
 		delete(additionalProperties, "PhysicalGpus")
 		delete(additionalProperties, "RegisteredDevice")
+		delete(additionalProperties, "StorageContainers")
 		delete(additionalProperties, "Violation")
 		delete(additionalProperties, "VirtualGpus")
 		delete(additionalProperties, "Vms")

@@ -3,12 +3,24 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_backup_profile"
 description: |-
-        Backup profile for on-demand or scheduled backups at endpoints.
+        The BackupProfile object serves as the cornerstone for managing backup configurations on endpoints. It defines the parameters and conditions under which backups are conducted, supporting both scheduled and on-demand operations.
+        #### Purpose
+        The BackupProfile object defines and manages backup configurations for endpoints. It allows setting up backup parameters, including scheduling and execution details, and enables or disables backup operations as needed to ensure systematic data protection, integrity, and availability.
+        #### Key Concepts
+        - **Flexibility:** Allows for both on-demand and scheduled backups, catering to diverse operational requirements.
+        - **Versioning and Validation:** Supports robust validation mechanisms to ensure the accuracy and reliability of backup configurations.
+        - **Relationship Management:** Links to device registrations and configuration results to maintain a comprehensive backup strategy.
 
 ---
 
 # Data Source: intersight_recovery_backup_profile
-Backup profile for on-demand or scheduled backups at endpoints.
+The BackupProfile object serves as the cornerstone for managing backup configurations on endpoints. It defines the parameters and conditions under which backups are conducted, supporting both scheduled and on-demand operations.
+#### Purpose
+The BackupProfile object defines and manages backup configurations for endpoints. It allows setting up backup parameters, including scheduling and execution details, and enables or disables backup operations as needed to ensure systematic data protection, integrity, and availability.
+#### Key Concepts
+- **Flexibility:** Allows for both on-demand and scheduled backups, catering to diverse operational requirements.
+- **Versioning and Validation:** Supports robust validation mechanisms to ensure the accuracy and reliability of backup configurations.
+- **Relationship Management:** Links to device registrations and configuration results to maintain a comprehensive backup strategy.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

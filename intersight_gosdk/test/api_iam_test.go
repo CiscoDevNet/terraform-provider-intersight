@@ -83,6 +83,18 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService CreateIamCuiIntegration", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.CreateIamCuiIntegration(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService CreateIamDomainNameInfo", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1411,6 +1423,32 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService GetIamLdapGroupInventoryByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.GetIamLdapGroupInventoryByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService GetIamLdapGroupInventoryList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.GetIamLdapGroupInventoryList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService GetIamLdapGroupList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1463,6 +1501,32 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService GetIamLdapPolicyInventoryByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.GetIamLdapPolicyInventoryByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService GetIamLdapPolicyInventoryList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.GetIamLdapPolicyInventoryList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService GetIamLdapPolicyList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1482,6 +1546,32 @@ func Test_intersight_IamApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.IamApi.GetIamLdapProviderByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService GetIamLdapProviderInventoryByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.GetIamLdapProviderInventoryByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService GetIamLdapProviderInventoryList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.GetIamLdapProviderInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -2287,6 +2377,20 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService PatchIamCuiIntegration", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.PatchIamCuiIntegration(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService PatchIamDefaultAuthentication", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2770,6 +2874,20 @@ func Test_intersight_IamApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.IamApi.UpdateIamCertificateRequest(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService UpdateIamCuiIntegration", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.UpdateIamCuiIntegration(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

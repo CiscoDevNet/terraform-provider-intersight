@@ -3,12 +3,28 @@ subcategory: "scheduler"
 layout: "intersight"
 page_title: "Intersight: intersight_scheduler_schedule_policy"
 description: |-
-        Metadata used to create a policy to schedule one-time or repeated tasks.
+        SchedulePolicies define reusable, policy-based scheduling definitions for running tasks either one-time or on a recurring cadence. They encapsulate one or more schedule definitions (each with its own start time, timezone, duration, and cadence parameters) and can optionally enforce “block dates” during which schedules must not run.
+        #### Purpose
+        Provide a centrally managed scheduling policy that can be attached to schedules or deployments so recurring operational actions (for example, workflow executions) run predictably and consistently across an organization.
+        #### Key Concepts
+        - **Policy-based scheduling:** A single policy can contain multiple schedule definitions, making scheduling reusable and standardized.
+        - **One-time and recurring support:** Policies can describe schedules that execute once or on cadences like daily/weekly/monthly via typed schedule params.
+        - **Block dates (blackout windows):** Optional block date intervals prevent execution during sensitive periods (maintenance freezes, change windows).
+        - **Usage governance:** Tracks usage count so administrators can understand whether a policy is safe to delete (cannot delete when in use).
+        - **Attachable association:** Maintains references to associated objects (e.g., task schedules and workload deployments) using the policy.
 
 ---
 
 # Resource: intersight_scheduler_schedule_policy
-Metadata used to create a policy to schedule one-time or repeated tasks.
+SchedulePolicies define reusable, policy-based scheduling definitions for running tasks either one-time or on a recurring cadence. They encapsulate one or more schedule definitions (each with its own start time, timezone, duration, and cadence parameters) and can optionally enforce “block dates” during which schedules must not run.
+#### Purpose
+Provide a centrally managed scheduling policy that can be attached to schedules or deployments so recurring operational actions (for example, workflow executions) run predictably and consistently across an organization.
+#### Key Concepts
+- **Policy-based scheduling:** A single policy can contain multiple schedule definitions, making scheduling reusable and standardized.
+- **One-time and recurring support:** Policies can describe schedules that execute once or on cadences like daily/weekly/monthly via typed schedule params.
+- **Block dates (blackout windows):** Optional block date intervals prevent execution during sensitive periods (maintenance freezes, change windows).
+- **Usage governance:** Tracks usage count so administrators can understand whether a policy is safe to delete (cannot delete when in use).
+- **Attachable association:** Maintains references to associated objects (e.g., task schedules and workload deployments) using the policy.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -40,10 +40,12 @@ type FabricSwitchControlPolicy struct {
 	FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
 	// Indicates whether the value of the 'aesPrimaryKey' property has been set.
 	IsAesPrimaryKeySet  *bool                             `json:"IsAesPrimaryKeySet,omitempty"`
+	LldpSettings        NullableFabricLldpGlobalSettings  `json:"LldpSettings,omitempty"`
 	MacAgingSettings    NullableFabricMacAgingSettings    `json:"MacAgingSettings,omitempty"`
 	MacLearningSettings NullableFabricMacLearningSettings `json:"MacLearningSettings,omitempty"`
 	// The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default. The reserved VLAN range is fixed for Unified Edge, so this setting cannot be configured and is ignored.
-	ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
+	ReservedVlanStartId *int64                          `json:"ReservedVlanStartId,omitempty"`
+	StpSettings         NullableFabricStpGlobalSettings `json:"StpSettings,omitempty"`
 	// The target platform type of the Switch Control policy. * `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.
 	TargetPlatform *string                          `json:"TargetPlatform,omitempty"`
 	UdldSettings   NullableFabricUdldGlobalSettings `json:"UdldSettings,omitempty"`
@@ -358,6 +360,49 @@ func (o *FabricSwitchControlPolicy) SetIsAesPrimaryKeySet(v bool) {
 	o.IsAesPrimaryKeySet = &v
 }
 
+// GetLldpSettings returns the LldpSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchControlPolicy) GetLldpSettings() FabricLldpGlobalSettings {
+	if o == nil || IsNil(o.LldpSettings.Get()) {
+		var ret FabricLldpGlobalSettings
+		return ret
+	}
+	return *o.LldpSettings.Get()
+}
+
+// GetLldpSettingsOk returns a tuple with the LldpSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchControlPolicy) GetLldpSettingsOk() (*FabricLldpGlobalSettings, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LldpSettings.Get(), o.LldpSettings.IsSet()
+}
+
+// HasLldpSettings returns a boolean if a field has been set.
+func (o *FabricSwitchControlPolicy) HasLldpSettings() bool {
+	if o != nil && o.LldpSettings.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLldpSettings gets a reference to the given NullableFabricLldpGlobalSettings and assigns it to the LldpSettings field.
+func (o *FabricSwitchControlPolicy) SetLldpSettings(v FabricLldpGlobalSettings) {
+	o.LldpSettings.Set(&v)
+}
+
+// SetLldpSettingsNil sets the value for LldpSettings to be an explicit nil
+func (o *FabricSwitchControlPolicy) SetLldpSettingsNil() {
+	o.LldpSettings.Set(nil)
+}
+
+// UnsetLldpSettings ensures that no value is present for LldpSettings, not even an explicit nil
+func (o *FabricSwitchControlPolicy) UnsetLldpSettings() {
+	o.LldpSettings.Unset()
+}
+
 // GetMacAgingSettings returns the MacAgingSettings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricSwitchControlPolicy) GetMacAgingSettings() FabricMacAgingSettings {
 	if o == nil || IsNil(o.MacAgingSettings.Get()) {
@@ -474,6 +519,49 @@ func (o *FabricSwitchControlPolicy) HasReservedVlanStartId() bool {
 // SetReservedVlanStartId gets a reference to the given int64 and assigns it to the ReservedVlanStartId field.
 func (o *FabricSwitchControlPolicy) SetReservedVlanStartId(v int64) {
 	o.ReservedVlanStartId = &v
+}
+
+// GetStpSettings returns the StpSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchControlPolicy) GetStpSettings() FabricStpGlobalSettings {
+	if o == nil || IsNil(o.StpSettings.Get()) {
+		var ret FabricStpGlobalSettings
+		return ret
+	}
+	return *o.StpSettings.Get()
+}
+
+// GetStpSettingsOk returns a tuple with the StpSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchControlPolicy) GetStpSettingsOk() (*FabricStpGlobalSettings, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StpSettings.Get(), o.StpSettings.IsSet()
+}
+
+// HasStpSettings returns a boolean if a field has been set.
+func (o *FabricSwitchControlPolicy) HasStpSettings() bool {
+	if o != nil && o.StpSettings.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStpSettings gets a reference to the given NullableFabricStpGlobalSettings and assigns it to the StpSettings field.
+func (o *FabricSwitchControlPolicy) SetStpSettings(v FabricStpGlobalSettings) {
+	o.StpSettings.Set(&v)
+}
+
+// SetStpSettingsNil sets the value for StpSettings to be an explicit nil
+func (o *FabricSwitchControlPolicy) SetStpSettingsNil() {
+	o.StpSettings.Set(nil)
+}
+
+// UnsetStpSettings ensures that no value is present for StpSettings, not even an explicit nil
+func (o *FabricSwitchControlPolicy) UnsetStpSettings() {
+	o.StpSettings.Unset()
 }
 
 // GetTargetPlatform returns the TargetPlatform field value if set, zero value otherwise.
@@ -703,6 +791,9 @@ func (o FabricSwitchControlPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsAesPrimaryKeySet) {
 		toSerialize["IsAesPrimaryKeySet"] = o.IsAesPrimaryKeySet
 	}
+	if o.LldpSettings.IsSet() {
+		toSerialize["LldpSettings"] = o.LldpSettings.Get()
+	}
 	if o.MacAgingSettings.IsSet() {
 		toSerialize["MacAgingSettings"] = o.MacAgingSettings.Get()
 	}
@@ -711,6 +802,9 @@ func (o FabricSwitchControlPolicy) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReservedVlanStartId) {
 		toSerialize["ReservedVlanStartId"] = o.ReservedVlanStartId
+	}
+	if o.StpSettings.IsSet() {
+		toSerialize["StpSettings"] = o.StpSettings.Get()
 	}
 	if !IsNil(o.TargetPlatform) {
 		toSerialize["TargetPlatform"] = o.TargetPlatform
@@ -794,10 +888,12 @@ func (o *FabricSwitchControlPolicy) UnmarshalJSON(data []byte) (err error) {
 		FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
 		// Indicates whether the value of the 'aesPrimaryKey' property has been set.
 		IsAesPrimaryKeySet  *bool                             `json:"IsAesPrimaryKeySet,omitempty"`
+		LldpSettings        NullableFabricLldpGlobalSettings  `json:"LldpSettings,omitempty"`
 		MacAgingSettings    NullableFabricMacAgingSettings    `json:"MacAgingSettings,omitempty"`
 		MacLearningSettings NullableFabricMacLearningSettings `json:"MacLearningSettings,omitempty"`
 		// The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default. The reserved VLAN range is fixed for Unified Edge, so this setting cannot be configured and is ignored.
-		ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
+		ReservedVlanStartId *int64                          `json:"ReservedVlanStartId,omitempty"`
+		StpSettings         NullableFabricStpGlobalSettings `json:"StpSettings,omitempty"`
 		// The target platform type of the Switch Control policy. * `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.
 		TargetPlatform *string                          `json:"TargetPlatform,omitempty"`
 		UdldSettings   NullableFabricUdldGlobalSettings `json:"UdldSettings,omitempty"`
@@ -821,9 +917,11 @@ func (o *FabricSwitchControlPolicy) UnmarshalJSON(data []byte) (err error) {
 		varFabricSwitchControlPolicy.FabricPcVhbaReset = varFabricSwitchControlPolicyWithoutEmbeddedStruct.FabricPcVhbaReset
 		varFabricSwitchControlPolicy.FcSwitchingMode = varFabricSwitchControlPolicyWithoutEmbeddedStruct.FcSwitchingMode
 		varFabricSwitchControlPolicy.IsAesPrimaryKeySet = varFabricSwitchControlPolicyWithoutEmbeddedStruct.IsAesPrimaryKeySet
+		varFabricSwitchControlPolicy.LldpSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.LldpSettings
 		varFabricSwitchControlPolicy.MacAgingSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.MacAgingSettings
 		varFabricSwitchControlPolicy.MacLearningSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.MacLearningSettings
 		varFabricSwitchControlPolicy.ReservedVlanStartId = varFabricSwitchControlPolicyWithoutEmbeddedStruct.ReservedVlanStartId
+		varFabricSwitchControlPolicy.StpSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.StpSettings
 		varFabricSwitchControlPolicy.TargetPlatform = varFabricSwitchControlPolicyWithoutEmbeddedStruct.TargetPlatform
 		varFabricSwitchControlPolicy.UdldSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.UdldSettings
 		varFabricSwitchControlPolicy.VlanPortOptimizationEnabled = varFabricSwitchControlPolicyWithoutEmbeddedStruct.VlanPortOptimizationEnabled
@@ -854,9 +952,11 @@ func (o *FabricSwitchControlPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "FabricPcVhbaReset")
 		delete(additionalProperties, "FcSwitchingMode")
 		delete(additionalProperties, "IsAesPrimaryKeySet")
+		delete(additionalProperties, "LldpSettings")
 		delete(additionalProperties, "MacAgingSettings")
 		delete(additionalProperties, "MacLearningSettings")
 		delete(additionalProperties, "ReservedVlanStartId")
+		delete(additionalProperties, "StpSettings")
 		delete(additionalProperties, "TargetPlatform")
 		delete(additionalProperties, "UdldSettings")
 		delete(additionalProperties, "VlanPortOptimizationEnabled")

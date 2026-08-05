@@ -716,7 +716,7 @@ func resourceCondThresholdDefinitionCreate(c context.Context, d *schema.Resource
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

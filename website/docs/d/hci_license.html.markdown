@@ -3,12 +3,22 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_license"
 description: |-
-        A license instance reported by a Prism Central. A license can be consumed by multiple clusters.
+        The License object captures the details of software licenses acquired by Nutanix Prism Central. This provides a structured representation of licenses for all entities managed by Prism Central.
+        #### Purpose
+        The License object provides a detailed view of license information and status.
+        #### Key Concepts
+        - **License Representation:** Stores structured information about licenses acquired by Prism Central, including type, status, and validity details.
+        - **Compliance Tracking:** Provides information on license usage and expiration.
 
 ---
 
 # Data Source: intersight_hci_license
-A license instance reported by a Prism Central. A license can be consumed by multiple clusters.
+The License object captures the details of software licenses acquired by Nutanix Prism Central. This provides a structured representation of licenses for all entities managed by Prism Central.
+#### Purpose  
+The License object provides a detailed view of license information and status.
+#### Key Concepts 
+- **License Representation:** Stores structured information about licenses acquired by Prism Central, including type, status, and validity details.
+- **Compliance Tracking:** Provides information on license usage and expiration.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

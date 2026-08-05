@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **IpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
 **IpV6Address** | Pointer to **string** | IPv6 Address given as a lease to an external entity like server profiles. | [optional] 
 **IpV6Config** | Pointer to [**NullableIppoolIpV6Config**](IppoolIpV6Config.md) |  | [optional] 
+**PreferredIpV4Address** | Pointer to **string** | The preferred IPv4 address can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that IPv4 address if it is available in the pool. If the specified preferred IPv4 address is not in the range of the pool or if it is already leased or reserved, then the next available IPv4 address from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred IPv4 address property. When the preferred IPv4 address property is specified in conjunction with &#39;migrate&#39; property, existing static or dynamic lease will be replaced by the new lease. Migration also supported only for dynamic lease requests. | [optional] 
+**PreferredIpV6Address** | Pointer to **string** | The preferred IPv6 address can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that IPv6 address if it is available in the pool. If the specified preferred IPv6 address is not in the range of the pool or if it is already leased or reserved, then the next available IPv6 address from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred IPv6 address property. When the preferred IPv6 address property is specified in conjunction with &#39;migrate&#39; property, existing static or dynamic lease will be replaced by the new lease. Migration also supported only for dynamic lease requests. | [optional] 
 **Reservation** | Pointer to [**IppoolReservationReference**](IppoolReservationReference.md) |  | [optional] 
 **AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **BlockLease** | Pointer to [**NullableIppoolBlockLeaseRelationship**](IppoolBlockLeaseRelationship.md) |  | [optional] 
@@ -223,6 +225,56 @@ HasIpV6Config returns a boolean if a field has been set.
 `func (o *IppoolIpLease) UnsetIpV6Config()`
 
 UnsetIpV6Config ensures that no value is present for IpV6Config, not even an explicit nil
+### GetPreferredIpV4Address
+
+`func (o *IppoolIpLease) GetPreferredIpV4Address() string`
+
+GetPreferredIpV4Address returns the PreferredIpV4Address field if non-nil, zero value otherwise.
+
+### GetPreferredIpV4AddressOk
+
+`func (o *IppoolIpLease) GetPreferredIpV4AddressOk() (*string, bool)`
+
+GetPreferredIpV4AddressOk returns a tuple with the PreferredIpV4Address field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreferredIpV4Address
+
+`func (o *IppoolIpLease) SetPreferredIpV4Address(v string)`
+
+SetPreferredIpV4Address sets PreferredIpV4Address field to given value.
+
+### HasPreferredIpV4Address
+
+`func (o *IppoolIpLease) HasPreferredIpV4Address() bool`
+
+HasPreferredIpV4Address returns a boolean if a field has been set.
+
+### GetPreferredIpV6Address
+
+`func (o *IppoolIpLease) GetPreferredIpV6Address() string`
+
+GetPreferredIpV6Address returns the PreferredIpV6Address field if non-nil, zero value otherwise.
+
+### GetPreferredIpV6AddressOk
+
+`func (o *IppoolIpLease) GetPreferredIpV6AddressOk() (*string, bool)`
+
+GetPreferredIpV6AddressOk returns a tuple with the PreferredIpV6Address field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreferredIpV6Address
+
+`func (o *IppoolIpLease) SetPreferredIpV6Address(v string)`
+
+SetPreferredIpV6Address sets PreferredIpV6Address field to given value.
+
+### HasPreferredIpV6Address
+
+`func (o *IppoolIpLease) HasPreferredIpV6Address() bool`
+
+HasPreferredIpV6Address returns a boolean if a field has been set.
+
 ### GetReservation
 
 `func (o *IppoolIpLease) GetReservation() IppoolReservationReference`

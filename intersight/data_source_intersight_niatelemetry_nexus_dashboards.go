@@ -60,6 +60,11 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"backup_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"bandwidth_usage_monitoring": {
 			Description: "Feature operational state of bandwidth monitoring.",
 			Type:        schema.TypeBool,
@@ -90,9 +95,19 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"compliance_rules": {
+			Description: "Number of compliance rules on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"dashboard_count": {
+			Description: "Number of custom dashboard in the fabric.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"device_snapshots_count": {
@@ -108,6 +123,11 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endpoint_count": {
+			Description: "Total number of endpoints on fabric.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"fabric_image_policies_count": {
@@ -140,6 +160,16 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"latest_version_list": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"live_protect_enabled_count": {
+			Description: "Count of devices with Live Protect shield status enabled.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -150,9 +180,19 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"multicast_route_count": {
+			Description: "Number of multicast routes on fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"nd_cluster_size": {
 			Description: "Number of nodes in Nexus Dashboard cluster.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"nd_healthy": {
+			Description: "Health status of the Nexus Dashboard cluster.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"nd_sites": {
@@ -243,6 +283,11 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"oam_enabled": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeBool}},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -337,11 +382,21 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"preupgrade_validation_count": {
+			Description: "Number of pre-upgrade validations on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"ptp_admin_state": {
 			Description: "Feature Operation status of Precision Time Protocol Monitoring.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"rec_version_list": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"record_type": {
 			Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
 			Type:        schema.TypeString,
@@ -382,8 +437,18 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"release_version": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sustainability_report_status": {
+			Description: "Status of sustainability report on fabric.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -496,6 +561,11 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 		"type_of_site_in_mso": {
 			Description: "Type of site added to Multi-Site Orchestrator.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"vcenter_count": {
+			Description: "Number of vCenters integrated into the fabric.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"version_context": {
@@ -616,6 +686,16 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"vx_lan_fab_count": {
+			Description: "The total number of active VXLAN-managed fabrics that have both leaf and spine switches configured.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vx_lan_fab_names": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 	}
 	return schemaMap
 }
@@ -692,6 +772,17 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("backup_status"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetBackupStatus(x)
+	}
+
 	if v, ok := d.GetOkExists("bandwidth_usage_monitoring"); ok {
 		x := (v.(bool))
 		o.SetBandwidthUsageMonitoring(x)
@@ -722,10 +813,20 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetClusterUuid(x)
 	}
 
+	if v, ok := d.GetOkExists("compliance_rules"); ok {
+		x := int64(v.(int))
+		o.SetComplianceRules(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOkExists("dashboard_count"); ok {
+		x := int64(v.(int))
+		o.SetDashboardCount(x)
 	}
 
 	if v, ok := d.GetOkExists("device_snapshots_count"); ok {
@@ -741,6 +842,11 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("endpoint_count"); ok {
+		x := int64(v.(int))
+		o.SetEndpointCount(x)
 	}
 
 	if v, ok := d.GetOkExists("fabric_image_policies_count"); ok {
@@ -773,6 +879,22 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetK8VisualizerAdminState(x)
 	}
 
+	if v, ok := d.GetOk("latest_version_list"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetLatestVersionList(x)
+	}
+
+	if v, ok := d.GetOkExists("live_protect_enabled_count"); ok {
+		x := int64(v.(int))
+		o.SetLiveProtectEnabledCount(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
@@ -784,9 +906,19 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("multicast_route_count"); ok {
+		x := int64(v.(int))
+		o.SetMulticastRouteCount(x)
+	}
+
 	if v, ok := d.GetOkExists("nd_cluster_size"); ok {
 		x := int64(v.(int))
 		o.SetNdClusterSize(x)
+	}
+
+	if v, ok := d.GetOkExists("nd_healthy"); ok {
+		x := (v.(bool))
+		o.SetNdHealthy(x)
 	}
 
 	if v, ok := d.GetOk("nd_sites"); ok {
@@ -883,6 +1015,17 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOkExists("number_of_vxlan_fabric_sites_in_mso"); ok {
 		x := int64(v.(int))
 		o.SetNumberOfVxlanFabricSitesInMso(x)
+	}
+
+	if v, ok := d.GetOk("oam_enabled"); ok {
+		x := make([]bool, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(bool))
+			}
+		}
+		o.SetOamEnabled(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -999,9 +1142,25 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetPreUpgradeReportGenerationCount(x)
 	}
 
+	if v, ok := d.GetOkExists("preupgrade_validation_count"); ok {
+		x := int64(v.(int))
+		o.SetPreupgradeValidationCount(x)
+	}
+
 	if v, ok := d.GetOk("ptp_admin_state"); ok {
 		x := (v.(string))
 		o.SetPtpAdminState(x)
+	}
+
+	if v, ok := d.GetOk("rec_version_list"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRecVersionList(x)
 	}
 
 	if v, ok := d.GetOk("record_type"); ok {
@@ -1052,9 +1211,25 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		}
 	}
 
+	if v, ok := d.GetOk("release_version"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetReleaseVersion(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOk("sustainability_report_status"); ok {
+		x := (v.(string))
+		o.SetSustainabilityReportStatus(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1138,6 +1313,11 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetTypeOfSiteInMso(x)
 	}
 
+	if v, ok := d.GetOkExists("vcenter_count"); ok {
+		x := int64(v.(int))
+		o.SetVcenterCount(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1217,6 +1397,22 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetVmmVisualizerAdminState(x)
 	}
 
+	if v, ok := d.GetOkExists("vx_lan_fab_count"); ok {
+		x := int64(v.(int))
+		o.SetVxLanFabCount(x)
+	}
+
+	if v, ok := d.GetOk("vx_lan_fab_names"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetVxLanFabNames(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of NiatelemetryNexusDashboards object failed with error : %s", err.Error())
@@ -1256,27 +1452,35 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["backup_status"] = (s.GetBackupStatus())
 				temp["bandwidth_usage_monitoring"] = (s.GetBandwidthUsageMonitoring())
 				temp["change_approval_count"] = (s.GetChangeApprovalCount())
 				temp["change_rollback_count"] = (s.GetChangeRollbackCount())
 				temp["class_id"] = (s.GetClassId())
 				temp["cluster_name"] = (s.GetClusterName())
 				temp["cluster_uuid"] = (s.GetClusterUuid())
+				temp["compliance_rules"] = (s.GetComplianceRules())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["dashboard_count"] = (s.GetDashboardCount())
 				temp["device_snapshots_count"] = (s.GetDeviceSnapshotsCount())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["endpoint_count"] = (s.GetEndpointCount())
 				temp["fabric_image_policies_count"] = (s.GetFabricImagePoliciesCount())
 				temp["feature_oper_status"] = (s.GetFeatureOperStatus())
 				temp["image_file_staging_count"] = (s.GetImageFileStagingCount())
 				temp["ipam_oper_state"] = (s.GetIpamOperState())
 				temp["is_cluster_healthy"] = (s.GetIsClusterHealthy())
 				temp["k8_visualizer_admin_state"] = (s.GetK8VisualizerAdminState())
+				temp["latest_version_list"] = (s.GetLatestVersionList())
+				temp["live_protect_enabled_count"] = (s.GetLiveProtectEnabledCount())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["multicast_route_count"] = (s.GetMulticastRouteCount())
 				temp["nd_cluster_size"] = (s.GetNdClusterSize())
+				temp["nd_healthy"] = (s.GetNdHealthy())
 
 				temp["nd_sites"] = flattenListNiatelemetrySites(s.GetNdSites(), d)
 				temp["nd_type"] = (s.GetNdType())
@@ -1289,6 +1493,7 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				temp["number_of_sites_serviced"] = (s.GetNumberOfSitesServiced())
 				temp["number_of_tenants_in_mso"] = (s.GetNumberOfTenantsInMso())
 				temp["number_of_vxlan_fabric_sites_in_mso"] = (s.GetNumberOfVxlanFabricSitesInMso())
+				temp["oam_enabled"] = (s.GetOamEnabled())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
@@ -1298,17 +1503,24 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["post_upgrade_report_generation_count"] = (s.GetPostUpgradeReportGenerationCount())
 				temp["pre_upgrade_report_generation_count"] = (s.GetPreUpgradeReportGenerationCount())
+				temp["preupgrade_validation_count"] = (s.GetPreupgradeValidationCount())
 				temp["ptp_admin_state"] = (s.GetPtpAdminState())
+				temp["rec_version_list"] = (s.GetRecVersionList())
 				temp["record_type"] = (s.GetRecordType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["release_version"] = (s.GetReleaseVersion())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["sustainability_report_status"] = (s.GetSustainabilityReportStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["type_of_site_in_mso"] = (s.GetTypeOfSiteInMso())
+				temp["vcenter_count"] = (s.GetVcenterCount())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vmm_visualizer_admin_state"] = (s.GetVmmVisualizerAdminState())
+				temp["vx_lan_fab_count"] = (s.GetVxLanFabCount())
+				temp["vx_lan_fab_names"] = (s.GetVxLanFabNames())
 				niatelemetryNexusDashboardsResults = append(niatelemetryNexusDashboardsResults, temp)
 			}
 		}

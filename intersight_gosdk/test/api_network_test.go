@@ -231,6 +231,58 @@ func Test_intersight_NetworkApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test NetworkApiService GetNetworkSecureRouterByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NetworkApi.GetNetworkSecureRouterByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NetworkApiService GetNetworkSecureRouterList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.NetworkApi.GetNetworkSecureRouterList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NetworkApiService GetNetworkSecureRouterSettingByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NetworkApi.GetNetworkSecureRouterSettingByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NetworkApiService GetNetworkSecureRouterSettingList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.NetworkApi.GetNetworkSecureRouterSettingList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test NetworkApiService GetNetworkSupervisorCardByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -493,6 +545,34 @@ func Test_intersight_NetworkApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test NetworkApiService PatchNetworkSecureRouter", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NetworkApi.PatchNetworkSecureRouter(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NetworkApiService PatchNetworkSecureRouterSetting", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NetworkApi.PatchNetworkSecureRouterSetting(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test NetworkApiService PatchNetworkVethernet", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -556,6 +636,34 @@ func Test_intersight_NetworkApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.NetworkApi.UpdateNetworkFcZoneInfo(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NetworkApiService UpdateNetworkSecureRouter", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NetworkApi.UpdateNetworkSecureRouter(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NetworkApiService UpdateNetworkSecureRouterSetting", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NetworkApi.UpdateNetworkSecureRouterSetting(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

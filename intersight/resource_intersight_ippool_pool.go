@@ -1429,7 +1429,7 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1441,7 +1441,7 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 
 	o.SetObjectType("ippool.Pool")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

@@ -13,7 +13,7 @@ description: |-
         - **Power State Monitoring:** Captures the server's power status before and after the upgrade submission, which is crucial for understanding operational state changes.
         - **Firmware Version Tracking:** Records both the source (pre-upgrade) and target (post-upgrade) firmware versions for clear verification.
         - **Workflow Integration:** Links to the runtime instance of the workflow orchestrating the upgrade, allowing for comprehensive process tracking.
-        - **Extends DownloadStatus:** Inherits capabilities from `connector.DownloadStatus`, indicating its role in managing file download aspects of the upgrade.
+        - **Extends CacheStatus:** Inherits capabilities from `connector.CacheStatus`, indicating its role in managing file download aspects of the upgrade.
 
 ---
 
@@ -28,19 +28,22 @@ The UpgradeStatus object provides comprehensive status information for firmware 
  - **Power State Monitoring:** Captures the server's power status before and after the upgrade submission, which is crucial for understanding operational state changes.
  - **Firmware Version Tracking:** Records both the source (pre-upgrade) and target (post-upgrade) firmware versions for clear verification.
  - **Workflow Integration:** Links to the runtime instance of the workflow orchestrating the upgrade, allowing for comprehensive process tracking.
- - **Extends DownloadStatus:** Inherits capabilities from `connector.DownloadStatus`, indicating its role in managing file download aspects of the upgrade.
+ - **Extends CacheStatus:** Inherits capabilities from `connector.CacheStatus`, indicating its role in managing file download aspects of the upgrade.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_firmware_upgrade_status.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `cache_error`:(string) Any error encountered in caching. Example, Space unavailability due to too many active workflows running. 
+* `cache_message`:(string) Message to notify caching operation status. 
+* `cache_state`:(string) The current cache status of the file.* `ReadyForImport` - The image is ready to be imported into the repository.* `Importing` - The image is being imported into the repository.* `Imported` - The image has been extracted and imported into the repository.* `ComputingMetadata` - Indicates that the image has been imported but its metadata computation has not been done.* `PendingExtraction` - Indicates that the image has been imported but not extracted in the repository.* `Extracting` - Indicates that the image is being extracted into the repository.* `Extracted` - Indicates that the image has been extracted into the repository.* `Failed` - The image import from an external source to the repository has failed.* `MetaOnly` - The image is present in an external repository.* `ReadyForCache` - The image is ready to be cached into the Intersight Appliance.* `Caching` - Indicates that the image is being cached into the Intersight Appliance or endpoint cache.* `Cached` - Indicates that the image has been cached into the Intersight Appliance or endpoint cache.* `CachingFailed` - Indicates that the image caching into the Intersight Appliance failed or endpoint cache.* `Corrupted` - Indicates that the image in the local repository (or endpoint cache) has been corrupted after it was cached.* `Evicted` - Indicates that the image has been evicted from the Intersight Appliance (or endpoint cache) to reclaim storage space.* `Invalid` - Indicates that the corresponding distributable MO has been removed from the backend. This can be due to unpublishing of an image. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `download_error`:(string) Any error encountered. Set to empty when download is in progress or completed. 
 * `download_message`:(string) The message from the endpoint during the download. 
 * `download_percentage`:(int) The percentage of the image downloaded in the endpoint. 
-* `download_progress`:(int) The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible, a value of -1 is sent. 
+* `download_progress`:(int) The download progress of the file represented as a percentage between 0 and 100. If progress reporting is not possible, a value of -1 is sent. 
 * `download_retries`:(int) The number of retries the plugin attempted before succeeding or failing the download. 
 * `download_stage`:(string) The image download stages. Example:downloading, flashing. 
 * `ep_power_status`:(string) The server power status after the upgrade request is submitted in the endpoint.* `none` - Server power status is none.* `powered on` - Server power status is powered on.* `powered off` - Server power status is powered off. 

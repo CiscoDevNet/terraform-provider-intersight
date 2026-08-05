@@ -1333,7 +1333,7 @@ func resourceWorkloadBlueprint() *schema.Resource {
 				Type:         schema.TypeInt,
 				ValidateFunc: validation.IntAtLeast(1),
 				Optional:     true,
-				Default:      1,
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"version_context": {
@@ -1619,7 +1619,7 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("catalog"); ok {
+	if v, ok := d.GetOkExists("catalog"); ok {
 		p := make([]models.WorkflowCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2139,12 +2139,12 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 		o.SetLabel(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}

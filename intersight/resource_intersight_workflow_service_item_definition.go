@@ -85,7 +85,7 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 				Description: "Service item definition can declare that only one instance can be allowed within the customer account.",
 				Type:        schema.TypeBool,
 				Optional:    true,
-				Default:     true,
+				Computed:    true,
 				ForceNew:    true,
 			},
 			"ancestors": {
@@ -358,7 +358,7 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 				Description: "The flag to indicate that service item instance will be deleted after the completion of decommission action.",
 				Type:        schema.TypeBool,
 				Optional:    true,
-				Default:     false,
+				Computed:    true,
 				ForceNew:    true,
 			},
 			"description": {
@@ -835,7 +835,7 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 				Type:         schema.TypeInt,
 				ValidateFunc: validation.IntAtLeast(1),
 				Optional:     true,
-				Default:      1,
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"version_context": {
@@ -999,7 +999,7 @@ func resourceWorkflowServiceItemDefinitionCreate(c context.Context, d *schema.Re
 	var de diag.Diagnostics
 	var o = models.NewWorkflowServiceItemDefinitionWithDefaults()
 
-	if v, ok := d.GetOk("action_definitions"); ok {
+	if v, ok := d.GetOkExists("action_definitions"); ok {
 		x := make([]models.WorkflowServiceItemActionDefinitionRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1213,7 +1213,7 @@ func resourceWorkflowServiceItemDefinitionCreate(c context.Context, d *schema.Re
 		}
 	}
 
-	if v, ok := d.GetOk("catalog"); ok {
+	if v, ok := d.GetOkExists("catalog"); ok {
 		p := make([]models.WorkflowCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1258,7 +1258,7 @@ func resourceWorkflowServiceItemDefinitionCreate(c context.Context, d *schema.Re
 
 	o.SetClassId("workflow.ServiceItemDefinition")
 
-	if v, ok := d.GetOk("cvd_id"); ok {
+	if v, ok := d.GetOkExists("cvd_id"); ok {
 		x := (v.(string))
 		o.SetCvdId(x)
 	}
@@ -1283,12 +1283,12 @@ func resourceWorkflowServiceItemDefinitionCreate(c context.Context, d *schema.Re
 		o.SetLabel(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}

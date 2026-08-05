@@ -1359,14 +1359,14 @@ func resourceBulkMoDeepClonerCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("bulk.MoDeepCloner")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1419,7 +1419,7 @@ func resourceBulkMoDeepClonerCreate(c context.Context, d *schema.ResourceData, m
 		o.SetReferencePolicy(x)
 	}
 
-	if v, ok := d.GetOk("nr_source"); ok {
+	if v, ok := d.GetOkExists("nr_source"); ok {
 		p := make([]models.MoMoRef, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1660,7 +1660,7 @@ func resourceBulkMoDeepClonerCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("workflow_name_suffix"); ok {
+	if v, ok := d.GetOkExists("workflow_name_suffix"); ok {
 		x := (v.(string))
 		o.SetWorkflowNameSuffix(x)
 	}

@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_vcenter"
 description: |-
-        VMware vCenter entity. The vCenter has a name assigned by user in Intersight.
+        The VmwareVcenter object represents the VMware vCenter entity within the virtualization package, providing comprehensive management and organizational capabilities for VMware environments.
+        #### Purpose
+        VmwareVcenter is integral to managing VMware infrastructure, offering a centralized point for accessing and controlling vCenter properties, settings, and associated entities such as clusters, hosts, and datacenters.
+        #### Key Concepts
+        - **Centralized Management:** Facilitates the oversight and administration of VMware environments, ensuring cohesive management of resources.
+        - **Access Control:** Incorporates privilege sets to govern read and update operations, supporting secure and authorized access.
+        - **Integration:** Extends the BaseHypervisorManager, leveraging foundational capabilities to enhance vCenter-specific functionalities.
+        - **Resource Tracking:** Provides metrics and counts for key entities like datacenters, clusters, hosts, and virtual machines, enabling effective monitoring and resource allocation.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_vcenter
-VMware vCenter entity. The vCenter has a name assigned by user in Intersight.
+The VmwareVcenter object represents the VMware vCenter entity within the virtualization package, providing comprehensive management and organizational capabilities for VMware environments.
+#### Purpose
+VmwareVcenter is integral to managing VMware infrastructure, offering a centralized point for accessing and controlling vCenter properties, settings, and associated entities such as clusters, hosts, and datacenters.
+#### Key Concepts
+- **Centralized Management:** Facilitates the oversight and administration of VMware environments, ensuring cohesive management of resources.
+- **Access Control:** Incorporates privilege sets to govern read and update operations, supporting secure and authorized access.
+- **Integration:** Extends the BaseHypervisorManager, leveraging foundational capabilities to enhance vCenter-specific functionalities.
+- **Resource Tracking:** Provides metrics and counts for key entities like datacenters, clusters, hosts, and virtual machines, enabling effective monitoring and resource allocation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

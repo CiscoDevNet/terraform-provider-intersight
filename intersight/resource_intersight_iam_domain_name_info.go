@@ -683,12 +683,12 @@ func resourceIamDomainNameInfoCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetClassId("iam.DomainNameInfo")
 
-	if v, ok := d.GetOk("domain_name"); ok {
+	if v, ok := d.GetOkExists("domain_name"); ok {
 		x := (v.(string))
 		o.SetDomainName(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

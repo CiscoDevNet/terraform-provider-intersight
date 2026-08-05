@@ -8,9 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resourcepool.PoolMember"]
 **Features** | Pointer to **[]string** |  | [optional] 
 **QualificationType** | Pointer to [**NullableResourcepoolQualificationType**](ResourcepoolQualificationType.md) |  | [optional] 
+**Reserved** | Pointer to **bool** | Identifies if the member has been reserved. | [optional] [readonly] [default to false]
 **AssignedToEntity** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **Peer** | Pointer to [**NullableResourcepoolLeaseRelationship**](ResourcepoolLeaseRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**NullableResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
+**Reservation** | Pointer to [**NullableResourcepoolReservationRelationship**](ResourcepoolReservationRelationship.md) |  | [optional] 
 **Resource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
@@ -142,6 +144,31 @@ HasQualificationType returns a boolean if a field has been set.
 `func (o *ResourcepoolPoolMember) UnsetQualificationType()`
 
 UnsetQualificationType ensures that no value is present for QualificationType, not even an explicit nil
+### GetReserved
+
+`func (o *ResourcepoolPoolMember) GetReserved() bool`
+
+GetReserved returns the Reserved field if non-nil, zero value otherwise.
+
+### GetReservedOk
+
+`func (o *ResourcepoolPoolMember) GetReservedOk() (*bool, bool)`
+
+GetReservedOk returns a tuple with the Reserved field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReserved
+
+`func (o *ResourcepoolPoolMember) SetReserved(v bool)`
+
+SetReserved sets Reserved field to given value.
+
+### HasReserved
+
+`func (o *ResourcepoolPoolMember) HasReserved() bool`
+
+HasReserved returns a boolean if a field has been set.
+
 ### GetAssignedToEntity
 
 `func (o *ResourcepoolPoolMember) GetAssignedToEntity() []MoBaseMoRelationship`
@@ -247,6 +274,41 @@ HasPool returns a boolean if a field has been set.
 `func (o *ResourcepoolPoolMember) UnsetPool()`
 
 UnsetPool ensures that no value is present for Pool, not even an explicit nil
+### GetReservation
+
+`func (o *ResourcepoolPoolMember) GetReservation() ResourcepoolReservationRelationship`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *ResourcepoolPoolMember) GetReservationOk() (*ResourcepoolReservationRelationship, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *ResourcepoolPoolMember) SetReservation(v ResourcepoolReservationRelationship)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *ResourcepoolPoolMember) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
+
+### SetReservationNil
+
+`func (o *ResourcepoolPoolMember) SetReservationNil(b bool)`
+
+ SetReservationNil sets the value for Reservation to be an explicit nil
+
+### UnsetReservation
+`func (o *ResourcepoolPoolMember) UnsetReservation()`
+
+UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
 ### GetResource
 
 `func (o *ResourcepoolPoolMember) GetResource() MoBaseMoRelationship`

@@ -169,7 +169,7 @@ This complex property has following sub-properties:
 * `reported_policy_changes`:(Array)
 This complex property has following sub-properties:
   + `change_id`:(string)(ReadOnly) The change evaluation identifier for which the change is reported. 
-  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy. 
+  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy.* `Failed` - The status when policy change evaluation report handling failed for a policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `policy_type`:(string)(ReadOnly) The type of policy for which the change has been reported. 
 * `scheduled_actions`:(Array)
@@ -180,6 +180,7 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `proceed_on_reboot`:(bool) ProceedOnReboot can be used to acknowledge server reboot while triggering deploy/activate. 
+* `server_family`:(string) The server family type applicable to a server profile when the target platform is Standalone. For all other platform types, the value should be All.* `Unspecified` - Server Family type for Unspecified servers.* `All` - All server family types are included under this category.* `UCSC845A` - Server Family type for UCS C845A servers.* `UCSC2XX/4XX` - Server Family type for UCS C2XX/4XX servers. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `src_template`:(HashMap) - A reference to a policyAbstractProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:

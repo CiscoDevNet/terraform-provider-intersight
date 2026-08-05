@@ -3,12 +3,24 @@ subcategory: "iaas"
 layout: "intersight"
 page_title: "Intersight: intersight_iaas_service_request"
 description: |-
-        Gets last six months Service Requests from UCSD.
+        The ServiceRequest object is integral to managing service requests within UCS Director (UCSD), capturing essential details about service request and statuses request workflows .
+        #### Purpose
+        ServiceRequest documents and tracks service requests, supporting efficient process management and resolution strategies.
+        #### Key Concepts
+        - **Workflow Documentation:** Captures information about workflow steps executed in service requests, aiding process refinement.
+        - **Status Tracking:** Monitors request statuses, supporting timely resolution and management.
+        - **Read-Only Access:** Ensures secure access to service request data without modification.
 
 ---
 
 # Data Source: intersight_iaas_service_request
-Gets last six months Service Requests from UCSD.
+The ServiceRequest object is integral to managing service requests within UCS Director (UCSD), capturing essential details about service request and statuses request workflows .
+#### Purpose 
+ServiceRequest documents and tracks service requests, supporting efficient process management and resolution strategies.   
+#### Key Concepts 
+- **Workflow Documentation:** Captures information about workflow steps executed in service requests, aiding process refinement. 
+- **Status Tracking:** Monitors request statuses, supporting timely resolution and management. 
+- **Read-Only Access:** Ensures secure access to service request data without modification.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

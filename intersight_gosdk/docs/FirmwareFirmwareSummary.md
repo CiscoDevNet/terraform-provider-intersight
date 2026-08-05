@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **BundleVersion** | Pointer to **string** | Version details at the bundle level for the each of server. | [optional] [readonly] 
 **ComponentsFwInventory** | Pointer to [**[]FirmwareFirmwareInventory**](FirmwareFirmwareInventory.md) |  | [optional] 
 **ExpanderModule** | Pointer to [**NullableEquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) |  | [optional] 
+**NetworkSecureRouter** | Pointer to [**NullableNetworkSecureRouterRelationship**](NetworkSecureRouterRelationship.md) |  | [optional] 
 **PciNode** | Pointer to [**NullablePciNodeRelationship**](PciNodeRelationship.md) |  | [optional] 
 **Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 **TargetMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
@@ -167,6 +168,41 @@ HasExpanderModule returns a boolean if a field has been set.
 `func (o *FirmwareFirmwareSummary) UnsetExpanderModule()`
 
 UnsetExpanderModule ensures that no value is present for ExpanderModule, not even an explicit nil
+### GetNetworkSecureRouter
+
+`func (o *FirmwareFirmwareSummary) GetNetworkSecureRouter() NetworkSecureRouterRelationship`
+
+GetNetworkSecureRouter returns the NetworkSecureRouter field if non-nil, zero value otherwise.
+
+### GetNetworkSecureRouterOk
+
+`func (o *FirmwareFirmwareSummary) GetNetworkSecureRouterOk() (*NetworkSecureRouterRelationship, bool)`
+
+GetNetworkSecureRouterOk returns a tuple with the NetworkSecureRouter field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkSecureRouter
+
+`func (o *FirmwareFirmwareSummary) SetNetworkSecureRouter(v NetworkSecureRouterRelationship)`
+
+SetNetworkSecureRouter sets NetworkSecureRouter field to given value.
+
+### HasNetworkSecureRouter
+
+`func (o *FirmwareFirmwareSummary) HasNetworkSecureRouter() bool`
+
+HasNetworkSecureRouter returns a boolean if a field has been set.
+
+### SetNetworkSecureRouterNil
+
+`func (o *FirmwareFirmwareSummary) SetNetworkSecureRouterNil(b bool)`
+
+ SetNetworkSecureRouterNil sets the value for NetworkSecureRouter to be an explicit nil
+
+### UnsetNetworkSecureRouter
+`func (o *FirmwareFirmwareSummary) UnsetNetworkSecureRouter()`
+
+UnsetNetworkSecureRouter ensures that no value is present for NetworkSecureRouter, not even an explicit nil
 ### GetPciNode
 
 `func (o *FirmwareFirmwareSummary) GetPciNode() PciNodeRelationship`

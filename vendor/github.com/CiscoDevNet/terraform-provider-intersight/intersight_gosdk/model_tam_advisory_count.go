@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the TamAdvisoryCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TamAdvisoryCount{}
 
-// TamAdvisoryCount Total number of advisories currently affecting a given Account.
+// TamAdvisoryCount The AdvisoryCount object provides a high-level summary of the total number of advisories currently affecting a specific Intersight account. #### Purpose This object serves as a quick-reference metric, allowing administrators to gauge the overall security and lifecycle posture of their infrastructure. By providing a consolidated count of active advisories—such as Field Notices, PSIRT, or EOL milestones—it enables organizations to prioritize their maintenance and remediation efforts effectively. #### Key Concepts - **Account-Level Aggregation:** Summarizes the total impact of all active advisories across the entire account, providing a single point of visibility for infrastructure health. - **Operational Visibility:** Offers a high-level dashboard metric that helps administrators quickly identify if there is a significant number of advisories requiring attention. - **License-Restricted Access:** Access to this object is governed by the 'Essentials' license entitlement, ensuring that capacity planning and maintenance monitoring are available to licensed users. - **Account Association:** Directly links the advisory count to a specific Intersight account, ensuring that the data is scoped correctly to the user's organizational context.
 type TamAdvisoryCount struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

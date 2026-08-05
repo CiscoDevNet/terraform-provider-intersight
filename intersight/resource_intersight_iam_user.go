@@ -999,7 +999,7 @@ func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta inter
 
 	o.SetClassId("iam.User")
 
-	if v, ok := d.GetOk("email"); ok {
+	if v, ok := d.GetOkExists("email"); ok {
 		x := (v.(string))
 		o.SetEmail(x)
 	}
@@ -1105,7 +1105,7 @@ func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta inter
 		o.SetLastName(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1232,7 +1232,7 @@ func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta inter
 		}
 	}
 
-	if v, ok := d.GetOk("user_id_or_email"); ok {
+	if v, ok := d.GetOkExists("user_id_or_email"); ok {
 		x := (v.(string))
 		o.SetUserIdOrEmail(x)
 	}

@@ -770,7 +770,7 @@ func resourceServerProfileTemplate() *schema.Resource {
 								return
 							}},
 						"change_status": {
-							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.",
+							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.\n* `Failed` - The status when policy change evaluation report handling failed for a policy.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -871,6 +871,14 @@ func resourceServerProfileTemplate() *schema.Resource {
 						},
 					},
 				},
+			},
+			"server_family": {
+				Description:  "The server family type applicable to a server profile when the target platform is Standalone. For all other platform types, the value should be All.\n* `Unspecified` - Server Family type for Unspecified servers.\n* `All` - All server family types are included under this category.\n* `UCSC845A` - Server Family type for UCS C845A servers.\n* `UCSC2XX/4XX` - Server Family type for UCS C2XX/4XX servers.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Unspecified", "All", "UCSC845A", "UCSC2XX/4XX"}, false),
+				Optional:     true,
+				Computed:     true,
+				ForceNew:     true,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -1527,7 +1535,7 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 		o.SetEnableOverride(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1539,7 +1547,7 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 
 	o.SetObjectType("server.ProfileTemplate")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1927,6 +1935,11 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 		if len(x) > 0 {
 			o.SetScheduledActions(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("server_family"); ok {
+		x := (v.(string))
+		o.SetServerFamily(x)
 	}
 
 	if v, ok := d.GetOk("src_template"); ok {
@@ -2347,6 +2360,10 @@ func resourceServerProfileTemplateRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("scheduled_actions", flattenListPolicyScheduledAction(s.GetScheduledActions(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ScheduledActions in ServerProfileTemplate object: %s", err.Error())
+	}
+
+	if err := d.Set("server_family", (s.GetServerFamily())); err != nil {
+		return diag.Errorf("error occurred while setting property ServerFamily in ServerProfileTemplate object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -2946,6 +2963,12 @@ func resourceServerProfileTemplateUpdate(c context.Context, d *schema.ResourceDa
 			x = append(x, *o)
 		}
 		o.SetScheduledActions(x)
+	}
+
+	if d.HasChange("server_family") {
+		v := d.Get("server_family")
+		x := (v.(string))
+		o.SetServerFamily(x)
 	}
 
 	if d.HasChange("src_template") {

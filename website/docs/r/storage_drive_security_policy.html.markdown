@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_drive_security_policy"
 description: |-
-        The drive security policy defines the configuration for a manual key or a KMIP server, which can be applied to multiple servers. You can enable drive security on the servers using either configuration..
+        The DriveSecurityPolicy object defines configurations for manual keys or KMIP servers, ensuring drive security across multiple servers. It enables the implementation of encryption and security policies for storage drives.
+        #### Purpose
+        The DriveSecurityPolicy object provides a comprehensive framework for managing drive security, supporting both manual and remote key management. It enhances security through drive encryption using manual or KMIP key configurations and ensures consistent application of security policies across server environments.
+        #### Key Concepts
+        - **Flexible Key Management:** Supports both manual and KMIP configurations, providing options for local and remote drive security.
+        - **Integration with Profiles:** Can be linked with server profiles for streamlined security policy deployment.
+        - **Read-Write Access:** Ensures configurable security settings can be adjusted to meet specific organizational requirements.
 
 ---
 
 # Resource: intersight_storage_drive_security_policy
-The drive security policy defines the configuration for a manual key or a KMIP server, which can be applied to multiple servers. You can enable drive security on the servers using either configuration..
+The DriveSecurityPolicy object defines configurations for manual keys or KMIP servers, ensuring drive security across multiple servers. It enables the implementation of encryption and security policies for storage drives.
+#### Purpose
+The DriveSecurityPolicy object provides a comprehensive framework for managing drive security, supporting both manual and remote key management. It enhances security through drive encryption using manual or KMIP key configurations and ensures consistent application of security policies across server environments.
+#### Key Concepts
+- **Flexible Key Management:** Supports both manual and KMIP configurations, providing options for local and remote drive security.
+- **Integration with Profiles:** Can be linked with server profiles for streamlined security policy deployment.
+- **Read-Write Access:** Ensures configurable security settings can be adjusted to meet specific organizational requirements.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

@@ -257,7 +257,7 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"feature_name": {
-						Description: "Name of the feature for which the version map is applicable.\n* `Unknown` - Unknown or Invalid feature in the equipment.\n* `ServerRole` - Server Role support for Fabric Interconnect Direct Hardware.\n* `FIAuditd` - AuditD feature for Fabric Interconnect.",
+						Description: "Name of the feature for which the version map is applicable.\n* `Unknown` - Unknown or Invalid feature in the equipment.\n* `ServerRole` - Server Role support for Fabric Interconnect Direct Hardware.\n* `FIAuditd` - AuditD feature support for Fabric Interconnect.\n* `FIAuditdLogMonitorSupport` - AuditD feature Log Monitor support for Fabric Interconnect.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -498,6 +498,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 					},
 					"maximum_secondary_vlan_per_primary": {
 						Description: "Maximum configurable Secondary VLANs per each Primary VLAN on Switch/Fabric-Interconnect.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"maximum_secure_router_ports": {
+						Description: "Maximum configurable Secure Router ports on Switch/Fabric-Interconnect.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -2100,6 +2105,12 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				{
 					x := int64(v.(int))
 					o.SetMaximumSecondaryVlanPerPrimary(x)
+				}
+			}
+			if v, ok := l["maximum_secure_router_ports"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumSecureRouterPorts(x)
 				}
 			}
 			if v, ok := l["maximum_vifs"]; ok {

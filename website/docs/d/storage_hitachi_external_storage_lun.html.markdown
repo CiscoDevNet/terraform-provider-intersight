@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_external_storage_lun"
 description: |-
-        A list of the LUs that are defined for the port on an external storage system that is externally connected to the local storage system.
+        The HitachiExternalStorageLun object represents a list of logical units defined for external storage ports connected to the local storage system, supporting LUN management and operations.
+        #### Purpose
+        HitachiExternalStorageLun is designed to manage logical units within external storage ports, facilitating operations related to LUN settings and capacities.
+        #### Key Concepts
+        - **LUN Management:** Defines settings for LUNs, including port IDs, WWN, and capacity information for external storage systems.
+        - **Privilege Sets:** Provides controlled access for managing external storage LUN settings with defined privilege sets.
+        - **Licensing:** Supports operations under specified entitlements, adhering to licensing requirements.
 
 ---
 
 # Data Source: intersight_storage_hitachi_external_storage_lun
-A list of the LUs that are defined for the port on an external storage system that is externally connected to the local storage system.
+The HitachiExternalStorageLun object represents a list of logical units defined for external storage ports connected to the local storage system, supporting LUN management and operations.
+#### Purpose
+HitachiExternalStorageLun is designed to manage logical units within external storage ports, facilitating operations related to LUN settings and capacities.
+#### Key Concepts
+- **LUN Management:** Defines settings for LUNs, including port IDs, WWN, and capacity information for external storage systems.
+- **Privilege Sets:** Provides controlled access for managing external storage LUN settings with defined privilege sets.
+- **Licensing:** Supports operations under specified entitlements, adhering to licensing requirements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

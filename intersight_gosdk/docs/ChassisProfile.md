@@ -6,8 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "chassis.Profile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "chassis.Profile"]
+**ChassisAssignmentMode** | Pointer to **string** | Source of the chassis assigned to the Chassis Profile. Values can be Static or None. Static is used if a chassis is attached directly to a Chassis Profile. None is used if no chassis is attached to a Chassis Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * &#x60;Static&#x60; - Chassis is directly assigned to chassis profile using assign chassis. * &#x60;None&#x60; - No chassis is assigned to the chassis profile. | [optional] [default to "Static"]
+**ChassisPreAssignBySerial** | Pointer to **string** | Serial number of the chassis that would be assigned to this pre-assigned Chassis Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters. | [optional] 
+**ChassisReservation** | Pointer to [**ResourcepoolReservationReference**](ResourcepoolReservationReference.md) |  | [optional] 
 **ConfigChangeContext** | Pointer to [**NullablePolicyConfigChangeContext**](PolicyConfigChangeContext.md) |  | [optional] 
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
+**ReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
+**ScheduledChassisAssignment** | Pointer to [**NullableChassisChassisAssignment**](ChassisChassisAssignment.md) |  | [optional] 
 **UserLabel** | Pointer to **string** | User label assigned to the chassis profile. | [optional] 
 **AssignedChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **AssociatedChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
@@ -73,6 +78,81 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetChassisAssignmentMode
+
+`func (o *ChassisProfile) GetChassisAssignmentMode() string`
+
+GetChassisAssignmentMode returns the ChassisAssignmentMode field if non-nil, zero value otherwise.
+
+### GetChassisAssignmentModeOk
+
+`func (o *ChassisProfile) GetChassisAssignmentModeOk() (*string, bool)`
+
+GetChassisAssignmentModeOk returns a tuple with the ChassisAssignmentMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChassisAssignmentMode
+
+`func (o *ChassisProfile) SetChassisAssignmentMode(v string)`
+
+SetChassisAssignmentMode sets ChassisAssignmentMode field to given value.
+
+### HasChassisAssignmentMode
+
+`func (o *ChassisProfile) HasChassisAssignmentMode() bool`
+
+HasChassisAssignmentMode returns a boolean if a field has been set.
+
+### GetChassisPreAssignBySerial
+
+`func (o *ChassisProfile) GetChassisPreAssignBySerial() string`
+
+GetChassisPreAssignBySerial returns the ChassisPreAssignBySerial field if non-nil, zero value otherwise.
+
+### GetChassisPreAssignBySerialOk
+
+`func (o *ChassisProfile) GetChassisPreAssignBySerialOk() (*string, bool)`
+
+GetChassisPreAssignBySerialOk returns a tuple with the ChassisPreAssignBySerial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChassisPreAssignBySerial
+
+`func (o *ChassisProfile) SetChassisPreAssignBySerial(v string)`
+
+SetChassisPreAssignBySerial sets ChassisPreAssignBySerial field to given value.
+
+### HasChassisPreAssignBySerial
+
+`func (o *ChassisProfile) HasChassisPreAssignBySerial() bool`
+
+HasChassisPreAssignBySerial returns a boolean if a field has been set.
+
+### GetChassisReservation
+
+`func (o *ChassisProfile) GetChassisReservation() ResourcepoolReservationReference`
+
+GetChassisReservation returns the ChassisReservation field if non-nil, zero value otherwise.
+
+### GetChassisReservationOk
+
+`func (o *ChassisProfile) GetChassisReservationOk() (*ResourcepoolReservationReference, bool)`
+
+GetChassisReservationOk returns a tuple with the ChassisReservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChassisReservation
+
+`func (o *ChassisProfile) SetChassisReservation(v ResourcepoolReservationReference)`
+
+SetChassisReservation sets ChassisReservation field to given value.
+
+### HasChassisReservation
+
+`func (o *ChassisProfile) HasChassisReservation() bool`
+
+HasChassisReservation returns a boolean if a field has been set.
 
 ### GetConfigChangeContext
 
@@ -144,6 +224,76 @@ HasConfigChanges returns a boolean if a field has been set.
 `func (o *ChassisProfile) UnsetConfigChanges()`
 
 UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
+### GetReservationReferences
+
+`func (o *ChassisProfile) GetReservationReferences() []PoolReservationReference`
+
+GetReservationReferences returns the ReservationReferences field if non-nil, zero value otherwise.
+
+### GetReservationReferencesOk
+
+`func (o *ChassisProfile) GetReservationReferencesOk() (*[]PoolReservationReference, bool)`
+
+GetReservationReferencesOk returns a tuple with the ReservationReferences field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservationReferences
+
+`func (o *ChassisProfile) SetReservationReferences(v []PoolReservationReference)`
+
+SetReservationReferences sets ReservationReferences field to given value.
+
+### HasReservationReferences
+
+`func (o *ChassisProfile) HasReservationReferences() bool`
+
+HasReservationReferences returns a boolean if a field has been set.
+
+### SetReservationReferencesNil
+
+`func (o *ChassisProfile) SetReservationReferencesNil(b bool)`
+
+ SetReservationReferencesNil sets the value for ReservationReferences to be an explicit nil
+
+### UnsetReservationReferences
+`func (o *ChassisProfile) UnsetReservationReferences()`
+
+UnsetReservationReferences ensures that no value is present for ReservationReferences, not even an explicit nil
+### GetScheduledChassisAssignment
+
+`func (o *ChassisProfile) GetScheduledChassisAssignment() ChassisChassisAssignment`
+
+GetScheduledChassisAssignment returns the ScheduledChassisAssignment field if non-nil, zero value otherwise.
+
+### GetScheduledChassisAssignmentOk
+
+`func (o *ChassisProfile) GetScheduledChassisAssignmentOk() (*ChassisChassisAssignment, bool)`
+
+GetScheduledChassisAssignmentOk returns a tuple with the ScheduledChassisAssignment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduledChassisAssignment
+
+`func (o *ChassisProfile) SetScheduledChassisAssignment(v ChassisChassisAssignment)`
+
+SetScheduledChassisAssignment sets ScheduledChassisAssignment field to given value.
+
+### HasScheduledChassisAssignment
+
+`func (o *ChassisProfile) HasScheduledChassisAssignment() bool`
+
+HasScheduledChassisAssignment returns a boolean if a field has been set.
+
+### SetScheduledChassisAssignmentNil
+
+`func (o *ChassisProfile) SetScheduledChassisAssignmentNil(b bool)`
+
+ SetScheduledChassisAssignmentNil sets the value for ScheduledChassisAssignment to be an explicit nil
+
+### UnsetScheduledChassisAssignment
+`func (o *ChassisProfile) UnsetScheduledChassisAssignment()`
+
+UnsetScheduledChassisAssignment ensures that no value is present for ScheduledChassisAssignment, not even an explicit nil
 ### GetUserLabel
 
 `func (o *ChassisProfile) GetUserLabel() string`

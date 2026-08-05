@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "notification.SimpleMoCondition"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "notification.SimpleMoCondition"]
 **Filter** | Pointer to [**NullableNotificationSimpleFilter**](NotificationSimpleFilter.md) |  | [optional] 
+**FilterExpression** | Pointer to [**NullableFilterexprFilterExpression**](FilterexprFilterExpression.md) |  | [optional] 
 **OdataFilter** | Pointer to **string** | Odata filter string managed internally. It is built with specific ObjectType properties. | [optional] [readonly] 
 
 ## Methods
@@ -103,6 +104,41 @@ HasFilter returns a boolean if a field has been set.
 `func (o *NotificationSimpleMoCondition) UnsetFilter()`
 
 UnsetFilter ensures that no value is present for Filter, not even an explicit nil
+### GetFilterExpression
+
+`func (o *NotificationSimpleMoCondition) GetFilterExpression() FilterexprFilterExpression`
+
+GetFilterExpression returns the FilterExpression field if non-nil, zero value otherwise.
+
+### GetFilterExpressionOk
+
+`func (o *NotificationSimpleMoCondition) GetFilterExpressionOk() (*FilterexprFilterExpression, bool)`
+
+GetFilterExpressionOk returns a tuple with the FilterExpression field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterExpression
+
+`func (o *NotificationSimpleMoCondition) SetFilterExpression(v FilterexprFilterExpression)`
+
+SetFilterExpression sets FilterExpression field to given value.
+
+### HasFilterExpression
+
+`func (o *NotificationSimpleMoCondition) HasFilterExpression() bool`
+
+HasFilterExpression returns a boolean if a field has been set.
+
+### SetFilterExpressionNil
+
+`func (o *NotificationSimpleMoCondition) SetFilterExpressionNil(b bool)`
+
+ SetFilterExpressionNil sets the value for FilterExpression to be an explicit nil
+
+### UnsetFilterExpression
+`func (o *NotificationSimpleMoCondition) UnsetFilterExpression()`
+
+UnsetFilterExpression ensures that no value is present for FilterExpression, not even an explicit nil
 ### GetOdataFilter
 
 `func (o *NotificationSimpleMoCondition) GetOdataFilter() string`

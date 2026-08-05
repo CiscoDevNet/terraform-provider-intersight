@@ -2416,7 +2416,7 @@ func resourceOsValidInstallTargetCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -2717,7 +2717,7 @@ func resourceOsValidInstallTargetCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetObjectType("os.ValidInstallTarget")
 
-	if v, ok := d.GetOk("servers"); ok {
+	if v, ok := d.GetOkExists("servers"); ok {
 		x := make([]models.ComputePhysicalRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2759,7 +2759,7 @@ func resourceOsValidInstallTargetCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("src"); ok {
+	if v, ok := d.GetOkExists("src"); ok {
 		x := (v.(string))
 		o.SetSrc(x)
 	}

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **AlarmSummary** | Pointer to [**NullableComputeAlarmSummary**](ComputeAlarmSummary.md) |  | [optional] 
 **AvailableMemory** | Pointer to **string** | Available memory (un-used) on this switch platform. | [optional] [readonly] 
 **BundleVersion** | Pointer to **string** | Running firmware bundle information. | [optional] [readonly] 
+**CdpEnabled** | Pointer to **bool** | Cisco Discovery Protocol (CDP) configuration for the switch. | [optional] [readonly] [default to false]
 **Chassis** | Pointer to **string** | Chassis IP of the switch. | [optional] [readonly] 
 **ConfModTs** | Pointer to **string** | Configuration modified timestamp of the switch. | [optional] [readonly] 
 **ConfModTsBackup** | Pointer to **string** | Configuration modified backup timestamp of the switch. | [optional] [readonly] 
@@ -29,11 +30,16 @@ Name | Type | Description | Notes
 **InbandIpAddress** | Pointer to **string** | The IP address of the network Element inband management interface. | [optional] [readonly] 
 **InbandIpGateway** | Pointer to **string** | The default gateway of the network Element inband management interface. | [optional] [readonly] 
 **InbandIpMask** | Pointer to **string** | The network mask of the network Element inband management interface. | [optional] [readonly] 
+**InbandIpv6Address** | Pointer to **string** | The IPv6 address of the network Element inband management interface. | [optional] [readonly] 
+**InbandIpv6Gateway** | Pointer to **string** | The default IPv6 gateway of the network Element inband management interface. | [optional] [readonly] 
+**InbandIpv6Prefix** | Pointer to **string** | The network mask of the network Element inband management interface. | [optional] [readonly] 
+**InbandMac** | Pointer to **string** | The MAC address of the network Element inband management interface. | [optional] [readonly] 
 **InbandVlan** | Pointer to **int64** | The VLAN ID of the network Element inband management interface. | [optional] [readonly] 
 **InterClusterLinkState** | Pointer to **string** | The intercluster link state of the switch. * &#x60;Unknown&#x60; - The operational state of the link is not known. * &#x60;Up&#x60; - The operational state of the link is up. * &#x60;Down&#x60; - The operational state of the link is down. * &#x60;Degraded&#x60; - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down. | [optional] [readonly] [default to "Unknown"]
 **Ipv4Address** | Pointer to **string** | IP version 4 address is saved in this property. | [optional] [readonly] 
 **IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] 
 **JumboFrameEnabled** | Pointer to **bool** | Jumbo Frame configuration for the switch. | [optional] [readonly] [default to true]
+**LldpEnabled** | Pointer to **bool** | Link Layer Discovery Protocol (LLDP) configuration for the switch. | [optional] [readonly] [default to false]
 **LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | The management mode of the fabric interconnect. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
@@ -58,8 +64,9 @@ Name | Type | Description | Notes
 **OutOfBandIpv6Gateway** | Pointer to **string** | The default IPv6 gateway of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpv6Mode** | Pointer to **string** | The IPv6 address configuration mode of the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 address mode is not available or not applicable. * &#x60;slaac&#x60; - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC). * &#x60;static&#x60; - IPv6 address is statically configured. * &#x60;disabled&#x60; - IPv6 is disabled on the out-of-band management interface. | [optional] [readonly] [default to ""]
 **OutOfBandIpv6Prefix** | Pointer to **string** | The network mask of the network Element out-of-band management interface. | [optional] 
+**OutOfBandIpv6Redirects** | Pointer to **string** | The IPv6 ICMPv6 redirects configuration on the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 redirects configuration is not available or not applicable. * &#x60;enabled&#x60; - IPv6 ICMPv6 redirects are enabled on the management interface. * &#x60;disabled&#x60; - IPv6 ICMPv6 redirects are disabled on the management interface. | [optional] [readonly] [default to ""]
 **OutOfBandIpv6SlaacIidMode** | Pointer to **string** | The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address. * &#x60;&#x60; - The SLAAC IID mode is not available or not applicable. * &#x60;eui64&#x60; - The SLAAC IID is derived from the MAC address using the EUI-64 method. * &#x60;opaque&#x60; - The SLAAC IID is generated using an opaque identifier for privacy. | [optional] [readonly] [default to ""]
-**OutOfBandIpv6Status** | Pointer to **string** | The status of the IPv6 configuration on the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 address status is not available or not applicable. * &#x60;active&#x60; - The IPv6 address is active and in use. * &#x60;tentative&#x60; - The IPv6 address is in tentative state (Duplicate Address Detection in progress). * &#x60;duplicate&#x60; - The IPv6 address is a duplicate (DAD failed). * &#x60;disabled&#x60; - The IPv6 address is disabled. * &#x60;error&#x60; - An error occurred during IPv6 address configuration. * &#x60;unknown&#x60; - The IPv6 address status is unknown. | [optional] [readonly] [default to ""]
+**OutOfBandIpv6Status** | Pointer to **string** | The status of the IPv6 configuration on the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 address status is not available or not applicable. * &#x60;active&#x60; - The IPv6 address is active and in use. * &#x60;tentative&#x60; - The IPv6 address is in tentative state (Duplicate Address Detection in progress). * &#x60;duplicate&#x60; - The IPv6 address is a duplicate (DAD failed). * &#x60;deprecated&#x60; - The IPv6 address is deprecated (preferred lifetime expired). * &#x60;disabled&#x60; - The IPv6 address is disabled. * &#x60;waiting&#x60; - SLAAC is configured but waiting for a Router Advertisement to assign an address. * &#x60;error&#x60; - An error occurred during IPv6 address configuration. * &#x60;unknown&#x60; - The IPv6 address status is unknown. | [optional] [readonly] [default to ""]
 **OutOfBandMac** | Pointer to **string** | The MAC address of the network Element out-of-band management interface. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part number of the switch. | [optional] 
 **Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
@@ -67,10 +74,12 @@ Name | Type | Description | Notes
 **Revision** | Pointer to **string** | The product revision of the switch. | [optional] [readonly] 
 **Rn** | Pointer to **string** | The Relative Name uniquely identifies an object within a given context. | [optional] [readonly] 
 **RouterMac** | Pointer to **string** | This MAC address will be the source MAC address for NetFlow packets. | [optional] [readonly] 
+**SecureRouterInfo** | Pointer to [**NullableNetworkSecureRouterInfo**](NetworkSecureRouterInfo.md) |  | [optional] 
 **Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | The Slot Id of the network Element when embedded inside a chassis. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | Stores the source object type used to fill the properties of this object. | [optional] [readonly] 
 **Status** | Pointer to **string** | The status of the switch. | [optional] 
+**StpMode** | Pointer to **string** | Spanning Tree Protocol configuration for the switch. * &#x60;Disabled&#x60; - Spanning Tree Protocol (STP) is disabled. * &#x60;STP&#x60; - Spanning Tree Protocol (STP) is enabled and operating in STP. * &#x60;RSTP&#x60; - Spanning Tree Protocol (STP) is enabled and operating in RSTP mode. * &#x60;MSTP&#x60; - Spanning Tree Protocol (STP) is enabled and operating in MSTP mode. * &#x60;PVST+&#x60; - Spanning Tree Protocol (STP) is enabled and operating in PVST mode. * &#x60;RPVST+&#x60; - Spanning Tree Protocol (STP) is enabled and operating in RPVST mode. | [optional] [readonly] [default to "Disabled"]
 **SwitchId** | Pointer to **string** | The Switch Id of the network Element. | [optional] [readonly] 
 **SwitchProfileName** | Pointer to **string** | The name of switch profile associated with the switch. | [optional] [readonly] 
 **SwitchType** | Pointer to **string** | The Switch type that the network element is a part of. * &#x60;FabricInterconnect&#x60; - The default Switch type of UCSM and IMM mode devices. * &#x60;NexusDevice&#x60; - Switch type of Nexus devices. * &#x60;MDSDevice&#x60; - Switch type of Nexus MDS devices. * &#x60;EdgeChassisManagementController&#x60; - Switch type of Edge Chassis Management Controller. | [optional] [readonly] [default to "FabricInterconnect"]
@@ -278,6 +287,31 @@ SetBundleVersion sets BundleVersion field to given value.
 `func (o *NetworkElementSummary) HasBundleVersion() bool`
 
 HasBundleVersion returns a boolean if a field has been set.
+
+### GetCdpEnabled
+
+`func (o *NetworkElementSummary) GetCdpEnabled() bool`
+
+GetCdpEnabled returns the CdpEnabled field if non-nil, zero value otherwise.
+
+### GetCdpEnabledOk
+
+`func (o *NetworkElementSummary) GetCdpEnabledOk() (*bool, bool)`
+
+GetCdpEnabledOk returns a tuple with the CdpEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCdpEnabled
+
+`func (o *NetworkElementSummary) SetCdpEnabled(v bool)`
+
+SetCdpEnabled sets CdpEnabled field to given value.
+
+### HasCdpEnabled
+
+`func (o *NetworkElementSummary) HasCdpEnabled() bool`
+
+HasCdpEnabled returns a boolean if a field has been set.
 
 ### GetChassis
 
@@ -729,6 +763,106 @@ SetInbandIpMask sets InbandIpMask field to given value.
 
 HasInbandIpMask returns a boolean if a field has been set.
 
+### GetInbandIpv6Address
+
+`func (o *NetworkElementSummary) GetInbandIpv6Address() string`
+
+GetInbandIpv6Address returns the InbandIpv6Address field if non-nil, zero value otherwise.
+
+### GetInbandIpv6AddressOk
+
+`func (o *NetworkElementSummary) GetInbandIpv6AddressOk() (*string, bool)`
+
+GetInbandIpv6AddressOk returns a tuple with the InbandIpv6Address field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInbandIpv6Address
+
+`func (o *NetworkElementSummary) SetInbandIpv6Address(v string)`
+
+SetInbandIpv6Address sets InbandIpv6Address field to given value.
+
+### HasInbandIpv6Address
+
+`func (o *NetworkElementSummary) HasInbandIpv6Address() bool`
+
+HasInbandIpv6Address returns a boolean if a field has been set.
+
+### GetInbandIpv6Gateway
+
+`func (o *NetworkElementSummary) GetInbandIpv6Gateway() string`
+
+GetInbandIpv6Gateway returns the InbandIpv6Gateway field if non-nil, zero value otherwise.
+
+### GetInbandIpv6GatewayOk
+
+`func (o *NetworkElementSummary) GetInbandIpv6GatewayOk() (*string, bool)`
+
+GetInbandIpv6GatewayOk returns a tuple with the InbandIpv6Gateway field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInbandIpv6Gateway
+
+`func (o *NetworkElementSummary) SetInbandIpv6Gateway(v string)`
+
+SetInbandIpv6Gateway sets InbandIpv6Gateway field to given value.
+
+### HasInbandIpv6Gateway
+
+`func (o *NetworkElementSummary) HasInbandIpv6Gateway() bool`
+
+HasInbandIpv6Gateway returns a boolean if a field has been set.
+
+### GetInbandIpv6Prefix
+
+`func (o *NetworkElementSummary) GetInbandIpv6Prefix() string`
+
+GetInbandIpv6Prefix returns the InbandIpv6Prefix field if non-nil, zero value otherwise.
+
+### GetInbandIpv6PrefixOk
+
+`func (o *NetworkElementSummary) GetInbandIpv6PrefixOk() (*string, bool)`
+
+GetInbandIpv6PrefixOk returns a tuple with the InbandIpv6Prefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInbandIpv6Prefix
+
+`func (o *NetworkElementSummary) SetInbandIpv6Prefix(v string)`
+
+SetInbandIpv6Prefix sets InbandIpv6Prefix field to given value.
+
+### HasInbandIpv6Prefix
+
+`func (o *NetworkElementSummary) HasInbandIpv6Prefix() bool`
+
+HasInbandIpv6Prefix returns a boolean if a field has been set.
+
+### GetInbandMac
+
+`func (o *NetworkElementSummary) GetInbandMac() string`
+
+GetInbandMac returns the InbandMac field if non-nil, zero value otherwise.
+
+### GetInbandMacOk
+
+`func (o *NetworkElementSummary) GetInbandMacOk() (*string, bool)`
+
+GetInbandMacOk returns a tuple with the InbandMac field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInbandMac
+
+`func (o *NetworkElementSummary) SetInbandMac(v string)`
+
+SetInbandMac sets InbandMac field to given value.
+
+### HasInbandMac
+
+`func (o *NetworkElementSummary) HasInbandMac() bool`
+
+HasInbandMac returns a boolean if a field has been set.
+
 ### GetInbandVlan
 
 `func (o *NetworkElementSummary) GetInbandVlan() int64`
@@ -853,6 +987,31 @@ SetJumboFrameEnabled sets JumboFrameEnabled field to given value.
 `func (o *NetworkElementSummary) HasJumboFrameEnabled() bool`
 
 HasJumboFrameEnabled returns a boolean if a field has been set.
+
+### GetLldpEnabled
+
+`func (o *NetworkElementSummary) GetLldpEnabled() bool`
+
+GetLldpEnabled returns the LldpEnabled field if non-nil, zero value otherwise.
+
+### GetLldpEnabledOk
+
+`func (o *NetworkElementSummary) GetLldpEnabledOk() (*bool, bool)`
+
+GetLldpEnabledOk returns a tuple with the LldpEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLldpEnabled
+
+`func (o *NetworkElementSummary) SetLldpEnabled(v bool)`
+
+SetLldpEnabled sets LldpEnabled field to given value.
+
+### HasLldpEnabled
+
+`func (o *NetworkElementSummary) HasLldpEnabled() bool`
+
+HasLldpEnabled returns a boolean if a field has been set.
 
 ### GetLocationDetails
 
@@ -1464,6 +1623,31 @@ SetOutOfBandIpv6Prefix sets OutOfBandIpv6Prefix field to given value.
 
 HasOutOfBandIpv6Prefix returns a boolean if a field has been set.
 
+### GetOutOfBandIpv6Redirects
+
+`func (o *NetworkElementSummary) GetOutOfBandIpv6Redirects() string`
+
+GetOutOfBandIpv6Redirects returns the OutOfBandIpv6Redirects field if non-nil, zero value otherwise.
+
+### GetOutOfBandIpv6RedirectsOk
+
+`func (o *NetworkElementSummary) GetOutOfBandIpv6RedirectsOk() (*string, bool)`
+
+GetOutOfBandIpv6RedirectsOk returns a tuple with the OutOfBandIpv6Redirects field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutOfBandIpv6Redirects
+
+`func (o *NetworkElementSummary) SetOutOfBandIpv6Redirects(v string)`
+
+SetOutOfBandIpv6Redirects sets OutOfBandIpv6Redirects field to given value.
+
+### HasOutOfBandIpv6Redirects
+
+`func (o *NetworkElementSummary) HasOutOfBandIpv6Redirects() bool`
+
+HasOutOfBandIpv6Redirects returns a boolean if a field has been set.
+
 ### GetOutOfBandIpv6SlaacIidMode
 
 `func (o *NetworkElementSummary) GetOutOfBandIpv6SlaacIidMode() string`
@@ -1689,6 +1873,41 @@ SetRouterMac sets RouterMac field to given value.
 
 HasRouterMac returns a boolean if a field has been set.
 
+### GetSecureRouterInfo
+
+`func (o *NetworkElementSummary) GetSecureRouterInfo() NetworkSecureRouterInfo`
+
+GetSecureRouterInfo returns the SecureRouterInfo field if non-nil, zero value otherwise.
+
+### GetSecureRouterInfoOk
+
+`func (o *NetworkElementSummary) GetSecureRouterInfoOk() (*NetworkSecureRouterInfo, bool)`
+
+GetSecureRouterInfoOk returns a tuple with the SecureRouterInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecureRouterInfo
+
+`func (o *NetworkElementSummary) SetSecureRouterInfo(v NetworkSecureRouterInfo)`
+
+SetSecureRouterInfo sets SecureRouterInfo field to given value.
+
+### HasSecureRouterInfo
+
+`func (o *NetworkElementSummary) HasSecureRouterInfo() bool`
+
+HasSecureRouterInfo returns a boolean if a field has been set.
+
+### SetSecureRouterInfoNil
+
+`func (o *NetworkElementSummary) SetSecureRouterInfoNil(b bool)`
+
+ SetSecureRouterInfoNil sets the value for SecureRouterInfo to be an explicit nil
+
+### UnsetSecureRouterInfo
+`func (o *NetworkElementSummary) UnsetSecureRouterInfo()`
+
+UnsetSecureRouterInfo ensures that no value is present for SecureRouterInfo, not even an explicit nil
 ### GetSerial
 
 `func (o *NetworkElementSummary) GetSerial() string`
@@ -1788,6 +2007,31 @@ SetStatus sets Status field to given value.
 `func (o *NetworkElementSummary) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetStpMode
+
+`func (o *NetworkElementSummary) GetStpMode() string`
+
+GetStpMode returns the StpMode field if non-nil, zero value otherwise.
+
+### GetStpModeOk
+
+`func (o *NetworkElementSummary) GetStpModeOk() (*string, bool)`
+
+GetStpModeOk returns a tuple with the StpMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStpMode
+
+`func (o *NetworkElementSummary) SetStpMode(v string)`
+
+SetStpMode sets StpMode field to given value.
+
+### HasStpMode
+
+`func (o *NetworkElementSummary) HasStpMode() bool`
+
+HasStpMode returns a boolean if a field has been set.
 
 ### GetSwitchId
 

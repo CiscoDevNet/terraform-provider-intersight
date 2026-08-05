@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -75,7 +75,8 @@ type BiosPolicy struct {
 	// BIOS Token for setting CPU Autonomous C State configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	AutonumousCstateEnable *string `json:"AutonumousCstateEnable,omitempty"`
 	// BIOS Token for setting Baud Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `9600` - Value - 9600 for configuring BaudRate token. * `19200` - Value - 19200 for configuring BaudRate token. * `38400` - Value - 38400 for configuring BaudRate token. * `57600` - Value - 57600 for configuring BaudRate token. * `115200` - Value - 115200 for configuring BaudRate token.
-	BaudRate *string `json:"BaudRate,omitempty"`
+	BaudRate           *string                     `json:"BaudRate,omitempty"`
+	BiosConfigurations []BiosBaseBiosConfiguration `json:"BiosConfigurations,omitempty"`
 	// BIOS Token for setting BME DMA Mitigation configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	BmeDmaMitigation *string `json:"BmeDmaMitigation,omitempty"`
 	// BIOS Token for setting Number of Retries configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `5` - Value - 5 for configuring BootOptionNumRetry token. * `13` - Value - 13 for configuring BootOptionNumRetry token. * `Infinite` - Value - Infinite for configuring BootOptionNumRetry token.
@@ -388,6 +389,8 @@ type BiosPolicy struct {
 	MmiohBase *string `json:"MmiohBase,omitempty"`
 	// BIOS Token for setting MMIO High Granularity Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring MmiohSize token. * `4G` - Value - 4G for configuring MmiohSize token. * `16G` - Value - 16G for configuring MmiohSize token. * `32G` - Value - 32G for configuring MmiohSize token. * `64G` - Value - 64G for configuring MmiohSize token. * `256G` - Value - 256G for configuring MmiohSize token. * `1024G` - Value - 1024G for configuring MmiohSize token. * `Auto` - Value - Auto for configuring MmiohSize token.
 	MmiohSize *string `json:"MmiohSize,omitempty"`
+	// Specifies supported server model. * `Not-Applicable` - Represents case where the server model does not apply. * `UCSC845A` - Represents UCS C845A server model.
+	Model *string `json:"Model,omitempty"`
 	// BIOS Token for setting Network Stack configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	NetworkStack *string `json:"NetworkStack,omitempty"`
 	// BIOS Token for setting NUMA Optimized configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -490,6 +493,8 @@ type BiosPolicy struct {
 	PcieSlotNvme6optionRom *string `json:"PcieSlotNvme6optionRom,omitempty"`
 	// BIOS Token for setting PCIe Slots CDN Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	PcieSlotsCdnEnable *string `json:"PcieSlotsCdnEnable,omitempty"`
+	// Specifies BIOS policy compatibility type. * `Generic` - Generic BIOS type is compatible only for UCS B, C, and X Series models. Do not attempt to proceed if you are using an unsupported model, as this may result in configuration errors. * `ModelSpecific` - Model Specific BIOS type is compatible only for UCS C845A model. Do not attempt to proceed if you are using an unsupported model, as this may result in configuration errors.
+	PolicyType *string `json:"PolicyType,omitempty"`
 	// BIOS Token for setting Power ON Password configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	PopSupport *string `json:"PopSupport,omitempty"`
 	// BIOS Token for setting POST Error Pause configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -518,7 +523,7 @@ type BiosPolicy struct {
 	PwrPerfTuning *string `json:"PwrPerfTuning,omitempty"`
 	// BIOS Token for setting QPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `6.4-gt/s` - Value - 6.4-gt/s for configuring QpiLinkFrequency token. * `7.2-gt/s` - Value - 7.2-gt/s for configuring QpiLinkFrequency token. * `8.0-gt/s` - Value - 8.0-gt/s for configuring QpiLinkFrequency token. * `9.6-gt/s` - Value - 9.6-gt/s for configuring QpiLinkFrequency token. * `auto` - Value - auto for configuring QpiLinkFrequency token.
 	QpiLinkFrequency *string `json:"QpiLinkFrequency,omitempty"`
-	// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token. * `24.0GT/s` - Value - 24.0GT/s for configuring QpiLinkSpeed token. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token. * `Use Per Link Setting` - Value - Use Per Link Setting for configuring QpiLinkSpeed token.
+	// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token. * `24.0GT/s` - Value - 24.0GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token. * `Use Per Link Setting` - Value - Use Per Link Setting for configuring QpiLinkSpeed token.
 	QpiLinkSpeed *string `json:"QpiLinkSpeed,omitempty"`
 	// BIOS Token for setting QPI Snoop Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring QpiSnoopMode token. * `cluster-on-die` - Value - cluster-on-die for configuring QpiSnoopMode token. * `early-snoop` - Value - early-snoop for configuring QpiSnoopMode token. * `home-directory-snoop` - Value - home-directory-snoop for configuring QpiSnoopMode token. * `home-directory-snoop-with-osb` - Value - home-directory-snoop-with-osb for configuring QpiSnoopMode token. * `home-snoop` - Value - home-snoop for configuring QpiSnoopMode token.
 	QpiSnoopMode *string `json:"QpiSnoopMode,omitempty"`
@@ -1347,6 +1352,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.MmiohBase = &mmiohBase
 	var mmiohSize string = "platform-default"
 	this.MmiohSize = &mmiohSize
+	var model string = "Not-Applicable"
+	this.Model = &model
 	var networkStack string = "platform-default"
 	this.NetworkStack = &networkStack
 	var numaOptimized string = "platform-default"
@@ -1449,6 +1456,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.PcieSlotNvme6optionRom = &pcieSlotNvme6optionRom
 	var pcieSlotsCdnEnable string = "platform-default"
 	this.PcieSlotsCdnEnable = &pcieSlotsCdnEnable
+	var policyType string = "Generic"
+	this.PolicyType = &policyType
 	var popSupport string = "platform-default"
 	this.PopSupport = &popSupport
 	var postErrorPause string = "platform-default"
@@ -2301,6 +2310,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.MmiohBase = &mmiohBase
 	var mmiohSize string = "platform-default"
 	this.MmiohSize = &mmiohSize
+	var model string = "Not-Applicable"
+	this.Model = &model
 	var networkStack string = "platform-default"
 	this.NetworkStack = &networkStack
 	var numaOptimized string = "platform-default"
@@ -2403,6 +2414,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.PcieSlotNvme6optionRom = &pcieSlotNvme6optionRom
 	var pcieSlotsCdnEnable string = "platform-default"
 	this.PcieSlotsCdnEnable = &pcieSlotsCdnEnable
+	var policyType string = "Generic"
+	this.PolicyType = &policyType
 	var popSupport string = "platform-default"
 	this.PopSupport = &popSupport
 	var postErrorPause string = "platform-default"
@@ -3710,6 +3723,39 @@ func (o *BiosPolicy) HasBaudRate() bool {
 // SetBaudRate gets a reference to the given string and assigns it to the BaudRate field.
 func (o *BiosPolicy) SetBaudRate(v string) {
 	o.BaudRate = &v
+}
+
+// GetBiosConfigurations returns the BiosConfigurations field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BiosPolicy) GetBiosConfigurations() []BiosBaseBiosConfiguration {
+	if o == nil {
+		var ret []BiosBaseBiosConfiguration
+		return ret
+	}
+	return o.BiosConfigurations
+}
+
+// GetBiosConfigurationsOk returns a tuple with the BiosConfigurations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BiosPolicy) GetBiosConfigurationsOk() ([]BiosBaseBiosConfiguration, bool) {
+	if o == nil || IsNil(o.BiosConfigurations) {
+		return nil, false
+	}
+	return o.BiosConfigurations, true
+}
+
+// HasBiosConfigurations returns a boolean if a field has been set.
+func (o *BiosPolicy) HasBiosConfigurations() bool {
+	if o != nil && !IsNil(o.BiosConfigurations) {
+		return true
+	}
+
+	return false
+}
+
+// SetBiosConfigurations gets a reference to the given []BiosBaseBiosConfiguration and assigns it to the BiosConfigurations field.
+func (o *BiosPolicy) SetBiosConfigurations(v []BiosBaseBiosConfiguration) {
+	o.BiosConfigurations = v
 }
 
 // GetBmeDmaMitigation returns the BmeDmaMitigation field value if set, zero value otherwise.
@@ -8704,6 +8750,38 @@ func (o *BiosPolicy) SetMmiohSize(v string) {
 	o.MmiohSize = &v
 }
 
+// GetModel returns the Model field value if set, zero value otherwise.
+func (o *BiosPolicy) GetModel() string {
+	if o == nil || IsNil(o.Model) {
+		var ret string
+		return ret
+	}
+	return *o.Model
+}
+
+// GetModelOk returns a tuple with the Model field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetModelOk() (*string, bool) {
+	if o == nil || IsNil(o.Model) {
+		return nil, false
+	}
+	return o.Model, true
+}
+
+// HasModel returns a boolean if a field has been set.
+func (o *BiosPolicy) HasModel() bool {
+	if o != nil && !IsNil(o.Model) {
+		return true
+	}
+
+	return false
+}
+
+// SetModel gets a reference to the given string and assigns it to the Model field.
+func (o *BiosPolicy) SetModel(v string) {
+	o.Model = &v
+}
+
 // GetNetworkStack returns the NetworkStack field value if set, zero value otherwise.
 func (o *BiosPolicy) GetNetworkStack() string {
 	if o == nil || IsNil(o.NetworkStack) {
@@ -10334,6 +10412,38 @@ func (o *BiosPolicy) HasPcieSlotsCdnEnable() bool {
 // SetPcieSlotsCdnEnable gets a reference to the given string and assigns it to the PcieSlotsCdnEnable field.
 func (o *BiosPolicy) SetPcieSlotsCdnEnable(v string) {
 	o.PcieSlotsCdnEnable = &v
+}
+
+// GetPolicyType returns the PolicyType field value if set, zero value otherwise.
+func (o *BiosPolicy) GetPolicyType() string {
+	if o == nil || IsNil(o.PolicyType) {
+		var ret string
+		return ret
+	}
+	return *o.PolicyType
+}
+
+// GetPolicyTypeOk returns a tuple with the PolicyType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetPolicyTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.PolicyType) {
+		return nil, false
+	}
+	return o.PolicyType, true
+}
+
+// HasPolicyType returns a boolean if a field has been set.
+func (o *BiosPolicy) HasPolicyType() bool {
+	if o != nil && !IsNil(o.PolicyType) {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicyType gets a reference to the given string and assigns it to the PolicyType field.
+func (o *BiosPolicy) SetPolicyType(v string) {
+	o.PolicyType = &v
 }
 
 // GetPopSupport returns the PopSupport field value if set, zero value otherwise.
@@ -18193,6 +18303,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BaudRate) {
 		toSerialize["BaudRate"] = o.BaudRate
 	}
+	if o.BiosConfigurations != nil {
+		toSerialize["BiosConfigurations"] = o.BiosConfigurations
+	}
 	if !IsNil(o.BmeDmaMitigation) {
 		toSerialize["BmeDmaMitigation"] = o.BmeDmaMitigation
 	}
@@ -18661,6 +18774,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MmiohSize) {
 		toSerialize["MmiohSize"] = o.MmiohSize
 	}
+	if !IsNil(o.Model) {
+		toSerialize["Model"] = o.Model
+	}
 	if !IsNil(o.NetworkStack) {
 		toSerialize["NetworkStack"] = o.NetworkStack
 	}
@@ -18813,6 +18929,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PcieSlotsCdnEnable) {
 		toSerialize["PcieSlotsCdnEnable"] = o.PcieSlotsCdnEnable
+	}
+	if !IsNil(o.PolicyType) {
+		toSerialize["PolicyType"] = o.PolicyType
 	}
 	if !IsNil(o.PopSupport) {
 		toSerialize["PopSupport"] = o.PopSupport
@@ -19642,7 +19761,8 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		// BIOS Token for setting CPU Autonomous C State configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		AutonumousCstateEnable *string `json:"AutonumousCstateEnable,omitempty"`
 		// BIOS Token for setting Baud Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `9600` - Value - 9600 for configuring BaudRate token. * `19200` - Value - 19200 for configuring BaudRate token. * `38400` - Value - 38400 for configuring BaudRate token. * `57600` - Value - 57600 for configuring BaudRate token. * `115200` - Value - 115200 for configuring BaudRate token.
-		BaudRate *string `json:"BaudRate,omitempty"`
+		BaudRate           *string                     `json:"BaudRate,omitempty"`
+		BiosConfigurations []BiosBaseBiosConfiguration `json:"BiosConfigurations,omitempty"`
 		// BIOS Token for setting BME DMA Mitigation configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		BmeDmaMitigation *string `json:"BmeDmaMitigation,omitempty"`
 		// BIOS Token for setting Number of Retries configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `5` - Value - 5 for configuring BootOptionNumRetry token. * `13` - Value - 13 for configuring BootOptionNumRetry token. * `Infinite` - Value - Infinite for configuring BootOptionNumRetry token.
@@ -19955,6 +20075,8 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		MmiohBase *string `json:"MmiohBase,omitempty"`
 		// BIOS Token for setting MMIO High Granularity Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring MmiohSize token. * `4G` - Value - 4G for configuring MmiohSize token. * `16G` - Value - 16G for configuring MmiohSize token. * `32G` - Value - 32G for configuring MmiohSize token. * `64G` - Value - 64G for configuring MmiohSize token. * `256G` - Value - 256G for configuring MmiohSize token. * `1024G` - Value - 1024G for configuring MmiohSize token. * `Auto` - Value - Auto for configuring MmiohSize token.
 		MmiohSize *string `json:"MmiohSize,omitempty"`
+		// Specifies supported server model. * `Not-Applicable` - Represents case where the server model does not apply. * `UCSC845A` - Represents UCS C845A server model.
+		Model *string `json:"Model,omitempty"`
 		// BIOS Token for setting Network Stack configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		NetworkStack *string `json:"NetworkStack,omitempty"`
 		// BIOS Token for setting NUMA Optimized configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -20057,6 +20179,8 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		PcieSlotNvme6optionRom *string `json:"PcieSlotNvme6optionRom,omitempty"`
 		// BIOS Token for setting PCIe Slots CDN Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		PcieSlotsCdnEnable *string `json:"PcieSlotsCdnEnable,omitempty"`
+		// Specifies BIOS policy compatibility type. * `Generic` - Generic BIOS type is compatible only for UCS B, C, and X Series models. Do not attempt to proceed if you are using an unsupported model, as this may result in configuration errors. * `ModelSpecific` - Model Specific BIOS type is compatible only for UCS C845A model. Do not attempt to proceed if you are using an unsupported model, as this may result in configuration errors.
+		PolicyType *string `json:"PolicyType,omitempty"`
 		// BIOS Token for setting Power ON Password configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		PopSupport *string `json:"PopSupport,omitempty"`
 		// BIOS Token for setting POST Error Pause configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -20085,7 +20209,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		PwrPerfTuning *string `json:"PwrPerfTuning,omitempty"`
 		// BIOS Token for setting QPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `6.4-gt/s` - Value - 6.4-gt/s for configuring QpiLinkFrequency token. * `7.2-gt/s` - Value - 7.2-gt/s for configuring QpiLinkFrequency token. * `8.0-gt/s` - Value - 8.0-gt/s for configuring QpiLinkFrequency token. * `9.6-gt/s` - Value - 9.6-gt/s for configuring QpiLinkFrequency token. * `auto` - Value - auto for configuring QpiLinkFrequency token.
 		QpiLinkFrequency *string `json:"QpiLinkFrequency,omitempty"`
-		// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token. * `24.0GT/s` - Value - 24.0GT/s for configuring QpiLinkSpeed token. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token. * `Use Per Link Setting` - Value - Use Per Link Setting for configuring QpiLinkSpeed token.
+		// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token. * `24.0GT/s` - Value - 24.0GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token. * `Use Per Link Setting` - Value - Use Per Link Setting for configuring QpiLinkSpeed token.
 		QpiLinkSpeed *string `json:"QpiLinkSpeed,omitempty"`
 		// BIOS Token for setting QPI Snoop Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring QpiSnoopMode token. * `cluster-on-die` - Value - cluster-on-die for configuring QpiSnoopMode token. * `early-snoop` - Value - early-snoop for configuring QpiSnoopMode token. * `home-directory-snoop` - Value - home-directory-snoop for configuring QpiSnoopMode token. * `home-directory-snoop-with-osb` - Value - home-directory-snoop-with-osb for configuring QpiSnoopMode token. * `home-snoop` - Value - home-snoop for configuring QpiSnoopMode token.
 		QpiSnoopMode *string `json:"QpiSnoopMode,omitempty"`
@@ -20574,6 +20698,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.AutoCcState = varBiosPolicyWithoutEmbeddedStruct.AutoCcState
 		varBiosPolicy.AutonumousCstateEnable = varBiosPolicyWithoutEmbeddedStruct.AutonumousCstateEnable
 		varBiosPolicy.BaudRate = varBiosPolicyWithoutEmbeddedStruct.BaudRate
+		varBiosPolicy.BiosConfigurations = varBiosPolicyWithoutEmbeddedStruct.BiosConfigurations
 		varBiosPolicy.BmeDmaMitigation = varBiosPolicyWithoutEmbeddedStruct.BmeDmaMitigation
 		varBiosPolicy.BootOptionNumRetry = varBiosPolicyWithoutEmbeddedStruct.BootOptionNumRetry
 		varBiosPolicy.BootOptionReCoolDown = varBiosPolicyWithoutEmbeddedStruct.BootOptionReCoolDown
@@ -20730,6 +20855,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.MmcfgBase = varBiosPolicyWithoutEmbeddedStruct.MmcfgBase
 		varBiosPolicy.MmiohBase = varBiosPolicyWithoutEmbeddedStruct.MmiohBase
 		varBiosPolicy.MmiohSize = varBiosPolicyWithoutEmbeddedStruct.MmiohSize
+		varBiosPolicy.Model = varBiosPolicyWithoutEmbeddedStruct.Model
 		varBiosPolicy.NetworkStack = varBiosPolicyWithoutEmbeddedStruct.NetworkStack
 		varBiosPolicy.NumaOptimized = varBiosPolicyWithoutEmbeddedStruct.NumaOptimized
 		varBiosPolicy.NvmdimmPerformConfig = varBiosPolicyWithoutEmbeddedStruct.NvmdimmPerformConfig
@@ -20781,6 +20907,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.PcieSlotNvme6linkSpeed = varBiosPolicyWithoutEmbeddedStruct.PcieSlotNvme6linkSpeed
 		varBiosPolicy.PcieSlotNvme6optionRom = varBiosPolicyWithoutEmbeddedStruct.PcieSlotNvme6optionRom
 		varBiosPolicy.PcieSlotsCdnEnable = varBiosPolicyWithoutEmbeddedStruct.PcieSlotsCdnEnable
+		varBiosPolicy.PolicyType = varBiosPolicyWithoutEmbeddedStruct.PolicyType
 		varBiosPolicy.PopSupport = varBiosPolicyWithoutEmbeddedStruct.PopSupport
 		varBiosPolicy.PostErrorPause = varBiosPolicyWithoutEmbeddedStruct.PostErrorPause
 		varBiosPolicy.PostPackageRepair = varBiosPolicyWithoutEmbeddedStruct.PostPackageRepair
@@ -21066,6 +21193,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "AutoCcState")
 		delete(additionalProperties, "AutonumousCstateEnable")
 		delete(additionalProperties, "BaudRate")
+		delete(additionalProperties, "BiosConfigurations")
 		delete(additionalProperties, "BmeDmaMitigation")
 		delete(additionalProperties, "BootOptionNumRetry")
 		delete(additionalProperties, "BootOptionReCoolDown")
@@ -21222,6 +21350,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "MmcfgBase")
 		delete(additionalProperties, "MmiohBase")
 		delete(additionalProperties, "MmiohSize")
+		delete(additionalProperties, "Model")
 		delete(additionalProperties, "NetworkStack")
 		delete(additionalProperties, "NumaOptimized")
 		delete(additionalProperties, "NvmdimmPerformConfig")
@@ -21273,6 +21402,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "PcieSlotNvme6linkSpeed")
 		delete(additionalProperties, "PcieSlotNvme6optionRom")
 		delete(additionalProperties, "PcieSlotsCdnEnable")
+		delete(additionalProperties, "PolicyType")
 		delete(additionalProperties, "PopSupport")
 		delete(additionalProperties, "PostErrorPause")
 		delete(additionalProperties, "PostPackageRepair")

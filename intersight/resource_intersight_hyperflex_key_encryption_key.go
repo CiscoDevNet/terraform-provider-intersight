@@ -746,7 +746,7 @@ func resourceHyperflexKeyEncryptionKeyCreate(c context.Context, d *schema.Resour
 		o.SetKek(x)
 	}
 
-	if v, ok := d.GetOk("key_id"); ok {
+	if v, ok := d.GetOkExists("key_id"); ok {
 		x := (v.(string))
 		o.SetKeyId(x)
 	}
@@ -756,7 +756,7 @@ func resourceHyperflexKeyEncryptionKeyCreate(c context.Context, d *schema.Resour
 		o.SetKeyState(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

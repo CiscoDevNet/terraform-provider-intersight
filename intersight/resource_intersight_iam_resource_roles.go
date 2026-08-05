@@ -738,14 +738,14 @@ func resourceIamResourceRolesCreate(c context.Context, d *schema.ResourceData, m
 
 	o.SetClassId("iam.ResourceRoles")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("iam.ResourceRoles")
 
-	if v, ok := d.GetOk("permission"); ok {
+	if v, ok := d.GetOkExists("permission"); ok {
 		p := make([]models.IamPermissionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -830,7 +830,7 @@ func resourceIamResourceRolesCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("resource"); ok {
+	if v, ok := d.GetOkExists("resource"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

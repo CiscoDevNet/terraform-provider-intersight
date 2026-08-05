@@ -1140,7 +1140,7 @@ func resourceFirmwarePciNodeUpgrade() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"direct_upgrade", "network_upgrade"}, false),
 				Optional:     true,
-				Default:      "direct_upgrade",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"version_context": {
@@ -1335,7 +1335,7 @@ func resourceFirmwarePciNodeUpgradeCreate(c context.Context, d *schema.ResourceD
 
 	o.SetClassId("firmware.PciNodeUpgrade")
 
-	if v, ok := d.GetOk("direct_download"); ok {
+	if v, ok := d.GetOkExists("direct_download"); ok {
 		p := make([]models.FirmwareDirectDownload, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1434,7 +1434,7 @@ func resourceFirmwarePciNodeUpgradeCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("distributable"); ok {
+	if v, ok := d.GetOkExists("distributable"); ok {
 		p := make([]models.FirmwareDistributableRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1477,7 +1477,7 @@ func resourceFirmwarePciNodeUpgradeCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("file_server"); ok {
+	if v, ok := d.GetOkExists("file_server"); ok {
 		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1508,12 +1508,12 @@ func resourceFirmwarePciNodeUpgradeCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("network_share"); ok {
+	if v, ok := d.GetOkExists("network_share"); ok {
 		p := make([]models.FirmwareNetworkShare, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1702,7 +1702,7 @@ func resourceFirmwarePciNodeUpgradeCreate(c context.Context, d *schema.ResourceD
 
 	o.SetObjectType("firmware.PciNodeUpgrade")
 
-	if v, ok := d.GetOk("pci_node"); ok {
+	if v, ok := d.GetOkExists("pci_node"); ok {
 		p := make([]models.PciNodeRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1745,7 +1745,7 @@ func resourceFirmwarePciNodeUpgradeCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("release"); ok {
+	if v, ok := d.GetOkExists("release"); ok {
 		p := make([]models.SoftwarerepositoryReleaseRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1876,7 +1876,7 @@ func resourceFirmwarePciNodeUpgradeCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("upgrade_type"); ok {
+	if v, ok := d.GetOkExists("upgrade_type"); ok {
 		x := (v.(string))
 		o.SetUpgradeType(x)
 	}

@@ -61,7 +61,7 @@ func getVnicIscsiBootPolicyInventorySchema() map[string]*schema.Schema {
 			},
 		},
 		"auto_targetvendor_name": {
-			Description: "Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 64 characters.",
+			Description: "Auto target interface that is represented via the Initiator name or the DHCP vendor ID. Accepted length: 1 to 63 characters.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

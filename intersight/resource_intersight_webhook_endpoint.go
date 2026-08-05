@@ -194,7 +194,7 @@ func resourceWebhookEndpoint() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"basic", "none", "bearer-token", "auth-code", "client-credentials"}, false),
 				Optional:     true,
-				Default:      "basic",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"class_id": {
@@ -759,7 +759,7 @@ func resourceWebhookEndpointCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if v, ok := d.GetOk("app_credentials"); ok {
+	if v, ok := d.GetOkExists("app_credentials"); ok {
 		p := make([]models.IamAppCredentials, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -833,7 +833,7 @@ func resourceWebhookEndpointCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if v, ok := d.GetOk("auth_type"); ok {
+	if v, ok := d.GetOkExists("auth_type"); ok {
 		x := (v.(string))
 		o.SetAuthType(x)
 	}
@@ -845,7 +845,7 @@ func resourceWebhookEndpointCreate(c context.Context, d *schema.ResourceData, me
 		o.SetCredentialsAction(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -857,7 +857,7 @@ func resourceWebhookEndpointCreate(c context.Context, d *schema.ResourceData, me
 
 	o.SetObjectType("webhook.Endpoint")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

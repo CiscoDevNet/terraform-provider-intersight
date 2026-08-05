@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_machine_gpu"
 description: |-
-        Common attributes of virtual GPU device on a VMware virtual machine.
+        The VmwareVirtualMachineGpu object encapsulates the common attributes of virtual GPU devices on VMware virtual machines, detailing configurations for resource allocation and management.
+        #### Purpose
+        VmwareVirtualMachineGpu provides the framework for managing virtual GPU configurations, supporting detailed settings and operational attributes within VMware environments.
+        #### Key Concepts
+        - **Resource Allocation:** Defines settings for GPU keys and identities, optimizing resource management and allocation on virtual machines.
+        - **Integration:** Interfaces with virtual machines, facilitating seamless connectivity and resource management for virtual GPU devices.
+        - **Security and Access:** Utilizes privilege sets for secure read operations, maintaining integrity and authorized access.
+        - **Operational Features:** Includes attributes for GPU configurations, supporting resilient and adaptive device operations.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_machine_gpu
-Common attributes of virtual GPU device on a VMware virtual machine.
+The VmwareVirtualMachineGpu object encapsulates the common attributes of virtual GPU devices on VMware virtual machines, detailing configurations for resource allocation and management.
+#### Purpose
+VmwareVirtualMachineGpu provides the framework for managing virtual GPU configurations, supporting detailed settings and operational attributes within VMware environments.
+#### Key Concepts
+- **Resource Allocation:** Defines settings for GPU keys and identities, optimizing resource management and allocation on virtual machines.
+- **Integration:** Interfaces with virtual machines, facilitating seamless connectivity and resource management for virtual GPU devices.
+- **Security and Access:** Utilizes privilege sets for secure read operations, maintaining integrity and authorized access.
+- **Operational Features:** Includes attributes for GPU configurations, supporting resilient and adaptive device operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

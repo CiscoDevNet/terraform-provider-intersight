@@ -399,7 +399,7 @@ func resourceWorkflowCatalogServiceRequest() *schema.Resource {
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringInSlice([]string{"PostDeployment", "Deployment", "Decommission", "Migration"}, false),
 							Optional:     true,
-							Default:      "PostDeployment",
+							Computed:     true,
 						},
 					},
 				},
@@ -1072,7 +1072,7 @@ func resourceWorkflowCatalogServiceRequestCreate(c context.Context, d *schema.Re
 		}
 	}
 
-	if v, ok := d.GetOk("catalog_item_definition"); ok {
+	if v, ok := d.GetOkExists("catalog_item_definition"); ok {
 		p := make([]models.WorkflowCatalogItemDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1253,7 +1253,7 @@ func resourceWorkflowCatalogServiceRequestCreate(c context.Context, d *schema.Re
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

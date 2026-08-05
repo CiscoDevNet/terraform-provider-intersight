@@ -1410,7 +1410,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	if v, ok := d.GetOk("cluster"); ok {
+	if v, ok := d.GetOkExists("cluster"); ok {
 		p := make([]models.VirtualizationBaseClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1581,7 +1581,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		o.SetGuestOs(x)
 	}
 
-	if v, ok := d.GetOk("host"); ok {
+	if v, ok := d.GetOkExists("host"); ok {
 		p := make([]models.VirtualizationBaseHostRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1730,7 +1730,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		o.SetMemory(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1752,7 +1752,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		o.SetProvisionType(x)
 	}
 
-	if v, ok := d.GetOk("registered_device"); ok {
+	if v, ok := d.GetOkExists("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

@@ -3,12 +3,22 @@ subcategory: "partnerintegration"
 layout: "intersight"
 page_title: "Intersight: intersight_partnerintegration_doc_issues"
 description: |-
-        Documentation issues from the build operation.
+        The DocIssues object captures documentation-related issues identified during the build operation of an inventory collection.
+        #### Purpose
+        This provides feedback on documentation generation, allowing developers to identify and resolve issues in the generated API documentation or SDKs.
+        #### Key Concepts
+        - **Issue Tracking:** Lists specific documentation errors or warnings encountered during the build.
+        - **Quality Assurance:** Helps ensure that generated documentation is accurate and complete.
 
 ---
 
 # Data Source: intersight_partnerintegration_doc_issues
-Documentation issues from the build operation.
+The DocIssues object captures documentation-related issues identified during the build operation of an inventory collection.
+#### Purpose
+This provides feedback on documentation generation, allowing developers to identify and resolve issues in the generated API documentation or SDKs.
+#### Key Concepts
+- **Issue Tracking:** Lists specific documentation errors or warnings encountered during the build.
+- **Quality Assurance:** Helps ensure that generated documentation is accurate and complete.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

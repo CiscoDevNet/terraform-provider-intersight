@@ -334,6 +334,11 @@ func getWorkflowCustomDataTypeDefinitionSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"support_status": {
+						Description: "Supported status of the definition.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 				},
 			},
 		},
@@ -1079,6 +1084,12 @@ func dataSourceWorkflowCustomDataTypeDefinitionRead(c context.Context, d *schema
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["support_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetSupportStatus(x)
 				}
 			}
 			p = append(p, *o)

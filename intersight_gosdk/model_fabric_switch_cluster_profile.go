@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -29,13 +29,23 @@ type FabricSwitchClusterProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The support actions are -- Deploy, Unassign.
-	Action             *string                     `json:"Action,omitempty"`
-	ClusterAssignments []FabricClusterAssignment   `json:"ClusterAssignments,omitempty"`
-	ConfigContext      NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
+	Action *string `json:"Action,omitempty"`
+	// Source of the chassis assigned to the Switch Cluster Profile. Values can be Static or None. Static is used if a chassis is attached directly to a Switch Cluster Profile. None is used if no chassis is attached to a Switch Cluster Profile. Serial pre-assignment is also considered None. * `Static` - Chassis is directly assigned to switch cluster profile. * `None` - No chassis is assigned to the switch cluster profile.
+	ChassisAssignmentMode *string `json:"ChassisAssignmentMode,omitempty"`
+	// Serial number of the chassis that would be assigned to this pre-assigned switch cluster profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
+	ChassisPreAssignBySerial *string                     `json:"ChassisPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
+	ClusterAssignments       []FabricClusterAssignment   `json:"ClusterAssignments,omitempty"`
+	ConfigContext            NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
 	// Deploy status of the switch cluster profile indicating if deployment has been initiated on all the members of the cluster profile. * `None` - Switch profiles not deployed on either of the switches. * `Complete` - Both switch profiles of the cluster profile are deployed. * `Partial` - Only one of the switch profiles of the cluster profile is deployed.
 	DeployStatus *string `json:"DeployStatus,omitempty"`
 	// Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * `None` - Switch profiles not deployed on either of the fabric interconnects. * `A` - Switch profiles deployed only on fabric interconnect A. * `B` - Switch profiles deployed only on fabric interconnect B. * `AB` - Switch profiles deployed on both fabric interconnect A and B.
-	DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
+	DeployedSwitches           *string                         `json:"DeployedSwitches,omitempty"`
+	OverriddenList             []string                        `json:"OverriddenList,omitempty"`
+	ScheduledChassisAssignment NullableFabricChassisAssignment `json:"ScheduledChassisAssignment,omitempty"`
+	TemplateActions            []MotemplateActionEntry         `json:"TemplateActions,omitempty"`
+	TemplateSyncErrors         []MotemplateSyncError           `json:"TemplateSyncErrors,omitempty"`
+	// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+	TemplateSyncStatus *string `json:"TemplateSyncStatus,omitempty"`
 	// The user defined label assigned to the switch profile.
 	UserLabel      *string                                      `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 	AssignedEntity NullableMoBaseMoRelationship                 `json:"AssignedEntity,omitempty"`
@@ -61,6 +71,8 @@ func NewFabricSwitchClusterProfile(classId string, objectType string) *FabricSwi
 	this.TargetPlatform = &targetPlatform
 	var action string = "No-op"
 	this.Action = &action
+	var chassisAssignmentMode string = "Static"
+	this.ChassisAssignmentMode = &chassisAssignmentMode
 	return &this
 }
 
@@ -75,6 +87,8 @@ func NewFabricSwitchClusterProfileWithDefaults() *FabricSwitchClusterProfile {
 	this.ObjectType = objectType
 	var action string = "No-op"
 	this.Action = &action
+	var chassisAssignmentMode string = "Static"
+	this.ChassisAssignmentMode = &chassisAssignmentMode
 	return &this
 }
 
@@ -166,6 +180,70 @@ func (o *FabricSwitchClusterProfile) HasAction() bool {
 // SetAction gets a reference to the given string and assigns it to the Action field.
 func (o *FabricSwitchClusterProfile) SetAction(v string) {
 	o.Action = &v
+}
+
+// GetChassisAssignmentMode returns the ChassisAssignmentMode field value if set, zero value otherwise.
+func (o *FabricSwitchClusterProfile) GetChassisAssignmentMode() string {
+	if o == nil || IsNil(o.ChassisAssignmentMode) {
+		var ret string
+		return ret
+	}
+	return *o.ChassisAssignmentMode
+}
+
+// GetChassisAssignmentModeOk returns a tuple with the ChassisAssignmentMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchClusterProfile) GetChassisAssignmentModeOk() (*string, bool) {
+	if o == nil || IsNil(o.ChassisAssignmentMode) {
+		return nil, false
+	}
+	return o.ChassisAssignmentMode, true
+}
+
+// HasChassisAssignmentMode returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasChassisAssignmentMode() bool {
+	if o != nil && !IsNil(o.ChassisAssignmentMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisAssignmentMode gets a reference to the given string and assigns it to the ChassisAssignmentMode field.
+func (o *FabricSwitchClusterProfile) SetChassisAssignmentMode(v string) {
+	o.ChassisAssignmentMode = &v
+}
+
+// GetChassisPreAssignBySerial returns the ChassisPreAssignBySerial field value if set, zero value otherwise.
+func (o *FabricSwitchClusterProfile) GetChassisPreAssignBySerial() string {
+	if o == nil || IsNil(o.ChassisPreAssignBySerial) {
+		var ret string
+		return ret
+	}
+	return *o.ChassisPreAssignBySerial
+}
+
+// GetChassisPreAssignBySerialOk returns a tuple with the ChassisPreAssignBySerial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchClusterProfile) GetChassisPreAssignBySerialOk() (*string, bool) {
+	if o == nil || IsNil(o.ChassisPreAssignBySerial) {
+		return nil, false
+	}
+	return o.ChassisPreAssignBySerial, true
+}
+
+// HasChassisPreAssignBySerial returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasChassisPreAssignBySerial() bool {
+	if o != nil && !IsNil(o.ChassisPreAssignBySerial) {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisPreAssignBySerial gets a reference to the given string and assigns it to the ChassisPreAssignBySerial field.
+func (o *FabricSwitchClusterProfile) SetChassisPreAssignBySerial(v string) {
+	o.ChassisPreAssignBySerial = &v
 }
 
 // GetClusterAssignments returns the ClusterAssignments field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -306,6 +384,180 @@ func (o *FabricSwitchClusterProfile) HasDeployedSwitches() bool {
 // SetDeployedSwitches gets a reference to the given string and assigns it to the DeployedSwitches field.
 func (o *FabricSwitchClusterProfile) SetDeployedSwitches(v string) {
 	o.DeployedSwitches = &v
+}
+
+// GetOverriddenList returns the OverriddenList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchClusterProfile) GetOverriddenList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.OverriddenList
+}
+
+// GetOverriddenListOk returns a tuple with the OverriddenList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchClusterProfile) GetOverriddenListOk() ([]string, bool) {
+	if o == nil || IsNil(o.OverriddenList) {
+		return nil, false
+	}
+	return o.OverriddenList, true
+}
+
+// HasOverriddenList returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasOverriddenList() bool {
+	if o != nil && !IsNil(o.OverriddenList) {
+		return true
+	}
+
+	return false
+}
+
+// SetOverriddenList gets a reference to the given []string and assigns it to the OverriddenList field.
+func (o *FabricSwitchClusterProfile) SetOverriddenList(v []string) {
+	o.OverriddenList = v
+}
+
+// GetScheduledChassisAssignment returns the ScheduledChassisAssignment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchClusterProfile) GetScheduledChassisAssignment() FabricChassisAssignment {
+	if o == nil || IsNil(o.ScheduledChassisAssignment.Get()) {
+		var ret FabricChassisAssignment
+		return ret
+	}
+	return *o.ScheduledChassisAssignment.Get()
+}
+
+// GetScheduledChassisAssignmentOk returns a tuple with the ScheduledChassisAssignment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchClusterProfile) GetScheduledChassisAssignmentOk() (*FabricChassisAssignment, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ScheduledChassisAssignment.Get(), o.ScheduledChassisAssignment.IsSet()
+}
+
+// HasScheduledChassisAssignment returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasScheduledChassisAssignment() bool {
+	if o != nil && o.ScheduledChassisAssignment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledChassisAssignment gets a reference to the given NullableFabricChassisAssignment and assigns it to the ScheduledChassisAssignment field.
+func (o *FabricSwitchClusterProfile) SetScheduledChassisAssignment(v FabricChassisAssignment) {
+	o.ScheduledChassisAssignment.Set(&v)
+}
+
+// SetScheduledChassisAssignmentNil sets the value for ScheduledChassisAssignment to be an explicit nil
+func (o *FabricSwitchClusterProfile) SetScheduledChassisAssignmentNil() {
+	o.ScheduledChassisAssignment.Set(nil)
+}
+
+// UnsetScheduledChassisAssignment ensures that no value is present for ScheduledChassisAssignment, not even an explicit nil
+func (o *FabricSwitchClusterProfile) UnsetScheduledChassisAssignment() {
+	o.ScheduledChassisAssignment.Unset()
+}
+
+// GetTemplateActions returns the TemplateActions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchClusterProfile) GetTemplateActions() []MotemplateActionEntry {
+	if o == nil {
+		var ret []MotemplateActionEntry
+		return ret
+	}
+	return o.TemplateActions
+}
+
+// GetTemplateActionsOk returns a tuple with the TemplateActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchClusterProfile) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
+	if o == nil || IsNil(o.TemplateActions) {
+		return nil, false
+	}
+	return o.TemplateActions, true
+}
+
+// HasTemplateActions returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasTemplateActions() bool {
+	if o != nil && !IsNil(o.TemplateActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateActions gets a reference to the given []MotemplateActionEntry and assigns it to the TemplateActions field.
+func (o *FabricSwitchClusterProfile) SetTemplateActions(v []MotemplateActionEntry) {
+	o.TemplateActions = v
+}
+
+// GetTemplateSyncErrors returns the TemplateSyncErrors field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchClusterProfile) GetTemplateSyncErrors() []MotemplateSyncError {
+	if o == nil {
+		var ret []MotemplateSyncError
+		return ret
+	}
+	return o.TemplateSyncErrors
+}
+
+// GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchClusterProfile) GetTemplateSyncErrorsOk() ([]MotemplateSyncError, bool) {
+	if o == nil || IsNil(o.TemplateSyncErrors) {
+		return nil, false
+	}
+	return o.TemplateSyncErrors, true
+}
+
+// HasTemplateSyncErrors returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasTemplateSyncErrors() bool {
+	if o != nil && !IsNil(o.TemplateSyncErrors) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncErrors gets a reference to the given []MotemplateSyncError and assigns it to the TemplateSyncErrors field.
+func (o *FabricSwitchClusterProfile) SetTemplateSyncErrors(v []MotemplateSyncError) {
+	o.TemplateSyncErrors = v
+}
+
+// GetTemplateSyncStatus returns the TemplateSyncStatus field value if set, zero value otherwise.
+func (o *FabricSwitchClusterProfile) GetTemplateSyncStatus() string {
+	if o == nil || IsNil(o.TemplateSyncStatus) {
+		var ret string
+		return ret
+	}
+	return *o.TemplateSyncStatus
+}
+
+// GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchClusterProfile) GetTemplateSyncStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.TemplateSyncStatus) {
+		return nil, false
+	}
+	return o.TemplateSyncStatus, true
+}
+
+// HasTemplateSyncStatus returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasTemplateSyncStatus() bool {
+	if o != nil && !IsNil(o.TemplateSyncStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncStatus gets a reference to the given string and assigns it to the TemplateSyncStatus field.
+func (o *FabricSwitchClusterProfile) SetTemplateSyncStatus(v string) {
+	o.TemplateSyncStatus = &v
 }
 
 // GetUserLabel returns the UserLabel field value if set, zero value otherwise.
@@ -488,6 +740,12 @@ func (o FabricSwitchClusterProfile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
+	if !IsNil(o.ChassisAssignmentMode) {
+		toSerialize["ChassisAssignmentMode"] = o.ChassisAssignmentMode
+	}
+	if !IsNil(o.ChassisPreAssignBySerial) {
+		toSerialize["ChassisPreAssignBySerial"] = o.ChassisPreAssignBySerial
+	}
 	if o.ClusterAssignments != nil {
 		toSerialize["ClusterAssignments"] = o.ClusterAssignments
 	}
@@ -499,6 +757,21 @@ func (o FabricSwitchClusterProfile) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DeployedSwitches) {
 		toSerialize["DeployedSwitches"] = o.DeployedSwitches
+	}
+	if o.OverriddenList != nil {
+		toSerialize["OverriddenList"] = o.OverriddenList
+	}
+	if o.ScheduledChassisAssignment.IsSet() {
+		toSerialize["ScheduledChassisAssignment"] = o.ScheduledChassisAssignment.Get()
+	}
+	if o.TemplateActions != nil {
+		toSerialize["TemplateActions"] = o.TemplateActions
+	}
+	if o.TemplateSyncErrors != nil {
+		toSerialize["TemplateSyncErrors"] = o.TemplateSyncErrors
+	}
+	if !IsNil(o.TemplateSyncStatus) {
+		toSerialize["TemplateSyncStatus"] = o.TemplateSyncStatus
 	}
 	if !IsNil(o.UserLabel) {
 		toSerialize["UserLabel"] = o.UserLabel
@@ -568,13 +841,23 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The support actions are -- Deploy, Unassign.
-		Action             *string                     `json:"Action,omitempty"`
-		ClusterAssignments []FabricClusterAssignment   `json:"ClusterAssignments,omitempty"`
-		ConfigContext      NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
+		Action *string `json:"Action,omitempty"`
+		// Source of the chassis assigned to the Switch Cluster Profile. Values can be Static or None. Static is used if a chassis is attached directly to a Switch Cluster Profile. None is used if no chassis is attached to a Switch Cluster Profile. Serial pre-assignment is also considered None. * `Static` - Chassis is directly assigned to switch cluster profile. * `None` - No chassis is assigned to the switch cluster profile.
+		ChassisAssignmentMode *string `json:"ChassisAssignmentMode,omitempty"`
+		// Serial number of the chassis that would be assigned to this pre-assigned switch cluster profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
+		ChassisPreAssignBySerial *string                     `json:"ChassisPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
+		ClusterAssignments       []FabricClusterAssignment   `json:"ClusterAssignments,omitempty"`
+		ConfigContext            NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
 		// Deploy status of the switch cluster profile indicating if deployment has been initiated on all the members of the cluster profile. * `None` - Switch profiles not deployed on either of the switches. * `Complete` - Both switch profiles of the cluster profile are deployed. * `Partial` - Only one of the switch profiles of the cluster profile is deployed.
 		DeployStatus *string `json:"DeployStatus,omitempty"`
 		// Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * `None` - Switch profiles not deployed on either of the fabric interconnects. * `A` - Switch profiles deployed only on fabric interconnect A. * `B` - Switch profiles deployed only on fabric interconnect B. * `AB` - Switch profiles deployed on both fabric interconnect A and B.
-		DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
+		DeployedSwitches           *string                         `json:"DeployedSwitches,omitempty"`
+		OverriddenList             []string                        `json:"OverriddenList,omitempty"`
+		ScheduledChassisAssignment NullableFabricChassisAssignment `json:"ScheduledChassisAssignment,omitempty"`
+		TemplateActions            []MotemplateActionEntry         `json:"TemplateActions,omitempty"`
+		TemplateSyncErrors         []MotemplateSyncError           `json:"TemplateSyncErrors,omitempty"`
+		// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+		TemplateSyncStatus *string `json:"TemplateSyncStatus,omitempty"`
 		// The user defined label assigned to the switch profile.
 		UserLabel      *string                                      `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 		AssignedEntity NullableMoBaseMoRelationship                 `json:"AssignedEntity,omitempty"`
@@ -591,10 +874,17 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(data []byte) (err error) {
 		varFabricSwitchClusterProfile.ClassId = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ClassId
 		varFabricSwitchClusterProfile.ObjectType = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ObjectType
 		varFabricSwitchClusterProfile.Action = varFabricSwitchClusterProfileWithoutEmbeddedStruct.Action
+		varFabricSwitchClusterProfile.ChassisAssignmentMode = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ChassisAssignmentMode
+		varFabricSwitchClusterProfile.ChassisPreAssignBySerial = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ChassisPreAssignBySerial
 		varFabricSwitchClusterProfile.ClusterAssignments = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ClusterAssignments
 		varFabricSwitchClusterProfile.ConfigContext = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ConfigContext
 		varFabricSwitchClusterProfile.DeployStatus = varFabricSwitchClusterProfileWithoutEmbeddedStruct.DeployStatus
 		varFabricSwitchClusterProfile.DeployedSwitches = varFabricSwitchClusterProfileWithoutEmbeddedStruct.DeployedSwitches
+		varFabricSwitchClusterProfile.OverriddenList = varFabricSwitchClusterProfileWithoutEmbeddedStruct.OverriddenList
+		varFabricSwitchClusterProfile.ScheduledChassisAssignment = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ScheduledChassisAssignment
+		varFabricSwitchClusterProfile.TemplateActions = varFabricSwitchClusterProfileWithoutEmbeddedStruct.TemplateActions
+		varFabricSwitchClusterProfile.TemplateSyncErrors = varFabricSwitchClusterProfileWithoutEmbeddedStruct.TemplateSyncErrors
+		varFabricSwitchClusterProfile.TemplateSyncStatus = varFabricSwitchClusterProfileWithoutEmbeddedStruct.TemplateSyncStatus
 		varFabricSwitchClusterProfile.UserLabel = varFabricSwitchClusterProfileWithoutEmbeddedStruct.UserLabel
 		varFabricSwitchClusterProfile.AssignedEntity = varFabricSwitchClusterProfileWithoutEmbeddedStruct.AssignedEntity
 		varFabricSwitchClusterProfile.Organization = varFabricSwitchClusterProfileWithoutEmbeddedStruct.Organization
@@ -619,10 +909,17 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")
+		delete(additionalProperties, "ChassisAssignmentMode")
+		delete(additionalProperties, "ChassisPreAssignBySerial")
 		delete(additionalProperties, "ClusterAssignments")
 		delete(additionalProperties, "ConfigContext")
 		delete(additionalProperties, "DeployStatus")
 		delete(additionalProperties, "DeployedSwitches")
+		delete(additionalProperties, "OverriddenList")
+		delete(additionalProperties, "ScheduledChassisAssignment")
+		delete(additionalProperties, "TemplateActions")
+		delete(additionalProperties, "TemplateSyncErrors")
+		delete(additionalProperties, "TemplateSyncStatus")
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "AssignedEntity")
 		delete(additionalProperties, "Organization")

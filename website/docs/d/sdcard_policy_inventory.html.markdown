@@ -3,12 +3,24 @@ subcategory: "sdcard"
 layout: "intersight"
 page_title: "Intersight: intersight_sdcard_policy_inventory"
 description: |-
-        Policy for configuring SD Card settings on endpoint.
+        The Policy object is a framework for configuring SD Card settings on endpoints, with a focus on managing partition types and virtual drives.
+        #### Purpose
+        The Policy object simplifies the configuration and deployment of SD Card settings. It enables partition management by defining partition types and associated virtual drives, and facilitates drive configuration within these partitions, enhancing overall endpoint resource management.
+        #### Key Concepts
+        - **Virtual Drives:** Supports the creation and management of virtual drives within OS and utility partitions.
+        - **Inventory Integration:** Generates inventory objects to track and manage SD Card settings across endpoints.
+        - **Deprecated Relationships:** While maintaining backward compatibility, certain relationship settings are marked deprecated.
 
 ---
 
 # Data Source: intersight_sdcard_policy_inventory
-Policy for configuring SD Card settings on endpoint.
+The Policy object is a framework for configuring SD Card settings on endpoints, with a focus on managing partition types and virtual drives.
+#### Purpose
+The Policy object simplifies the configuration and deployment of SD Card settings. It enables partition management by defining partition types and associated virtual drives, and facilitates drive configuration within these partitions, enhancing overall endpoint resource management.
+#### Key Concepts
+- **Virtual Drives:** Supports the creation and management of virtual drives within OS and utility partitions.
+- **Inventory Integration:** Generates inventory objects to track and manage SD Card settings across endpoints.
+- **Deprecated Relationships:** While maintaining backward compatibility, certain relationship settings are marked deprecated.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

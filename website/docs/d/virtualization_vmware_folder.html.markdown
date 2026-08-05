@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_folder"
 description: |-
-        A folder in a VMware vCenter. Folder can be created directly under the vCenter, under a datacenter, or inside another folder.
+        The VmwareFolder object delineates the folder entity within VMware vCenter, providing organizational structure for resources such as VMs, networks, and datastores.
+        #### Purpose
+        VmwareFolder is critical for managing and organizing VMware resources, offering a hierarchical framework for resource categorization and management.
+        #### Key Concepts
+        - **Organizational Hierarchy:** Supports nested folder structures, enabling efficient resource organization within vCenter.
+        - **Integration:** Connects with datacenters, hypervisor managers, and other folders, promoting cohesive resource management.
+        - **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+        - **Resource Categorization:** Includes folder types for categorizing resources, enhancing organizational clarity and management efficiency.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_folder
-A folder in a VMware vCenter. Folder can be created directly under the vCenter, under a datacenter, or inside another folder.
+The VmwareFolder object delineates the folder entity within VMware vCenter, providing organizational structure for resources such as VMs, networks, and datastores.
+#### Purpose
+VmwareFolder is critical for managing and organizing VMware resources, offering a hierarchical framework for resource categorization and management.
+#### Key Concepts
+- **Organizational Hierarchy:** Supports nested folder structures, enabling efficient resource organization within vCenter.
+- **Integration:** Connects with datacenters, hypervisor managers, and other folders, promoting cohesive resource management.
+- **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+- **Resource Categorization:** Includes folder types for categorizing resources, enhancing organizational clarity and management efficiency.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

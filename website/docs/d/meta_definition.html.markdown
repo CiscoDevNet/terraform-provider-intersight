@@ -17,6 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `enable_previous_mo`:(bool) When true, MO change events for this type include the previous (old) value of each modified field alongside the new value, so consumers (e.g. post-processing services) can see both. Implemented by enabling MongoDB change stream pre-image snapshots for the collection. 
 * `is_concrete`:(bool) Boolean flag to specify whether the meta class is a concrete class or not. 
 * `meta_type`:(string) Indicates whether the meta class is a complex type or managed object.* `ManagedObject` - The meta.Definition object describes a managed object.* `ComplexType` - The meta.Definition object describes a nested complex type within a managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 

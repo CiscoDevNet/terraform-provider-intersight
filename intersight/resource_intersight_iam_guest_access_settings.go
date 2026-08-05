@@ -620,7 +620,7 @@ func resourceIamGuestAccessSettingsCreate(c context.Context, d *schema.ResourceD
 		o.SetMaxGuestAccessLinkShelfLife(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

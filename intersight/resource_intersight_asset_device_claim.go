@@ -799,14 +799,14 @@ func resourceAssetDeviceClaimCreate(c context.Context, d *schema.ResourceData, m
 
 	o.SetClassId("asset.DeviceClaim")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("asset.DeviceClaim")
 
-	if v, ok := d.GetOk("reservation"); ok {
+	if v, ok := d.GetOkExists("reservation"); ok {
 		p := make([]models.ResourceReservationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -849,12 +849,12 @@ func resourceAssetDeviceClaimCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("security_token"); ok {
+	if v, ok := d.GetOkExists("security_token"); ok {
 		x := (v.(string))
 		o.SetSecurityToken(x)
 	}
 
-	if v, ok := d.GetOk("serial_number"); ok {
+	if v, ok := d.GetOkExists("serial_number"); ok {
 		x := (v.(string))
 		o.SetSerialNumber(x)
 	}

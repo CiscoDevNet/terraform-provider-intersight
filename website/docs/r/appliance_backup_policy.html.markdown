@@ -3,18 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_backup_policy"
 description: |-
-        BackupPolicy stores the Intersight Appliance's backup policy. There will be only
-        one BackupPolicy managed object in the Intersight Appliance. Default backup policy
-        managed object is created during the Intersight Appliance setup, and it is configured
-        in the manual backup mode.
+        The BackupPolicy object defines the strategic approach to system backups, setting guidelines and parameters for regular data protection operations.
+        #### Purpose
+        BackupPolicy establishes the backup framework, detailing the schedule, retention, and manual operation modes to ensure comprehensive data safeguarding.
+        #### Key Concepts
+        - **Policy Definition:** Outlines the backup strategy, including schedules and retention policies, facilitating organized and predictable backup operations.
+        - **Manual and Automatic Modes:** Supports user-defined backup modes, allowing flexibility in data protection management.
+        - **Retention Strategies:** Specifies retention policies to manage backup data lifecycle, promoting efficient storage use and data integrity.
+        - **Organizational Alignment:** Ensures backup operations align with organizational goals and security standards, promoting reliable data management.
 
 ---
 
 # Resource: intersight_appliance_backup_policy
-BackupPolicy stores the Intersight Appliance's backup policy. There will be only
-one BackupPolicy managed object in the Intersight Appliance. Default backup policy
-managed object is created during the Intersight Appliance setup, and it is configured
-in the manual backup mode.
+The BackupPolicy object defines the strategic approach to system backups, setting guidelines and parameters for regular data protection operations.
+#### Purpose
+BackupPolicy establishes the backup framework, detailing the schedule, retention, and manual operation modes to ensure comprehensive data safeguarding.
+#### Key Concepts
+- **Policy Definition:** Outlines the backup strategy, including schedules and retention policies, facilitating organized and predictable backup operations.
+- **Manual and Automatic Modes:** Supports user-defined backup modes, allowing flexibility in data protection management.
+- **Retention Strategies:** Specifies retention policies to manage backup data lifecycle, promoting efficient storage use and data integrity.
+- **Organizational Alignment:** Ensures backup operations align with organizational goals and security standards, promoting reliable data management.
 ## Usage Example
 ### Resource Creation
 
@@ -83,10 +91,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `protocol`:(string) Communication protocol used by the file server (e.g. scp, sftp, or CIFS).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.* `cifs` - Common Internet File System (CIFS) Protocol to access file server. 
-* `remote_host`:(string) Hostname of the remote file server. 
-* `remote_path`:(string) File server directory or share name to copy the file. 
-* `remote_port`:(int) Remote TCP port on the file server (e.g. 22 for scp). 
+* `protocol`:(string) Communication protocol used by backup and restore workflow (e.g. scp, sftp, cifs, or local).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.* `cifs` - Common Internet File System (CIFS) Protocol to access file server.* `local` - Backup file is stored in Intersight Appliance. 
+* `remote_host`:(string) Hostname of the remote file server. Not required when protocol is local. 
+* `remote_path`:(string) File server directory or share name to copy the file. Not required when protocol is local. 
+* `remote_port`:(int) Remote TCP port on the file server (e.g. 22 for scp). Not required when protocol is local. 
 * `retention_count`:(int) The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled. 
 * `retention_policy_enabled`:(bool) If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property. 
 * `schedule`:(HashMap) - Schedule to create a backup of the Intersight Appliance. Manualbackup field must be set to 'false' for this schedule to be active. 
@@ -117,7 +125,7 @@ This complex property has following sub-properties:
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
-* `username`:(string) Username to authenticate the fileserver. 
+* `username`:(string) Username to authenticate the fileserver. Not required when protocol is local. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

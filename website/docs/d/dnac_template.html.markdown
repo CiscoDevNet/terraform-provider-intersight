@@ -3,12 +3,24 @@ subcategory: "dnac"
 layout: "intersight"
 page_title: "Intersight: intersight_dnac_template"
 description: |-
-        Collection of information of templates.
+        The Template object encapsulates the configuration and management of templates within the network system, supporting standardized and efficient deployment of configurations.
+        #### Purpose
+        A Template object serves as the blueprint for network configurations, enabling systematic and consistent deployment across the network infrastructure.
+        #### Key Concepts
+        - **Configuration Standardization:** Facilitates the creation and management of templates, promoting consistency in network configuration.
+        - **Versioning and Access Control:** Supports version control and secure access, ensuring safe updates and management.
+        - **Integration with Network Processes:** Designed to work cohesively with other network elements, enhancing overall efficiency and reliability.
 
 ---
 
 # Data Source: intersight_dnac_template
-Collection of information of templates.
+The Template object encapsulates the configuration and management of templates within the network system, supporting standardized and efficient deployment of configurations.
+#### Purpose
+A Template object serves as the blueprint for network configurations, enabling systematic and consistent deployment across the network infrastructure.
+#### Key Concepts
+- **Configuration Standardization:** Facilitates the creation and management of templates, promoting consistency in network configuration.
+- **Versioning and Access Control:** Supports version control and secure access, ensuring safe updates and management.
+- **Integration with Network Processes:** Designed to work cohesively with other network elements, enhancing overall efficiency and reliability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

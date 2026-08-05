@@ -3,12 +3,24 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_node"
 description: |-
-        A HCI node reported by Prism Central.
+        The Node object encapsulates the details of individual nodes within clusters, as reported by Nutanix Prism Central. This provides a structured representation of nodes, including their configuration and operational status.
+        #### Purpose
+        The Node object provides a detailed view of node configurations.
+        #### Key Concepts
+        - **Configuration Details:** Offers insights into node attributes like hypervisor type, model details, host type, and associated objects like disks and VMs.
+        - **Operational Status:** Monitors node health, operational states, and resource utilization.
+        - **Server Linkage:** The PhysicalServer property on the node object provides a link to the actual server, if the server is claimed in Intersight.
 
 ---
 
 # Data Source: intersight_hci_node
-A HCI node reported by Prism Central.
+The Node object encapsulates the details of individual nodes within clusters, as reported by Nutanix Prism Central. This provides a structured representation of nodes, including their configuration and operational status.
+#### Purpose 
+The Node object provides a detailed view of node configurations. 
+#### Key Concepts  
+- **Configuration Details:** Offers insights into node attributes like hypervisor type, model details, host type, and associated objects like disks and VMs.
+- **Operational Status:** Monitors node health, operational states, and resource utilization.
+- **Server Linkage:** The PhysicalServer property on the node object provides a link to the actual server, if the server is claimed in Intersight.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

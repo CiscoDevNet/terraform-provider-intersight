@@ -3,12 +3,26 @@ subcategory: "iwotenant"
 layout: "intersight"
 page_title: "Intersight: intersight_iwotenant_migrate"
 description: |-
-        Api used to transfer customer's IWO data.
+        Migrates provide an API surface to transfer a customer's IWO data, including the information required to stage migration artifacts (for example, an S3 URL) and protect access with a password that meets complexity requirements.
+        #### Purpose
+        Enable controlled migration of IWO tenant data for an account, coordinating the migration operation with the account and its associated tenant.
+        #### Key Concepts
+        - **Migration staging location:** Uses a URL (for example, an object storage bucket endpoint) to upload or access migration data.
+        - **Protected operation:** Requires a password (stored securely/encrypted) to safeguard migration artifacts or processes.
+        - **Account and tenant linkage:** Ties the migration request to the relevant account and (optionally) the tenant for context and governance.
+        - **Lifecycle controls:** Supports create/update for initiating/configuring migration and delete for administrative cleanup.
 
 ---
 
 # Data Source: intersight_iwotenant_migrate
-Api used to transfer customer's IWO data.
+Migrates provide an API surface to transfer a customer's IWO data, including the information required to stage migration artifacts (for example, an S3 URL) and protect access with a password that meets complexity requirements.
+#### Purpose
+Enable controlled migration of IWO tenant data for an account, coordinating the migration operation with the account and its associated tenant.
+#### Key Concepts
+- **Migration staging location:** Uses a URL (for example, an object storage bucket endpoint) to upload or access migration data.
+- **Protected operation:** Requires a password (stored securely/encrypted) to safeguard migration artifacts or processes.
+- **Account and tenant linkage:** Ties the migration request to the relevant account and (optionally) the tenant for context and governance.
+- **Lifecycle controls:** Supports create/update for initiating/configuring migration and delete for administrative cleanup.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

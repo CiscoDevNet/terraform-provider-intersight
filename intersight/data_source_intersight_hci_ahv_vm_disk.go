@@ -100,6 +100,11 @@ func getHciAhvVmDiskSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"is_external_storage": {
+			Description: "Derived property based on if storage container used external storage.\nNote: this value is independent of existence of volumeExtId. When a volumeExtId is empty \n(when the Pure Inventory is not available), this value can be true because storage container \nindicates external storage is used. If volumeExtId is true, it does indicate the isExternalStorage \nshould be true.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_flash_mode_enabled": {
 			Description: "Indicates whether the virtual disk is pinned to the hot tier or not.",
 			Type:        schema.TypeBool,
@@ -238,6 +243,41 @@ func getHciAhvVmDiskSchema() map[string]*schema.Schema {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"storage_container": {
+			Description: "A reference to a hciStorageContainer resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"storage_container_ext_id": {
 			Description: "The extId of the storage container which backs this disk.",
@@ -503,6 +543,46 @@ func getHciAhvVmDiskSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"volume": {
+			Description: "A reference to a storageBaseVolume resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"volume_ext_id": {
+			Description: "The volume id this VM disk owns. Either from 'resource.Id' of the Pure Volume 'owner_disk_id' tag \n(see 9.5.1.1.2 for detail) or from V4 VM API after Iris.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
 	return schemaMap
 }
@@ -618,6 +698,11 @@ func dataSourceHciAhvVmDiskRead(c context.Context, d *schema.ResourceData, meta 
 	if v, ok := d.GetOkExists("index"); ok {
 		x := int32(v.(int))
 		o.SetIndex(x)
+	}
+
+	if v, ok := d.GetOkExists("is_external_storage"); ok {
+		x := (v.(bool))
+		o.SetIsExternalStorage(x)
 	}
 
 	if v, ok := d.GetOkExists("is_flash_mode_enabled"); ok {
@@ -786,6 +871,49 @@ func dataSourceHciAhvVmDiskRead(c context.Context, d *schema.ResourceData, meta 
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOk("storage_container"); ok {
+		p := make([]models.HciStorageContainerRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsHciStorageContainerRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStorageContainer(x)
+		}
 	}
 
 	if v, ok := d.GetOk("storage_container_ext_id"); ok {
@@ -991,6 +1119,54 @@ func dataSourceHciAhvVmDiskRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetVmExtId(x)
 	}
 
+	if v, ok := d.GetOk("volume"); ok {
+		p := make([]models.StorageBaseVolumeRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsStorageBaseVolumeRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVolume(x)
+		}
+	}
+
+	if v, ok := d.GetOk("volume_ext_id"); ok {
+		x := (v.(string))
+		o.SetVolumeExtId(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of HciAhvVmDisk object failed with error : %s", err.Error())
@@ -1039,6 +1215,7 @@ func dataSourceHciAhvVmDiskRead(c context.Context, d *schema.ResourceData, meta 
 				temp["disk_size_bytes"] = (s.GetDiskSizeBytes())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["index"] = (s.GetIndex())
+				temp["is_external_storage"] = (s.GetIsExternalStorage())
 				temp["is_flash_mode_enabled"] = (s.GetIsFlashModeEnabled())
 				temp["is_migration_in_progress"] = (s.GetIsMigrationInProgress())
 
@@ -1053,6 +1230,8 @@ func dataSourceHciAhvVmDiskRead(c context.Context, d *schema.ResourceData, meta 
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+
+				temp["storage_container"] = flattenMapHciStorageContainerRelationship(s.GetStorageContainer(), d)
 				temp["storage_container_ext_id"] = (s.GetStorageContainerExtId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
@@ -1061,6 +1240,9 @@ func dataSourceHciAhvVmDiskRead(c context.Context, d *schema.ResourceData, meta 
 
 				temp["vm"] = flattenMapHciAhvVmRelationship(s.GetVm(), d)
 				temp["vm_ext_id"] = (s.GetVmExtId())
+
+				temp["volume"] = flattenMapStorageBaseVolumeRelationship(s.GetVolume(), d)
+				temp["volume_ext_id"] = (s.GetVolumeExtId())
 				hciAhvVmDiskResults = append(hciAhvVmDiskResults, temp)
 			}
 		}

@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_uplink_port"
 description: |-
-        The VMware uplink port object is represented here.
+        The VmwareUplinkPort object represents the VMware uplink port entity, detailing attributes for network connectivity and management.
+        #### Purpose
+        VmwareUplinkPort serves as the critical component for managing uplink port configurations, optimizing network resource allocation and control within VMware environments.
+        #### Key Concepts
+        - **Network Connectivity:** Supports settings for port names, keys, and identities, enhancing network management and control.
+        - **Integration:** Interfaces with distributed networks, hosts, and physical interfaces, facilitating seamless network management and resource distribution.
+        - **Security and Access** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+        - **Operational Features:** Includes attributes for network relationships, supporting resilient and adaptive network operations.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_uplink_port
-The VMware uplink port object is represented here.
+The VmwareUplinkPort object represents the VMware uplink port entity, detailing attributes for network connectivity and management.
+#### Purpose
+VmwareUplinkPort serves as the critical component for managing uplink port configurations, optimizing network resource allocation and control within VMware environments.
+#### Key Concepts
+- **Network Connectivity:** Supports settings for port names, keys, and identities, enhancing network management and control.
+- **Integration:** Interfaces with distributed networks, hosts, and physical interfaces, facilitating seamless network management and resource distribution.   
+- **Security and Access** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+- **Operational Features:** Includes attributes for network relationships, supporting resilient and adaptive network operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

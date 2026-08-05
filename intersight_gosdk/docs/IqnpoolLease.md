@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **IqnNumber** | Pointer to **int64** | Number of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **IqnPrefix** | Pointer to **string** | Prefix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **IqnSuffix** | Pointer to **string** | Suffix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
+**PreferredIqnAddress** | Pointer to **string** | The preferred IQN address can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that IQN address if it is available in the pool. If the specified preferred IQN address is not in the range of the pool or if it is already leased or reserved, then the next available IQN address from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred IQN address property. When the preferred IQN address property is specified in conjunction with &#39;migrate&#39; property, existing static or dynamic lease will be replaced by the new lease. Migration is supported only for dynamic lease requests. | [optional] 
 **Reservation** | Pointer to [**IqnpoolReservationReference**](IqnpoolReservationReference.md) |  | [optional] 
 **AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**NullableIqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
@@ -174,6 +175,31 @@ SetIqnSuffix sets IqnSuffix field to given value.
 `func (o *IqnpoolLease) HasIqnSuffix() bool`
 
 HasIqnSuffix returns a boolean if a field has been set.
+
+### GetPreferredIqnAddress
+
+`func (o *IqnpoolLease) GetPreferredIqnAddress() string`
+
+GetPreferredIqnAddress returns the PreferredIqnAddress field if non-nil, zero value otherwise.
+
+### GetPreferredIqnAddressOk
+
+`func (o *IqnpoolLease) GetPreferredIqnAddressOk() (*string, bool)`
+
+GetPreferredIqnAddressOk returns a tuple with the PreferredIqnAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreferredIqnAddress
+
+`func (o *IqnpoolLease) SetPreferredIqnAddress(v string)`
+
+SetPreferredIqnAddress sets PreferredIqnAddress field to given value.
+
+### HasPreferredIqnAddress
+
+`func (o *IqnpoolLease) HasPreferredIqnAddress() bool`
+
+HasPreferredIqnAddress returns a boolean if a field has been set.
 
 ### GetReservation
 

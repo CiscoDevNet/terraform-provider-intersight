@@ -216,7 +216,7 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Type:         schema.TypeString,
 							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-_]*$"), ""), StringLenMaximum(15)),
 							Optional:     true,
-							Default:      "MStorBootVd",
+							Computed:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1001,7 +1001,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1013,7 +1013,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetObjectType("storage.StoragePolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

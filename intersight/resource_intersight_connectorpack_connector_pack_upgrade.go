@@ -714,7 +714,7 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 		o.SetConnectorPackOpType(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -799,7 +799,7 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 		}
 	}
 
-	if v, ok := d.GetOk("ucsd_info"); ok {
+	if v, ok := d.GetOkExists("ucsd_info"); ok {
 		p := make([]models.IaasUcsdInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

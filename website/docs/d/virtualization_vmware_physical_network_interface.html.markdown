@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_physical_network_interface"
 description: |-
-        Details of VMware physical network interface.
+        The VmwarePhysicalNetworkInterface object delineates the physical network interface entity within VMware environments, detailing attributes for resource allocation and management.
+        #### Purpose
+        VmwarePhysicalNetworkInterface provides the framework for managing physical network interfaces, supporting detailed configurations and operational settings within VMware environments.
+        #### Key Concepts
+        - **Resource Allocation:** Defines settings for switch names, driver types, and link speeds, optimizing interface resource management.
+        - **Integration:** Interfaces with hosts, facilitating seamless connectivity and resource management for physical network interfaces.
+        - **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+        - **Operational Settings:** Includes attributes such as MAC addresses and PCI info, supporting tailored interface operations.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_physical_network_interface
-Details of VMware physical network interface.
+The VmwarePhysicalNetworkInterface object delineates the physical network interface entity within VMware environments, detailing attributes for resource allocation and management.
+#### Purpose
+VmwarePhysicalNetworkInterface provides the framework for managing physical network interfaces, supporting detailed configurations and operational settings within VMware environments.
+#### Key Concepts
+- **Resource Allocation:** Defines settings for switch names, driver types, and link speeds, optimizing interface resource management.
+- **Integration:** Interfaces with hosts, facilitating seamless connectivity and resource management for physical network interfaces.
+- **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+- **Operational Settings:** Includes attributes such as MAC addresses and PCI info, supporting tailored interface operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

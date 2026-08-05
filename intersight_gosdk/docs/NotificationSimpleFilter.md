@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "notification.SimpleFilter"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "notification.SimpleFilter"]
 **Operator** | Pointer to **string** | The operator to apply (eq, ne, contains, in). | [optional] 
-**Property** | Pointer to **string** | The property name to filter on (e.g., HostName, Domain,  ServerProfile, Organization). | [optional] 
+**Property** | Pointer to **string** | The property name to filter on (e.g., HostName, Domain, ServerProfile, Organization). | [optional] 
 **Value** | Pointer to **[]string** |  | [optional] 
 
 ## Methods

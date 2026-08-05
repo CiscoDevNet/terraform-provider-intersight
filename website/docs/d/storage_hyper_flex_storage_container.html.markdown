@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hyper_flex_storage_container"
 description: |-
-        A Storage Container (Datastore) entity.
+        The HyperFlexStorageContainer object is a critical component of the HyperFlex storage architecture, representing a Storage Container (or Datastore) entity. It plays a pivotal role in managing and organizing the storage resources within a HyperFlex cluster.
+        #### Purpose
+        The primary purpose of the HyperFlexStorageContainer is to provide a structured and efficient way to manage storage allocations and utilization within a HyperFlex environment. It acts as a container for data storage, supporting various storage types and ensuring optimal data management.
+        #### Key Concepts
+        - **Storage Management:** Facilitates the organization and management of storage resources, allowing for efficient allocation and utilization of space within a cluster.
+        - **Data Integrity:** Ensures the reliability and consistency of data storage, supporting various storage types such as SMB, NFS, and iSCSI.
+        - **Access Control:** Offers a robust access control system with privilege sets, ensuring that only authorized personnel can manage storage arrays.
+        - **Integration:** Seamlessly integrates with the HyperFlex cluster's infrastructure, providing essential storage services and capabilities.
 
 ---
 
 # Data Source: intersight_storage_hyper_flex_storage_container
-A Storage Container (Datastore) entity.
+The HyperFlexStorageContainer object is a critical component of the HyperFlex storage architecture, representing a Storage Container (or Datastore) entity. It plays a pivotal role in managing and organizing the storage resources within a HyperFlex cluster.
+#### Purpose
+The primary purpose of the HyperFlexStorageContainer is to provide a structured and efficient way to manage storage allocations and utilization within a HyperFlex environment. It acts as a container for data storage, supporting various storage types and ensuring optimal data management.
+#### Key Concepts
+- **Storage Management:** Facilitates the organization and management of storage resources, allowing for efficient allocation and utilization of space within a cluster.
+- **Data Integrity:** Ensures the reliability and consistency of data storage, supporting various storage types such as SMB, NFS, and iSCSI.
+- **Access Control:** Offers a robust access control system with privilege sets, ensuring that only authorized personnel can manage storage arrays.
+- **Integration:** Seamlessly integrates with the HyperFlex cluster's infrastructure, providing essential storage services and capabilities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

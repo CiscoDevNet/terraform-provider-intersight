@@ -693,7 +693,7 @@ func resourcePartnerintegrationDeviceConnectorCreate(c context.Context, d *schem
 
 	o.SetClassId("partnerintegration.DeviceConnector")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -705,7 +705,7 @@ func resourcePartnerintegrationDeviceConnectorCreate(c context.Context, d *schem
 
 	o.SetObjectType("partnerintegration.DeviceConnector")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

@@ -488,7 +488,7 @@ func resourceCommTagDefinition() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
 				Optional:     true,
-				Default:      "KeyValue",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"usage": {
@@ -734,7 +734,7 @@ func resourceCommTagDefinitionCreate(c context.Context, d *schema.ResourceData, 
 		o.SetKey(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -824,7 +824,7 @@ func resourceCommTagDefinitionCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("type"); ok {
+	if v, ok := d.GetOkExists("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}

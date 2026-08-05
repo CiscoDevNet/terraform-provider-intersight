@@ -597,7 +597,7 @@ func resourceTechsupportmanagementCollectionControlPolicyCreate(c context.Contex
 
 	o.SetClassId("techsupportmanagement.CollectionControlPolicy")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

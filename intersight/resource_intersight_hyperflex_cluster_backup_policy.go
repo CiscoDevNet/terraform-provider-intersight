@@ -84,21 +84,21 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 				Description: "Backup datastore name prefix used during the auto creation of the datastore. All VMs created in this datastore will be automatically backed up.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "backup-source-ds",
+				Computed:    true,
 				ForceNew:    true,
 			},
 			"backup_data_store_size": {
 				Description: "Replication data store size in backupDataStoreSizeUnit.",
 				Type:        schema.TypeInt,
 				Optional:    true,
-				Default:     2,
+				Computed:    true,
 				ForceNew:    true,
 			},
 			"backup_data_store_size_unit": {
 				Description: "Replication data store size.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "TB",
+				Computed:    true,
 				ForceNew:    true,
 			},
 			"backup_target": {
@@ -389,7 +389,7 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 				Description: "Replication cluster pairing name prefix.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "backup",
+				Computed:    true,
 				ForceNew:    true,
 			},
 			"replication_schedule": {
@@ -754,7 +754,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	if v, ok := d.GetOk("backup_data_store_name"); ok {
+	if v, ok := d.GetOkExists("backup_data_store_name"); ok {
 		x := (v.(string))
 		o.SetBackupDataStoreName(x)
 	}
@@ -764,7 +764,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 		o.SetBackupDataStoreSize(x)
 	}
 
-	if v, ok := d.GetOk("backup_data_store_size_unit"); ok {
+	if v, ok := d.GetOkExists("backup_data_store_size_unit"); ok {
 		x := (v.(string))
 		o.SetBackupDataStoreSizeUnit(x)
 	}
@@ -871,7 +871,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 		o.SetLocalSnapshotRetentionCount(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -883,7 +883,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 
 	o.SetObjectType("hyperflex.ClusterBackupPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -926,7 +926,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	if v, ok := d.GetOk("replication_pair_name_prefix"); ok {
+	if v, ok := d.GetOkExists("replication_pair_name_prefix"); ok {
 		x := (v.(string))
 		o.SetReplicationPairNamePrefix(x)
 	}

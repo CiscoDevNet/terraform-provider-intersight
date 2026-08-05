@@ -204,6 +204,73 @@ func resourceChassisProfile() *schema.Resource {
 					},
 				},
 			},
+			"chassis_assignment_mode": {
+				Description:  "Source of the chassis assigned to the Chassis Profile. Values can be Static or None. Static is used if a chassis is attached directly to a Chassis Profile. None is used if no chassis is attached to a Chassis Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later.\n* `Static` - Chassis is directly assigned to chassis profile using assign chassis.\n* `None` - No chassis is assigned to the chassis profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Static", "None"}, false),
+				Optional:     true,
+				Default:      "Static",
+			},
+			"chassis_pre_assign_by_serial": {
+				Description:  "Serial number of the chassis that would be assigned to this pre-assigned Chassis Profile. It can be any string that adheres to the following constraints:\nIt should start and end with an alphanumeric character.\nIt cannot be more than 20 characters.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]{0,20}$"), ""),
+				Optional:     true,
+			},
+			"chassis_reservation": {
+				Description: "Serial number based reservation for the chassis to be assigned to this Chassis Profile.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "resourcepool.ReservationReference",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "resourcepool.ReservationReference",
+						},
+						"pool_moid": {
+							Description: "The moid of the pool object, if applicable.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"reservation_id": {
+							Description: "The identity for which the reference is created. It is used to store the ID allocated to the profile during export. \nReservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.\nDuring import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.\nFor IP and UUid IDs, we create reservation, for other Ids we do not create reservations.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"reservation_moid": {
+							Description: "The moid of the reservation object.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"resource_serial": {
+							Description: "The serial number of the resource that is being reserved.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"resource_type": {
+							Description: "The resource type that is being reserved.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -1157,7 +1224,7 @@ func resourceChassisProfile() *schema.Resource {
 								return
 							}},
 						"change_status": {
-							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.",
+							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.\n* `Failed` - The status when policy change evaluation report handling failed for a policy.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -1190,6 +1257,43 @@ func resourceChassisProfile() *schema.Resource {
 								}
 								return
 							}},
+					},
+				},
+			},
+			"reservation_references": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"reservation_id": {
+							Description: "The identity for which the reference is created. It is used to store the ID allocated to the profile during export. \nReservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.\nDuring import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.\nFor IP and UUid IDs, we create reservation, for other Ids we do not create reservations.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"reservation_moid": {
+							Description: "The moid of the reservation object.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 					},
 				},
 			},
@@ -1294,6 +1398,45 @@ func resourceChassisProfile() *schema.Resource {
 							Description: "ProceedOnReboot can be used to acknowledge server reboot while triggering deploy/activate.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+						},
+					},
+				},
+			},
+			"scheduled_chassis_assignment": {
+				Description: "Chassis reassignment information that is captured as part of the config import process.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"chassis_serial": {
+							Description: "Serial number of the chassis.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "chassis.ChassisAssignment",
+						},
+						"enabled": {
+							Description: "Indicates if this assignment is enabled.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "chassis.ChassisAssignment",
 						},
 					},
 				},
@@ -1772,6 +1915,77 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOk("chassis_assignment_mode"); ok {
+		x := (v.(string))
+		o.SetChassisAssignmentMode(x)
+	}
+
+	if v, ok := d.GetOk("chassis_pre_assign_by_serial"); ok {
+		x := (v.(string))
+		o.SetChassisPreAssignBySerial(x)
+	}
+
+	if v, ok := d.GetOk("chassis_reservation"); ok {
+		p := make([]models.ResourcepoolReservationReference, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewResourcepoolReservationReferenceWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("resourcepool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["pool_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetPoolMoid(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			if v, ok := l["resource_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetResourceSerial(x)
+				}
+			}
+			if v, ok := l["resource_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetResourceType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetChassisReservation(x)
+		}
+	}
+
 	o.SetClassId("chassis.Profile")
 
 	if v, ok := d.GetOk("config_context"); ok {
@@ -1849,7 +2063,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1861,7 +2075,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 
 	o.SetObjectType("chassis.Profile")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2177,6 +2391,48 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOk("reservation_references"); ok {
+		x := make([]models.PoolReservationReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewPoolReservationReferenceWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("pool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetReservationReferences(x)
+		}
+	}
+
 	if v, ok := d.GetOk("scheduled_actions"); ok {
 		x := make([]models.PolicyScheduledAction, 0)
 		s := v.([]interface{})
@@ -2248,6 +2504,49 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 		}
 		if len(x) > 0 {
 			o.SetScheduledActions(x)
+		}
+	}
+
+	if v, ok := d.GetOk("scheduled_chassis_assignment"); ok {
+		p := make([]models.ChassisChassisAssignment, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewChassisChassisAssignmentWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["chassis_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetChassisSerial(x)
+				}
+			}
+			o.SetClassId("chassis.ChassisAssignment")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetScheduledChassisAssignment(x)
 		}
 	}
 
@@ -2510,6 +2809,18 @@ func resourceChassisProfileRead(c context.Context, d *schema.ResourceData, meta 
 		return diag.Errorf("error occurred while setting property AssociatedChassis in ChassisProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("chassis_assignment_mode", (s.GetChassisAssignmentMode())); err != nil {
+		return diag.Errorf("error occurred while setting property ChassisAssignmentMode in ChassisProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("chassis_pre_assign_by_serial", (s.GetChassisPreAssignBySerial())); err != nil {
+		return diag.Errorf("error occurred while setting property ChassisPreAssignBySerial in ChassisProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("chassis_reservation", flattenMapResourcepoolReservationReference(s.GetChassisReservation(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ChassisReservation in ChassisProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in ChassisProfile object: %s", err.Error())
 	}
@@ -2610,12 +2921,20 @@ func resourceChassisProfileRead(c context.Context, d *schema.ResourceData, meta 
 		return diag.Errorf("error occurred while setting property ReportedPolicyChanges in ChassisProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("reservation_references", flattenListPoolReservationReference(s.GetReservationReferences(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ReservationReferences in ChassisProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("running_workflows", flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property RunningWorkflows in ChassisProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("scheduled_actions", flattenListPolicyScheduledAction(s.GetScheduledActions(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ScheduledActions in ChassisProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("scheduled_chassis_assignment", flattenMapChassisChassisAssignment(s.GetScheduledChassisAssignment(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ScheduledChassisAssignment in ChassisProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -2755,6 +3074,80 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 		if len(p) > 0 {
 			x := p[0]
 			o.SetAssignedChassis(x)
+		}
+	}
+
+	if d.HasChange("chassis_assignment_mode") {
+		v := d.Get("chassis_assignment_mode")
+		x := (v.(string))
+		o.SetChassisAssignmentMode(x)
+	}
+
+	if d.HasChange("chassis_pre_assign_by_serial") {
+		v := d.Get("chassis_pre_assign_by_serial")
+		x := (v.(string))
+		o.SetChassisPreAssignBySerial(x)
+	}
+
+	if d.HasChange("chassis_reservation") {
+		v := d.Get("chassis_reservation")
+		p := make([]models.ResourcepoolReservationReference, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ResourcepoolReservationReference{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("resourcepool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["pool_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetPoolMoid(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			if v, ok := l["resource_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetResourceSerial(x)
+				}
+			}
+			if v, ok := l["resource_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetResourceType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetChassisReservation(x)
 		}
 	}
 
@@ -3162,6 +3555,47 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 		o.SetReportedPolicyChanges(x)
 	}
 
+	if d.HasChange("reservation_references") {
+		v := d.Get("reservation_references")
+		x := make([]models.PoolReservationReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PoolReservationReference{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("pool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetReservationReferences(x)
+	}
+
 	if d.HasChange("scheduled_actions") {
 		v := d.Get("scheduled_actions")
 		x := make([]models.PolicyScheduledAction, 0)
@@ -3233,6 +3667,50 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 			x = append(x, *o)
 		}
 		o.SetScheduledActions(x)
+	}
+
+	if d.HasChange("scheduled_chassis_assignment") {
+		v := d.Get("scheduled_chassis_assignment")
+		p := make([]models.ChassisChassisAssignment, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ChassisChassisAssignment{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["chassis_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetChassisSerial(x)
+				}
+			}
+			o.SetClassId("chassis.ChassisAssignment")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetScheduledChassisAssignment(x)
+		}
 	}
 
 	if d.HasChange("src_template") {

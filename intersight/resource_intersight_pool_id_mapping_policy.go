@@ -114,6 +114,39 @@ func resourcePoolIdMappingPolicy() *schema.Resource {
 					}
 					return
 				}},
+			"exported_selectors": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "resource.Selector",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "resource.Selector",
+						},
+						"selector": {
+							Description:  "ODATA filter to select resources. The group selector may include URLs of individual resource, or OData query with filters that match multiple queries. The URLs must be relative (i.e. do not include the host).",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|/api/v1/.*"), ""),
+							Optional:     true,
+						},
+					},
+				},
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -702,7 +735,43 @@ func resourcePoolIdMappingPolicyCreate(c context.Context, d *schema.ResourceData
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOk("exported_selectors"); ok {
+		x := make([]models.ResourceSelector, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewResourceSelectorWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("resource.Selector")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetExportedSelectors(x)
+		}
+	}
+
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -714,7 +783,7 @@ func resourcePoolIdMappingPolicyCreate(c context.Context, d *schema.ResourceData
 
 	o.SetObjectType("pool.IdMappingPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -975,6 +1044,10 @@ func resourcePoolIdMappingPolicyRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in PoolIdMappingPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("exported_selectors", flattenListResourceSelector(s.GetExportedSelectors(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ExportedSelectors in PoolIdMappingPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in PoolIdMappingPolicy object: %s", err.Error())
 	}
@@ -1058,6 +1131,41 @@ func resourcePoolIdMappingPolicyUpdate(c context.Context, d *schema.ResourceData
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("exported_selectors") {
+		v := d.Get("exported_selectors")
+		x := make([]models.ResourceSelector, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.ResourceSelector{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("resource.Selector")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetExportedSelectors(x)
 	}
 
 	if d.HasChange("moid") {

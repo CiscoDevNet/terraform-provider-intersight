@@ -6,14 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.Backup"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.Backup"]
+**BackupDownloadUrl** | Pointer to **string** | Download URL for the backup artifact when available. Only populated for successful local-protocol backups; empty for remote-protocol backups. | [optional] [readonly] 
 **ElapsedTime** | Pointer to **int64** | Elapsed time in seconds since the backup process has started. | [optional] [readonly] 
 **EndTime** | Pointer to **time.Time** | End date and time of the backup process. | [optional] [readonly] 
+**ForceDelete** | Pointer to **bool** | Set to true to allow deletion of the oldest local backup when local backup retention limit is reached. If false and retention count is reached, the backup operation fails. | [optional] 
 **IsManual** | Pointer to **bool** | If true, represents a manual backup. Else represents a scheduled backup. | [optional] [readonly] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **Messages** | Pointer to **[]string** |  | [optional] 
 **Password** | Pointer to **string** | Password to authenticate the fileserver. | [optional] 
 **StartTime** | Pointer to **time.Time** | Start date and time of the backup process. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the backup managed object. * &#x60;Started&#x60; - Backup or restore process has started. * &#x60;Created&#x60; - Backup or restore is in created state. * &#x60;Failed&#x60; - Backup or restore process has failed. * &#x60;Completed&#x60; - Backup or restore process has completed. * &#x60;Copied&#x60; - Backup file has been copied. * &#x60;Cleanup Failed&#x60; - Cleanup of the old backup has failed. | [optional] [readonly] [default to "Started"]
+**UsePolicySettings** | Pointer to **bool** | Set to true to inherit credentials, protocol, and file server settings from the appliance backup policy. If false, use explicit settings provided in this backup object. | [optional] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
@@ -75,6 +78,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetBackupDownloadUrl
+
+`func (o *ApplianceBackup) GetBackupDownloadUrl() string`
+
+GetBackupDownloadUrl returns the BackupDownloadUrl field if non-nil, zero value otherwise.
+
+### GetBackupDownloadUrlOk
+
+`func (o *ApplianceBackup) GetBackupDownloadUrlOk() (*string, bool)`
+
+GetBackupDownloadUrlOk returns a tuple with the BackupDownloadUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupDownloadUrl
+
+`func (o *ApplianceBackup) SetBackupDownloadUrl(v string)`
+
+SetBackupDownloadUrl sets BackupDownloadUrl field to given value.
+
+### HasBackupDownloadUrl
+
+`func (o *ApplianceBackup) HasBackupDownloadUrl() bool`
+
+HasBackupDownloadUrl returns a boolean if a field has been set.
+
 ### GetElapsedTime
 
 `func (o *ApplianceBackup) GetElapsedTime() int64`
@@ -124,6 +152,31 @@ SetEndTime sets EndTime field to given value.
 `func (o *ApplianceBackup) HasEndTime() bool`
 
 HasEndTime returns a boolean if a field has been set.
+
+### GetForceDelete
+
+`func (o *ApplianceBackup) GetForceDelete() bool`
+
+GetForceDelete returns the ForceDelete field if non-nil, zero value otherwise.
+
+### GetForceDeleteOk
+
+`func (o *ApplianceBackup) GetForceDeleteOk() (*bool, bool)`
+
+GetForceDeleteOk returns a tuple with the ForceDelete field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForceDelete
+
+`func (o *ApplianceBackup) SetForceDelete(v bool)`
+
+SetForceDelete sets ForceDelete field to given value.
+
+### HasForceDelete
+
+`func (o *ApplianceBackup) HasForceDelete() bool`
+
+HasForceDelete returns a boolean if a field has been set.
 
 ### GetIsManual
 
@@ -284,6 +337,31 @@ SetStatus sets Status field to given value.
 `func (o *ApplianceBackup) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetUsePolicySettings
+
+`func (o *ApplianceBackup) GetUsePolicySettings() bool`
+
+GetUsePolicySettings returns the UsePolicySettings field if non-nil, zero value otherwise.
+
+### GetUsePolicySettingsOk
+
+`func (o *ApplianceBackup) GetUsePolicySettingsOk() (*bool, bool)`
+
+GetUsePolicySettingsOk returns a tuple with the UsePolicySettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsePolicySettings
+
+`func (o *ApplianceBackup) SetUsePolicySettings(v bool)`
+
+SetUsePolicySettings sets UsePolicySettings field to given value.
+
+### HasUsePolicySettings
+
+`func (o *ApplianceBackup) HasUsePolicySettings() bool`
+
+HasUsePolicySettings returns a boolean if a field has been set.
 
 ### GetAccount
 

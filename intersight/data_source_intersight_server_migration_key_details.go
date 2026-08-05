@@ -162,6 +162,11 @@ func getServerMigrationKeyDetailsSchema() map[string]*schema.Schema {
 						Optional: true,
 						Elem: &schema.Schema{
 							Type: schema.TypeString}},
+					"tpm_serial": {
+						Description: "Serial Id of the associated TPM module in the server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 				},
 			},
 		},

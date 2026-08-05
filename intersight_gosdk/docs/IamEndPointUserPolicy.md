@@ -6,6 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.EndPointUserPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.EndPointUserPolicy"]
+**AccountLockoutDuration** | Pointer to **int64** | Timeout duration specifies the duration (in seconds) after which a locked account is automatically unlocked. - Set to 0 when accountUnlockMode is Manual. - Set a value between 1 and 604800 when accountUnlockMode is Automatic. | [optional] [default to 300]
+**AccountLockoutThreshold** | Pointer to **int64** | Set Account Lockout Threshold for endpoint users. | [optional] [default to 5]
+**AccountUnlockMode** | Pointer to **string** | Account unlock method specifies how the account is unlocked after it is locked: - Manual: Account must be manually unlocked by an administrator. - Automatic: Account unlocks automatically after a timeout duration. * &#x60;Automatic&#x60; - Set Automatic on the selected end point. * &#x60;Manual&#x60; - Set Manual on the selected end point. | [optional] [default to "Automatic"]
 **PasswordProperties** | Pointer to [**NullableIamEndPointPasswordProperties**](IamEndPointPasswordProperties.md) |  | [optional] 
 **EndPointUserRoles** | Pointer to [**[]IamEndPointUserRoleRelationship**](IamEndPointUserRoleRelationship.md) | An array of relationships to iamEndPointUserRole resources. | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
@@ -69,6 +72,81 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAccountLockoutDuration
+
+`func (o *IamEndPointUserPolicy) GetAccountLockoutDuration() int64`
+
+GetAccountLockoutDuration returns the AccountLockoutDuration field if non-nil, zero value otherwise.
+
+### GetAccountLockoutDurationOk
+
+`func (o *IamEndPointUserPolicy) GetAccountLockoutDurationOk() (*int64, bool)`
+
+GetAccountLockoutDurationOk returns a tuple with the AccountLockoutDuration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountLockoutDuration
+
+`func (o *IamEndPointUserPolicy) SetAccountLockoutDuration(v int64)`
+
+SetAccountLockoutDuration sets AccountLockoutDuration field to given value.
+
+### HasAccountLockoutDuration
+
+`func (o *IamEndPointUserPolicy) HasAccountLockoutDuration() bool`
+
+HasAccountLockoutDuration returns a boolean if a field has been set.
+
+### GetAccountLockoutThreshold
+
+`func (o *IamEndPointUserPolicy) GetAccountLockoutThreshold() int64`
+
+GetAccountLockoutThreshold returns the AccountLockoutThreshold field if non-nil, zero value otherwise.
+
+### GetAccountLockoutThresholdOk
+
+`func (o *IamEndPointUserPolicy) GetAccountLockoutThresholdOk() (*int64, bool)`
+
+GetAccountLockoutThresholdOk returns a tuple with the AccountLockoutThreshold field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountLockoutThreshold
+
+`func (o *IamEndPointUserPolicy) SetAccountLockoutThreshold(v int64)`
+
+SetAccountLockoutThreshold sets AccountLockoutThreshold field to given value.
+
+### HasAccountLockoutThreshold
+
+`func (o *IamEndPointUserPolicy) HasAccountLockoutThreshold() bool`
+
+HasAccountLockoutThreshold returns a boolean if a field has been set.
+
+### GetAccountUnlockMode
+
+`func (o *IamEndPointUserPolicy) GetAccountUnlockMode() string`
+
+GetAccountUnlockMode returns the AccountUnlockMode field if non-nil, zero value otherwise.
+
+### GetAccountUnlockModeOk
+
+`func (o *IamEndPointUserPolicy) GetAccountUnlockModeOk() (*string, bool)`
+
+GetAccountUnlockModeOk returns a tuple with the AccountUnlockMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountUnlockMode
+
+`func (o *IamEndPointUserPolicy) SetAccountUnlockMode(v string)`
+
+SetAccountUnlockMode sets AccountUnlockMode field to given value.
+
+### HasAccountUnlockMode
+
+`func (o *IamEndPointUserPolicy) HasAccountUnlockMode() bool`
+
+HasAccountUnlockMode returns a boolean if a field has been set.
 
 ### GetPasswordProperties
 

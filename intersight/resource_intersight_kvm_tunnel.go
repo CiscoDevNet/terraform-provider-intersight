@@ -960,7 +960,7 @@ func resourceKvmTunnelCreate(c context.Context, d *schema.ResourceData, meta int
 
 	o.SetClassId("kvm.Tunnel")
 
-	if v, ok := d.GetOk("kvm_session"); ok {
+	if v, ok := d.GetOkExists("kvm_session"); ok {
 		p := make([]models.KvmSessionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1003,14 +1003,14 @@ func resourceKvmTunnelCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("kvm.Tunnel")
 
-	if v, ok := d.GetOk("server"); ok {
+	if v, ok := d.GetOkExists("server"); ok {
 		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -35,6 +35,10 @@ type NiatelemetrySiteInventory struct {
 	ConnectivityAnalysisCount *int64 `json:"ConnectivityAnalysisCount,omitempty"`
 	// Count of total Endpoint Locators.
 	EndpointLocatorCount *int64 `json:"EndpointLocatorCount,omitempty"`
+	// Fabric technology reported by the onboarded DCNM site.
+	FabricTechnology *string `json:"FabricTechnology,omitempty"`
+	// Status of the fabric update.
+	FabricUpdateStatus *string `json:"FabricUpdateStatus,omitempty"`
 	// Version of the specified site.
 	FirmwareVersion *string `json:"FirmwareVersion,omitempty"`
 	// Fine-grained type DCNM either SAN or LAN.
@@ -48,16 +52,32 @@ type NiatelemetrySiteInventory struct {
 	Nodes *int64 `json:"Nodes,omitempty"`
 	// Count of number of manual backups.
 	OnDemandBackups *bool `json:"OnDemandBackups,omitempty"`
+	// Count of service functions configured with use case Perimeter Service.
+	PerimeterService *int64 `json:"PerimeterService,omitempty"`
 	// Specifies whether Site object is DCNM or APIC or ND.
 	RecordType *string `json:"RecordType,omitempty"`
+	// Count of service functions configured with use case Service Chain Redirection.
+	RedirectToServiceChain *int64 `json:"RedirectToServiceChain,omitempty"`
 	// Count of number of scheduled backups.
 	ScheduledBackups *bool `json:"ScheduledBackups,omitempty"`
 	// Count of total security groups.
 	SecurityGroupsCount *int64 `json:"SecurityGroupsCount,omitempty"`
+	// Count of service functions configured with use case Service As Default Gateway.
+	ServiceAsGateway *int64 `json:"ServiceAsGateway,omitempty"`
 	// Count of total Service Clusters.
 	ServiceClustersCount *int64 `json:"ServiceClustersCount,omitempty"`
 	// Count of total Service Functions configured.
 	ServiceFunctionCount *int64 `json:"ServiceFunctionCount,omitempty"`
+	// Count of total Service Function Insertions enabled.
+	ServiceInsertionCount *int64 `json:"ServiceInsertionCount,omitempty"`
+	// Sum of latestVersionCount and recommendedVersionCount.
+	SumCount *int64 `json:"SumCount,omitempty"`
+	// Count of switches in the fabric.
+	SwitchCount *int64 `json:"SwitchCount,omitempty"`
+	// Count of total Networks on the fabric.
+	TotalNetworks *int64 `json:"TotalNetworks,omitempty"`
+	// Count of total VRFs on the fabric.
+	TotalVrfs *int64 `json:"TotalVrfs,omitempty"`
 	// Type of site onboarded either APIC or DCNM.
 	Type                 *string                                     `json:"Type,omitempty"`
 	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -274,6 +294,70 @@ func (o *NiatelemetrySiteInventory) HasEndpointLocatorCount() bool {
 // SetEndpointLocatorCount gets a reference to the given int64 and assigns it to the EndpointLocatorCount field.
 func (o *NiatelemetrySiteInventory) SetEndpointLocatorCount(v int64) {
 	o.EndpointLocatorCount = &v
+}
+
+// GetFabricTechnology returns the FabricTechnology field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetFabricTechnology() string {
+	if o == nil || IsNil(o.FabricTechnology) {
+		var ret string
+		return ret
+	}
+	return *o.FabricTechnology
+}
+
+// GetFabricTechnologyOk returns a tuple with the FabricTechnology field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetFabricTechnologyOk() (*string, bool) {
+	if o == nil || IsNil(o.FabricTechnology) {
+		return nil, false
+	}
+	return o.FabricTechnology, true
+}
+
+// HasFabricTechnology returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasFabricTechnology() bool {
+	if o != nil && !IsNil(o.FabricTechnology) {
+		return true
+	}
+
+	return false
+}
+
+// SetFabricTechnology gets a reference to the given string and assigns it to the FabricTechnology field.
+func (o *NiatelemetrySiteInventory) SetFabricTechnology(v string) {
+	o.FabricTechnology = &v
+}
+
+// GetFabricUpdateStatus returns the FabricUpdateStatus field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetFabricUpdateStatus() string {
+	if o == nil || IsNil(o.FabricUpdateStatus) {
+		var ret string
+		return ret
+	}
+	return *o.FabricUpdateStatus
+}
+
+// GetFabricUpdateStatusOk returns a tuple with the FabricUpdateStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetFabricUpdateStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.FabricUpdateStatus) {
+		return nil, false
+	}
+	return o.FabricUpdateStatus, true
+}
+
+// HasFabricUpdateStatus returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasFabricUpdateStatus() bool {
+	if o != nil && !IsNil(o.FabricUpdateStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetFabricUpdateStatus gets a reference to the given string and assigns it to the FabricUpdateStatus field.
+func (o *NiatelemetrySiteInventory) SetFabricUpdateStatus(v string) {
+	o.FabricUpdateStatus = &v
 }
 
 // GetFirmwareVersion returns the FirmwareVersion field value if set, zero value otherwise.
@@ -501,6 +585,38 @@ func (o *NiatelemetrySiteInventory) SetOnDemandBackups(v bool) {
 	o.OnDemandBackups = &v
 }
 
+// GetPerimeterService returns the PerimeterService field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetPerimeterService() int64 {
+	if o == nil || IsNil(o.PerimeterService) {
+		var ret int64
+		return ret
+	}
+	return *o.PerimeterService
+}
+
+// GetPerimeterServiceOk returns a tuple with the PerimeterService field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetPerimeterServiceOk() (*int64, bool) {
+	if o == nil || IsNil(o.PerimeterService) {
+		return nil, false
+	}
+	return o.PerimeterService, true
+}
+
+// HasPerimeterService returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasPerimeterService() bool {
+	if o != nil && !IsNil(o.PerimeterService) {
+		return true
+	}
+
+	return false
+}
+
+// SetPerimeterService gets a reference to the given int64 and assigns it to the PerimeterService field.
+func (o *NiatelemetrySiteInventory) SetPerimeterService(v int64) {
+	o.PerimeterService = &v
+}
+
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetRecordType() string {
 	if o == nil || IsNil(o.RecordType) {
@@ -531,6 +647,38 @@ func (o *NiatelemetrySiteInventory) HasRecordType() bool {
 // SetRecordType gets a reference to the given string and assigns it to the RecordType field.
 func (o *NiatelemetrySiteInventory) SetRecordType(v string) {
 	o.RecordType = &v
+}
+
+// GetRedirectToServiceChain returns the RedirectToServiceChain field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetRedirectToServiceChain() int64 {
+	if o == nil || IsNil(o.RedirectToServiceChain) {
+		var ret int64
+		return ret
+	}
+	return *o.RedirectToServiceChain
+}
+
+// GetRedirectToServiceChainOk returns a tuple with the RedirectToServiceChain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetRedirectToServiceChainOk() (*int64, bool) {
+	if o == nil || IsNil(o.RedirectToServiceChain) {
+		return nil, false
+	}
+	return o.RedirectToServiceChain, true
+}
+
+// HasRedirectToServiceChain returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasRedirectToServiceChain() bool {
+	if o != nil && !IsNil(o.RedirectToServiceChain) {
+		return true
+	}
+
+	return false
+}
+
+// SetRedirectToServiceChain gets a reference to the given int64 and assigns it to the RedirectToServiceChain field.
+func (o *NiatelemetrySiteInventory) SetRedirectToServiceChain(v int64) {
+	o.RedirectToServiceChain = &v
 }
 
 // GetScheduledBackups returns the ScheduledBackups field value if set, zero value otherwise.
@@ -597,6 +745,38 @@ func (o *NiatelemetrySiteInventory) SetSecurityGroupsCount(v int64) {
 	o.SecurityGroupsCount = &v
 }
 
+// GetServiceAsGateway returns the ServiceAsGateway field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetServiceAsGateway() int64 {
+	if o == nil || IsNil(o.ServiceAsGateway) {
+		var ret int64
+		return ret
+	}
+	return *o.ServiceAsGateway
+}
+
+// GetServiceAsGatewayOk returns a tuple with the ServiceAsGateway field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetServiceAsGatewayOk() (*int64, bool) {
+	if o == nil || IsNil(o.ServiceAsGateway) {
+		return nil, false
+	}
+	return o.ServiceAsGateway, true
+}
+
+// HasServiceAsGateway returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasServiceAsGateway() bool {
+	if o != nil && !IsNil(o.ServiceAsGateway) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceAsGateway gets a reference to the given int64 and assigns it to the ServiceAsGateway field.
+func (o *NiatelemetrySiteInventory) SetServiceAsGateway(v int64) {
+	o.ServiceAsGateway = &v
+}
+
 // GetServiceClustersCount returns the ServiceClustersCount field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetServiceClustersCount() int64 {
 	if o == nil || IsNil(o.ServiceClustersCount) {
@@ -659,6 +839,166 @@ func (o *NiatelemetrySiteInventory) HasServiceFunctionCount() bool {
 // SetServiceFunctionCount gets a reference to the given int64 and assigns it to the ServiceFunctionCount field.
 func (o *NiatelemetrySiteInventory) SetServiceFunctionCount(v int64) {
 	o.ServiceFunctionCount = &v
+}
+
+// GetServiceInsertionCount returns the ServiceInsertionCount field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetServiceInsertionCount() int64 {
+	if o == nil || IsNil(o.ServiceInsertionCount) {
+		var ret int64
+		return ret
+	}
+	return *o.ServiceInsertionCount
+}
+
+// GetServiceInsertionCountOk returns a tuple with the ServiceInsertionCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetServiceInsertionCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.ServiceInsertionCount) {
+		return nil, false
+	}
+	return o.ServiceInsertionCount, true
+}
+
+// HasServiceInsertionCount returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasServiceInsertionCount() bool {
+	if o != nil && !IsNil(o.ServiceInsertionCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceInsertionCount gets a reference to the given int64 and assigns it to the ServiceInsertionCount field.
+func (o *NiatelemetrySiteInventory) SetServiceInsertionCount(v int64) {
+	o.ServiceInsertionCount = &v
+}
+
+// GetSumCount returns the SumCount field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetSumCount() int64 {
+	if o == nil || IsNil(o.SumCount) {
+		var ret int64
+		return ret
+	}
+	return *o.SumCount
+}
+
+// GetSumCountOk returns a tuple with the SumCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetSumCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.SumCount) {
+		return nil, false
+	}
+	return o.SumCount, true
+}
+
+// HasSumCount returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasSumCount() bool {
+	if o != nil && !IsNil(o.SumCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetSumCount gets a reference to the given int64 and assigns it to the SumCount field.
+func (o *NiatelemetrySiteInventory) SetSumCount(v int64) {
+	o.SumCount = &v
+}
+
+// GetSwitchCount returns the SwitchCount field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetSwitchCount() int64 {
+	if o == nil || IsNil(o.SwitchCount) {
+		var ret int64
+		return ret
+	}
+	return *o.SwitchCount
+}
+
+// GetSwitchCountOk returns a tuple with the SwitchCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetSwitchCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.SwitchCount) {
+		return nil, false
+	}
+	return o.SwitchCount, true
+}
+
+// HasSwitchCount returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasSwitchCount() bool {
+	if o != nil && !IsNil(o.SwitchCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetSwitchCount gets a reference to the given int64 and assigns it to the SwitchCount field.
+func (o *NiatelemetrySiteInventory) SetSwitchCount(v int64) {
+	o.SwitchCount = &v
+}
+
+// GetTotalNetworks returns the TotalNetworks field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetTotalNetworks() int64 {
+	if o == nil || IsNil(o.TotalNetworks) {
+		var ret int64
+		return ret
+	}
+	return *o.TotalNetworks
+}
+
+// GetTotalNetworksOk returns a tuple with the TotalNetworks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetTotalNetworksOk() (*int64, bool) {
+	if o == nil || IsNil(o.TotalNetworks) {
+		return nil, false
+	}
+	return o.TotalNetworks, true
+}
+
+// HasTotalNetworks returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasTotalNetworks() bool {
+	if o != nil && !IsNil(o.TotalNetworks) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalNetworks gets a reference to the given int64 and assigns it to the TotalNetworks field.
+func (o *NiatelemetrySiteInventory) SetTotalNetworks(v int64) {
+	o.TotalNetworks = &v
+}
+
+// GetTotalVrfs returns the TotalVrfs field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetTotalVrfs() int64 {
+	if o == nil || IsNil(o.TotalVrfs) {
+		var ret int64
+		return ret
+	}
+	return *o.TotalVrfs
+}
+
+// GetTotalVrfsOk returns a tuple with the TotalVrfs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetTotalVrfsOk() (*int64, bool) {
+	if o == nil || IsNil(o.TotalVrfs) {
+		return nil, false
+	}
+	return o.TotalVrfs, true
+}
+
+// HasTotalVrfs returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasTotalVrfs() bool {
+	if o != nil && !IsNil(o.TotalVrfs) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalVrfs gets a reference to the given int64 and assigns it to the TotalVrfs field.
+func (o *NiatelemetrySiteInventory) SetTotalVrfs(v int64) {
+	o.TotalVrfs = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -774,6 +1114,12 @@ func (o NiatelemetrySiteInventory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EndpointLocatorCount) {
 		toSerialize["EndpointLocatorCount"] = o.EndpointLocatorCount
 	}
+	if !IsNil(o.FabricTechnology) {
+		toSerialize["FabricTechnology"] = o.FabricTechnology
+	}
+	if !IsNil(o.FabricUpdateStatus) {
+		toSerialize["FabricUpdateStatus"] = o.FabricUpdateStatus
+	}
 	if !IsNil(o.FirmwareVersion) {
 		toSerialize["FirmwareVersion"] = o.FirmwareVersion
 	}
@@ -795,8 +1141,14 @@ func (o NiatelemetrySiteInventory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OnDemandBackups) {
 		toSerialize["OnDemandBackups"] = o.OnDemandBackups
 	}
+	if !IsNil(o.PerimeterService) {
+		toSerialize["PerimeterService"] = o.PerimeterService
+	}
 	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
+	}
+	if !IsNil(o.RedirectToServiceChain) {
+		toSerialize["RedirectToServiceChain"] = o.RedirectToServiceChain
 	}
 	if !IsNil(o.ScheduledBackups) {
 		toSerialize["ScheduledBackups"] = o.ScheduledBackups
@@ -804,11 +1156,29 @@ func (o NiatelemetrySiteInventory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SecurityGroupsCount) {
 		toSerialize["SecurityGroupsCount"] = o.SecurityGroupsCount
 	}
+	if !IsNil(o.ServiceAsGateway) {
+		toSerialize["ServiceAsGateway"] = o.ServiceAsGateway
+	}
 	if !IsNil(o.ServiceClustersCount) {
 		toSerialize["ServiceClustersCount"] = o.ServiceClustersCount
 	}
 	if !IsNil(o.ServiceFunctionCount) {
 		toSerialize["ServiceFunctionCount"] = o.ServiceFunctionCount
+	}
+	if !IsNil(o.ServiceInsertionCount) {
+		toSerialize["ServiceInsertionCount"] = o.ServiceInsertionCount
+	}
+	if !IsNil(o.SumCount) {
+		toSerialize["SumCount"] = o.SumCount
+	}
+	if !IsNil(o.SwitchCount) {
+		toSerialize["SwitchCount"] = o.SwitchCount
+	}
+	if !IsNil(o.TotalNetworks) {
+		toSerialize["TotalNetworks"] = o.TotalNetworks
+	}
+	if !IsNil(o.TotalVrfs) {
+		toSerialize["TotalVrfs"] = o.TotalVrfs
 	}
 	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
@@ -878,6 +1248,10 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(data []byte) (err error) {
 		ConnectivityAnalysisCount *int64 `json:"ConnectivityAnalysisCount,omitempty"`
 		// Count of total Endpoint Locators.
 		EndpointLocatorCount *int64 `json:"EndpointLocatorCount,omitempty"`
+		// Fabric technology reported by the onboarded DCNM site.
+		FabricTechnology *string `json:"FabricTechnology,omitempty"`
+		// Status of the fabric update.
+		FabricUpdateStatus *string `json:"FabricUpdateStatus,omitempty"`
 		// Version of the specified site.
 		FirmwareVersion *string `json:"FirmwareVersion,omitempty"`
 		// Fine-grained type DCNM either SAN or LAN.
@@ -891,16 +1265,32 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(data []byte) (err error) {
 		Nodes *int64 `json:"Nodes,omitempty"`
 		// Count of number of manual backups.
 		OnDemandBackups *bool `json:"OnDemandBackups,omitempty"`
+		// Count of service functions configured with use case Perimeter Service.
+		PerimeterService *int64 `json:"PerimeterService,omitempty"`
 		// Specifies whether Site object is DCNM or APIC or ND.
 		RecordType *string `json:"RecordType,omitempty"`
+		// Count of service functions configured with use case Service Chain Redirection.
+		RedirectToServiceChain *int64 `json:"RedirectToServiceChain,omitempty"`
 		// Count of number of scheduled backups.
 		ScheduledBackups *bool `json:"ScheduledBackups,omitempty"`
 		// Count of total security groups.
 		SecurityGroupsCount *int64 `json:"SecurityGroupsCount,omitempty"`
+		// Count of service functions configured with use case Service As Default Gateway.
+		ServiceAsGateway *int64 `json:"ServiceAsGateway,omitempty"`
 		// Count of total Service Clusters.
 		ServiceClustersCount *int64 `json:"ServiceClustersCount,omitempty"`
 		// Count of total Service Functions configured.
 		ServiceFunctionCount *int64 `json:"ServiceFunctionCount,omitempty"`
+		// Count of total Service Function Insertions enabled.
+		ServiceInsertionCount *int64 `json:"ServiceInsertionCount,omitempty"`
+		// Sum of latestVersionCount and recommendedVersionCount.
+		SumCount *int64 `json:"SumCount,omitempty"`
+		// Count of switches in the fabric.
+		SwitchCount *int64 `json:"SwitchCount,omitempty"`
+		// Count of total Networks on the fabric.
+		TotalNetworks *int64 `json:"TotalNetworks,omitempty"`
+		// Count of total VRFs on the fabric.
+		TotalVrfs *int64 `json:"TotalVrfs,omitempty"`
 		// Type of site onboarded either APIC or DCNM.
 		Type             *string                                     `json:"Type,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -917,6 +1307,8 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetrySiteInventory.ConfigurationChangeTrackingCount = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.ConfigurationChangeTrackingCount
 		varNiatelemetrySiteInventory.ConnectivityAnalysisCount = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.ConnectivityAnalysisCount
 		varNiatelemetrySiteInventory.EndpointLocatorCount = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.EndpointLocatorCount
+		varNiatelemetrySiteInventory.FabricTechnology = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.FabricTechnology
+		varNiatelemetrySiteInventory.FabricUpdateStatus = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.FabricUpdateStatus
 		varNiatelemetrySiteInventory.FirmwareVersion = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.FirmwareVersion
 		varNiatelemetrySiteInventory.InstallType = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.InstallType
 		varNiatelemetrySiteInventory.IpAddress = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.IpAddress
@@ -924,11 +1316,19 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetrySiteInventory.NexusDashboard = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.NexusDashboard
 		varNiatelemetrySiteInventory.Nodes = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.Nodes
 		varNiatelemetrySiteInventory.OnDemandBackups = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.OnDemandBackups
+		varNiatelemetrySiteInventory.PerimeterService = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.PerimeterService
 		varNiatelemetrySiteInventory.RecordType = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.RecordType
+		varNiatelemetrySiteInventory.RedirectToServiceChain = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.RedirectToServiceChain
 		varNiatelemetrySiteInventory.ScheduledBackups = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.ScheduledBackups
 		varNiatelemetrySiteInventory.SecurityGroupsCount = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.SecurityGroupsCount
+		varNiatelemetrySiteInventory.ServiceAsGateway = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.ServiceAsGateway
 		varNiatelemetrySiteInventory.ServiceClustersCount = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.ServiceClustersCount
 		varNiatelemetrySiteInventory.ServiceFunctionCount = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.ServiceFunctionCount
+		varNiatelemetrySiteInventory.ServiceInsertionCount = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.ServiceInsertionCount
+		varNiatelemetrySiteInventory.SumCount = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.SumCount
+		varNiatelemetrySiteInventory.SwitchCount = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.SwitchCount
+		varNiatelemetrySiteInventory.TotalNetworks = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.TotalNetworks
+		varNiatelemetrySiteInventory.TotalVrfs = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.TotalVrfs
 		varNiatelemetrySiteInventory.Type = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.Type
 		varNiatelemetrySiteInventory.RegisteredDevice = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.RegisteredDevice
 		*o = NiatelemetrySiteInventory(varNiatelemetrySiteInventory)
@@ -954,6 +1354,8 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ConfigurationChangeTrackingCount")
 		delete(additionalProperties, "ConnectivityAnalysisCount")
 		delete(additionalProperties, "EndpointLocatorCount")
+		delete(additionalProperties, "FabricTechnology")
+		delete(additionalProperties, "FabricUpdateStatus")
 		delete(additionalProperties, "FirmwareVersion")
 		delete(additionalProperties, "InstallType")
 		delete(additionalProperties, "IpAddress")
@@ -961,11 +1363,19 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "NexusDashboard")
 		delete(additionalProperties, "Nodes")
 		delete(additionalProperties, "OnDemandBackups")
+		delete(additionalProperties, "PerimeterService")
 		delete(additionalProperties, "RecordType")
+		delete(additionalProperties, "RedirectToServiceChain")
 		delete(additionalProperties, "ScheduledBackups")
 		delete(additionalProperties, "SecurityGroupsCount")
+		delete(additionalProperties, "ServiceAsGateway")
 		delete(additionalProperties, "ServiceClustersCount")
 		delete(additionalProperties, "ServiceFunctionCount")
+		delete(additionalProperties, "ServiceInsertionCount")
+		delete(additionalProperties, "SumCount")
+		delete(additionalProperties, "SwitchCount")
+		delete(additionalProperties, "TotalNetworks")
+		delete(additionalProperties, "TotalVrfs")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "RegisteredDevice")
 

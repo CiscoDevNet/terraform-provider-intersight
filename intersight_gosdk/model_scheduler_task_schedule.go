@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,7 @@ import (
 // checks if the SchedulerTaskSchedule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SchedulerTaskSchedule{}
 
-// SchedulerTaskSchedule Metadata used to schedule one-time or repeated tasks.
+// SchedulerTaskSchedule TaskSchedules are the runtime scheduling objects that drive one-time or recurring executions. A TaskSchedule can run directly using explicit schedule parameters or can be “policy-based” by referencing a SchedulePolicy. It also defines what to execute (a REST-stim task request and/or an associated workflow definition) and tracks current scheduling status. #### Purpose Create and manage scheduled executions including lifecycle actions like suspend or resume, while exposing current and historical execution status. #### Key Concepts - **Schedule orchestration:** Combines *when to run* (schedule params or referenced policy) with *what to run* (task request or workflow definition). - **Policy-backed vs direct schedules:** `usePolicy` determines whether execution timing comes from a SchedulePolicy or inline schedule params. - **Lifecycle actions:** Supports operational actions like suspend or resume (and captures the last applied action). - **Status and execution telemetry:** Exposes next or previous run timestamps, counters (completed, failed, or skipped), and suspension reasons. - **Permission inheritance from target:** Inherits permissions from an `associatedObject`, ensuring schedule management aligns with the governed resource.
 type SchedulerTaskSchedule struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -40,6 +40,8 @@ type SchedulerTaskSchedule struct {
 	Name           *string                             `json:"Name,omitempty"`
 	ScheduleParams *SchedulerBaseScheduleParams        `json:"ScheduleParams,omitempty"`
 	Status         NullableSchedulerTaskScheduleStatus `json:"Status,omitempty"`
+	// Email address of the user who created the schedule.
+	SubmittedBy *string `json:"SubmittedBy,omitempty"`
 	// Suspend a task until an end date. this applies only to the action suspendTill.
 	SuspendEndTime *time.Time                    `json:"SuspendEndTime,omitempty"`
 	TaskRequest    *SchedulerRestStimTaskRequest `json:"TaskRequest,omitempty"`
@@ -384,6 +386,38 @@ func (o *SchedulerTaskSchedule) UnsetStatus() {
 	o.Status.Unset()
 }
 
+// GetSubmittedBy returns the SubmittedBy field value if set, zero value otherwise.
+func (o *SchedulerTaskSchedule) GetSubmittedBy() string {
+	if o == nil || IsNil(o.SubmittedBy) {
+		var ret string
+		return ret
+	}
+	return *o.SubmittedBy
+}
+
+// GetSubmittedByOk returns a tuple with the SubmittedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchedulerTaskSchedule) GetSubmittedByOk() (*string, bool) {
+	if o == nil || IsNil(o.SubmittedBy) {
+		return nil, false
+	}
+	return o.SubmittedBy, true
+}
+
+// HasSubmittedBy returns a boolean if a field has been set.
+func (o *SchedulerTaskSchedule) HasSubmittedBy() bool {
+	if o != nil && !IsNil(o.SubmittedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubmittedBy gets a reference to the given string and assigns it to the SubmittedBy field.
+func (o *SchedulerTaskSchedule) SetSubmittedBy(v string) {
+	o.SubmittedBy = &v
+}
+
 // GetSuspendEndTime returns the SuspendEndTime field value if set, zero value otherwise.
 func (o *SchedulerTaskSchedule) GetSuspendEndTime() time.Time {
 	if o == nil || IsNil(o.SuspendEndTime) {
@@ -688,6 +722,9 @@ func (o SchedulerTaskSchedule) ToMap() (map[string]interface{}, error) {
 	if o.Status.IsSet() {
 		toSerialize["Status"] = o.Status.Get()
 	}
+	if !IsNil(o.SubmittedBy) {
+		toSerialize["SubmittedBy"] = o.SubmittedBy
+	}
 	if !IsNil(o.SuspendEndTime) {
 		toSerialize["SuspendEndTime"] = o.SuspendEndTime
 	}
@@ -775,6 +812,8 @@ func (o *SchedulerTaskSchedule) UnmarshalJSON(data []byte) (err error) {
 		Name           *string                             `json:"Name,omitempty"`
 		ScheduleParams *SchedulerBaseScheduleParams        `json:"ScheduleParams,omitempty"`
 		Status         NullableSchedulerTaskScheduleStatus `json:"Status,omitempty"`
+		// Email address of the user who created the schedule.
+		SubmittedBy *string `json:"SubmittedBy,omitempty"`
 		// Suspend a task until an end date. this applies only to the action suspendTill.
 		SuspendEndTime *time.Time                    `json:"SuspendEndTime,omitempty"`
 		TaskRequest    *SchedulerRestStimTaskRequest `json:"TaskRequest,omitempty"`
@@ -801,6 +840,7 @@ func (o *SchedulerTaskSchedule) UnmarshalJSON(data []byte) (err error) {
 		varSchedulerTaskSchedule.Name = varSchedulerTaskScheduleWithoutEmbeddedStruct.Name
 		varSchedulerTaskSchedule.ScheduleParams = varSchedulerTaskScheduleWithoutEmbeddedStruct.ScheduleParams
 		varSchedulerTaskSchedule.Status = varSchedulerTaskScheduleWithoutEmbeddedStruct.Status
+		varSchedulerTaskSchedule.SubmittedBy = varSchedulerTaskScheduleWithoutEmbeddedStruct.SubmittedBy
 		varSchedulerTaskSchedule.SuspendEndTime = varSchedulerTaskScheduleWithoutEmbeddedStruct.SuspendEndTime
 		varSchedulerTaskSchedule.TaskRequest = varSchedulerTaskScheduleWithoutEmbeddedStruct.TaskRequest
 		varSchedulerTaskSchedule.Type = varSchedulerTaskScheduleWithoutEmbeddedStruct.Type
@@ -834,6 +874,7 @@ func (o *SchedulerTaskSchedule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "ScheduleParams")
 		delete(additionalProperties, "Status")
+		delete(additionalProperties, "SubmittedBy")
 		delete(additionalProperties, "SuspendEndTime")
 		delete(additionalProperties, "TaskRequest")
 		delete(additionalProperties, "Type")

@@ -3,26 +3,24 @@ subcategory: "iwotenant"
 layout: "intersight"
 page_title: "Intersight: intersight_iwotenant_tenant_customization"
 description: |-
-        ### Overview
         The TenantCustomization object allows end-users to tailor their IWO tenant configurations, enhancing functionality through options like enabling data extractors.
         #### Purpose
         The TenantCustomization object provides mechanisms for users to customize their tenant environments, offering flexibility in data handling and feature management.
         #### Key Concepts
-        - **Data Management:** - Enables the activation of data extractors, facilitating reporting and analysis within the tenant's namespace.
-        - **Customization Flexibility:** - Provides options for users to enhance tenant capabilities according to their specific requirements.
-        - **Account Linkage:** - Maintains associations with relevant accounts and tenants, ensuring consistent customization across linked entities.
+        - **Data Management:** Enables the activation of data extractors, facilitating reporting and analysis within the tenant's namespace.
+        - **Customization Flexibility:** Provides options for users to enhance tenant capabilities according to their specific requirements.
+        - **Account Linkage:** Maintains associations with relevant accounts and tenants, ensuring consistent customization across linked entities.
 
 ---
 
 # Resource: intersight_iwotenant_tenant_customization
-### Overview
 The TenantCustomization object allows end-users to tailor their IWO tenant configurations, enhancing functionality through options like enabling data extractors.
 #### Purpose
 The TenantCustomization object provides mechanisms for users to customize their tenant environments, offering flexibility in data handling and feature management. 
 #### Key Concepts
-- **Data Management:** - Enables the activation of data extractors, facilitating reporting and analysis within the tenant's namespace.
-- **Customization Flexibility:** - Provides options for users to enhance tenant capabilities according to their specific requirements.
-- **Account Linkage:** - Maintains associations with relevant accounts and tenants, ensuring consistent customization across linked entities.
+- **Data Management:** Enables the activation of data extractors, facilitating reporting and analysis within the tenant's namespace.
+- **Customization Flexibility:** Provides options for users to enhance tenant capabilities according to their specific requirements.
+- **Account Linkage:** Maintains associations with relevant accounts and tenants, ensuring consistent customization across linked entities.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

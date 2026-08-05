@@ -644,7 +644,7 @@ func resourceSoftwareReleaseMetaCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if v, ok := d.GetOk("catalog"); ok {
+	if v, ok := d.GetOkExists("catalog"); ok {
 		p := make([]models.SoftwarerepositoryCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -699,7 +699,7 @@ func resourceSoftwareReleaseMetaCreate(c context.Context, d *schema.ResourceData
 		o.SetLatestFileName(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

@@ -326,6 +326,11 @@ func getMacpoolLeaseSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"reservation_id": {
+						Description: "The identity for which the reference is created. It is used to store the ID allocated to the profile during export. \nReservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.\nDuring import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.\nFor IP and UUid IDs, we create reservation, for other Ids we do not create reservations.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"reservation_moid": {
 						Description: "The moid of the reservation object.",
 						Type:        schema.TypeString,
@@ -982,6 +987,12 @@ func dataSourceMacpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
 				}
 			}
 			if v, ok := l["reservation_moid"]; ok {

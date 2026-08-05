@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **IsPplEnabled** | Pointer to **bool** | Indicates Processor Package Power Limit for the server. | [optional] [default to false]
 **MlomAdapterPcieSlotNumber** | Pointer to **int64** | Indicates PCIe Slot numerical value for each Server model MLOM slot. | [optional] 
 **ServerFormFactor** | Pointer to **string** | The form factor (blade/rack/etc) of the server. * &#x60;unknown&#x60; - The form factor of the server is unknown. * &#x60;blade&#x60; - Blade server form factor. * &#x60;rack&#x60; - Rack unit server form factor. | [optional] [readonly] [default to "unknown"]
+**SupportedPolicies** | Pointer to **[]string** |  | [optional] 
 **UnsupportedPolicies** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
@@ -171,6 +172,41 @@ SetServerFormFactor sets ServerFormFactor field to given value.
 
 HasServerFormFactor returns a boolean if a field has been set.
 
+### GetSupportedPolicies
+
+`func (o *CapabilityServerDescriptor) GetSupportedPolicies() []string`
+
+GetSupportedPolicies returns the SupportedPolicies field if non-nil, zero value otherwise.
+
+### GetSupportedPoliciesOk
+
+`func (o *CapabilityServerDescriptor) GetSupportedPoliciesOk() (*[]string, bool)`
+
+GetSupportedPoliciesOk returns a tuple with the SupportedPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportedPolicies
+
+`func (o *CapabilityServerDescriptor) SetSupportedPolicies(v []string)`
+
+SetSupportedPolicies sets SupportedPolicies field to given value.
+
+### HasSupportedPolicies
+
+`func (o *CapabilityServerDescriptor) HasSupportedPolicies() bool`
+
+HasSupportedPolicies returns a boolean if a field has been set.
+
+### SetSupportedPoliciesNil
+
+`func (o *CapabilityServerDescriptor) SetSupportedPoliciesNil(b bool)`
+
+ SetSupportedPoliciesNil sets the value for SupportedPolicies to be an explicit nil
+
+### UnsetSupportedPolicies
+`func (o *CapabilityServerDescriptor) UnsetSupportedPolicies()`
+
+UnsetSupportedPolicies ensures that no value is present for SupportedPolicies, not even an explicit nil
 ### GetUnsupportedPolicies
 
 `func (o *CapabilityServerDescriptor) GetUnsupportedPolicies() []string`

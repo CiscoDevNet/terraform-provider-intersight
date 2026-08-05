@@ -3,12 +3,22 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_violation"
 description: |-
-        A license violation instance reported by a Prism Central. Multiple license violations can be reported by a Prism Central.
+        The Violation object identifies instances of license violations within Nutanix Prism Central. This provides information for tracking license violation issues.
+        #### Purpose
+        The Violation object provides a view of license violations on the cluster. It reports features which exceed their licensed capacity as well as expired licenses.
+        #### Key Concepts
+        - **Compliance Monitoring:** Tracks instances of license violations, supporting timely resolution.
+        - **Issue Management:** Provides insights into feature and capacity violations, aiding in corrective actions.
 
 ---
 
 # Data Source: intersight_hci_violation
-A license violation instance reported by a Prism Central. Multiple license violations can be reported by a Prism Central.
+The Violation object identifies instances of license violations within Nutanix Prism Central. This provides information for tracking license violation issues.
+#### Purpose 
+The Violation object provides a view of license violations on the cluster. It reports features which exceed their licensed capacity as well as expired licenses.
+#### Key Concepts  
+- **Compliance Monitoring:** Tracks instances of license violations, supporting timely resolution. 
+- **Issue Management:** Provides insights into feature and capacity violations, aiding in corrective actions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

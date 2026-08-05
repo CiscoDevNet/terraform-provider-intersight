@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_volume"
 description: |-
-        A volume entity in Hitachi storage array.
+        The HitachiVolume object defines a volume entity within a Hitachi storage array. It encapsulates essential aspects of storage volumes, including their attributes, status, and associated pools and parity groups.
+        #### Purpose
+        HitachiVolume serves as the core component for managing storage volumes, facilitating operations such as viewing, management, and status monitoring within storage arrays.
+        #### Key Concepts
+        - **Volume Association:** Connects volumes to arrays and pools, providing comprehensive relationship management.
+        - **Data Reduction:** Integrates capacity-saving functions through deduplication and compression settings.
+        - **Privilege Sets:** Ensures secure access and management with defined privilege sets for volume-related operations.
+        - **Licensing:** Operates under specific entitlements, adhering to licensing requirements.
 
 ---
 
 # Data Source: intersight_storage_hitachi_volume
-A volume entity in Hitachi storage array.
+The HitachiVolume object defines a volume entity within a Hitachi storage array. It encapsulates essential aspects of storage volumes, including their attributes, status, and associated pools and parity groups.
+#### Purpose
+HitachiVolume serves as the core component for managing storage volumes, facilitating operations such as viewing, management, and status monitoring within storage arrays.
+#### Key Concepts
+- **Volume Association:** Connects volumes to arrays and pools, providing comprehensive relationship management.
+- **Data Reduction:** Integrates capacity-saving functions through deduplication and compression settings.
+- **Privilege Sets:** Ensures secure access and management with defined privilege sets for volume-related operations.
+- **Licensing:** Operates under specific entitlements, adhering to licensing requirements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

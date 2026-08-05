@@ -28,9 +28,12 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_ether_host_port.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `access_vlan`:(string) Access VLAN for this port. 
 * `account_moid`:(string) The Account ID for this managed object. 
+* `admin_fec`:(string) Administratively configured FEC mode for this port.* `` - Default value for FEC state.* `Not Supported` - FEC is not supported on this port.* `Disabled` - FEC is disabled on this port.* `Auto` - FEC mode is automatically negotiated between link partners.* `Cl74` - FEC is configured to use the IEEE Clause 74 (FireCode) standard.* `RS-IEEE(Cl108)` - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard.* `KP` - FEC is configured to use the KP (Backplane Ethernet) FEC mode. 
 * `admin_state`:(string) Administratively configured state (enabled/disabled) for this port. 
 * `aggregate_port_id`:(int) Breakout port member in the fabric extender. 
+* `allowed_vlans`:(string) Allowed VLANs on this port. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -40,9 +43,12 @@ The following arguments can be used to get data of already created objects in In
 * `mode`:(string) Operating mode of this port. 
 * `module_id`:(int) Fabric extender identifier for this port. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `native_vlan`:(string) Native VLAN for this port. 
+* `oper_fec`:(string) Operational FEC mode for this port.* `` - Default value for FEC state.* `Not Supported` - FEC is not supported on this port.* `Disabled` - FEC is disabled on this port.* `Auto` - FEC mode is automatically negotiated between link partners.* `Cl74` - FEC is configured to use the IEEE Clause 74 (FireCode) standard.* `RS-IEEE(Cl108)` - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard.* `KP` - FEC is configured to use the KP (Backplane Ethernet) FEC mode. 
 * `oper_speed`:(string) Current Operational speed for this port. 
 * `oper_state`:(string) Operational state of this port (enabled/disabled). 
 * `oper_state_qual`:(string) Reason for this port's Operational state. 
+* `oper_vlans`:(string) Operational VLANs on this port. 
 * `peer_dn`:(string) PeerDn for ethernet physical port. 
 * `port_channel_id`:(int) Port channel id for port channel created on FI switch. 
 * `port_id`:(int) Switch physical port identifier. 

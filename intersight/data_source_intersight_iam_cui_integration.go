@@ -115,6 +115,16 @@ func getIamCuiIntegrationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"last_full_sync_time": {
+			Description: "The last-modified timestamp of the tenant as returned by the remote API during the most recent workflow-based synchronization.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_notification_modified_time": {
+			Description: "The modified-time carried by the most recent notification applied to this CUI integration MO, used to detect and skip stale or duplicate notifications.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"linked_tenants": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -160,6 +170,21 @@ func getIamCuiIntegrationSchema() map[string]*schema.Schema {
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"opt_in": {
+			Description: "Indicates whether the account has opted in to CUI identity synchronization.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"opt_in_time": {
+			Description: "Timestamp representing when the customer opted in to CUI identity synchronization.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"opt_in_user_identity": {
+			Description: "Identity or name of the engineer who performed the opt-in action.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -357,6 +382,41 @@ func getIamCuiIntegrationSchema() map[string]*schema.Schema {
 			Description: "Primary tenant ID for CUI integration.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"user": {
+			Description: "A reference to a iamUser resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -611,6 +671,18 @@ func dataSourceIamCuiIntegrationRead(c context.Context, d *schema.ResourceData, 
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("last_full_sync_time"); ok {
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
+		o.SetLastFullSyncTime(x)
+	}
+
+	if v, ok := d.GetOk("last_notification_modified_time"); ok {
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
+		o.SetLastNotificationModifiedTime(x)
+	}
+
 	if v, ok := d.GetOk("linked_tenants"); ok {
 		x := make([]models.IamTenantLinking, 0)
 		s := v.([]interface{})
@@ -665,6 +737,22 @@ func dataSourceIamCuiIntegrationRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+
+	if v, ok := d.GetOkExists("opt_in"); ok {
+		x := (v.(bool))
+		o.SetOptIn(x)
+	}
+
+	if v, ok := d.GetOk("opt_in_time"); ok {
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
+		o.SetOptInTime(x)
+	}
+
+	if v, ok := d.GetOk("opt_in_user_identity"); ok {
+		x := (v.(string))
+		o.SetOptInUserIdentity(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -852,6 +940,49 @@ func dataSourceIamCuiIntegrationRead(c context.Context, d *schema.ResourceData, 
 		o.SetTenantId(x)
 	}
 
+	if v, ok := d.GetOk("user"); ok {
+		p := make([]models.IamUserRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamUserRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetUser(x)
+		}
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -973,11 +1104,19 @@ func dataSourceIamCuiIntegrationRead(c context.Context, d *schema.ResourceData, 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
+				temp["last_full_sync_time"] = (s.GetLastFullSyncTime()).String()
+
+				temp["last_notification_modified_time"] = (s.GetLastNotificationModifiedTime()).String()
+
 				temp["linked_tenants"] = flattenListIamTenantLinking(s.GetLinkedTenants(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
+				temp["opt_in"] = (s.GetOptIn())
+
+				temp["opt_in_time"] = (s.GetOptInTime()).String()
+				temp["opt_in_user_identity"] = (s.GetOptInUserIdentity())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -988,6 +1127,8 @@ func dataSourceIamCuiIntegrationRead(c context.Context, d *schema.ResourceData, 
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["tenant_id"] = (s.GetTenantId())
+
+				temp["user"] = flattenMapIamUserRelationship(s.GetUser(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				iamCuiIntegrationResults = append(iamCuiIntegrationResults, temp)

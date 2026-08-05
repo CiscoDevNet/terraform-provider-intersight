@@ -20,6 +20,8 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `endpoint_locator_count`:(int) Count of total Endpoint Locators. 
+* `fabric_technology`:(string) Fabric technology reported by the onboarded DCNM site. 
+* `fabric_update_status`:(string) Status of the fabric update. 
 * `firmware_version`:(string) Version of the specified site. 
 * `install_type`:(string) Fine-grained type DCNM either SAN or LAN. 
 * `mod_time`:(string) The time when this managed object was last modified. 
@@ -28,11 +30,19 @@ The following arguments can be used to get data of already created objects in In
 * `nexus_dashboard`:(string) Name of ND on which site has been onboarded. 
 * `nodes`:(int) Number of nodes the site contains. 
 * `on_demand_backups`:(bool) Count of number of manual backups. 
+* `perimeter_service`:(int) Count of service functions configured with use case Perimeter Service. 
 * `record_type`:(string) Specifies whether Site object is DCNM or APIC or ND. 
+* `redirect_to_service_chain`:(int) Count of service functions configured with use case Service Chain Redirection. 
 * `scheduled_backups`:(bool) Count of number of scheduled backups. 
 * `security_groups_count`:(int) Count of total security groups. 
+* `service_as_gateway`:(int) Count of service functions configured with use case Service As Default Gateway. 
 * `service_clusters_count`:(int) Count of total Service Clusters. 
 * `service_function_count`:(int) Count of total Service Functions configured. 
+* `service_insertion_count`:(int) Count of total Service Function Insertions enabled. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `sum_count`:(int) Sum of latestVersionCount and recommendedVersionCount. 
+* `switch_count`:(int) Count of switches in the fabric. 
+* `total_networks`:(int) Count of total Networks on the fabric. 
+* `total_vrfs`:(int) Count of total VRFs on the fabric. 
 * `type`:(string) Type of site onboarded either APIC or DCNM. 
  

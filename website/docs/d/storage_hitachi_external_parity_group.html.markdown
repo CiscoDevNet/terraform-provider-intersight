@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_external_parity_group"
 description: |-
-        A external parity group in Hitachi storage array.
+        The HitachiExternalParityGroup object defines an external parity group within the Hitachi storage array, encapsulating attributes related to external storage connections.
+        #### Purpose
+        HitachiExternalParityGroup serves as the foundational element for managing external parity groups, supporting operations related to capacity, utilization, and emulation settings.
+        #### Key Concepts
+        - **External Storage Management:** Manages usage rates, capacities, and emulation types for external parity groups.
+        - **Privilege Sets:** Ensures secure management of external parity group settings with defined privilege sets.
+        - **Licensing:** Operates under specified entitlements, supporting authorized operations.
 
 ---
 
 # Data Source: intersight_storage_hitachi_external_parity_group
-A external parity group in Hitachi storage array.
+The HitachiExternalParityGroup object defines an external parity group within the Hitachi storage array, encapsulating attributes related to external storage connections.
+#### Purpose
+HitachiExternalParityGroup serves as the foundational element for managing external parity groups, supporting operations related to capacity, utilization, and emulation settings.
+#### Key Concepts
+- **External Storage Management:** Manages usage rates, capacities, and emulation types for external parity groups.
+- **Privilege Sets:** Ensures secure management of external parity group settings with defined privilege sets.
+- **Licensing:** Operates under specified entitlements, supporting authorized operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

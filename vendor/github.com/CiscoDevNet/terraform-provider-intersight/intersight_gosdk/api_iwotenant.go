@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -58,6 +58,8 @@ CreateIwotenantMigrate Create a 'iwotenant.Migrate' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateIwotenantMigrateRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) CreateIwotenantMigrate(ctx context.Context) ApiCreateIwotenantMigrateRequest {
 	return ApiCreateIwotenantMigrateRequest{
@@ -69,6 +71,8 @@ func (a *IwotenantApiService) CreateIwotenantMigrate(ctx context.Context) ApiCre
 // Execute executes the request
 //
 //	@return IwotenantMigrate
+//
+// Deprecated
 func (a *IwotenantApiService) CreateIwotenantMigrateExecute(r ApiCreateIwotenantMigrateRequest) (*IwotenantMigrate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -240,6 +244,8 @@ CreateIwotenantTenantCustomization Create a 'iwotenant.TenantCustomization' reso
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateIwotenantTenantCustomizationRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) CreateIwotenantTenantCustomization(ctx context.Context) ApiCreateIwotenantTenantCustomizationRequest {
 	return ApiCreateIwotenantTenantCustomizationRequest{
@@ -251,6 +257,8 @@ func (a *IwotenantApiService) CreateIwotenantTenantCustomization(ctx context.Con
 // Execute executes the request
 //
 //	@return IwotenantTenantCustomization
+//
+// Deprecated
 func (a *IwotenantApiService) CreateIwotenantTenantCustomizationExecute(r ApiCreateIwotenantTenantCustomizationRequest) (*IwotenantTenantCustomization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -403,6 +411,8 @@ DeleteIwotenantTenantCustomization Delete a 'iwotenant.TenantCustomization' reso
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiDeleteIwotenantTenantCustomizationRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) DeleteIwotenantTenantCustomization(ctx context.Context, moid string) ApiDeleteIwotenantTenantCustomizationRequest {
 	return ApiDeleteIwotenantTenantCustomizationRequest{
@@ -413,6 +423,7 @@ func (a *IwotenantApiService) DeleteIwotenantTenantCustomization(ctx context.Con
 }
 
 // Execute executes the request
+// Deprecated
 func (a *IwotenantApiService) DeleteIwotenantTenantCustomizationExecute(r ApiDeleteIwotenantTenantCustomizationRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodDelete
@@ -566,6 +577,8 @@ GetIwotenantMaintenanceNotificationByMoid Read a 'iwotenant.MaintenanceNotificat
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetIwotenantMaintenanceNotificationByMoidRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) GetIwotenantMaintenanceNotificationByMoid(ctx context.Context, moid string) ApiGetIwotenantMaintenanceNotificationByMoidRequest {
 	return ApiGetIwotenantMaintenanceNotificationByMoidRequest{
@@ -578,6 +591,8 @@ func (a *IwotenantApiService) GetIwotenantMaintenanceNotificationByMoid(ctx cont
 // Execute executes the request
 //
 //	@return IwotenantMaintenanceNotification
+//
+// Deprecated
 func (a *IwotenantApiService) GetIwotenantMaintenanceNotificationByMoidExecute(r ApiGetIwotenantMaintenanceNotificationByMoidRequest) (*IwotenantMaintenanceNotification, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -807,6 +822,8 @@ GetIwotenantMaintenanceNotificationList Read a 'iwotenant.MaintenanceNotificatio
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetIwotenantMaintenanceNotificationListRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) GetIwotenantMaintenanceNotificationList(ctx context.Context) ApiGetIwotenantMaintenanceNotificationListRequest {
 	return ApiGetIwotenantMaintenanceNotificationListRequest{
@@ -818,6 +835,8 @@ func (a *IwotenantApiService) GetIwotenantMaintenanceNotificationList(ctx contex
 // Execute executes the request
 //
 //	@return IwotenantMaintenanceNotificationResponse
+//
+// Deprecated
 func (a *IwotenantApiService) GetIwotenantMaintenanceNotificationListExecute(r ApiGetIwotenantMaintenanceNotificationListRequest) (*IwotenantMaintenanceNotificationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1028,6 +1047,8 @@ GetIwotenantMigrateByMoid Read a 'iwotenant.Migrate' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetIwotenantMigrateByMoidRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) GetIwotenantMigrateByMoid(ctx context.Context, moid string) ApiGetIwotenantMigrateByMoidRequest {
 	return ApiGetIwotenantMigrateByMoidRequest{
@@ -1040,6 +1061,8 @@ func (a *IwotenantApiService) GetIwotenantMigrateByMoid(ctx context.Context, moi
 // Execute executes the request
 //
 //	@return IwotenantMigrate
+//
+// Deprecated
 func (a *IwotenantApiService) GetIwotenantMigrateByMoidExecute(r ApiGetIwotenantMigrateByMoidRequest) (*IwotenantMigrate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1269,6 +1292,8 @@ GetIwotenantMigrateList Read a 'iwotenant.Migrate' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetIwotenantMigrateListRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) GetIwotenantMigrateList(ctx context.Context) ApiGetIwotenantMigrateListRequest {
 	return ApiGetIwotenantMigrateListRequest{
@@ -1280,6 +1305,8 @@ func (a *IwotenantApiService) GetIwotenantMigrateList(ctx context.Context) ApiGe
 // Execute executes the request
 //
 //	@return IwotenantMigrateResponse
+//
+// Deprecated
 func (a *IwotenantApiService) GetIwotenantMigrateListExecute(r ApiGetIwotenantMigrateListRequest) (*IwotenantMigrateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1490,6 +1517,8 @@ GetIwotenantTenantCustomizationByMoid Read a 'iwotenant.TenantCustomization' res
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetIwotenantTenantCustomizationByMoidRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) GetIwotenantTenantCustomizationByMoid(ctx context.Context, moid string) ApiGetIwotenantTenantCustomizationByMoidRequest {
 	return ApiGetIwotenantTenantCustomizationByMoidRequest{
@@ -1502,6 +1531,8 @@ func (a *IwotenantApiService) GetIwotenantTenantCustomizationByMoid(ctx context.
 // Execute executes the request
 //
 //	@return IwotenantTenantCustomization
+//
+// Deprecated
 func (a *IwotenantApiService) GetIwotenantTenantCustomizationByMoidExecute(r ApiGetIwotenantTenantCustomizationByMoidRequest) (*IwotenantTenantCustomization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1731,6 +1762,8 @@ GetIwotenantTenantCustomizationList Read a 'iwotenant.TenantCustomization' resou
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetIwotenantTenantCustomizationListRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) GetIwotenantTenantCustomizationList(ctx context.Context) ApiGetIwotenantTenantCustomizationListRequest {
 	return ApiGetIwotenantTenantCustomizationListRequest{
@@ -1742,6 +1775,8 @@ func (a *IwotenantApiService) GetIwotenantTenantCustomizationList(ctx context.Co
 // Execute executes the request
 //
 //	@return IwotenantTenantCustomizationResponse
+//
+// Deprecated
 func (a *IwotenantApiService) GetIwotenantTenantCustomizationListExecute(r ApiGetIwotenantTenantCustomizationListRequest) (*IwotenantTenantCustomizationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1952,6 +1987,8 @@ GetIwotenantTenantStatusByMoid Read a 'iwotenant.TenantStatus' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetIwotenantTenantStatusByMoidRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) GetIwotenantTenantStatusByMoid(ctx context.Context, moid string) ApiGetIwotenantTenantStatusByMoidRequest {
 	return ApiGetIwotenantTenantStatusByMoidRequest{
@@ -1964,6 +2001,8 @@ func (a *IwotenantApiService) GetIwotenantTenantStatusByMoid(ctx context.Context
 // Execute executes the request
 //
 //	@return IwotenantTenantStatus
+//
+// Deprecated
 func (a *IwotenantApiService) GetIwotenantTenantStatusByMoidExecute(r ApiGetIwotenantTenantStatusByMoidRequest) (*IwotenantTenantStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2193,6 +2232,8 @@ GetIwotenantTenantStatusList Read a 'iwotenant.TenantStatus' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetIwotenantTenantStatusListRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) GetIwotenantTenantStatusList(ctx context.Context) ApiGetIwotenantTenantStatusListRequest {
 	return ApiGetIwotenantTenantStatusListRequest{
@@ -2204,6 +2245,8 @@ func (a *IwotenantApiService) GetIwotenantTenantStatusList(ctx context.Context) 
 // Execute executes the request
 //
 //	@return IwotenantTenantStatusResponse
+//
+// Deprecated
 func (a *IwotenantApiService) GetIwotenantTenantStatusListExecute(r ApiGetIwotenantTenantStatusListRequest) (*IwotenantTenantStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2407,6 +2450,8 @@ PatchIwotenantMigrate Update a 'iwotenant.Migrate' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiPatchIwotenantMigrateRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) PatchIwotenantMigrate(ctx context.Context, moid string) ApiPatchIwotenantMigrateRequest {
 	return ApiPatchIwotenantMigrateRequest{
@@ -2419,6 +2464,8 @@ func (a *IwotenantApiService) PatchIwotenantMigrate(ctx context.Context, moid st
 // Execute executes the request
 //
 //	@return IwotenantMigrate
+//
+// Deprecated
 func (a *IwotenantApiService) PatchIwotenantMigrateExecute(r ApiPatchIwotenantMigrateRequest) (*IwotenantMigrate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2583,6 +2630,8 @@ PatchIwotenantTenantCustomization Update a 'iwotenant.TenantCustomization' resou
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiPatchIwotenantTenantCustomizationRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) PatchIwotenantTenantCustomization(ctx context.Context, moid string) ApiPatchIwotenantTenantCustomizationRequest {
 	return ApiPatchIwotenantTenantCustomizationRequest{
@@ -2595,6 +2644,8 @@ func (a *IwotenantApiService) PatchIwotenantTenantCustomization(ctx context.Cont
 // Execute executes the request
 //
 //	@return IwotenantTenantCustomization
+//
+// Deprecated
 func (a *IwotenantApiService) PatchIwotenantTenantCustomizationExecute(r ApiPatchIwotenantTenantCustomizationRequest) (*IwotenantTenantCustomization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2759,6 +2810,8 @@ UpdateIwotenantMigrate Update a 'iwotenant.Migrate' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiUpdateIwotenantMigrateRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) UpdateIwotenantMigrate(ctx context.Context, moid string) ApiUpdateIwotenantMigrateRequest {
 	return ApiUpdateIwotenantMigrateRequest{
@@ -2771,6 +2824,8 @@ func (a *IwotenantApiService) UpdateIwotenantMigrate(ctx context.Context, moid s
 // Execute executes the request
 //
 //	@return IwotenantMigrate
+//
+// Deprecated
 func (a *IwotenantApiService) UpdateIwotenantMigrateExecute(r ApiUpdateIwotenantMigrateRequest) (*IwotenantMigrate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2935,6 +2990,8 @@ UpdateIwotenantTenantCustomization Update a 'iwotenant.TenantCustomization' reso
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiUpdateIwotenantTenantCustomizationRequest
+
+Deprecated
 */
 func (a *IwotenantApiService) UpdateIwotenantTenantCustomization(ctx context.Context, moid string) ApiUpdateIwotenantTenantCustomizationRequest {
 	return ApiUpdateIwotenantTenantCustomizationRequest{
@@ -2947,6 +3004,8 @@ func (a *IwotenantApiService) UpdateIwotenantTenantCustomization(ctx context.Con
 // Execute executes the request
 //
 //	@return IwotenantTenantCustomization
+//
+// Deprecated
 func (a *IwotenantApiService) UpdateIwotenantTenantCustomizationExecute(r ApiUpdateIwotenantTenantCustomizationRequest) (*IwotenantTenantCustomization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

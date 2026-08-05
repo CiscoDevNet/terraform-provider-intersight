@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_host_gpu"
 description: |-
-        Common attributes of a GPU device on a VMware host.
+        The VmwareHostGpu object delineates the common attributes of a GPU device on a VMware host, detailing configurations for resource allocation and management.
+        #### Purpose
+        VmwareHostGpu serves as the critical component for managing GPU configurations on hosts, optimizing resource allocation and performance within VMware environments.
+        #### Key Concepts
+        - **Resource Allocation:** Defines settings for GPU attributes, optimizing resource management and allocation on VMware hosts.
+        - **Integration:** Interfaces with hosts, facilitating seamless connectivity and resource management for GPU devices.
+        - **Security and Access:** Utilizes privilege sets for secure read operations, maintaining integrity and authorized access.
+        - **Operational Features:** Includes attributes for GPU settings, supporting resilient and adaptive device operations.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_host_gpu
-Common attributes of a GPU device on a VMware host.
+The VmwareHostGpu object delineates the common attributes of a GPU device on a VMware host, detailing configurations for resource allocation and management.
+#### Purpose
+VmwareHostGpu serves as the critical component for managing GPU configurations on hosts, optimizing resource allocation and performance within VMware environments.
+#### Key Concepts
+- **Resource Allocation:** Defines settings for GPU attributes, optimizing resource management and allocation on VMware hosts.
+- **Integration:** Interfaces with hosts, facilitating seamless connectivity and resource management for GPU devices.
+- **Security and Access:** Utilizes privilege sets for secure read operations, maintaining integrity and authorized access.
+- **Operational Features:** Includes attributes for GPU settings, supporting resilient and adaptive device operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

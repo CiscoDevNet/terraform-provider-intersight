@@ -116,12 +116,17 @@ func getIamLocalUserPasswordPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"failed_login_tracker_window": {
-			Description: "Seconds are tracked for consecutive incorrect login attempts. Users will be locked out if they exceed the max number of incorrect login attempts during this duration.",
+			Description: "The duration, in seconds, within which consecutive incorrect login attempts are counted. The system locks out the account if the number of incorrect attempts exceeds the maximum allowed value during this window.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"lock_out_time_period": {
 			Description: "The time period, in seconds, during which a user account will remain locked.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"max_days_allowed_with_same_password": {
+			Description: "Maximum number of days a password can be used before it must be changed. Set to 0 to disable password expiration.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -633,6 +638,11 @@ func dataSourceIamLocalUserPasswordPolicyRead(c context.Context, d *schema.Resou
 		o.SetLockOutTimePeriod(x)
 	}
 
+	if v, ok := d.GetOkExists("max_days_allowed_with_same_password"); ok {
+		x := int64(v.(int))
+		o.SetMaxDaysAllowedWithSamePassword(x)
+	}
+
 	if v, ok := d.GetOkExists("max_failed_logins_allowed"); ok {
 		x := int64(v.(int))
 		o.SetMaxFailedLoginsAllowed(x)
@@ -991,6 +1001,7 @@ func dataSourceIamLocalUserPasswordPolicyRead(c context.Context, d *schema.Resou
 				temp["enable_lock_out_for_admin_user"] = (s.GetEnableLockOutForAdminUser())
 				temp["failed_login_tracker_window"] = (s.GetFailedLoginTrackerWindow())
 				temp["lock_out_time_period"] = (s.GetLockOutTimePeriod())
+				temp["max_days_allowed_with_same_password"] = (s.GetMaxDaysAllowedWithSamePassword())
 				temp["max_failed_logins_allowed"] = (s.GetMaxFailedLoginsAllowed())
 				temp["min_char_difference"] = (s.GetMinCharDifference())
 				temp["min_days_between_password_change"] = (s.GetMinDaysBetweenPasswordChange())

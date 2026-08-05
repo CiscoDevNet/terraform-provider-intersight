@@ -81,7 +81,7 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 				},
 			},
 			"auto_targetvendor_name": {
-				Description: "Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 64 characters.",
+				Description: "Auto target interface that is represented via the Initiator name or the DHCP vendor ID. Accepted length: 1 to 63 characters.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -1270,7 +1270,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 		o.SetIscsiIpType(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1325,7 +1325,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 
 	o.SetObjectType("vnic.IscsiBootPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

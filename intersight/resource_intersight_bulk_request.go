@@ -87,7 +87,7 @@ func resourceBulkRequest() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Stop", "Proceed"}, false),
 				Optional:     true,
-				Default:      "Stop",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"actions": {
@@ -597,7 +597,7 @@ func resourceBulkRequest() *schema.Resource {
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringInSlice([]string{"POST", "PATCH", "DELETE"}, false),
 							Optional:     true,
-							Default:      "POST",
+							Computed:     true,
 							ForceNew:     true,
 						},
 					},
@@ -857,7 +857,7 @@ func resourceBulkRequest() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"POST", "PATCH", "DELETE"}, false),
 				Optional:     true,
-				Default:      "POST",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"version_context": {
@@ -1091,7 +1091,7 @@ func resourceBulkRequestCreate(c context.Context, d *schema.ResourceData, meta i
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewBulkRequestWithDefaults()
-	if v, ok := d.GetOk("account"); ok {
+	if v, ok := d.GetOkExists("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1134,7 +1134,7 @@ func resourceBulkRequestCreate(c context.Context, d *schema.ResourceData, meta i
 		}
 	}
 
-	if v, ok := d.GetOk("action_on_error"); ok {
+	if v, ok := d.GetOkExists("action_on_error"); ok {
 		x := (v.(string))
 		o.SetActionOnError(x)
 	}
@@ -1193,14 +1193,14 @@ func resourceBulkRequestCreate(c context.Context, d *schema.ResourceData, meta i
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("bulk.Request")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1398,12 +1398,12 @@ func resourceBulkRequestCreate(c context.Context, d *schema.ResourceData, meta i
 		}
 	}
 
-	if v, ok := d.GetOk("uri"); ok {
+	if v, ok := d.GetOkExists("uri"); ok {
 		x := (v.(string))
 		o.SetUri(x)
 	}
 
-	if v, ok := d.GetOk("verb"); ok {
+	if v, ok := d.GetOkExists("verb"); ok {
 		x := (v.(string))
 		o.SetVerb(x)
 	}

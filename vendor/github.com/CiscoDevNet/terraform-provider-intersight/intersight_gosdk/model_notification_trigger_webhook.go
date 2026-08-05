@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -22,13 +22,17 @@ import (
 // checks if the NotificationTriggerWebhook type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationTriggerWebhook{}
 
-// NotificationTriggerWebhook TriggerWebhook complexType holds the Payload URL's server meta info.
+// NotificationTriggerWebhook TriggerWebhook complexType holds the Payload URL's server meta info. Configure at most one primary signing or credential mechanism: secret (HMAC-SHA256), authentication (Basic, Bearer, Splunk), and/or customHeaders (use EncryptedValue for sensitive values such as API keys). Setting both secret and a real authentication credential at the same time is rejected at create/update time. If secret is unset, customHeaders is empty, and authentication is unset or asset.NoAuthenticationCredential, deliveries are sent with no HMAC signing and no Authorization header (unauthenticated outbound webhook).
 type NotificationTriggerWebhook struct {
 	NotificationAction
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType     string                  `json:"ObjectType"`
+	Authentication NullableAssetCredential `json:"Authentication,omitempty"`
+	// When set to true on update, the HMAC shared secret is not carried over from the previous stored action when the request omits the write-only ``secret`` field. Use this to clear the signing key without re-sending a secret value. When false or not set, the prior behavior applies: the previous secret is preserved on PATCH if ``secret`` is omitted.
+	ClearSecret   *bool                    `json:"ClearSecret,omitempty"`
+	CustomHeaders []NotificationHttpHeader `json:"CustomHeaders,omitempty"`
 	// Holds the timestamp of the first failed request. The first time the notification is not delivered to the webhook server, the user will have the Warning alarm in the system. Next 48 hours the system still will try to notify the webhook server. If after 48 hours the server is not recovered, the system will mark this webhook as Inactive, and the user will have a critical alarm in the system.
 	FirstFailedRequest *time.Time `json:"FirstFailedRequest,omitempty"`
 	// Indicates whether the value of the 'secret' property has been set.
@@ -37,7 +41,7 @@ type NotificationTriggerWebhook struct {
 	LastNetworkError *string `json:"LastNetworkError,omitempty"`
 	// Holds the code of the last response, which helps to debug the issue in case if webhook server is not reachable.
 	LastResponseCode *int64 `json:"LastResponseCode,omitempty"`
-	// The secret is used to build the Authorization header, which will be attached to each webhook notification. By this header developers of the webhooks servers can make sure that events are received from the trusted source - Intersight.
+	// Prefer the Authentication property to configure how webhook deliveries are authenticated, including the Authorization header. This field holds the shared secret used for HMAC-SHA256 signing when no credential is configured, and remains supported for existing integrations. By this header developers of the webhooks servers can make sure that events are received from the trusted source - Intersight.
 	Secret *string `json:"Secret,omitempty"`
 	// State of the action shows whether this action passes the verification or not. If this property holds 'Inactive' value, this action will not be executed. To verify action again, use the Verify property from the MO. * `Inactive` - Inactive state means action didn't pass the verification and it won't be executed. * `Active` - Active state means that action successfully passed the verification and it is ready to be performed.
 	State *string `json:"State,omitempty"`
@@ -56,6 +60,8 @@ func NewNotificationTriggerWebhook(classId string, objectType string) *Notificat
 	this := NotificationTriggerWebhook{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var clearSecret bool = false
+	this.ClearSecret = &clearSecret
 	return &this
 }
 
@@ -68,6 +74,8 @@ func NewNotificationTriggerWebhookWithDefaults() *NotificationTriggerWebhook {
 	this.ClassId = classId
 	var objectType string = "notification.TriggerWebhook"
 	this.ObjectType = objectType
+	var clearSecret bool = false
+	this.ClearSecret = &clearSecret
 	return &this
 }
 
@@ -127,6 +135,114 @@ func (o *NotificationTriggerWebhook) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "notification.TriggerWebhook" of the ObjectType field.
 func (o *NotificationTriggerWebhook) GetDefaultObjectType() interface{} {
 	return "notification.TriggerWebhook"
+}
+
+// GetAuthentication returns the Authentication field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NotificationTriggerWebhook) GetAuthentication() AssetCredential {
+	if o == nil || IsNil(o.Authentication.Get()) {
+		var ret AssetCredential
+		return ret
+	}
+	return *o.Authentication.Get()
+}
+
+// GetAuthenticationOk returns a tuple with the Authentication field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NotificationTriggerWebhook) GetAuthenticationOk() (*AssetCredential, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Authentication.Get(), o.Authentication.IsSet()
+}
+
+// HasAuthentication returns a boolean if a field has been set.
+func (o *NotificationTriggerWebhook) HasAuthentication() bool {
+	if o != nil && o.Authentication.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthentication gets a reference to the given NullableAssetCredential and assigns it to the Authentication field.
+func (o *NotificationTriggerWebhook) SetAuthentication(v AssetCredential) {
+	o.Authentication.Set(&v)
+}
+
+// SetAuthenticationNil sets the value for Authentication to be an explicit nil
+func (o *NotificationTriggerWebhook) SetAuthenticationNil() {
+	o.Authentication.Set(nil)
+}
+
+// UnsetAuthentication ensures that no value is present for Authentication, not even an explicit nil
+func (o *NotificationTriggerWebhook) UnsetAuthentication() {
+	o.Authentication.Unset()
+}
+
+// GetClearSecret returns the ClearSecret field value if set, zero value otherwise.
+func (o *NotificationTriggerWebhook) GetClearSecret() bool {
+	if o == nil || IsNil(o.ClearSecret) {
+		var ret bool
+		return ret
+	}
+	return *o.ClearSecret
+}
+
+// GetClearSecretOk returns a tuple with the ClearSecret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationTriggerWebhook) GetClearSecretOk() (*bool, bool) {
+	if o == nil || IsNil(o.ClearSecret) {
+		return nil, false
+	}
+	return o.ClearSecret, true
+}
+
+// HasClearSecret returns a boolean if a field has been set.
+func (o *NotificationTriggerWebhook) HasClearSecret() bool {
+	if o != nil && !IsNil(o.ClearSecret) {
+		return true
+	}
+
+	return false
+}
+
+// SetClearSecret gets a reference to the given bool and assigns it to the ClearSecret field.
+func (o *NotificationTriggerWebhook) SetClearSecret(v bool) {
+	o.ClearSecret = &v
+}
+
+// GetCustomHeaders returns the CustomHeaders field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NotificationTriggerWebhook) GetCustomHeaders() []NotificationHttpHeader {
+	if o == nil {
+		var ret []NotificationHttpHeader
+		return ret
+	}
+	return o.CustomHeaders
+}
+
+// GetCustomHeadersOk returns a tuple with the CustomHeaders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NotificationTriggerWebhook) GetCustomHeadersOk() ([]NotificationHttpHeader, bool) {
+	if o == nil || IsNil(o.CustomHeaders) {
+		return nil, false
+	}
+	return o.CustomHeaders, true
+}
+
+// HasCustomHeaders returns a boolean if a field has been set.
+func (o *NotificationTriggerWebhook) HasCustomHeaders() bool {
+	if o != nil && !IsNil(o.CustomHeaders) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomHeaders gets a reference to the given []NotificationHttpHeader and assigns it to the CustomHeaders field.
+func (o *NotificationTriggerWebhook) SetCustomHeaders(v []NotificationHttpHeader) {
+	o.CustomHeaders = v
 }
 
 // GetFirstFailedRequest returns the FirstFailedRequest field value if set, zero value otherwise.
@@ -379,6 +495,15 @@ func (o NotificationTriggerWebhook) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if o.Authentication.IsSet() {
+		toSerialize["Authentication"] = o.Authentication.Get()
+	}
+	if !IsNil(o.ClearSecret) {
+		toSerialize["ClearSecret"] = o.ClearSecret
+	}
+	if o.CustomHeaders != nil {
+		toSerialize["CustomHeaders"] = o.CustomHeaders
+	}
 	if !IsNil(o.FirstFailedRequest) {
 		toSerialize["FirstFailedRequest"] = o.FirstFailedRequest
 	}
@@ -454,7 +579,11 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType     string                  `json:"ObjectType"`
+		Authentication NullableAssetCredential `json:"Authentication,omitempty"`
+		// When set to true on update, the HMAC shared secret is not carried over from the previous stored action when the request omits the write-only ``secret`` field. Use this to clear the signing key without re-sending a secret value. When false or not set, the prior behavior applies: the previous secret is preserved on PATCH if ``secret`` is omitted.
+		ClearSecret   *bool                    `json:"ClearSecret,omitempty"`
+		CustomHeaders []NotificationHttpHeader `json:"CustomHeaders,omitempty"`
 		// Holds the timestamp of the first failed request. The first time the notification is not delivered to the webhook server, the user will have the Warning alarm in the system. Next 48 hours the system still will try to notify the webhook server. If after 48 hours the server is not recovered, the system will mark this webhook as Inactive, and the user will have a critical alarm in the system.
 		FirstFailedRequest *time.Time `json:"FirstFailedRequest,omitempty"`
 		// Indicates whether the value of the 'secret' property has been set.
@@ -463,7 +592,7 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 		LastNetworkError *string `json:"LastNetworkError,omitempty"`
 		// Holds the code of the last response, which helps to debug the issue in case if webhook server is not reachable.
 		LastResponseCode *int64 `json:"LastResponseCode,omitempty"`
-		// The secret is used to build the Authorization header, which will be attached to each webhook notification. By this header developers of the webhooks servers can make sure that events are received from the trusted source - Intersight.
+		// Prefer the Authentication property to configure how webhook deliveries are authenticated, including the Authorization header. This field holds the shared secret used for HMAC-SHA256 signing when no credential is configured, and remains supported for existing integrations. By this header developers of the webhooks servers can make sure that events are received from the trusted source - Intersight.
 		Secret *string `json:"Secret,omitempty"`
 		// State of the action shows whether this action passes the verification or not. If this property holds 'Inactive' value, this action will not be executed. To verify action again, use the Verify property from the MO. * `Inactive` - Inactive state means action didn't pass the verification and it won't be executed. * `Active` - Active state means that action successfully passed the verification and it is ready to be performed.
 		State *string `json:"State,omitempty"`
@@ -478,6 +607,9 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 		varNotificationTriggerWebhook := _NotificationTriggerWebhook{}
 		varNotificationTriggerWebhook.ClassId = varNotificationTriggerWebhookWithoutEmbeddedStruct.ClassId
 		varNotificationTriggerWebhook.ObjectType = varNotificationTriggerWebhookWithoutEmbeddedStruct.ObjectType
+		varNotificationTriggerWebhook.Authentication = varNotificationTriggerWebhookWithoutEmbeddedStruct.Authentication
+		varNotificationTriggerWebhook.ClearSecret = varNotificationTriggerWebhookWithoutEmbeddedStruct.ClearSecret
+		varNotificationTriggerWebhook.CustomHeaders = varNotificationTriggerWebhookWithoutEmbeddedStruct.CustomHeaders
 		varNotificationTriggerWebhook.FirstFailedRequest = varNotificationTriggerWebhookWithoutEmbeddedStruct.FirstFailedRequest
 		varNotificationTriggerWebhook.IsSecretSet = varNotificationTriggerWebhookWithoutEmbeddedStruct.IsSecretSet
 		varNotificationTriggerWebhook.LastNetworkError = varNotificationTriggerWebhookWithoutEmbeddedStruct.LastNetworkError
@@ -504,6 +636,9 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Authentication")
+		delete(additionalProperties, "ClearSecret")
+		delete(additionalProperties, "CustomHeaders")
 		delete(additionalProperties, "FirstFailedRequest")
 		delete(additionalProperties, "IsSecretSet")
 		delete(additionalProperties, "LastNetworkError")

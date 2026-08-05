@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -64,6 +64,8 @@ type EquipmentSwitchCard struct {
 	State *string `json:"State,omitempty"`
 	// The connection status of the switch hardware like up/down. * `Down` - Connection status of the switch card is down. * `Up` - Connection status of the switch card is up.
 	Status *string `json:"Status,omitempty"`
+	// Spanning Tree Protocol configuration for the switch. * `Disabled` - Spanning Tree Protocol (STP) is disabled. * `STP` - Spanning Tree Protocol (STP) is enabled and operating in STP. * `RSTP` - Spanning Tree Protocol (STP) is enabled and operating in RSTP mode. * `MSTP` - Spanning Tree Protocol (STP) is enabled and operating in MSTP mode. * `PVST+` - Spanning Tree Protocol (STP) is enabled and operating in PVST mode. * `RPVST+` - Spanning Tree Protocol (STP) is enabled and operating in RPVST mode.
+	StpMode *string `json:"StpMode,omitempty"`
 	// Switch Identifier that is local to a cluster.
 	SwitchId *string `json:"SwitchId,omitempty"`
 	// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
@@ -75,9 +77,10 @@ type EquipmentSwitchCard struct {
 	// An array of relationships to fcPhysicalPort resources.
 	FcPorts []FcPhysicalPortRelationship `json:"FcPorts,omitempty"`
 	// An array of relationships to etherHostPort resources.
-	HostPorts           []EtherHostPortRelationship             `json:"HostPorts,omitempty"`
-	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
-	NetworkElement      NullableNetworkElementRelationship      `json:"NetworkElement,omitempty"`
+	HostPorts           []EtherHostPortRelationship              `json:"HostPorts,omitempty"`
+	InterSwitchPort     NullableEtherInterSwitchPortRelationship `json:"InterSwitchPort,omitempty"`
+	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
+	NetworkElement      NullableNetworkElementRelationship       `json:"NetworkElement,omitempty"`
 	// An array of relationships to etherPortChannel resources.
 	PortChannels []EtherPortChannelRelationship `json:"PortChannels,omitempty"`
 	// An array of relationships to portGroup resources.
@@ -757,6 +760,38 @@ func (o *EquipmentSwitchCard) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetStpMode returns the StpMode field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetStpMode() string {
+	if o == nil || IsNil(o.StpMode) {
+		var ret string
+		return ret
+	}
+	return *o.StpMode
+}
+
+// GetStpModeOk returns a tuple with the StpMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetStpModeOk() (*string, bool) {
+	if o == nil || IsNil(o.StpMode) {
+		return nil, false
+	}
+	return o.StpMode, true
+}
+
+// HasStpMode returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasStpMode() bool {
+	if o != nil && !IsNil(o.StpMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetStpMode gets a reference to the given string and assigns it to the StpMode field.
+func (o *EquipmentSwitchCard) SetStpMode(v string) {
+	o.StpMode = &v
+}
+
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetSwitchId() string {
 	if o == nil || IsNil(o.SwitchId) {
@@ -950,6 +985,49 @@ func (o *EquipmentSwitchCard) HasHostPorts() bool {
 // SetHostPorts gets a reference to the given []EtherHostPortRelationship and assigns it to the HostPorts field.
 func (o *EquipmentSwitchCard) SetHostPorts(v []EtherHostPortRelationship) {
 	o.HostPorts = v
+}
+
+// GetInterSwitchPort returns the InterSwitchPort field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentSwitchCard) GetInterSwitchPort() EtherInterSwitchPortRelationship {
+	if o == nil || IsNil(o.InterSwitchPort.Get()) {
+		var ret EtherInterSwitchPortRelationship
+		return ret
+	}
+	return *o.InterSwitchPort.Get()
+}
+
+// GetInterSwitchPortOk returns a tuple with the InterSwitchPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentSwitchCard) GetInterSwitchPortOk() (*EtherInterSwitchPortRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InterSwitchPort.Get(), o.InterSwitchPort.IsSet()
+}
+
+// HasInterSwitchPort returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasInterSwitchPort() bool {
+	if o != nil && o.InterSwitchPort.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInterSwitchPort gets a reference to the given NullableEtherInterSwitchPortRelationship and assigns it to the InterSwitchPort field.
+func (o *EquipmentSwitchCard) SetInterSwitchPort(v EtherInterSwitchPortRelationship) {
+	o.InterSwitchPort.Set(&v)
+}
+
+// SetInterSwitchPortNil sets the value for InterSwitchPort to be an explicit nil
+func (o *EquipmentSwitchCard) SetInterSwitchPortNil() {
+	o.InterSwitchPort.Set(nil)
+}
+
+// UnsetInterSwitchPort ensures that no value is present for InterSwitchPort, not even an explicit nil
+func (o *EquipmentSwitchCard) UnsetInterSwitchPort() {
+	o.InterSwitchPort.Unset()
 }
 
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1227,6 +1305,9 @@ func (o EquipmentSwitchCard) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
+	if !IsNil(o.StpMode) {
+		toSerialize["StpMode"] = o.StpMode
+	}
 	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
@@ -1244,6 +1325,9 @@ func (o EquipmentSwitchCard) ToMap() (map[string]interface{}, error) {
 	}
 	if o.HostPorts != nil {
 		toSerialize["HostPorts"] = o.HostPorts
+	}
+	if o.InterSwitchPort.IsSet() {
+		toSerialize["InterSwitchPort"] = o.InterSwitchPort.Get()
 	}
 	if o.InventoryDeviceInfo.IsSet() {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
@@ -1351,6 +1435,8 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		State *string `json:"State,omitempty"`
 		// The connection status of the switch hardware like up/down. * `Down` - Connection status of the switch card is down. * `Up` - Connection status of the switch card is up.
 		Status *string `json:"Status,omitempty"`
+		// Spanning Tree Protocol configuration for the switch. * `Disabled` - Spanning Tree Protocol (STP) is disabled. * `STP` - Spanning Tree Protocol (STP) is enabled and operating in STP. * `RSTP` - Spanning Tree Protocol (STP) is enabled and operating in RSTP mode. * `MSTP` - Spanning Tree Protocol (STP) is enabled and operating in MSTP mode. * `PVST+` - Spanning Tree Protocol (STP) is enabled and operating in PVST mode. * `RPVST+` - Spanning Tree Protocol (STP) is enabled and operating in RPVST mode.
+		StpMode *string `json:"StpMode,omitempty"`
 		// Switch Identifier that is local to a cluster.
 		SwitchId *string `json:"SwitchId,omitempty"`
 		// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
@@ -1362,9 +1448,10 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		// An array of relationships to fcPhysicalPort resources.
 		FcPorts []FcPhysicalPortRelationship `json:"FcPorts,omitempty"`
 		// An array of relationships to etherHostPort resources.
-		HostPorts           []EtherHostPortRelationship             `json:"HostPorts,omitempty"`
-		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
-		NetworkElement      NullableNetworkElementRelationship      `json:"NetworkElement,omitempty"`
+		HostPorts           []EtherHostPortRelationship              `json:"HostPorts,omitempty"`
+		InterSwitchPort     NullableEtherInterSwitchPortRelationship `json:"InterSwitchPort,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
+		NetworkElement      NullableNetworkElementRelationship       `json:"NetworkElement,omitempty"`
 		// An array of relationships to etherPortChannel resources.
 		PortChannels []EtherPortChannelRelationship `json:"PortChannels,omitempty"`
 		// An array of relationships to portGroup resources.
@@ -1397,12 +1484,14 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentSwitchCard.SlotId = varEquipmentSwitchCardWithoutEmbeddedStruct.SlotId
 		varEquipmentSwitchCard.State = varEquipmentSwitchCardWithoutEmbeddedStruct.State
 		varEquipmentSwitchCard.Status = varEquipmentSwitchCardWithoutEmbeddedStruct.Status
+		varEquipmentSwitchCard.StpMode = varEquipmentSwitchCardWithoutEmbeddedStruct.StpMode
 		varEquipmentSwitchCard.SwitchId = varEquipmentSwitchCardWithoutEmbeddedStruct.SwitchId
 		varEquipmentSwitchCard.Thermal = varEquipmentSwitchCardWithoutEmbeddedStruct.Thermal
 		varEquipmentSwitchCard.Type = varEquipmentSwitchCardWithoutEmbeddedStruct.Type
 		varEquipmentSwitchCard.FcPortChannels = varEquipmentSwitchCardWithoutEmbeddedStruct.FcPortChannels
 		varEquipmentSwitchCard.FcPorts = varEquipmentSwitchCardWithoutEmbeddedStruct.FcPorts
 		varEquipmentSwitchCard.HostPorts = varEquipmentSwitchCardWithoutEmbeddedStruct.HostPorts
+		varEquipmentSwitchCard.InterSwitchPort = varEquipmentSwitchCardWithoutEmbeddedStruct.InterSwitchPort
 		varEquipmentSwitchCard.InventoryDeviceInfo = varEquipmentSwitchCardWithoutEmbeddedStruct.InventoryDeviceInfo
 		varEquipmentSwitchCard.NetworkElement = varEquipmentSwitchCardWithoutEmbeddedStruct.NetworkElement
 		varEquipmentSwitchCard.PortChannels = varEquipmentSwitchCardWithoutEmbeddedStruct.PortChannels
@@ -1445,12 +1534,14 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "State")
 		delete(additionalProperties, "Status")
+		delete(additionalProperties, "StpMode")
 		delete(additionalProperties, "SwitchId")
 		delete(additionalProperties, "Thermal")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "FcPortChannels")
 		delete(additionalProperties, "FcPorts")
 		delete(additionalProperties, "HostPorts")
+		delete(additionalProperties, "InterSwitchPort")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "NetworkElement")
 		delete(additionalProperties, "PortChannels")

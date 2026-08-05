@@ -3,12 +3,22 @@ subcategory: "partnerintegration"
 layout: "intersight"
 page_title: "Intersight: intersight_partnerintegration_model"
 description: |-
-        Model definition for the endpoint.
+        The Model object defines the endpoint model used for inventory collections.
+        #### Purpose
+        This provides the schema definition for the inventory endpoints, ensuring that the data structure is clearly defined and consistent for API consumption.
+        #### Key Concepts
+        - **Schema Definition:** Stores the endpoint model in YAML/JSON format.
+        - **Endpoint Integration:** Defines the structure of the data exposed by the inventory service.
 
 ---
 
 # Data Source: intersight_partnerintegration_model
-Model definition for the endpoint.
+The Model object defines the endpoint model used for inventory collections.
+#### Purpose
+This provides the schema definition for the inventory endpoints, ensuring that the data structure is clearly defined and consistent for API consumption.
+#### Key Concepts
+- **Schema Definition:** Stores the endpoint model in YAML/JSON format.
+- **Endpoint Integration:** Defines the structure of the data exposed by the inventory service.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

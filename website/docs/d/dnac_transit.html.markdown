@@ -3,12 +3,24 @@ subcategory: "dnac"
 layout: "intersight"
 page_title: "Intersight: intersight_dnac_transit"
 description: |-
-        Details for the transits.
+        The Transit object is integral to network connectivity, representing transit paths and configurations that facilitate communication between different network segments.
+        #### Purpose
+        A Transit object defines the connectivity pathways within the network, enabling efficient routing and communication between distinct network areas.
+        #### Key Concepts
+        - **Connectivity Management:** Facilitates the establishment and management of transit paths, optimizing network traffic flow.
+        - **Identity Control:** Utilizes unique identifiers for precise tracking and management of transit entities.
+        - **Integration with Network Elements:** Seamlessly interfaces with other network components, enhancing overall network performance.
 
 ---
 
 # Data Source: intersight_dnac_transit
-Details for the transits.
+The Transit object is integral to network connectivity, representing transit paths and configurations that facilitate communication between different network segments.
+#### Purpose
+A Transit object defines the connectivity pathways within the network, enabling efficient routing and communication between distinct network areas.
+#### Key Concepts
+- **Connectivity Management:** Facilitates the establishment and management of transit paths, optimizing network traffic flow.
+- **Identity Control:** Utilizes unique identifiers for precise tracking and management of transit entities.
+- **Integration with Network Elements:** Seamlessly interfaces with other network components, enhancing overall network performance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

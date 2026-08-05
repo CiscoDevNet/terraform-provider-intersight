@@ -122,14 +122,14 @@ func resourcePowerPolicy() *schema.Resource {
 					return
 				}},
 			"dynamic_rebalancing": {
-				Description:  "Sets the dynamic power rebalancing mode of the chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+				Description:  "Sets the dynamic power rebalancing mode of the chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage.\n* `Enabled` - The power group is administratively enabled.\n* `Disabled` - The power group is administratively disabled.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Enabled", "Disabled"}, false),
 				Optional:     true,
 				Default:      "Enabled",
 			},
 			"extended_power_capacity": {
-				Description:  "Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.  This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+				Description:  "Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.  This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - The power group is administratively enabled.\n* `Disabled` - The power group is administratively disabled.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Enabled", "Disabled"}, false),
 				Optional:     true,
@@ -301,7 +301,7 @@ func resourcePowerPolicy() *schema.Resource {
 				Default:      "Low",
 			},
 			"power_profiling": {
-				Description:  "Sets the Power Profiling of the Server. If Enabled, this field allows the power manager to run power profiling  utility to determine the power needs of the server.  This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+				Description:  "Sets the Power Profiling of the Server. If Enabled, this field allows the power manager to run power profiling  utility to determine the power needs of the server.  This field is only supported for Cisco UCS X series servers.\n* `Enabled` - The power group is administratively enabled.\n* `Disabled` - The power group is administratively disabled.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Enabled", "Disabled"}, false),
 				Optional:     true,
@@ -315,14 +315,14 @@ func resourcePowerPolicy() *schema.Resource {
 				Default:      "AlwaysOff",
 			},
 			"power_save_mode": {
-				Description:  "Sets the power save mode of the chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in power save mode.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+				Description:  "Sets the power save mode of the chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in power save mode.\n* `Enabled` - The power group is administratively enabled.\n* `Disabled` - The power group is administratively disabled.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Enabled", "Disabled"}, false),
 				Optional:     true,
 				Default:      "Enabled",
 			},
 			"processor_package_power_limit": {
-				Description:  "Sets the Processor Package Power Limit (PPL) of a server. PPL refers to the amount of power that a CPU can draw from the power supply. The Processor Package Power Limit (PPL) feature is currently available exclusively on Cisco UCS C225/C245 M8 servers.\n* `Default` - Set the Package Power Limit to the platform defined default value.\n* `Maximum` - Set the Package Power Limit to the platform defined maximum value.\n* `Minimum` - Set the Package Power Limit to the platform defined minimum value.",
+				Description:  "Sets the Processor Package Power Limit (PPL) of a server. PPL refers to the amount of power that a CPU can draw from the power supply. The Processor Package Power Limit (PPL) feature is currently available exclusively on Cisco UCS C225/C245/C845 M8 servers.\n* `Default` - Set the Package Power Limit to the platform defined default value.\n* `Maximum` - Set the Package Power Limit to the platform defined maximum value.\n* `Minimum` - Set the Package Power Limit to the platform defined minimum value.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Default", "Maximum", "Minimum"}, false),
 				Optional:     true,
@@ -715,7 +715,7 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 		o.SetExtendedPowerCapacity(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -727,7 +727,7 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 
 	o.SetObjectType("power.Policy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

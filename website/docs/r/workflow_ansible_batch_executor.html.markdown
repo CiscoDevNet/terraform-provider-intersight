@@ -3,20 +3,22 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_ansible_batch_executor"
 description: |-
-        Intersight allows generic tasks to be created by taking the executor request
-        body and a response parser specification in the form of content.Grammar object.
-        Ansible Batch associates the list of Ansible commands executed as SSH requests as part of single
-        task execution. Each SSH request takes the Ansible command to execute and a response parser
-        specification based off text to extract fields of interest.
+        The AnsibleBatchExecutor object is a core component within Intersight's workflow framework, designed to facilitate the execution of Ansible commands in batch mode. By leveraging SSH requests, this object enables the execution of a series of Ansible playbooks as part of a single task, enhancing efficiency and automation capabilities.
+        #### Purpose
+        The AnsibleBatchExecutor streamlines task execution by associating multiple Ansible commands with SSH requests, allowing for comprehensive task management within a unified framework. It integrates seamlessly with existing systems to support complex task orchestration.
+        #### Key Concepts
+        - **Batch Processing:** Allows multiple Ansible commands to be executed in a batch, reducing overhead and improving performance.
+        - **Ansible Session:** Supports Ansible sessions, and in each session, a single Ansible playbook can be executed on the Ansible Control Node.
 
 ---
 
 # Resource: intersight_workflow_ansible_batch_executor
-Intersight allows generic tasks to be created by taking the executor request
-body and a response parser specification in the form of content.Grammar object.
-Ansible Batch associates the list of Ansible commands executed as SSH requests as part of single
-task execution. Each SSH request takes the Ansible command to execute and a response parser
-specification based off text to extract fields of interest.
+The AnsibleBatchExecutor object is a core component within Intersight's workflow framework, designed to facilitate the execution of Ansible commands in batch mode. By leveraging SSH requests, this object enables the execution of a series of Ansible playbooks as part of a single task, enhancing efficiency and automation capabilities.
+#### Purpose
+The AnsibleBatchExecutor streamlines task execution by associating multiple Ansible commands with SSH requests, allowing for comprehensive task management within a unified framework. It integrates seamlessly with existing systems to support complex task orchestration.
+#### Key Concepts
+- **Batch Processing:** Allows multiple Ansible commands to be executed in a batch, reducing overhead and improving performance.
+- **Ansible Session:** Supports Ansible sessions, and in each session, a single Ansible playbook can be executed on the Ansible Control Node.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

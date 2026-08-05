@@ -3,12 +3,26 @@ subcategory: "connectorpack"
 layout: "intersight"
 page_title: "Intersight: intersight_connectorpack_upgrade_impact"
 description: |-
-        Used to determine the list of connector packs to be installed on a target UCS Director in its next upgrade cycle. Accepts the moid of the target UcsdInfo as part of the filter query. Given below is a sample url :- https://{{target}}/api/v1/connectorpack/UpgradeImpacts? $filter= ( UcsdInfo.Moid eq <<MoId>> ).
+        The UpgradeImpact object is designed to assess and identify the list of connector packs to be installed or upgraded on UCS Director. It identifies the requisite connector packs for installation during the next upgrade cycle, ensuring a smooth transition and enhanced functionality.
+        #### Purpose
+        UpgradeImpact object plays a crucial role in planning and executing upgrades for UCS Director, ensuring that all necessary connector packs are identified and managed effectively. It evaluates eligibility for upgrades and provides insights into the upgrade readiness of UCS Director.
+        #### Key Concepts
+        - **Upgrade Planning:** Facilitates strategic planning for upgrades by identifying necessary connector packs and evaluating upgrade readiness.
+        - **Eligibility Assessment:** Assesses UCS Director's eligibility for upgrades, ensuring that all criteria for successful upgrade execution are met.
+        - **Download Management:** Manages the download status of connector packs required for upgrades, ensuring readiness for the next iteration.
+        - **Relationship Management:** Establishes relationship within connector packs of a UCS Director instance to ensure accurate upgrade of connector packs.
 
 ---
 
 # Data Source: intersight_connectorpack_upgrade_impact
-Used to determine the list of connector packs to be installed on a target UCS Director in its next upgrade cycle. Accepts the moid of the target UcsdInfo as part of the filter query. Given below is a sample url :- https://{{target}}/api/v1/connectorpack/UpgradeImpacts? $filter= ( UcsdInfo.Moid eq <<MoId>> ).
+The UpgradeImpact object is designed to assess and identify the list of connector packs to be installed or upgraded on UCS Director. It identifies the requisite connector packs for installation during the next upgrade cycle, ensuring a smooth transition and enhanced functionality.
+#### Purpose
+UpgradeImpact object plays a crucial role in planning and executing upgrades for UCS Director, ensuring that all necessary connector packs are identified and managed effectively. It evaluates eligibility for upgrades and provides insights into the upgrade readiness of UCS Director.
+#### Key Concepts
+- **Upgrade Planning:** Facilitates strategic planning for upgrades by identifying necessary connector packs and evaluating upgrade readiness.
+- **Eligibility Assessment:** Assesses UCS Director's eligibility for upgrades, ensuring that all criteria for successful upgrade execution are met.
+- **Download Management:** Manages the download status of connector packs required for upgrades, ensuring readiness for the next iteration.
+- **Relationship Management:** Establishes relationship within connector packs of a UCS Director instance to ensure accurate upgrade of connector packs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

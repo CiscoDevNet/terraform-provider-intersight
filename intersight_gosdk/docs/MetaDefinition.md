@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AccessPrivileges** | Pointer to [**[]MetaAccessPrivilege**](MetaAccessPrivilege.md) |  | [optional] 
 **AncestorClasses** | Pointer to **[]string** |  | [optional] 
 **DisplayNameMetas** | Pointer to [**[]MetaDisplayNameDefinition**](MetaDisplayNameDefinition.md) |  | [optional] 
+**EnablePreviousMo** | Pointer to **bool** | When true, MO change events for this type include the previous (old) value of each modified field alongside the new value, so consumers (e.g. post-processing services) can see both. Implemented by enabling MongoDB change stream pre-image snapshots for the collection. | [optional] [readonly] 
 **IdentityConstraints** | Pointer to [**[]MetaIdentityDefinition**](MetaIdentityDefinition.md) |  | [optional] 
 **IsConcrete** | Pointer to **bool** | Boolean flag to specify whether the meta class is a concrete class or not. | [optional] [readonly] 
 **MetaType** | Pointer to **string** | Indicates whether the meta class is a complex type or managed object. * &#x60;ManagedObject&#x60; - The meta.Definition object describes a managed object. * &#x60;ComplexType&#x60; - The meta.Definition object describes a nested complex type within a managed object. | [optional] [readonly] [default to "ManagedObject"]
@@ -188,6 +189,31 @@ HasDisplayNameMetas returns a boolean if a field has been set.
 `func (o *MetaDefinition) UnsetDisplayNameMetas()`
 
 UnsetDisplayNameMetas ensures that no value is present for DisplayNameMetas, not even an explicit nil
+### GetEnablePreviousMo
+
+`func (o *MetaDefinition) GetEnablePreviousMo() bool`
+
+GetEnablePreviousMo returns the EnablePreviousMo field if non-nil, zero value otherwise.
+
+### GetEnablePreviousMoOk
+
+`func (o *MetaDefinition) GetEnablePreviousMoOk() (*bool, bool)`
+
+GetEnablePreviousMoOk returns a tuple with the EnablePreviousMo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnablePreviousMo
+
+`func (o *MetaDefinition) SetEnablePreviousMo(v bool)`
+
+SetEnablePreviousMo sets EnablePreviousMo field to given value.
+
+### HasEnablePreviousMo
+
+`func (o *MetaDefinition) HasEnablePreviousMo() bool`
+
+HasEnablePreviousMo returns a boolean if a field has been set.
+
 ### GetIdentityConstraints
 
 `func (o *MetaDefinition) GetIdentityConstraints() []MetaIdentityDefinition`

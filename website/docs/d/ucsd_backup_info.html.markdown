@@ -3,12 +3,24 @@ subcategory: "ucsd"
 layout: "intersight"
 page_title: "Intersight: intersight_ucsd_backup_info"
 description: |-
-        Available backup images for target device restoration.
+        The BackupInfo object provides detailed insights into backup images available for restoration on target endpoint (UCS Director) devices. It captures essential metadata and status information to support recovery operations.
+        #### Purpose
+        The BackupInfo object provides comprehensive visibility into available backup images and real-time status updates on backup progress. It ensures that restoration processes rely on accurate, current data, enabling informed and efficient recovery operations.
+        #### Key Concepts
+        - **Transparency:** Delivers comprehensive metadata about backup images, including status, location, and completion percentage.
+        - **Access Control:** Designed to allow authorized personnel to access backup information securely.
+        - **Relationship Management:** Extends abstract backup information concepts to provide a detailed view of available resources.
 
 ---
 
 # Data Source: intersight_ucsd_backup_info
-Available backup images for target device restoration.
+The BackupInfo object provides detailed insights into backup images available for restoration on target endpoint (UCS Director) devices. It captures essential metadata and status information to support recovery operations.
+#### Purpose
+The BackupInfo object provides comprehensive visibility into available backup images and real-time status updates on backup progress. It ensures that restoration processes rely on accurate, current data, enabling informed and efficient recovery operations.
+#### Key Concepts
+- **Transparency:** Delivers comprehensive metadata about backup images, including status, location, and completion percentage.
+- **Access Control:** Designed to allow authorized personnel to access backup information securely.
+- **Relationship Management:** Extends abstract backup information concepts to provide a detailed view of available resources.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

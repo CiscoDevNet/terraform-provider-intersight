@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -28,12 +28,24 @@ type EtherPhysicalPortBase struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
+	// Access VLAN for this port.
+	AccessVlan *string `json:"AccessVlan,omitempty"`
+	// Administratively configured FEC mode for this port. * `` - Default value for FEC state. * `Not Supported` - FEC is not supported on this port. * `Disabled` - FEC is disabled on this port. * `Auto` - FEC mode is automatically negotiated between link partners. * `Cl74` - FEC is configured to use the IEEE Clause 74 (FireCode) standard. * `RS-IEEE(Cl108)` - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard. * `KP` - FEC is configured to use the KP (Backplane Ethernet) FEC mode.
+	AdminFec *string `json:"AdminFec,omitempty"`
+	// Allowed VLANs on this port.
+	AllowedVlans *string `json:"AllowedVlans,omitempty"`
 	// Mac Address of a port in the Fabric Interconnect.
 	MacAddress *string `json:"MacAddress,omitempty"`
 	// Operating mode of this port.
 	Mode *string `json:"Mode,omitempty"`
+	// Native VLAN for this port.
+	NativeVlan *string `json:"NativeVlan,omitempty"`
+	// Operational FEC mode for this port. * `` - Default value for FEC state. * `Not Supported` - FEC is not supported on this port. * `Disabled` - FEC is disabled on this port. * `Auto` - FEC mode is automatically negotiated between link partners. * `Cl74` - FEC is configured to use the IEEE Clause 74 (FireCode) standard. * `RS-IEEE(Cl108)` - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard. * `KP` - FEC is configured to use the KP (Backplane Ethernet) FEC mode.
+	OperFec *string `json:"OperFec,omitempty"`
 	// Current Operational speed for this port.
 	OperSpeed *string `json:"OperSpeed,omitempty"`
+	// Operational VLANs on this port.
+	OperVlans *string `json:"OperVlans,omitempty"`
 	// PeerDn for ethernet physical port.
 	PeerDn *string `json:"PeerDn,omitempty"`
 	// Port channel id for port channel created on FI switch.
@@ -118,6 +130,102 @@ func (o *EtherPhysicalPortBase) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetAccessVlan returns the AccessVlan field value if set, zero value otherwise.
+func (o *EtherPhysicalPortBase) GetAccessVlan() string {
+	if o == nil || IsNil(o.AccessVlan) {
+		var ret string
+		return ret
+	}
+	return *o.AccessVlan
+}
+
+// GetAccessVlanOk returns a tuple with the AccessVlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPhysicalPortBase) GetAccessVlanOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessVlan) {
+		return nil, false
+	}
+	return o.AccessVlan, true
+}
+
+// HasAccessVlan returns a boolean if a field has been set.
+func (o *EtherPhysicalPortBase) HasAccessVlan() bool {
+	if o != nil && !IsNil(o.AccessVlan) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessVlan gets a reference to the given string and assigns it to the AccessVlan field.
+func (o *EtherPhysicalPortBase) SetAccessVlan(v string) {
+	o.AccessVlan = &v
+}
+
+// GetAdminFec returns the AdminFec field value if set, zero value otherwise.
+func (o *EtherPhysicalPortBase) GetAdminFec() string {
+	if o == nil || IsNil(o.AdminFec) {
+		var ret string
+		return ret
+	}
+	return *o.AdminFec
+}
+
+// GetAdminFecOk returns a tuple with the AdminFec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPhysicalPortBase) GetAdminFecOk() (*string, bool) {
+	if o == nil || IsNil(o.AdminFec) {
+		return nil, false
+	}
+	return o.AdminFec, true
+}
+
+// HasAdminFec returns a boolean if a field has been set.
+func (o *EtherPhysicalPortBase) HasAdminFec() bool {
+	if o != nil && !IsNil(o.AdminFec) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdminFec gets a reference to the given string and assigns it to the AdminFec field.
+func (o *EtherPhysicalPortBase) SetAdminFec(v string) {
+	o.AdminFec = &v
+}
+
+// GetAllowedVlans returns the AllowedVlans field value if set, zero value otherwise.
+func (o *EtherPhysicalPortBase) GetAllowedVlans() string {
+	if o == nil || IsNil(o.AllowedVlans) {
+		var ret string
+		return ret
+	}
+	return *o.AllowedVlans
+}
+
+// GetAllowedVlansOk returns a tuple with the AllowedVlans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPhysicalPortBase) GetAllowedVlansOk() (*string, bool) {
+	if o == nil || IsNil(o.AllowedVlans) {
+		return nil, false
+	}
+	return o.AllowedVlans, true
+}
+
+// HasAllowedVlans returns a boolean if a field has been set.
+func (o *EtherPhysicalPortBase) HasAllowedVlans() bool {
+	if o != nil && !IsNil(o.AllowedVlans) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedVlans gets a reference to the given string and assigns it to the AllowedVlans field.
+func (o *EtherPhysicalPortBase) SetAllowedVlans(v string) {
+	o.AllowedVlans = &v
+}
+
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *EtherPhysicalPortBase) GetMacAddress() string {
 	if o == nil || IsNil(o.MacAddress) {
@@ -182,6 +290,70 @@ func (o *EtherPhysicalPortBase) SetMode(v string) {
 	o.Mode = &v
 }
 
+// GetNativeVlan returns the NativeVlan field value if set, zero value otherwise.
+func (o *EtherPhysicalPortBase) GetNativeVlan() string {
+	if o == nil || IsNil(o.NativeVlan) {
+		var ret string
+		return ret
+	}
+	return *o.NativeVlan
+}
+
+// GetNativeVlanOk returns a tuple with the NativeVlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPhysicalPortBase) GetNativeVlanOk() (*string, bool) {
+	if o == nil || IsNil(o.NativeVlan) {
+		return nil, false
+	}
+	return o.NativeVlan, true
+}
+
+// HasNativeVlan returns a boolean if a field has been set.
+func (o *EtherPhysicalPortBase) HasNativeVlan() bool {
+	if o != nil && !IsNil(o.NativeVlan) {
+		return true
+	}
+
+	return false
+}
+
+// SetNativeVlan gets a reference to the given string and assigns it to the NativeVlan field.
+func (o *EtherPhysicalPortBase) SetNativeVlan(v string) {
+	o.NativeVlan = &v
+}
+
+// GetOperFec returns the OperFec field value if set, zero value otherwise.
+func (o *EtherPhysicalPortBase) GetOperFec() string {
+	if o == nil || IsNil(o.OperFec) {
+		var ret string
+		return ret
+	}
+	return *o.OperFec
+}
+
+// GetOperFecOk returns a tuple with the OperFec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPhysicalPortBase) GetOperFecOk() (*string, bool) {
+	if o == nil || IsNil(o.OperFec) {
+		return nil, false
+	}
+	return o.OperFec, true
+}
+
+// HasOperFec returns a boolean if a field has been set.
+func (o *EtherPhysicalPortBase) HasOperFec() bool {
+	if o != nil && !IsNil(o.OperFec) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperFec gets a reference to the given string and assigns it to the OperFec field.
+func (o *EtherPhysicalPortBase) SetOperFec(v string) {
+	o.OperFec = &v
+}
+
 // GetOperSpeed returns the OperSpeed field value if set, zero value otherwise.
 func (o *EtherPhysicalPortBase) GetOperSpeed() string {
 	if o == nil || IsNil(o.OperSpeed) {
@@ -212,6 +384,38 @@ func (o *EtherPhysicalPortBase) HasOperSpeed() bool {
 // SetOperSpeed gets a reference to the given string and assigns it to the OperSpeed field.
 func (o *EtherPhysicalPortBase) SetOperSpeed(v string) {
 	o.OperSpeed = &v
+}
+
+// GetOperVlans returns the OperVlans field value if set, zero value otherwise.
+func (o *EtherPhysicalPortBase) GetOperVlans() string {
+	if o == nil || IsNil(o.OperVlans) {
+		var ret string
+		return ret
+	}
+	return *o.OperVlans
+}
+
+// GetOperVlansOk returns a tuple with the OperVlans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPhysicalPortBase) GetOperVlansOk() (*string, bool) {
+	if o == nil || IsNil(o.OperVlans) {
+		return nil, false
+	}
+	return o.OperVlans, true
+}
+
+// HasOperVlans returns a boolean if a field has been set.
+func (o *EtherPhysicalPortBase) HasOperVlans() bool {
+	if o != nil && !IsNil(o.OperVlans) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperVlans gets a reference to the given string and assigns it to the OperVlans field.
+func (o *EtherPhysicalPortBase) SetOperVlans(v string) {
+	o.OperVlans = &v
 }
 
 // GetPeerDn returns the PeerDn field value if set, zero value otherwise.
@@ -480,14 +684,32 @@ func (o EtherPhysicalPortBase) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["ClassId"] = o.ClassId
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessVlan) {
+		toSerialize["AccessVlan"] = o.AccessVlan
+	}
+	if !IsNil(o.AdminFec) {
+		toSerialize["AdminFec"] = o.AdminFec
+	}
+	if !IsNil(o.AllowedVlans) {
+		toSerialize["AllowedVlans"] = o.AllowedVlans
+	}
 	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
 	if !IsNil(o.Mode) {
 		toSerialize["Mode"] = o.Mode
 	}
+	if !IsNil(o.NativeVlan) {
+		toSerialize["NativeVlan"] = o.NativeVlan
+	}
+	if !IsNil(o.OperFec) {
+		toSerialize["OperFec"] = o.OperFec
+	}
 	if !IsNil(o.OperSpeed) {
 		toSerialize["OperSpeed"] = o.OperSpeed
+	}
+	if !IsNil(o.OperVlans) {
+		toSerialize["OperVlans"] = o.OperVlans
 	}
 	if !IsNil(o.PeerDn) {
 		toSerialize["PeerDn"] = o.PeerDn
@@ -562,12 +784,24 @@ func (o *EtherPhysicalPortBase) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
+		// Access VLAN for this port.
+		AccessVlan *string `json:"AccessVlan,omitempty"`
+		// Administratively configured FEC mode for this port. * `` - Default value for FEC state. * `Not Supported` - FEC is not supported on this port. * `Disabled` - FEC is disabled on this port. * `Auto` - FEC mode is automatically negotiated between link partners. * `Cl74` - FEC is configured to use the IEEE Clause 74 (FireCode) standard. * `RS-IEEE(Cl108)` - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard. * `KP` - FEC is configured to use the KP (Backplane Ethernet) FEC mode.
+		AdminFec *string `json:"AdminFec,omitempty"`
+		// Allowed VLANs on this port.
+		AllowedVlans *string `json:"AllowedVlans,omitempty"`
 		// Mac Address of a port in the Fabric Interconnect.
 		MacAddress *string `json:"MacAddress,omitempty"`
 		// Operating mode of this port.
 		Mode *string `json:"Mode,omitempty"`
+		// Native VLAN for this port.
+		NativeVlan *string `json:"NativeVlan,omitempty"`
+		// Operational FEC mode for this port. * `` - Default value for FEC state. * `Not Supported` - FEC is not supported on this port. * `Disabled` - FEC is disabled on this port. * `Auto` - FEC mode is automatically negotiated between link partners. * `Cl74` - FEC is configured to use the IEEE Clause 74 (FireCode) standard. * `RS-IEEE(Cl108)` - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard. * `KP` - FEC is configured to use the KP (Backplane Ethernet) FEC mode.
+		OperFec *string `json:"OperFec,omitempty"`
 		// Current Operational speed for this port.
 		OperSpeed *string `json:"OperSpeed,omitempty"`
+		// Operational VLANs on this port.
+		OperVlans *string `json:"OperVlans,omitempty"`
 		// PeerDn for ethernet physical port.
 		PeerDn *string `json:"PeerDn,omitempty"`
 		// Port channel id for port channel created on FI switch.
@@ -589,9 +823,15 @@ func (o *EtherPhysicalPortBase) UnmarshalJSON(data []byte) (err error) {
 		varEtherPhysicalPortBase := _EtherPhysicalPortBase{}
 		varEtherPhysicalPortBase.ClassId = varEtherPhysicalPortBaseWithoutEmbeddedStruct.ClassId
 		varEtherPhysicalPortBase.ObjectType = varEtherPhysicalPortBaseWithoutEmbeddedStruct.ObjectType
+		varEtherPhysicalPortBase.AccessVlan = varEtherPhysicalPortBaseWithoutEmbeddedStruct.AccessVlan
+		varEtherPhysicalPortBase.AdminFec = varEtherPhysicalPortBaseWithoutEmbeddedStruct.AdminFec
+		varEtherPhysicalPortBase.AllowedVlans = varEtherPhysicalPortBaseWithoutEmbeddedStruct.AllowedVlans
 		varEtherPhysicalPortBase.MacAddress = varEtherPhysicalPortBaseWithoutEmbeddedStruct.MacAddress
 		varEtherPhysicalPortBase.Mode = varEtherPhysicalPortBaseWithoutEmbeddedStruct.Mode
+		varEtherPhysicalPortBase.NativeVlan = varEtherPhysicalPortBaseWithoutEmbeddedStruct.NativeVlan
+		varEtherPhysicalPortBase.OperFec = varEtherPhysicalPortBaseWithoutEmbeddedStruct.OperFec
 		varEtherPhysicalPortBase.OperSpeed = varEtherPhysicalPortBaseWithoutEmbeddedStruct.OperSpeed
+		varEtherPhysicalPortBase.OperVlans = varEtherPhysicalPortBaseWithoutEmbeddedStruct.OperVlans
 		varEtherPhysicalPortBase.PeerDn = varEtherPhysicalPortBaseWithoutEmbeddedStruct.PeerDn
 		varEtherPhysicalPortBase.PortChannelId = varEtherPhysicalPortBaseWithoutEmbeddedStruct.PortChannelId
 		varEtherPhysicalPortBase.PortName = varEtherPhysicalPortBaseWithoutEmbeddedStruct.PortName
@@ -618,9 +858,15 @@ func (o *EtherPhysicalPortBase) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AccessVlan")
+		delete(additionalProperties, "AdminFec")
+		delete(additionalProperties, "AllowedVlans")
 		delete(additionalProperties, "MacAddress")
 		delete(additionalProperties, "Mode")
+		delete(additionalProperties, "NativeVlan")
+		delete(additionalProperties, "OperFec")
 		delete(additionalProperties, "OperSpeed")
+		delete(additionalProperties, "OperVlans")
 		delete(additionalProperties, "PeerDn")
 		delete(additionalProperties, "PortChannelId")
 		delete(additionalProperties, "PortName")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the VirtualizationHost type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VirtualizationHost{}
 
-// VirtualizationHost Depicts operations to control the life cycle of a Hypervisor Host.
+// VirtualizationHost The Host object represents a hypervisor host configuration and encapsulates operations to control its life cycle. It is a concrete object that provides a standardized approach to managing hypervisor hosts within virtualization environments. #### Purpose The Host object is designed to facilitate the management of hypervisor host configurations, enabling operations such as creation, power state management, migration, and cloning. It serves as a central element for interacting with hypervisor hosts, ensuring efficient and consistent management across virtualized infrastructure. #### Key Concepts - **Lifecycle Management:** Supports various operations for managing the state and configuration of hypervisor hosts, including maintenance mode transitions. - **Integration with Device Registration:** Directly associates with device registration objects, ensuring seamless integration with inventory and management systems. - **Entitlement and Licensing:** Operates under specific entitlement levels, providing controlled access to host management functions.
 type VirtualizationHost struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

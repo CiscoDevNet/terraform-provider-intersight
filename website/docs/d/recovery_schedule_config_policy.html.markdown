@@ -3,12 +3,24 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_schedule_config_policy"
 description: |-
-        Base Schedule configuration for local or remote server.
+        The ScheduleConfigPolicy object is integral to defining and managing scheduled backup operations on both local and remote servers. It establishes the parameters for regular data protection processes.
+        #### Purpose
+        The ScheduleConfigPolicy object manages and coordinates backup schedules for target devices. It defines the frequency and timing of backups in line with organizational policies, ensuring structured scheduling that enhances the reliability and efficiency of backup operations.
+        #### Key Concepts
+        - **Consistency:** Ensures regular and predictable backup operations, reducing the risk of data loss.
+        - **Access Control:** Restricts scheduling capabilities to authorized users, safeguarding operational integrity.
+        - **Relationship Management:** Links to backup profiles, promoting comprehensive backup scheduling strategies.
 
 ---
 
 # Data Source: intersight_recovery_schedule_config_policy
-Base Schedule configuration for local or remote server.
+The ScheduleConfigPolicy object is integral to defining and managing scheduled backup operations on both local and remote servers. It establishes the parameters for regular data protection processes.
+#### Purpose
+The ScheduleConfigPolicy object manages and coordinates backup schedules for target devices. It defines the frequency and timing of backups in line with organizational policies, ensuring structured scheduling that enhances the reliability and efficiency of backup operations.
+#### Key Concepts
+- **Consistency:** Ensures regular and predictable backup operations, reducing the risk of data loss.
+- **Access Control:** Restricts scheduling capabilities to authorized users, safeguarding operational integrity.
+- **Relationship Management:** Links to backup profiles, promoting comprehensive backup scheduling strategies.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

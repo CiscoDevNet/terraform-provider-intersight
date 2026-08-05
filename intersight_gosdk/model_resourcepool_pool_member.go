@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -30,11 +30,14 @@ type ResourcepoolPoolMember struct {
 	ObjectType        string                                `json:"ObjectType"`
 	Features          []string                              `json:"Features,omitempty"`
 	QualificationType NullableResourcepoolQualificationType `json:"QualificationType,omitempty"`
+	// Identifies if the member has been reserved.
+	Reserved *bool `json:"Reserved,omitempty"`
 	// An array of relationships to moBaseMo resources.
-	AssignedToEntity     []MoBaseMoRelationship                `json:"AssignedToEntity,omitempty"`
-	Peer                 NullableResourcepoolLeaseRelationship `json:"Peer,omitempty"`
-	Pool                 NullableResourcepoolPoolRelationship  `json:"Pool,omitempty"`
-	Resource             NullableMoBaseMoRelationship          `json:"Resource,omitempty"`
+	AssignedToEntity     []MoBaseMoRelationship                      `json:"AssignedToEntity,omitempty"`
+	Peer                 NullableResourcepoolLeaseRelationship       `json:"Peer,omitempty"`
+	Pool                 NullableResourcepoolPoolRelationship        `json:"Pool,omitempty"`
+	Reservation          NullableResourcepoolReservationRelationship `json:"Reservation,omitempty"`
+	Resource             NullableMoBaseMoRelationship                `json:"Resource,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -199,6 +202,38 @@ func (o *ResourcepoolPoolMember) UnsetQualificationType() {
 	o.QualificationType.Unset()
 }
 
+// GetReserved returns the Reserved field value if set, zero value otherwise.
+func (o *ResourcepoolPoolMember) GetReserved() bool {
+	if o == nil || IsNil(o.Reserved) {
+		var ret bool
+		return ret
+	}
+	return *o.Reserved
+}
+
+// GetReservedOk returns a tuple with the Reserved field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourcepoolPoolMember) GetReservedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Reserved) {
+		return nil, false
+	}
+	return o.Reserved, true
+}
+
+// HasReserved returns a boolean if a field has been set.
+func (o *ResourcepoolPoolMember) HasReserved() bool {
+	if o != nil && !IsNil(o.Reserved) {
+		return true
+	}
+
+	return false
+}
+
+// SetReserved gets a reference to the given bool and assigns it to the Reserved field.
+func (o *ResourcepoolPoolMember) SetReserved(v bool) {
+	o.Reserved = &v
+}
+
 // GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolPoolMember) GetAssignedToEntity() []MoBaseMoRelationship {
 	if o == nil {
@@ -318,6 +353,49 @@ func (o *ResourcepoolPoolMember) UnsetPool() {
 	o.Pool.Unset()
 }
 
+// GetReservation returns the Reservation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResourcepoolPoolMember) GetReservation() ResourcepoolReservationRelationship {
+	if o == nil || IsNil(o.Reservation.Get()) {
+		var ret ResourcepoolReservationRelationship
+		return ret
+	}
+	return *o.Reservation.Get()
+}
+
+// GetReservationOk returns a tuple with the Reservation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResourcepoolPoolMember) GetReservationOk() (*ResourcepoolReservationRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Reservation.Get(), o.Reservation.IsSet()
+}
+
+// HasReservation returns a boolean if a field has been set.
+func (o *ResourcepoolPoolMember) HasReservation() bool {
+	if o != nil && o.Reservation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReservation gets a reference to the given NullableResourcepoolReservationRelationship and assigns it to the Reservation field.
+func (o *ResourcepoolPoolMember) SetReservation(v ResourcepoolReservationRelationship) {
+	o.Reservation.Set(&v)
+}
+
+// SetReservationNil sets the value for Reservation to be an explicit nil
+func (o *ResourcepoolPoolMember) SetReservationNil() {
+	o.Reservation.Set(nil)
+}
+
+// UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
+func (o *ResourcepoolPoolMember) UnsetReservation() {
+	o.Reservation.Unset()
+}
+
 // GetResource returns the Resource field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolPoolMember) GetResource() MoBaseMoRelationship {
 	if o == nil || IsNil(o.Resource.Get()) {
@@ -393,6 +471,9 @@ func (o ResourcepoolPoolMember) ToMap() (map[string]interface{}, error) {
 	if o.QualificationType.IsSet() {
 		toSerialize["QualificationType"] = o.QualificationType.Get()
 	}
+	if !IsNil(o.Reserved) {
+		toSerialize["Reserved"] = o.Reserved
+	}
 	if o.AssignedToEntity != nil {
 		toSerialize["AssignedToEntity"] = o.AssignedToEntity
 	}
@@ -401,6 +482,9 @@ func (o ResourcepoolPoolMember) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Pool.IsSet() {
 		toSerialize["Pool"] = o.Pool.Get()
+	}
+	if o.Reservation.IsSet() {
+		toSerialize["Reservation"] = o.Reservation.Get()
 	}
 	if o.Resource.IsSet() {
 		toSerialize["Resource"] = o.Resource.Get()
@@ -462,11 +546,14 @@ func (o *ResourcepoolPoolMember) UnmarshalJSON(data []byte) (err error) {
 		ObjectType        string                                `json:"ObjectType"`
 		Features          []string                              `json:"Features,omitempty"`
 		QualificationType NullableResourcepoolQualificationType `json:"QualificationType,omitempty"`
+		// Identifies if the member has been reserved.
+		Reserved *bool `json:"Reserved,omitempty"`
 		// An array of relationships to moBaseMo resources.
-		AssignedToEntity []MoBaseMoRelationship                `json:"AssignedToEntity,omitempty"`
-		Peer             NullableResourcepoolLeaseRelationship `json:"Peer,omitempty"`
-		Pool             NullableResourcepoolPoolRelationship  `json:"Pool,omitempty"`
-		Resource         NullableMoBaseMoRelationship          `json:"Resource,omitempty"`
+		AssignedToEntity []MoBaseMoRelationship                      `json:"AssignedToEntity,omitempty"`
+		Peer             NullableResourcepoolLeaseRelationship       `json:"Peer,omitempty"`
+		Pool             NullableResourcepoolPoolRelationship        `json:"Pool,omitempty"`
+		Reservation      NullableResourcepoolReservationRelationship `json:"Reservation,omitempty"`
+		Resource         NullableMoBaseMoRelationship                `json:"Resource,omitempty"`
 	}
 
 	varResourcepoolPoolMemberWithoutEmbeddedStruct := ResourcepoolPoolMemberWithoutEmbeddedStruct{}
@@ -478,9 +565,11 @@ func (o *ResourcepoolPoolMember) UnmarshalJSON(data []byte) (err error) {
 		varResourcepoolPoolMember.ObjectType = varResourcepoolPoolMemberWithoutEmbeddedStruct.ObjectType
 		varResourcepoolPoolMember.Features = varResourcepoolPoolMemberWithoutEmbeddedStruct.Features
 		varResourcepoolPoolMember.QualificationType = varResourcepoolPoolMemberWithoutEmbeddedStruct.QualificationType
+		varResourcepoolPoolMember.Reserved = varResourcepoolPoolMemberWithoutEmbeddedStruct.Reserved
 		varResourcepoolPoolMember.AssignedToEntity = varResourcepoolPoolMemberWithoutEmbeddedStruct.AssignedToEntity
 		varResourcepoolPoolMember.Peer = varResourcepoolPoolMemberWithoutEmbeddedStruct.Peer
 		varResourcepoolPoolMember.Pool = varResourcepoolPoolMemberWithoutEmbeddedStruct.Pool
+		varResourcepoolPoolMember.Reservation = varResourcepoolPoolMemberWithoutEmbeddedStruct.Reservation
 		varResourcepoolPoolMember.Resource = varResourcepoolPoolMemberWithoutEmbeddedStruct.Resource
 		*o = ResourcepoolPoolMember(varResourcepoolPoolMember)
 	} else {
@@ -503,9 +592,11 @@ func (o *ResourcepoolPoolMember) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Features")
 		delete(additionalProperties, "QualificationType")
+		delete(additionalProperties, "Reserved")
 		delete(additionalProperties, "AssignedToEntity")
 		delete(additionalProperties, "Peer")
 		delete(additionalProperties, "Pool")
+		delete(additionalProperties, "Reservation")
 		delete(additionalProperties, "Resource")
 
 		// remove fields from embedded structs

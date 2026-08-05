@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "auditd.Policy"]
 **AdminState** | Pointer to **string** | Admin state for the AuditD feature. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
 **AuditdLogLevel** | Pointer to **string** | The log level for the AuditD feature. The default value is \&quot;notifications\&quot;. * &#x60;notifications&#x60; - Generated logs are of Notification level, providing information about normal but significant system events requiring awareness. * &#x60;emergencies&#x60; - Generated logs will be of Emergency log level, indicating a critical and unstable system state. * &#x60;alerts&#x60; - Generated logs are of Alert level, indicating critical issues needing immediate attention to prevent system disruption. * &#x60;critical&#x60; - Generated logs are of Critical level, signaling severe issues that may cause system failure if not addressed immediately. * &#x60;errors&#x60; - Generated logs are of Error level, indicating significant problems that affect functionality but do not cause system failure. * &#x60;warnings&#x60; - Generated logs are of Warning level, highlighting potential issues that require attention but do not yet impact functionality. * &#x60;information&#x60; - Generated logs are of Information level, detailing routine operational messages without indicating any issues or errors. * &#x60;debugging&#x60; - Generated logs are of Debugging level, providing detailed information to help diagnose and troubleshoot system issues. | [optional] [default to "notifications"]
+**LogMonitor** | Pointer to [**NullableAuditdLogMonitorType**](AuditdLogMonitorType.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]FabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) | An array of relationships to fabricBaseSwitchProfile resources. | [optional] 
 
@@ -120,6 +121,41 @@ SetAuditdLogLevel sets AuditdLogLevel field to given value.
 
 HasAuditdLogLevel returns a boolean if a field has been set.
 
+### GetLogMonitor
+
+`func (o *AuditdPolicy) GetLogMonitor() AuditdLogMonitorType`
+
+GetLogMonitor returns the LogMonitor field if non-nil, zero value otherwise.
+
+### GetLogMonitorOk
+
+`func (o *AuditdPolicy) GetLogMonitorOk() (*AuditdLogMonitorType, bool)`
+
+GetLogMonitorOk returns a tuple with the LogMonitor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogMonitor
+
+`func (o *AuditdPolicy) SetLogMonitor(v AuditdLogMonitorType)`
+
+SetLogMonitor sets LogMonitor field to given value.
+
+### HasLogMonitor
+
+`func (o *AuditdPolicy) HasLogMonitor() bool`
+
+HasLogMonitor returns a boolean if a field has been set.
+
+### SetLogMonitorNil
+
+`func (o *AuditdPolicy) SetLogMonitorNil(b bool)`
+
+ SetLogMonitorNil sets the value for LogMonitor to be an explicit nil
+
+### UnsetLogMonitor
+`func (o *AuditdPolicy) UnsetLogMonitor()`
+
+UnsetLogMonitor ensures that no value is present for LogMonitor, not even an explicit nil
 ### GetOrganization
 
 `func (o *AuditdPolicy) GetOrganization() OrganizationOrganizationRelationship`

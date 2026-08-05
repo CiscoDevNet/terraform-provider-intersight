@@ -95,6 +95,18 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirmwareApiService CreateFirmwareSecureRouterUpgrade", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FirmwareApi.CreateFirmwareSecureRouterUpgrade(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirmwareApiService CreateFirmwareServerConfigurationUtilityDistributable", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -226,6 +238,19 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.FirmwareApi.DeleteFirmwarePolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirmwareApiService DeleteFirmwareSecureRouterUpgrade", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.FirmwareApi.DeleteFirmwareSecureRouterUpgrade(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -875,6 +900,32 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FirmwareApi.GetFirmwareSasExpanderDescriptorList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirmwareApiService GetFirmwareSecureRouterUpgradeByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FirmwareApi.GetFirmwareSecureRouterUpgradeByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirmwareApiService GetFirmwareSecureRouterUpgradeList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FirmwareApi.GetFirmwareSecureRouterUpgradeList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

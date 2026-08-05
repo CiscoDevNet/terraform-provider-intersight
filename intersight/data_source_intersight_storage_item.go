@@ -489,6 +489,11 @@ func getStorageItemSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"used_val": {
+			Description: "The used value (MiB) of the Local storage.",
+			Type:        schema.TypeFloat,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1137,6 +1142,11 @@ func dataSourceStorageItemRead(c context.Context, d *schema.ResourceData, meta i
 		o.SetUsed(x)
 	}
 
+	if v, ok := d.GetOk("used_val"); ok {
+		x := float32(v.(float64))
+		o.SetUsedVal(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1284,6 +1294,7 @@ func dataSourceStorageItemRead(c context.Context, d *schema.ResourceData, meta i
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["used"] = (s.GetUsed())
+				temp["used_val"] = (s.GetUsedVal())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				storageItemResults = append(storageItemResults, temp)

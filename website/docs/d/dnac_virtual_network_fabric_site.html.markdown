@@ -3,12 +3,24 @@ subcategory: "dnac"
 layout: "intersight"
 page_title: "Intersight: intersight_dnac_virtual_network_fabric_site"
 description: |-
-        Virtual networks for Fabric-Site.
+        The VirtualNetworkFabricSite object encapsulates the virtual networking aspects of a fabric site, enabling advanced network configurations and interactions. It plays a pivotal role in the deployment and management of virtual networks within the fabric.
+        #### Purpose
+        A VirtualNetworkFabricSite object facilitates the establishment and management of virtual networks associated with a fabric site, offering flexibility and scalability in network architecture.
+        #### Key Concepts
+        - **Virtual Network Management:** Supports the creation, monitoring, and modification of virtual networks, enhancing network adaptability.
+        - **Identity and Access Control:** Ensures secure and efficient management through unique identifiers and privilege sets.
+        - **Network Integration:** Seamlessly integrates with physical and logical network elements, fostering cohesive network operations.
 
 ---
 
 # Data Source: intersight_dnac_virtual_network_fabric_site
-Virtual networks for Fabric-Site.
+The VirtualNetworkFabricSite object encapsulates the virtual networking aspects of a fabric site, enabling advanced network configurations and interactions. It plays a pivotal role in the deployment and management of virtual networks within the fabric.
+#### Purpose
+A VirtualNetworkFabricSite object facilitates the establishment and management of virtual networks associated with a fabric site, offering flexibility and scalability in network architecture.
+#### Key Concepts
+- **Virtual Network Management:** Supports the creation, monitoring, and modification of virtual networks, enhancing network adaptability.
+- **Identity and Access Control:** Ensures secure and efficient management through unique identifiers and privilege sets.
+- **Network Integration:** Seamlessly integrates with physical and logical network elements, fostering cohesive network operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,7 @@ import (
 // checks if the StorageHyperFlexStorageContainer type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StorageHyperFlexStorageContainer{}
 
-// StorageHyperFlexStorageContainer A Storage Container (Datastore) entity.
+// StorageHyperFlexStorageContainer The HyperFlexStorageContainer object is a critical component of the HyperFlex storage architecture, representing a Storage Container (or Datastore) entity. It plays a pivotal role in managing and organizing the storage resources within a HyperFlex cluster. #### Purpose The primary purpose of the HyperFlexStorageContainer is to provide a structured and efficient way to manage storage allocations and utilization within a HyperFlex environment. It acts as a container for data storage, supporting various storage types and ensuring optimal data management. #### Key Concepts - **Storage Management:** Facilitates the organization and management of storage resources, allowing for efficient allocation and utilization of space within a cluster. - **Data Integrity:** Ensures the reliability and consistency of data storage, supporting various storage types such as SMB, NFS, and iSCSI. - **Access Control:** Offers a robust access control system with privilege sets, ensuring that only authorized personnel can manage storage arrays. - **Integration:** Seamlessly integrates with the HyperFlex cluster's infrastructure, providing essential storage services and capabilities.
 type StorageHyperFlexStorageContainer struct {
 	StorageBaseStorageContainer
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

@@ -124,7 +124,7 @@ func resourceIamApiKey() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"SHA256", "SHA384", "SHA512", "SHA512_224", "SHA512_256"}, false),
 				Optional:     true,
-				Default:      "SHA256",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"is_never_expiring": {
@@ -542,7 +542,7 @@ func resourceIamApiKey() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"RSASSA-PKCS1-v1_5", "RSASSA-PSS", "Ed25519", "Ecdsa", "EcdsaP1363Format"}, false),
 				Optional:     true,
-				Default:      "RSASSA-PKCS1-v1_5",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"start_time": {
@@ -917,7 +917,7 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetExpiryDateTime(x)
 	}
 
-	if v, ok := d.GetOk("hash_algorithm"); ok {
+	if v, ok := d.GetOkExists("hash_algorithm"); ok {
 		x := (v.(string))
 		o.SetHashAlgorithm(x)
 	}
@@ -927,7 +927,7 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetIsNeverExpiring(x)
 	}
 
-	if v, ok := d.GetOk("key_spec"); ok {
+	if v, ok := d.GetOkExists("key_spec"); ok {
 		p := make([]models.PkixKeyGenerationSpec, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -958,7 +958,7 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -975,7 +975,7 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetPurpose(x)
 	}
 
-	if v, ok := d.GetOk("signing_algorithm"); ok {
+	if v, ok := d.GetOkExists("signing_algorithm"); ok {
 		x := (v.(string))
 		o.SetSigningAlgorithm(x)
 	}

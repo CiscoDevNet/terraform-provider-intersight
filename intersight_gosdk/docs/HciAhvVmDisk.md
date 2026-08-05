@@ -11,12 +11,16 @@ Name | Type | Description | Notes
 **DiskExtId** | Pointer to **string** | The unique identifier of the disk. | [optional] [readonly] 
 **DiskSizeBytes** | Pointer to **int64** | The size of the disk in bytes. | [optional] [readonly] 
 **Index** | Pointer to **int32** | The index of the disk, similar to a slot number on physical machine. | [optional] [readonly] 
+**IsExternalStorage** | Pointer to **bool** | Derived property based on if storage container used external storage. Note: this value is independent of existence of volumeExtId. When a volumeExtId is empty  (when the Pure Inventory is not available), this value can be true because storage container  indicates external storage is used. If volumeExtId is true, it does indicate the isExternalStorage  should be true. | [optional] [readonly] 
 **IsFlashModeEnabled** | Pointer to **bool** | Indicates whether the virtual disk is pinned to the hot tier or not. | [optional] [readonly] 
 **IsMigrationInProgress** | Pointer to **bool** | Indicates if the disk is being migrated. | [optional] [readonly] 
 **StorageContainerExtId** | Pointer to **string** | The extId of the storage container which backs this disk. | [optional] [readonly] 
 **VmExtId** | Pointer to **string** | The unique identifier of the VM. | [optional] [readonly] 
+**VolumeExtId** | Pointer to **string** | The volume id this VM disk owns. Either from &#39;resource.Id&#39; of the Pure Volume &#39;owner_disk_id&#39; tag  (see 9.5.1.1.2 for detail) or from V4 VM API after Iris. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageContainer** | Pointer to [**NullableHciStorageContainerRelationship**](HciStorageContainerRelationship.md) |  | [optional] 
 **Vm** | Pointer to [**NullableHciAhvVmRelationship**](HciAhvVmRelationship.md) |  | [optional] 
+**Volume** | Pointer to [**NullableStorageBaseVolumeRelationship**](StorageBaseVolumeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -202,6 +206,31 @@ SetIndex sets Index field to given value.
 
 HasIndex returns a boolean if a field has been set.
 
+### GetIsExternalStorage
+
+`func (o *HciAhvVmDisk) GetIsExternalStorage() bool`
+
+GetIsExternalStorage returns the IsExternalStorage field if non-nil, zero value otherwise.
+
+### GetIsExternalStorageOk
+
+`func (o *HciAhvVmDisk) GetIsExternalStorageOk() (*bool, bool)`
+
+GetIsExternalStorageOk returns a tuple with the IsExternalStorage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsExternalStorage
+
+`func (o *HciAhvVmDisk) SetIsExternalStorage(v bool)`
+
+SetIsExternalStorage sets IsExternalStorage field to given value.
+
+### HasIsExternalStorage
+
+`func (o *HciAhvVmDisk) HasIsExternalStorage() bool`
+
+HasIsExternalStorage returns a boolean if a field has been set.
+
 ### GetIsFlashModeEnabled
 
 `func (o *HciAhvVmDisk) GetIsFlashModeEnabled() bool`
@@ -302,6 +331,31 @@ SetVmExtId sets VmExtId field to given value.
 
 HasVmExtId returns a boolean if a field has been set.
 
+### GetVolumeExtId
+
+`func (o *HciAhvVmDisk) GetVolumeExtId() string`
+
+GetVolumeExtId returns the VolumeExtId field if non-nil, zero value otherwise.
+
+### GetVolumeExtIdOk
+
+`func (o *HciAhvVmDisk) GetVolumeExtIdOk() (*string, bool)`
+
+GetVolumeExtIdOk returns a tuple with the VolumeExtId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeExtId
+
+`func (o *HciAhvVmDisk) SetVolumeExtId(v string)`
+
+SetVolumeExtId sets VolumeExtId field to given value.
+
+### HasVolumeExtId
+
+`func (o *HciAhvVmDisk) HasVolumeExtId() bool`
+
+HasVolumeExtId returns a boolean if a field has been set.
+
 ### GetRegisteredDevice
 
 `func (o *HciAhvVmDisk) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -337,6 +391,41 @@ HasRegisteredDevice returns a boolean if a field has been set.
 `func (o *HciAhvVmDisk) UnsetRegisteredDevice()`
 
 UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+### GetStorageContainer
+
+`func (o *HciAhvVmDisk) GetStorageContainer() HciStorageContainerRelationship`
+
+GetStorageContainer returns the StorageContainer field if non-nil, zero value otherwise.
+
+### GetStorageContainerOk
+
+`func (o *HciAhvVmDisk) GetStorageContainerOk() (*HciStorageContainerRelationship, bool)`
+
+GetStorageContainerOk returns a tuple with the StorageContainer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageContainer
+
+`func (o *HciAhvVmDisk) SetStorageContainer(v HciStorageContainerRelationship)`
+
+SetStorageContainer sets StorageContainer field to given value.
+
+### HasStorageContainer
+
+`func (o *HciAhvVmDisk) HasStorageContainer() bool`
+
+HasStorageContainer returns a boolean if a field has been set.
+
+### SetStorageContainerNil
+
+`func (o *HciAhvVmDisk) SetStorageContainerNil(b bool)`
+
+ SetStorageContainerNil sets the value for StorageContainer to be an explicit nil
+
+### UnsetStorageContainer
+`func (o *HciAhvVmDisk) UnsetStorageContainer()`
+
+UnsetStorageContainer ensures that no value is present for StorageContainer, not even an explicit nil
 ### GetVm
 
 `func (o *HciAhvVmDisk) GetVm() HciAhvVmRelationship`
@@ -372,6 +461,41 @@ HasVm returns a boolean if a field has been set.
 `func (o *HciAhvVmDisk) UnsetVm()`
 
 UnsetVm ensures that no value is present for Vm, not even an explicit nil
+### GetVolume
+
+`func (o *HciAhvVmDisk) GetVolume() StorageBaseVolumeRelationship`
+
+GetVolume returns the Volume field if non-nil, zero value otherwise.
+
+### GetVolumeOk
+
+`func (o *HciAhvVmDisk) GetVolumeOk() (*StorageBaseVolumeRelationship, bool)`
+
+GetVolumeOk returns a tuple with the Volume field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolume
+
+`func (o *HciAhvVmDisk) SetVolume(v StorageBaseVolumeRelationship)`
+
+SetVolume sets Volume field to given value.
+
+### HasVolume
+
+`func (o *HciAhvVmDisk) HasVolume() bool`
+
+HasVolume returns a boolean if a field has been set.
+
+### SetVolumeNil
+
+`func (o *HciAhvVmDisk) SetVolumeNil(b bool)`
+
+ SetVolumeNil sets the value for Volume to be an explicit nil
+
+### UnsetVolume
+`func (o *HciAhvVmDisk) UnsetVolume()`
+
+UnsetVolume ensures that no value is present for Volume, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

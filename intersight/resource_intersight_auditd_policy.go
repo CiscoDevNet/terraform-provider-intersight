@@ -128,6 +128,126 @@ func resourceAuditdPolicy() *schema.Resource {
 					}
 					return
 				}},
+			"log_monitor": {
+				Description: "Log monitor configuration for the AuditD feature.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"all": {
+							Description:  "It can be configured to monitor all the log events.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"auth_log_files": {
+							Description:  "It can be configured to monitor log events only w.r.t auth log files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "auditd.LogMonitorType",
+						},
+						"cron_files": {
+							Description:  "It can be configured to monitor log events only w.r.t cron files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"dns_client_files": {
+							Description:  "It can be configured to monitor log events only w.r.t dns client files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"docker": {
+							Description:  "It can be configured to monitor log events only w.r.t Docker executions and file changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"kernel_module_mgmt": {
+							Description:  "It can be configured to monitor log events only w.r.t kernel module files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "auditd.LogMonitorType",
+						},
+						"process_audit": {
+							Description:  "It can be configured to monitor log events only w.r.t process execution audit.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"system_log_files": {
+							Description:  "It can be configured to monitor log events only w.r.t system log files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"system_login_reboot": {
+							Description:  "It can be configured to monitor log events only w.r.t system login reboot file changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"system_software": {
+							Description:  "It can be configured to monitor log events only w.r.t system software's binaries changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"system_time_change": {
+							Description:  "It can be configured to monitor log events only w.r.t system time file changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"user_group_config_files": {
+							Description:  "It can be configured to monitor log events only w.r.t User Group Config Files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+						"user_privilege_mgmt": {
+							Description:  "It can be configured to monitor log events only w.r.t User Privilege management file changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"no", "yes"}, false),
+							Optional:     true,
+							Default:      "no",
+						},
+					},
+				},
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -661,7 +781,116 @@ func resourceAuditdPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOk("log_monitor"); ok {
+		p := make([]models.AuditdLogMonitorType, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewAuditdLogMonitorTypeWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["all"]; ok {
+				{
+					x := (v.(string))
+					o.SetAll(x)
+				}
+			}
+			if v, ok := l["auth_log_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetAuthLogFiles(x)
+				}
+			}
+			o.SetClassId("auditd.LogMonitorType")
+			if v, ok := l["cron_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetCronFiles(x)
+				}
+			}
+			if v, ok := l["dns_client_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetDnsClientFiles(x)
+				}
+			}
+			if v, ok := l["docker"]; ok {
+				{
+					x := (v.(string))
+					o.SetDocker(x)
+				}
+			}
+			if v, ok := l["kernel_module_mgmt"]; ok {
+				{
+					x := (v.(string))
+					o.SetKernelModuleMgmt(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["process_audit"]; ok {
+				{
+					x := (v.(string))
+					o.SetProcessAudit(x)
+				}
+			}
+			if v, ok := l["system_log_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemLogFiles(x)
+				}
+			}
+			if v, ok := l["system_login_reboot"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemLoginReboot(x)
+				}
+			}
+			if v, ok := l["system_software"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemSoftware(x)
+				}
+			}
+			if v, ok := l["system_time_change"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemTimeChange(x)
+				}
+			}
+			if v, ok := l["user_group_config_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetUserGroupConfigFiles(x)
+				}
+			}
+			if v, ok := l["user_privilege_mgmt"]; ok {
+				{
+					x := (v.(string))
+					o.SetUserPrivilegeMgmt(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetLogMonitor(x)
+		}
+	}
+
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -673,7 +902,7 @@ func resourceAuditdPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 
 	o.SetObjectType("auditd.Policy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -918,6 +1147,10 @@ func resourceAuditdPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in AuditdPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("log_monitor", flattenMapAuditdLogMonitorType(s.GetLogMonitor(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property LogMonitor in AuditdPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in AuditdPolicy object: %s", err.Error())
 	}
@@ -1005,6 +1238,116 @@ func resourceAuditdPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("log_monitor") {
+		v := d.Get("log_monitor")
+		p := make([]models.AuditdLogMonitorType, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.AuditdLogMonitorType{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["all"]; ok {
+				{
+					x := (v.(string))
+					o.SetAll(x)
+				}
+			}
+			if v, ok := l["auth_log_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetAuthLogFiles(x)
+				}
+			}
+			o.SetClassId("auditd.LogMonitorType")
+			if v, ok := l["cron_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetCronFiles(x)
+				}
+			}
+			if v, ok := l["dns_client_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetDnsClientFiles(x)
+				}
+			}
+			if v, ok := l["docker"]; ok {
+				{
+					x := (v.(string))
+					o.SetDocker(x)
+				}
+			}
+			if v, ok := l["kernel_module_mgmt"]; ok {
+				{
+					x := (v.(string))
+					o.SetKernelModuleMgmt(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["process_audit"]; ok {
+				{
+					x := (v.(string))
+					o.SetProcessAudit(x)
+				}
+			}
+			if v, ok := l["system_log_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemLogFiles(x)
+				}
+			}
+			if v, ok := l["system_login_reboot"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemLoginReboot(x)
+				}
+			}
+			if v, ok := l["system_software"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemSoftware(x)
+				}
+			}
+			if v, ok := l["system_time_change"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemTimeChange(x)
+				}
+			}
+			if v, ok := l["user_group_config_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetUserGroupConfigFiles(x)
+				}
+			}
+			if v, ok := l["user_privilege_mgmt"]; ok {
+				{
+					x := (v.(string))
+					o.SetUserPrivilegeMgmt(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetLogMonitor(x)
+		}
 	}
 
 	if d.HasChange("moid") {

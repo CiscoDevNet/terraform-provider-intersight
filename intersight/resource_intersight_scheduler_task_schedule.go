@@ -749,6 +749,17 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 					},
 				},
 			},
+			"submitted_by": {
+				Description: "Email address of the user who created the schedule.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"suspend_end_time": {
 				Description: "Suspend a task until an end date. this applies only to the action suspendTill.",
 				Type:        schema.TypeString,
@@ -967,7 +978,7 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 				Description: "Indicates if the schedule is policy based or not.",
 				Type:        schema.TypeBool,
 				Optional:    true,
-				Default:     false,
+				Computed:    true,
 				ForceNew:    true,
 			},
 			"version_context": {
@@ -1222,7 +1233,7 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1234,7 +1245,7 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 
 	o.SetObjectType("scheduler.TaskSchedule")
 
-	if v, ok := d.GetOk("policy"); ok {
+	if v, ok := d.GetOkExists("policy"); ok {
 		p := make([]models.SchedulerSchedulePolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1647,6 +1658,10 @@ func resourceSchedulerTaskScheduleRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("status", flattenMapSchedulerTaskScheduleStatus(s.GetStatus(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Status in SchedulerTaskSchedule object: %s", err.Error())
+	}
+
+	if err := d.Set("submitted_by", (s.GetSubmittedBy())); err != nil {
+		return diag.Errorf("error occurred while setting property SubmittedBy in SchedulerTaskSchedule object: %s", err.Error())
 	}
 
 	if err := d.Set("suspend_end_time", (s.GetSuspendEndTime()).String()); err != nil {

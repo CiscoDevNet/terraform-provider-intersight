@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_machine_snapshot"
 description: |-
-        The virtual machine snapshot is represented here.
+        The VmwareVirtualMachineSnapshot object encapsulates the virtual machine snapshot entity within VMware environments, detailing attributes for resource allocation and management.
+        #### Purpose
+        VmwareVirtualMachineSnapshot provides the framework for managing VM snapshots, supporting detailed configurations and operational settings within VMware environments.
+        #### Key Concepts
+        - **Snapshot Management:** Defines settings for snapshot keys, reference values, and creation times, optimizing snapshot resource management.
+        - **Integration:** Interfaces with virtual machines, facilitating seamless connectivity and resource management for VM snapshots.
+        - **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+        - **Operational Features:** Includes attributes such as golden snapshots and quiesce settings, supporting resilient and adaptive snapshot operations.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_machine_snapshot
-The virtual machine snapshot is represented here.
+The VmwareVirtualMachineSnapshot object encapsulates the virtual machine snapshot entity within VMware environments, detailing attributes for resource allocation and management.
+#### Purpose
+VmwareVirtualMachineSnapshot provides the framework for managing VM snapshots, supporting detailed configurations and operational settings within VMware environments.
+#### Key Concepts
+- **Snapshot Management:** Defines settings for snapshot keys, reference values, and creation times, optimizing snapshot resource management.
+- **Integration:** Interfaces with virtual machines, facilitating seamless connectivity and resource management for VM snapshots.
+- **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+- **Operational Features:** Includes attributes such as golden snapshots and quiesce settings, supporting resilient and adaptive snapshot operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

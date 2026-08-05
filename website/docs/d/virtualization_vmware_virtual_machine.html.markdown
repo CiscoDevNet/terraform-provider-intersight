@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_machine"
 description: |-
-        The VMware Virtual machine. It has details such as power state, IP address, resource consumption, etc. Basic elements come from the base class and VMware specific details are provided here.
+        The VmwareVirtualMachine object represents the virtual machine entity within the VMware environment, encompassing detailed configurations, states, and resource allocations.
+        #### Purpose
+        VmwareVirtualMachine is pivotal in managing virtual machine operations, providing insights into VM states, configurations, and relationships with other VMware resources.
+        #### Key Concepts
+        - **Operational States:** Tracks VM states such as power status and guest state, ensuring real-time monitoring and control.
+        - **Configuration Details:** Includes comprehensive settings for CPU, memory, disk, and network configurations, supporting tailored VM operations.
+        - **Resource Integration:** Interfaces with datastores, hosts, and clusters, facilitating seamless connectivity and resource management.
+        - **Security and Management:** Incorporates features for managing guest tools, network settings, and security policies, enhancing VM security and efficiency.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_machine
-The VMware Virtual machine. It has details such as power state, IP address, resource consumption, etc. Basic elements come from the base class and VMware specific details are provided here.
+The VmwareVirtualMachine object represents the virtual machine entity within the VMware environment, encompassing detailed configurations, states, and resource allocations.
+#### Purpose
+VmwareVirtualMachine is pivotal in managing virtual machine operations, providing insights into VM states, configurations, and relationships with other VMware resources.
+#### Key Concepts
+- **Operational States:** Tracks VM states such as power status and guest state, ensuring real-time monitoring and control.
+- **Configuration Details:** Includes comprehensive settings for CPU, memory, disk, and network configurations, supporting tailored VM operations.
+- **Resource Integration:** Interfaces with datastores, hosts, and clusters, facilitating seamless connectivity and resource management.
+- **Security and Management:** Incorporates features for managing guest tools, network settings, and security policies, enhancing VM security and efficiency.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

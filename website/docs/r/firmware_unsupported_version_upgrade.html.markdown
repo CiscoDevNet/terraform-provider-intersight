@@ -30,7 +30,7 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `checksum`:(HashMap) - The checksum of the downloaded file as calculated by the download plugin after successfully downloading a file. 
 This complex property has following sub-properties:
-  + `hash_algorithm`:(string) The hash algorithm used to calculate the checksum.* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.* `sha256` - An SHA256 hash as defined by RFC 4634. 
+  + `hash_algorithm`:(string) The hash algorithm used to calculate the checksum.* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.* `sha256` - An SHA256 hash as defined by RFC 4634.* `md5sum` - An MD5 hash as defined by RFC 1321. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `device`:(HashMap) -(ReadOnly) A reference to a assetDeviceRegistration resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

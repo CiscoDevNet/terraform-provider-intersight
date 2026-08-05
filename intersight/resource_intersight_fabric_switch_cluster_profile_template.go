@@ -114,6 +114,11 @@ func resourceFabricSwitchClusterProfileTemplate() *schema.Resource {
 					}
 					return
 				}},
+			"enable_override": {
+				Description: "When enabled, the configuration of the derived instances may override the template configuration.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -516,8 +521,81 @@ func resourceFabricSwitchClusterProfileTemplate() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"UCS Domain", "Unified Edge"}, false),
 				Optional:     true,
-				Default:      "UCS Domain",
+				Computed:     true,
 				ForceNew:     true,
+			},
+			"template_actions": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "motemplate.ActionEntry",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "motemplate.ActionEntry",
+						},
+						"params": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "motemplate.ActionParam",
+									},
+									"name": {
+										Description:  "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"None", "SyncType", "SyncTimer", "OverriddenList"}, false),
+										Optional:     true,
+										Default:      "None",
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "motemplate.ActionParam",
+									},
+									"value": {
+										Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"type": {
+							Description:  "The action type to be executed.\n* `Sync` - The action to merge values from the template to its derived objects.\n* `Deploy` - The action to execute deploy action on all the objects derived from the template that is mainly applicable for the various profile types.\n* `Detach` - The action to detach the current derived object from its attached template.\n* `Attach` - The action to attach the current object to the specified template.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Sync", "Deploy", "Detach", "Attach"}, false),
+							Optional:     true,
+							Default:      "Sync",
+						},
+					},
+				},
 			},
 			"type": {
 				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
@@ -526,8 +604,30 @@ func resourceFabricSwitchClusterProfileTemplate() *schema.Resource {
 				Optional:     true,
 				Default:      "instance",
 			},
+			"update_status": {
+				Description: "The template sync status with all derived objects.\n* `None` - The Enum value represents that the object is not attached to any template.\n* `OK` - The Enum value represents that the object values are in sync with attached template.\n* `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template.\n* `InProgress` - The Enum value represents that the object sync with the attached template is in progress.\n* `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"usage": {
 				Description: "The count of switch cluster profiles derived from the template.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"usage_count": {
+				Description: "The number of objects derived from a Template MO instance.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
@@ -714,7 +814,12 @@ func resourceFabricSwitchClusterProfileTemplateCreate(c context.Context, d *sche
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("enable_override"); ok {
+		x := (v.(bool))
+		o.SetEnableOverride(x)
+	}
+
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -726,7 +831,7 @@ func resourceFabricSwitchClusterProfileTemplateCreate(c context.Context, d *sche
 
 	o.SetObjectType("fabric.SwitchClusterProfileTemplate")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -932,9 +1037,88 @@ func resourceFabricSwitchClusterProfileTemplateCreate(c context.Context, d *sche
 		}
 	}
 
-	if v, ok := d.GetOk("target_platform"); ok {
+	if v, ok := d.GetOkExists("target_platform"); ok {
 		x := (v.(string))
 		o.SetTargetPlatform(x)
+	}
+
+	if v, ok := d.GetOk("template_actions"); ok {
+		x := make([]models.MotemplateActionEntry, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMotemplateActionEntryWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("motemplate.ActionEntry")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["params"]; ok {
+				{
+					x := make([]models.MotemplateActionParam, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMotemplateActionParamWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("motemplate.ActionParam")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["value"]; ok {
+							{
+								x := (v.(string))
+								o.SetValue(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetParams(x)
+					}
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetTemplateActions(x)
+		}
 	}
 
 	if v, ok := d.GetOk("type"); ok {
@@ -1016,6 +1200,10 @@ func resourceFabricSwitchClusterProfileTemplateRead(c context.Context, d *schema
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in FabricSwitchClusterProfileTemplate object: %s", err.Error())
 	}
 
+	if err := d.Set("enable_override", (s.GetEnableOverride())); err != nil {
+		return diag.Errorf("error occurred while setting property EnableOverride in FabricSwitchClusterProfileTemplate object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in FabricSwitchClusterProfileTemplate object: %s", err.Error())
 	}
@@ -1072,12 +1260,24 @@ func resourceFabricSwitchClusterProfileTemplateRead(c context.Context, d *schema
 		return diag.Errorf("error occurred while setting property TargetPlatform in FabricSwitchClusterProfileTemplate object: %s", err.Error())
 	}
 
+	if err := d.Set("template_actions", flattenListMotemplateActionEntry(s.GetTemplateActions(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property TemplateActions in FabricSwitchClusterProfileTemplate object: %s", err.Error())
+	}
+
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in FabricSwitchClusterProfileTemplate object: %s", err.Error())
 	}
 
+	if err := d.Set("update_status", (s.GetUpdateStatus())); err != nil {
+		return diag.Errorf("error occurred while setting property UpdateStatus in FabricSwitchClusterProfileTemplate object: %s", err.Error())
+	}
+
 	if err := d.Set("usage", (s.GetUsage())); err != nil {
 		return diag.Errorf("error occurred while setting property Usage in FabricSwitchClusterProfileTemplate object: %s", err.Error())
+	}
+
+	if err := d.Set("usage_count", (s.GetUsageCount())); err != nil {
+		return diag.Errorf("error occurred while setting property UsageCount in FabricSwitchClusterProfileTemplate object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1111,6 +1311,12 @@ func resourceFabricSwitchClusterProfileTemplateUpdate(c context.Context, d *sche
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("enable_override") {
+		v := d.Get("enable_override")
+		x := (v.(bool))
+		o.SetEnableOverride(x)
 	}
 
 	if d.HasChange("moid") {
@@ -1337,6 +1543,84 @@ func resourceFabricSwitchClusterProfileTemplateUpdate(c context.Context, d *sche
 		v := d.Get("target_platform")
 		x := (v.(string))
 		o.SetTargetPlatform(x)
+	}
+
+	if d.HasChange("template_actions") {
+		v := d.Get("template_actions")
+		x := make([]models.MotemplateActionEntry, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MotemplateActionEntry{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("motemplate.ActionEntry")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["params"]; ok {
+				{
+					x := make([]models.MotemplateActionParam, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMotemplateActionParamWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("motemplate.ActionParam")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["value"]; ok {
+							{
+								x := (v.(string))
+								o.SetValue(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetParams(x)
+					}
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetTemplateActions(x)
 	}
 
 	if d.HasChange("type") {

@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_host"
 description: |-
-        A host group entity in Hitachi storage array. It is an abstraction used by Hitachi storage to organize the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names) of client computers and to control communications between clients and volumes.
+        The HitachiHost object represents a host group entity in the Hitachi storage array, serving as an abstraction for organizing storage network addresses. It facilitates communication control between client computers and storage volumes.
+        #### Purpose
+        HitachiHost is critical for managing host groups, ensuring secure and efficient communication within storage networks through the organization of network addresses.
+        #### Key Concepts
+        - **Host Group Configuration:** Provides settings for port IDs, types, and security configurations within host groups.
+        - **Authentication:** Supports iSCSI target authentication modes, enhancing security and access control.
+        - **Privilege Sets:** Ensures secure management of host groups with defined access privileges.
+        - **Licensing:** Operates under specified entitlements, supporting authorized operations.
 
 ---
 
 # Data Source: intersight_storage_hitachi_host
-A host group entity in Hitachi storage array. It is an abstraction used by Hitachi storage to organize the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names) of client computers and to control communications between clients and volumes.
+The HitachiHost object represents a host group entity in the Hitachi storage array, serving as an abstraction for organizing storage network addresses. It facilitates communication control between client computers and storage volumes.
+#### Purpose
+HitachiHost is critical for managing host groups, ensuring secure and efficient communication within storage networks through the organization of network addresses.
+#### Key Concepts
+- **Host Group Configuration:** Provides settings for port IDs, types, and security configurations within host groups.
+- **Authentication:** Supports iSCSI target authentication modes, enhancing security and access control.
+- **Privilege Sets:** Ensures secure management of host groups with defined access privileges.
+- **Licensing:** Operates under specified entitlements, supporting authorized operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

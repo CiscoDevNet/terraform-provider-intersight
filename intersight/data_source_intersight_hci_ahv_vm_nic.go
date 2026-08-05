@@ -555,10 +555,10 @@ func getHciAhvVmNicSchema() map[string]*schema.Schema {
 			},
 		},
 		"vlan_id": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Schema{
-				Type: schema.TypeInt}},
+			Description: "VLAN ID of subnet for this NIC.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"vlan_mode": {
 			Description: "By default, all the virtual NICs are created in ACCESS mode, which permits only one VLAN per virtual network. TRUNKED mode allows multiple VLANs on a single VM NIC for network-aware user VMs.",
 			Type:        schema.TypeString,
@@ -1111,14 +1111,8 @@ func dataSourceHciAhvVmNicRead(c context.Context, d *schema.ResourceData, meta i
 		}
 	}
 
-	if v, ok := d.GetOk("vlan_id"); ok {
-		x := make([]int32, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			if y.Index(i).Interface() != nil {
-				x = append(x, y.Index(i).Interface().(int32))
-			}
-		}
+	if v, ok := d.GetOkExists("vlan_id"); ok {
+		x := int32(v.(int))
 		o.SetVlanId(x)
 	}
 

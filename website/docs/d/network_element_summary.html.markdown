@@ -19,6 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `admin_inband_interface_state`:(string) The administrative state of the network Element inband management interface. 
 * `available_memory`:(string) Available memory (un-used) on this switch platform. 
 * `bundle_version`:(string) Running firmware bundle information. 
+* `cdp_enabled`:(bool) Cisco Discovery Protocol (CDP) configuration for the switch. 
 * `chassis`:(string) Chassis IP of the switch. 
 * `conf_mod_ts`:(string) Configuration modified timestamp of the switch. 
 * `conf_mod_ts_backup`:(string) Configuration modified backup timestamp of the switch. 
@@ -39,11 +40,16 @@ The following arguments can be used to get data of already created objects in In
 * `inband_ip_address`:(string) The IP address of the network Element inband management interface. 
 * `inband_ip_gateway`:(string) The default gateway of the network Element inband management interface. 
 * `inband_ip_mask`:(string) The network mask of the network Element inband management interface. 
+* `inband_ipv6_address`:(string) The IPv6 address of the network Element inband management interface. 
+* `inband_ipv6_gateway`:(string) The default IPv6 gateway of the network Element inband management interface. 
+* `inband_ipv6_prefix`:(string) The network mask of the network Element inband management interface. 
+* `inband_mac`:(string) The MAC address of the network Element inband management interface. 
 * `inband_vlan`:(int) The VLAN ID of the network Element inband management interface. 
 * `inter_cluster_link_state`:(string) The intercluster link state of the switch.* `Unknown` - The operational state of the link is not known.* `Up` - The operational state of the link is up.* `Down` - The operational state of the link is down.* `Degraded` - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down. 
 * `ipv4_address`:(string) IP version 4 address is saved in this property. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `jumbo_frame_enabled`:(bool) Jumbo Frame configuration for the switch. 
+* `lldp_enabled`:(bool) Link Layer Discovery Protocol (LLDP) configuration for the switch. 
 * `management_mode`:(string) The management mode of the fabric interconnect.* `IntersightStandalone` - Intersight Standalone mode of operation.* `UCSM` - Unified Computing System Manager mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
@@ -69,8 +75,9 @@ The following arguments can be used to get data of already created objects in In
 * `out_of_band_ipv6_gateway`:(string) The default IPv6 gateway of the network Element out-of-band management interface. 
 * `out_of_band_ipv6_mode`:(string) The IPv6 address configuration mode of the network Element out-of-band management interface.* `` - The IPv6 address mode is not available or not applicable.* `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC).* `static` - IPv6 address is statically configured.* `disabled` - IPv6 is disabled on the out-of-band management interface. 
 * `out_of_band_ipv6_prefix`:(string) The network mask of the network Element out-of-band management interface. 
+* `out_of_band_ipv6_redirects`:(string) The IPv6 ICMPv6 redirects configuration on the network Element out-of-band management interface.* `` - The IPv6 redirects configuration is not available or not applicable.* `enabled` - IPv6 ICMPv6 redirects are enabled on the management interface.* `disabled` - IPv6 ICMPv6 redirects are disabled on the management interface. 
 * `out_of_band_ipv6_slaac_iid_mode`:(string) The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address.* `` - The SLAAC IID mode is not available or not applicable.* `eui64` - The SLAAC IID is derived from the MAC address using the EUI-64 method.* `opaque` - The SLAAC IID is generated using an opaque identifier for privacy. 
-* `out_of_band_ipv6_status`:(string) The status of the IPv6 configuration on the network Element out-of-band management interface.* `` - The IPv6 address status is not available or not applicable.* `active` - The IPv6 address is active and in use.* `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress).* `duplicate` - The IPv6 address is a duplicate (DAD failed).* `disabled` - The IPv6 address is disabled.* `error` - An error occurred during IPv6 address configuration.* `unknown` - The IPv6 address status is unknown. 
+* `out_of_band_ipv6_status`:(string) The status of the IPv6 configuration on the network Element out-of-band management interface.* `` - The IPv6 address status is not available or not applicable.* `active` - The IPv6 address is active and in use.* `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress).* `duplicate` - The IPv6 address is a duplicate (DAD failed).* `deprecated` - The IPv6 address is deprecated (preferred lifetime expired).* `disabled` - The IPv6 address is disabled.* `waiting` - SLAAC is configured but waiting for a Router Advertisement to assign an address.* `error` - An error occurred during IPv6 address configuration.* `unknown` - The IPv6 address status is unknown. 
 * `out_of_band_mac`:(string) The MAC address of the network Element out-of-band management interface. 
 * `part_number`:(string) Part number of the switch. 
 * `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
@@ -83,6 +90,7 @@ The following arguments can be used to get data of already created objects in In
 * `slot_id`:(int) The Slot Id of the network Element when embedded inside a chassis. 
 * `source_object_type`:(string) Stores the source object type used to fill the properties of this object. 
 * `status`:(string) The status of the switch. 
+* `stp_mode`:(string) Spanning Tree Protocol configuration for the switch.* `Disabled` - Spanning Tree Protocol (STP) is disabled.* `STP` - Spanning Tree Protocol (STP) is enabled and operating in STP.* `RSTP` - Spanning Tree Protocol (STP) is enabled and operating in RSTP mode.* `MSTP` - Spanning Tree Protocol (STP) is enabled and operating in MSTP mode.* `PVST+` - Spanning Tree Protocol (STP) is enabled and operating in PVST mode.* `RPVST+` - Spanning Tree Protocol (STP) is enabled and operating in RPVST mode. 
 * `switch_id`:(string) The Switch Id of the network Element. 
 * `switch_profile_name`:(string) The name of switch profile associated with the switch. 
 * `switch_type`:(string) The Switch type that the network element is a part of.* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.* `NexusDevice` - Switch type of Nexus devices.* `MDSDevice` - Switch type of Nexus MDS devices.* `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller. 

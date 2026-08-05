@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **NumQueues** | Pointer to **int32** | The number of Tx/Rx queue pairs for this NIC. | [optional] [readonly] 
 **ShouldAllowUnknownMacs** | Pointer to **bool** | Indicates whether an unknown unicast traffic is forwarded to this NIC or not, only for the NICs on the overlay subnets. | [optional] [readonly] 
 **TrunkedVlans** | Pointer to **[]int32** |  | [optional] 
-**VlanId** | Pointer to **[]int32** |  | [optional] 
+**VlanId** | Pointer to **int32** | VLAN ID of subnet for this NIC. | [optional] [readonly] 
 **VlanMode** | Pointer to **string** | By default, all the virtual NICs are created in ACCESS mode, which permits only one VLAN per virtual network. TRUNKED mode allows multiple VLANs on a single VM NIC for network-aware user VMs. | [optional] [readonly] 
 **VmExtId** | Pointer to **string** | The unique identifier of the VM. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -389,20 +389,20 @@ HasTrunkedVlans returns a boolean if a field has been set.
 UnsetTrunkedVlans ensures that no value is present for TrunkedVlans, not even an explicit nil
 ### GetVlanId
 
-`func (o *HciAhvVmNic) GetVlanId() []int32`
+`func (o *HciAhvVmNic) GetVlanId() int32`
 
 GetVlanId returns the VlanId field if non-nil, zero value otherwise.
 
 ### GetVlanIdOk
 
-`func (o *HciAhvVmNic) GetVlanIdOk() (*[]int32, bool)`
+`func (o *HciAhvVmNic) GetVlanIdOk() (*int32, bool)`
 
 GetVlanIdOk returns a tuple with the VlanId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVlanId
 
-`func (o *HciAhvVmNic) SetVlanId(v []int32)`
+`func (o *HciAhvVmNic) SetVlanId(v int32)`
 
 SetVlanId sets VlanId field to given value.
 
@@ -412,16 +412,6 @@ SetVlanId sets VlanId field to given value.
 
 HasVlanId returns a boolean if a field has been set.
 
-### SetVlanIdNil
-
-`func (o *HciAhvVmNic) SetVlanIdNil(b bool)`
-
- SetVlanIdNil sets the value for VlanId to be an explicit nil
-
-### UnsetVlanId
-`func (o *HciAhvVmNic) UnsetVlanId()`
-
-UnsetVlanId ensures that no value is present for VlanId, not even an explicit nil
 ### GetVlanMode
 
 `func (o *HciAhvVmNic) GetVlanMode() string`

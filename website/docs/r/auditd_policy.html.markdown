@@ -22,6 +22,22 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `log_monitor`:(HashMap) - Log monitor configuration for the AuditD feature. 
+This complex property has following sub-properties:
+  + `all`:(string) It can be configured to monitor all the log events.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `auth_log_files`:(string) It can be configured to monitor log events only w.r.t auth log files changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `cron_files`:(string) It can be configured to monitor log events only w.r.t cron files changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `dns_client_files`:(string) It can be configured to monitor log events only w.r.t dns client files changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `docker`:(string) It can be configured to monitor log events only w.r.t Docker executions and file changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `kernel_module_mgmt`:(string) It can be configured to monitor log events only w.r.t kernel module files changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `process_audit`:(string) It can be configured to monitor log events only w.r.t process execution audit.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `system_log_files`:(string) It can be configured to monitor log events only w.r.t system log files changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `system_login_reboot`:(string) It can be configured to monitor log events only w.r.t system login reboot file changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `system_software`:(string) It can be configured to monitor log events only w.r.t system software's binaries changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `system_time_change`:(string) It can be configured to monitor log events only w.r.t system time file changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `user_group_config_files`:(string) It can be configured to monitor log events only w.r.t User Group Config Files changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
+  + `user_privilege_mgmt`:(string) It can be configured to monitor log events only w.r.t User Privilege management file changes.* `no` - Value to disable the specific monitoring rule.* `yes` - Value to enable the specific monitoring rule. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 

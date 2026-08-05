@@ -68,7 +68,7 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringInSlice([]string{"PostDeployment", "Deployment", "Decommission", "Migration"}, false),
 							Optional:     true,
-							Default:      "PostDeployment",
+							Computed:     true,
 						},
 						"properties": {
 							Description: "The properties of the action. The actual structure of properties can vary based on the operationType.",
@@ -2048,12 +2048,12 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 		o.SetLabel(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
@@ -2224,7 +2224,7 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 		o.SetRestrictOnPrivateAppliance(x)
 	}
 
-	if v, ok := d.GetOk("service_item_definition"); ok {
+	if v, ok := d.GetOkExists("service_item_definition"); ok {
 		p := make([]models.WorkflowServiceItemDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

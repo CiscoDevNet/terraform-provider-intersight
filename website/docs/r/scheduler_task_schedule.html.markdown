@@ -3,12 +3,28 @@ subcategory: "scheduler"
 layout: "intersight"
 page_title: "Intersight: intersight_scheduler_task_schedule"
 description: |-
-        Metadata used to schedule one-time or repeated tasks.
+        TaskSchedules are the runtime scheduling objects that drive one-time or recurring executions. A TaskSchedule can run directly using explicit schedule parameters or can be “policy-based” by referencing a SchedulePolicy. It also defines what to execute (a REST-stim task request and/or an associated workflow definition) and tracks current scheduling status.
+        #### Purpose
+        Create and manage scheduled executions including lifecycle actions like suspend or resume, while exposing current and historical execution status.
+        #### Key Concepts
+        - **Schedule orchestration:** Combines *when to run* (schedule params or referenced policy) with *what to run* (task request or workflow definition).
+        - **Policy-backed vs direct schedules:** `usePolicy` determines whether execution timing comes from a SchedulePolicy or inline schedule params.
+        - **Lifecycle actions:** Supports operational actions like suspend or resume (and captures the last applied action).
+        - **Status and execution telemetry:** Exposes next or previous run timestamps, counters (completed, failed, or skipped), and suspension reasons.
+        - **Permission inheritance from target:** Inherits permissions from an `associatedObject`, ensuring schedule management aligns with the governed resource.
 
 ---
 
 # Resource: intersight_scheduler_task_schedule
-Metadata used to schedule one-time or repeated tasks.
+TaskSchedules are the runtime scheduling objects that drive one-time or recurring executions. A TaskSchedule can run directly using explicit schedule parameters or can be “policy-based” by referencing a SchedulePolicy. It also defines what to execute (a REST-stim task request and/or an associated workflow definition) and tracks current scheduling status.
+#### Purpose
+Create and manage scheduled executions including lifecycle actions like suspend or resume, while exposing current and historical execution status.
+#### Key Concepts
+- **Schedule orchestration:** Combines *when to run* (schedule params or referenced policy) with *what to run* (task request or workflow definition).
+- **Policy-backed vs direct schedules:** `usePolicy` determines whether execution timing comes from a SchedulePolicy or inline schedule params.
+- **Lifecycle actions:** Supports operational actions like suspend or resume (and captures the last applied action).
+- **Status and execution telemetry:** Exposes next or previous run timestamps, counters (completed, failed, or skipped), and suspension reasons.
+- **Permission inheritance from target:** Inherits permissions from an `associatedObject`, ensuring schedule management aligns with the governed resource.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -91,6 +107,7 @@ This complex property has following sub-properties:
   + `prev_run_start_time`:(string)(ReadOnly) The previous time the scheduled task was run. 
   + `reason`:(string)(ReadOnly) The reason why the task failed or suspended. 
   + `skipped_count`:(int)(ReadOnly) The count of tasks that were skipped. 
+* `submitted_by`:(string)(ReadOnly) Email address of the user who created the schedule. 
 * `suspend_end_time`:(string) Suspend a task until an end date. this applies only to the action suspendTill. 
 * `tags`:(Array)
 This complex property has following sub-properties:

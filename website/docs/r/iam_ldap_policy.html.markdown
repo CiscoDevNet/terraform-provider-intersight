@@ -84,20 +84,22 @@ This complex property has following sub-properties:
 * `base_properties`:(HashMap) - Base settings of LDAP required while configuring LDAP policy. 
 This complex property has following sub-properties:
   + `attribute`:(string) Role and locale information of the user. 
-  + `base_dn`:(string) Base Distinguished Name (DN). Starting point from where server will search for users and groups. 
-  + `bind_dn`:(string) Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers. 
+  + `base_dn`:(string) Base Distinguished Name (DN), the starting point for searching users and groups. 
+  + `bind_dn`:(string) Distinguished Name (DN) used to authenticate against LDAP servers. 
   + `bind_method`:(string) Authentication method to access LDAP servers.* `LoginCredentials` - Requires the user credentials. If the bind process fails, then user is denied access.* `Anonymous` - Requires no username and password. If this option is selected and the LDAP server is configured for Anonymous logins, then the user gains access.* `ConfiguredCredentials` - Requires a known set of credentials to be specified for the initial bind process. If the initial bind process succeeds, then the distinguished name (DN) of the user name is queried and re-used for the re-binding process. If the re-binding process fails, then the user is denied access. 
   + `domain`:(string) The IPv4 domain that all users must be in. 
-  + `enable_encryption`:(bool) If enabled, the endpoint encrypts all information it sends to the LDAP server. 
+  + `enable_encryption`:(bool) If enabled, the endpoint encrypts all information sent to the LDAP server. 
   + `enable_group_authorization`:(bool) If enabled, user authorization is also done at the group level for LDAP users not in the local user database. 
-  + `enable_nested_group_search`:(bool) If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively. 
+  + `enable_nested_group_search`:(bool) If enabled, an extended search walks the ancestry chain to the root and returns all groups and subgroups recursively. 
   + `filter`:(string) Criteria to identify entries in search requests. 
   + `group_attribute`:(string) Groups to which an LDAP entry belongs. 
   + `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
   + `nested_group_search_depth`:(int) Search depth to look for a nested LDAP group in an LDAP group map. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `password`:(string) The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters. 
+  + `password`:(string) The password for the initial bind process. Must not contain spaces, tabs, or line breaks, and cannot exceed 254 characters. 
   + `timeout`:(int) LDAP authentication timeout duration, in seconds. 
+  + `user_search_attribute`:
+                (Array of schema.TypeString) -
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `dns_parameters`:(HashMap) - Configuration settings to resolve LDAP servers, when DNS is enabled. 

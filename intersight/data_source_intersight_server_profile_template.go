@@ -592,7 +592,7 @@ func getServerProfileTemplateSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"change_status": {
-						Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.",
+						Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.\n* `Failed` - The status when policy change evaluation report handling failed for a policy.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -671,6 +671,11 @@ func getServerProfileTemplateSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"server_family": {
+			Description: "The server family type applicable to a server profile when the target platform is Standalone. For all other platform types, the value should be All.\n* `Unspecified` - Server Family type for Unspecified servers.\n* `All` - All server family types are included under this category.\n* `UCSC845A` - Server Family type for UCS C845A servers.\n* `UCSC2XX/4XX` - Server Family type for UCS C2XX/4XX servers.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -1853,6 +1858,11 @@ func dataSourceServerProfileTemplateRead(c context.Context, d *schema.ResourceDa
 		o.SetScheduledActions(x)
 	}
 
+	if v, ok := d.GetOk("server_family"); ok {
+		x := (v.(string))
+		o.SetServerFamily(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -2280,6 +2290,7 @@ func dataSourceServerProfileTemplateRead(c context.Context, d *schema.ResourceDa
 				temp["reported_policy_changes"] = flattenListPolicyReportedPolicyChange(s.GetReportedPolicyChanges(), d)
 
 				temp["scheduled_actions"] = flattenListPolicyScheduledAction(s.GetScheduledActions(), d)
+				temp["server_family"] = (s.GetServerFamily())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)

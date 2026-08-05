@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -37,6 +37,8 @@ type NetworkElementSummary struct {
 	AvailableMemory *string `json:"AvailableMemory,omitempty"`
 	// Running firmware bundle information.
 	BundleVersion *string `json:"BundleVersion,omitempty"`
+	// Cisco Discovery Protocol (CDP) configuration for the switch.
+	CdpEnabled *bool `json:"CdpEnabled,omitempty"`
 	// Chassis IP of the switch.
 	Chassis *string `json:"Chassis,omitempty"`
 	// Configuration modified timestamp of the switch.
@@ -76,6 +78,14 @@ type NetworkElementSummary struct {
 	InbandIpGateway *string `json:"InbandIpGateway,omitempty"`
 	// The network mask of the network Element inband management interface.
 	InbandIpMask *string `json:"InbandIpMask,omitempty"`
+	// The IPv6 address of the network Element inband management interface.
+	InbandIpv6Address *string `json:"InbandIpv6Address,omitempty"`
+	// The default IPv6 gateway of the network Element inband management interface.
+	InbandIpv6Gateway *string `json:"InbandIpv6Gateway,omitempty"`
+	// The network mask of the network Element inband management interface.
+	InbandIpv6Prefix *string `json:"InbandIpv6Prefix,omitempty"`
+	// The MAC address of the network Element inband management interface.
+	InbandMac *string `json:"InbandMac,omitempty"`
 	// The VLAN ID of the network Element inband management interface.
 	InbandVlan *int64 `json:"InbandVlan,omitempty"`
 	// The intercluster link state of the switch. * `Unknown` - The operational state of the link is not known. * `Up` - The operational state of the link is up. * `Down` - The operational state of the link is down. * `Degraded` - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down.
@@ -85,8 +95,10 @@ type NetworkElementSummary struct {
 	// This field indicates the compute status of the catalog values for the associated component or hardware.
 	IsUpgraded *bool `json:"IsUpgraded,omitempty"`
 	// Jumbo Frame configuration for the switch.
-	JumboFrameEnabled *bool                          `json:"JumboFrameEnabled,omitempty"`
-	LocationDetails   NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
+	JumboFrameEnabled *bool `json:"JumboFrameEnabled,omitempty"`
+	// Link Layer Discovery Protocol (LLDP) configuration for the switch.
+	LldpEnabled     *bool                          `json:"LldpEnabled,omitempty"`
+	LocationDetails NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 	// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
 	// This field identifies the model of the given component.
@@ -133,9 +145,11 @@ type NetworkElementSummary struct {
 	OutOfBandIpv6Mode *string `json:"OutOfBandIpv6Mode,omitempty"`
 	// The network mask of the network Element out-of-band management interface.
 	OutOfBandIpv6Prefix *string `json:"OutOfBandIpv6Prefix,omitempty"`
+	// The IPv6 ICMPv6 redirects configuration on the network Element out-of-band management interface. * `` - The IPv6 redirects configuration is not available or not applicable. * `enabled` - IPv6 ICMPv6 redirects are enabled on the management interface. * `disabled` - IPv6 ICMPv6 redirects are disabled on the management interface.
+	OutOfBandIpv6Redirects *string `json:"OutOfBandIpv6Redirects,omitempty"`
 	// The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address. * `` - The SLAAC IID mode is not available or not applicable. * `eui64` - The SLAAC IID is derived from the MAC address using the EUI-64 method. * `opaque` - The SLAAC IID is generated using an opaque identifier for privacy.
 	OutOfBandIpv6SlaacIidMode *string `json:"OutOfBandIpv6SlaacIidMode,omitempty"`
-	// The status of the IPv6 configuration on the network Element out-of-band management interface. * `` - The IPv6 address status is not available or not applicable. * `active` - The IPv6 address is active and in use. * `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress). * `duplicate` - The IPv6 address is a duplicate (DAD failed). * `disabled` - The IPv6 address is disabled. * `error` - An error occurred during IPv6 address configuration. * `unknown` - The IPv6 address status is unknown.
+	// The status of the IPv6 configuration on the network Element out-of-band management interface. * `` - The IPv6 address status is not available or not applicable. * `active` - The IPv6 address is active and in use. * `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress). * `duplicate` - The IPv6 address is a duplicate (DAD failed). * `deprecated` - The IPv6 address is deprecated (preferred lifetime expired). * `disabled` - The IPv6 address is disabled. * `waiting` - SLAAC is configured but waiting for a Router Advertisement to assign an address. * `error` - An error occurred during IPv6 address configuration. * `unknown` - The IPv6 address status is unknown.
 	OutOfBandIpv6Status *string `json:"OutOfBandIpv6Status,omitempty"`
 	// The MAC address of the network Element out-of-band management interface.
 	OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
@@ -150,7 +164,8 @@ type NetworkElementSummary struct {
 	// The Relative Name uniquely identifies an object within a given context.
 	Rn *string `json:"Rn,omitempty"`
 	// This MAC address will be the source MAC address for NetFlow packets.
-	RouterMac *string `json:"RouterMac,omitempty"`
+	RouterMac        *string                         `json:"RouterMac,omitempty"`
+	SecureRouterInfo NullableNetworkSecureRouterInfo `json:"SecureRouterInfo,omitempty"`
 	// This field identifies the serial of the given component.
 	Serial *string `json:"Serial,omitempty"`
 	// The Slot Id of the network Element when embedded inside a chassis.
@@ -159,6 +174,8 @@ type NetworkElementSummary struct {
 	SourceObjectType *string `json:"SourceObjectType,omitempty"`
 	// The status of the switch.
 	Status *string `json:"Status,omitempty"`
+	// Spanning Tree Protocol configuration for the switch. * `Disabled` - Spanning Tree Protocol (STP) is disabled. * `STP` - Spanning Tree Protocol (STP) is enabled and operating in STP. * `RSTP` - Spanning Tree Protocol (STP) is enabled and operating in RSTP mode. * `MSTP` - Spanning Tree Protocol (STP) is enabled and operating in MSTP mode. * `PVST+` - Spanning Tree Protocol (STP) is enabled and operating in PVST mode. * `RPVST+` - Spanning Tree Protocol (STP) is enabled and operating in RPVST mode.
+	StpMode *string `json:"StpMode,omitempty"`
 	// The Switch Id of the network Element.
 	SwitchId *string `json:"SwitchId,omitempty"`
 	// The name of switch profile associated with the switch.
@@ -441,6 +458,38 @@ func (o *NetworkElementSummary) HasBundleVersion() bool {
 // SetBundleVersion gets a reference to the given string and assigns it to the BundleVersion field.
 func (o *NetworkElementSummary) SetBundleVersion(v string) {
 	o.BundleVersion = &v
+}
+
+// GetCdpEnabled returns the CdpEnabled field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetCdpEnabled() bool {
+	if o == nil || IsNil(o.CdpEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.CdpEnabled
+}
+
+// GetCdpEnabledOk returns a tuple with the CdpEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetCdpEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.CdpEnabled) {
+		return nil, false
+	}
+	return o.CdpEnabled, true
+}
+
+// HasCdpEnabled returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasCdpEnabled() bool {
+	if o != nil && !IsNil(o.CdpEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetCdpEnabled gets a reference to the given bool and assigns it to the CdpEnabled field.
+func (o *NetworkElementSummary) SetCdpEnabled(v bool) {
+	o.CdpEnabled = &v
 }
 
 // GetChassis returns the Chassis field value if set, zero value otherwise.
@@ -1028,6 +1077,134 @@ func (o *NetworkElementSummary) SetInbandIpMask(v string) {
 	o.InbandIpMask = &v
 }
 
+// GetInbandIpv6Address returns the InbandIpv6Address field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetInbandIpv6Address() string {
+	if o == nil || IsNil(o.InbandIpv6Address) {
+		var ret string
+		return ret
+	}
+	return *o.InbandIpv6Address
+}
+
+// GetInbandIpv6AddressOk returns a tuple with the InbandIpv6Address field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetInbandIpv6AddressOk() (*string, bool) {
+	if o == nil || IsNil(o.InbandIpv6Address) {
+		return nil, false
+	}
+	return o.InbandIpv6Address, true
+}
+
+// HasInbandIpv6Address returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasInbandIpv6Address() bool {
+	if o != nil && !IsNil(o.InbandIpv6Address) {
+		return true
+	}
+
+	return false
+}
+
+// SetInbandIpv6Address gets a reference to the given string and assigns it to the InbandIpv6Address field.
+func (o *NetworkElementSummary) SetInbandIpv6Address(v string) {
+	o.InbandIpv6Address = &v
+}
+
+// GetInbandIpv6Gateway returns the InbandIpv6Gateway field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetInbandIpv6Gateway() string {
+	if o == nil || IsNil(o.InbandIpv6Gateway) {
+		var ret string
+		return ret
+	}
+	return *o.InbandIpv6Gateway
+}
+
+// GetInbandIpv6GatewayOk returns a tuple with the InbandIpv6Gateway field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetInbandIpv6GatewayOk() (*string, bool) {
+	if o == nil || IsNil(o.InbandIpv6Gateway) {
+		return nil, false
+	}
+	return o.InbandIpv6Gateway, true
+}
+
+// HasInbandIpv6Gateway returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasInbandIpv6Gateway() bool {
+	if o != nil && !IsNil(o.InbandIpv6Gateway) {
+		return true
+	}
+
+	return false
+}
+
+// SetInbandIpv6Gateway gets a reference to the given string and assigns it to the InbandIpv6Gateway field.
+func (o *NetworkElementSummary) SetInbandIpv6Gateway(v string) {
+	o.InbandIpv6Gateway = &v
+}
+
+// GetInbandIpv6Prefix returns the InbandIpv6Prefix field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetInbandIpv6Prefix() string {
+	if o == nil || IsNil(o.InbandIpv6Prefix) {
+		var ret string
+		return ret
+	}
+	return *o.InbandIpv6Prefix
+}
+
+// GetInbandIpv6PrefixOk returns a tuple with the InbandIpv6Prefix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetInbandIpv6PrefixOk() (*string, bool) {
+	if o == nil || IsNil(o.InbandIpv6Prefix) {
+		return nil, false
+	}
+	return o.InbandIpv6Prefix, true
+}
+
+// HasInbandIpv6Prefix returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasInbandIpv6Prefix() bool {
+	if o != nil && !IsNil(o.InbandIpv6Prefix) {
+		return true
+	}
+
+	return false
+}
+
+// SetInbandIpv6Prefix gets a reference to the given string and assigns it to the InbandIpv6Prefix field.
+func (o *NetworkElementSummary) SetInbandIpv6Prefix(v string) {
+	o.InbandIpv6Prefix = &v
+}
+
+// GetInbandMac returns the InbandMac field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetInbandMac() string {
+	if o == nil || IsNil(o.InbandMac) {
+		var ret string
+		return ret
+	}
+	return *o.InbandMac
+}
+
+// GetInbandMacOk returns a tuple with the InbandMac field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetInbandMacOk() (*string, bool) {
+	if o == nil || IsNil(o.InbandMac) {
+		return nil, false
+	}
+	return o.InbandMac, true
+}
+
+// HasInbandMac returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasInbandMac() bool {
+	if o != nil && !IsNil(o.InbandMac) {
+		return true
+	}
+
+	return false
+}
+
+// SetInbandMac gets a reference to the given string and assigns it to the InbandMac field.
+func (o *NetworkElementSummary) SetInbandMac(v string) {
+	o.InbandMac = &v
+}
+
 // GetInbandVlan returns the InbandVlan field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetInbandVlan() int64 {
 	if o == nil || IsNil(o.InbandVlan) {
@@ -1186,6 +1363,38 @@ func (o *NetworkElementSummary) HasJumboFrameEnabled() bool {
 // SetJumboFrameEnabled gets a reference to the given bool and assigns it to the JumboFrameEnabled field.
 func (o *NetworkElementSummary) SetJumboFrameEnabled(v bool) {
 	o.JumboFrameEnabled = &v
+}
+
+// GetLldpEnabled returns the LldpEnabled field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetLldpEnabled() bool {
+	if o == nil || IsNil(o.LldpEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.LldpEnabled
+}
+
+// GetLldpEnabledOk returns a tuple with the LldpEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetLldpEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.LldpEnabled) {
+		return nil, false
+	}
+	return o.LldpEnabled, true
+}
+
+// HasLldpEnabled returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasLldpEnabled() bool {
+	if o != nil && !IsNil(o.LldpEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetLldpEnabled gets a reference to the given bool and assigns it to the LldpEnabled field.
+func (o *NetworkElementSummary) SetLldpEnabled(v bool) {
+	o.LldpEnabled = &v
 }
 
 // GetLocationDetails returns the LocationDetails field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1967,6 +2176,38 @@ func (o *NetworkElementSummary) SetOutOfBandIpv6Prefix(v string) {
 	o.OutOfBandIpv6Prefix = &v
 }
 
+// GetOutOfBandIpv6Redirects returns the OutOfBandIpv6Redirects field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetOutOfBandIpv6Redirects() string {
+	if o == nil || IsNil(o.OutOfBandIpv6Redirects) {
+		var ret string
+		return ret
+	}
+	return *o.OutOfBandIpv6Redirects
+}
+
+// GetOutOfBandIpv6RedirectsOk returns a tuple with the OutOfBandIpv6Redirects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetOutOfBandIpv6RedirectsOk() (*string, bool) {
+	if o == nil || IsNil(o.OutOfBandIpv6Redirects) {
+		return nil, false
+	}
+	return o.OutOfBandIpv6Redirects, true
+}
+
+// HasOutOfBandIpv6Redirects returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasOutOfBandIpv6Redirects() bool {
+	if o != nil && !IsNil(o.OutOfBandIpv6Redirects) {
+		return true
+	}
+
+	return false
+}
+
+// SetOutOfBandIpv6Redirects gets a reference to the given string and assigns it to the OutOfBandIpv6Redirects field.
+func (o *NetworkElementSummary) SetOutOfBandIpv6Redirects(v string) {
+	o.OutOfBandIpv6Redirects = &v
+}
+
 // GetOutOfBandIpv6SlaacIidMode returns the OutOfBandIpv6SlaacIidMode field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetOutOfBandIpv6SlaacIidMode() string {
 	if o == nil || IsNil(o.OutOfBandIpv6SlaacIidMode) {
@@ -2255,6 +2496,49 @@ func (o *NetworkElementSummary) SetRouterMac(v string) {
 	o.RouterMac = &v
 }
 
+// GetSecureRouterInfo returns the SecureRouterInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkElementSummary) GetSecureRouterInfo() NetworkSecureRouterInfo {
+	if o == nil || IsNil(o.SecureRouterInfo.Get()) {
+		var ret NetworkSecureRouterInfo
+		return ret
+	}
+	return *o.SecureRouterInfo.Get()
+}
+
+// GetSecureRouterInfoOk returns a tuple with the SecureRouterInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkElementSummary) GetSecureRouterInfoOk() (*NetworkSecureRouterInfo, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SecureRouterInfo.Get(), o.SecureRouterInfo.IsSet()
+}
+
+// HasSecureRouterInfo returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasSecureRouterInfo() bool {
+	if o != nil && o.SecureRouterInfo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSecureRouterInfo gets a reference to the given NullableNetworkSecureRouterInfo and assigns it to the SecureRouterInfo field.
+func (o *NetworkElementSummary) SetSecureRouterInfo(v NetworkSecureRouterInfo) {
+	o.SecureRouterInfo.Set(&v)
+}
+
+// SetSecureRouterInfoNil sets the value for SecureRouterInfo to be an explicit nil
+func (o *NetworkElementSummary) SetSecureRouterInfoNil() {
+	o.SecureRouterInfo.Set(nil)
+}
+
+// UnsetSecureRouterInfo ensures that no value is present for SecureRouterInfo, not even an explicit nil
+func (o *NetworkElementSummary) UnsetSecureRouterInfo() {
+	o.SecureRouterInfo.Unset()
+}
+
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetSerial() string {
 	if o == nil || IsNil(o.Serial) {
@@ -2381,6 +2665,38 @@ func (o *NetworkElementSummary) HasStatus() bool {
 // SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *NetworkElementSummary) SetStatus(v string) {
 	o.Status = &v
+}
+
+// GetStpMode returns the StpMode field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetStpMode() string {
+	if o == nil || IsNil(o.StpMode) {
+		var ret string
+		return ret
+	}
+	return *o.StpMode
+}
+
+// GetStpModeOk returns a tuple with the StpMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetStpModeOk() (*string, bool) {
+	if o == nil || IsNil(o.StpMode) {
+		return nil, false
+	}
+	return o.StpMode, true
+}
+
+// HasStpMode returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasStpMode() bool {
+	if o != nil && !IsNil(o.StpMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetStpMode gets a reference to the given string and assigns it to the StpMode field.
+func (o *NetworkElementSummary) SetStpMode(v string) {
+	o.StpMode = &v
 }
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
@@ -2873,6 +3189,9 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BundleVersion) {
 		toSerialize["BundleVersion"] = o.BundleVersion
 	}
+	if !IsNil(o.CdpEnabled) {
+		toSerialize["CdpEnabled"] = o.CdpEnabled
+	}
 	if !IsNil(o.Chassis) {
 		toSerialize["Chassis"] = o.Chassis
 	}
@@ -2927,6 +3246,18 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InbandIpMask) {
 		toSerialize["InbandIpMask"] = o.InbandIpMask
 	}
+	if !IsNil(o.InbandIpv6Address) {
+		toSerialize["InbandIpv6Address"] = o.InbandIpv6Address
+	}
+	if !IsNil(o.InbandIpv6Gateway) {
+		toSerialize["InbandIpv6Gateway"] = o.InbandIpv6Gateway
+	}
+	if !IsNil(o.InbandIpv6Prefix) {
+		toSerialize["InbandIpv6Prefix"] = o.InbandIpv6Prefix
+	}
+	if !IsNil(o.InbandMac) {
+		toSerialize["InbandMac"] = o.InbandMac
+	}
 	if !IsNil(o.InbandVlan) {
 		toSerialize["InbandVlan"] = o.InbandVlan
 	}
@@ -2941,6 +3272,9 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.JumboFrameEnabled) {
 		toSerialize["JumboFrameEnabled"] = o.JumboFrameEnabled
+	}
+	if !IsNil(o.LldpEnabled) {
+		toSerialize["LldpEnabled"] = o.LldpEnabled
 	}
 	if o.LocationDetails.IsSet() {
 		toSerialize["LocationDetails"] = o.LocationDetails.Get()
@@ -3014,6 +3348,9 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OutOfBandIpv6Prefix) {
 		toSerialize["OutOfBandIpv6Prefix"] = o.OutOfBandIpv6Prefix
 	}
+	if !IsNil(o.OutOfBandIpv6Redirects) {
+		toSerialize["OutOfBandIpv6Redirects"] = o.OutOfBandIpv6Redirects
+	}
 	if !IsNil(o.OutOfBandIpv6SlaacIidMode) {
 		toSerialize["OutOfBandIpv6SlaacIidMode"] = o.OutOfBandIpv6SlaacIidMode
 	}
@@ -3041,6 +3378,9 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RouterMac) {
 		toSerialize["RouterMac"] = o.RouterMac
 	}
+	if o.SecureRouterInfo.IsSet() {
+		toSerialize["SecureRouterInfo"] = o.SecureRouterInfo.Get()
+	}
 	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
@@ -3052,6 +3392,9 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
+	}
+	if !IsNil(o.StpMode) {
+		toSerialize["StpMode"] = o.StpMode
 	}
 	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
@@ -3156,6 +3499,8 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		AvailableMemory *string `json:"AvailableMemory,omitempty"`
 		// Running firmware bundle information.
 		BundleVersion *string `json:"BundleVersion,omitempty"`
+		// Cisco Discovery Protocol (CDP) configuration for the switch.
+		CdpEnabled *bool `json:"CdpEnabled,omitempty"`
 		// Chassis IP of the switch.
 		Chassis *string `json:"Chassis,omitempty"`
 		// Configuration modified timestamp of the switch.
@@ -3195,6 +3540,14 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		InbandIpGateway *string `json:"InbandIpGateway,omitempty"`
 		// The network mask of the network Element inband management interface.
 		InbandIpMask *string `json:"InbandIpMask,omitempty"`
+		// The IPv6 address of the network Element inband management interface.
+		InbandIpv6Address *string `json:"InbandIpv6Address,omitempty"`
+		// The default IPv6 gateway of the network Element inband management interface.
+		InbandIpv6Gateway *string `json:"InbandIpv6Gateway,omitempty"`
+		// The network mask of the network Element inband management interface.
+		InbandIpv6Prefix *string `json:"InbandIpv6Prefix,omitempty"`
+		// The MAC address of the network Element inband management interface.
+		InbandMac *string `json:"InbandMac,omitempty"`
 		// The VLAN ID of the network Element inband management interface.
 		InbandVlan *int64 `json:"InbandVlan,omitempty"`
 		// The intercluster link state of the switch. * `Unknown` - The operational state of the link is not known. * `Up` - The operational state of the link is up. * `Down` - The operational state of the link is down. * `Degraded` - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down.
@@ -3204,8 +3557,10 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		// This field indicates the compute status of the catalog values for the associated component or hardware.
 		IsUpgraded *bool `json:"IsUpgraded,omitempty"`
 		// Jumbo Frame configuration for the switch.
-		JumboFrameEnabled *bool                          `json:"JumboFrameEnabled,omitempty"`
-		LocationDetails   NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
+		JumboFrameEnabled *bool `json:"JumboFrameEnabled,omitempty"`
+		// Link Layer Discovery Protocol (LLDP) configuration for the switch.
+		LldpEnabled     *bool                          `json:"LldpEnabled,omitempty"`
+		LocationDetails NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 		// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
 		// This field identifies the model of the given component.
@@ -3252,9 +3607,11 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		OutOfBandIpv6Mode *string `json:"OutOfBandIpv6Mode,omitempty"`
 		// The network mask of the network Element out-of-band management interface.
 		OutOfBandIpv6Prefix *string `json:"OutOfBandIpv6Prefix,omitempty"`
+		// The IPv6 ICMPv6 redirects configuration on the network Element out-of-band management interface. * `` - The IPv6 redirects configuration is not available or not applicable. * `enabled` - IPv6 ICMPv6 redirects are enabled on the management interface. * `disabled` - IPv6 ICMPv6 redirects are disabled on the management interface.
+		OutOfBandIpv6Redirects *string `json:"OutOfBandIpv6Redirects,omitempty"`
 		// The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address. * `` - The SLAAC IID mode is not available or not applicable. * `eui64` - The SLAAC IID is derived from the MAC address using the EUI-64 method. * `opaque` - The SLAAC IID is generated using an opaque identifier for privacy.
 		OutOfBandIpv6SlaacIidMode *string `json:"OutOfBandIpv6SlaacIidMode,omitempty"`
-		// The status of the IPv6 configuration on the network Element out-of-band management interface. * `` - The IPv6 address status is not available or not applicable. * `active` - The IPv6 address is active and in use. * `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress). * `duplicate` - The IPv6 address is a duplicate (DAD failed). * `disabled` - The IPv6 address is disabled. * `error` - An error occurred during IPv6 address configuration. * `unknown` - The IPv6 address status is unknown.
+		// The status of the IPv6 configuration on the network Element out-of-band management interface. * `` - The IPv6 address status is not available or not applicable. * `active` - The IPv6 address is active and in use. * `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress). * `duplicate` - The IPv6 address is a duplicate (DAD failed). * `deprecated` - The IPv6 address is deprecated (preferred lifetime expired). * `disabled` - The IPv6 address is disabled. * `waiting` - SLAAC is configured but waiting for a Router Advertisement to assign an address. * `error` - An error occurred during IPv6 address configuration. * `unknown` - The IPv6 address status is unknown.
 		OutOfBandIpv6Status *string `json:"OutOfBandIpv6Status,omitempty"`
 		// The MAC address of the network Element out-of-band management interface.
 		OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
@@ -3269,7 +3626,8 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		// The Relative Name uniquely identifies an object within a given context.
 		Rn *string `json:"Rn,omitempty"`
 		// This MAC address will be the source MAC address for NetFlow packets.
-		RouterMac *string `json:"RouterMac,omitempty"`
+		RouterMac        *string                         `json:"RouterMac,omitempty"`
+		SecureRouterInfo NullableNetworkSecureRouterInfo `json:"SecureRouterInfo,omitempty"`
 		// This field identifies the serial of the given component.
 		Serial *string `json:"Serial,omitempty"`
 		// The Slot Id of the network Element when embedded inside a chassis.
@@ -3278,6 +3636,8 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		SourceObjectType *string `json:"SourceObjectType,omitempty"`
 		// The status of the switch.
 		Status *string `json:"Status,omitempty"`
+		// Spanning Tree Protocol configuration for the switch. * `Disabled` - Spanning Tree Protocol (STP) is disabled. * `STP` - Spanning Tree Protocol (STP) is enabled and operating in STP. * `RSTP` - Spanning Tree Protocol (STP) is enabled and operating in RSTP mode. * `MSTP` - Spanning Tree Protocol (STP) is enabled and operating in MSTP mode. * `PVST+` - Spanning Tree Protocol (STP) is enabled and operating in PVST mode. * `RPVST+` - Spanning Tree Protocol (STP) is enabled and operating in RPVST mode.
+		StpMode *string `json:"StpMode,omitempty"`
 		// The Switch Id of the network Element.
 		SwitchId *string `json:"SwitchId,omitempty"`
 		// The name of switch profile associated with the switch.
@@ -3315,6 +3675,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.AlarmSummary = varNetworkElementSummaryWithoutEmbeddedStruct.AlarmSummary
 		varNetworkElementSummary.AvailableMemory = varNetworkElementSummaryWithoutEmbeddedStruct.AvailableMemory
 		varNetworkElementSummary.BundleVersion = varNetworkElementSummaryWithoutEmbeddedStruct.BundleVersion
+		varNetworkElementSummary.CdpEnabled = varNetworkElementSummaryWithoutEmbeddedStruct.CdpEnabled
 		varNetworkElementSummary.Chassis = varNetworkElementSummaryWithoutEmbeddedStruct.Chassis
 		varNetworkElementSummary.ConfModTs = varNetworkElementSummaryWithoutEmbeddedStruct.ConfModTs
 		varNetworkElementSummary.ConfModTsBackup = varNetworkElementSummaryWithoutEmbeddedStruct.ConfModTsBackup
@@ -3333,11 +3694,16 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.InbandIpAddress = varNetworkElementSummaryWithoutEmbeddedStruct.InbandIpAddress
 		varNetworkElementSummary.InbandIpGateway = varNetworkElementSummaryWithoutEmbeddedStruct.InbandIpGateway
 		varNetworkElementSummary.InbandIpMask = varNetworkElementSummaryWithoutEmbeddedStruct.InbandIpMask
+		varNetworkElementSummary.InbandIpv6Address = varNetworkElementSummaryWithoutEmbeddedStruct.InbandIpv6Address
+		varNetworkElementSummary.InbandIpv6Gateway = varNetworkElementSummaryWithoutEmbeddedStruct.InbandIpv6Gateway
+		varNetworkElementSummary.InbandIpv6Prefix = varNetworkElementSummaryWithoutEmbeddedStruct.InbandIpv6Prefix
+		varNetworkElementSummary.InbandMac = varNetworkElementSummaryWithoutEmbeddedStruct.InbandMac
 		varNetworkElementSummary.InbandVlan = varNetworkElementSummaryWithoutEmbeddedStruct.InbandVlan
 		varNetworkElementSummary.InterClusterLinkState = varNetworkElementSummaryWithoutEmbeddedStruct.InterClusterLinkState
 		varNetworkElementSummary.Ipv4Address = varNetworkElementSummaryWithoutEmbeddedStruct.Ipv4Address
 		varNetworkElementSummary.IsUpgraded = varNetworkElementSummaryWithoutEmbeddedStruct.IsUpgraded
 		varNetworkElementSummary.JumboFrameEnabled = varNetworkElementSummaryWithoutEmbeddedStruct.JumboFrameEnabled
+		varNetworkElementSummary.LldpEnabled = varNetworkElementSummaryWithoutEmbeddedStruct.LldpEnabled
 		varNetworkElementSummary.LocationDetails = varNetworkElementSummaryWithoutEmbeddedStruct.LocationDetails
 		varNetworkElementSummary.ManagementMode = varNetworkElementSummaryWithoutEmbeddedStruct.ManagementMode
 		varNetworkElementSummary.Model = varNetworkElementSummaryWithoutEmbeddedStruct.Model
@@ -3362,6 +3728,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.OutOfBandIpv6Gateway = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandIpv6Gateway
 		varNetworkElementSummary.OutOfBandIpv6Mode = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandIpv6Mode
 		varNetworkElementSummary.OutOfBandIpv6Prefix = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandIpv6Prefix
+		varNetworkElementSummary.OutOfBandIpv6Redirects = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandIpv6Redirects
 		varNetworkElementSummary.OutOfBandIpv6SlaacIidMode = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandIpv6SlaacIidMode
 		varNetworkElementSummary.OutOfBandIpv6Status = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandIpv6Status
 		varNetworkElementSummary.OutOfBandMac = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandMac
@@ -3371,10 +3738,12 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.Revision = varNetworkElementSummaryWithoutEmbeddedStruct.Revision
 		varNetworkElementSummary.Rn = varNetworkElementSummaryWithoutEmbeddedStruct.Rn
 		varNetworkElementSummary.RouterMac = varNetworkElementSummaryWithoutEmbeddedStruct.RouterMac
+		varNetworkElementSummary.SecureRouterInfo = varNetworkElementSummaryWithoutEmbeddedStruct.SecureRouterInfo
 		varNetworkElementSummary.Serial = varNetworkElementSummaryWithoutEmbeddedStruct.Serial
 		varNetworkElementSummary.SlotId = varNetworkElementSummaryWithoutEmbeddedStruct.SlotId
 		varNetworkElementSummary.SourceObjectType = varNetworkElementSummaryWithoutEmbeddedStruct.SourceObjectType
 		varNetworkElementSummary.Status = varNetworkElementSummaryWithoutEmbeddedStruct.Status
+		varNetworkElementSummary.StpMode = varNetworkElementSummaryWithoutEmbeddedStruct.StpMode
 		varNetworkElementSummary.SwitchId = varNetworkElementSummaryWithoutEmbeddedStruct.SwitchId
 		varNetworkElementSummary.SwitchProfileName = varNetworkElementSummaryWithoutEmbeddedStruct.SwitchProfileName
 		varNetworkElementSummary.SwitchType = varNetworkElementSummaryWithoutEmbeddedStruct.SwitchType
@@ -3412,6 +3781,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "AlarmSummary")
 		delete(additionalProperties, "AvailableMemory")
 		delete(additionalProperties, "BundleVersion")
+		delete(additionalProperties, "CdpEnabled")
 		delete(additionalProperties, "Chassis")
 		delete(additionalProperties, "ConfModTs")
 		delete(additionalProperties, "ConfModTsBackup")
@@ -3430,11 +3800,16 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "InbandIpAddress")
 		delete(additionalProperties, "InbandIpGateway")
 		delete(additionalProperties, "InbandIpMask")
+		delete(additionalProperties, "InbandIpv6Address")
+		delete(additionalProperties, "InbandIpv6Gateway")
+		delete(additionalProperties, "InbandIpv6Prefix")
+		delete(additionalProperties, "InbandMac")
 		delete(additionalProperties, "InbandVlan")
 		delete(additionalProperties, "InterClusterLinkState")
 		delete(additionalProperties, "Ipv4Address")
 		delete(additionalProperties, "IsUpgraded")
 		delete(additionalProperties, "JumboFrameEnabled")
+		delete(additionalProperties, "LldpEnabled")
 		delete(additionalProperties, "LocationDetails")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "Model")
@@ -3459,6 +3834,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OutOfBandIpv6Gateway")
 		delete(additionalProperties, "OutOfBandIpv6Mode")
 		delete(additionalProperties, "OutOfBandIpv6Prefix")
+		delete(additionalProperties, "OutOfBandIpv6Redirects")
 		delete(additionalProperties, "OutOfBandIpv6SlaacIidMode")
 		delete(additionalProperties, "OutOfBandIpv6Status")
 		delete(additionalProperties, "OutOfBandMac")
@@ -3468,10 +3844,12 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Revision")
 		delete(additionalProperties, "Rn")
 		delete(additionalProperties, "RouterMac")
+		delete(additionalProperties, "SecureRouterInfo")
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "SourceObjectType")
 		delete(additionalProperties, "Status")
+		delete(additionalProperties, "StpMode")
 		delete(additionalProperties, "SwitchId")
 		delete(additionalProperties, "SwitchProfileName")
 		delete(additionalProperties, "SwitchType")

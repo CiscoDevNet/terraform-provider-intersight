@@ -3,12 +3,26 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_workflow_definition"
 description: |-
-        Workflow definition is a collection of tasks that are sequenced in a certain way using control tasks. The tasks in the workflow definition is represented as a directed acyclic graph where each node in the graph is a task and the edges in the graph are transitions from one task to another.
+        The WorkflowDefinitions object serves as the blueprint for automation, representing a collection of tasks sequenced as a Directed Acyclic Graph (DAG).
+        #### Purpose
+        It defines the logical flow of an automation process by sequencing tasks and control logic. It allows users to create complex automation scenarios by linking tasks with defined transitions and dependencies.
+        ### Key Concepts
+        - **DAG Structure:** Represents tasks as nodes and transitions as edges in a directed graph.
+        - **Versioning:** Supports multiple versions of a workflow, allowing for safe updates and maintenance.
+        - **Input/Output/Variable Schema:** Defines the schema for data flowing through the workflow, including inputs, outputs, and intermediate variables.
+        - **Control Logic:** Manages execution flow through control tasks and mapping parameters.
 
 ---
 
 # Data Source: intersight_workflow_workflow_definition
-Workflow definition is a collection of tasks that are sequenced in a certain way using control tasks. The tasks in the workflow definition is represented as a directed acyclic graph where each node in the graph is a task and the edges in the graph are transitions from one task to another.
+The WorkflowDefinitions object serves as the blueprint for automation, representing a collection of tasks sequenced as a Directed Acyclic Graph (DAG).
+#### Purpose
+It defines the logical flow of an automation process by sequencing tasks and control logic. It allows users to create complex automation scenarios by linking tasks with defined transitions and dependencies.
+### Key Concepts
+- **DAG Structure:** Represents tasks as nodes and transitions as edges in a directed graph.
+- **Versioning:** Supports multiple versions of a workflow, allowing for safe updates and maintenance.
+- **Input/Output/Variable Schema:** Defines the schema for data flowing through the workflow, including inputs, outputs, and intermediate variables.
+- **Control Logic:** Manages execution flow through control tasks and mapping parameters.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

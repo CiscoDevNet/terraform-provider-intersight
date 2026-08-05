@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_volume_migration_pair"
 description: |-
-        A copy pair to be used for Volume Migration in Hitachi storage array.
+        The HitachiVolumeMigrationPair object defines a copy pair used for volume migration within the Hitachi storage array, focusing on migration operations and pair management.
+        #### Purpose
+        HitachiVolumeMigrationPair serves as a pivotal element for managing volume migration pairs, supporting operations related to copy modes and pair statuses.
+        #### Key Concepts
+        - **Migration Operations:** Manages copy modes, LDEV numbers, and status information for volume migration pairs.
+        - **Privilege Sets:** Ensures secure access and management of migration pair settings with defined privilege sets.
+        - **Licensing:** Operates under specified entitlements, supporting authorized migration operations.
 
 ---
 
 # Data Source: intersight_storage_hitachi_volume_migration_pair
-A copy pair to be used for Volume Migration in Hitachi storage array.
+The HitachiVolumeMigrationPair object defines a copy pair used for volume migration within the Hitachi storage array, focusing on migration operations and pair management.
+#### Purpose
+HitachiVolumeMigrationPair serves as a pivotal element for managing volume migration pairs, supporting operations related to copy modes and pair statuses.
+#### Key Concepts
+- **Migration Operations:** Manages copy modes, LDEV numbers, and status information for volume migration pairs.
+- **Privilege Sets:** Ensures secure access and management of migration pair settings with defined privilege sets.
+- **Licensing:** Operates under specified entitlements, supporting authorized migration operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

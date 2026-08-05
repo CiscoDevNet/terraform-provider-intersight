@@ -284,6 +284,11 @@ func getUuidpoolUuidLeaseSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"preferred_uuid": {
+			Description: "The preferred UUID can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that UUID if it is available in the pool. If the specified preferred UUID is not in the range of the pool or if it is already leased or reserved, then the next available UUID from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred UUID property. When the preferred UUID property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be replaced by the new lease. Migration also supported only for dynamic lease requests.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"reservation": {
 			Description: "The holder of a reference to reservation Moid and the specific details on lease condition for this reservation. Specified to allocate already reserved identities.",
 			Type:        schema.TypeList,
@@ -303,6 +308,11 @@ func getUuidpoolUuidLeaseSchema() map[string]*schema.Schema {
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"reservation_id": {
+						Description: "The identity for which the reference is created. It is used to store the ID allocated to the profile during export. \nReservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.\nDuring import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.\nFor IP and UUid IDs, we create reservation, for other Ids we do not create reservations.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -924,6 +934,11 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOk("preferred_uuid"); ok {
+		x := (v.(string))
+		o.SetPreferredUuid(x)
+	}
+
 	if v, ok := d.GetOk("reservation"); ok {
 		p := make([]models.UuidpoolReservationReference, 0, 1)
 		s := v.([]interface{})
@@ -945,6 +960,12 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
 				}
 			}
 			if v, ok := l["reservation_moid"]; ok {
@@ -1225,6 +1246,7 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 				temp["pool"] = flattenMapUuidpoolPoolRelationship(s.GetPool(), d)
 
 				temp["pool_member"] = flattenMapUuidpoolPoolMemberRelationship(s.GetPoolMember(), d)
+				temp["preferred_uuid"] = (s.GetPreferredUuid())
 
 				temp["reservation"] = flattenMapUuidpoolReservationReference(s.GetReservation(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

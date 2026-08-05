@@ -597,7 +597,7 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"UCS Domain", "Unified Edge"}, false),
 				Optional:     true,
-				Default:      "UCS Domain",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"version_context": {
@@ -855,7 +855,7 @@ func resourceFabricSystemQosPolicyCreate(c context.Context, d *schema.ResourceDa
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -867,7 +867,7 @@ func resourceFabricSystemQosPolicyCreate(c context.Context, d *schema.ResourceDa
 
 	o.SetObjectType("fabric.SystemQosPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1079,7 +1079,7 @@ func resourceFabricSystemQosPolicyCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if v, ok := d.GetOk("target_platform"); ok {
+	if v, ok := d.GetOkExists("target_platform"); ok {
 		x := (v.(string))
 		o.SetTargetPlatform(x)
 	}

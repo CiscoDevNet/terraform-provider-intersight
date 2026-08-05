@@ -3,12 +3,24 @@ subcategory: "iaas"
 layout: "intersight"
 page_title: "Intersight: intersight_iaas_system_task_info"
 description: |-
-        List out the execution of various library tasks within UCSD.
+        The SystemTaskInfo object provides details about library task executions within UCS Director (UCSD), supporting system oversight and process management.
+        #### Purpose
+        SystemTaskInfo documents task execution data, aiding in workflow task management and optimization strategies.
+        #### Key Concepts
+        - **Execution Frequency:** Tracks each library tasks execution count, supporting process refinement and optimization.
+        - **Functional Categorization:** Provides information regarding the task category to which the library task belongs in UCSD.
+        - **Read-Only Access:** Ensures secure access to system task data without modification.
 
 ---
 
 # Data Source: intersight_iaas_system_task_info
-List out the execution of various library tasks within UCSD.
+The SystemTaskInfo object provides details about library task executions within UCS Director (UCSD), supporting system oversight and process management.  
+#### Purpose
+SystemTaskInfo documents task execution data, aiding in workflow task management and optimization strategies. 
+#### Key Concepts 
+- **Execution Frequency:** Tracks each library tasks execution count, supporting process refinement and optimization.
+- **Functional Categorization:** Provides information regarding the task category to which the library task belongs in UCSD. 
+- **Read-Only Access:** Ensures secure access to system task data without modification.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

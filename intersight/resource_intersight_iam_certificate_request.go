@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -213,10 +214,11 @@ func resourceIamCertificateRequest() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the certificate request.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "Name of the certificate request.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[A-Za-z0-9]([^/\\\\.]*(\\.[^/\\\\.]+)*)?$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -828,7 +830,7 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if v, ok := d.GetOk("certificate"); ok {
+	if v, ok := d.GetOkExists("certificate"); ok {
 		p := make([]models.IamCertificateRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -878,19 +880,19 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 		o.SetEmailAddress(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
 	o.SetObjectType("iam.CertificateRequest")
 
-	if v, ok := d.GetOk("private_key_spec"); ok {
+	if v, ok := d.GetOkExists("private_key_spec"); ok {
 		p := make([]models.IamPrivateKeySpecRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

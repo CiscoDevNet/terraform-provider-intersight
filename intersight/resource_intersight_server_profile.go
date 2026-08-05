@@ -807,6 +807,11 @@ func resourceServerProfile() *schema.Resource {
 							Optional:    true,
 							Computed:    true,
 						},
+						"reservation_id": {
+							Description: "The identity for which the reference is created. It is used to store the ID allocated to the profile during export. \nReservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.\nDuring import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.\nFor IP and UUid IDs, we create reservation, for other Ids we do not create reservations.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"reservation_moid": {
 							Description: "The moid of the reservation object.",
 							Type:        schema.TypeString,
@@ -1459,7 +1464,7 @@ func resourceServerProfile() *schema.Resource {
 								return
 							}},
 						"change_status": {
-							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.",
+							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.\n* `Failed` - The status when policy change evaluation report handling failed for a policy.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -1518,6 +1523,11 @@ func resourceServerProfile() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
+						},
+						"reservation_id": {
+							Description: "The identity for which the reference is created. It is used to store the ID allocated to the profile during export. \nReservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.\nDuring import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.\nFor IP and UUid IDs, we create reservation, for other Ids we do not create reservations.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"reservation_moid": {
 							Description: "The moid of the reservation object.",
@@ -1672,12 +1682,69 @@ func resourceServerProfile() *schema.Resource {
 					},
 				},
 			},
+			"scheduled_server_assignment": {
+				Description: "Server reassignment information that is captured as part of the config import process.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "server.ServerAssignment",
+						},
+						"enabled": {
+							Description: "Indicates if this assignment is enabled.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "server.ServerAssignment",
+						},
+						"pool_selector": {
+							Description: "Odata selector that resolves to the server pool to be used for assignment, if applicable.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"server_serial": {
+							Description: "Serial number of the server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"server_type": {
+							Description: "The object type of the server - blade or rack.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"server_assignment_mode": {
 				Description:  "Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later.\n* `None` - No server is assigned to the server profile.\n* `Static` - Server is directly assigned to server profile using assign server.\n* `Pool` - Server is assigned from a resource pool.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"None", "Static", "Pool"}, false),
 				Optional:     true,
 				Default:      "None",
+			},
+			"server_family": {
+				Description:  "The server family type applicable to a server profile when the target platform is Standalone. For all other platform types, the value should be All.\n* `Unspecified` - Server Family type for Unspecified servers.\n* `All` - All server family types are included under this category.\n* `UCSC845A` - Server Family type for UCS C845A servers.\n* `UCSC2XX/4XX` - Server Family type for UCS C2XX/4XX servers.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Unspecified", "All", "UCSC845A", "UCSC2XX/4XX"}, false),
+				Optional:     true,
+				Computed:     true,
+				ForceNew:     true,
 			},
 			"server_pool": {
 				Description: "A reference to a resourcepoolPool resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1770,6 +1837,60 @@ func resourceServerProfile() *schema.Resource {
 							ValidateFunc: validation.IntBetween(0, 8),
 							Optional:     true,
 							Default:      0,
+						},
+					},
+				},
+			},
+			"server_reservation": {
+				Description: "Serial number based reservation for the server to be assigned to this Server Profile.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "resourcepool.ReservationReference",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "resourcepool.ReservationReference",
+						},
+						"pool_moid": {
+							Description: "The moid of the pool object, if applicable.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"reservation_id": {
+							Description: "The identity for which the reference is created. It is used to store the ID allocated to the profile during export. \nReservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.\nDuring import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.\nFor IP and UUid IDs, we create reservation, for other Ids we do not create reservations.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"reservation_moid": {
+							Description: "The moid of the reservation object.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"resource_serial": {
+							Description: "The serial number of the resource that is being reserved.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"resource_type": {
+							Description: "The resource type that is being reserved.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 					},
 				},
@@ -2646,6 +2767,12 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
+				}
+			}
 			if v, ok := l["reservation_moid"]; ok {
 				{
 					x := (v.(string))
@@ -2702,7 +2829,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -2714,7 +2841,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 
 	o.SetObjectType("server.Profile")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3084,6 +3211,12 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
+				}
+			}
 			if v, ok := l["reservation_moid"]; ok {
 				{
 					x := (v.(string))
@@ -3171,9 +3304,69 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOk("scheduled_server_assignment"); ok {
+		p := make([]models.ServerServerAssignment, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewServerServerAssignmentWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("server.ServerAssignment")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["pool_selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetPoolSelector(x)
+				}
+			}
+			if v, ok := l["server_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetServerSerial(x)
+				}
+			}
+			if v, ok := l["server_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetServerType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetScheduledServerAssignment(x)
+		}
+	}
+
 	if v, ok := d.GetOk("server_assignment_mode"); ok {
 		x := (v.(string))
 		o.SetServerAssignmentMode(x)
+	}
+
+	if v, ok := d.GetOkExists("server_family"); ok {
+		x := (v.(string))
+		o.SetServerFamily(x)
 	}
 
 	if v, ok := d.GetOk("server_pool"); ok {
@@ -3270,6 +3463,67 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		if len(p) > 0 {
 			x := p[0]
 			o.SetServerPreAssignBySlot(x)
+		}
+	}
+
+	if v, ok := d.GetOk("server_reservation"); ok {
+		p := make([]models.ResourcepoolReservationReference, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewResourcepoolReservationReferenceWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("resourcepool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["pool_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetPoolMoid(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			if v, ok := l["resource_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetResourceSerial(x)
+				}
+			}
+			if v, ok := l["resource_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetResourceType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetServerReservation(x)
 		}
 	}
 
@@ -3893,8 +4147,16 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("error occurred while setting property ScheduledActions in ServerProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("scheduled_server_assignment", flattenMapServerServerAssignment(s.GetScheduledServerAssignment(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ScheduledServerAssignment in ServerProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("server_assignment_mode", (s.GetServerAssignmentMode())); err != nil {
 		return diag.Errorf("error occurred while setting property ServerAssignmentMode in ServerProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("server_family", (s.GetServerFamily())); err != nil {
+		return diag.Errorf("error occurred while setting property ServerFamily in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("server_pool", flattenMapResourcepoolPoolRelationship(s.GetServerPool(), d)); err != nil {
@@ -3907,6 +4169,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 
 	if err := d.Set("server_pre_assign_by_slot", flattenMapServerServerAssignTypeSlot(s.GetServerPreAssignBySlot(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ServerPreAssignBySlot in ServerProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("server_reservation", flattenMapResourcepoolReservationReference(s.GetServerReservation(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ServerReservation in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -4241,6 +4507,12 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
 				}
 			}
 			if v, ok := l["reservation_moid"]; ok {
@@ -4678,6 +4950,12 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
+				}
+			}
 			if v, ok := l["reservation_moid"]; ok {
 				{
 					x := (v.(string))
@@ -4762,10 +5040,72 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 		o.SetScheduledActions(x)
 	}
 
+	if d.HasChange("scheduled_server_assignment") {
+		v := d.Get("scheduled_server_assignment")
+		p := make([]models.ServerServerAssignment, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ServerServerAssignment{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("server.ServerAssignment")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["pool_selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetPoolSelector(x)
+				}
+			}
+			if v, ok := l["server_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetServerSerial(x)
+				}
+			}
+			if v, ok := l["server_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetServerType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetScheduledServerAssignment(x)
+		}
+	}
+
 	if d.HasChange("server_assignment_mode") {
 		v := d.Get("server_assignment_mode")
 		x := (v.(string))
 		o.SetServerAssignmentMode(x)
+	}
+
+	if d.HasChange("server_family") {
+		v := d.Get("server_family")
+		x := (v.(string))
+		o.SetServerFamily(x)
 	}
 
 	if d.HasChange("server_pool") {
@@ -4865,6 +5205,68 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 		if len(p) > 0 {
 			x := p[0]
 			o.SetServerPreAssignBySlot(x)
+		}
+	}
+
+	if d.HasChange("server_reservation") {
+		v := d.Get("server_reservation")
+		p := make([]models.ResourcepoolReservationReference, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ResourcepoolReservationReference{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("resourcepool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["pool_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetPoolMoid(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			if v, ok := l["resource_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetResourceSerial(x)
+				}
+			}
+			if v, ok := l["resource_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetResourceType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetServerReservation(x)
 		}
 	}
 

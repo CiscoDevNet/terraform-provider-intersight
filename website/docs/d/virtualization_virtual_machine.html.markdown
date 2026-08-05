@@ -3,12 +3,24 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_virtual_machine"
 description: |-
-        Depicts operations to control the life cycle of a virtual machine on a hypervisor.
+        The VirtualMachine object is central to virtual machine configuration and lifecycle management within a hypervisor environment. This provides a comprehensive framework for creating, updating, and deleting virtual machines.
+        #### Purpose
+        VirtualMachine serves as the foundational object for managing virtual machine configurations, supporting actions such as provisioning, power state management, and resource placement. It is integral to orchestrating virtual machine operations within a defined hypervisor ecosystem.
+        #### Key Concepts
+        - **Lifecycle Operations:** Encompasses a wide range of operations for virtual machine lifecycle management, including creation, deletion, and configuration updates.
+        - **Resource Placement:** Supports affinity and anti-affinity rules, ensuring optimal resource allocation and placement.
+        - **Integration with Workflow:** Tightly integrates with workflow management objects, enabling streamlined automation and orchestration of virtual machine operations.
 
 ---
 
 # Data Source: intersight_virtualization_virtual_machine
-Depicts operations to control the life cycle of a virtual machine on a hypervisor.
+The VirtualMachine object is central to virtual machine configuration and lifecycle management within a hypervisor environment. This provides a comprehensive framework for creating, updating, and deleting virtual machines.
+#### Purpose
+VirtualMachine serves as the foundational object for managing virtual machine configurations, supporting actions such as provisioning, power state management, and resource placement. It is integral to orchestrating virtual machine operations within a defined hypervisor ecosystem.
+#### Key Concepts
+- **Lifecycle Operations:** Encompasses a wide range of operations for virtual machine lifecycle management, including creation, deletion, and configuration updates.
+- **Resource Placement:** Supports affinity and anti-affinity rules, ensuring optimal resource allocation and placement.
+- **Integration with Workflow:** Tightly integrates with workflow management objects, enabling streamlined automation and orchestration of virtual machine operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -213,6 +213,11 @@ func getIamPasswordHistorySettingCollectionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"password_history_window": {
+			Description: "The password history window size (number of previous passwords to remember) that is currently in effect. Used to detect policy changes at deploy time so the stored history can be renormalized if the window has changed.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -828,6 +833,11 @@ func dataSourceIamPasswordHistorySettingCollectionRead(c context.Context, d *sch
 		o.SetPasswordHistoryObjects(x)
 	}
 
+	if v, ok := d.GetOkExists("password_history_window"); ok {
+		x := int64(v.(int))
+		o.SetPasswordHistoryWindow(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1207,6 +1217,7 @@ func dataSourceIamPasswordHistorySettingCollectionRead(c context.Context, d *sch
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["password_history_objects"] = flattenListIamPasswordHistorySetting(s.GetPasswordHistoryObjects(), d)
+				temp["password_history_window"] = (s.GetPasswordHistoryWindow())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 

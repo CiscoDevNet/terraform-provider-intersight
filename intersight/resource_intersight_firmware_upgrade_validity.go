@@ -674,7 +674,7 @@ func resourceFirmwareUpgradeValidityCreate(c context.Context, d *schema.Resource
 
 	o.SetClassId("firmware.UpgradeValidity")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

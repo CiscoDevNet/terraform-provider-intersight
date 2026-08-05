@@ -123,7 +123,7 @@ This complex property has following sub-properties:
 * `reported_policy_changes`:(Array)
 This complex property has following sub-properties:
   + `change_id`:(string)(ReadOnly) The change evaluation identifier for which the change is reported. 
-  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy. 
+  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy.* `Failed` - The status when policy change evaluation report handling failed for a policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `policy_type`:(string)(ReadOnly) The type of policy for which the change has been reported. 
 * `scheduled_actions`:(Array)

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_remote_copy_pair_tc"
 description: |-
-        TrueCopy pair entity in Hitachi storage array.
+        The HitachiRemoteCopyPairTc object represents a TrueCopy pair entity within the Hitachi storage array, focused on replication management and operations.
+        #### Purpose
+        HitachiRemoteCopyPairTc is designed to manage TrueCopy pairs, facilitating replication operations and monitoring of pair attributes.
+        #### Key Concepts
+        - **Replication Operations:** Manages replication types, LDEV numbers, and status information for TrueCopy pairs.
+        - **Privilege Sets:** Provides controlled access for managing TrueCopy pair settings with defined privilege sets.
+        - **Licensing:** Supports operations under specified entitlements, adhering to licensing requirements.
 
 ---
 
 # Data Source: intersight_storage_hitachi_remote_copy_pair_tc
-TrueCopy pair entity in Hitachi storage array.
+The HitachiRemoteCopyPairTc object represents a TrueCopy pair entity within the Hitachi storage array, focused on replication management and operations.
+#### Purpose
+HitachiRemoteCopyPairTc is designed to manage TrueCopy pairs, facilitating replication operations and monitoring of pair attributes.
+#### Key Concepts
+- **Replication Operations:** Manages replication types, LDEV numbers, and status information for TrueCopy pairs.
+- **Privilege Sets:** Provides controlled access for managing TrueCopy pair settings with defined privilege sets.
+- **Licensing:** Supports operations under specified entitlements, adhering to licensing requirements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

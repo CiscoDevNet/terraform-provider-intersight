@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,8 @@ type ServerBaseProfile struct {
 	ObjectType string `json:"ObjectType"`
 	// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
+	// The server family type applicable to a server profile when the target platform is Standalone. For all other platform types, the value should be All. * `Unspecified` - Server Family type for Unspecified servers. * `All` - All server family types are included under this category. * `UCSC845A` - Server Family type for UCS C845A servers. * `UCSC2XX/4XX` - Server Family type for UCS C2XX/4XX servers.
+	ServerFamily *string `json:"ServerFamily,omitempty"`
 	// The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight. * `UnifiedEdgeServer` - Unified Edge sleds that is managed by Intersight.
 	TargetPlatform *string `json:"TargetPlatform,omitempty"`
 	// UUID address allocation type selected to assign an UUID address for the server. * `NONE` - The user did not assign any UUID address. * `STATIC` - The user assigns a static UUID address. * `POOL` - The user selects a pool from which the address will be leased.
@@ -53,6 +55,8 @@ func NewServerBaseProfile(classId string, objectType string) *ServerBaseProfile 
 	this.Type = &type_
 	var action string = "No-op"
 	this.Action = &action
+	var serverFamily string = "Unspecified"
+	this.ServerFamily = &serverFamily
 	var targetPlatform string = "Standalone"
 	this.TargetPlatform = &targetPlatform
 	var uuidAddressType string = "NONE"
@@ -65,6 +69,8 @@ func NewServerBaseProfile(classId string, objectType string) *ServerBaseProfile 
 // but it doesn't guarantee that properties required by API are set
 func NewServerBaseProfileWithDefaults() *ServerBaseProfile {
 	this := ServerBaseProfile{}
+	var serverFamily string = "Unspecified"
+	this.ServerFamily = &serverFamily
 	var targetPlatform string = "Standalone"
 	this.TargetPlatform = &targetPlatform
 	var uuidAddressType string = "NONE"
@@ -150,6 +156,38 @@ func (o *ServerBaseProfile) HasManagementMode() bool {
 // SetManagementMode gets a reference to the given string and assigns it to the ManagementMode field.
 func (o *ServerBaseProfile) SetManagementMode(v string) {
 	o.ManagementMode = &v
+}
+
+// GetServerFamily returns the ServerFamily field value if set, zero value otherwise.
+func (o *ServerBaseProfile) GetServerFamily() string {
+	if o == nil || IsNil(o.ServerFamily) {
+		var ret string
+		return ret
+	}
+	return *o.ServerFamily
+}
+
+// GetServerFamilyOk returns a tuple with the ServerFamily field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerBaseProfile) GetServerFamilyOk() (*string, bool) {
+	if o == nil || IsNil(o.ServerFamily) {
+		return nil, false
+	}
+	return o.ServerFamily, true
+}
+
+// HasServerFamily returns a boolean if a field has been set.
+func (o *ServerBaseProfile) HasServerFamily() bool {
+	if o != nil && !IsNil(o.ServerFamily) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerFamily gets a reference to the given string and assigns it to the ServerFamily field.
+func (o *ServerBaseProfile) SetServerFamily(v string) {
+	o.ServerFamily = &v
 }
 
 // GetTargetPlatform returns the TargetPlatform field value if set, zero value otherwise.
@@ -325,6 +363,9 @@ func (o ServerBaseProfile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ManagementMode) {
 		toSerialize["ManagementMode"] = o.ManagementMode
 	}
+	if !IsNil(o.ServerFamily) {
+		toSerialize["ServerFamily"] = o.ServerFamily
+	}
 	if !IsNil(o.TargetPlatform) {
 		toSerialize["TargetPlatform"] = o.TargetPlatform
 	}
@@ -391,6 +432,8 @@ func (o *ServerBaseProfile) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
+		// The server family type applicable to a server profile when the target platform is Standalone. For all other platform types, the value should be All. * `Unspecified` - Server Family type for Unspecified servers. * `All` - All server family types are included under this category. * `UCSC845A` - Server Family type for UCS C845A servers. * `UCSC2XX/4XX` - Server Family type for UCS C2XX/4XX servers.
+		ServerFamily *string `json:"ServerFamily,omitempty"`
 		// The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight. * `UnifiedEdgeServer` - Unified Edge sleds that is managed by Intersight.
 		TargetPlatform *string `json:"TargetPlatform,omitempty"`
 		// UUID address allocation type selected to assign an UUID address for the server. * `NONE` - The user did not assign any UUID address. * `STATIC` - The user assigns a static UUID address. * `POOL` - The user selects a pool from which the address will be leased.
@@ -407,6 +450,7 @@ func (o *ServerBaseProfile) UnmarshalJSON(data []byte) (err error) {
 		varServerBaseProfile.ClassId = varServerBaseProfileWithoutEmbeddedStruct.ClassId
 		varServerBaseProfile.ObjectType = varServerBaseProfileWithoutEmbeddedStruct.ObjectType
 		varServerBaseProfile.ManagementMode = varServerBaseProfileWithoutEmbeddedStruct.ManagementMode
+		varServerBaseProfile.ServerFamily = varServerBaseProfileWithoutEmbeddedStruct.ServerFamily
 		varServerBaseProfile.TargetPlatform = varServerBaseProfileWithoutEmbeddedStruct.TargetPlatform
 		varServerBaseProfile.UuidAddressType = varServerBaseProfileWithoutEmbeddedStruct.UuidAddressType
 		varServerBaseProfile.ConfigResult = varServerBaseProfileWithoutEmbeddedStruct.ConfigResult
@@ -431,6 +475,7 @@ func (o *ServerBaseProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ManagementMode")
+		delete(additionalProperties, "ServerFamily")
 		delete(additionalProperties, "TargetPlatform")
 		delete(additionalProperties, "UuidAddressType")
 		delete(additionalProperties, "ConfigResult")

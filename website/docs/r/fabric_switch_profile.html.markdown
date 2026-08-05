@@ -121,6 +121,7 @@ This complex property has following sub-properties:
                 (Array of schema.TypeString) -
 * `description`:(string) Description of the profile. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `fabric_pre_assign_by_serial`:(string) Serial number of the fabric that would be assigned to this pre-assigned fabric switch Profile. It can be any string that adheres to the following constraints:It should start and end with an alphanumeric character.It cannot be more than 20 characters. 
 * `incomplete_policies`:(Array)(ReadOnly) An array of relationships to policyAbstractPolicy resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -180,7 +181,7 @@ This complex property has following sub-properties:
 * `reported_policy_changes`:(Array)
 This complex property has following sub-properties:
   + `change_id`:(string)(ReadOnly) The change evaluation identifier for which the change is reported. 
-  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy. 
+  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy.* `Failed` - The status when policy change evaluation report handling failed for a policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `policy_type`:(string)(ReadOnly) The type of policy for which the change has been reported. 
 * `running_workflows`:(Array)(ReadOnly) An array of relationships to workflowWorkflowInfo resources. 
@@ -196,12 +197,18 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `proceed_on_reboot`:(bool) ProceedOnReboot can be used to acknowledge server reboot while triggering deploy/activate. 
+* `scheduled_switch_assignment`:(HashMap) - Switch reassignment information that is captured as part of the config import process. 
+This complex property has following sub-properties:
+  + `enabled`:(bool) Indicates if this assignment is enabled. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `switch_serial`:(string) Serial number of the switch. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `src_template`:(HashMap) - A reference to a policyAbstractProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `switch_assignment_mode`:(string) Source of the switch assigned to the Domain Profile. Values can be Static or None. Static is used if a switch is attached directly to a Domain Profile. None is used if no switch is attached to a Domain Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later.* `Static` - Fabric is directly assigned to domain profile using assign chassis.* `None` - No fabric is assigned to the domain profile. 
 * `switch_cluster_profile`:(HashMap) - A reference to a fabricSwitchClusterProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

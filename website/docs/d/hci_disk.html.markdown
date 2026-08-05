@@ -3,12 +3,22 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_disk"
 description: |-
-        A disk associated with a node.
+        The physical disk belonging to a node in a Nutanix cluster.
+        #### Purpose
+        The Disk object provides a detailed view of disk configurations.
+        #### Key Concepts
+        - **Configuration Details:** Offers insights into disk attributes like storage tier, size, model, and status.
+        - **Operational Status:** Monitors disk operational state and storage utilization.
 
 ---
 
 # Data Source: intersight_hci_disk
-A disk associated with a node.
+The physical disk belonging to a node in a Nutanix cluster.
+#### Purpose
+The Disk object provides a detailed view of disk configurations.
+#### Key Concepts
+- **Configuration Details:** Offers insights into disk attributes like storage tier, size, model, and status.
+- **Operational Status:** Monitors disk operational state and storage utilization.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

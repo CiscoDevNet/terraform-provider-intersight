@@ -28,7 +28,10 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_iam_end_point_user_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `account_lockout_duration`:(int) Timeout duration specifies the duration (in seconds) after which a locked account is automatically unlocked. - Set to 0 when accountUnlockMode is Manual. - Set a value between 1 and 604800 when accountUnlockMode is Automatic. 
+* `account_lockout_threshold`:(int) Set Account Lockout Threshold for endpoint users. 
 * `account_moid`:(string) The Account ID for this managed object. 
+* `account_unlock_mode`:(string) Account unlock method specifies how the account is unlocked after it is locked: - Manual: Account must be manually unlocked by an administrator. - Automatic: Account unlocks automatically after a timeout duration.* `Automatic` - Set Automatic on the selected end point.* `Manual` - Set Manual on the selected end point. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

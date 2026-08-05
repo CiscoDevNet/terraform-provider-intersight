@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hci.DomainManager"]
 **ApiLimits** | Pointer to [**[]HciApiLimit**](HciApiLimit.md) |  | [optional] 
 **ApiLimitsString** | Pointer to **string** | The string representation of the API limits as a string. It can be used by Alarm. | [optional] [readonly] 
+**LcmConnectivityType** | Pointer to **string** | The LCM (Life Cycle Manager) connectivity type. Possible values: CONNECTED_SITE (has internet connectivity), DARKSITE_DIRECT_UPLOAD (no external connectivity with direct upload), DARKSITE_WEB_SERVER (no external connectivity with darksite webserver). | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the domain manager. | [optional] [readonly] 
 **PcExtId** | Pointer to **string** | The unique identifier of the domain manager (Prism Central) instance. | [optional] [readonly] 
 **Size** | Pointer to **string** | The size of the domain manager such as STARTER, SMALL, LARGE, EXTRALARGE. It determines the resources used by the domain manager. | [optional] [readonly] 
@@ -133,6 +134,31 @@ SetApiLimitsString sets ApiLimitsString field to given value.
 `func (o *HciDomainManager) HasApiLimitsString() bool`
 
 HasApiLimitsString returns a boolean if a field has been set.
+
+### GetLcmConnectivityType
+
+`func (o *HciDomainManager) GetLcmConnectivityType() string`
+
+GetLcmConnectivityType returns the LcmConnectivityType field if non-nil, zero value otherwise.
+
+### GetLcmConnectivityTypeOk
+
+`func (o *HciDomainManager) GetLcmConnectivityTypeOk() (*string, bool)`
+
+GetLcmConnectivityTypeOk returns a tuple with the LcmConnectivityType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLcmConnectivityType
+
+`func (o *HciDomainManager) SetLcmConnectivityType(v string)`
+
+SetLcmConnectivityType sets LcmConnectivityType field to given value.
+
+### HasLcmConnectivityType
+
+`func (o *HciDomainManager) HasLcmConnectivityType() bool`
+
+HasLcmConnectivityType returns a boolean if a field has been set.
 
 ### GetName
 

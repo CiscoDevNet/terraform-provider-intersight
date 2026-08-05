@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.UserSetting"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.UserSetting"]
 **AllowUiSessionRecording** | Pointer to **bool** | UI preference of the user for Session Recording. | [optional] [default to true]
+**DefaultPermission** | Pointer to [**[]IamDefaultPermissionInfo**](IamDefaultPermissionInfo.md) |  | [optional] 
 **UserIdOrEmail** | Pointer to **string** | UserID or email as configured in the IdP. | [optional] [readonly] 
 **UserUniqueIdentifier** | Pointer to **string** | Unique id of the user used by the identity provider to store the user. | [optional] [readonly] 
 **Idp** | Pointer to [**NullableIamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
@@ -96,6 +97,41 @@ SetAllowUiSessionRecording sets AllowUiSessionRecording field to given value.
 
 HasAllowUiSessionRecording returns a boolean if a field has been set.
 
+### GetDefaultPermission
+
+`func (o *IamUserSetting) GetDefaultPermission() []IamDefaultPermissionInfo`
+
+GetDefaultPermission returns the DefaultPermission field if non-nil, zero value otherwise.
+
+### GetDefaultPermissionOk
+
+`func (o *IamUserSetting) GetDefaultPermissionOk() (*[]IamDefaultPermissionInfo, bool)`
+
+GetDefaultPermissionOk returns a tuple with the DefaultPermission field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultPermission
+
+`func (o *IamUserSetting) SetDefaultPermission(v []IamDefaultPermissionInfo)`
+
+SetDefaultPermission sets DefaultPermission field to given value.
+
+### HasDefaultPermission
+
+`func (o *IamUserSetting) HasDefaultPermission() bool`
+
+HasDefaultPermission returns a boolean if a field has been set.
+
+### SetDefaultPermissionNil
+
+`func (o *IamUserSetting) SetDefaultPermissionNil(b bool)`
+
+ SetDefaultPermissionNil sets the value for DefaultPermission to be an explicit nil
+
+### UnsetDefaultPermission
+`func (o *IamUserSetting) UnsetDefaultPermission()`
+
+UnsetDefaultPermission ensures that no value is present for DefaultPermission, not even an explicit nil
 ### GetUserIdOrEmail
 
 `func (o *IamUserSetting) GetUserIdOrEmail() string`

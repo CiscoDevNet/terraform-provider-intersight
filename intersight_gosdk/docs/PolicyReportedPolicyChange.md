@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "policy.ReportedPolicyChange"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.ReportedPolicyChange"]
 **ChangeId** | Pointer to **string** | The change evaluation identifier for which the change is reported. | [optional] [readonly] 
-**ChangeStatus** | Pointer to **string** | The status of policy change evaluation which has been reported. * &#x60;Initiated&#x60; - The status when policy change evaluation is triggered for a policy. * &#x60;Reported&#x60; - The status when policy change evaluation is reported for a policy. | [optional] [readonly] [default to "Initiated"]
+**ChangeStatus** | Pointer to **string** | The status of policy change evaluation which has been reported. * &#x60;Initiated&#x60; - The status when policy change evaluation is triggered for a policy. * &#x60;Reported&#x60; - The status when policy change evaluation is reported for a policy. * &#x60;Failed&#x60; - The status when policy change evaluation report handling failed for a policy. | [optional] [readonly] [default to "Initiated"]
 **PolicyType** | Pointer to **string** | The type of policy for which the change has been reported. | [optional] [readonly] 
 
 ## Methods

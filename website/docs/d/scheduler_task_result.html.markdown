@@ -3,12 +3,28 @@ subcategory: "scheduler"
 layout: "intersight"
 page_title: "Intersight: intersight_scheduler_task_result"
 description: |-
-        An instance of a task execution result. Each Recurring schedule will have an instance of this object in the database. A one-time schedule will have just one entry.
+        TaskResults represent individual execution instances produced by a TaskSchedule. For recurring schedules, each run yields a TaskResult record; for one-time schedules, there is typically a single result. TaskResults capture timing and outcome status information for auditing and troubleshooting.
+        #### Purpose
+        Provide per-run execution history for scheduled tasks so users and administrators can track success or failure over time and diagnose issues.
+        #### Key Concepts
+        - **Execution instance record:** One TaskResult per schedule run (many for recurring, one for one-time).
+        - **Timing and duration visibility:** Captures start time, timezone, and end time for each execution.
+        - **Outcome reporting:** Stores a structured status detail with state and reason for failure or suspension.
+        - **Backreference to schedule:** Always linked to the TaskSchedule that produced it (cascade delete with the schedule).
+        - **Associated object pointer:** Can reference the managed object created/updated by the run (e.g., a workflow execution record).
 
 ---
 
 # Data Source: intersight_scheduler_task_result
-An instance of a task execution result. Each Recurring schedule will have an instance of this object in the database. A one-time schedule will have just one entry.
+TaskResults represent individual execution instances produced by a TaskSchedule. For recurring schedules, each run yields a TaskResult record; for one-time schedules, there is typically a single result. TaskResults capture timing and outcome status information for auditing and troubleshooting.
+#### Purpose
+Provide per-run execution history for scheduled tasks so users and administrators can track success or failure over time and diagnose issues.
+#### Key Concepts
+- **Execution instance record:** One TaskResult per schedule run (many for recurring, one for one-time).
+- **Timing and duration visibility:** Captures start time, timezone, and end time for each execution.
+- **Outcome reporting:** Stores a structured status detail with state and reason for failure or suspension.
+- **Backreference to schedule:** Always linked to the TaskSchedule that produced it (cascade delete with the schedule).
+- **Associated object pointer:** Can reference the managed object created/updated by the run (e.g., a workflow execution record).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

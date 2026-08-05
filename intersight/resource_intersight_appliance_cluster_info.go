@@ -172,6 +172,13 @@ func resourceApplianceClusterInfo() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"hypervisor_type": {
+				Description:  "The hypervisor type of the node.\n* `ESXi` - VMware ESXi hypervisor type.Indicates the appliance node is running on a VMware ESXi virtualization platform.\n* `Hyper-V` - Microsoft Hyper-V hypervisor type.Indicates the appliance node is running on a Microsoft Hyper-V virtualization platform.\n* `KVM` - Kernel-based Virtual Machine hypervisor type.Indicates the appliance node is running on a KVM virtualization platform.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"ESXi", "Hyper-V", "KVM"}, false),
+				Optional:     true,
+				Default:      "ESXi",
+			},
 			"installer_version": {
 				Description: "Installer version used to install on peer node.",
 				Type:        schema.TypeString,
@@ -718,12 +725,17 @@ func resourceApplianceClusterInfoCreate(c context.Context, d *schema.ResourceDat
 		o.SetHostname(x)
 	}
 
+	if v, ok := d.GetOk("hypervisor_type"); ok {
+		x := (v.(string))
+		o.SetHypervisorType(x)
+	}
+
 	if v, ok := d.GetOk("installer_version"); ok {
 		x := (v.(string))
 		o.SetInstallerVersion(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -962,6 +974,10 @@ func resourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property Hostname in ApplianceClusterInfo object: %s", err.Error())
 	}
 
+	if err := d.Set("hypervisor_type", (s.GetHypervisorType())); err != nil {
+		return diag.Errorf("error occurred while setting property HypervisorType in ApplianceClusterInfo object: %s", err.Error())
+	}
+
 	if err := d.Set("installer_version", (s.GetInstallerVersion())); err != nil {
 		return diag.Errorf("error occurred while setting property InstallerVersion in ApplianceClusterInfo object: %s", err.Error())
 	}
@@ -1109,6 +1125,12 @@ func resourceApplianceClusterInfoUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("hostname")
 		x := (v.(string))
 		o.SetHostname(x)
+	}
+
+	if d.HasChange("hypervisor_type") {
+		v := d.Get("hypervisor_type")
+		x := (v.(string))
+		o.SetHypervisorType(x)
 	}
 
 	if d.HasChange("installer_version") {

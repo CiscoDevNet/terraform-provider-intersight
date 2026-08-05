@@ -3,12 +3,22 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_cluster"
 description: |-
-        A HCI cluster reported by Prism Central.
+        The Cluster object represents a cluster, as reported by Nutanix Prism Central. This provides a structured representation of clusters, including their configuration and operational status.
+        #### Purpose
+        The Cluster object serves as a central point of information for understanding the characteristics of Nutanix clusters. It enables administrators to monitor cluster status and configuration.
+        #### Key Concepts
+        - **Configuration Details:** Provides insights into cluster attributes, including software and hardware configurations, license.
+        - **Performance Monitoring:** Tracks key performance indicators such as VM count, upgrade status, and resource utilization.
 
 ---
 
 # Data Source: intersight_hci_cluster
-A HCI cluster reported by Prism Central.
+The Cluster object represents a cluster, as reported by Nutanix Prism Central. This provides a structured representation of clusters, including their configuration and operational status.
+#### Purpose  
+The Cluster object serves as a central point of information for understanding the characteristics of Nutanix clusters. It enables administrators to monitor cluster status and configuration.
+#### Key Concepts
+- **Configuration Details:** Provides insights into cluster attributes, including software and hardware configurations, license. 
+- **Performance Monitoring:** Tracks key performance indicators such as VM count, upgrade status, and resource utilization.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -22,6 +32,7 @@ The following arguments can be used to get data of already created objects in In
 * `build_info_version`:(string) The software version from the build. 
 * `cluster_arch`:(string) The CPU architecture of the cluster server such as x86_64 and PPC64LE. 
 * `cluster_ext_id`:(string) The unique identifier of the cluster. 
+* `cluster_type`:(string) The type of the cluster. Possible values:- HYPER_CONVERGED: Traditional HCI cluster using local storage.- COMPUTE: Cluster using external storage. 
 * `container_name`:(string) The name of the default container created as part of cluster creation. 
 * `cpu_capacity_hz`:(int) The CPU capacity in Hz of the cluster. 
 * `cpu_usage_hz`:(int) The CPU usage in Hz of the cluster. 
@@ -50,6 +61,6 @@ The following arguments can be used to get data of already created objects in In
 * `storage_capacity_bytes`:(int) The storage capacity in bytes of the cluster. 
 * `storage_usage_bytes`:(int) The storage usage in bytes of the cluster. 
 * `timezone`:(string) The timezone of the cluster. 
-* `upgrade_status`:(string) The upgrade status of a cluster includes the following known values: PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED,FAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster. 
+* `upgrade_status`:(string) The upgrade status of a cluster includes the following known values PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED,FAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster. 
 * `vm_count`:(int) The number of VMs running on this cluster. 
  

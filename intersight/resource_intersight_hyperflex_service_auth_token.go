@@ -695,12 +695,12 @@ func resourceHyperflexServiceAuthTokenCreate(c context.Context, d *schema.Resour
 
 	o.SetClassId("hyperflex.ServiceAuthToken")
 
-	if v, ok := d.GetOk("client_id"); ok {
+	if v, ok := d.GetOkExists("client_id"); ok {
 		x := (v.(string))
 		o.SetClientId(x)
 	}
 
-	if v, ok := d.GetOk("cluster"); ok {
+	if v, ok := d.GetOkExists("cluster"); ok {
 		p := make([]models.HyperflexClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -748,14 +748,14 @@ func resourceHyperflexServiceAuthTokenCreate(c context.Context, d *schema.Resour
 		o.SetCsiVersion(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("hyperflex.ServiceAuthToken")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -876,7 +876,7 @@ func resourceHyperflexServiceAuthTokenCreate(c context.Context, d *schema.Resour
 		}
 	}
 
-	if v, ok := d.GetOk("token_owner"); ok {
+	if v, ok := d.GetOkExists("token_owner"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_network"
 description: |-
-        Details of VMware Virtual Network.
+        The VmwareNetwork object represents the VMware Virtual Network entity, detailing configurations and attributes for network management within VMware environments.
+        #### Purpose
+        VmwareNetwork is critical for managing virtual network configurations, offering comprehensive control over network attributes and settings to optimize resource allocation and performance.
+        #### Key Concepts
+        - **Network Configuration:** Supports settings for VLAN IDs, security policies, and teaming options, enhancing network management and control.
+        - **Operational Features:** Includes features for failover and teaming, promoting resilient and adaptive network operations.
+        - **Integration:** Interfaces with virtual switches and hosts, facilitating seamless network management and resource distribution.
+        - **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_network
-Details of VMware Virtual Network.
+The VmwareNetwork object represents the VMware Virtual Network entity, detailing configurations and attributes for network management within VMware environments.
+#### Purpose
+VmwareNetwork is critical for managing virtual network configurations, offering comprehensive control over network attributes and settings to optimize resource allocation and performance.
+#### Key Concepts
+- **Network Configuration:** Supports settings for VLAN IDs, security policies, and teaming options, enhancing network management and control.
+- **Operational Features:** Includes features for failover and teaming, promoting resilient and adaptive network operations.
+- **Integration:** Interfaces with virtual switches and hosts, facilitating seamless network management and resource distribution.
+- **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

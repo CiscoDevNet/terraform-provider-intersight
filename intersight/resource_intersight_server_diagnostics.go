@@ -672,7 +672,7 @@ func resourceServerDiagnosticsCreate(c context.Context, d *schema.ResourceData, 
 		o.SetDiagnosticsType(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -684,7 +684,7 @@ func resourceServerDiagnosticsCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetObjectType("server.Diagnostics")
 
-	if v, ok := d.GetOk("server"); ok {
+	if v, ok := d.GetOkExists("server"); ok {
 		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

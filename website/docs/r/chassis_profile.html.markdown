@@ -54,6 +54,16 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `chassis_assignment_mode`:(string) Source of the chassis assigned to the Chassis Profile. Values can be Static or None. Static is used if a chassis is attached directly to a Chassis Profile. None is used if no chassis is attached to a Chassis Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later.* `Static` - Chassis is directly assigned to chassis profile using assign chassis.* `None` - No chassis is assigned to the chassis profile. 
+* `chassis_pre_assign_by_serial`:(string) Serial number of the chassis that would be assigned to this pre-assigned Chassis Profile. It can be any string that adheres to the following constraints:It should start and end with an alphanumeric character.It cannot be more than 20 characters. 
+* `chassis_reservation`:(HashMap) - Serial number based reservation for the chassis to be assigned to this Chassis Profile. 
+This complex property has following sub-properties:
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `pool_moid`:(string) The moid of the pool object, if applicable. 
+  + `reservation_id`:(string) The identity for which the reference is created. It is used to store the ID allocated to the profile during export. Reservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.During import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.For IP and UUid IDs, we create reservation, for other Ids we do not create reservations. 
+  + `reservation_moid`:(string) The moid of the reservation object. 
+  + `resource_serial`:(string) The serial number of the resource that is being reserved. 
+  + `resource_type`:(string) The resource type that is being reserved. 
 * `config_change_context`:(HashMap) -(ReadOnly) The configuration change state and results of the last change operation. 
 This complex property has following sub-properties:
   + `config_change_error`:(string)(ReadOnly) Indicates reason for failure state of configChangeState. 
@@ -180,9 +190,20 @@ This complex property has following sub-properties:
 * `reported_policy_changes`:(Array)
 This complex property has following sub-properties:
   + `change_id`:(string)(ReadOnly) The change evaluation identifier for which the change is reported. 
-  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy. 
+  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy.* `Failed` - The status when policy change evaluation report handling failed for a policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `policy_type`:(string)(ReadOnly) The type of policy for which the change has been reported. 
+* `reservation_references`:(Array)
+This complex property has following sub-properties:
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [fcpool.ReservationReference](#fcpoolReservationReference)
+[ippool.ReservationReference](#ippoolReservationReference)
+[iqnpool.ReservationReference](#iqnpoolReservationReference)
+[macpool.ReservationReference](#macpoolReservationReference)
+[resourcepool.ReservationReference](#resourcepoolReservationReference)
+[uuidpool.ReservationReference](#uuidpoolReservationReference)
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `reservation_id`:(string) The identity for which the reference is created. It is used to store the ID allocated to the profile during export. Reservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.During import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.For IP and UUid IDs, we create reservation, for other Ids we do not create reservations. 
+  + `reservation_moid`:(string) The moid of the reservation object. 
 * `running_workflows`:(Array)(ReadOnly) An array of relationships to workflowWorkflowInfo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -196,6 +217,11 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `proceed_on_reboot`:(bool) ProceedOnReboot can be used to acknowledge server reboot while triggering deploy/activate. 
+* `scheduled_chassis_assignment`:(HashMap) - Chassis reassignment information that is captured as part of the config import process. 
+This complex property has following sub-properties:
+  + `chassis_serial`:(string) Serial number of the chassis. 
+  + `enabled`:(bool) Indicates if this assignment is enabled. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `src_template`:(HashMap) - A reference to a policyAbstractProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
@@ -248,4 +274,33 @@ These are
 `intersight_chassis_profile` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_chassis_profile.example 1234567890987654321abcde
-``` 
+```
+## Allowed Types in `AdditionalProperties`
+ 
+### [fcpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `consumer_name`:(string) The consumer name for which the reserved fc pool would be used. 
+* `consumer_type`:(string) The consumer type for which the reserved fc pool would be used.* `Vhba` - FC reservation would be used by Vhba.* `WWNN` - FC reservation would be used by WWNN. 
+
+### [ippool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `consumer_name`:(string) The consumer name for which the reserved IP would be used. 
+* `consumer_type`:(string) The consumer type for which the reserved IP would be used.* `OutofbandIpv4-Access` - IP reservation would be used for out of band management.* `InbandIpv4-Access` - IP reservation would be used for inband management.* `InbandIpv6-Access` - IP reservation would be used for inband management.* `ISCSI` - IP reservation would be used for ISCSI management. 
+
+### [iqnpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+
+### [macpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `consumer_name`:(string) The consumer name for which the reserved MAC would be used. 
+* `consumer_type`:(string) The consumer type for which the reserved MAC would be used.* `Vnic` - MAC reservation would be used by VNIC. 
+
+### [resourcepool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `pool_moid`:(string) The moid of the pool object, if applicable. 
+* `resource_serial`:(string) The serial number of the resource that is being reserved. 
+* `resource_type`:(string) The resource type that is being reserved. 
+
+### [uuidpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+  

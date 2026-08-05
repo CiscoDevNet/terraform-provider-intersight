@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_cluster"
 description: |-
-        A real cluster of resources within a data center in VMware. A cluster is a convenient grouping of resources such as Host, Datastore, etc.
+        The VmwareCluster object characterizes the cluster entity within a VMware datacenter, serving as a grouping of resources such as hosts and datastores.
+        #### Purpose
+        VmwareCluster facilitates resource management and allocation within a VMware environment, optimizing operational efficiency and resource utilization through clustered resources.
+        #### Key Concepts
+        - **Resource Grouping:** Organizes resources like hosts and datastores into clusters, promoting efficient management and resource distribution.
+        - **Operational Features:** Supports proactive HA and other cluster-specific settings, enhancing resilience and operational continuity.
+        - **Integration:** Connects with datacenters and registered devices, supporting cohesive resource and inventory management.
+        - **Security and Access:** Enforces privilege sets for secure read and update operations, ensuring authorized and controlled access.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_cluster
-A real cluster of resources within a data center in VMware. A cluster is a convenient grouping of resources such as Host, Datastore, etc.
+The VmwareCluster object characterizes the cluster entity within a VMware datacenter, serving as a grouping of resources such as hosts and datastores.
+#### Purpose
+VmwareCluster facilitates resource management and allocation within a VMware environment, optimizing operational efficiency and resource utilization through clustered resources.
+#### Key Concepts
+- **Resource Grouping:** Organizes resources like hosts and datastores into clusters, promoting efficient management and resource distribution.
+- **Operational Features:** Supports proactive HA and other cluster-specific settings, enhancing resilience and operational continuity.
+- **Integration:** Connects with datacenters and registered devices, supporting cohesive resource and inventory management.
+- **Security and Access:** Enforces privilege sets for secure read and update operations, ensuring authorized and controlled access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

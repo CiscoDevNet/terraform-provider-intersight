@@ -857,7 +857,7 @@ func resourceHyperflexExtIscsiStoragePolicyCreate(c context.Context, d *schema.R
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -869,7 +869,7 @@ func resourceHyperflexExtIscsiStoragePolicyCreate(c context.Context, d *schema.R
 
 	o.SetObjectType("hyperflex.ExtIscsiStoragePolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

@@ -6,9 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**AccessVlan** | Pointer to **string** | Access VLAN for this port. | [optional] [readonly] 
+**AdminFec** | Pointer to **string** | Administratively configured FEC mode for this port. * &#x60;&#x60; - Default value for FEC state. * &#x60;Not Supported&#x60; - FEC is not supported on this port. * &#x60;Disabled&#x60; - FEC is disabled on this port. * &#x60;Auto&#x60; - FEC mode is automatically negotiated between link partners. * &#x60;Cl74&#x60; - FEC is configured to use the IEEE Clause 74 (FireCode) standard. * &#x60;RS-IEEE(Cl108)&#x60; - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard. * &#x60;KP&#x60; - FEC is configured to use the KP (Backplane Ethernet) FEC mode. | [optional] [readonly] [default to ""]
+**AllowedVlans** | Pointer to **string** | Allowed VLANs on this port. | [optional] [readonly] 
 **MacAddress** | Pointer to **string** | Mac Address of a port in the Fabric Interconnect. | [optional] [readonly] 
 **Mode** | Pointer to **string** | Operating mode of this port. | [optional] [readonly] 
+**NativeVlan** | Pointer to **string** | Native VLAN for this port. | [optional] [readonly] 
+**OperFec** | Pointer to **string** | Operational FEC mode for this port. * &#x60;&#x60; - Default value for FEC state. * &#x60;Not Supported&#x60; - FEC is not supported on this port. * &#x60;Disabled&#x60; - FEC is disabled on this port. * &#x60;Auto&#x60; - FEC mode is automatically negotiated between link partners. * &#x60;Cl74&#x60; - FEC is configured to use the IEEE Clause 74 (FireCode) standard. * &#x60;RS-IEEE(Cl108)&#x60; - FEC is configured to use the IEEE Clause 108 (Reed-Solomon) standard. * &#x60;KP&#x60; - FEC is configured to use the KP (Backplane Ethernet) FEC mode. | [optional] [readonly] [default to ""]
 **OperSpeed** | Pointer to **string** | Current Operational speed for this port. | [optional] [readonly] 
+**OperVlans** | Pointer to **string** | Operational VLANs on this port. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | PeerDn for ethernet physical port. | [optional] [readonly] 
 **PortChannelId** | Pointer to **int64** | Port channel id for port channel created on FI switch. | [optional] [readonly] 
 **PortName** | Pointer to **string** | Switch physical port name. | [optional] [readonly] 
@@ -76,6 +82,81 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAccessVlan
+
+`func (o *EtherPhysicalPortBase) GetAccessVlan() string`
+
+GetAccessVlan returns the AccessVlan field if non-nil, zero value otherwise.
+
+### GetAccessVlanOk
+
+`func (o *EtherPhysicalPortBase) GetAccessVlanOk() (*string, bool)`
+
+GetAccessVlanOk returns a tuple with the AccessVlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessVlan
+
+`func (o *EtherPhysicalPortBase) SetAccessVlan(v string)`
+
+SetAccessVlan sets AccessVlan field to given value.
+
+### HasAccessVlan
+
+`func (o *EtherPhysicalPortBase) HasAccessVlan() bool`
+
+HasAccessVlan returns a boolean if a field has been set.
+
+### GetAdminFec
+
+`func (o *EtherPhysicalPortBase) GetAdminFec() string`
+
+GetAdminFec returns the AdminFec field if non-nil, zero value otherwise.
+
+### GetAdminFecOk
+
+`func (o *EtherPhysicalPortBase) GetAdminFecOk() (*string, bool)`
+
+GetAdminFecOk returns a tuple with the AdminFec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminFec
+
+`func (o *EtherPhysicalPortBase) SetAdminFec(v string)`
+
+SetAdminFec sets AdminFec field to given value.
+
+### HasAdminFec
+
+`func (o *EtherPhysicalPortBase) HasAdminFec() bool`
+
+HasAdminFec returns a boolean if a field has been set.
+
+### GetAllowedVlans
+
+`func (o *EtherPhysicalPortBase) GetAllowedVlans() string`
+
+GetAllowedVlans returns the AllowedVlans field if non-nil, zero value otherwise.
+
+### GetAllowedVlansOk
+
+`func (o *EtherPhysicalPortBase) GetAllowedVlansOk() (*string, bool)`
+
+GetAllowedVlansOk returns a tuple with the AllowedVlans field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedVlans
+
+`func (o *EtherPhysicalPortBase) SetAllowedVlans(v string)`
+
+SetAllowedVlans sets AllowedVlans field to given value.
+
+### HasAllowedVlans
+
+`func (o *EtherPhysicalPortBase) HasAllowedVlans() bool`
+
+HasAllowedVlans returns a boolean if a field has been set.
+
 ### GetMacAddress
 
 `func (o *EtherPhysicalPortBase) GetMacAddress() string`
@@ -126,6 +207,56 @@ SetMode sets Mode field to given value.
 
 HasMode returns a boolean if a field has been set.
 
+### GetNativeVlan
+
+`func (o *EtherPhysicalPortBase) GetNativeVlan() string`
+
+GetNativeVlan returns the NativeVlan field if non-nil, zero value otherwise.
+
+### GetNativeVlanOk
+
+`func (o *EtherPhysicalPortBase) GetNativeVlanOk() (*string, bool)`
+
+GetNativeVlanOk returns a tuple with the NativeVlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNativeVlan
+
+`func (o *EtherPhysicalPortBase) SetNativeVlan(v string)`
+
+SetNativeVlan sets NativeVlan field to given value.
+
+### HasNativeVlan
+
+`func (o *EtherPhysicalPortBase) HasNativeVlan() bool`
+
+HasNativeVlan returns a boolean if a field has been set.
+
+### GetOperFec
+
+`func (o *EtherPhysicalPortBase) GetOperFec() string`
+
+GetOperFec returns the OperFec field if non-nil, zero value otherwise.
+
+### GetOperFecOk
+
+`func (o *EtherPhysicalPortBase) GetOperFecOk() (*string, bool)`
+
+GetOperFecOk returns a tuple with the OperFec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperFec
+
+`func (o *EtherPhysicalPortBase) SetOperFec(v string)`
+
+SetOperFec sets OperFec field to given value.
+
+### HasOperFec
+
+`func (o *EtherPhysicalPortBase) HasOperFec() bool`
+
+HasOperFec returns a boolean if a field has been set.
+
 ### GetOperSpeed
 
 `func (o *EtherPhysicalPortBase) GetOperSpeed() string`
@@ -150,6 +281,31 @@ SetOperSpeed sets OperSpeed field to given value.
 `func (o *EtherPhysicalPortBase) HasOperSpeed() bool`
 
 HasOperSpeed returns a boolean if a field has been set.
+
+### GetOperVlans
+
+`func (o *EtherPhysicalPortBase) GetOperVlans() string`
+
+GetOperVlans returns the OperVlans field if non-nil, zero value otherwise.
+
+### GetOperVlansOk
+
+`func (o *EtherPhysicalPortBase) GetOperVlansOk() (*string, bool)`
+
+GetOperVlansOk returns a tuple with the OperVlans field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperVlans
+
+`func (o *EtherPhysicalPortBase) SetOperVlans(v string)`
+
+SetOperVlans sets OperVlans field to given value.
+
+### HasOperVlans
+
+`func (o *EtherPhysicalPortBase) HasOperVlans() bool`
+
+HasOperVlans returns a boolean if a field has been set.
 
 ### GetPeerDn
 

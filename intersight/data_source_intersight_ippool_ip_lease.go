@@ -424,6 +424,16 @@ func getIppoolIpLeaseSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"preferred_ip_v4_address": {
+			Description: "The preferred IPv4 address can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that IPv4 address if it is available in the pool. If the specified preferred IPv4 address is not in the range of the pool or if it is already leased or reserved, then the next available IPv4 address from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred IPv4 address property. When the preferred IPv4 address property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be replaced by the new lease. Migration also supported only for dynamic lease requests.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"preferred_ip_v6_address": {
+			Description: "The preferred IPv6 address can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that IPv6 address if it is available in the pool. If the specified preferred IPv6 address is not in the range of the pool or if it is already leased or reserved, then the next available IPv6 address from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred IPv6 address property. When the preferred IPv6 address property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be replaced by the new lease. Migration also supported only for dynamic lease requests.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"reservation": {
 			Description: "The holder of a reference to reservation Moid and the specific details on lease condition for this reservation. Specified to allocate already reserved identities.",
 			Type:        schema.TypeList,
@@ -453,6 +463,11 @@ func getIppoolIpLeaseSchema() map[string]*schema.Schema {
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"reservation_id": {
+						Description: "The identity for which the reference is created. It is used to store the ID allocated to the profile during export. \nReservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.\nDuring import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.\nFor IP and UUid IDs, we create reservation, for other Ids we do not create reservations.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1272,6 +1287,16 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOk("preferred_ip_v4_address"); ok {
+		x := (v.(string))
+		o.SetPreferredIpV4Address(x)
+	}
+
+	if v, ok := d.GetOk("preferred_ip_v6_address"); ok {
+		x := (v.(string))
+		o.SetPreferredIpV6Address(x)
+	}
+
 	if v, ok := d.GetOk("reservation"); ok {
 		p := make([]models.IppoolReservationReference, 0, 1)
 		s := v.([]interface{})
@@ -1305,6 +1330,12 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
 				}
 			}
 			if v, ok := l["reservation_moid"]; ok {
@@ -1632,6 +1663,8 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 				temp["pool"] = flattenMapIppoolPoolRelationship(s.GetPool(), d)
 
 				temp["pool_member"] = flattenMapIppoolPoolMemberRelationship(s.GetPoolMember(), d)
+				temp["preferred_ip_v4_address"] = (s.GetPreferredIpV4Address())
+				temp["preferred_ip_v6_address"] = (s.GetPreferredIpV6Address())
 
 				temp["reservation"] = flattenMapIppoolReservationReference(s.GetReservation(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

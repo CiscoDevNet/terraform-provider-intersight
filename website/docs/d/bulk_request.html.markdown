@@ -3,16 +3,32 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_request"
 description: |-
-        The bulk.Request API allows users to perform API actions (Create, Update or Delete) in bulk, on a given URI.
-        It is possible to operate on multiple subpaths relative to the provided URI (For example, it would be possible to
-        perform a PATCH action on multiple objects of a given REST resource type).
+        Requests (bulk.Request) represent a bulk-operation submission that allows clients to execute multiple API actions—such as Create, Update, or Delete—against a given base URI, including operations across multiple subpaths relative to that URI. The object is designed for high-volume changes with optional asynchronous response handling.
+        #### Purpose
+        Enable efficient, controlled execution of many related API changes in a single bulk request, reducing client-side overhead and supporting consistent execution semantics for batch create/update/delete workflows.
+        #### Key Concepts
+        - **Bulk API execution container**: Encapsulates a set of actions (`actions`) that the platform will apply in bulk relative to a provided target URI.
+        - **Multi-subpath operations**: Supports acting on multiple objects/resources under the same REST resource type (e.g., PATCH multiple objects of a type).
+        - **Action semantics and pre-checks**: `actions` describe what should be done, and can include behavior such as checking for existence vs executing changes (as described in the model).
+        - **Asynchronous support**: CREATE supports `respond-async: true`, allowing clients to request async processing suitable for large batches.
+        - **Create-only action definition**: `actions` is `createonly`, preserving the integrity of what was submitted once the bulk request is created.
+        - **Global privilege gating**: Access is controlled via global privilege sets for READ/CREATE, reflecting the broad impact and cross-resource nature of bulk operations.
+        - **Organization-owned request record**: `owner: organization` indicates the bulk request exists within an org/account context even though the privileges are global.
 
 ---
 
 # Data Source: intersight_bulk_request
-The bulk.Request API allows users to perform API actions (Create, Update or Delete) in bulk, on a given URI.
-It is possible to operate on multiple subpaths relative to the provided URI (For example, it would be possible to
-perform a PATCH action on multiple objects of a given REST resource type).
+Requests (bulk.Request) represent a bulk-operation submission that allows clients to execute multiple API actions—such as Create, Update, or Delete—against a given base URI, including operations across multiple subpaths relative to that URI. The object is designed for high-volume changes with optional asynchronous response handling.
+#### Purpose
+Enable efficient, controlled execution of many related API changes in a single bulk request, reducing client-side overhead and supporting consistent execution semantics for batch create/update/delete workflows.
+#### Key Concepts
+- **Bulk API execution container**: Encapsulates a set of actions (`actions`) that the platform will apply in bulk relative to a provided target URI.
+- **Multi-subpath operations**: Supports acting on multiple objects/resources under the same REST resource type (e.g., PATCH multiple objects of a type).
+- **Action semantics and pre-checks**: `actions` describe what should be done, and can include behavior such as checking for existence vs executing changes (as described in the model).
+- **Asynchronous support**: CREATE supports `respond-async: true`, allowing clients to request async processing suitable for large batches.
+- **Create-only action definition**: `actions` is `createonly`, preserving the integrity of what was submitted once the bulk request is created.
+- **Global privilege gating**: Access is controlled via global privilege sets for READ/CREATE, reflecting the broad impact and cross-resource nature of bulk operations.
+- **Organization-owned request record**: `owner: organization` indicates the bulk request exists within an org/account context even though the privileges are global.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

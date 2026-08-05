@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "pool.IdMappingPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "pool.IdMappingPolicy"]
+**ExportedSelectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **PerTypeCombinedSelector** | Pointer to [**[]ResourcePerTypeCombinedSelector**](ResourcePerTypeCombinedSelector.md) |  | [optional] 
 **Selectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **UsageCount** | Pointer to **int64** | The number of ID pools to which this ID mapping policy is attached. | [optional] [readonly] 
@@ -70,6 +71,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetExportedSelectors
+
+`func (o *PoolIdMappingPolicy) GetExportedSelectors() []ResourceSelector`
+
+GetExportedSelectors returns the ExportedSelectors field if non-nil, zero value otherwise.
+
+### GetExportedSelectorsOk
+
+`func (o *PoolIdMappingPolicy) GetExportedSelectorsOk() (*[]ResourceSelector, bool)`
+
+GetExportedSelectorsOk returns a tuple with the ExportedSelectors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExportedSelectors
+
+`func (o *PoolIdMappingPolicy) SetExportedSelectors(v []ResourceSelector)`
+
+SetExportedSelectors sets ExportedSelectors field to given value.
+
+### HasExportedSelectors
+
+`func (o *PoolIdMappingPolicy) HasExportedSelectors() bool`
+
+HasExportedSelectors returns a boolean if a field has been set.
+
+### SetExportedSelectorsNil
+
+`func (o *PoolIdMappingPolicy) SetExportedSelectorsNil(b bool)`
+
+ SetExportedSelectorsNil sets the value for ExportedSelectors to be an explicit nil
+
+### UnsetExportedSelectors
+`func (o *PoolIdMappingPolicy) UnsetExportedSelectors()`
+
+UnsetExportedSelectors ensures that no value is present for ExportedSelectors, not even an explicit nil
 ### GetPerTypeCombinedSelector
 
 `func (o *PoolIdMappingPolicy) GetPerTypeCombinedSelector() []ResourcePerTypeCombinedSelector`

@@ -3,12 +3,20 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_compliance"
 description: |-
-        A compliance instance associated with a cluster reported by a Prism Central.
+        The Compliance object offers a comprehensive view of licensing compliance within clusters, as reported by Nutanix Prism Central.
+        #### Purpose
+        The Compliance object enables efficient monitoring of the cluster’s license compliance and any software usage violations. It aids in ensuring adherence to software agreements and operational guidelines.
+        #### Key Concepts
+        - **Compliance Tracking:** Provides insights into compliance status and usage violation details.
 
 ---
 
 # Data Source: intersight_hci_compliance
-A compliance instance associated with a cluster reported by a Prism Central.
+The Compliance object offers a comprehensive view of licensing compliance within clusters, as reported by Nutanix Prism Central.
+#### Purpose 
+The Compliance object enables efficient monitoring of the cluster’s license compliance and any software usage violations. It aids in ensuring adherence to software agreements and operational guidelines.  
+#### Key Concepts  
+- **Compliance Tracking:** Provides insights into compliance status and usage violation details.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

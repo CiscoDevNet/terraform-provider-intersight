@@ -3,12 +3,24 @@ subcategory: "partnerintegration"
 layout: "intersight"
 page_title: "Intersight: intersight_partnerintegration_etl"
 description: |-
-        ETL definition for the endpoint to translate platform API outputs to Intersight managed objects.
+        The Etls object defines the transformation logic used to translate platform-specific API outputs into Intersight-managed objects.
+        #### Purpose
+        It serves as the transformation engine for inventory data, enabling the system to ingest data from various platforms and normalize it into a common model.
+        #### Key Concepts
+        - **Data Transformation:** Uses YAML-based models to map raw API data to managed objects.
+        - **Normalization:** Ensures consistent data structure across different integrated platforms.
+        - **Inventory Integration:** Links transformation definitions to specific inventory collections.
 
 ---
 
 # Resource: intersight_partnerintegration_etl
-ETL definition for the endpoint to translate platform API outputs to Intersight managed objects.
+The Etls object defines the transformation logic used to translate platform-specific API outputs into Intersight-managed objects.
+#### Purpose
+It serves as the transformation engine for inventory data, enabling the system to ingest data from various platforms and normalize it into a common model.
+#### Key Concepts
+- **Data Transformation:** Uses YAML-based models to map raw API data to managed objects.
+- **Normalization:** Ensures consistent data structure across different integrated platforms.
+- **Inventory Integration:** Links transformation definitions to specific inventory collections.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

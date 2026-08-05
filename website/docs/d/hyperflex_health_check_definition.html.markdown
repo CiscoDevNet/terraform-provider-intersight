@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_health_check_definition"
 description: |-
-        HyperFlex health check definition metadata.
+        The HealthCheckDefinition object serves as the blueprint for defining health checks within the HyperFlex system. It outlines the criteria, methodology, and scope of health checks, ensuring standardized and effective assessments of system performance.
+        #### Purpose
+        HealthCheckDefinition objects provide a structured approach to health monitoring, detailing the checks required to maintain system stability and prevent disruptions. They enable systematic evaluations that inform maintenance strategies and enhance operational efficiency.
+        #### Key Concepts
+        - **Standardization:** Offers a consistent framework for health checks, promoting uniformity and reliability across different environments and use cases.
+        - **Execution Configuration:** Defines how health checks are executed, including script settings, timeouts, and target nodes, tailoring assessments to specific system needs.
+        - **Impact Analysis:** Provides insights into the potential health impact of check failures, guiding remediation efforts and prioritizing corrective actions.
+        - **Support for Multiple Versions:** Accommodates different HyperFlex versions, ensuring compatibility and comprehensive coverage across diverse system deployments.
 
 ---
 
 # Data Source: intersight_hyperflex_health_check_definition
-HyperFlex health check definition metadata.
+The HealthCheckDefinition object serves as the blueprint for defining health checks within the HyperFlex system. It outlines the criteria, methodology, and scope of health checks, ensuring standardized and effective assessments of system performance.
+#### Purpose
+HealthCheckDefinition objects provide a structured approach to health monitoring, detailing the checks required to maintain system stability and prevent disruptions. They enable systematic evaluations that inform maintenance strategies and enhance operational efficiency.
+#### Key Concepts
+- **Standardization:** Offers a consistent framework for health checks, promoting uniformity and reliability across different environments and use cases.
+- **Execution Configuration:** Defines how health checks are executed, including script settings, timeouts, and target nodes, tailoring assessments to specific system needs.
+- **Impact Analysis:** Provides insights into the potential health impact of check failures, guiding remediation efforts and prioritizing corrective actions.
+- **Support for Multiple Versions:** Accommodates different HyperFlex versions, ensuring compatibility and comprehensive coverage across diverse system deployments.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

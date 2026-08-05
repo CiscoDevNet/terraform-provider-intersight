@@ -151,6 +151,11 @@ func getMetaDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"enable_previous_mo": {
+			Description: "When true, MO change events for this type include the previous (old) value of each modified field alongside the new value, so consumers (e.g. post-processing services) can see both. Implemented by enabling MongoDB change stream pre-image snapshots for the collection.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"identity_constraints": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -852,6 +857,11 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_previous_mo"); ok {
+		x := (v.(bool))
+		o.SetEnablePreviousMo(x)
+	}
+
 	if v, ok := d.GetOk("identity_constraints"); ok {
 		x := make([]models.MetaIdentityDefinition, 0)
 		s := v.([]interface{})
@@ -1338,6 +1348,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 
 				temp["display_name_metas"] = flattenListMetaDisplayNameDefinition(s.GetDisplayNameMetas(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["enable_previous_mo"] = (s.GetEnablePreviousMo())
 
 				temp["identity_constraints"] = flattenListMetaIdentityDefinition(s.GetIdentityConstraints(), d)
 				temp["is_concrete"] = (s.GetIsConcrete())

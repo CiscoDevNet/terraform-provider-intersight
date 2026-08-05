@@ -3,14 +3,24 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_catalog"
 description: |-
-        A catalog of workflow related objects such as workflow and task definitions. Each user account will have a local workflow catalog where account users can store their private workflow and task definitions.
-        Cisco provides validated workflows and tasks to Intersight users via shared catalogs. Intersight users will be able to read, run these workflows and tasks within their account context. The shared catalogs will be managed entirely by Cisco. Contributions to shared catalogs will need to be provided to Cisco who will publish them at their own discretion.
+        The Catalog object serves as a container for organizing definitions related to orchestration, including both workflow, task definitions and more.
+        #### Purpose
+        It provides a structured way to manage and isolate orchestration assets. Each user account has a local catalog for private definitions, while Cisco provides shared catalogs containing validated workflows and tasks for use within the account context.
+        #### Key Concepts
+        - **Asset Organization:** Groups workflow and task definitions for better discovery and management.
+        - **Access Context:** Supports both private account-level catalogs and shared, Cisco-managed catalogs.
+        - **Namespace Management:** Ensures unique identification of orchestration assets within the organizational context.
 
 ---
 
 # Data Source: intersight_workflow_catalog
-A catalog of workflow related objects such as workflow and task definitions. Each user account will have a local workflow catalog where account users can store their private workflow and task definitions.
-Cisco provides validated workflows and tasks to Intersight users via shared catalogs. Intersight users will be able to read, run these workflows and tasks within their account context. The shared catalogs will be managed entirely by Cisco. Contributions to shared catalogs will need to be provided to Cisco who will publish them at their own discretion.
+The Catalog object serves as a container for organizing definitions related to orchestration, including both workflow, task definitions and more.
+#### Purpose
+It provides a structured way to manage and isolate orchestration assets. Each user account has a local catalog for private definitions, while Cisco provides shared catalogs containing validated workflows and tasks for use within the account context.
+#### Key Concepts
+- **Asset Organization:** Groups workflow and task definitions for better discovery and management.
+- **Access Context:** Supports both private account-level catalogs and shared, Cisco-managed catalogs.
+- **Namespace Management:** Ensures unique identification of orchestration assets within the organizational context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

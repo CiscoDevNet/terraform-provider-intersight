@@ -873,7 +873,7 @@ func resourceFabricSpanSessionCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetClassId("fabric.SpanSession")
 
-	if v, ok := d.GetOk("dest_ports"); ok {
+	if v, ok := d.GetOkExists("dest_ports"); ok {
 		x := make([]models.FabricAbstractSpanDestPortRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -915,17 +915,17 @@ func resourceFabricSpanSessionCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if v, ok := d.GetOk("network_element"); ok {
+	if v, ok := d.GetOkExists("network_element"); ok {
 		p := make([]models.NetworkElementRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -970,7 +970,7 @@ func resourceFabricSpanSessionCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetObjectType("fabric.SpanSession")
 
-	if v, ok := d.GetOk("source_port_channels"); ok {
+	if v, ok := d.GetOkExists("source_port_channels"); ok {
 		x := make([]models.FabricAbstractSpanSourcePortChannelRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1012,7 +1012,7 @@ func resourceFabricSpanSessionCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("source_ports"); ok {
+	if v, ok := d.GetOkExists("source_ports"); ok {
 		x := make([]models.FabricAbstractSpanSourcePortRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1054,7 +1054,7 @@ func resourceFabricSpanSessionCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("source_virtual_ifs"); ok {
+	if v, ok := d.GetOkExists("source_virtual_ifs"); ok {
 		x := make([]models.FabricAbstractSpanSourceVirtualIfRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1096,7 +1096,7 @@ func resourceFabricSpanSessionCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("source_vlans"); ok {
+	if v, ok := d.GetOkExists("source_vlans"); ok {
 		x := make([]models.FabricSpanSourceVlanRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

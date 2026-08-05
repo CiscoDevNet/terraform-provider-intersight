@@ -3,26 +3,24 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_security_advisory"
 description: |-
-        ### Overview
         The SecurityAdvisory object represents the Intersight adaptation of Cisco PSIRT advisories, focusing on security issues with associated CVE identifiers and CVSS scores. It helps users identify and address security vulnerabilities within their managed objects.
         #### Purpose
         SecurityAdvisory provides a structured representation of security advisories, enabling users to understand vulnerabilities and take appropriate actions to secure their systems.
         #### Key Concepts
-        - **PSIRT Integration** - Aligns with Cisco's PSIRT advisories for comprehensive security coverage.
-        - **Detailed Severity Assessment** - Uses CVE identifiers and CVSS scores to quantify the severity of vulnerabilities.
-        - **Access Control and Management** - Ensures that only authorized personnel can manage security advisories.
+        - **PSIRT Integration:** Aligns with Cisco's PSIRT advisories for comprehensive security coverage.
+        - **Detailed Severity Assessment:** Uses CVE identifiers and CVSS scores to quantify the severity of vulnerabilities.
+        - **Access Control and Management:** Ensures that only authorized personnel can manage security advisories.
 
 ---
 
 # Data Source: intersight_tam_security_advisory
-### Overview
 The SecurityAdvisory object represents the Intersight adaptation of Cisco PSIRT advisories, focusing on security issues with associated CVE identifiers and CVSS scores. It helps users identify and address security vulnerabilities within their managed objects.
 #### Purpose
 SecurityAdvisory provides a structured representation of security advisories, enabling users to understand vulnerabilities and take appropriate actions to secure their systems.
 #### Key Concepts
-- **PSIRT Integration** - Aligns with Cisco's PSIRT advisories for comprehensive security coverage.
-- **Detailed Severity Assessment** - Uses CVE identifiers and CVSS scores to quantify the severity of vulnerabilities.
-- **Access Control and Management** - Ensures that only authorized personnel can manage security advisories.
+- **PSIRT Integration:** Aligns with Cisco's PSIRT advisories for comprehensive security coverage.
+- **Detailed Severity Assessment:** Uses CVE identifiers and CVSS scores to quantify the severity of vulnerabilities.
+- **Access Control and Management:** Ensures that only authorized personnel can manage security advisories.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

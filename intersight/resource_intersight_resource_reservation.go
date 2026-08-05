@@ -759,18 +759,18 @@ func resourceResourceReservationCreate(c context.Context, d *schema.ResourceData
 
 	o.SetClassId("resource.Reservation")
 
-	if v, ok := d.GetOk("description"); ok {
+	if v, ok := d.GetOkExists("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("expiration"); ok {
+	if v, ok := d.GetOkExists("expiration"); ok {
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetExpiration(x)
 	}
 
-	if v, ok := d.GetOk("groups"); ok {
+	if v, ok := d.GetOkExists("groups"); ok {
 		x := make([]models.ResourceGroupRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -812,7 +812,7 @@ func resourceResourceReservationCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if v, ok := d.GetOk("identity"); ok {
+	if v, ok := d.GetOkExists("identity"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -860,14 +860,14 @@ func resourceResourceReservationCreate(c context.Context, d *schema.ResourceData
 		o.SetMarkFail(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("resource.Reservation")
 
-	if v, ok := d.GetOk("reservation_selector"); ok {
+	if v, ok := d.GetOkExists("reservation_selector"); ok {
 		x := (v.(string))
 		o.SetReservationSelector(x)
 	}
@@ -885,7 +885,7 @@ func resourceResourceReservationCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if v, ok := d.GetOk("resource_type"); ok {
+	if v, ok := d.GetOkExists("resource_type"); ok {
 		x := (v.(string))
 		o.SetResourceType(x)
 	}

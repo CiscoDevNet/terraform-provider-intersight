@@ -16,6 +16,8 @@ To access the ith object of the results obtained, use `data.intersight_chassis_p
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `action`:(string) User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. 
+* `chassis_assignment_mode`:(string) Source of the chassis assigned to the Chassis Profile. Values can be Static or None. Static is used if a chassis is attached directly to a Chassis Profile. None is used if no chassis is attached to a Chassis Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later.* `Static` - Chassis is directly assigned to chassis profile using assign chassis.* `None` - No chassis is assigned to the chassis profile. 
+* `chassis_pre_assign_by_serial`:(string) Serial number of the chassis that would be assigned to this pre-assigned Chassis Profile. It can be any string that adheres to the following constraints:It should start and end with an alphanumeric character.It cannot be more than 20 characters. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the profile. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

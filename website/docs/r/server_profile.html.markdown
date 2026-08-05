@@ -149,8 +149,10 @@ This complex property has following sub-properties:
 [ippool.ReservationReference](#ippoolReservationReference)
 [iqnpool.ReservationReference](#iqnpoolReservationReference)
 [macpool.ReservationReference](#macpoolReservationReference)
+[resourcepool.ReservationReference](#resourcepoolReservationReference)
 [uuidpool.ReservationReference](#uuidpoolReservationReference)
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `reservation_id`:(string) The identity for which the reference is created. It is used to store the ID allocated to the profile during export. Reservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.During import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.For IP and UUid IDs, we create reservation, for other Ids we do not create reservations. 
   + `reservation_moid`:(string) The moid of the reservation object. 
 * `is_pmc_deployed_secure_passphrase_set`:(bool)(ReadOnly) Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set. 
 * `leased_server`:(HashMap) - A reference to a computePhysical resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -239,7 +241,7 @@ This complex property has following sub-properties:
 * `reported_policy_changes`:(Array)
 This complex property has following sub-properties:
   + `change_id`:(string)(ReadOnly) The change evaluation identifier for which the change is reported. 
-  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy. 
+  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy.* `Failed` - The status when policy change evaluation report handling failed for a policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `policy_type`:(string)(ReadOnly) The type of policy for which the change has been reported. 
 * `reservation_references`:(Array)
@@ -248,8 +250,10 @@ This complex property has following sub-properties:
 [ippool.ReservationReference](#ippoolReservationReference)
 [iqnpool.ReservationReference](#iqnpoolReservationReference)
 [macpool.ReservationReference](#macpoolReservationReference)
+[resourcepool.ReservationReference](#resourcepoolReservationReference)
 [uuidpool.ReservationReference](#uuidpoolReservationReference)
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `reservation_id`:(string) The identity for which the reference is created. It is used to store the ID allocated to the profile during export. Reservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.During import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.For IP and UUid IDs, we create reservation, for other Ids we do not create reservations. 
   + `reservation_moid`:(string) The moid of the reservation object. 
 * `resource_lease`:(HashMap) -(ReadOnly) A reference to a resourcepoolLease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
@@ -269,7 +273,15 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `proceed_on_reboot`:(bool) ProceedOnReboot can be used to acknowledge server reboot while triggering deploy/activate. 
+* `scheduled_server_assignment`:(HashMap) - Server reassignment information that is captured as part of the config import process. 
+This complex property has following sub-properties:
+  + `enabled`:(bool) Indicates if this assignment is enabled. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `pool_selector`:(string) Odata selector that resolves to the server pool to be used for assignment, if applicable. 
+  + `server_serial`:(string) Serial number of the server. 
+  + `server_type`:(string) The object type of the server - blade or rack. 
 * `server_assignment_mode`:(string) Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later.* `None` - No server is assigned to the server profile.* `Static` - Server is directly assigned to server profile using assign server.* `Pool` - Server is assigned from a resource pool. 
+* `server_family`:(string) The server family type applicable to a server profile when the target platform is Standalone. For all other platform types, the value should be All.* `Unspecified` - Server Family type for Unspecified servers.* `All` - All server family types are included under this category.* `UCSC845A` - Server Family type for UCS C845A servers.* `UCSC2XX/4XX` - Server Family type for UCS C2XX/4XX servers. 
 * `server_pool`:(HashMap) - A reference to a resourcepoolPool resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -282,6 +294,14 @@ This complex property has following sub-properties:
   + `domain_name`:(string) The domain name of the Fabric Interconnect or the chassis name prefix.The name must start and end with an alphanumeric character, can include underscores and hyphens, and has a maximum length of 30 characters. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `slot_id`:(int) Slot-id of the server that would be assigned to this pre-assigned server profile. 
+* `server_reservation`:(HashMap) - Serial number based reservation for the server to be assigned to this Server Profile. 
+This complex property has following sub-properties:
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `pool_moid`:(string) The moid of the pool object, if applicable. 
+  + `reservation_id`:(string) The identity for which the reference is created. It is used to store the ID allocated to the profile during export. Reservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.During import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.For IP and UUid IDs, we create reservation, for other Ids we do not create reservations. 
+  + `reservation_moid`:(string) The moid of the reservation object. 
+  + `resource_serial`:(string) The serial number of the resource that is being reserved. 
+  + `resource_type`:(string) The resource type that is being reserved. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `src_template`:(HashMap) - A reference to a policyAbstractProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
@@ -385,6 +405,12 @@ The reference to the reservation object.
 * `consumer_name`:(string) The consumer name for which the reserved MAC would be used. 
 * `consumer_type`:(string) The consumer type for which the reserved MAC would be used.* `Vnic` - MAC reservation would be used by VNIC. 
 
+### [resourcepool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `pool_moid`:(string) The moid of the pool object, if applicable. 
+* `resource_serial`:(string) The serial number of the resource that is being reserved. 
+* `resource_type`:(string) The resource type that is being reserved. 
+
 ### [uuidpool.ReservationReference](#argument-reference)
 The reference to the reservation object.
   
@@ -405,6 +431,12 @@ The reference to the reservation object.
 The reference to the reservation object.
 * `consumer_name`:(string) The consumer name for which the reserved MAC would be used. 
 * `consumer_type`:(string) The consumer type for which the reserved MAC would be used.* `Vnic` - MAC reservation would be used by VNIC. 
+
+### [resourcepool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `pool_moid`:(string) The moid of the pool object, if applicable. 
+* `resource_serial`:(string) The serial number of the resource that is being reserved. 
+* `resource_type`:(string) The resource type that is being reserved. 
 
 ### [uuidpool.ReservationReference](#argument-reference)
 The reference to the reservation object.

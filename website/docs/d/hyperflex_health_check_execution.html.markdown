@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_health_check_execution"
 description: |-
-        Health check execution result for a health check definition on a HyperFlex device.
+        The HealthCheckExecution object is a pivotal element in the HyperFlex system, detailing the execution process and outcomes for health checks performed on HyperFlex devices. It encapsulates the execution lifecycle, from initiation through completion, providing visibility into the health check's effect on device stability and performance.
+        #### Purpose
+        HealthCheckExecution objects document the execution of health checks, offering a detailed account of how these checks were conducted, their results, and any issues encountered. This supports informed decision-making for system improvements and resource management.
+        #### Key Concepts
+        - **Lifecycle Management:** Tracks the execution phase of health checks, including initiation, progress, and final results, enabling thorough analysis of operational health.
+        - **Outcome Documentation:** Records the result of health check executions, highlighting successful checks and identifying areas of concern.
+        - **Error Reporting:** Provides detailed error information for any execution failures, facilitating targeted troubleshooting and remediation efforts.
+        - **Integration with HyperFlex Devices:** Directly associated with specific HyperFlex devices, enabling device-specific health assessments and optimizations.
 
 ---
 
 # Data Source: intersight_hyperflex_health_check_execution
-Health check execution result for a health check definition on a HyperFlex device.
+The HealthCheckExecution object is a pivotal element in the HyperFlex system, detailing the execution process and outcomes for health checks performed on HyperFlex devices. It encapsulates the execution lifecycle, from initiation through completion, providing visibility into the health check's effect on device stability and performance.
+#### Purpose
+HealthCheckExecution objects document the execution of health checks, offering a detailed account of how these checks were conducted, their results, and any issues encountered. This supports informed decision-making for system improvements and resource management.
+#### Key Concepts
+- **Lifecycle Management:** Tracks the execution phase of health checks, including initiation, progress, and final results, enabling thorough analysis of operational health.
+- **Outcome Documentation:** Records the result of health check executions, highlighting successful checks and identifying areas of concern.
+- **Error Reporting:** Provides detailed error information for any execution failures, facilitating targeted troubleshooting and remediation efforts.
+- **Integration with HyperFlex Devices:** Directly associated with specific HyperFlex devices, enabling device-specific health assessments and optimizations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

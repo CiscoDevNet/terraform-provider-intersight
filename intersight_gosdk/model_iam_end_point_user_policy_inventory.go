@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -27,7 +27,13 @@ type IamEndPointUserPolicyInventory struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType         string                                `json:"ObjectType"`
+	ObjectType string `json:"ObjectType"`
+	// Timeout duration specifies the duration (in seconds) after which a locked account is automatically unlocked. - Set to 0 when accountUnlockMode is Manual. - Set a value between 1 and 604800 when accountUnlockMode is Automatic.
+	AccountLockoutDuration *int64 `json:"AccountLockoutDuration,omitempty"`
+	// Set Account Lockout Threshold for endpoint users.
+	AccountLockoutThreshold *int64 `json:"AccountLockoutThreshold,omitempty"`
+	// Account unlock method specifies how the account is unlocked after it is locked: - Manual: Account must be manually unlocked by an administrator. - Automatic: Account unlocks automatically after a timeout duration. * `Automatic` - Set Automatic on the selected end point. * `Manual` - Set Manual on the selected end point.
+	AccountUnlockMode  *string                               `json:"AccountUnlockMode,omitempty"`
 	PasswordProperties NullableIamEndPointPasswordProperties `json:"PasswordProperties,omitempty"`
 	// An array of relationships to iamEndPointUserRoleInventory resources.
 	EndPointUserRoles    []IamEndPointUserRoleInventoryRelationship `json:"EndPointUserRoles,omitempty"`
@@ -116,6 +122,102 @@ func (o *IamEndPointUserPolicyInventory) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "iam.EndPointUserPolicyInventory" of the ObjectType field.
 func (o *IamEndPointUserPolicyInventory) GetDefaultObjectType() interface{} {
 	return "iam.EndPointUserPolicyInventory"
+}
+
+// GetAccountLockoutDuration returns the AccountLockoutDuration field value if set, zero value otherwise.
+func (o *IamEndPointUserPolicyInventory) GetAccountLockoutDuration() int64 {
+	if o == nil || IsNil(o.AccountLockoutDuration) {
+		var ret int64
+		return ret
+	}
+	return *o.AccountLockoutDuration
+}
+
+// GetAccountLockoutDurationOk returns a tuple with the AccountLockoutDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamEndPointUserPolicyInventory) GetAccountLockoutDurationOk() (*int64, bool) {
+	if o == nil || IsNil(o.AccountLockoutDuration) {
+		return nil, false
+	}
+	return o.AccountLockoutDuration, true
+}
+
+// HasAccountLockoutDuration returns a boolean if a field has been set.
+func (o *IamEndPointUserPolicyInventory) HasAccountLockoutDuration() bool {
+	if o != nil && !IsNil(o.AccountLockoutDuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountLockoutDuration gets a reference to the given int64 and assigns it to the AccountLockoutDuration field.
+func (o *IamEndPointUserPolicyInventory) SetAccountLockoutDuration(v int64) {
+	o.AccountLockoutDuration = &v
+}
+
+// GetAccountLockoutThreshold returns the AccountLockoutThreshold field value if set, zero value otherwise.
+func (o *IamEndPointUserPolicyInventory) GetAccountLockoutThreshold() int64 {
+	if o == nil || IsNil(o.AccountLockoutThreshold) {
+		var ret int64
+		return ret
+	}
+	return *o.AccountLockoutThreshold
+}
+
+// GetAccountLockoutThresholdOk returns a tuple with the AccountLockoutThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamEndPointUserPolicyInventory) GetAccountLockoutThresholdOk() (*int64, bool) {
+	if o == nil || IsNil(o.AccountLockoutThreshold) {
+		return nil, false
+	}
+	return o.AccountLockoutThreshold, true
+}
+
+// HasAccountLockoutThreshold returns a boolean if a field has been set.
+func (o *IamEndPointUserPolicyInventory) HasAccountLockoutThreshold() bool {
+	if o != nil && !IsNil(o.AccountLockoutThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountLockoutThreshold gets a reference to the given int64 and assigns it to the AccountLockoutThreshold field.
+func (o *IamEndPointUserPolicyInventory) SetAccountLockoutThreshold(v int64) {
+	o.AccountLockoutThreshold = &v
+}
+
+// GetAccountUnlockMode returns the AccountUnlockMode field value if set, zero value otherwise.
+func (o *IamEndPointUserPolicyInventory) GetAccountUnlockMode() string {
+	if o == nil || IsNil(o.AccountUnlockMode) {
+		var ret string
+		return ret
+	}
+	return *o.AccountUnlockMode
+}
+
+// GetAccountUnlockModeOk returns a tuple with the AccountUnlockMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamEndPointUserPolicyInventory) GetAccountUnlockModeOk() (*string, bool) {
+	if o == nil || IsNil(o.AccountUnlockMode) {
+		return nil, false
+	}
+	return o.AccountUnlockMode, true
+}
+
+// HasAccountUnlockMode returns a boolean if a field has been set.
+func (o *IamEndPointUserPolicyInventory) HasAccountUnlockMode() bool {
+	if o != nil && !IsNil(o.AccountUnlockMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountUnlockMode gets a reference to the given string and assigns it to the AccountUnlockMode field.
+func (o *IamEndPointUserPolicyInventory) SetAccountUnlockMode(v string) {
+	o.AccountUnlockMode = &v
 }
 
 // GetPasswordProperties returns the PasswordProperties field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -263,6 +365,15 @@ func (o IamEndPointUserPolicyInventory) ToMap() (map[string]interface{}, error) 
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccountLockoutDuration) {
+		toSerialize["AccountLockoutDuration"] = o.AccountLockoutDuration
+	}
+	if !IsNil(o.AccountLockoutThreshold) {
+		toSerialize["AccountLockoutThreshold"] = o.AccountLockoutThreshold
+	}
+	if !IsNil(o.AccountUnlockMode) {
+		toSerialize["AccountUnlockMode"] = o.AccountUnlockMode
+	}
 	if o.PasswordProperties.IsSet() {
 		toSerialize["PasswordProperties"] = o.PasswordProperties.Get()
 	}
@@ -326,7 +437,13 @@ func (o *IamEndPointUserPolicyInventory) UnmarshalJSON(data []byte) (err error) 
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType         string                                `json:"ObjectType"`
+		ObjectType string `json:"ObjectType"`
+		// Timeout duration specifies the duration (in seconds) after which a locked account is automatically unlocked. - Set to 0 when accountUnlockMode is Manual. - Set a value between 1 and 604800 when accountUnlockMode is Automatic.
+		AccountLockoutDuration *int64 `json:"AccountLockoutDuration,omitempty"`
+		// Set Account Lockout Threshold for endpoint users.
+		AccountLockoutThreshold *int64 `json:"AccountLockoutThreshold,omitempty"`
+		// Account unlock method specifies how the account is unlocked after it is locked: - Manual: Account must be manually unlocked by an administrator. - Automatic: Account unlocks automatically after a timeout duration. * `Automatic` - Set Automatic on the selected end point. * `Manual` - Set Manual on the selected end point.
+		AccountUnlockMode  *string                               `json:"AccountUnlockMode,omitempty"`
 		PasswordProperties NullableIamEndPointPasswordProperties `json:"PasswordProperties,omitempty"`
 		// An array of relationships to iamEndPointUserRoleInventory resources.
 		EndPointUserRoles []IamEndPointUserRoleInventoryRelationship `json:"EndPointUserRoles,omitempty"`
@@ -340,6 +457,9 @@ func (o *IamEndPointUserPolicyInventory) UnmarshalJSON(data []byte) (err error) 
 		varIamEndPointUserPolicyInventory := _IamEndPointUserPolicyInventory{}
 		varIamEndPointUserPolicyInventory.ClassId = varIamEndPointUserPolicyInventoryWithoutEmbeddedStruct.ClassId
 		varIamEndPointUserPolicyInventory.ObjectType = varIamEndPointUserPolicyInventoryWithoutEmbeddedStruct.ObjectType
+		varIamEndPointUserPolicyInventory.AccountLockoutDuration = varIamEndPointUserPolicyInventoryWithoutEmbeddedStruct.AccountLockoutDuration
+		varIamEndPointUserPolicyInventory.AccountLockoutThreshold = varIamEndPointUserPolicyInventoryWithoutEmbeddedStruct.AccountLockoutThreshold
+		varIamEndPointUserPolicyInventory.AccountUnlockMode = varIamEndPointUserPolicyInventoryWithoutEmbeddedStruct.AccountUnlockMode
 		varIamEndPointUserPolicyInventory.PasswordProperties = varIamEndPointUserPolicyInventoryWithoutEmbeddedStruct.PasswordProperties
 		varIamEndPointUserPolicyInventory.EndPointUserRoles = varIamEndPointUserPolicyInventoryWithoutEmbeddedStruct.EndPointUserRoles
 		varIamEndPointUserPolicyInventory.TargetMo = varIamEndPointUserPolicyInventoryWithoutEmbeddedStruct.TargetMo
@@ -362,6 +482,9 @@ func (o *IamEndPointUserPolicyInventory) UnmarshalJSON(data []byte) (err error) 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AccountLockoutDuration")
+		delete(additionalProperties, "AccountLockoutThreshold")
+		delete(additionalProperties, "AccountUnlockMode")
 		delete(additionalProperties, "PasswordProperties")
 		delete(additionalProperties, "EndPointUserRoles")
 		delete(additionalProperties, "TargetMo")

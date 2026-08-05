@@ -3,12 +3,24 @@ subcategory: "dnac"
 layout: "intersight"
 page_title: "Intersight: intersight_dnac_external_border_node_interface"
 description: |-
-        The external border node interface serves as the gateway between a network and external entities.
+        The ExternalBorderNodeInterface object serves as the gateway between a network and external entities, focusing on interface management and configuration.
+        #### Purpose
+        An ExternalBorderNodeInterface object provides the framework for managing external network interfaces, supporting secure and efficient data exchange.
+        #### Key Concepts
+        - **Interface Management:** Offers detailed configuration options for external interfaces, enhancing control over data flow.
+        - **Security and Access Control:** Ensures secure interaction through privilege sets and controlled access mechanisms.
+        - **Network Integration:** Interfaces seamlessly with external networks, promoting robust and secure connectivity.
 
 ---
 
 # Data Source: intersight_dnac_external_border_node_interface
-The external border node interface serves as the gateway between a network and external entities.
+The ExternalBorderNodeInterface object serves as the gateway between a network and external entities, focusing on interface management and configuration.
+#### Purpose
+An ExternalBorderNodeInterface object provides the framework for managing external network interfaces, supporting secure and efficient data exchange.
+#### Key Concepts
+- **Interface Management:** Offers detailed configuration options for external interfaces, enhancing control over data flow.
+- **Security and Access Control:** Ensures secure interaction through privilege sets and controlled access mechanisms.
+- **Network Integration:** Interfaces seamlessly with external networks, promoting robust and secure connectivity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

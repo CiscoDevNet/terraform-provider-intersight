@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the IamLocalUserPassword type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IamLocalUserPassword{}
 
-// IamLocalUserPassword LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context. #### Purpose It enforces secure password-change operations for local users while keeping reset flows separate. #### Key Concepts - **Self-service Change:** Allows users to update their own password. - **Policy-aware:** Works alongside password policy configurations. - **Scoped to User:** Inherits permissions from the associated user. - **Appliance Focus:** Applicable to local authentication scenarios.
+// IamLocalUserPassword LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context. This model is applicable only to Intersight Appliance deployments. #### Purpose It enforces secure password-change operations for local users while keeping reset flows separate. #### Key Concepts - **Self-service Change:** Allows users to update their own password. - **Policy-aware:** Works alongside password policy configurations. - **Scoped to User:** Inherits permissions from the associated user. - **Appliance Focus:** Applicable to local authentication scenarios.
 type IamLocalUserPassword struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -42,10 +42,10 @@ type IamLocalUserPassword struct {
 	NeedPasswordReset *bool `json:"NeedPasswordReset,omitempty"`
 	// New password that the user's password should be changed to.
 	NewPassword *string `json:"NewPassword,omitempty"`
-	// User's current valid password.
-	Password             *string                     `json:"Password,omitempty"`
-	User                 NullableIamUserRelationship `json:"User,omitempty"`
-	AdditionalProperties map[string]interface{}
+	// The passwordExpiresInDays attribute indicates the number of days remaining until a user's password expires, with negative values meaning the password has already expired and zero indicating expiration today. This value is dynamically calculated based on the time since the last password change and the maximum allowed password age defined by the password policy. No migration code or default value is required during system upgrades because the value is computed in real-time, and initially, the password age property defaults to zero, ensuring no passwords are mistakenly marked as expired.
+	PasswordExpiresInDays *int64                      `json:"PasswordExpiresInDays,omitempty"`
+	User                  NullableIamUserRelationship `json:"User,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _IamLocalUserPassword IamLocalUserPassword
@@ -355,36 +355,36 @@ func (o *IamLocalUserPassword) SetNewPassword(v string) {
 	o.NewPassword = &v
 }
 
-// GetPassword returns the Password field value if set, zero value otherwise.
-func (o *IamLocalUserPassword) GetPassword() string {
-	if o == nil || IsNil(o.Password) {
-		var ret string
+// GetPasswordExpiresInDays returns the PasswordExpiresInDays field value if set, zero value otherwise.
+func (o *IamLocalUserPassword) GetPasswordExpiresInDays() int64 {
+	if o == nil || IsNil(o.PasswordExpiresInDays) {
+		var ret int64
 		return ret
 	}
-	return *o.Password
+	return *o.PasswordExpiresInDays
 }
 
-// GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
+// GetPasswordExpiresInDaysOk returns a tuple with the PasswordExpiresInDays field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamLocalUserPassword) GetPasswordOk() (*string, bool) {
-	if o == nil || IsNil(o.Password) {
+func (o *IamLocalUserPassword) GetPasswordExpiresInDaysOk() (*int64, bool) {
+	if o == nil || IsNil(o.PasswordExpiresInDays) {
 		return nil, false
 	}
-	return o.Password, true
+	return o.PasswordExpiresInDays, true
 }
 
-// HasPassword returns a boolean if a field has been set.
-func (o *IamLocalUserPassword) HasPassword() bool {
-	if o != nil && !IsNil(o.Password) {
+// HasPasswordExpiresInDays returns a boolean if a field has been set.
+func (o *IamLocalUserPassword) HasPasswordExpiresInDays() bool {
+	if o != nil && !IsNil(o.PasswordExpiresInDays) {
 		return true
 	}
 
 	return false
 }
 
-// SetPassword gets a reference to the given string and assigns it to the Password field.
-func (o *IamLocalUserPassword) SetPassword(v string) {
-	o.Password = &v
+// SetPasswordExpiresInDays gets a reference to the given int64 and assigns it to the PasswordExpiresInDays field.
+func (o *IamLocalUserPassword) SetPasswordExpiresInDays(v int64) {
+	o.PasswordExpiresInDays = &v
 }
 
 // GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -477,8 +477,8 @@ func (o IamLocalUserPassword) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NewPassword) {
 		toSerialize["NewPassword"] = o.NewPassword
 	}
-	if !IsNil(o.Password) {
-		toSerialize["Password"] = o.Password
+	if !IsNil(o.PasswordExpiresInDays) {
+		toSerialize["PasswordExpiresInDays"] = o.PasswordExpiresInDays
 	}
 	if o.User.IsSet() {
 		toSerialize["User"] = o.User.Get()
@@ -552,9 +552,9 @@ func (o *IamLocalUserPassword) UnmarshalJSON(data []byte) (err error) {
 		NeedPasswordReset *bool `json:"NeedPasswordReset,omitempty"`
 		// New password that the user's password should be changed to.
 		NewPassword *string `json:"NewPassword,omitempty"`
-		// User's current valid password.
-		Password *string                     `json:"Password,omitempty"`
-		User     NullableIamUserRelationship `json:"User,omitempty"`
+		// The passwordExpiresInDays attribute indicates the number of days remaining until a user's password expires, with negative values meaning the password has already expired and zero indicating expiration today. This value is dynamically calculated based on the time since the last password change and the maximum allowed password age defined by the password policy. No migration code or default value is required during system upgrades because the value is computed in real-time, and initially, the password age property defaults to zero, ensuring no passwords are mistakenly marked as expired.
+		PasswordExpiresInDays *int64                      `json:"PasswordExpiresInDays,omitempty"`
+		User                  NullableIamUserRelationship `json:"User,omitempty"`
 	}
 
 	varIamLocalUserPasswordWithoutEmbeddedStruct := IamLocalUserPasswordWithoutEmbeddedStruct{}
@@ -571,7 +571,7 @@ func (o *IamLocalUserPassword) UnmarshalJSON(data []byte) (err error) {
 		varIamLocalUserPassword.IsNewPasswordSet = varIamLocalUserPasswordWithoutEmbeddedStruct.IsNewPasswordSet
 		varIamLocalUserPassword.NeedPasswordReset = varIamLocalUserPasswordWithoutEmbeddedStruct.NeedPasswordReset
 		varIamLocalUserPassword.NewPassword = varIamLocalUserPasswordWithoutEmbeddedStruct.NewPassword
-		varIamLocalUserPassword.Password = varIamLocalUserPasswordWithoutEmbeddedStruct.Password
+		varIamLocalUserPassword.PasswordExpiresInDays = varIamLocalUserPasswordWithoutEmbeddedStruct.PasswordExpiresInDays
 		varIamLocalUserPassword.User = varIamLocalUserPasswordWithoutEmbeddedStruct.User
 		*o = IamLocalUserPassword(varIamLocalUserPassword)
 	} else {
@@ -599,7 +599,7 @@ func (o *IamLocalUserPassword) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "IsNewPasswordSet")
 		delete(additionalProperties, "NeedPasswordReset")
 		delete(additionalProperties, "NewPassword")
-		delete(additionalProperties, "Password")
+		delete(additionalProperties, "PasswordExpiresInDays")
 		delete(additionalProperties, "User")
 
 		// remove fields from embedded structs

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **IsNewPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;newPassword&#39; property has been set. | [optional] [readonly] [default to false]
 **NeedPasswordReset** | Pointer to **bool** | Indicates whether the user should be prompted to reset their password. | [optional] [readonly] 
 **NewPassword** | Pointer to **string** | New password that the user&#39;s password should be changed to. | [optional] 
-**Password** | Pointer to **string** | User&#39;s current valid password. | [optional] 
+**PasswordExpiresInDays** | Pointer to **int64** | The passwordExpiresInDays attribute indicates the number of days remaining until a user&#39;s password expires, with negative values meaning the password has already expired and zero indicating expiration today. This value is dynamically calculated based on the time since the last password change and the maximum allowed password age defined by the password policy. No migration code or default value is required during system upgrades because the value is computed in real-time, and initially, the password age property defaults to zero, ensuring no passwords are mistakenly marked as expired. | [optional] [readonly] 
 **User** | Pointer to [**NullableIamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
@@ -250,30 +250,30 @@ SetNewPassword sets NewPassword field to given value.
 
 HasNewPassword returns a boolean if a field has been set.
 
-### GetPassword
+### GetPasswordExpiresInDays
 
-`func (o *IamLocalUserPassword) GetPassword() string`
+`func (o *IamLocalUserPassword) GetPasswordExpiresInDays() int64`
 
-GetPassword returns the Password field if non-nil, zero value otherwise.
+GetPasswordExpiresInDays returns the PasswordExpiresInDays field if non-nil, zero value otherwise.
 
-### GetPasswordOk
+### GetPasswordExpiresInDaysOk
 
-`func (o *IamLocalUserPassword) GetPasswordOk() (*string, bool)`
+`func (o *IamLocalUserPassword) GetPasswordExpiresInDaysOk() (*int64, bool)`
 
-GetPasswordOk returns a tuple with the Password field if it's non-nil, zero value otherwise
+GetPasswordExpiresInDaysOk returns a tuple with the PasswordExpiresInDays field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPassword
+### SetPasswordExpiresInDays
 
-`func (o *IamLocalUserPassword) SetPassword(v string)`
+`func (o *IamLocalUserPassword) SetPasswordExpiresInDays(v int64)`
 
-SetPassword sets Password field to given value.
+SetPasswordExpiresInDays sets PasswordExpiresInDays field to given value.
 
-### HasPassword
+### HasPasswordExpiresInDays
 
-`func (o *IamLocalUserPassword) HasPassword() bool`
+`func (o *IamLocalUserPassword) HasPasswordExpiresInDays() bool`
 
-HasPassword returns a boolean if a field has been set.
+HasPasswordExpiresInDays returns a boolean if a field has been set.
 
 ### GetUser
 

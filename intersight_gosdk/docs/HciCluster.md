@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **ClusterExtId** | Pointer to **string** | The unique identifier of the cluster. | [optional] [readonly] 
 **ClusterFunction** | Pointer to **[]string** |  | [optional] 
 **ClusterSoftwareMap** | Pointer to [**[]HciSoftwareType**](HciSoftwareType.md) |  | [optional] 
+**ClusterType** | Pointer to **string** | The type of the cluster. Possible values: - HYPER_CONVERGED: Traditional HCI cluster using local storage. - COMPUTE: Cluster using external storage. | [optional] [readonly] 
 **ContainerName** | Pointer to **string** | The name of the default container created as part of cluster creation. | [optional] [readonly] 
 **CpuCapacityHz** | Pointer to **int64** | The CPU capacity in Hz of the cluster. | [optional] [readonly] 
 **CpuUsageHz** | Pointer to **int64** | The CPU usage in Hz of the cluster. | [optional] [readonly] 
@@ -50,14 +51,16 @@ Name | Type | Description | Notes
 **StorageCapacityBytes** | Pointer to **int64** | The storage capacity in bytes of the cluster. | [optional] [readonly] 
 **StorageUsageBytes** | Pointer to **int64** | The storage usage in bytes of the cluster. | [optional] [readonly] 
 **Timezone** | Pointer to **string** | The timezone of the cluster. | [optional] [readonly] 
-**UpgradeStatus** | Pointer to **string** | The upgrade status of a cluster includes the following known values: PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED, FAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster. | [optional] [readonly] 
+**UpgradeStatus** | Pointer to **string** | The upgrade status of a cluster includes the following known values PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED, FAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster. | [optional] [readonly] 
 **VmCount** | Pointer to **int64** | The number of VMs running on this cluster. | [optional] [readonly] 
+**ClusterOperation** | Pointer to [**NullableHciClusterOperationRelationship**](HciClusterOperationRelationship.md) |  | [optional] 
 **Compliance** | Pointer to [**NullableHciComplianceRelationship**](HciComplianceRelationship.md) |  | [optional] 
 **DomainManager** | Pointer to [**NullableHciDomainManagerRelationship**](HciDomainManagerRelationship.md) |  | [optional] 
 **Entitlement** | Pointer to [**NullableHciEntitlementRelationship**](HciEntitlementRelationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]HciNodeRelationship**](HciNodeRelationship.md) | An array of relationships to hciNode resources. | [optional] [readonly] 
 **PhysicalGpus** | Pointer to [**[]HciPhysicalGpuRelationship**](HciPhysicalGpuRelationship.md) | An array of relationships to hciPhysicalGpu resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageContainers** | Pointer to [**[]HciStorageContainerRelationship**](HciStorageContainerRelationship.md) | An array of relationships to hciStorageContainer resources. | [optional] [readonly] 
 **Violation** | Pointer to [**NullableHciViolationRelationship**](HciViolationRelationship.md) |  | [optional] 
 **VirtualGpus** | Pointer to [**[]HciVirtualGpuRelationship**](HciVirtualGpuRelationship.md) | An array of relationships to hciVirtualGpu resources. | [optional] [readonly] 
 **Vms** | Pointer to [**[]HciBaseVmRelationship**](HciBaseVmRelationship.md) | An array of relationships to hciBaseVm resources. | [optional] [readonly] 
@@ -436,6 +439,31 @@ HasClusterSoftwareMap returns a boolean if a field has been set.
 `func (o *HciCluster) UnsetClusterSoftwareMap()`
 
 UnsetClusterSoftwareMap ensures that no value is present for ClusterSoftwareMap, not even an explicit nil
+### GetClusterType
+
+`func (o *HciCluster) GetClusterType() string`
+
+GetClusterType returns the ClusterType field if non-nil, zero value otherwise.
+
+### GetClusterTypeOk
+
+`func (o *HciCluster) GetClusterTypeOk() (*string, bool)`
+
+GetClusterTypeOk returns a tuple with the ClusterType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterType
+
+`func (o *HciCluster) SetClusterType(v string)`
+
+SetClusterType sets ClusterType field to given value.
+
+### HasClusterType
+
+`func (o *HciCluster) HasClusterType() bool`
+
+HasClusterType returns a boolean if a field has been set.
+
 ### GetContainerName
 
 `func (o *HciCluster) GetContainerName() string`
@@ -1411,6 +1439,41 @@ SetVmCount sets VmCount field to given value.
 
 HasVmCount returns a boolean if a field has been set.
 
+### GetClusterOperation
+
+`func (o *HciCluster) GetClusterOperation() HciClusterOperationRelationship`
+
+GetClusterOperation returns the ClusterOperation field if non-nil, zero value otherwise.
+
+### GetClusterOperationOk
+
+`func (o *HciCluster) GetClusterOperationOk() (*HciClusterOperationRelationship, bool)`
+
+GetClusterOperationOk returns a tuple with the ClusterOperation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterOperation
+
+`func (o *HciCluster) SetClusterOperation(v HciClusterOperationRelationship)`
+
+SetClusterOperation sets ClusterOperation field to given value.
+
+### HasClusterOperation
+
+`func (o *HciCluster) HasClusterOperation() bool`
+
+HasClusterOperation returns a boolean if a field has been set.
+
+### SetClusterOperationNil
+
+`func (o *HciCluster) SetClusterOperationNil(b bool)`
+
+ SetClusterOperationNil sets the value for ClusterOperation to be an explicit nil
+
+### UnsetClusterOperation
+`func (o *HciCluster) UnsetClusterOperation()`
+
+UnsetClusterOperation ensures that no value is present for ClusterOperation, not even an explicit nil
 ### GetCompliance
 
 `func (o *HciCluster) GetCompliance() HciComplianceRelationship`
@@ -1621,6 +1684,41 @@ HasRegisteredDevice returns a boolean if a field has been set.
 `func (o *HciCluster) UnsetRegisteredDevice()`
 
 UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+### GetStorageContainers
+
+`func (o *HciCluster) GetStorageContainers() []HciStorageContainerRelationship`
+
+GetStorageContainers returns the StorageContainers field if non-nil, zero value otherwise.
+
+### GetStorageContainersOk
+
+`func (o *HciCluster) GetStorageContainersOk() (*[]HciStorageContainerRelationship, bool)`
+
+GetStorageContainersOk returns a tuple with the StorageContainers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageContainers
+
+`func (o *HciCluster) SetStorageContainers(v []HciStorageContainerRelationship)`
+
+SetStorageContainers sets StorageContainers field to given value.
+
+### HasStorageContainers
+
+`func (o *HciCluster) HasStorageContainers() bool`
+
+HasStorageContainers returns a boolean if a field has been set.
+
+### SetStorageContainersNil
+
+`func (o *HciCluster) SetStorageContainersNil(b bool)`
+
+ SetStorageContainersNil sets the value for StorageContainers to be an explicit nil
+
+### UnsetStorageContainers
+`func (o *HciCluster) UnsetStorageContainers()`
+
+UnsetStorageContainers ensures that no value is present for StorageContainers, not even an explicit nil
 ### GetViolation
 
 `func (o *HciCluster) GetViolation() HciViolationRelationship`

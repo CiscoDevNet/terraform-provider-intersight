@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_host_lun"
 description: |-
-        A host LUN entity in Hitachi storage array. It exists only if the volume has a connection to host group. A host lun provides public connection to all hosts associated within host group. Hitachi assign same HLU for all the host.
+        The HitachiHostLun object represents a host LUN entity within a Hitachi storage array. It facilitates public connections to hosts within host groups, supporting effective data access and communication.
+        #### Purpose
+        HitachiHostLun is integral to managing host LUNs within Hitachi arrays. It enables seamless connectivity to volumes, ensuring efficient data access and resource allocation.
+        #### Key Concepts
+        - **Public Connectivity:** Provides shared access to volumes across hosts within a host group, simplifying data access management.
+        - **Volume Association:** Links host LUNs to specific volumes, supporting streamlined access and resource allocation.
+        - **Host Group Integration:** Connects host LUNs to host groups, ensuring reliable communication pathways.
+        - **Security and Control:** Implements settings for port and LUN security, enhancing access control and data protection.
 
 ---
 
 # Data Source: intersight_storage_hitachi_host_lun
-A host LUN entity in Hitachi storage array. It exists only if the volume has a connection to host group. A host lun provides public connection to all hosts associated within host group. Hitachi assign same HLU for all the host.
+The HitachiHostLun object represents a host LUN entity within a Hitachi storage array. It facilitates public connections to hosts within host groups, supporting effective data access and communication.
+#### Purpose
+HitachiHostLun is integral to managing host LUNs within Hitachi arrays. It enables seamless connectivity to volumes, ensuring efficient data access and resource allocation.
+#### Key Concepts
+- **Public Connectivity:** Provides shared access to volumes across hosts within a host group, simplifying data access management.
+- **Volume Association:** Links host LUNs to specific volumes, supporting streamlined access and resource allocation.
+- **Host Group Integration:** Connects host LUNs to host groups, ensuring reliable communication pathways.
+- **Security and Control:** Implements settings for port and LUN security, enhancing access control and data protection.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

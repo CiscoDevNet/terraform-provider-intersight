@@ -165,7 +165,7 @@ func resourceIppoolReservation() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"IPv4", "IPv6"}, false),
 				Optional:     true,
-				Default:      "IPv4",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"ip_v4_address": {
@@ -874,24 +874,24 @@ func resourceIppoolReservationCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetClassId("ippool.Reservation")
 
-	if v, ok := d.GetOk("identity"); ok {
+	if v, ok := d.GetOkExists("identity"); ok {
 		x := (v.(string))
 		o.SetIdentity(x)
 	}
 
-	if v, ok := d.GetOk("ip_type"); ok {
+	if v, ok := d.GetOkExists("ip_type"); ok {
 		x := (v.(string))
 		o.SetIpType(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("ippool.Reservation")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1055,7 +1055,7 @@ func resourceIppoolReservationCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("vrf_moid"); ok {
+	if v, ok := d.GetOkExists("vrf_moid"); ok {
 		x := (v.(string))
 		o.SetVrfMoid(x)
 	}

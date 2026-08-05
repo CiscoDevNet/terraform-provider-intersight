@@ -626,12 +626,12 @@ func resourceOsTemplateFileCreate(c context.Context, d *schema.ResourceData, met
 
 	o.SetClassId("os.TemplateFile")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}

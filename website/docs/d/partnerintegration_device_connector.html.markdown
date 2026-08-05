@@ -3,12 +3,24 @@ subcategory: "partnerintegration"
 layout: "intersight"
 page_title: "Intersight: intersight_partnerintegration_device_connector"
 description: |-
-        Recipe for device connector build and deploy.
+        The DeviceConnectors object acts as a recipe for building and deploying device connector services on an appliance.
+        #### Purpose
+        It manages the lifecycle of device connector images, providing a mechanism to trigger builds, deployments, and file uploads to storage buckets.
+        #### Key Concepts
+        - **Action Orchestration:** Supports build, deploy, and upload actions to manage service images.
+        - **Status Monitoring:** Tracks the build status (e.g., InProgress, Completed, Failed) to ensure successful service delivery.
+        - **Image Management:** Stores metadata regarding built docker images and source file locations.
 
 ---
 
 # Data Source: intersight_partnerintegration_device_connector
-Recipe for device connector build and deploy.
+The DeviceConnectors object acts as a recipe for building and deploying device connector services on an appliance.
+#### Purpose
+It manages the lifecycle of device connector images, providing a mechanism to trigger builds, deployments, and file uploads to storage buckets.
+#### Key Concepts
+- **Action Orchestration:** Supports build, deploy, and upload actions to manage service images.
+- **Status Monitoring:** Tracks the build status (e.g., InProgress, Completed, Failed) to ensure successful service delivery.
+- **Image Management:** Stores metadata regarding built docker images and source file locations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

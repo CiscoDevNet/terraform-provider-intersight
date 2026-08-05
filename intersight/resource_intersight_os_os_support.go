@@ -610,14 +610,14 @@ func resourceOsOsSupportCreate(c context.Context, d *schema.ResourceData, meta i
 
 	o.SetClassId("os.OsSupport")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("os.OsSupport")
 
-	if v, ok := d.GetOk("os_version"); ok {
+	if v, ok := d.GetOkExists("os_version"); ok {
 		x := (v.(string))
 		o.SetOsVersion(x)
 	}

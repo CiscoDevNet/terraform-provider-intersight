@@ -3,12 +3,22 @@ subcategory: "partnerintegration"
 layout: "intersight"
 page_title: "Intersight: intersight_partnerintegration_logs"
 description: |-
-        Logs from the build operation.
+        The Logs object captures the standard output and error logs generated during the build operation of an inventory collection.
+        #### Purpose
+        Similar to `DcLogs`, this object provides detailed logs for inventory build processes, enabling troubleshooting of build failures or performance issues.
+        #### Key Concepts
+        - **Build Visibility:** Tracks `stdout` and `stderr` for inventory build operations.
+        - **Stage-Based Logging:** Categorizes logs by build stage (e.g., Backend, UI, Apidocs) to simplify debugging.
 
 ---
 
 # Data Source: intersight_partnerintegration_logs
-Logs from the build operation.
+The Logs object captures the standard output and error logs generated during the build operation of an inventory collection.
+#### Purpose
+Similar to `DcLogs`, this object provides detailed logs for inventory build processes, enabling troubleshooting of build failures or performance issues.
+#### Key Concepts
+- **Build Visibility:** Tracks `stdout` and `stderr` for inventory build operations.
+- **Stage-Based Logging:** Categorizes logs by build stage (e.g., Backend, UI, Apidocs) to simplify debugging.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

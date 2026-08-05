@@ -53,7 +53,10 @@ variable "organization" {
 ```
 ## Argument Reference
 The following arguments are supported:
+* `account_lockout_duration`:(int) Timeout duration specifies the duration (in seconds) after which a locked account is automatically unlocked. - Set to 0 when accountUnlockMode is Manual. - Set a value between 1 and 604800 when accountUnlockMode is Automatic. 
+* `account_lockout_threshold`:(int) Set Account Lockout Threshold for endpoint users. 
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `account_unlock_mode`:(string) Account unlock method specifies how the account is unlocked after it is locked: - Manual: Account must be manually unlocked by an administrator. - Automatic: Account unlocks automatically after a timeout duration.* `Automatic` - Set Automatic on the selected end point.* `Manual` - Set Manual on the selected end point. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

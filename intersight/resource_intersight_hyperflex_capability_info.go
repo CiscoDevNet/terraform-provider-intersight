@@ -717,7 +717,7 @@ func resourceHyperflexCapabilityInfoCreate(c context.Context, d *schema.Resource
 
 	o.SetClassId("hyperflex.CapabilityInfo")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

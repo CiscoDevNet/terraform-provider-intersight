@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hyper_flex_volume"
 description: |-
-        A HyperFlex Volume entity.
+        The HyperFlexVolume object represents a HyperFlex Volume entity, which is integral to the storage capabilities of the HyperFlex system. It encapsulates the essential attributes and functionalities of a volume within the HyperFlex storage architecture.
+        #### Purpose
+        HyperFlexVolume serves as the primary entity for managing volume storage within a HyperFlex cluster. It provides essential capabilities for volume management, ensuring efficient storage operations and data handling.
+        #### Key Concepts
+        - **Volume Management:** Supports the creation, configuration, and maintenance of volumes, essential for organizing storage resources in a HyperFlex cluster.
+        - **Data Handling:** Facilitates data storage operations, ensuring high performance and reliability within the storage environment.
+        - **Access Control:** Implements comprehensive access control measures with privilege sets, allowing secure management of volume resources.
+        - **Integration:** Works in conjunction with other storage components and systems, enabling a cohesive and efficient storage infrastructure.
 
 ---
 
 # Data Source: intersight_storage_hyper_flex_volume
-A HyperFlex Volume entity.
+The HyperFlexVolume object represents a HyperFlex Volume entity, which is integral to the storage capabilities of the HyperFlex system. It encapsulates the essential attributes and functionalities of a volume within the HyperFlex storage architecture.
+#### Purpose
+HyperFlexVolume serves as the primary entity for managing volume storage within a HyperFlex cluster. It provides essential capabilities for volume management, ensuring efficient storage operations and data handling.
+#### Key Concepts
+- **Volume Management:** Supports the creation, configuration, and maintenance of volumes, essential for organizing storage resources in a HyperFlex cluster.
+- **Data Handling:** Facilitates data storage operations, ensuring high performance and reliability within the storage environment.
+- **Access Control:** Implements comprehensive access control measures with privilege sets, allowing secure management of volume resources.
+- **Integration:** Works in conjunction with other storage components and systems, enabling a cohesive and efficient storage infrastructure.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

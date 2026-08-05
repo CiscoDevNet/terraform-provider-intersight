@@ -1077,7 +1077,7 @@ func resourceWorkflowTemplateParserCreate(c context.Context, d *schema.ResourceD
 
 	o.SetClassId("workflow.TemplateParser")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

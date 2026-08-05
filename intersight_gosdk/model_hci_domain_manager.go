@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the HciDomainManager type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HciDomainManager{}
 
-// HciDomainManager The current HCI Prism Central instance reported by Prism Central.
+// HciDomainManager The DomainManager object represents the Nutanix Prism Central instance managing multiple clusters. #### Purpose  The DomainManager object reports basic information about the Nutanix Prism Central instance such as its name and size. It also is a parent object for all other entities managed by Prism Central, including clusters, nodes, VMs, GPUs, and licenses. #### Key Concepts - **Inventory Collection Limits:** The API limits property defines the maximum number of inventory objects that can be collected based on the current Prism Central resource configuration. - **Anchor point for resources in the Prism Central:** All HCI clusters registered with Prism Central, including the Prism Central cluster itself, along with their associated resources—such as nodes, GPUs, VMs, and licenses.
 type HciDomainManager struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -31,6 +31,8 @@ type HciDomainManager struct {
 	ApiLimits  []HciApiLimit `json:"ApiLimits,omitempty"`
 	// The string representation of the API limits as a string. It can be used by Alarm.
 	ApiLimitsString *string `json:"ApiLimitsString,omitempty"`
+	// The LCM (Life Cycle Manager) connectivity type. Possible values: CONNECTED_SITE (has internet connectivity), DARKSITE_DIRECT_UPLOAD (no external connectivity with direct upload), DARKSITE_WEB_SERVER (no external connectivity with darksite webserver).
+	LcmConnectivityType *string `json:"LcmConnectivityType,omitempty"`
 	// The name of the domain manager.
 	Name *string `json:"Name,omitempty"`
 	// The unique identifier of the domain manager (Prism Central) instance.
@@ -191,6 +193,38 @@ func (o *HciDomainManager) HasApiLimitsString() bool {
 // SetApiLimitsString gets a reference to the given string and assigns it to the ApiLimitsString field.
 func (o *HciDomainManager) SetApiLimitsString(v string) {
 	o.ApiLimitsString = &v
+}
+
+// GetLcmConnectivityType returns the LcmConnectivityType field value if set, zero value otherwise.
+func (o *HciDomainManager) GetLcmConnectivityType() string {
+	if o == nil || IsNil(o.LcmConnectivityType) {
+		var ret string
+		return ret
+	}
+	return *o.LcmConnectivityType
+}
+
+// GetLcmConnectivityTypeOk returns a tuple with the LcmConnectivityType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HciDomainManager) GetLcmConnectivityTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.LcmConnectivityType) {
+		return nil, false
+	}
+	return o.LcmConnectivityType, true
+}
+
+// HasLcmConnectivityType returns a boolean if a field has been set.
+func (o *HciDomainManager) HasLcmConnectivityType() bool {
+	if o != nil && !IsNil(o.LcmConnectivityType) {
+		return true
+	}
+
+	return false
+}
+
+// SetLcmConnectivityType gets a reference to the given string and assigns it to the LcmConnectivityType field.
+func (o *HciDomainManager) SetLcmConnectivityType(v string) {
+	o.LcmConnectivityType = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -430,6 +464,9 @@ func (o HciDomainManager) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ApiLimitsString) {
 		toSerialize["ApiLimitsString"] = o.ApiLimitsString
 	}
+	if !IsNil(o.LcmConnectivityType) {
+		toSerialize["LcmConnectivityType"] = o.LcmConnectivityType
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
@@ -506,6 +543,8 @@ func (o *HciDomainManager) UnmarshalJSON(data []byte) (err error) {
 		ApiLimits  []HciApiLimit `json:"ApiLimits,omitempty"`
 		// The string representation of the API limits as a string. It can be used by Alarm.
 		ApiLimitsString *string `json:"ApiLimitsString,omitempty"`
+		// The LCM (Life Cycle Manager) connectivity type. Possible values: CONNECTED_SITE (has internet connectivity), DARKSITE_DIRECT_UPLOAD (no external connectivity with direct upload), DARKSITE_WEB_SERVER (no external connectivity with darksite webserver).
+		LcmConnectivityType *string `json:"LcmConnectivityType,omitempty"`
 		// The name of the domain manager.
 		Name *string `json:"Name,omitempty"`
 		// The unique identifier of the domain manager (Prism Central) instance.
@@ -528,6 +567,7 @@ func (o *HciDomainManager) UnmarshalJSON(data []byte) (err error) {
 		varHciDomainManager.ObjectType = varHciDomainManagerWithoutEmbeddedStruct.ObjectType
 		varHciDomainManager.ApiLimits = varHciDomainManagerWithoutEmbeddedStruct.ApiLimits
 		varHciDomainManager.ApiLimitsString = varHciDomainManagerWithoutEmbeddedStruct.ApiLimitsString
+		varHciDomainManager.LcmConnectivityType = varHciDomainManagerWithoutEmbeddedStruct.LcmConnectivityType
 		varHciDomainManager.Name = varHciDomainManagerWithoutEmbeddedStruct.Name
 		varHciDomainManager.PcExtId = varHciDomainManagerWithoutEmbeddedStruct.PcExtId
 		varHciDomainManager.Size = varHciDomainManagerWithoutEmbeddedStruct.Size
@@ -555,6 +595,7 @@ func (o *HciDomainManager) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ApiLimits")
 		delete(additionalProperties, "ApiLimitsString")
+		delete(additionalProperties, "LcmConnectivityType")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "PcExtId")
 		delete(additionalProperties, "Size")

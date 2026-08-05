@@ -24,6 +24,7 @@ The following arguments can be used to get data of already created objects in In
 * `gateway`:(string) Default gateway configured on the peer node. 
 * `hostip`:(string) Publicly accessible IP of the peer node. 
 * `hostname`:(string) Publicly accessible FQDN of the peer node. 
+* `hypervisor_type`:(string) The hypervisor type of the node.* `ESXi` - VMware ESXi hypervisor type.Indicates the appliance node is running on a VMware ESXi virtualization platform.* `Hyper-V` - Microsoft Hyper-V hypervisor type.Indicates the appliance node is running on a Microsoft Hyper-V virtualization platform.* `KVM` - Kernel-based Virtual Machine hypervisor type.Indicates the appliance node is running on a KVM virtualization platform. 
 * `installer_version`:(string) Installer version used to install on peer node. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

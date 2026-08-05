@@ -95,6 +95,34 @@ func getResourcepoolPoolSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"exported_selectors": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "ODATA filter to select resources. The group selector may include URLs of individual resource, or OData query with filters that match multiple queries. The URLs must be relative (i.e. do not include the host).",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -231,6 +259,40 @@ func getResourcepoolPoolSchema() map[string]*schema.Schema {
 		},
 		"qualification_policies": {
 			Description: "An array of relationships to resourceAbstractResourceQualificationPolicy resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"reservations": {
+			Description: "An array of relationships to resourcepoolReservation resources.",
 			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
@@ -702,6 +764,40 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("exported_selectors"); ok {
+		x := make([]models.ResourceSelector, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.ResourceSelector{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("resource.Selector")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetExportedSelectors(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
@@ -903,6 +999,46 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 			x = append(x, models.MoMoRefAsResourceAbstractResourceQualificationPolicyRelationship(o))
 		}
 		o.SetQualificationPolicies(x)
+	}
+
+	if v, ok := d.GetOk("reservations"); ok {
+		x := make([]models.ResourcepoolReservationRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsResourcepoolReservationRelationship(o))
+		}
+		o.SetReservations(x)
 	}
 
 	if v, ok := d.GetOkExists("reserved"); ok {
@@ -1219,6 +1355,8 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
+				temp["exported_selectors"] = flattenListResourceSelector(s.GetExportedSelectors(), d)
+
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
@@ -1233,6 +1371,8 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 				temp["pool_type"] = (s.GetPoolType())
 
 				temp["qualification_policies"] = flattenListResourceAbstractResourceQualificationPolicyRelationship(s.GetQualificationPolicies(), d)
+
+				temp["reservations"] = flattenListResourcepoolReservationRelationship(s.GetReservations(), d)
 				temp["reserved"] = (s.GetReserved())
 
 				temp["resource_evaluation_status"] = flattenMapResourcepoolResourceEvaluationStatus(s.GetResourceEvaluationStatus(), d)

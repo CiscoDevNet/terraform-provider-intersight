@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "notification.TriggerWebhook"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "notification.TriggerWebhook"]
+**Authentication** | Pointer to [**NullableAssetCredential**](AssetCredential.md) |  | [optional] 
+**ClearSecret** | Pointer to **bool** | When set to true on update, the HMAC shared secret is not carried over from the previous stored action when the request omits the write-only &#x60;&#x60;secret&#x60;&#x60; field. Use this to clear the signing key without re-sending a secret value. When false or not set, the prior behavior applies: the previous secret is preserved on PATCH if &#x60;&#x60;secret&#x60;&#x60; is omitted. | [optional] [default to false]
+**CustomHeaders** | Pointer to [**[]NotificationHttpHeader**](NotificationHttpHeader.md) |  | [optional] 
 **FirstFailedRequest** | Pointer to **time.Time** | Holds the timestamp of the first failed request. The first time the notification is not delivered to the webhook server, the user will have the Warning alarm in the system. Next 48 hours the system still will try to notify the webhook server. If after 48 hours the server is not recovered, the system will mark this webhook as Inactive, and the user will have a critical alarm in the system. | [optional] [readonly] 
 **IsSecretSet** | Pointer to **bool** | Indicates whether the value of the &#39;secret&#39; property has been set. | [optional] [readonly] [default to false]
 **LastNetworkError** | Pointer to **string** | Holds the error message for the user of the last response. | [optional] [readonly] 
 **LastResponseCode** | Pointer to **int64** | Holds the code of the last response, which helps to debug the issue in case if webhook server is not reachable. | [optional] [readonly] 
-**Secret** | Pointer to **string** | The secret is used to build the Authorization header, which will be attached to each webhook notification. By this header developers of the webhooks servers can make sure that events are received from the trusted source - Intersight. | [optional] 
+**Secret** | Pointer to **string** | Prefer the Authentication property to configure how webhook deliveries are authenticated, including the Authorization header. This field holds the shared secret used for HMAC-SHA256 signing when no credential is configured, and remains supported for existing integrations. By this header developers of the webhooks servers can make sure that events are received from the trusted source - Intersight. | [optional] 
 **State** | Pointer to **string** | State of the action shows whether this action passes the verification or not. If this property holds &#39;Inactive&#39; value, this action will not be executed. To verify action again, use the Verify property from the MO. * &#x60;Inactive&#x60; - Inactive state means action didn&#39;t pass the verification and it won&#39;t be executed. * &#x60;Active&#x60; - Active state means that action successfully passed the verification and it is ready to be performed. | [optional] [readonly] [default to "Inactive"]
 **Url** | Pointer to **string** | Payload URL of the recipient app, which is intended to serve the events that happens in Intersight. | [optional] 
 
@@ -73,6 +76,101 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAuthentication
+
+`func (o *NotificationTriggerWebhook) GetAuthentication() AssetCredential`
+
+GetAuthentication returns the Authentication field if non-nil, zero value otherwise.
+
+### GetAuthenticationOk
+
+`func (o *NotificationTriggerWebhook) GetAuthenticationOk() (*AssetCredential, bool)`
+
+GetAuthenticationOk returns a tuple with the Authentication field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthentication
+
+`func (o *NotificationTriggerWebhook) SetAuthentication(v AssetCredential)`
+
+SetAuthentication sets Authentication field to given value.
+
+### HasAuthentication
+
+`func (o *NotificationTriggerWebhook) HasAuthentication() bool`
+
+HasAuthentication returns a boolean if a field has been set.
+
+### SetAuthenticationNil
+
+`func (o *NotificationTriggerWebhook) SetAuthenticationNil(b bool)`
+
+ SetAuthenticationNil sets the value for Authentication to be an explicit nil
+
+### UnsetAuthentication
+`func (o *NotificationTriggerWebhook) UnsetAuthentication()`
+
+UnsetAuthentication ensures that no value is present for Authentication, not even an explicit nil
+### GetClearSecret
+
+`func (o *NotificationTriggerWebhook) GetClearSecret() bool`
+
+GetClearSecret returns the ClearSecret field if non-nil, zero value otherwise.
+
+### GetClearSecretOk
+
+`func (o *NotificationTriggerWebhook) GetClearSecretOk() (*bool, bool)`
+
+GetClearSecretOk returns a tuple with the ClearSecret field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClearSecret
+
+`func (o *NotificationTriggerWebhook) SetClearSecret(v bool)`
+
+SetClearSecret sets ClearSecret field to given value.
+
+### HasClearSecret
+
+`func (o *NotificationTriggerWebhook) HasClearSecret() bool`
+
+HasClearSecret returns a boolean if a field has been set.
+
+### GetCustomHeaders
+
+`func (o *NotificationTriggerWebhook) GetCustomHeaders() []NotificationHttpHeader`
+
+GetCustomHeaders returns the CustomHeaders field if non-nil, zero value otherwise.
+
+### GetCustomHeadersOk
+
+`func (o *NotificationTriggerWebhook) GetCustomHeadersOk() (*[]NotificationHttpHeader, bool)`
+
+GetCustomHeadersOk returns a tuple with the CustomHeaders field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomHeaders
+
+`func (o *NotificationTriggerWebhook) SetCustomHeaders(v []NotificationHttpHeader)`
+
+SetCustomHeaders sets CustomHeaders field to given value.
+
+### HasCustomHeaders
+
+`func (o *NotificationTriggerWebhook) HasCustomHeaders() bool`
+
+HasCustomHeaders returns a boolean if a field has been set.
+
+### SetCustomHeadersNil
+
+`func (o *NotificationTriggerWebhook) SetCustomHeadersNil(b bool)`
+
+ SetCustomHeadersNil sets the value for CustomHeaders to be an explicit nil
+
+### UnsetCustomHeaders
+`func (o *NotificationTriggerWebhook) UnsetCustomHeaders()`
+
+UnsetCustomHeaders ensures that no value is present for CustomHeaders, not even an explicit nil
 ### GetFirstFailedRequest
 
 `func (o *NotificationTriggerWebhook) GetFirstFailedRequest() time.Time`

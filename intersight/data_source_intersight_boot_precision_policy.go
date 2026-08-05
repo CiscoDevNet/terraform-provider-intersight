@@ -99,7 +99,7 @@ func getBootPrecisionPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"configured_boot_mode": {
-			Description: "Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme. To apply this setting, Please reboot the server.\n* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.\n* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader.",
+			Description: "Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme. Unified Edge servers support only UEFI boot mode. Legacy mode is not supported on these platforms. To apply this setting, Please reboot the server.\n* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.\n* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader. Not supported on Unified Edge Server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

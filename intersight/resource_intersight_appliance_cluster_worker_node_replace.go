@@ -661,7 +661,7 @@ func resourceApplianceClusterWorkerNodeReplaceCreate(c context.Context, d *schem
 		o.SetHostname(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

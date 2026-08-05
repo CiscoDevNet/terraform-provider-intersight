@@ -128,7 +128,7 @@ func resourceBootPrecisionPolicy() *schema.Resource {
 				Default:     "boot.PrecisionPolicy",
 			},
 			"configured_boot_mode": {
-				Description:  "Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme. To apply this setting, Please reboot the server.\n* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.\n* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader.",
+				Description:  "Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme. Unified Edge servers support only UEFI boot mode. Legacy mode is not supported on these platforms. To apply this setting, Please reboot the server.\n* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.\n* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader. Not supported on Unified Edge Server.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Uefi", "Legacy"}, false),
 				Optional:     true,
@@ -753,7 +753,7 @@ func resourceBootPrecisionPolicyCreate(c context.Context, d *schema.ResourceData
 		o.SetEnforceUefiSecureBoot(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -765,7 +765,7 @@ func resourceBootPrecisionPolicyCreate(c context.Context, d *schema.ResourceData
 
 	o.SetObjectType("boot.PrecisionPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

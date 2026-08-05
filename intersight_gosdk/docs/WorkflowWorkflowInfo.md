@@ -39,6 +39,7 @@ Name | Type | Description | Notes
 **AssociatedObject** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **ParentTaskInfo** | Pointer to [**NullableWorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) |  | [optional] 
+**ParentWorkflowInfos** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
 **Permission** | Pointer to [**NullableIamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
 **TaskInfos** | Pointer to [**[]WorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) | An array of relationships to workflowTaskInfo resources. | [optional] [readonly] 
 **WorkflowDefinition** | Pointer to [**NullableWorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
@@ -1037,6 +1038,41 @@ HasParentTaskInfo returns a boolean if a field has been set.
 `func (o *WorkflowWorkflowInfo) UnsetParentTaskInfo()`
 
 UnsetParentTaskInfo ensures that no value is present for ParentTaskInfo, not even an explicit nil
+### GetParentWorkflowInfos
+
+`func (o *WorkflowWorkflowInfo) GetParentWorkflowInfos() []WorkflowWorkflowInfoRelationship`
+
+GetParentWorkflowInfos returns the ParentWorkflowInfos field if non-nil, zero value otherwise.
+
+### GetParentWorkflowInfosOk
+
+`func (o *WorkflowWorkflowInfo) GetParentWorkflowInfosOk() (*[]WorkflowWorkflowInfoRelationship, bool)`
+
+GetParentWorkflowInfosOk returns a tuple with the ParentWorkflowInfos field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentWorkflowInfos
+
+`func (o *WorkflowWorkflowInfo) SetParentWorkflowInfos(v []WorkflowWorkflowInfoRelationship)`
+
+SetParentWorkflowInfos sets ParentWorkflowInfos field to given value.
+
+### HasParentWorkflowInfos
+
+`func (o *WorkflowWorkflowInfo) HasParentWorkflowInfos() bool`
+
+HasParentWorkflowInfos returns a boolean if a field has been set.
+
+### SetParentWorkflowInfosNil
+
+`func (o *WorkflowWorkflowInfo) SetParentWorkflowInfosNil(b bool)`
+
+ SetParentWorkflowInfosNil sets the value for ParentWorkflowInfos to be an explicit nil
+
+### UnsetParentWorkflowInfos
+`func (o *WorkflowWorkflowInfo) UnsetParentWorkflowInfos()`
+
+UnsetParentWorkflowInfos ensures that no value is present for ParentWorkflowInfos, not even an explicit nil
 ### GetPermission
 
 `func (o *WorkflowWorkflowInfo) GetPermission() IamPermissionRelationship`

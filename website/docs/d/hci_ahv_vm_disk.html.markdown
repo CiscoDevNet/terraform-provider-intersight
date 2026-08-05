@@ -22,6 +22,7 @@ The following arguments can be used to get data of already created objects in In
 * `disk_size_bytes`:(int) The size of the disk in bytes. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `index`:(int) The index of the disk, similar to a slot number on physical machine. 
+* `is_external_storage`:(bool) Derived property based on if storage container used external storage.Note: this value is independent of existence of volumeExtId. When a volumeExtId is empty (when the Pure Inventory is not available), this value can be true because storage container indicates external storage is used. If volumeExtId is true, it does indicate the isExternalStorage should be true. 
 * `is_flash_mode_enabled`:(bool) Indicates whether the virtual disk is pinned to the hot tier or not. 
 * `is_migration_in_progress`:(bool) Indicates if the disk is being migrated. 
 * `mod_time`:(string) The time when this managed object was last modified. 
@@ -29,4 +30,5 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `storage_container_ext_id`:(string) The extId of the storage container which backs this disk. 
 * `vm_ext_id`:(string) The unique identifier of the VM. 
+* `volume_ext_id`:(string) The volume id this VM disk owns. Either from 'resource.Id' of the Pure Volume 'owner_disk_id' tag (see 9.5.1.1.2 for detail) or from V4 VM API after Iris. 
  

@@ -102,7 +102,7 @@ This complex property has following sub-properties:
   + `enabled`:(bool) Specifies if the boot device is enabled or disabled. 
   + `name`:(string) A name that helps identify a boot device. It can be any string that adheres to the following constraints. It should start and end with an alphanumeric character. It can have underscores and hyphens. It cannot be more than 30 characters. It cannot be a reserved keyword. However, it can be used in conjunction with other letters, numbers, underscores, and hyphens (EU_CDROM-3, etc.). Reserved words include - all, ALL, CDROM, EFI, EOD, FDD, HDD, HDDANY, HTTP, ISCSI, ISCSIANY, LOCALCDD, LOCALHDD, NULL, NVME, NVMEANY, PCHSTORAGE, PCHSTORANY, PXE, SAN, SANANY, SDANY, SDCARD, UEFISHELL, USB, USBCD, USBFDD, USBHDD, VMCIMCCD, VMCIMCHDD, VMEDIA, VMFDD, VMKVMCD, VMKVMHDD. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-* `configured_boot_mode`:(string) Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme. To apply this setting, Please reboot the server.* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader. 
+* `configured_boot_mode`:(string) Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme. Unified Edge servers support only UEFI boot mode. Legacy mode is not supported on these platforms. To apply this setting, Please reboot the server.* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader. Not supported on Unified Edge Server. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
@@ -188,7 +188,7 @@ Device type used in boot policy to boot from HTTP device.
 * `ip_config_type`:(string) The IP config type to use during the HTTP boot process. For DHCP configuration, the IP address, DNS server, netmask and gateway details are obtained from DHCP server. For static configuration, please provide the IP address, DNS server, netmask, and gateway details.* `DHCP` - The type of the IP config is DHCP.* `Static` - The type of the IP config is Static. 
 * `ip_type`:(string) The IP address family type to use during the HTTP boot process.* `IPv4` - The type of the IP address is IPv4.* `IPv6` - The type of the IP address is IPv6. 
 * `mac_address`:(string) The MAC Address of the underlying virtual ethernet interface used by the HTTP boot device. 
-* `port`:(int) The Port ID of the adapter on which the underlying virtual ethernet interface is present. If no port is specified, the default value is -1. Supported values are 0 to 255. 
+* `port`:(int) Enter the port ID of the adapter for the virtual ethernet interface. Valid values are 0 to 255. 
 * `protocol`:(string) Protocol to be used for HTTP boot. HTTPS require root certificate for authentication.* `HTTPS` - Secure HTTP protocol, certificate required for authentication.* `HTTP` - HTTP protocol without security certificate requirement. 
 * `slot`:(string) The slot ID of the adapter on which the underlying virtual ethernet interface is present. Supported values are ( 1 - 255, \ MLOM\ , \ L\ , \ L1\ , \ L2\ , \ OCP\ ). 
 * `static_ip_v4_settings`:(HashMap) - The static IP config settings to use during the HTTP boot process. 
@@ -258,7 +258,7 @@ Device type used when booting from a PXE boot device.
 * `interface_source`:(string) Lists the supported methods to provide network boot device configuration. Supported values are \ name\  and \ mac\ .* `name` - Use interface name to select virtual ethernet interface.* `mac` - Use MAC address to select virtual ethernet interface.* `port` - Use port to select virtual ethernet interface. 
 * `ip_type`:(string) The IP Address family type to use during the PXE Boot process.* `None` - Default value if IpType is not specified.* `IPv4` - The IPv4 address family type.* `IPv6` - The IPv6 address family type. 
 * `mac_address`:(string) The MAC Address of the underlying virtual ethernet interface used by the PXE boot device. 
-* `port`:(int) The Port ID of the adapter on which the underlying virtual ethernet interface is present. If no port is specified, the default value is -1. Supported values are 0 to 255. 
+* `port`:(int) Enter the port ID of the adapter for the virtual ethernet interface. Valid values are 0 to 255. 
 * `slot`:(string) The slot ID of the adapter on which the underlying virtual ethernet interface is present. Supported values are ( 1 - 255, \ MLOM\ , \ L\ , \ L1\ , \ L2\ , \ OCP\ ). 
 
 ### [boot.San](#argument-reference)

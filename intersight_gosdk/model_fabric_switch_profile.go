@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -30,9 +30,14 @@ type FabricSwitchProfile struct {
 	ObjectType          string                            `json:"ObjectType"`
 	ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
 	ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
-	OverriddenList      []string                          `json:"OverriddenList,omitempty"`
-	TemplateActions     []MotemplateActionEntry           `json:"TemplateActions,omitempty"`
-	TemplateSyncErrors  []MotemplateSyncError             `json:"TemplateSyncErrors,omitempty"`
+	// Serial number of the fabric that would be assigned to this pre-assigned fabric switch Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
+	FabricPreAssignBySerial   *string                        `json:"FabricPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
+	OverriddenList            []string                       `json:"OverriddenList,omitempty"`
+	ScheduledSwitchAssignment NullableFabricSwitchAssignment `json:"ScheduledSwitchAssignment,omitempty"`
+	// Source of the switch assigned to the Domain Profile. Values can be Static or None. Static is used if a switch is attached directly to a Domain Profile. None is used if no switch is attached to a Domain Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `Static` - Fabric is directly assigned to domain profile using assign chassis. * `None` - No fabric is assigned to the domain profile.
+	SwitchAssignmentMode *string                 `json:"SwitchAssignmentMode,omitempty"`
+	TemplateActions      []MotemplateActionEntry `json:"TemplateActions,omitempty"`
+	TemplateSyncErrors   []MotemplateSyncError   `json:"TemplateSyncErrors,omitempty"`
 	// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
 	TemplateSyncStatus *string                            `json:"TemplateSyncStatus,omitempty"`
 	AssignedSwitch     NullableNetworkElementRelationship `json:"AssignedSwitch,omitempty"`
@@ -63,6 +68,8 @@ func NewFabricSwitchProfile(classId string, objectType string) *FabricSwitchProf
 	this.SwitchId = &switchId
 	var targetPlatform string = "UCS Domain"
 	this.TargetPlatform = &targetPlatform
+	var switchAssignmentMode string = "Static"
+	this.SwitchAssignmentMode = &switchAssignmentMode
 	return &this
 }
 
@@ -75,6 +82,8 @@ func NewFabricSwitchProfileWithDefaults() *FabricSwitchProfile {
 	this.ClassId = classId
 	var objectType string = "fabric.SwitchProfile"
 	this.ObjectType = objectType
+	var switchAssignmentMode string = "Static"
+	this.SwitchAssignmentMode = &switchAssignmentMode
 	return &this
 }
 
@@ -222,6 +231,38 @@ func (o *FabricSwitchProfile) UnsetConfigChanges() {
 	o.ConfigChanges.Unset()
 }
 
+// GetFabricPreAssignBySerial returns the FabricPreAssignBySerial field value if set, zero value otherwise.
+func (o *FabricSwitchProfile) GetFabricPreAssignBySerial() string {
+	if o == nil || IsNil(o.FabricPreAssignBySerial) {
+		var ret string
+		return ret
+	}
+	return *o.FabricPreAssignBySerial
+}
+
+// GetFabricPreAssignBySerialOk returns a tuple with the FabricPreAssignBySerial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchProfile) GetFabricPreAssignBySerialOk() (*string, bool) {
+	if o == nil || IsNil(o.FabricPreAssignBySerial) {
+		return nil, false
+	}
+	return o.FabricPreAssignBySerial, true
+}
+
+// HasFabricPreAssignBySerial returns a boolean if a field has been set.
+func (o *FabricSwitchProfile) HasFabricPreAssignBySerial() bool {
+	if o != nil && !IsNil(o.FabricPreAssignBySerial) {
+		return true
+	}
+
+	return false
+}
+
+// SetFabricPreAssignBySerial gets a reference to the given string and assigns it to the FabricPreAssignBySerial field.
+func (o *FabricSwitchProfile) SetFabricPreAssignBySerial(v string) {
+	o.FabricPreAssignBySerial = &v
+}
+
 // GetOverriddenList returns the OverriddenList field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricSwitchProfile) GetOverriddenList() []string {
 	if o == nil {
@@ -253,6 +294,81 @@ func (o *FabricSwitchProfile) HasOverriddenList() bool {
 // SetOverriddenList gets a reference to the given []string and assigns it to the OverriddenList field.
 func (o *FabricSwitchProfile) SetOverriddenList(v []string) {
 	o.OverriddenList = v
+}
+
+// GetScheduledSwitchAssignment returns the ScheduledSwitchAssignment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchProfile) GetScheduledSwitchAssignment() FabricSwitchAssignment {
+	if o == nil || IsNil(o.ScheduledSwitchAssignment.Get()) {
+		var ret FabricSwitchAssignment
+		return ret
+	}
+	return *o.ScheduledSwitchAssignment.Get()
+}
+
+// GetScheduledSwitchAssignmentOk returns a tuple with the ScheduledSwitchAssignment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchProfile) GetScheduledSwitchAssignmentOk() (*FabricSwitchAssignment, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ScheduledSwitchAssignment.Get(), o.ScheduledSwitchAssignment.IsSet()
+}
+
+// HasScheduledSwitchAssignment returns a boolean if a field has been set.
+func (o *FabricSwitchProfile) HasScheduledSwitchAssignment() bool {
+	if o != nil && o.ScheduledSwitchAssignment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledSwitchAssignment gets a reference to the given NullableFabricSwitchAssignment and assigns it to the ScheduledSwitchAssignment field.
+func (o *FabricSwitchProfile) SetScheduledSwitchAssignment(v FabricSwitchAssignment) {
+	o.ScheduledSwitchAssignment.Set(&v)
+}
+
+// SetScheduledSwitchAssignmentNil sets the value for ScheduledSwitchAssignment to be an explicit nil
+func (o *FabricSwitchProfile) SetScheduledSwitchAssignmentNil() {
+	o.ScheduledSwitchAssignment.Set(nil)
+}
+
+// UnsetScheduledSwitchAssignment ensures that no value is present for ScheduledSwitchAssignment, not even an explicit nil
+func (o *FabricSwitchProfile) UnsetScheduledSwitchAssignment() {
+	o.ScheduledSwitchAssignment.Unset()
+}
+
+// GetSwitchAssignmentMode returns the SwitchAssignmentMode field value if set, zero value otherwise.
+func (o *FabricSwitchProfile) GetSwitchAssignmentMode() string {
+	if o == nil || IsNil(o.SwitchAssignmentMode) {
+		var ret string
+		return ret
+	}
+	return *o.SwitchAssignmentMode
+}
+
+// GetSwitchAssignmentModeOk returns a tuple with the SwitchAssignmentMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchProfile) GetSwitchAssignmentModeOk() (*string, bool) {
+	if o == nil || IsNil(o.SwitchAssignmentMode) {
+		return nil, false
+	}
+	return o.SwitchAssignmentMode, true
+}
+
+// HasSwitchAssignmentMode returns a boolean if a field has been set.
+func (o *FabricSwitchProfile) HasSwitchAssignmentMode() bool {
+	if o != nil && !IsNil(o.SwitchAssignmentMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetSwitchAssignmentMode gets a reference to the given string and assigns it to the SwitchAssignmentMode field.
+func (o *FabricSwitchProfile) SetSwitchAssignmentMode(v string) {
+	o.SwitchAssignmentMode = &v
 }
 
 // GetTemplateActions returns the TemplateActions field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -580,8 +696,17 @@ func (o FabricSwitchProfile) ToMap() (map[string]interface{}, error) {
 	if o.ConfigChanges.IsSet() {
 		toSerialize["ConfigChanges"] = o.ConfigChanges.Get()
 	}
+	if !IsNil(o.FabricPreAssignBySerial) {
+		toSerialize["FabricPreAssignBySerial"] = o.FabricPreAssignBySerial
+	}
 	if o.OverriddenList != nil {
 		toSerialize["OverriddenList"] = o.OverriddenList
+	}
+	if o.ScheduledSwitchAssignment.IsSet() {
+		toSerialize["ScheduledSwitchAssignment"] = o.ScheduledSwitchAssignment.Get()
+	}
+	if !IsNil(o.SwitchAssignmentMode) {
+		toSerialize["SwitchAssignmentMode"] = o.SwitchAssignmentMode
 	}
 	if o.TemplateActions != nil {
 		toSerialize["TemplateActions"] = o.TemplateActions
@@ -664,9 +789,14 @@ func (o *FabricSwitchProfile) UnmarshalJSON(data []byte) (err error) {
 		ObjectType          string                            `json:"ObjectType"`
 		ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
 		ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
-		OverriddenList      []string                          `json:"OverriddenList,omitempty"`
-		TemplateActions     []MotemplateActionEntry           `json:"TemplateActions,omitempty"`
-		TemplateSyncErrors  []MotemplateSyncError             `json:"TemplateSyncErrors,omitempty"`
+		// Serial number of the fabric that would be assigned to this pre-assigned fabric switch Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
+		FabricPreAssignBySerial   *string                        `json:"FabricPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
+		OverriddenList            []string                       `json:"OverriddenList,omitempty"`
+		ScheduledSwitchAssignment NullableFabricSwitchAssignment `json:"ScheduledSwitchAssignment,omitempty"`
+		// Source of the switch assigned to the Domain Profile. Values can be Static or None. Static is used if a switch is attached directly to a Domain Profile. None is used if no switch is attached to a Domain Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `Static` - Fabric is directly assigned to domain profile using assign chassis. * `None` - No fabric is assigned to the domain profile.
+		SwitchAssignmentMode *string                 `json:"SwitchAssignmentMode,omitempty"`
+		TemplateActions      []MotemplateActionEntry `json:"TemplateActions,omitempty"`
+		TemplateSyncErrors   []MotemplateSyncError   `json:"TemplateSyncErrors,omitempty"`
 		// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
 		TemplateSyncStatus *string                            `json:"TemplateSyncStatus,omitempty"`
 		AssignedSwitch     NullableNetworkElementRelationship `json:"AssignedSwitch,omitempty"`
@@ -687,7 +817,10 @@ func (o *FabricSwitchProfile) UnmarshalJSON(data []byte) (err error) {
 		varFabricSwitchProfile.ObjectType = varFabricSwitchProfileWithoutEmbeddedStruct.ObjectType
 		varFabricSwitchProfile.ConfigChangeContext = varFabricSwitchProfileWithoutEmbeddedStruct.ConfigChangeContext
 		varFabricSwitchProfile.ConfigChanges = varFabricSwitchProfileWithoutEmbeddedStruct.ConfigChanges
+		varFabricSwitchProfile.FabricPreAssignBySerial = varFabricSwitchProfileWithoutEmbeddedStruct.FabricPreAssignBySerial
 		varFabricSwitchProfile.OverriddenList = varFabricSwitchProfileWithoutEmbeddedStruct.OverriddenList
+		varFabricSwitchProfile.ScheduledSwitchAssignment = varFabricSwitchProfileWithoutEmbeddedStruct.ScheduledSwitchAssignment
+		varFabricSwitchProfile.SwitchAssignmentMode = varFabricSwitchProfileWithoutEmbeddedStruct.SwitchAssignmentMode
 		varFabricSwitchProfile.TemplateActions = varFabricSwitchProfileWithoutEmbeddedStruct.TemplateActions
 		varFabricSwitchProfile.TemplateSyncErrors = varFabricSwitchProfileWithoutEmbeddedStruct.TemplateSyncErrors
 		varFabricSwitchProfile.TemplateSyncStatus = varFabricSwitchProfileWithoutEmbeddedStruct.TemplateSyncStatus
@@ -717,7 +850,10 @@ func (o *FabricSwitchProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigChangeContext")
 		delete(additionalProperties, "ConfigChanges")
+		delete(additionalProperties, "FabricPreAssignBySerial")
 		delete(additionalProperties, "OverriddenList")
+		delete(additionalProperties, "ScheduledSwitchAssignment")
+		delete(additionalProperties, "SwitchAssignmentMode")
 		delete(additionalProperties, "TemplateActions")
 		delete(additionalProperties, "TemplateSyncErrors")
 		delete(additionalProperties, "TemplateSyncStatus")

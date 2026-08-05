@@ -661,6 +661,12 @@ func resourceFabricSwitchProfile() *schema.Resource {
 					}
 					return
 				}},
+			"fabric_pre_assign_by_serial": {
+				Description:  "Serial number of the fabric that would be assigned to this pre-assigned fabric switch Profile. It can be any string that adheres to the following constraints:\nIt should start and end with an alphanumeric character.\nIt cannot be more than 20 characters.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]{0,20}$"), ""),
+				Optional:     true,
+			},
 			"incomplete_policies": {
 				Description: "An array of relationships to policyAbstractPolicy resources.",
 				Type:        schema.TypeList,
@@ -1085,7 +1091,7 @@ func resourceFabricSwitchProfile() *schema.Resource {
 								return
 							}},
 						"change_status": {
-							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.",
+							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.\n* `Failed` - The status when policy change evaluation report handling failed for a policy.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -1226,6 +1232,45 @@ func resourceFabricSwitchProfile() *schema.Resource {
 					},
 				},
 			},
+			"scheduled_switch_assignment": {
+				Description: "Switch reassignment information that is captured as part of the config import process.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "fabric.SwitchAssignment",
+						},
+						"enabled": {
+							Description: "Indicates if this assignment is enabled.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "fabric.SwitchAssignment",
+						},
+						"switch_serial": {
+							Description: "Serial number of the switch.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -1276,6 +1321,13 @@ func resourceFabricSwitchProfile() *schema.Resource {
 						},
 					},
 				},
+			},
+			"switch_assignment_mode": {
+				Description:  "Source of the switch assigned to the Domain Profile. Values can be Static or None. Static is used if a switch is attached directly to a Domain Profile. None is used if no switch is attached to a Domain Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later.\n* `Static` - Fabric is directly assigned to domain profile using assign chassis.\n* `None` - No fabric is assigned to the domain profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Static", "None"}, false),
+				Optional:     true,
+				Default:      "Static",
 			},
 			"switch_cluster_profile": {
 				Description: "A reference to a fabricSwitchClusterProfile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1467,7 +1519,7 @@ func resourceFabricSwitchProfile() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"UCS Domain", "Unified Edge"}, false),
 				Optional:     true,
-				Default:      "UCS Domain",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"template_actions": {
@@ -1952,7 +2004,12 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOk("fabric_pre_assign_by_serial"); ok {
+		x := (v.(string))
+		o.SetFabricPreAssignBySerial(x)
+	}
+
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -2324,6 +2381,49 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOk("scheduled_switch_assignment"); ok {
+		p := make([]models.FabricSwitchAssignment, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewFabricSwitchAssignmentWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.SwitchAssignment")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["switch_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetSwitchSerial(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetScheduledSwitchAssignment(x)
+		}
+	}
+
 	if v, ok := d.GetOk("src_template"); ok {
 		p := make([]models.PolicyAbstractProfileRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2365,6 +2465,11 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetSrcTemplate(x)
 		}
+	}
+
+	if v, ok := d.GetOk("switch_assignment_mode"); ok {
+		x := (v.(string))
+		o.SetSwitchAssignmentMode(x)
 	}
 
 	if v, ok := d.GetOk("switch_cluster_profile"); ok {
@@ -2493,7 +2598,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if v, ok := d.GetOk("target_platform"); ok {
+	if v, ok := d.GetOkExists("target_platform"); ok {
 		x := (v.(string))
 		o.SetTargetPlatform(x)
 	}
@@ -2775,6 +2880,10 @@ func resourceFabricSwitchProfileRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in FabricSwitchProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("fabric_pre_assign_by_serial", (s.GetFabricPreAssignBySerial())); err != nil {
+		return diag.Errorf("error occurred while setting property FabricPreAssignBySerial in FabricSwitchProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("incomplete_policies", flattenListPolicyAbstractPolicyRelationship(s.GetIncompletePolicies(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property IncompletePolicies in FabricSwitchProfile object: %s", err.Error())
 	}
@@ -2839,12 +2948,20 @@ func resourceFabricSwitchProfileRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property ScheduledActions in FabricSwitchProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("scheduled_switch_assignment", flattenMapFabricSwitchAssignment(s.GetScheduledSwitchAssignment(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ScheduledSwitchAssignment in FabricSwitchProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in FabricSwitchProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("src_template", flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property SrcTemplate in FabricSwitchProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("switch_assignment_mode", (s.GetSwitchAssignmentMode())); err != nil {
+		return diag.Errorf("error occurred while setting property SwitchAssignmentMode in FabricSwitchProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("switch_cluster_profile", flattenMapFabricSwitchClusterProfileRelationship(s.GetSwitchClusterProfile(), d)); err != nil {
@@ -3071,6 +3188,12 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("fabric_pre_assign_by_serial") {
+		v := d.Get("fabric_pre_assign_by_serial")
+		x := (v.(string))
+		o.SetFabricPreAssignBySerial(x)
 	}
 
 	if d.HasChange("moid") {
@@ -3440,6 +3563,50 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 		o.SetScheduledActions(x)
 	}
 
+	if d.HasChange("scheduled_switch_assignment") {
+		v := d.Get("scheduled_switch_assignment")
+		p := make([]models.FabricSwitchAssignment, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FabricSwitchAssignment{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.SwitchAssignment")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["switch_serial"]; ok {
+				{
+					x := (v.(string))
+					o.SetSwitchSerial(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetScheduledSwitchAssignment(x)
+		}
+	}
+
 	if d.HasChange("src_template") {
 		v := d.Get("src_template")
 		p := make([]models.PolicyAbstractProfileRelationship, 0, 1)
@@ -3482,6 +3649,12 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetSrcTemplate(x)
 		}
+	}
+
+	if d.HasChange("switch_assignment_mode") {
+		v := d.Get("switch_assignment_mode")
+		x := (v.(string))
+		o.SetSwitchAssignmentMode(x)
 	}
 
 	if d.HasChange("switch_cluster_profile") {

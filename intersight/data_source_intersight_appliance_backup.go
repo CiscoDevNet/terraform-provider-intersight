@@ -95,6 +95,11 @@ func getApplianceBackupSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"backup_download_url": {
+			Description: "Download URL for the backup artifact when available. Only populated for successful local-protocol backups; empty for remote-protocol backups.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -123,6 +128,11 @@ func getApplianceBackupSchema() map[string]*schema.Schema {
 		"filename": {
 			Description: "Backup filename to backup or restore.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"force_delete": {
+			Description: "Set to true to allow deletion of the oldest local backup when local backup retention limit is reached. If false and retention count is reached, the backup operation fails.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"is_manual": {
@@ -235,22 +245,22 @@ func getApplianceBackupSchema() map[string]*schema.Schema {
 			},
 		},
 		"protocol": {
-			Description: "Communication protocol used by the file server (e.g. scp, sftp, or CIFS).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
+			Description: "Communication protocol used by backup and restore workflow (e.g. scp, sftp, cifs, or local).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.\n* `local` - Backup file is stored in Intersight Appliance.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"remote_host": {
-			Description: "Hostname of the remote file server.",
+			Description: "Hostname of the remote file server. Not required when protocol is local.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"remote_path": {
-			Description: "File server directory or share name to copy the file.",
+			Description: "File server directory or share name to copy the file. Not required when protocol is local.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"remote_port": {
-			Description: "Remote TCP port on the file server (e.g. 22 for scp).",
+			Description: "Remote TCP port on the file server (e.g. 22 for scp). Not required when protocol is local.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -375,8 +385,13 @@ func getApplianceBackupSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"use_policy_settings": {
+			Description: "Set to true to inherit credentials, protocol, and file server settings from the appliance backup policy. If false, use explicit settings provided in this backup object.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"username": {
-			Description: "Username to authenticate the fileserver.",
+			Description: "Username to authenticate the fileserver. Not required when protocol is local.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -612,6 +627,11 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("backup_download_url"); ok {
+		x := (v.(string))
+		o.SetBackupDownloadUrl(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -642,6 +662,11 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 	if v, ok := d.GetOk("filename"); ok {
 		x := (v.(string))
 		o.SetFilename(x)
+	}
+
+	if v, ok := d.GetOkExists("force_delete"); ok {
+		x := (v.(bool))
+		o.SetForceDelete(x)
 	}
 
 	if v, ok := d.GetOkExists("is_manual"); ok {
@@ -892,6 +917,11 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOkExists("use_policy_settings"); ok {
+		x := (v.(bool))
+		o.SetUsePolicySettings(x)
+	}
+
 	if v, ok := d.GetOk("username"); ok {
 		x := (v.(string))
 		o.SetUsername(x)
@@ -1012,6 +1042,7 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["backup_download_url"] = (s.GetBackupDownloadUrl())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -1020,6 +1051,7 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 
 				temp["end_time"] = (s.GetEndTime()).String()
 				temp["filename"] = (s.GetFilename())
+				temp["force_delete"] = (s.GetForceDelete())
 				temp["is_manual"] = (s.GetIsManual())
 				temp["is_password_set"] = (s.GetIsPasswordSet())
 				temp["messages"] = (s.GetMessages())
@@ -1042,6 +1074,7 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["use_policy_settings"] = (s.GetUsePolicySettings())
 				temp["username"] = (s.GetUsername())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

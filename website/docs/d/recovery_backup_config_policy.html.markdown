@@ -3,12 +3,24 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_backup_config_policy"
 description: |-
-        Backup config policy which contains all the required inputs to do backup on a local or remote server.
+        The BackupConfigPolicy object defines comprehensive backup policies for local or remote servers. This provides the necessary inputs and configurations to execute backup operations effectively.
+        #### Purpose
+        The BackupConfigPolicy object defines the rules and configurations for executing backups on designated servers. It coordinates backup profiles and ensures alignment with organizational strategies, providing a structured and consistent approach to managing backup operations.
+        #### Key Concepts
+        - **Centralized Control:** Facilitates the management of backup profiles under a unified policy framework.
+        - **Access Control:** Ensures that only authorized personnel can define, read, or update backup policies.
+        - **Relationship Management:** Maintains connections to backup profiles, promoting consistency and comprehensive policy application.
 
 ---
 
 # Data Source: intersight_recovery_backup_config_policy
-Backup config policy which contains all the required inputs to do backup on a local or remote server.
+The BackupConfigPolicy object defines comprehensive backup policies for local or remote servers. This provides the necessary inputs and configurations to execute backup operations effectively.
+#### Purpose
+The BackupConfigPolicy object defines the rules and configurations for executing backups on designated servers. It coordinates backup profiles and ensures alignment with organizational strategies, providing a structured and consistent approach to managing backup operations.
+#### Key Concepts
+- **Centralized Control:** Facilitates the management of backup profiles under a unified policy framework.
+- **Access Control:** Ensures that only authorized personnel can define, read, or update backup policies.
+- **Relationship Management:** Maintains connections to backup profiles, promoting consistency and comprehensive policy application.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

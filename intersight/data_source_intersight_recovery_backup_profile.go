@@ -657,7 +657,7 @@ func getRecoveryBackupProfileSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"change_status": {
-						Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.",
+						Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.\n* `Failed` - The status when policy change evaluation report handling failed for a policy.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

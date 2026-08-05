@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_health_check_schedule_policy"
 description: |-
-        Continuous health check schedule policy of a HyperFlex cluster.
+        The HealthCheckSchedulePolicy object defines the scheduling framework for continuous health checks within a HyperFlex cluster. It specifies the frequency and conditions under which health checks are automatically executed, ensuring regular monitoring and maintenance of system integrity.
+        #### Purpose
+        HealthCheckSchedulePolicy objects ensure that health checks are conducted at consistent intervals, providing ongoing oversight of cluster health. This automated scheduling reduces the burden on administrators and enhances the reliability of health monitoring.
+        #### Key Concepts
+        - **Automated Scheduling:** Establishes regular intervals for health check execution, promoting continuous monitoring without manual intervention.
+        - **Policy Management:** Allows administrators to enable or disable scheduling policies, adapting monitoring practices to meet evolving system needs.
+        - **Historical Tracking:** Records past scheduling actions, providing a timeline of health check policy activity for auditing and review.
+        - **Cluster Integration:** Seamlessly integrated with HyperFlex clusters, ensuring that scheduling policies are aligned with cluster-specific health requirements.
 
 ---
 
 # Data Source: intersight_hyperflex_health_check_schedule_policy
-Continuous health check schedule policy of a HyperFlex cluster.
+The HealthCheckSchedulePolicy object defines the scheduling framework for continuous health checks within a HyperFlex cluster. It specifies the frequency and conditions under which health checks are automatically executed, ensuring regular monitoring and maintenance of system integrity.
+#### Purpose
+HealthCheckSchedulePolicy objects ensure that health checks are conducted at consistent intervals, providing ongoing oversight of cluster health. This automated scheduling reduces the burden on administrators and enhances the reliability of health monitoring.
+#### Key Concepts
+- **Automated Scheduling:** Establishes regular intervals for health check execution, promoting continuous monitoring without manual intervention.
+- **Policy Management:** Allows administrators to enable or disable scheduling policies, adapting monitoring practices to meet evolving system needs.
+- **Historical Tracking:** Records past scheduling actions, providing a timeline of health check policy activity for auditing and review.
+- **Cluster Integration:** Seamlessly integrated with HyperFlex clusters, ensuring that scheduling policies are aligned with cluster-specific health requirements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

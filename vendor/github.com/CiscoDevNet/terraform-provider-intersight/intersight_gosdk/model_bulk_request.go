@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the BulkRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BulkRequest{}
 
-// BulkRequest The bulk.Request API allows users to perform API actions (Create, Update or Delete) in bulk, on a given URI. It is possible to operate on multiple subpaths relative to the provided URI (For example, it would be possible to perform a PATCH action on multiple objects of a given REST resource type).
+// BulkRequest Requests (bulk.Request) represent a bulk-operation submission that allows clients to execute multiple API actions—such as Create, Update, or Delete—against a given base URI, including operations across multiple subpaths relative to that URI. The object is designed for high-volume changes with optional asynchronous response handling. #### Purpose Enable efficient, controlled execution of many related API changes in a single bulk request, reducing client-side overhead and supporting consistent execution semantics for batch create/update/delete workflows. #### Key Concepts - **Bulk API execution container**: Encapsulates a set of actions (`actions`) that the platform will apply in bulk relative to a provided target URI. - **Multi-subpath operations**: Supports acting on multiple objects/resources under the same REST resource type (e.g., PATCH multiple objects of a type). - **Action semantics and pre-checks**: `actions` describe what should be done, and can include behavior such as checking for existence vs executing changes (as described in the model). - **Asynchronous support**: CREATE supports `respond-async: true`, allowing clients to request async processing suitable for large batches. - **Create-only action definition**: `actions` is `createonly`, preserving the integrity of what was submitted once the bulk request is created. - **Global privilege gating**: Access is controlled via global privilege sets for READ/CREATE, reflecting the broad impact and cross-resource nature of bulk operations. - **Organization-owned request record**: `owner: organization` indicates the bulk request exists within an org/account context even though the privileges are global.
 type BulkRequest struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -51,10 +51,8 @@ type BulkRequest struct {
 	// The status message corresponding to the status.
 	StatusMessage *string `json:"StatusMessage,omitempty"`
 	// The URI on which this bulk action is to be performed. The value will be used when there is no override in the SubRequest.
-	// Deprecated
 	Uri *string `json:"Uri,omitempty"`
 	// The type of operation to be performed. One of - Post (Create), Patch (Update) or Delete (Remove). The value will be used when there is no override in the SubRequest. * `POST` - Used to create a REST resource. * `PATCH` - Used to update a REST resource. * `DELETE` - Used to delete a REST resource.
-	// Deprecated
 	Verb    *string                        `json:"Verb,omitempty"`
 	Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to bulkSubRequestObj resources.
@@ -578,7 +576,6 @@ func (o *BulkRequest) SetStatusMessage(v string) {
 }
 
 // GetUri returns the Uri field value if set, zero value otherwise.
-// Deprecated
 func (o *BulkRequest) GetUri() string {
 	if o == nil || IsNil(o.Uri) {
 		var ret string
@@ -589,7 +586,6 @@ func (o *BulkRequest) GetUri() string {
 
 // GetUriOk returns a tuple with the Uri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *BulkRequest) GetUriOk() (*string, bool) {
 	if o == nil || IsNil(o.Uri) {
 		return nil, false
@@ -607,13 +603,11 @@ func (o *BulkRequest) HasUri() bool {
 }
 
 // SetUri gets a reference to the given string and assigns it to the Uri field.
-// Deprecated
 func (o *BulkRequest) SetUri(v string) {
 	o.Uri = &v
 }
 
 // GetVerb returns the Verb field value if set, zero value otherwise.
-// Deprecated
 func (o *BulkRequest) GetVerb() string {
 	if o == nil || IsNil(o.Verb) {
 		var ret string
@@ -624,7 +618,6 @@ func (o *BulkRequest) GetVerb() string {
 
 // GetVerbOk returns a tuple with the Verb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *BulkRequest) GetVerbOk() (*string, bool) {
 	if o == nil || IsNil(o.Verb) {
 		return nil, false
@@ -642,7 +635,6 @@ func (o *BulkRequest) HasVerb() bool {
 }
 
 // SetVerb gets a reference to the given string and assigns it to the Verb field.
-// Deprecated
 func (o *BulkRequest) SetVerb(v string) {
 	o.Verb = &v
 }
@@ -1006,10 +998,8 @@ func (o *BulkRequest) UnmarshalJSON(data []byte) (err error) {
 		// The status message corresponding to the status.
 		StatusMessage *string `json:"StatusMessage,omitempty"`
 		// The URI on which this bulk action is to be performed. The value will be used when there is no override in the SubRequest.
-		// Deprecated
 		Uri *string `json:"Uri,omitempty"`
 		// The type of operation to be performed. One of - Post (Create), Patch (Update) or Delete (Remove). The value will be used when there is no override in the SubRequest. * `POST` - Used to create a REST resource. * `PATCH` - Used to update a REST resource. * `DELETE` - Used to delete a REST resource.
-		// Deprecated
 		Verb    *string                        `json:"Verb,omitempty"`
 		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to bulkSubRequestObj resources.

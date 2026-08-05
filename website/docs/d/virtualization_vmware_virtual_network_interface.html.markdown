@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_network_interface"
 description: |-
-        Details of VMware virtual network interface.
+        The VmwareVirtualNetworkInterface object characterizes the virtual network interface entity within VMware environments, detailing attributes for resource allocation and management.
+        #### Purpose
+        VmwareVirtualNetworkInterface provides the framework for managing virtual network interfaces, supporting detailed configurations and operational settings within VMware environments.
+        #### Key Concepts
+        - **Resource Allocation:** Defines settings for adapter types, network types, and connection statuses, optimizing interface resource management.
+        - **Integration:** Interfaces with virtual machines and networks, facilitating seamless connectivity and resource management for virtual network interfaces.
+        - **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+        - **Operational Settings:** Includes attributes such as MAC address types and connection policies, supporting tailored interface operations.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_network_interface
-Details of VMware virtual network interface.
+The VmwareVirtualNetworkInterface object characterizes the virtual network interface entity within VMware environments, detailing attributes for resource allocation and management.
+#### Purpose
+VmwareVirtualNetworkInterface provides the framework for managing virtual network interfaces, supporting detailed configurations and operational settings within VMware environments.
+#### Key Concepts
+- **Resource Allocation:** Defines settings for adapter types, network types, and connection statuses, optimizing interface resource management.
+- **Integration:** Interfaces with virtual machines and networks, facilitating seamless connectivity and resource management for virtual network interfaces.
+- **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+- **Operational Settings:** Includes attributes such as MAC address types and connection policies, supporting tailored interface operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

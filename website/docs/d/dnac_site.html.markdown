@@ -3,12 +3,24 @@ subcategory: "dnac"
 layout: "intersight"
 page_title: "Intersight: intersight_dnac_site"
 description: |-
-        Information about the Site.
+        The Site object serves as a detailed representation of a network site, encompassing essential site information required for comprehensive network management. This aids in the logical organization and integration of network sites within broader network operations.
+        #### Purpose
+        A Site object provides detailed insights into the configuration and status of a network site. It supports network administrators in effectively managing site-specific data, contributing to streamlined network operations.
+        #### Key Concepts
+        - **Identity Management:** Unique identifiers ensure precise tracking and management of individual sites.
+        - **Security and Permissions:** Access control mechanisms safeguard site data, ensuring interaction is restricted to authorized personnel.
+        - **Operational Integration:** Site objects are designed to work seamlessly with other network components, promoting efficiency and coherence in network activities.
 
 ---
 
 # Data Source: intersight_dnac_site
-Information about the Site.
+The Site object serves as a detailed representation of a network site, encompassing essential site information required for comprehensive network management. This aids in the logical organization and integration of network sites within broader network operations.
+#### Purpose
+A Site object provides detailed insights into the configuration and status of a network site. It supports network administrators in effectively managing site-specific data, contributing to streamlined network operations.
+#### Key Concepts
+- **Identity Management:** Unique identifiers ensure precise tracking and management of individual sites.
+- **Security and Permissions:** Access control mechanisms safeguard site data, ensuring interaction is restricted to authorized personnel.
+- **Operational Integration:** Site objects are designed to work seamlessly with other network components, promoting efficiency and coherence in network activities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

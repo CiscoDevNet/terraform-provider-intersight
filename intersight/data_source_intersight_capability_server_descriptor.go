@@ -233,6 +233,11 @@ func getCapabilityServerDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"supported_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -744,6 +749,17 @@ func dataSourceCapabilityServerDescriptorRead(c context.Context, d *schema.Resou
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("supported_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetSupportedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -976,6 +992,7 @@ func dataSourceCapabilityServerDescriptorRead(c context.Context, d *schema.Resou
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["server_form_factor"] = (s.GetServerFormFactor())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["supported_policies"] = (s.GetSupportedPolicies())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["unsupported_policies"] = (s.GetUnsupportedPolicies())

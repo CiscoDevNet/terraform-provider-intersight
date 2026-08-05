@@ -348,6 +348,32 @@ func Test_intersight_ApplianceApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ApplianceApiService GetApplianceBackupDownloadByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceBackupDownloadByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ApplianceApiService GetApplianceBackupDownloadList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceBackupDownloadList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ApplianceApiService GetApplianceBackupList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

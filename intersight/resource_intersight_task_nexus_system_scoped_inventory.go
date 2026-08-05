@@ -689,7 +689,7 @@ func resourceTaskNexusSystemScopedInventoryCreate(c context.Context, d *schema.R
 		o.SetImmediate(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -711,7 +711,7 @@ func resourceTaskNexusSystemScopedInventoryCreate(c context.Context, d *schema.R
 		}
 	}
 
-	if v, ok := d.GetOk("registered_device"); ok {
+	if v, ok := d.GetOkExists("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -832,7 +832,7 @@ func resourceTaskNexusSystemScopedInventoryCreate(c context.Context, d *schema.R
 		}
 	}
 
-	if v, ok := d.GetOk("type"); ok {
+	if v, ok := d.GetOkExists("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}

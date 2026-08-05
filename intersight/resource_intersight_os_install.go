@@ -1398,7 +1398,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 
 	o.SetClassId("os.Install")
 
-	if v, ok := d.GetOk("configuration_file"); ok {
+	if v, ok := d.GetOkExists("configuration_file"); ok {
 		p := make([]models.OsConfigurationFileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1446,7 +1446,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("image"); ok {
+	if v, ok := d.GetOkExists("image"); ok {
 		p := make([]models.SoftwarerepositoryOperatingSystemFileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1525,12 +1525,12 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
@@ -1568,7 +1568,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1611,7 +1611,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("osdu_image"); ok {
+	if v, ok := d.GetOkExists("osdu_image"); ok {
 		p := make([]models.FirmwareServerConfigurationUtilityDistributableRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

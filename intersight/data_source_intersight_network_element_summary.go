@@ -145,6 +145,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cdp_enabled": {
+			Description: "Cisco Discovery Protocol (CDP) configuration for the switch.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"chassis": {
 			Description: "Chassis IP of the switch.",
 			Type:        schema.TypeString,
@@ -285,6 +290,26 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"inband_ipv6_address": {
+			Description: "The IPv6 address of the network Element inband management interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"inband_ipv6_gateway": {
+			Description: "The default IPv6 gateway of the network Element inband management interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"inband_ipv6_prefix": {
+			Description: "The network mask of the network Element inband management interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"inband_mac": {
+			Description: "The MAC address of the network Element inband management interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"inband_vlan": {
 			Description: "The VLAN ID of the network Element inband management interface.",
 			Type:        schema.TypeInt,
@@ -342,6 +367,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 		},
 		"jumbo_frame_enabled": {
 			Description: "Jumbo Frame configuration for the switch.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"lldp_enabled": {
+			Description: "Link Layer Discovery Protocol (LLDP) configuration for the switch.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -595,13 +625,18 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"out_of_band_ipv6_redirects": {
+			Description: "The IPv6 ICMPv6 redirects configuration on the network Element out-of-band management interface.\n* `` - The IPv6 redirects configuration is not available or not applicable.\n* `enabled` - IPv6 ICMPv6 redirects are enabled on the management interface.\n* `disabled` - IPv6 ICMPv6 redirects are disabled on the management interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"out_of_band_ipv6_slaac_iid_mode": {
 			Description: "The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address.\n* `` - The SLAAC IID mode is not available or not applicable.\n* `eui64` - The SLAAC IID is derived from the MAC address using the EUI-64 method.\n* `opaque` - The SLAAC IID is generated using an opaque identifier for privacy.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"out_of_band_ipv6_status": {
-			Description: "The status of the IPv6 configuration on the network Element out-of-band management interface.\n* `` - The IPv6 address status is not available or not applicable.\n* `active` - The IPv6 address is active and in use.\n* `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress).\n* `duplicate` - The IPv6 address is a duplicate (DAD failed).\n* `disabled` - The IPv6 address is disabled.\n* `error` - An error occurred during IPv6 address configuration.\n* `unknown` - The IPv6 address status is unknown.",
+			Description: "The status of the IPv6 configuration on the network Element out-of-band management interface.\n* `` - The IPv6 address status is not available or not applicable.\n* `active` - The IPv6 address is active and in use.\n* `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress).\n* `duplicate` - The IPv6 address is a duplicate (DAD failed).\n* `deprecated` - The IPv6 address is deprecated (preferred lifetime expired).\n* `disabled` - The IPv6 address is disabled.\n* `waiting` - SLAAC is configured but waiting for a Router Advertisement to assign an address.\n* `error` - An error occurred during IPv6 address configuration.\n* `unknown` - The IPv6 address status is unknown.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -749,6 +784,51 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"secure_router_info": {
+			Description: "Information about secure routers detected, discovered and configured.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"config_mismatch": {
+						Description: "Indicates if there is a configuration mismatch between the detected and configured slots for secure routers.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"configured_in_slots": {
+						Description: "The slots in which secure router roles are configured.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"detected_in_slots": {
+						Description: "The slots in which secure routers are detected.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"discovered_in_slots": {
+						Description: "The slots in which secure routers are discovered.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"serial": {
 			Description: "This field identifies the serial of the given component.",
 			Type:        schema.TypeString,
@@ -771,6 +851,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 		},
 		"status": {
 			Description: "The status of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"stp_mode": {
+			Description: "Spanning Tree Protocol configuration for the switch.\n* `Disabled` - Spanning Tree Protocol (STP) is disabled.\n* `STP` - Spanning Tree Protocol (STP) is enabled and operating in STP.\n* `RSTP` - Spanning Tree Protocol (STP) is enabled and operating in RSTP mode.\n* `MSTP` - Spanning Tree Protocol (STP) is enabled and operating in MSTP mode.\n* `PVST+` - Spanning Tree Protocol (STP) is enabled and operating in PVST mode.\n* `RPVST+` - Spanning Tree Protocol (STP) is enabled and operating in RPVST mode.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1170,6 +1255,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetBundleVersion(x)
 	}
 
+	if v, ok := d.GetOkExists("cdp_enabled"); ok {
+		x := (v.(bool))
+		o.SetCdpEnabled(x)
+	}
+
 	if v, ok := d.GetOk("chassis"); ok {
 		x := (v.(string))
 		o.SetChassis(x)
@@ -1319,6 +1409,26 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetInbandIpMask(x)
 	}
 
+	if v, ok := d.GetOk("inband_ipv6_address"); ok {
+		x := (v.(string))
+		o.SetInbandIpv6Address(x)
+	}
+
+	if v, ok := d.GetOk("inband_ipv6_gateway"); ok {
+		x := (v.(string))
+		o.SetInbandIpv6Gateway(x)
+	}
+
+	if v, ok := d.GetOk("inband_ipv6_prefix"); ok {
+		x := (v.(string))
+		o.SetInbandIpv6Prefix(x)
+	}
+
+	if v, ok := d.GetOk("inband_mac"); ok {
+		x := (v.(string))
+		o.SetInbandMac(x)
+	}
+
 	if v, ok := d.GetOkExists("inband_vlan"); ok {
 		x := int64(v.(int))
 		o.SetInbandVlan(x)
@@ -1385,6 +1495,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOkExists("jumbo_frame_enabled"); ok {
 		x := (v.(bool))
 		o.SetJumboFrameEnabled(x)
+	}
+
+	if v, ok := d.GetOkExists("lldp_enabled"); ok {
+		x := (v.(bool))
+		o.SetLldpEnabled(x)
 	}
 
 	if v, ok := d.GetOk("location_details"); ok {
@@ -1547,6 +1662,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("out_of_band_ipv6_prefix"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv6Prefix(x)
+	}
+
+	if v, ok := d.GetOk("out_of_band_ipv6_redirects"); ok {
+		x := (v.(string))
+		o.SetOutOfBandIpv6Redirects(x)
 	}
 
 	if v, ok := d.GetOk("out_of_band_ipv6_slaac_iid_mode"); ok {
@@ -1731,6 +1851,37 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetRouterMac(x)
 	}
 
+	if v, ok := d.GetOk("secure_router_info"); ok {
+		p := make([]models.NetworkSecureRouterInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.NetworkSecureRouterInfo{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("network.SecureRouterInfo")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSecureRouterInfo(x)
+		}
+	}
+
 	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
@@ -1754,6 +1905,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
+	}
+
+	if v, ok := d.GetOk("stp_mode"); ok {
+		x := (v.(string))
+		o.SetStpMode(x)
 	}
 
 	if v, ok := d.GetOk("switch_id"); ok {
@@ -2001,6 +2157,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["available_memory"] = (s.GetAvailableMemory())
 				temp["bundle_version"] = (s.GetBundleVersion())
+				temp["cdp_enabled"] = (s.GetCdpEnabled())
 				temp["chassis"] = (s.GetChassis())
 				temp["class_id"] = (s.GetClassId())
 				temp["conf_mod_ts"] = (s.GetConfModTs())
@@ -2025,6 +2182,10 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["inband_ip_address"] = (s.GetInbandIpAddress())
 				temp["inband_ip_gateway"] = (s.GetInbandIpGateway())
 				temp["inband_ip_mask"] = (s.GetInbandIpMask())
+				temp["inband_ipv6_address"] = (s.GetInbandIpv6Address())
+				temp["inband_ipv6_gateway"] = (s.GetInbandIpv6Gateway())
+				temp["inband_ipv6_prefix"] = (s.GetInbandIpv6Prefix())
+				temp["inband_mac"] = (s.GetInbandMac())
 				temp["inband_vlan"] = (s.GetInbandVlan())
 				temp["inter_cluster_link_state"] = (s.GetInterClusterLinkState())
 
@@ -2032,6 +2193,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["ipv4_address"] = (s.GetIpv4Address())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 				temp["jumbo_frame_enabled"] = (s.GetJumboFrameEnabled())
+				temp["lldp_enabled"] = (s.GetLldpEnabled())
 
 				temp["location_details"] = flattenMapCommGeoLocationDetails(s.GetLocationDetails(), d)
 				temp["management_mode"] = (s.GetManagementMode())
@@ -2061,6 +2223,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["out_of_band_ipv6_gateway"] = (s.GetOutOfBandIpv6Gateway())
 				temp["out_of_band_ipv6_mode"] = (s.GetOutOfBandIpv6Mode())
 				temp["out_of_band_ipv6_prefix"] = (s.GetOutOfBandIpv6Prefix())
+				temp["out_of_band_ipv6_redirects"] = (s.GetOutOfBandIpv6Redirects())
 				temp["out_of_band_ipv6_slaac_iid_mode"] = (s.GetOutOfBandIpv6SlaacIidMode())
 				temp["out_of_band_ipv6_status"] = (s.GetOutOfBandIpv6Status())
 				temp["out_of_band_mac"] = (s.GetOutOfBandMac())
@@ -2077,11 +2240,14 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["revision"] = (s.GetRevision())
 				temp["rn"] = (s.GetRn())
 				temp["router_mac"] = (s.GetRouterMac())
+
+				temp["secure_router_info"] = flattenMapNetworkSecureRouterInfo(s.GetSecureRouterInfo(), d)
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["slot_id"] = (s.GetSlotId())
 				temp["source_object_type"] = (s.GetSourceObjectType())
 				temp["status"] = (s.GetStatus())
+				temp["stp_mode"] = (s.GetStpMode())
 				temp["switch_id"] = (s.GetSwitchId())
 				temp["switch_profile_name"] = (s.GetSwitchProfileName())
 				temp["switch_type"] = (s.GetSwitchType())

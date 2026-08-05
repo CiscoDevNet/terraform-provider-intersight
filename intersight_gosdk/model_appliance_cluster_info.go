@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -38,6 +38,8 @@ type ApplianceClusterInfo struct {
 	Hostip *string `json:"Hostip,omitempty"`
 	// Publicly accessible FQDN of the peer node.
 	Hostname *string `json:"Hostname,omitempty"`
+	// The hypervisor type of the node. * `ESXi` - VMware ESXi hypervisor type.Indicates the appliance node is running on a VMware ESXi virtualization platform. * `Hyper-V` - Microsoft Hyper-V hypervisor type.Indicates the appliance node is running on a Microsoft Hyper-V virtualization platform. * `KVM` - Kernel-based Virtual Machine hypervisor type.Indicates the appliance node is running on a KVM virtualization platform.
+	HypervisorType *string `json:"HypervisorType,omitempty"`
 	// Installer version used to install on peer node.
 	InstallerVersion *string `json:"InstallerVersion,omitempty"`
 	// System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance starting with a value of 0.
@@ -82,6 +84,8 @@ func NewApplianceClusterInfo(classId string, objectType string) *ApplianceCluste
 	this := ApplianceClusterInfo{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var hypervisorType string = "ESXi"
+	this.HypervisorType = &hypervisorType
 	var nodeType string = "standalone"
 	this.NodeType = &nodeType
 	return &this
@@ -96,6 +100,8 @@ func NewApplianceClusterInfoWithDefaults() *ApplianceClusterInfo {
 	this.ClassId = classId
 	var objectType string = "appliance.ClusterInfo"
 	this.ObjectType = objectType
+	var hypervisorType string = "ESXi"
+	this.HypervisorType = &hypervisorType
 	var nodeType string = "standalone"
 	this.NodeType = &nodeType
 	return &this
@@ -317,6 +323,38 @@ func (o *ApplianceClusterInfo) HasHostname() bool {
 // SetHostname gets a reference to the given string and assigns it to the Hostname field.
 func (o *ApplianceClusterInfo) SetHostname(v string) {
 	o.Hostname = &v
+}
+
+// GetHypervisorType returns the HypervisorType field value if set, zero value otherwise.
+func (o *ApplianceClusterInfo) GetHypervisorType() string {
+	if o == nil || IsNil(o.HypervisorType) {
+		var ret string
+		return ret
+	}
+	return *o.HypervisorType
+}
+
+// GetHypervisorTypeOk returns a tuple with the HypervisorType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceClusterInfo) GetHypervisorTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.HypervisorType) {
+		return nil, false
+	}
+	return o.HypervisorType, true
+}
+
+// HasHypervisorType returns a boolean if a field has been set.
+func (o *ApplianceClusterInfo) HasHypervisorType() bool {
+	if o != nil && !IsNil(o.HypervisorType) {
+		return true
+	}
+
+	return false
+}
+
+// SetHypervisorType gets a reference to the given string and assigns it to the HypervisorType field.
+func (o *ApplianceClusterInfo) SetHypervisorType(v string) {
+	o.HypervisorType = &v
 }
 
 // GetInstallerVersion returns the InstallerVersion field value if set, zero value otherwise.
@@ -883,6 +921,9 @@ func (o ApplianceClusterInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Hostname) {
 		toSerialize["Hostname"] = o.Hostname
 	}
+	if !IsNil(o.HypervisorType) {
+		toSerialize["HypervisorType"] = o.HypervisorType
+	}
 	if !IsNil(o.InstallerVersion) {
 		toSerialize["InstallerVersion"] = o.InstallerVersion
 	}
@@ -996,6 +1037,8 @@ func (o *ApplianceClusterInfo) UnmarshalJSON(data []byte) (err error) {
 		Hostip *string `json:"Hostip,omitempty"`
 		// Publicly accessible FQDN of the peer node.
 		Hostname *string `json:"Hostname,omitempty"`
+		// The hypervisor type of the node. * `ESXi` - VMware ESXi hypervisor type.Indicates the appliance node is running on a VMware ESXi virtualization platform. * `Hyper-V` - Microsoft Hyper-V hypervisor type.Indicates the appliance node is running on a Microsoft Hyper-V virtualization platform. * `KVM` - Kernel-based Virtual Machine hypervisor type.Indicates the appliance node is running on a KVM virtualization platform.
+		HypervisorType *string `json:"HypervisorType,omitempty"`
 		// Installer version used to install on peer node.
 		InstallerVersion *string `json:"InstallerVersion,omitempty"`
 		// System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance starting with a value of 0.
@@ -1041,6 +1084,7 @@ func (o *ApplianceClusterInfo) UnmarshalJSON(data []byte) (err error) {
 		varApplianceClusterInfo.Gateway = varApplianceClusterInfoWithoutEmbeddedStruct.Gateway
 		varApplianceClusterInfo.Hostip = varApplianceClusterInfoWithoutEmbeddedStruct.Hostip
 		varApplianceClusterInfo.Hostname = varApplianceClusterInfoWithoutEmbeddedStruct.Hostname
+		varApplianceClusterInfo.HypervisorType = varApplianceClusterInfoWithoutEmbeddedStruct.HypervisorType
 		varApplianceClusterInfo.InstallerVersion = varApplianceClusterInfoWithoutEmbeddedStruct.InstallerVersion
 		varApplianceClusterInfo.NodeId = varApplianceClusterInfoWithoutEmbeddedStruct.NodeId
 		varApplianceClusterInfo.NodeType = varApplianceClusterInfoWithoutEmbeddedStruct.NodeType
@@ -1081,6 +1125,7 @@ func (o *ApplianceClusterInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Gateway")
 		delete(additionalProperties, "Hostip")
 		delete(additionalProperties, "Hostname")
+		delete(additionalProperties, "HypervisorType")
 		delete(additionalProperties, "InstallerVersion")
 		delete(additionalProperties, "NodeId")
 		delete(additionalProperties, "NodeType")

@@ -266,7 +266,7 @@ func resourceIamLdapProvider() *schema.Resource {
 				Default:      389,
 			},
 			"server": {
-				Description: "LDAP Server Address, can be IP address or hostname.",
+				Description: "LDAP Server Address, such as an IP address or hostname.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -641,7 +641,7 @@ func resourceIamLdapProviderCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

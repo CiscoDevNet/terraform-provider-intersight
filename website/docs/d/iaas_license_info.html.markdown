@@ -3,12 +3,24 @@ subcategory: "iaas"
 layout: "intersight"
 page_title: "Intersight: intersight_iaas_license_info"
 description: |-
-        Describes about license info currently available in UCSD.
+        The LicenseInfo object is a fundamental component in managing license details within UCS Director (UCSD), providing a structured overview of license types and expiration dates.
+        #### Purpose
+        LicenseInfo offers comprehensive data about licenses in UCSD, supporting proactive license management and compliance.
+        #### Key Concepts
+        - **Type and Expiration:** Captures license type and expiration details, aiding in strategic license management.
+        - **Utilization Overview:** Provides insights into license utilization, supporting optimization and planning.
+        - **Read-Only Access:** Ensures secure access to license data without modification.
 
 ---
 
 # Data Source: intersight_iaas_license_info
-Describes about license info currently available in UCSD.
+The LicenseInfo object is a fundamental component in managing license details within UCS Director (UCSD), providing a structured overview of license types and expiration dates.   
+#### Purpose 
+LicenseInfo offers comprehensive data about licenses in UCSD, supporting proactive license management and compliance.   
+#### Key Concepts  
+- **Type and Expiration:** Captures license type and expiration details, aiding in strategic license management. 
+- **Utilization Overview:** Provides insights into license utilization, supporting optimization and planning. 
+- **Read-Only Access:** Ensures secure access to license data without modification.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

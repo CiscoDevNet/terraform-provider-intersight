@@ -414,7 +414,7 @@ func resourceHyperflexClusterReplicationNetworkPolicy() *schema.Resource {
 				Type:         schema.TypeInt,
 				ValidateFunc: validation.IntBetween(1024, 1500),
 				Optional:     true,
-				Default:      1500,
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"replication_vlan": {
@@ -827,7 +827,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyCreate(c context.Context, d
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -839,7 +839,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyCreate(c context.Context, d
 
 	o.SetObjectType("hyperflex.ClusterReplicationNetworkPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -989,7 +989,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyCreate(c context.Context, d
 		o.SetReplicationMtu(x)
 	}
 
-	if v, ok := d.GetOk("replication_vlan"); ok {
+	if v, ok := d.GetOkExists("replication_vlan"); ok {
 		p := make([]models.HyperflexNamedVlan, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

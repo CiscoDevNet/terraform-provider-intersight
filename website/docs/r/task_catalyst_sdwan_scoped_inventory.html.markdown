@@ -3,12 +3,28 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_catalyst_sdwan_scoped_inventory"
 description: |-
-        API to trigger on-demand inventory to update modified objects.
+        CatalystSdwanScopedInventories represent an on-demand inventory trigger used to refresh inventory for a specific registered Catalyst SD-WAN device/connection. Creating one of these objects initiates a scoped discovery cycle to update modified objects in Intersight without waiting for the next scheduled inventory run.
+        #### Purpose
+        Allow administrators to manually trigger a targeted inventory refresh for a Catalyst SD-WAN registered device so Intersight reflects recent changes promptly.
+        #### Key Concepts
+        - **On-demand trigger (CREATE-only)**: The object is primarily an action/request used to start inventory, not a long-lived configuration resource.
+        - **Scoped inventory behavior**: Extends `connector.ScopedInventory`, indicating the operation is limited to the specified device scope.
+        - **Device targeting via registration**: `registeredDevice` (create-only) identifies the exact device registration to inventory.
+        - **Permission inheritance**: Inherits permissions from `registeredDevice`, aligning access control with the underlying device registration.
+        - **Lifecycle coupling**: `onpeerdelete: cascade` ties the trigger record to the device registration lifecycle.
 
 ---
 
 # Resource: intersight_task_catalyst_sdwan_scoped_inventory
-API to trigger on-demand inventory to update modified objects.
+CatalystSdwanScopedInventories represent an on-demand inventory trigger used to refresh inventory for a specific registered Catalyst SD-WAN device/connection. Creating one of these objects initiates a scoped discovery cycle to update modified objects in Intersight without waiting for the next scheduled inventory run.
+#### Purpose
+Allow administrators to manually trigger a targeted inventory refresh for a Catalyst SD-WAN registered device so Intersight reflects recent changes promptly.
+#### Key Concepts
+- **On-demand trigger (CREATE-only)**: The object is primarily an action/request used to start inventory, not a long-lived configuration resource.
+- **Scoped inventory behavior**: Extends `connector.ScopedInventory`, indicating the operation is limited to the specified device scope.
+- **Device targeting via registration**: `registeredDevice` (create-only) identifies the exact device registration to inventory.
+- **Permission inheritance**: Inherits permissions from `registeredDevice`, aligning access control with the underlying device registration.
+- **Lifecycle coupling**: `onpeerdelete: cascade` ties the trigger record to the device registration lifecycle.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

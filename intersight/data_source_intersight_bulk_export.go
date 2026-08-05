@@ -16,11 +16,46 @@ import (
 
 func getBulkExportSchema() map[string]*schema.Schema {
 	var schemaMap = make(map[string]*schema.Schema)
-	schemaMap = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
-		Type:        schema.TypeString,
+	schemaMap = map[string]*schema.Schema{"account": {
+		Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		Type:        schema.TypeList,
+		MaxItems:    1,
 		Optional:    true,
+		Elem: &schema.Resource{
+			Schema: map[string]*schema.Schema{
+				"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+				"class_id": {
+					Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"moid": {
+					Description: "The Moid of the referenced REST resource.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"object_type": {
+					Description: "The fully-qualified name of the remote type referred by this relationship.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"selector": {
+					Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+			},
+		},
 	},
+		"account_moid": {
+			Description: "The Account ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"action": {
 			Description: "Action to be performed on the export operation.\n* `Start` - Starts the export operation.\n* `Cancel` - Cancels the export operation that is in progress.",
 			Type:        schema.TypeString,
@@ -162,8 +197,134 @@ func getBulkExportSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"exported_objects_as_groups": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"requests": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"uri": {
+									Description: "The URI on which this action is to be performed.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"verb": {
+									Description: "The type of operation to be performed.\nOne of - Post (Create), Patch (Update) or Delete (Remove).\nThe value is used to override the top level verb.\n* `POST` - Used to create a REST resource.\n* `PATCH` - Used to update a REST resource.\n* `DELETE` - Used to delete a REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"idp": {
+			Description: "A reference to a iamIdp resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"idp_reference": {
+			Description: "A reference to a iamIdpReference resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"import_order": {
-			Description: "Contains the list of import order.",
+			Description: "Contains the list of import order. This field is deprecated and will be removed in future versions.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -172,6 +333,16 @@ func getBulkExportSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_aes_key_set": {
+			Description: "Indicates whether the value of the 'aesKey' property has been set.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"item_names": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"items": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -339,9 +510,57 @@ func getBulkExportSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"preserve_identities": {
+			Description: "The flag set by the user during a configuration backup to preserve static or dynamic IDs assigned to an export item.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"related_type_options": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"exclude_relations": {
+						Description: "Do not export relationships.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"excluded_peers": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"related_type": {
+						Description: "The fully qualified related type name.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"split_requests": {
+			Description: "Intersight supports the import operation using bulk requests. A single bulk request is created using the bulk sub\nrequests created in export operation. There is a restriction of a single API request size in Intersight.\nIf the exported MOs are many in an export operation, this flag will store the bulk sub requests as two dimensional\ncollection property exportedObjectsAsGroups instead of one dimensional exportedObjects value where the sub requests are split into multiple smaller\ngroups. Each group can be sent in a single bulk request during import operation.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"status": {
@@ -454,6 +673,41 @@ func getBulkExportSchema() map[string]*schema.Schema {
 					},
 					"value": {
 						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"user": {
+			Description: "A reference to a iamUser resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -600,6 +854,49 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.BulkExport{}
+	if v, ok := d.GetOk("account"); ok {
+		p := make([]models.IamAccountRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAccount(x)
+		}
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
@@ -776,6 +1073,163 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetExportedObjects(x)
 	}
 
+	if v, ok := d.GetOk("exported_objects_as_groups"); ok {
+		x := make([]models.BulkSubRequestsGroup, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.BulkSubRequestsGroup{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("bulk.SubRequestsGroup")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["requests"]; ok {
+				{
+					x := make([]models.BulkSubRequest, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewBulkSubRequestWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("bulk.SubRequest")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["uri"]; ok {
+							{
+								x := (v.(string))
+								o.SetUri(x)
+							}
+						}
+						if v, ok := l["verb"]; ok {
+							{
+								x := (v.(string))
+								o.SetVerb(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetRequests(x)
+					}
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetExportedObjectsAsGroups(x)
+	}
+
+	if v, ok := d.GetOk("idp"); ok {
+		p := make([]models.IamIdpRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamIdpRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIdp(x)
+		}
+	}
+
+	if v, ok := d.GetOk("idp_reference"); ok {
+		p := make([]models.IamIdpReferenceRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamIdpReferenceRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIdpReference(x)
+		}
+	}
+
 	if v, ok := d.GetOk("import_order"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -789,6 +1243,22 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOkExists("include_org_identity"); ok {
 		x := (v.(bool))
 		o.SetIncludeOrgIdentity(x)
+	}
+
+	if v, ok := d.GetOkExists("is_aes_key_set"); ok {
+		x := (v.(bool))
+		o.SetIsAesKeySet(x)
+	}
+
+	if v, ok := d.GetOk("item_names"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetItemNames(x)
 	}
 
 	if v, ok := d.GetOk("items"); ok {
@@ -994,9 +1464,73 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOkExists("preserve_identities"); ok {
+		x := (v.(bool))
+		o.SetPreserveIdentities(x)
+	}
+
+	if v, ok := d.GetOk("related_type_options"); ok {
+		x := make([]models.BulkRelatedTypeExportOption, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.BulkRelatedTypeExportOption{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("bulk.RelatedTypeExportOption")
+			if v, ok := l["exclude_relations"]; ok {
+				{
+					x := (v.(bool))
+					o.SetExcludeRelations(x)
+				}
+			}
+			if v, ok := l["excluded_peers"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetExcludedPeers(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["related_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetRelatedType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetRelatedTypeOptions(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOkExists("split_requests"); ok {
+		x := (v.(bool))
+		o.SetSplitRequests(x)
 	}
 
 	if v, ok := d.GetOk("status"); ok {
@@ -1083,6 +1617,49 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("user"); ok {
+		p := make([]models.IamUserRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamUserRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetUser(x)
+		}
 	}
 
 	if v, ok := d.GetOk("user_id"); ok {
@@ -1199,6 +1776,8 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 			for k := 0; k < len(results); k++ {
 				var s = results[k]
 				var temp = make(map[string]interface{})
+
+				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1215,8 +1794,16 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 				temp["exported_items"] = flattenListBulkExportedItemRelationship(s.GetExportedItems(), d)
 
 				temp["exported_objects"] = flattenListBulkSubRequest(s.GetExportedObjects(), d)
+
+				temp["exported_objects_as_groups"] = flattenListBulkSubRequestsGroup(s.GetExportedObjectsAsGroups(), d)
+
+				temp["idp"] = flattenMapIamIdpRelationship(s.GetIdp(), d)
+
+				temp["idp_reference"] = flattenMapIamIdpReferenceRelationship(s.GetIdpReference(), d)
 				temp["import_order"] = flattenAdditionalProperties(s.GetImportOrder())
 				temp["include_org_identity"] = (s.GetIncludeOrgIdentity())
+				temp["is_aes_key_set"] = (s.GetIsAesKeySet())
+				temp["item_names"] = (s.GetItemNames())
 
 				temp["items"] = flattenListMoMoRef(s.GetItems(), d)
 
@@ -1232,11 +1819,17 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 				temp["permission_id"] = (s.GetPermissionId())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["preserve_identities"] = (s.GetPreserveIdentities())
+
+				temp["related_type_options"] = flattenListBulkRelatedTypeExportOption(s.GetRelatedTypeOptions(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["split_requests"] = (s.GetSplitRequests())
 				temp["status"] = (s.GetStatus())
 				temp["status_message"] = (s.GetStatusMessage())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["user"] = flattenMapIamUserRelationship(s.GetUser(), d)
 				temp["user_id"] = (s.GetUserId())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

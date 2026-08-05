@@ -87,6 +87,32 @@ func Test_intersight_SmtpApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test SmtpApiService GetSmtpPolicyInventoryByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.SmtpApi.GetSmtpPolicyInventoryByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SmtpApiService GetSmtpPolicyInventoryList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.SmtpApi.GetSmtpPolicyInventoryList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SmtpApiService GetSmtpPolicyList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

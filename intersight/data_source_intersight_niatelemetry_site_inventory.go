@@ -95,6 +95,16 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"fabric_technology": {
+			Description: "Fabric technology reported by the onboarded DCNM site.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"fabric_update_status": {
+			Description: "Status of the fabric update.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"firmware_version": {
 			Description: "Version of the specified site.",
 			Type:        schema.TypeString,
@@ -185,6 +195,11 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"perimeter_service": {
+			Description: "Count of service functions configured with use case Perimeter Service.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -222,6 +237,11 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 		"record_type": {
 			Description: "Specifies whether Site object is DCNM or APIC or ND.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"redirect_to_service_chain": {
+			Description: "Count of service functions configured with use case Service Chain Redirection.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"registered_device": {
@@ -269,6 +289,11 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"service_as_gateway": {
+			Description: "Count of service functions configured with use case Service As Default Gateway.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"service_clusters_count": {
 			Description: "Count of total Service Clusters.",
 			Type:        schema.TypeInt,
@@ -279,9 +304,24 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"service_insertion_count": {
+			Description: "Count of total Service Function Insertions enabled.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sum_count": {
+			Description: "Sum of latestVersionCount and recommendedVersionCount.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"switch_count": {
+			Description: "Count of switches in the fabric.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"tags": {
@@ -389,6 +429,16 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"total_networks": {
+			Description: "Count of total Networks on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"total_vrfs": {
+			Description: "Count of total VRFs on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"type": {
 			Description: "Type of site onboarded either APIC or DCNM.",
@@ -626,6 +676,16 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 		o.SetEndpointLocatorCount(x)
 	}
 
+	if v, ok := d.GetOk("fabric_technology"); ok {
+		x := (v.(string))
+		o.SetFabricTechnology(x)
+	}
+
+	if v, ok := d.GetOk("fabric_update_status"); ok {
+		x := (v.(string))
+		o.SetFabricUpdateStatus(x)
+	}
+
 	if v, ok := d.GetOk("firmware_version"); ok {
 		x := (v.(string))
 		o.SetFirmwareVersion(x)
@@ -737,6 +797,11 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOkExists("perimeter_service"); ok {
+		x := int64(v.(int))
+		o.SetPerimeterService(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -780,6 +845,11 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("record_type"); ok {
 		x := (v.(string))
 		o.SetRecordType(x)
+	}
+
+	if v, ok := d.GetOkExists("redirect_to_service_chain"); ok {
+		x := int64(v.(int))
+		o.SetRedirectToServiceChain(x)
 	}
 
 	if v, ok := d.GetOk("registered_device"); ok {
@@ -835,6 +905,11 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 		o.SetSecurityGroupsCount(x)
 	}
 
+	if v, ok := d.GetOkExists("service_as_gateway"); ok {
+		x := int64(v.(int))
+		o.SetServiceAsGateway(x)
+	}
+
 	if v, ok := d.GetOkExists("service_clusters_count"); ok {
 		x := int64(v.(int))
 		o.SetServiceClustersCount(x)
@@ -845,9 +920,24 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 		o.SetServiceFunctionCount(x)
 	}
 
+	if v, ok := d.GetOkExists("service_insertion_count"); ok {
+		x := int64(v.(int))
+		o.SetServiceInsertionCount(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOkExists("sum_count"); ok {
+		x := int64(v.(int))
+		o.SetSumCount(x)
+	}
+
+	if v, ok := d.GetOkExists("switch_count"); ok {
+		x := int64(v.(int))
+		o.SetSwitchCount(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -924,6 +1014,16 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOkExists("total_networks"); ok {
+		x := int64(v.(int))
+		o.SetTotalNetworks(x)
+	}
+
+	if v, ok := d.GetOkExists("total_vrfs"); ok {
+		x := int64(v.(int))
+		o.SetTotalVrfs(x)
 	}
 
 	if v, ok := d.GetOk("type"); ok {
@@ -1052,6 +1152,8 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["endpoint_locator_count"] = (s.GetEndpointLocatorCount())
+				temp["fabric_technology"] = (s.GetFabricTechnology())
+				temp["fabric_update_status"] = (s.GetFabricUpdateStatus())
 				temp["firmware_version"] = (s.GetFirmwareVersion())
 				temp["install_type"] = (s.GetInstallType())
 				temp["ip_address"] = (s.GetIpAddress())
@@ -1066,18 +1168,26 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["perimeter_service"] = (s.GetPerimeterService())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["record_type"] = (s.GetRecordType())
+				temp["redirect_to_service_chain"] = (s.GetRedirectToServiceChain())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["scheduled_backups"] = (s.GetScheduledBackups())
 				temp["security_groups_count"] = (s.GetSecurityGroupsCount())
+				temp["service_as_gateway"] = (s.GetServiceAsGateway())
 				temp["service_clusters_count"] = (s.GetServiceClustersCount())
 				temp["service_function_count"] = (s.GetServiceFunctionCount())
+				temp["service_insertion_count"] = (s.GetServiceInsertionCount())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["sum_count"] = (s.GetSumCount())
+				temp["switch_count"] = (s.GetSwitchCount())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_networks"] = (s.GetTotalNetworks())
+				temp["total_vrfs"] = (s.GetTotalVrfs())
 				temp["type"] = (s.GetType())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

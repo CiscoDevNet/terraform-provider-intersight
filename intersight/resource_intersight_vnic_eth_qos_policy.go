@@ -649,7 +649,7 @@ func resourceVnicEthQosPolicyCreate(c context.Context, d *schema.ResourceData, m
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -666,7 +666,7 @@ func resourceVnicEthQosPolicyCreate(c context.Context, d *schema.ResourceData, m
 
 	o.SetObjectType("vnic.EthQosPolicy")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

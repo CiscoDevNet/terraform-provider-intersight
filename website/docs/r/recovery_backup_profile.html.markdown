@@ -3,12 +3,24 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_backup_profile"
 description: |-
-        Backup profile for on-demand or scheduled backups at endpoints.
+        The BackupProfile object serves as the cornerstone for managing backup configurations on endpoints. It defines the parameters and conditions under which backups are conducted, supporting both scheduled and on-demand operations.
+        #### Purpose
+        The BackupProfile object defines and manages backup configurations for endpoints. It allows setting up backup parameters, including scheduling and execution details, and enables or disables backup operations as needed to ensure systematic data protection, integrity, and availability.
+        #### Key Concepts
+        - **Flexibility:** Allows for both on-demand and scheduled backups, catering to diverse operational requirements.
+        - **Versioning and Validation:** Supports robust validation mechanisms to ensure the accuracy and reliability of backup configurations.
+        - **Relationship Management:** Links to device registrations and configuration results to maintain a comprehensive backup strategy.
 
 ---
 
 # Resource: intersight_recovery_backup_profile
-Backup profile for on-demand or scheduled backups at endpoints.
+The BackupProfile object serves as the cornerstone for managing backup configurations on endpoints. It defines the parameters and conditions under which backups are conducted, supporting both scheduled and on-demand operations.
+#### Purpose
+The BackupProfile object defines and manages backup configurations for endpoints. It allows setting up backup parameters, including scheduling and execution details, and enables or disables backup operations as needed to ensure systematic data protection, integrity, and availability.
+#### Key Concepts
+- **Flexibility:** Allows for both on-demand and scheduled backups, catering to diverse operational requirements.
+- **Versioning and Validation:** Supports robust validation mechanisms to ensure the accuracy and reliability of backup configurations.
+- **Relationship Management:** Links to device registrations and configuration results to maintain a comprehensive backup strategy.
 ## Usage Example
 ### Resource Creation
 
@@ -159,7 +171,7 @@ This complex property has following sub-properties:
 * `reported_policy_changes`:(Array)
 This complex property has following sub-properties:
   + `change_id`:(string)(ReadOnly) The change evaluation identifier for which the change is reported. 
-  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy. 
+  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy.* `Failed` - The status when policy change evaluation report handling failed for a policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `policy_type`:(string)(ReadOnly) The type of policy for which the change has been reported. 
 * `schedule_config`:(HashMap) - A reference to a recoveryScheduleConfigPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

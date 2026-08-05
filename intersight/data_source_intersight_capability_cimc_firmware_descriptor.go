@@ -218,6 +218,11 @@ func getCapabilityCimcFirmwareDescriptorSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"policy_profile_supported_version": {
+			Description: "Minimum server firmware version for policy profile feature support.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"revision": {
 			Description: "Revision information for the server.",
 			Type:        schema.TypeString,
@@ -724,6 +729,11 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("policy_profile_supported_version"); ok {
+		x := (v.(string))
+		o.SetPolicyProfileSupportedVersion(x)
+	}
+
 	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
@@ -957,6 +967,7 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["policy_profile_supported_version"] = (s.GetPolicyProfileSupportedVersion())
 				temp["revision"] = (s.GetRevision())
 				temp["shared_scope"] = (s.GetSharedScope())
 

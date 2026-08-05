@@ -314,6 +314,41 @@ func getCapabilityDomainPolicyRequirementSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"switch_control_policy_constraints": {
+			Description: "Switch control policy specific constraints applicable for this model.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"min_bundle_version_for_stp_mode_rpvst": {
+						Description: "Minimum bundle version required to support RPVST mode for Spanning Tree Protocol.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"min_switch_version_for_stp_mode_rpvst": {
+						Description: "Minimum switch firmware version required to support RPVST mode for Spanning Tree Protocol.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -872,6 +907,37 @@ func dataSourceCapabilityDomainPolicyRequirementRead(c context.Context, d *schem
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("switch_control_policy_constraints"); ok {
+		p := make([]models.CapabilitySwitchControlPolicyConstraints, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CapabilitySwitchControlPolicyConstraints{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.SwitchControlPolicyConstraints")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSwitchControlPolicyConstraints(x)
+		}
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1086,6 +1152,8 @@ func dataSourceCapabilityDomainPolicyRequirementRead(c context.Context, d *schem
 
 				temp["port_policy_constraints"] = flattenMapCapabilityPortPropertyConstraints(s.GetPortPolicyConstraints(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+
+				temp["switch_control_policy_constraints"] = flattenMapCapabilitySwitchControlPolicyConstraints(s.GetSwitchControlPolicyConstraints(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

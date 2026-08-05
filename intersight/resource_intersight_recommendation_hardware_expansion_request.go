@@ -674,7 +674,7 @@ func resourceRecommendationHardwareExpansionRequestCreate(c context.Context, d *
 
 	o.SetClassId("recommendation.HardwareExpansionRequest")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

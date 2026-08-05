@@ -197,9 +197,9 @@ func resourceComputeHostUtilityOperation() *schema.Resource {
 				ForceNew: true,
 			},
 			"host_utility_operation_mode": {
-				Description:  "Host utility operation need to be performed in the endpoint.\n* `None` - Host utility mode of the operation is set to none by default.\n* `SecureErase` - EU LOT-9 secure data cleanup on the server components.\n* `SecureEraseWithDecommission` - EU LOT-9 secure data cleanup on the server components and do decommission.\n* `Scrub` - Quick cleanup on storage and BIOS.",
+				Description:  "Host utility operation need to be performed in the endpoint.\n* `None` - Host utility mode of the operation is set to none by default.\n* `SecureErase` - EU LOT-9 secure data cleanup on the server components.\n* `SecureEraseWithDecommission` - EU LOT-9 secure data cleanup on the server components and do decommission.\n* `SecureEraseWithDecommissionAndRemove` - EU LOT-9 secure data cleanup on the server components and do decommission and remove.\n* `Scrub` - Quick cleanup on storage and BIOS.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"None", "SecureErase", "SecureEraseWithDecommission", "Scrub"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"None", "SecureErase", "SecureEraseWithDecommission", "SecureEraseWithDecommissionAndRemove", "Scrub"}, false),
 				Optional:     true,
 				Default:      "None",
 				ForceNew:     true,
@@ -836,14 +836,14 @@ func resourceComputeHostUtilityOperationCreate(c context.Context, d *schema.Reso
 		o.SetHostUtilityOperationMode(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("compute.HostUtilityOperation")
 
-	if v, ok := d.GetOk("server"); ok {
+	if v, ok := d.GetOkExists("server"); ok {
 		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

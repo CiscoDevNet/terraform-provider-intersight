@@ -37,6 +37,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_speed`:(string) Operational speed of this port-channel. 
 * `oper_state`:(string) Operational state of this port-channel. 
 * `oper_state_qual`:(string) Reason for this port-channel's Operational state. 
+* `oper_vlans`:(string) Operational VLANs on this port. 
 * `port_channel_id`:(int) Unique identifier for this port-channel on the FI. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `role`:(string) This port-channel's configured role (uplink, server, etc.). 

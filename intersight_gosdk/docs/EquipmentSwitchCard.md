@@ -24,12 +24,14 @@ Name | Type | Description | Notes
 **SlotId** | Pointer to **int64** | Slot identifier of the SwitchCard within the Switch. | [optional] [readonly] 
 **State** | Pointer to **string** | Operational state of the switch hardware. | [optional] [readonly] 
 **Status** | Pointer to **string** | The connection status of the switch hardware like up/down. * &#x60;Down&#x60; - Connection status of the switch card is down. * &#x60;Up&#x60; - Connection status of the switch card is up. | [optional] [default to "Down"]
+**StpMode** | Pointer to **string** | Spanning Tree Protocol configuration for the switch. * &#x60;Disabled&#x60; - Spanning Tree Protocol (STP) is disabled. * &#x60;STP&#x60; - Spanning Tree Protocol (STP) is enabled and operating in STP. * &#x60;RSTP&#x60; - Spanning Tree Protocol (STP) is enabled and operating in RSTP mode. * &#x60;MSTP&#x60; - Spanning Tree Protocol (STP) is enabled and operating in MSTP mode. * &#x60;PVST+&#x60; - Spanning Tree Protocol (STP) is enabled and operating in PVST mode. * &#x60;RPVST+&#x60; - Spanning Tree Protocol (STP) is enabled and operating in RPVST mode. | [optional] [readonly] [default to "Disabled"]
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | The Thermal status of the fabric interconnect. * &#x60;unknown&#x60; - The default state of the sensor (in case no data is received). * &#x60;ok&#x60; - State of the sensor indicating the sensor&#39;s temperature range is okay. * &#x60;upper-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely high above normal range. * &#x60;upper-critical&#x60; - State of the sensor indicating that the temperature is above normal range. * &#x60;upper-non-critical&#x60; - State of the sensor indicating that the temperature is a little above the normal range. * &#x60;lower-non-critical&#x60; - State of the sensor indicating that the temperature is a little below the normal range. * &#x60;lower-critical&#x60; - State of the sensor indicating that the temperature is below normal range. * &#x60;lower-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely below normal range. | [optional] [default to "unknown"]
 **Type** | Pointer to **string** | Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc. | [optional] 
 **FcPortChannels** | Pointer to [**[]FcPortChannelRelationship**](FcPortChannelRelationship.md) | An array of relationships to fcPortChannel resources. | [optional] 
 **FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] 
 **HostPorts** | Pointer to [**[]EtherHostPortRelationship**](EtherHostPortRelationship.md) | An array of relationships to etherHostPort resources. | [optional] 
+**InterSwitchPort** | Pointer to [**NullableEtherInterSwitchPortRelationship**](EtherInterSwitchPortRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **PortChannels** | Pointer to [**[]EtherPortChannelRelationship**](EtherPortChannelRelationship.md) | An array of relationships to etherPortChannel resources. | [optional] 
@@ -545,6 +547,31 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
+### GetStpMode
+
+`func (o *EquipmentSwitchCard) GetStpMode() string`
+
+GetStpMode returns the StpMode field if non-nil, zero value otherwise.
+
+### GetStpModeOk
+
+`func (o *EquipmentSwitchCard) GetStpModeOk() (*string, bool)`
+
+GetStpModeOk returns a tuple with the StpMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStpMode
+
+`func (o *EquipmentSwitchCard) SetStpMode(v string)`
+
+SetStpMode sets StpMode field to given value.
+
+### HasStpMode
+
+`func (o *EquipmentSwitchCard) HasStpMode() bool`
+
+HasStpMode returns a boolean if a field has been set.
+
 ### GetSwitchId
 
 `func (o *EquipmentSwitchCard) GetSwitchId() string`
@@ -725,6 +752,41 @@ HasHostPorts returns a boolean if a field has been set.
 `func (o *EquipmentSwitchCard) UnsetHostPorts()`
 
 UnsetHostPorts ensures that no value is present for HostPorts, not even an explicit nil
+### GetInterSwitchPort
+
+`func (o *EquipmentSwitchCard) GetInterSwitchPort() EtherInterSwitchPortRelationship`
+
+GetInterSwitchPort returns the InterSwitchPort field if non-nil, zero value otherwise.
+
+### GetInterSwitchPortOk
+
+`func (o *EquipmentSwitchCard) GetInterSwitchPortOk() (*EtherInterSwitchPortRelationship, bool)`
+
+GetInterSwitchPortOk returns a tuple with the InterSwitchPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterSwitchPort
+
+`func (o *EquipmentSwitchCard) SetInterSwitchPort(v EtherInterSwitchPortRelationship)`
+
+SetInterSwitchPort sets InterSwitchPort field to given value.
+
+### HasInterSwitchPort
+
+`func (o *EquipmentSwitchCard) HasInterSwitchPort() bool`
+
+HasInterSwitchPort returns a boolean if a field has been set.
+
+### SetInterSwitchPortNil
+
+`func (o *EquipmentSwitchCard) SetInterSwitchPortNil(b bool)`
+
+ SetInterSwitchPortNil sets the value for InterSwitchPort to be an explicit nil
+
+### UnsetInterSwitchPort
+`func (o *EquipmentSwitchCard) UnsetInterSwitchPort()`
+
+UnsetInterSwitchPort ensures that no value is present for InterSwitchPort, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentSwitchCard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

@@ -3,12 +3,24 @@ subcategory: "partnerintegration"
 layout: "intersight"
 page_title: "Intersight: intersight_partnerintegration_dc_logs"
 description: |-
-        Logs from the build operation.
+        The DcLogs object captures the standard output and error logs generated during the build operations of a device connector.
+        #### Purpose
+        This provides visibility into the build process, allowing administrators to debug failures or review the progress of build and deployment tasks for device connectors.
+        #### Key Concepts
+        - **Log Aggregation:** Collects both standard output (`stdout`) and error logs (`stderr`) from build operations.
+        - **Stage Tracking:** Associates logs with specific build stages to help pinpoint where an operation might have failed.
+        - **Traceability:** Links logs directly to the parent `DeviceConnector` object for clear operational context.
 
 ---
 
 # Data Source: intersight_partnerintegration_dc_logs
-Logs from the build operation.
+The DcLogs object captures the standard output and error logs generated during the build operations of a device connector.
+#### Purpose
+This provides visibility into the build process, allowing administrators to debug failures or review the progress of build and deployment tasks for device connectors.
+#### Key Concepts
+- **Log Aggregation:** Collects both standard output (`stdout`) and error logs (`stderr`) from build operations.
+- **Stage Tracking:** Associates logs with specific build stages to help pinpoint where an operation might have failed.
+- **Traceability:** Links logs directly to the parent `DeviceConnector` object for clear operational context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -615,7 +615,7 @@ func resourceIwotenantTenantCustomizationCreate(c context.Context, d *schema.Res
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIwotenantTenantCustomizationWithDefaults()
-	if v, ok := d.GetOk("account"); ok {
+	if v, ok := d.GetOkExists("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -679,7 +679,7 @@ func resourceIwotenantTenantCustomizationCreate(c context.Context, d *schema.Res
 		o.SetIwoId(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

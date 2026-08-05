@@ -110,6 +110,36 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"lldp_settings": {
+			Description: "LLDP Global configurations for this switch. LLDP Global Configuration is supported on Unified Edge platform only, and will be ignored for other platforms.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"enabled": {
+						Description: "Determines if the LLDP frames can be sent or received on the switch.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"mac_aging_settings": {
 			Description: "This specifies the MAC aging option and time settings.",
 			Type:        schema.TypeList,
@@ -347,6 +377,36 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"stp_settings": {
+			Description: "This specifies the Spanning Tree Protocol global configurations for this switch. STP global configuration is supported on Unified Edge platform only, and will be ignored for other platforms.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"stp_mode": {
+						Description: "The Spanning Tree Protocol (STP) mode determines the specific version of STP that is used to prevent loops in a network topology.\n* `Disabled` - Spanning Tree Protocol is disabled, and the switch does not participate in STP calculations or operations.\n* `RPVST+` - Rapid Per-VLAN Spanning Tree (RPVST) is a Cisco proprietary protocol that improves STP by providing faster convergence and creating a separate spanning tree for each VLAN, enhancing network performance and redundancy.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"tags": {
 			Type:     schema.TypeList,
@@ -739,6 +799,43 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		o.SetIsAesPrimaryKeySet(x)
 	}
 
+	if v, ok := d.GetOk("lldp_settings"); ok {
+		p := make([]models.FabricLldpGlobalSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FabricLldpGlobalSettings{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.LldpGlobalSettings")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetLldpSettings(x)
+		}
+	}
+
 	if v, ok := d.GetOk("mac_aging_settings"); ok {
 		p := make([]models.FabricMacAgingSettings, 0, 1)
 		s := v.([]interface{})
@@ -1027,6 +1124,43 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("stp_settings"); ok {
+		p := make([]models.FabricStpGlobalSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FabricStpGlobalSettings{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.StpGlobalSettings")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["stp_mode"]; ok {
+				{
+					x := (v.(string))
+					o.SetStpMode(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStpSettings(x)
+		}
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1280,6 +1414,8 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["fc_switching_mode"] = (s.GetFcSwitchingMode())
 				temp["is_aes_primary_key_set"] = (s.GetIsAesPrimaryKeySet())
 
+				temp["lldp_settings"] = flattenMapFabricLldpGlobalSettings(s.GetLldpSettings(), d)
+
 				temp["mac_aging_settings"] = flattenMapFabricMacAgingSettings(s.GetMacAgingSettings(), d)
 
 				temp["mac_learning_settings"] = flattenMapFabricMacLearningSettings(s.GetMacLearningSettings(), d)
@@ -1299,6 +1435,8 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["profiles"] = flattenListFabricBaseSwitchProfileRelationship(s.GetProfiles(), d)
 				temp["reserved_vlan_start_id"] = (s.GetReservedVlanStartId())
 				temp["shared_scope"] = (s.GetSharedScope())
+
+				temp["stp_settings"] = flattenMapFabricStpGlobalSettings(s.GetStpSettings(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["target_platform"] = (s.GetTargetPlatform())

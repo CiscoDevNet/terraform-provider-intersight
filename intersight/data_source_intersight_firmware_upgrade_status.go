@@ -60,35 +60,20 @@ func getFirmwareUpgradeStatusSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"checksum": {
-			Description: "The checksum of the downloaded file as calculated by the download plugin after successfully downloading a file.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
+		"cache_error": {
+			Description: "Any error encountered in caching. Example, Space unavailability due to too many active workflows running.",
+			Type:        schema.TypeString,
 			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"hash_algorithm": {
-						Description: "The hash algorithm used to calculate the checksum.\n* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.\n* `sha256` - An SHA256 hash as defined by RFC 4634.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
+		},
+		"cache_message": {
+			Description: "Message to notify caching operation status.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cache_state": {
+			Description: "The current cache status of the file.\n* `ReadyForImport` - The image is ready to be imported into the repository.\n* `Importing` - The image is being imported into the repository.\n* `Imported` - The image has been extracted and imported into the repository.\n* `ComputingMetadata` - Indicates that the image has been imported but its metadata computation has not been done.\n* `PendingExtraction` - Indicates that the image has been imported but not extracted in the repository.\n* `Extracting` - Indicates that the image is being extracted into the repository.\n* `Extracted` - Indicates that the image has been extracted into the repository.\n* `Failed` - The image import from an external source to the repository has failed.\n* `MetaOnly` - The image is present in an external repository.\n* `ReadyForCache` - The image is ready to be cached into the Intersight Appliance.\n* `Caching` - Indicates that the image is being cached into the Intersight Appliance or endpoint cache.\n* `Cached` - Indicates that the image has been cached into the Intersight Appliance or endpoint cache.\n* `CachingFailed` - Indicates that the image caching into the Intersight Appliance failed or endpoint cache.\n* `Corrupted` - Indicates that the image in the local repository (or endpoint cache) has been corrupted after it was cached.\n* `Evicted` - Indicates that the image has been evicted from the Intersight Appliance (or endpoint cache) to reclaim storage space.\n* `Invalid` - Indicates that the corresponding distributable MO has been removed from the backend. This can be due to unpublishing of an image.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -121,7 +106,7 @@ func getFirmwareUpgradeStatusSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"download_progress": {
-			Description: "The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible, a value of -1 is sent.",
+			Description: "The download progress of the file represented as a percentage between 0 and 100. If progress reporting is not possible, a value of -1 is sent.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -644,41 +629,19 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		o.SetAncestors(x)
 	}
 
-	if v, ok := d.GetOk("checksum"); ok {
-		p := make([]models.ConnectorFileChecksum, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.ConnectorFileChecksum{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("connector.FileChecksum")
-			if v, ok := l["hash_algorithm"]; ok {
-				{
-					x := (v.(string))
-					o.SetHashAlgorithm(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetChecksum(x)
-		}
+	if v, ok := d.GetOk("cache_error"); ok {
+		x := (v.(string))
+		o.SetCacheError(x)
+	}
+
+	if v, ok := d.GetOk("cache_message"); ok {
+		x := (v.(string))
+		o.SetCacheMessage(x)
+	}
+
+	if v, ok := d.GetOk("cache_state"); ok {
+		x := (v.(string))
+		o.SetCacheState(x)
 	}
 
 	if v, ok := d.GetOk("class_id"); ok {
@@ -1167,8 +1130,9 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
-
-				temp["checksum"] = flattenMapConnectorFileChecksum(s.GetChecksum(), d)
+				temp["cache_error"] = (s.GetCacheError())
+				temp["cache_message"] = (s.GetCacheMessage())
+				temp["cache_state"] = (s.GetCacheState())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

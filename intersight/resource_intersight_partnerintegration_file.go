@@ -752,7 +752,7 @@ func resourcePartnerintegrationFileCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("catalog"); ok {
+	if v, ok := d.GetOkExists("catalog"); ok {
 		p := make([]models.SoftwarerepositoryCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -817,12 +817,12 @@ func resourcePartnerintegrationFileCreate(c context.Context, d *schema.ResourceD
 		o.SetMd5eTag(x)
 	}
 
-	if v, ok := d.GetOk("md5sum"); ok {
+	if v, ok := d.GetOkExists("md5sum"); ok {
 		x := (v.(string))
 		o.SetMd5sum(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -834,7 +834,7 @@ func resourcePartnerintegrationFileCreate(c context.Context, d *schema.ResourceD
 
 	o.SetObjectType("partnerintegration.File")
 
-	if v, ok := d.GetOk("sha512sum"); ok {
+	if v, ok := d.GetOkExists("sha512sum"); ok {
 		x := (v.(string))
 		o.SetSha512sum(x)
 	}

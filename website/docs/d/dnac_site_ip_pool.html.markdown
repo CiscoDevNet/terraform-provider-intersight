@@ -3,12 +3,24 @@ subcategory: "dnac"
 layout: "intersight"
 page_title: "Intersight: intersight_dnac_site_ip_pool"
 description: |-
-        Collection of IP pools of the site.
+        The SiteIpPool object provides a structured approach to managing IP pools associated with network sites, ensuring efficient and organized IP address allocation within the network infrastructure.
+        #### Purpose
+        A SiteIpPool object serves as a central repository for IP pool configurations tied to specific network sites, aiding in systematic IP address management and allocation.
+        #### Key Concepts
+        - **IP Pool Configuration:** Allows for detailed specification and management of IP pools, facilitating precise control over IP address distribution.
+        - **Hierarchical Organization:** Maintains a structured hierarchy for site association, promoting clarity and order in IP management.
+        - **Secure Access:** Utilizes privilege sets to control access and modification rights, ensuring secure interaction with IP pool data.
 
 ---
 
 # Data Source: intersight_dnac_site_ip_pool
-Collection of IP pools of the site.
+The SiteIpPool object provides a structured approach to managing IP pools associated with network sites, ensuring efficient and organized IP address allocation within the network infrastructure.
+#### Purpose
+A SiteIpPool object serves as a central repository for IP pool configurations tied to specific network sites, aiding in systematic IP address management and allocation.
+#### Key Concepts
+- **IP Pool Configuration:** Allows for detailed specification and management of IP pools, facilitating precise control over IP address distribution.
+- **Hierarchical Organization:** Maintains a structured hierarchy for site association, promoting clarity and order in IP management.
+- **Secure Access:** Utilizes privilege sets to control access and modification rights, ensuring secure interaction with IP pool data.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

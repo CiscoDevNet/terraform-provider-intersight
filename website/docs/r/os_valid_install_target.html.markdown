@@ -3,14 +3,28 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_valid_install_target"
 description: |-
-        ValidInstallTarget is used to fetch all the valid Install targets for the servers.
-        The List of Install targets includes Physical Disks and Virtual Drives.
+        ValidInstallTargets are on-demand “discovery response” objects used to fetch and return the set of valid local install targets for one or more servers. The results include both Physical Disks and Virtual Drives, grouped by controller/drive type and optionally also returned as a flat list for UI consumption.
+        #### Purpose
+        Allow OS installation workflows to query which local storage targets are suitable for installation on the specified servers, returning validated choices to drive an install wizard or automation.
+        #### Key Concepts
+        - **Action-style request/response**: Invoked via CREATE to trigger target discovery/validation for the specified `servers`.
+        - **Controller/drive-type grouping**: Provides categorized collections such as `mraidVirtualDrives`, `mraidJbod`, `m2VirtualDrives`, `u2Nvme`, `e3sNvme`, `e1sNvme`, `mstorNvme`, and NVMe RAID variants.
+        - **Flat-list UI mode**: `src` can indicate orchestration UI usage; `installTargets` offers a generic flat list (`InstallTargetResponse`) for simplified consumption.
+        - **Error reporting**: `error` captures validation/discovery failures encountered while retrieving install targets.
+        - **Server-scoped evaluation**: `servers` (create-only) defines which compute.Physical endpoints are evaluated.
 
 ---
 
 # Resource: intersight_os_valid_install_target
-ValidInstallTarget is used to fetch all the valid Install targets for the servers.
-The List of Install targets includes Physical Disks and Virtual Drives.
+ValidInstallTargets are on-demand “discovery response” objects used to fetch and return the set of valid local install targets for one or more servers. The results include both Physical Disks and Virtual Drives, grouped by controller/drive type and optionally also returned as a flat list for UI consumption.
+#### Purpose
+Allow OS installation workflows to query which local storage targets are suitable for installation on the specified servers, returning validated choices to drive an install wizard or automation.
+#### Key Concepts
+- **Action-style request/response**: Invoked via CREATE to trigger target discovery/validation for the specified `servers`.
+- **Controller/drive-type grouping**: Provides categorized collections such as `mraidVirtualDrives`, `mraidJbod`, `m2VirtualDrives`, `u2Nvme`, `e3sNvme`, `e1sNvme`, `mstorNvme`, and NVMe RAID variants.
+- **Flat-list UI mode**: `src` can indicate orchestration UI usage; `installTargets` offers a generic flat list (`InstallTargetResponse`) for simplified consumption.
+- **Error reporting**: `error` captures validation/discovery failures encountered while retrieving install targets.
+- **Server-scoped evaluation**: `servers` (create-only) defines which compute.Physical endpoints are evaluated.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

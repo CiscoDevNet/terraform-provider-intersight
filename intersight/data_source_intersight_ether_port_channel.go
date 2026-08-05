@@ -250,6 +250,11 @@ func getEtherPortChannelSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"oper_vlans": {
+			Description: "Operational VLANs on this port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -897,6 +902,11 @@ func dataSourceEtherPortChannelRead(c context.Context, d *schema.ResourceData, m
 		o.SetOperStateQual(x)
 	}
 
+	if v, ok := d.GetOk("oper_vlans"); ok {
+		x := (v.(string))
+		o.SetOperVlans(x)
+	}
+
 	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -1288,6 +1298,7 @@ func dataSourceEtherPortChannelRead(c context.Context, d *schema.ResourceData, m
 				temp["oper_speed"] = (s.GetOperSpeed())
 				temp["oper_state"] = (s.GetOperState())
 				temp["oper_state_qual"] = (s.GetOperStateQual())
+				temp["oper_vlans"] = (s.GetOperVlans())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)

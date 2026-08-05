@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -27,9 +27,16 @@ type ChassisProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType          string                            `json:"ObjectType"`
-	ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
-	ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+	ObjectType string `json:"ObjectType"`
+	// Source of the chassis assigned to the Chassis Profile. Values can be Static or None. Static is used if a chassis is attached directly to a Chassis Profile. None is used if no chassis is attached to a Chassis Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `Static` - Chassis is directly assigned to chassis profile using assign chassis. * `None` - No chassis is assigned to the chassis profile.
+	ChassisAssignmentMode *string `json:"ChassisAssignmentMode,omitempty"`
+	// Serial number of the chassis that would be assigned to this pre-assigned Chassis Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
+	ChassisPreAssignBySerial   *string                           `json:"ChassisPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
+	ChassisReservation         *ResourcepoolReservationReference `json:"ChassisReservation,omitempty"`
+	ConfigChangeContext        NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
+	ConfigChanges              NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+	ReservationReferences      []PoolReservationReference        `json:"ReservationReferences,omitempty"`
+	ScheduledChassisAssignment NullableChassisChassisAssignment  `json:"ScheduledChassisAssignment,omitempty"`
 	// User label assigned to the chassis profile.
 	UserLabel         *string                              `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 	AssignedChassis   NullableEquipmentChassisRelationship `json:"AssignedChassis,omitempty"`
@@ -58,6 +65,8 @@ func NewChassisProfile(classId string, objectType string) *ChassisProfile {
 	this.Action = &action
 	var targetPlatform string = "FIAttached"
 	this.TargetPlatform = &targetPlatform
+	var chassisAssignmentMode string = "Static"
+	this.ChassisAssignmentMode = &chassisAssignmentMode
 	return &this
 }
 
@@ -70,6 +79,8 @@ func NewChassisProfileWithDefaults() *ChassisProfile {
 	this.ClassId = classId
 	var objectType string = "chassis.Profile"
 	this.ObjectType = objectType
+	var chassisAssignmentMode string = "Static"
+	this.ChassisAssignmentMode = &chassisAssignmentMode
 	return &this
 }
 
@@ -129,6 +140,102 @@ func (o *ChassisProfile) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "chassis.Profile" of the ObjectType field.
 func (o *ChassisProfile) GetDefaultObjectType() interface{} {
 	return "chassis.Profile"
+}
+
+// GetChassisAssignmentMode returns the ChassisAssignmentMode field value if set, zero value otherwise.
+func (o *ChassisProfile) GetChassisAssignmentMode() string {
+	if o == nil || IsNil(o.ChassisAssignmentMode) {
+		var ret string
+		return ret
+	}
+	return *o.ChassisAssignmentMode
+}
+
+// GetChassisAssignmentModeOk returns a tuple with the ChassisAssignmentMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChassisProfile) GetChassisAssignmentModeOk() (*string, bool) {
+	if o == nil || IsNil(o.ChassisAssignmentMode) {
+		return nil, false
+	}
+	return o.ChassisAssignmentMode, true
+}
+
+// HasChassisAssignmentMode returns a boolean if a field has been set.
+func (o *ChassisProfile) HasChassisAssignmentMode() bool {
+	if o != nil && !IsNil(o.ChassisAssignmentMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisAssignmentMode gets a reference to the given string and assigns it to the ChassisAssignmentMode field.
+func (o *ChassisProfile) SetChassisAssignmentMode(v string) {
+	o.ChassisAssignmentMode = &v
+}
+
+// GetChassisPreAssignBySerial returns the ChassisPreAssignBySerial field value if set, zero value otherwise.
+func (o *ChassisProfile) GetChassisPreAssignBySerial() string {
+	if o == nil || IsNil(o.ChassisPreAssignBySerial) {
+		var ret string
+		return ret
+	}
+	return *o.ChassisPreAssignBySerial
+}
+
+// GetChassisPreAssignBySerialOk returns a tuple with the ChassisPreAssignBySerial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChassisProfile) GetChassisPreAssignBySerialOk() (*string, bool) {
+	if o == nil || IsNil(o.ChassisPreAssignBySerial) {
+		return nil, false
+	}
+	return o.ChassisPreAssignBySerial, true
+}
+
+// HasChassisPreAssignBySerial returns a boolean if a field has been set.
+func (o *ChassisProfile) HasChassisPreAssignBySerial() bool {
+	if o != nil && !IsNil(o.ChassisPreAssignBySerial) {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisPreAssignBySerial gets a reference to the given string and assigns it to the ChassisPreAssignBySerial field.
+func (o *ChassisProfile) SetChassisPreAssignBySerial(v string) {
+	o.ChassisPreAssignBySerial = &v
+}
+
+// GetChassisReservation returns the ChassisReservation field value if set, zero value otherwise.
+func (o *ChassisProfile) GetChassisReservation() ResourcepoolReservationReference {
+	if o == nil || IsNil(o.ChassisReservation) {
+		var ret ResourcepoolReservationReference
+		return ret
+	}
+	return *o.ChassisReservation
+}
+
+// GetChassisReservationOk returns a tuple with the ChassisReservation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChassisProfile) GetChassisReservationOk() (*ResourcepoolReservationReference, bool) {
+	if o == nil || IsNil(o.ChassisReservation) {
+		return nil, false
+	}
+	return o.ChassisReservation, true
+}
+
+// HasChassisReservation returns a boolean if a field has been set.
+func (o *ChassisProfile) HasChassisReservation() bool {
+	if o != nil && !IsNil(o.ChassisReservation) {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisReservation gets a reference to the given ResourcepoolReservationReference and assigns it to the ChassisReservation field.
+func (o *ChassisProfile) SetChassisReservation(v ResourcepoolReservationReference) {
+	o.ChassisReservation = &v
 }
 
 // GetConfigChangeContext returns the ConfigChangeContext field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -215,6 +322,82 @@ func (o *ChassisProfile) SetConfigChangesNil() {
 // UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
 func (o *ChassisProfile) UnsetConfigChanges() {
 	o.ConfigChanges.Unset()
+}
+
+// GetReservationReferences returns the ReservationReferences field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ChassisProfile) GetReservationReferences() []PoolReservationReference {
+	if o == nil {
+		var ret []PoolReservationReference
+		return ret
+	}
+	return o.ReservationReferences
+}
+
+// GetReservationReferencesOk returns a tuple with the ReservationReferences field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ChassisProfile) GetReservationReferencesOk() ([]PoolReservationReference, bool) {
+	if o == nil || IsNil(o.ReservationReferences) {
+		return nil, false
+	}
+	return o.ReservationReferences, true
+}
+
+// HasReservationReferences returns a boolean if a field has been set.
+func (o *ChassisProfile) HasReservationReferences() bool {
+	if o != nil && !IsNil(o.ReservationReferences) {
+		return true
+	}
+
+	return false
+}
+
+// SetReservationReferences gets a reference to the given []PoolReservationReference and assigns it to the ReservationReferences field.
+func (o *ChassisProfile) SetReservationReferences(v []PoolReservationReference) {
+	o.ReservationReferences = v
+}
+
+// GetScheduledChassisAssignment returns the ScheduledChassisAssignment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ChassisProfile) GetScheduledChassisAssignment() ChassisChassisAssignment {
+	if o == nil || IsNil(o.ScheduledChassisAssignment.Get()) {
+		var ret ChassisChassisAssignment
+		return ret
+	}
+	return *o.ScheduledChassisAssignment.Get()
+}
+
+// GetScheduledChassisAssignmentOk returns a tuple with the ScheduledChassisAssignment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ChassisProfile) GetScheduledChassisAssignmentOk() (*ChassisChassisAssignment, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ScheduledChassisAssignment.Get(), o.ScheduledChassisAssignment.IsSet()
+}
+
+// HasScheduledChassisAssignment returns a boolean if a field has been set.
+func (o *ChassisProfile) HasScheduledChassisAssignment() bool {
+	if o != nil && o.ScheduledChassisAssignment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledChassisAssignment gets a reference to the given NullableChassisChassisAssignment and assigns it to the ScheduledChassisAssignment field.
+func (o *ChassisProfile) SetScheduledChassisAssignment(v ChassisChassisAssignment) {
+	o.ScheduledChassisAssignment.Set(&v)
+}
+
+// SetScheduledChassisAssignmentNil sets the value for ScheduledChassisAssignment to be an explicit nil
+func (o *ChassisProfile) SetScheduledChassisAssignmentNil() {
+	o.ScheduledChassisAssignment.Set(nil)
+}
+
+// UnsetScheduledChassisAssignment ensures that no value is present for ScheduledChassisAssignment, not even an explicit nil
+func (o *ChassisProfile) UnsetScheduledChassisAssignment() {
+	o.ScheduledChassisAssignment.Unset()
 }
 
 // GetUserLabel returns the UserLabel field value if set, zero value otherwise.
@@ -470,11 +653,26 @@ func (o ChassisProfile) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ChassisAssignmentMode) {
+		toSerialize["ChassisAssignmentMode"] = o.ChassisAssignmentMode
+	}
+	if !IsNil(o.ChassisPreAssignBySerial) {
+		toSerialize["ChassisPreAssignBySerial"] = o.ChassisPreAssignBySerial
+	}
+	if !IsNil(o.ChassisReservation) {
+		toSerialize["ChassisReservation"] = o.ChassisReservation
+	}
 	if o.ConfigChangeContext.IsSet() {
 		toSerialize["ConfigChangeContext"] = o.ConfigChangeContext.Get()
 	}
 	if o.ConfigChanges.IsSet() {
 		toSerialize["ConfigChanges"] = o.ConfigChanges.Get()
+	}
+	if o.ReservationReferences != nil {
+		toSerialize["ReservationReferences"] = o.ReservationReferences
+	}
+	if o.ScheduledChassisAssignment.IsSet() {
+		toSerialize["ScheduledChassisAssignment"] = o.ScheduledChassisAssignment.Get()
 	}
 	if !IsNil(o.UserLabel) {
 		toSerialize["UserLabel"] = o.UserLabel
@@ -548,9 +746,16 @@ func (o *ChassisProfile) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType          string                            `json:"ObjectType"`
-		ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
-		ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+		ObjectType string `json:"ObjectType"`
+		// Source of the chassis assigned to the Chassis Profile. Values can be Static or None. Static is used if a chassis is attached directly to a Chassis Profile. None is used if no chassis is attached to a Chassis Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `Static` - Chassis is directly assigned to chassis profile using assign chassis. * `None` - No chassis is assigned to the chassis profile.
+		ChassisAssignmentMode *string `json:"ChassisAssignmentMode,omitempty"`
+		// Serial number of the chassis that would be assigned to this pre-assigned Chassis Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
+		ChassisPreAssignBySerial   *string                           `json:"ChassisPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
+		ChassisReservation         *ResourcepoolReservationReference `json:"ChassisReservation,omitempty"`
+		ConfigChangeContext        NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
+		ConfigChanges              NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+		ReservationReferences      []PoolReservationReference        `json:"ReservationReferences,omitempty"`
+		ScheduledChassisAssignment NullableChassisChassisAssignment  `json:"ScheduledChassisAssignment,omitempty"`
 		// User label assigned to the chassis profile.
 		UserLabel         *string                              `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 		AssignedChassis   NullableEquipmentChassisRelationship `json:"AssignedChassis,omitempty"`
@@ -569,8 +774,13 @@ func (o *ChassisProfile) UnmarshalJSON(data []byte) (err error) {
 		varChassisProfile := _ChassisProfile{}
 		varChassisProfile.ClassId = varChassisProfileWithoutEmbeddedStruct.ClassId
 		varChassisProfile.ObjectType = varChassisProfileWithoutEmbeddedStruct.ObjectType
+		varChassisProfile.ChassisAssignmentMode = varChassisProfileWithoutEmbeddedStruct.ChassisAssignmentMode
+		varChassisProfile.ChassisPreAssignBySerial = varChassisProfileWithoutEmbeddedStruct.ChassisPreAssignBySerial
+		varChassisProfile.ChassisReservation = varChassisProfileWithoutEmbeddedStruct.ChassisReservation
 		varChassisProfile.ConfigChangeContext = varChassisProfileWithoutEmbeddedStruct.ConfigChangeContext
 		varChassisProfile.ConfigChanges = varChassisProfileWithoutEmbeddedStruct.ConfigChanges
+		varChassisProfile.ReservationReferences = varChassisProfileWithoutEmbeddedStruct.ReservationReferences
+		varChassisProfile.ScheduledChassisAssignment = varChassisProfileWithoutEmbeddedStruct.ScheduledChassisAssignment
 		varChassisProfile.UserLabel = varChassisProfileWithoutEmbeddedStruct.UserLabel
 		varChassisProfile.AssignedChassis = varChassisProfileWithoutEmbeddedStruct.AssignedChassis
 		varChassisProfile.AssociatedChassis = varChassisProfileWithoutEmbeddedStruct.AssociatedChassis
@@ -596,8 +806,13 @@ func (o *ChassisProfile) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ChassisAssignmentMode")
+		delete(additionalProperties, "ChassisPreAssignBySerial")
+		delete(additionalProperties, "ChassisReservation")
 		delete(additionalProperties, "ConfigChangeContext")
 		delete(additionalProperties, "ConfigChanges")
+		delete(additionalProperties, "ReservationReferences")
+		delete(additionalProperties, "ScheduledChassisAssignment")
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "AssignedChassis")
 		delete(additionalProperties, "AssociatedChassis")

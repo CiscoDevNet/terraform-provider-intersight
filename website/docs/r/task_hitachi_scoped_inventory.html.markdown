@@ -3,12 +3,26 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_hitachi_scoped_inventory"
 description: |-
-        API to trigger on-demand HitachiStorage FlashArray inventory to update modified objects in Intersight report.
+        The HitachiScopedInventory object provides an API to trigger on-demand HitachiStorage FlashArray inventory updates, supporting effective storage system reporting.
+        #### Purpose
+        HitachiScopedInventory is fundamental to managing inventory updates within Hitachi arrays. It ensures accurate and timely reporting of modified objects, supporting efficient storage system operations.
+        #### Key Concepts
+        - **Inventory Management:** Facilitates on-demand inventory updates, ensuring accurate and current reporting of storage system changes.
+        - **API Integration:** Provides a structured API for inventory updates, supporting seamless integration within the Intersight system.
+        - **Device Registration:** Connects inventory updates to device registration objects, ensuring reliable communication and reporting.
+        - **Access Control:** Utilizes privilege sets to ensure secure and authorized operations on inventory updates.
 
 ---
 
 # Resource: intersight_task_hitachi_scoped_inventory
-API to trigger on-demand HitachiStorage FlashArray inventory to update modified objects in Intersight report.
+The HitachiScopedInventory object provides an API to trigger on-demand HitachiStorage FlashArray inventory updates, supporting effective storage system reporting.
+#### Purpose
+HitachiScopedInventory is fundamental to managing inventory updates within Hitachi arrays. It ensures accurate and timely reporting of modified objects, supporting efficient storage system operations.
+#### Key Concepts
+- **Inventory Management:** Facilitates on-demand inventory updates, ensuring accurate and current reporting of storage system changes.
+- **API Integration:** Provides a structured API for inventory updates, supporting seamless integration within the Intersight system.
+- **Device Registration:** Connects inventory updates to device registration objects, ensuring reliable communication and reporting.
+- **Access Control:** Utilizes privilege sets to ensure secure and authorized operations on inventory updates.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

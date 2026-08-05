@@ -8,7 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchProfile"]
 **ConfigChangeContext** | Pointer to [**NullablePolicyConfigChangeContext**](PolicyConfigChangeContext.md) |  | [optional] 
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
+**FabricPreAssignBySerial** | Pointer to **string** | Serial number of the fabric that would be assigned to this pre-assigned fabric switch Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters. | [optional] 
 **OverriddenList** | Pointer to **[]string** |  | [optional] 
+**ScheduledSwitchAssignment** | Pointer to [**NullableFabricSwitchAssignment**](FabricSwitchAssignment.md) |  | [optional] 
+**SwitchAssignmentMode** | Pointer to **string** | Source of the switch assigned to the Domain Profile. Values can be Static or None. Static is used if a switch is attached directly to a Domain Profile. None is used if no switch is attached to a Domain Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * &#x60;Static&#x60; - Fabric is directly assigned to domain profile using assign chassis. * &#x60;None&#x60; - No fabric is assigned to the domain profile. | [optional] [default to "Static"]
 **TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
 **TemplateSyncErrors** | Pointer to [**[]MotemplateSyncError**](MotemplateSyncError.md) |  | [optional] 
 **TemplateSyncStatus** | Pointer to **string** | The sync status of the current MO wrt the attached Template MO. * &#x60;None&#x60; - The Enum value represents that the object is not attached to any template. * &#x60;OK&#x60; - The Enum value represents that the object values are in sync with attached template. * &#x60;Scheduled&#x60; - The Enum value represents that the object sync from attached template is scheduled from template. * &#x60;InProgress&#x60; - The Enum value represents that the object sync with the attached template is in progress. * &#x60;OutOfSync&#x60; - The Enum value represents that the object values are not in sync with attached template. | [optional] [readonly] [default to "None"]
@@ -147,6 +150,31 @@ HasConfigChanges returns a boolean if a field has been set.
 `func (o *FabricSwitchProfile) UnsetConfigChanges()`
 
 UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
+### GetFabricPreAssignBySerial
+
+`func (o *FabricSwitchProfile) GetFabricPreAssignBySerial() string`
+
+GetFabricPreAssignBySerial returns the FabricPreAssignBySerial field if non-nil, zero value otherwise.
+
+### GetFabricPreAssignBySerialOk
+
+`func (o *FabricSwitchProfile) GetFabricPreAssignBySerialOk() (*string, bool)`
+
+GetFabricPreAssignBySerialOk returns a tuple with the FabricPreAssignBySerial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFabricPreAssignBySerial
+
+`func (o *FabricSwitchProfile) SetFabricPreAssignBySerial(v string)`
+
+SetFabricPreAssignBySerial sets FabricPreAssignBySerial field to given value.
+
+### HasFabricPreAssignBySerial
+
+`func (o *FabricSwitchProfile) HasFabricPreAssignBySerial() bool`
+
+HasFabricPreAssignBySerial returns a boolean if a field has been set.
+
 ### GetOverriddenList
 
 `func (o *FabricSwitchProfile) GetOverriddenList() []string`
@@ -182,6 +210,66 @@ HasOverriddenList returns a boolean if a field has been set.
 `func (o *FabricSwitchProfile) UnsetOverriddenList()`
 
 UnsetOverriddenList ensures that no value is present for OverriddenList, not even an explicit nil
+### GetScheduledSwitchAssignment
+
+`func (o *FabricSwitchProfile) GetScheduledSwitchAssignment() FabricSwitchAssignment`
+
+GetScheduledSwitchAssignment returns the ScheduledSwitchAssignment field if non-nil, zero value otherwise.
+
+### GetScheduledSwitchAssignmentOk
+
+`func (o *FabricSwitchProfile) GetScheduledSwitchAssignmentOk() (*FabricSwitchAssignment, bool)`
+
+GetScheduledSwitchAssignmentOk returns a tuple with the ScheduledSwitchAssignment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduledSwitchAssignment
+
+`func (o *FabricSwitchProfile) SetScheduledSwitchAssignment(v FabricSwitchAssignment)`
+
+SetScheduledSwitchAssignment sets ScheduledSwitchAssignment field to given value.
+
+### HasScheduledSwitchAssignment
+
+`func (o *FabricSwitchProfile) HasScheduledSwitchAssignment() bool`
+
+HasScheduledSwitchAssignment returns a boolean if a field has been set.
+
+### SetScheduledSwitchAssignmentNil
+
+`func (o *FabricSwitchProfile) SetScheduledSwitchAssignmentNil(b bool)`
+
+ SetScheduledSwitchAssignmentNil sets the value for ScheduledSwitchAssignment to be an explicit nil
+
+### UnsetScheduledSwitchAssignment
+`func (o *FabricSwitchProfile) UnsetScheduledSwitchAssignment()`
+
+UnsetScheduledSwitchAssignment ensures that no value is present for ScheduledSwitchAssignment, not even an explicit nil
+### GetSwitchAssignmentMode
+
+`func (o *FabricSwitchProfile) GetSwitchAssignmentMode() string`
+
+GetSwitchAssignmentMode returns the SwitchAssignmentMode field if non-nil, zero value otherwise.
+
+### GetSwitchAssignmentModeOk
+
+`func (o *FabricSwitchProfile) GetSwitchAssignmentModeOk() (*string, bool)`
+
+GetSwitchAssignmentModeOk returns a tuple with the SwitchAssignmentMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSwitchAssignmentMode
+
+`func (o *FabricSwitchProfile) SetSwitchAssignmentMode(v string)`
+
+SetSwitchAssignmentMode sets SwitchAssignmentMode field to given value.
+
+### HasSwitchAssignmentMode
+
+`func (o *FabricSwitchProfile) HasSwitchAssignmentMode() bool`
+
+HasSwitchAssignmentMode returns a boolean if a field has been set.
+
 ### GetTemplateActions
 
 `func (o *FabricSwitchProfile) GetTemplateActions() []MotemplateActionEntry`

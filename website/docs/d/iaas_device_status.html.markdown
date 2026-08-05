@@ -3,12 +3,24 @@ subcategory: "iaas"
 layout: "intersight"
 page_title: "Intersight: intersight_iaas_device_status"
 description: |-
-        List of infra accounts managed by UCSD.
+        The DeviceStatus object is pivotal in managing infrastructure accounts within UCS Director (UCSD), offering insights into connection status and device details. It aids in maintaining connectivity and operational integrity.
+        #### Purpose
+        DeviceStatus provides detailed information about infrastructure accounts managed by UCSD, supporting connection monitoring and device management.
+        #### Key Concepts
+        - **Connection Monitoring:** Tracks connection status between UCSD and managed devices, ensuring operational reliability.
+        - **Device Insights:** Offers comprehensive details about device vendors, models, and versions, aiding in effective management.
+        - **Read-Only Access:** Ensures secure access to device information without modification.
 
 ---
 
 # Data Source: intersight_iaas_device_status
-List of infra accounts managed by UCSD.
+The DeviceStatus object is pivotal in managing infrastructure accounts within UCS Director (UCSD), offering insights into connection status and device details. It aids in maintaining connectivity and operational integrity.   
+#### Purpose 
+DeviceStatus provides detailed information about infrastructure accounts managed by UCSD, supporting connection monitoring and device management.  
+#### Key Concepts 
+- **Connection Monitoring:** Tracks connection status between UCSD and managed devices, ensuring operational reliability. 
+- **Device Insights:** Offers comprehensive details about device vendors, models, and versions, aiding in effective management. 
+- **Read-Only Access:** Ensures secure access to device information without modification.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

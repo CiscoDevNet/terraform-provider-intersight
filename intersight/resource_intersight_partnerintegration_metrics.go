@@ -769,7 +769,7 @@ func resourcePartnerintegrationMetricsCreate(c context.Context, d *schema.Resour
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

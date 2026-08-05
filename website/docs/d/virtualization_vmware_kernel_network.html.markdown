@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_kernel_network"
 description: |-
-        Details of VMware Kernel Network.
+        The VmwareKernelNetwork object encapsulates the kernel network entity within VMware environments, detailing attributes for network management and operational settings.
+        #### Purpose
+        VmwareKernelNetwork serves as the critical component for managing kernel network configurations, optimizing network resource allocation and control within VMware environments.
+        #### Key Concepts
+        - **Network Management:** Supports settings for IP addresses, MAC addresses, and operational features like vMotion, enhancing network efficiency and performance.
+        - **Operational Features:** Includes settings for management traffic, vsphere provisioning, and fault tolerance logging, ensuring resilient and adaptive network operations.
+        - **Integration:** Interfaces with networks and hosts, facilitating cohesive network management and resource distribution.
+        - **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_kernel_network
-Details of VMware Kernel Network.
+The VmwareKernelNetwork object encapsulates the kernel network entity within VMware environments, detailing attributes for network management and operational settings.
+#### Purpose
+VmwareKernelNetwork serves as the critical component for managing kernel network configurations, optimizing network resource allocation and control within VMware environments.
+#### Key Concepts
+- **Network Management:** Supports settings for IP addresses, MAC addresses, and operational features like vMotion, enhancing network efficiency and performance.
+- **Operational Features:** Includes settings for management traffic, vsphere provisioning, and fault tolerance logging, ensuring resilient and adaptive network operations.
+- **Integration:** Interfaces with networks and hosts, facilitating cohesive network management and resource distribution.
+- **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

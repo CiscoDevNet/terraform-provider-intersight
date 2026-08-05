@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -28,8 +28,16 @@ type FabricSwitchClusterProfileTemplate struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// When enabled, the configuration of the derived instances may override the template configuration.
+	EnableOverride  *bool                   `json:"EnableOverride,omitempty"`
+	TemplateActions []MotemplateActionEntry `json:"TemplateActions,omitempty"`
+	// The template sync status with all derived objects. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+	UpdateStatus *string `json:"UpdateStatus,omitempty"`
 	// The count of switch cluster profiles derived from the template.
-	Usage        *int64                                       `json:"Usage,omitempty"`
+	// Deprecated
+	Usage *int64 `json:"Usage,omitempty"`
+	// The number of objects derived from a Template MO instance.
+	UsageCount   *int64                                       `json:"UsageCount,omitempty"`
 	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to fabricSwitchProfileTemplate resources.
 	SwitchProfileTemplates []FabricSwitchProfileTemplateRelationship `json:"SwitchProfileTemplates,omitempty"`
@@ -123,7 +131,105 @@ func (o *FabricSwitchClusterProfileTemplate) GetDefaultObjectType() interface{} 
 	return "fabric.SwitchClusterProfileTemplate"
 }
 
+// GetEnableOverride returns the EnableOverride field value if set, zero value otherwise.
+func (o *FabricSwitchClusterProfileTemplate) GetEnableOverride() bool {
+	if o == nil || IsNil(o.EnableOverride) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableOverride
+}
+
+// GetEnableOverrideOk returns a tuple with the EnableOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchClusterProfileTemplate) GetEnableOverrideOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnableOverride) {
+		return nil, false
+	}
+	return o.EnableOverride, true
+}
+
+// HasEnableOverride returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfileTemplate) HasEnableOverride() bool {
+	if o != nil && !IsNil(o.EnableOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableOverride gets a reference to the given bool and assigns it to the EnableOverride field.
+func (o *FabricSwitchClusterProfileTemplate) SetEnableOverride(v bool) {
+	o.EnableOverride = &v
+}
+
+// GetTemplateActions returns the TemplateActions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchClusterProfileTemplate) GetTemplateActions() []MotemplateActionEntry {
+	if o == nil {
+		var ret []MotemplateActionEntry
+		return ret
+	}
+	return o.TemplateActions
+}
+
+// GetTemplateActionsOk returns a tuple with the TemplateActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchClusterProfileTemplate) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
+	if o == nil || IsNil(o.TemplateActions) {
+		return nil, false
+	}
+	return o.TemplateActions, true
+}
+
+// HasTemplateActions returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfileTemplate) HasTemplateActions() bool {
+	if o != nil && !IsNil(o.TemplateActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateActions gets a reference to the given []MotemplateActionEntry and assigns it to the TemplateActions field.
+func (o *FabricSwitchClusterProfileTemplate) SetTemplateActions(v []MotemplateActionEntry) {
+	o.TemplateActions = v
+}
+
+// GetUpdateStatus returns the UpdateStatus field value if set, zero value otherwise.
+func (o *FabricSwitchClusterProfileTemplate) GetUpdateStatus() string {
+	if o == nil || IsNil(o.UpdateStatus) {
+		var ret string
+		return ret
+	}
+	return *o.UpdateStatus
+}
+
+// GetUpdateStatusOk returns a tuple with the UpdateStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchClusterProfileTemplate) GetUpdateStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.UpdateStatus) {
+		return nil, false
+	}
+	return o.UpdateStatus, true
+}
+
+// HasUpdateStatus returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfileTemplate) HasUpdateStatus() bool {
+	if o != nil && !IsNil(o.UpdateStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateStatus gets a reference to the given string and assigns it to the UpdateStatus field.
+func (o *FabricSwitchClusterProfileTemplate) SetUpdateStatus(v string) {
+	o.UpdateStatus = &v
+}
+
 // GetUsage returns the Usage field value if set, zero value otherwise.
+// Deprecated
 func (o *FabricSwitchClusterProfileTemplate) GetUsage() int64 {
 	if o == nil || IsNil(o.Usage) {
 		var ret int64
@@ -134,6 +240,7 @@ func (o *FabricSwitchClusterProfileTemplate) GetUsage() int64 {
 
 // GetUsageOk returns a tuple with the Usage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *FabricSwitchClusterProfileTemplate) GetUsageOk() (*int64, bool) {
 	if o == nil || IsNil(o.Usage) {
 		return nil, false
@@ -151,8 +258,41 @@ func (o *FabricSwitchClusterProfileTemplate) HasUsage() bool {
 }
 
 // SetUsage gets a reference to the given int64 and assigns it to the Usage field.
+// Deprecated
 func (o *FabricSwitchClusterProfileTemplate) SetUsage(v int64) {
 	o.Usage = &v
+}
+
+// GetUsageCount returns the UsageCount field value if set, zero value otherwise.
+func (o *FabricSwitchClusterProfileTemplate) GetUsageCount() int64 {
+	if o == nil || IsNil(o.UsageCount) {
+		var ret int64
+		return ret
+	}
+	return *o.UsageCount
+}
+
+// GetUsageCountOk returns a tuple with the UsageCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchClusterProfileTemplate) GetUsageCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.UsageCount) {
+		return nil, false
+	}
+	return o.UsageCount, true
+}
+
+// HasUsageCount returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfileTemplate) HasUsageCount() bool {
+	if o != nil && !IsNil(o.UsageCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsageCount gets a reference to the given int64 and assigns it to the UsageCount field.
+func (o *FabricSwitchClusterProfileTemplate) SetUsageCount(v int64) {
+	o.UsageCount = &v
 }
 
 // GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -257,8 +397,20 @@ func (o FabricSwitchClusterProfileTemplate) ToMap() (map[string]interface{}, err
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EnableOverride) {
+		toSerialize["EnableOverride"] = o.EnableOverride
+	}
+	if o.TemplateActions != nil {
+		toSerialize["TemplateActions"] = o.TemplateActions
+	}
+	if !IsNil(o.UpdateStatus) {
+		toSerialize["UpdateStatus"] = o.UpdateStatus
+	}
 	if !IsNil(o.Usage) {
 		toSerialize["Usage"] = o.Usage
+	}
+	if !IsNil(o.UsageCount) {
+		toSerialize["UsageCount"] = o.UsageCount
 	}
 	if o.Organization.IsSet() {
 		toSerialize["Organization"] = o.Organization.Get()
@@ -321,8 +473,16 @@ func (o *FabricSwitchClusterProfileTemplate) UnmarshalJSON(data []byte) (err err
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// When enabled, the configuration of the derived instances may override the template configuration.
+		EnableOverride  *bool                   `json:"EnableOverride,omitempty"`
+		TemplateActions []MotemplateActionEntry `json:"TemplateActions,omitempty"`
+		// The template sync status with all derived objects. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+		UpdateStatus *string `json:"UpdateStatus,omitempty"`
 		// The count of switch cluster profiles derived from the template.
-		Usage        *int64                                       `json:"Usage,omitempty"`
+		// Deprecated
+		Usage *int64 `json:"Usage,omitempty"`
+		// The number of objects derived from a Template MO instance.
+		UsageCount   *int64                                       `json:"UsageCount,omitempty"`
 		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to fabricSwitchProfileTemplate resources.
 		SwitchProfileTemplates []FabricSwitchProfileTemplateRelationship `json:"SwitchProfileTemplates,omitempty"`
@@ -335,7 +495,11 @@ func (o *FabricSwitchClusterProfileTemplate) UnmarshalJSON(data []byte) (err err
 		varFabricSwitchClusterProfileTemplate := _FabricSwitchClusterProfileTemplate{}
 		varFabricSwitchClusterProfileTemplate.ClassId = varFabricSwitchClusterProfileTemplateWithoutEmbeddedStruct.ClassId
 		varFabricSwitchClusterProfileTemplate.ObjectType = varFabricSwitchClusterProfileTemplateWithoutEmbeddedStruct.ObjectType
+		varFabricSwitchClusterProfileTemplate.EnableOverride = varFabricSwitchClusterProfileTemplateWithoutEmbeddedStruct.EnableOverride
+		varFabricSwitchClusterProfileTemplate.TemplateActions = varFabricSwitchClusterProfileTemplateWithoutEmbeddedStruct.TemplateActions
+		varFabricSwitchClusterProfileTemplate.UpdateStatus = varFabricSwitchClusterProfileTemplateWithoutEmbeddedStruct.UpdateStatus
 		varFabricSwitchClusterProfileTemplate.Usage = varFabricSwitchClusterProfileTemplateWithoutEmbeddedStruct.Usage
+		varFabricSwitchClusterProfileTemplate.UsageCount = varFabricSwitchClusterProfileTemplateWithoutEmbeddedStruct.UsageCount
 		varFabricSwitchClusterProfileTemplate.Organization = varFabricSwitchClusterProfileTemplateWithoutEmbeddedStruct.Organization
 		varFabricSwitchClusterProfileTemplate.SwitchProfileTemplates = varFabricSwitchClusterProfileTemplateWithoutEmbeddedStruct.SwitchProfileTemplates
 		*o = FabricSwitchClusterProfileTemplate(varFabricSwitchClusterProfileTemplate)
@@ -357,7 +521,11 @@ func (o *FabricSwitchClusterProfileTemplate) UnmarshalJSON(data []byte) (err err
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "EnableOverride")
+		delete(additionalProperties, "TemplateActions")
+		delete(additionalProperties, "UpdateStatus")
 		delete(additionalProperties, "Usage")
+		delete(additionalProperties, "UsageCount")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "SwitchProfileTemplates")
 

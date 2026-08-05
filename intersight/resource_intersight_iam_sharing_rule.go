@@ -661,14 +661,14 @@ func resourceIamSharingRuleCreate(c context.Context, d *schema.ResourceData, met
 
 	o.SetClassId("iam.SharingRule")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("iam.SharingRule")
 
-	if v, ok := d.GetOk("shared_resource"); ok {
+	if v, ok := d.GetOkExists("shared_resource"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -711,7 +711,7 @@ func resourceIamSharingRuleCreate(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if v, ok := d.GetOk("shared_with_resource"); ok {
+	if v, ok := d.GetOkExists("shared_with_resource"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

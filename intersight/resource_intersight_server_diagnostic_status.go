@@ -100,9 +100,9 @@ func resourceServerDiagnosticStatus() *schema.Resource {
 							Default:     "connector.FileChecksum",
 						},
 						"hash_algorithm": {
-							Description:  "The hash algorithm used to calculate the checksum.\n* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.\n* `sha256` - An SHA256 hash as defined by RFC 4634.",
+							Description:  "The hash algorithm used to calculate the checksum.\n* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.\n* `sha256` - An SHA256 hash as defined by RFC 4634.\n* `md5sum` - An MD5 hash as defined by RFC 1321.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"crc", "sha256"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"crc", "sha256", "md5sum"}, false),
 							Optional:     true,
 							Default:      "crc",
 						},
@@ -950,7 +950,7 @@ func resourceServerDiagnosticStatusCreate(c context.Context, d *schema.ResourceD
 		o.SetDownloadRetries(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -987,7 +987,7 @@ func resourceServerDiagnosticStatusCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("server"); ok {
+	if v, ok := d.GetOkExists("server"); ok {
 		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

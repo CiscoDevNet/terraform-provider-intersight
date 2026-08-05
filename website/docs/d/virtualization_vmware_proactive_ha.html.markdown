@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_proactive_ha"
 description: |-
-        Vmware vCenter has a functionality to support 'proactive HA' in clusters. Common attributes of 'HA Provider' and custom alarms added for a provider in a vCenter.
+        The VmwareProactiveHa object represents the attributes of 'HA Provider' and custom alarms added for a provider in a vCenter, supporting proactive high availability in clusters.
+        #### Purpose
+        VmwareProactiveHa enhances cluster resilience through proactive high availability settings, optimizing resource allocation and management within VMware environments.
+        #### Key Concepts
+        - **Proactive High Availability:** Supports settings for HA alarms and provider attributes, enhancing cluster resilience and operational continuity.
+        - **Integration:** Interfaces with registered devices and alarm definitions, facilitating cohesive resource management and operational control.
+        - **Security and Access:** Utilizes privilege sets for secure read operations, maintaining integrity and authorized access.
+        - **Operational Features:** Includes attributes for HA settings, supporting resilient and adaptive cluster operations.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_proactive_ha
-Vmware vCenter has a functionality to support 'proactive HA' in clusters. Common attributes of 'HA Provider' and custom alarms added for a provider in a vCenter.
+The VmwareProactiveHa object represents the attributes of 'HA Provider' and custom alarms added for a provider in a vCenter, supporting proactive high availability in clusters.
+#### Purpose
+VmwareProactiveHa enhances cluster resilience through proactive high availability settings, optimizing resource allocation and management within VMware environments.
+#### Key Concepts
+- **Proactive High Availability:** Supports settings for HA alarms and provider attributes, enhancing cluster resilience and operational continuity.
+- **Integration:** Interfaces with registered devices and alarm definitions, facilitating cohesive resource management and operational control.
+- **Security and Access:** Utilizes privilege sets for secure read operations, maintaining integrity and authorized access.
+- **Operational Features:** Includes attributes for HA settings, supporting resilient and adaptive cluster operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

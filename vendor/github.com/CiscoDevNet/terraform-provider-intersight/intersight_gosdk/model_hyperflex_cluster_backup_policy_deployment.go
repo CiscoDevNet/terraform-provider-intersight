@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the HyperflexClusterBackupPolicyDeployment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HyperflexClusterBackupPolicyDeployment{}
 
-// HyperflexClusterBackupPolicyDeployment Record of HyperFlex Cluster backup policy deployment.
+// HyperflexClusterBackupPolicyDeployment The ClusterBackupPolicyDeployment object is an essential component in the HyperFlex system, designed to record the deployment status of backup policies within a HyperFlex Cluster. This provides a comprehensive view of backup policy implementations, ensuring transparency and traceability in deployment processes.   #### Purpose   ClusterBackupPolicyDeployment serves as the documentation and monitoring tool for backup policy deployments. It tracks the implementation details of backup configurations, allowing administrators to oversee and manage deployed policies effectively.   #### Key Concepts   - **Deployment Tracking:** Records detailed information about deployed backup policies, including datastore names, replication schedules, and encryption settings.  - **Audit and Transparency:** Ensures visibility into backup policy deployments, supporting auditing and compliance requirements.  - **Relationship Management:** Links deployed policies to source and target clusters, facilitating efficient management and monitoring of backup operations.  - **Discovery:** Supports discovery mechanisms to identify and document backup policy deployments within the HyperFlex Cluster environment.
 type HyperflexClusterBackupPolicyDeployment struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

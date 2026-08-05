@@ -792,12 +792,12 @@ func resourceMgmtConfigBackupFileCreate(c context.Context, d *schema.ResourceDat
 		o.SetMd5eTag(x)
 	}
 
-	if v, ok := d.GetOk("md5sum"); ok {
+	if v, ok := d.GetOkExists("md5sum"); ok {
 		x := (v.(string))
 		o.SetMd5sum(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -809,7 +809,7 @@ func resourceMgmtConfigBackupFileCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetObjectType("mgmt.ConfigBackupFile")
 
-	if v, ok := d.GetOk("sha512sum"); ok {
+	if v, ok := d.GetOkExists("sha512sum"); ok {
 		x := (v.(string))
 		o.SetSha512sum(x)
 	}

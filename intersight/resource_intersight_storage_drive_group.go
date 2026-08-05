@@ -112,7 +112,7 @@ func resourceStorageDriveGroup() *schema.Resource {
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntBetween(1, 100),
 							Optional:     true,
-							Default:      1,
+							Computed:     true,
 						},
 						"minimum_drive_size": {
 							Description: "Minimum size of the drive to be used for creating this RAID group.",
@@ -130,7 +130,7 @@ func resourceStorageDriveGroup() *schema.Resource {
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntBetween(0, 8),
 							Optional:     true,
-							Default:      0,
+							Computed:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -998,12 +998,12 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}

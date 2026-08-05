@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_nvm_subsystem"
 description: |-
-        NVM subsystem entity in Hitachi storage array.
+        The HitachiNvmSubsystem object represents an NVM subsystem entity within the Hitachi storage array, providing functionalities for managing NVMe-oF connections and subsystems.
+        #### Purpose
+        HitachiNvmSubsystem serves as a critical component for managing NVM subsystems, supporting operations related to subsystem settings, security configurations, and namespace management.
+        #### Key Concepts
+        - **Subsystem Management:** Provides settings for subsystem IDs, security configurations, and namespace management within NVMe-oF connections.
+        - **Privilege Sets:** Ensures controlled access for managing NVM subsystem configurations with defined privilege sets.
+        - **Licensing:** Operates under specified entitlements, supporting authorized operations.
 
 ---
 
 # Data Source: intersight_storage_hitachi_nvm_subsystem
-NVM subsystem entity in Hitachi storage array.
+The HitachiNvmSubsystem object represents an NVM subsystem entity within the Hitachi storage array, providing functionalities for managing NVMe-oF connections and subsystems.
+#### Purpose
+HitachiNvmSubsystem serves as a critical component for managing NVM subsystems, supporting operations related to subsystem settings, security configurations, and namespace management.
+#### Key Concepts
+- **Subsystem Management:** Provides settings for subsystem IDs, security configurations, and namespace management within NVMe-oF connections.
+- **Privilege Sets:** Ensures controlled access for managing NVM subsystem configurations with defined privilege sets.
+- **Licensing:** Operates under specified entitlements, supporting authorized operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

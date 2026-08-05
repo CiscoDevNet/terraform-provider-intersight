@@ -3,12 +3,20 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_gpu"
 description: |-
-        A Gpu associated with a node.
+        A GPU belonging to a node in a Nutanix cluster.
+        #### Purpose
+        The Gpu object provides a detailed view of GPU configuration for a node in a Nutanix cluster.
+        #### Key Concepts
+        - **Configuration Details:** Offers insights into GPU attributes like model, associated node and cluster, and allocation of virtual GPUs.
 
 ---
 
 # Data Source: intersight_hci_gpu
-A Gpu associated with a node.
+A GPU belonging to a node in a Nutanix cluster.
+#### Purpose
+The Gpu object provides a detailed view of GPU configuration for a node in a Nutanix cluster.
+#### Key Concepts
+- **Configuration Details:** Offers insights into GPU attributes like model, associated node and cluster, and allocation of virtual GPUs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

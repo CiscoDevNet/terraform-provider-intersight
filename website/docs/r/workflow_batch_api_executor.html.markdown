@@ -3,20 +3,24 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_batch_api_executor"
 description: |-
-        Intersight allows generic API tasks to be created by taking the API request
-        body and a response parser specification in the form of content.Grammar object.
-        Batch API associates the list of API requests to be executed as part of single
-        task execution. Each API request takes the request body and a response parser
-        specification.
+        The BatchApiExecutor object is a key component within the workflow system that facilitates the execution of multiple API requests as part of a single task execution. It is designed to handle batch operations efficiently, allowing users to define and execute a series of API calls in a cohesive manner.
+        #### Purpose
+        The BatchApiExecutor serves as a mechanism to associate and manage a list of API requests that need to be executed together. This provides the ability to define API tasks using the API request body and a response parser specification, thus streamlining the execution process within a workflow.
+        #### Key Concepts
+        - **Batch Execution:** Enables the grouping and execution of multiple API requests as a single task, enhancing operational efficiency.
+        - **Access Control:** Utilizes privilege sets to manage who can read, update, create, and delete batch API tasks, ensuring security and proper governance.
+        - **Error Handling:** Integrates with error response handlers to provide robust mechanisms for parsing and managing error responses from API calls.
 
 ---
 
 # Resource: intersight_workflow_batch_api_executor
-Intersight allows generic API tasks to be created by taking the API request
-body and a response parser specification in the form of content.Grammar object.
-Batch API associates the list of API requests to be executed as part of single
-task execution. Each API request takes the request body and a response parser
-specification.
+The BatchApiExecutor object is a key component within the workflow system that facilitates the execution of multiple API requests as part of a single task execution. It is designed to handle batch operations efficiently, allowing users to define and execute a series of API calls in a cohesive manner.
+#### Purpose
+The BatchApiExecutor serves as a mechanism to associate and manage a list of API requests that need to be executed together. This provides the ability to define API tasks using the API request body and a response parser specification, thus streamlining the execution process within a workflow.
+#### Key Concepts
+- **Batch Execution:** Enables the grouping and execution of multiple API requests as a single task, enhancing operational efficiency.
+- **Access Control:** Utilizes privilege sets to manage who can read, update, create, and delete batch API tasks, ensuring security and proper governance.
+- **Error Handling:** Integrates with error response handlers to provide robust mechanisms for parsing and managing error responses from API calls.
 ## Usage Example
 ### Resource Creation
 

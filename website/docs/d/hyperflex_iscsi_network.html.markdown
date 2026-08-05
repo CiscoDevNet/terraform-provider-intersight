@@ -3,26 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_iscsi_network"
 description: |-
-        ### Overview
         The IscsiNetwork object represents the iSCSI network configuration within the HyperFlex storage system. This provides a detailed interface for managing network settings, including IP ranges, VLAN configuration, and gateway settings, supporting effective storage network operations.
         #### Purpose
         An IscsiNetwork serves as a key entity within the HyperFlex storage framework, enabling the organized management of iSCSI network resources and settings.
         #### Key Concepts
-        - **Configuration Management:** - Manages network settings, including IP address ranges and VLAN configuration, supporting efficient storage network operations.
-        - **Inventory Tracking:** - Provides detailed inventory information, ensuring accurate and reliable network resource management.
-        - **Cluster Integration:** - Integrated with the HyperFlex Cluster, enabling seamless interaction and coordination of storage network resources.
+        - **Configuration Management:** Manages network settings, including IP address ranges and VLAN configuration, supporting efficient storage network operations.
+        - **Inventory Tracking:** Provides detailed inventory information, ensuring accurate and reliable network resource management.
+        - **Cluster Integration:** Integrated with the HyperFlex Cluster, enabling seamless interaction and coordination of storage network resources.
 
 ---
 
 # Data Source: intersight_hyperflex_iscsi_network
-### Overview
 The IscsiNetwork object represents the iSCSI network configuration within the HyperFlex storage system. This provides a detailed interface for managing network settings, including IP ranges, VLAN configuration, and gateway settings, supporting effective storage network operations.
 #### Purpose
 An IscsiNetwork serves as a key entity within the HyperFlex storage framework, enabling the organized management of iSCSI network resources and settings.
 #### Key Concepts
-- **Configuration Management:** - Manages network settings, including IP address ranges and VLAN configuration, supporting efficient storage network operations.
-- **Inventory Tracking:** - Provides detailed inventory information, ensuring accurate and reliable network resource management.
-- **Cluster Integration:** - Integrated with the HyperFlex Cluster, enabling seamless interaction and coordination of storage network resources.
+- **Configuration Management:** Manages network settings, including IP address ranges and VLAN configuration, supporting efficient storage network operations.
+- **Inventory Tracking:** Provides detailed inventory information, ensuring accurate and reliable network resource management.
+- **Cluster Integration:** Integrated with the HyperFlex Cluster, enabling seamless interaction and coordination of storage network resources.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

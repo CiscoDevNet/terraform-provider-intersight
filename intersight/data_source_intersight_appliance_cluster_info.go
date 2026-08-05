@@ -135,6 +135,11 @@ func getApplianceClusterInfoSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"hypervisor_type": {
+			Description: "The hypervisor type of the node.\n* `ESXi` - VMware ESXi hypervisor type.Indicates the appliance node is running on a VMware ESXi virtualization platform.\n* `Hyper-V` - Microsoft Hyper-V hypervisor type.Indicates the appliance node is running on a Microsoft Hyper-V virtualization platform.\n* `KVM` - Kernel-based Virtual Machine hypervisor type.Indicates the appliance node is running on a KVM virtualization platform.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"installer_version": {
 			Description: "Installer version used to install on peer node.",
 			Type:        schema.TypeString,
@@ -683,6 +688,11 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 		o.SetHostname(x)
 	}
 
+	if v, ok := d.GetOk("hypervisor_type"); ok {
+		x := (v.(string))
+		o.SetHypervisorType(x)
+	}
+
 	if v, ok := d.GetOk("installer_version"); ok {
 		x := (v.(string))
 		o.SetInstallerVersion(x)
@@ -1073,6 +1083,7 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 				temp["gateway"] = (s.GetGateway())
 				temp["hostip"] = (s.GetHostip())
 				temp["hostname"] = (s.GetHostname())
+				temp["hypervisor_type"] = (s.GetHypervisorType())
 				temp["installer_version"] = (s.GetInstallerVersion())
 
 				temp["mod_time"] = (s.GetModTime()).String()

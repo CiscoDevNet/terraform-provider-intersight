@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_parity_group"
 description: |-
-        A parity group in Hitachi storage array.
+        The HitachiParityGroup object defines a parity group within the Hitachi storage array, encapsulating key attributes related to disk configurations and settings.
+        #### Purpose
+        HitachiParityGroup serves as the foundational element for managing parity groups, supporting operations related to disk types, speeds, and compression settings.
+        #### Key Concepts
+        - **Disk Management:** Manages disk types, speeds, and settings related to accelerated compression and encryption.
+        - **Privilege Sets:** Provides controlled access for managing parity group settings with defined privilege sets.
+        - **Licensing:** Ensures operations are performed under specified entitlements, adhering to licensing requirements.
 
 ---
 
 # Data Source: intersight_storage_hitachi_parity_group
-A parity group in Hitachi storage array.
+The HitachiParityGroup object defines a parity group within the Hitachi storage array, encapsulating key attributes related to disk configurations and settings.
+#### Purpose
+HitachiParityGroup serves as the foundational element for managing parity groups, supporting operations related to disk types, speeds, and compression settings.
+#### Key Concepts
+- **Disk Management:** Manages disk types, speeds, and settings related to accelerated compression and encryption.
+- **Privilege Sets:** Provides controlled access for managing parity group settings with defined privilege sets.
+- **Licensing:** Ensures operations are performed under specified entitlements, adhering to licensing requirements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

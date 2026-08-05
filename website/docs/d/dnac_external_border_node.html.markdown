@@ -3,12 +3,24 @@ subcategory: "dnac"
 layout: "intersight"
 page_title: "Intersight: intersight_dnac_external_border_node"
 description: |-
-        External border node is an external boundary of a network.
+        The ExternalBorderNode object represents the external boundaries of a network, focusing on the management and configuration of nodes that interact with external network entities.
+        #### Purpose
+        An ExternalBorderNode object is essential for defining and managing the interfaces between internal and external networks, ensuring secure and efficient communication.
+        #### Key Concepts
+        - **Boundary Definition:** Specifies the roles and configurations of external border nodes, clarifying their position within the network architecture.
+        - **Security and Roles Management:** Enables detailed role assignment and security configuration, safeguarding network boundaries.
+        - **Interoperability:** Designed to facilitate interaction with external networks, promoting seamless and secure connectivity.
 
 ---
 
 # Data Source: intersight_dnac_external_border_node
-External border node is an external boundary of a network.
+The ExternalBorderNode object represents the external boundaries of a network, focusing on the management and configuration of nodes that interact with external network entities.
+#### Purpose
+An ExternalBorderNode object is essential for defining and managing the interfaces between internal and external networks, ensuring secure and efficient communication.
+#### Key Concepts
+- **Boundary Definition:** Specifies the roles and configurations of external border nodes, clarifying their position within the network architecture.
+- **Security and Roles Management:** Enables detailed role assignment and security configuration, safeguarding network boundaries.
+- **Interoperability:** Designed to facilitate interaction with external networks, promoting seamless and secure connectivity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

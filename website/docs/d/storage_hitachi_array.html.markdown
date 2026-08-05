@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_array"
 description: |-
-        The details of the Hitachi storage array.
+        The HitachiArray object represents the comprehensive details of a Hitachi storage array within the system. It is designed to provide out-of-band configuration and management capabilities, enabling efficient management and diagnostics of storage arrays.
+        #### Purpose
+        The HitachiArray object serves as a central entity for managing Hitachi storage arrays, encompassing functionalities that support performance data collection, configuration, and connection management.
+        #### Key Concepts
+        - **Device Registration:** Facilitates the connection of storage arrays to Intersight, ensuring seamless integration and management.
+        - **IP Configuration:** Provides detailed IP address settings for service processors and controllers, supporting robust network configurations.
+        - **Privilege Sets:** Ensures controlled access with defined privilege sets for reading and updating storage array configurations.
+        - **Licensing and Entitlements:** Supports operations under specified entitlements, ensuring compliance and feature availability.
 
 ---
 
 # Data Source: intersight_storage_hitachi_array
-The details of the Hitachi storage array.
+The HitachiArray object represents the comprehensive details of a Hitachi storage array within the system. It is designed to provide out-of-band configuration and management capabilities, enabling efficient management and diagnostics of storage arrays.
+#### Purpose
+The HitachiArray object serves as a central entity for managing Hitachi storage arrays, encompassing functionalities that support performance data collection, configuration, and connection management.
+#### Key Concepts
+- **Device Registration:** Facilitates the connection of storage arrays to Intersight, ensuring seamless integration and management.
+- **IP Configuration:** Provides detailed IP address settings for service processors and controllers, supporting robust network configurations.
+- **Privilege Sets:** Ensures controlled access with defined privilege sets for reading and updating storage array configurations.
+- **Licensing and Entitlements:** Supports operations under specified entitlements, ensuring compliance and feature availability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

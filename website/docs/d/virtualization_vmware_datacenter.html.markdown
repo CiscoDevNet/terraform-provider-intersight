@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_datacenter"
 description: |-
-        Datacenter object in VMware inventory. It is the logical container for all other objects like Datastore, Host, VirtualMachine, etc.
+        The VmwareDatacenter object encapsulates the datacenter entity within the VMware inventory, serving as the logical container for associated objects such as datastores, hosts, and virtual machines.
+        #### Purpose
+        VmwareDatacenter acts as the organizational framework for managing and structuring VMware resources, facilitating efficient inventory and resource oversight within the datacenter environment.
+        #### Key Concepts
+        - **Logical Container:** Structures and groups resources under a unified datacenter entity, promoting organized management.
+        - **Resource Integration:** Interfaces with hosts, clusters, networks, and other entities within the datacenter, providing comprehensive connectivity and oversight.
+        - **Access Control:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+        - **Tagging System:** Supports attached resource tags, enhancing resource categorization and identification for streamlined management.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_datacenter
-Datacenter object in VMware inventory. It is the logical container for all other objects like Datastore, Host, VirtualMachine, etc.
+The VmwareDatacenter object encapsulates the datacenter entity within the VMware inventory, serving as the logical container for associated objects such as datastores, hosts, and virtual machines.
+#### Purpose
+VmwareDatacenter acts as the organizational framework for managing and structuring VMware resources, facilitating efficient inventory and resource oversight within the datacenter environment.
+#### Key Concepts
+- **Logical Container:** Structures and groups resources under a unified datacenter entity, promoting organized management.
+- **Resource Integration:** Interfaces with hosts, clusters, networks, and other entities within the datacenter, providing comprehensive connectivity and oversight.
+- **Access Control:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
+- **Tagging System:** Supports attached resource tags, enhancing resource categorization and identification for streamlined management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

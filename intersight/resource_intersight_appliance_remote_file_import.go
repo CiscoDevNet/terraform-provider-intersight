@@ -332,9 +332,9 @@ func resourceApplianceRemoteFileImport() *schema.Resource {
 				ForceNew:    true,
 			},
 			"protocol": {
-				Description:  "Specifies if this is an scp or sftp request.\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
+				Description:  "Specifies if this is an scp or sftp request.\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.\n* `local` - Backup file is stored in Intersight Appliance.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp", "cifs"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp", "cifs", "local"}, false),
 				Optional:     true,
 				Default:      "scp",
 				ForceNew:     true,
@@ -716,7 +716,7 @@ func resourceApplianceRemoteFileImportCreate(c context.Context, d *schema.Resour
 		o.SetHostname(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

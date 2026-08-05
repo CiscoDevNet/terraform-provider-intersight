@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_remote_copy_pair_gad"
 description: |-
-        The global-active device pair entity in Hitachi storage array.
+        The HitachiRemoteCopyPairGad object represents the global-active device pair entity within the Hitachi storage array, focusing on replication management and operations.
+        #### Purpose
+        HitachiRemoteCopyPairGad is designed to manage global-active device pairs, supporting replication operations and monitoring of pair attributes.
+        #### Key Concepts
+        - **Replication Operations:** Manages replication types, LDEV numbers, and status information for global-active device pairs.
+        - **Privilege Sets:** Provides controlled access for managing global-active device pair settings with defined privilege sets.
+        - **Licensing:** Supports operations under specified entitlements, adhering to licensing requirements.
 
 ---
 
 # Data Source: intersight_storage_hitachi_remote_copy_pair_gad
-The global-active device pair entity in Hitachi storage array.
+The HitachiRemoteCopyPairGad object represents the global-active device pair entity within the Hitachi storage array, focusing on replication management and operations.
+#### Purpose
+HitachiRemoteCopyPairGad is designed to manage global-active device pairs, supporting replication operations and monitoring of pair attributes.
+#### Key Concepts
+- **Replication Operations:** Manages replication types, LDEV numbers, and status information for global-active device pairs.
+- **Privilege Sets:** Provides controlled access for managing global-active device pair settings with defined privilege sets.
+- **Licensing:** Supports operations under specified entitlements, adhering to licensing requirements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

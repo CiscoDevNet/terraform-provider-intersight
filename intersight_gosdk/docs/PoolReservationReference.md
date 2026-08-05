@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ReservationId** | Pointer to **string** | The identity for which the reference is created. It is used to store the ID allocated to the profile during export.  Reservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated. During import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference. For IP and UUid IDs, we create reservation, for other Ids we do not create reservations. | [optional] 
 **ReservationMoid** | Pointer to **string** | The moid of the reservation object. | [optional] 
 
 ## Methods
@@ -66,6 +67,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetReservationId
+
+`func (o *PoolReservationReference) GetReservationId() string`
+
+GetReservationId returns the ReservationId field if non-nil, zero value otherwise.
+
+### GetReservationIdOk
+
+`func (o *PoolReservationReference) GetReservationIdOk() (*string, bool)`
+
+GetReservationIdOk returns a tuple with the ReservationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservationId
+
+`func (o *PoolReservationReference) SetReservationId(v string)`
+
+SetReservationId sets ReservationId field to given value.
+
+### HasReservationId
+
+`func (o *PoolReservationReference) HasReservationId() bool`
+
+HasReservationId returns a boolean if a field has been set.
 
 ### GetReservationMoid
 

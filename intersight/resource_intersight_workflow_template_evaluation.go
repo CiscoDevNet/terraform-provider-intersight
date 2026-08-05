@@ -1016,7 +1016,7 @@ func resourceWorkflowTemplateEvaluationCreate(c context.Context, d *schema.Resou
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

@@ -594,7 +594,7 @@ func resourceVrfVrfCreate(c context.Context, d *schema.ResourceData, meta interf
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

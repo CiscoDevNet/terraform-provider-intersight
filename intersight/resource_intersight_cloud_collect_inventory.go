@@ -656,7 +656,7 @@ func resourceCloudCollectInventoryCreate(c context.Context, d *schema.ResourceDa
 
 	o.SetClassId("cloud.CollectInventory")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

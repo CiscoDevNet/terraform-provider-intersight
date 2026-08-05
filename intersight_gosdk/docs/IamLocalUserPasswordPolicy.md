@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LocalUserPasswordPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LocalUserPasswordPolicy"]
 **EnableLockOutForAdminUser** | Pointer to **bool** | Determines if the user lock out feature must be enabled for the local admin user. | [optional] [default to false]
-**FailedLoginTrackerWindow** | Pointer to **int64** | Seconds are tracked for consecutive incorrect login attempts. Users will be locked out if they exceed the max number of incorrect login attempts during this duration. | [optional] [default to 1800]
+**FailedLoginTrackerWindow** | Pointer to **int64** | The duration, in seconds, within which consecutive incorrect login attempts are counted. The system locks out the account if the number of incorrect attempts exceeds the maximum allowed value during this window. | [optional] [default to 1800]
 **LockOutTimePeriod** | Pointer to **int64** | The time period, in seconds, during which a user account will remain locked. | [optional] [default to 900]
+**MaxDaysAllowedWithSamePassword** | Pointer to **int64** | Maximum number of days a password can be used before it must be changed. Set to 0 to disable password expiration. | [optional] [default to 0]
 **MaxFailedLoginsAllowed** | Pointer to **int64** | Users will be locked out after exceeding the max consecutive incorrect login attempts allowed within the configured time duration. | [optional] [default to 5]
 **MinCharDifference** | Pointer to **int64** | Minimum number of characters different from previous password. | [optional] [default to 0]
 **MinDaysBetweenPasswordChange** | Pointer to **int64** | Minimum Days allowed between password change. | [optional] [default to 0]
@@ -153,6 +154,31 @@ SetLockOutTimePeriod sets LockOutTimePeriod field to given value.
 `func (o *IamLocalUserPasswordPolicy) HasLockOutTimePeriod() bool`
 
 HasLockOutTimePeriod returns a boolean if a field has been set.
+
+### GetMaxDaysAllowedWithSamePassword
+
+`func (o *IamLocalUserPasswordPolicy) GetMaxDaysAllowedWithSamePassword() int64`
+
+GetMaxDaysAllowedWithSamePassword returns the MaxDaysAllowedWithSamePassword field if non-nil, zero value otherwise.
+
+### GetMaxDaysAllowedWithSamePasswordOk
+
+`func (o *IamLocalUserPasswordPolicy) GetMaxDaysAllowedWithSamePasswordOk() (*int64, bool)`
+
+GetMaxDaysAllowedWithSamePasswordOk returns a tuple with the MaxDaysAllowedWithSamePassword field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxDaysAllowedWithSamePassword
+
+`func (o *IamLocalUserPasswordPolicy) SetMaxDaysAllowedWithSamePassword(v int64)`
+
+SetMaxDaysAllowedWithSamePassword sets MaxDaysAllowedWithSamePassword field to given value.
+
+### HasMaxDaysAllowedWithSamePassword
+
+`func (o *IamLocalUserPasswordPolicy) HasMaxDaysAllowedWithSamePassword() bool`
+
+HasMaxDaysAllowedWithSamePassword returns a boolean if a field has been set.
 
 ### GetMaxFailedLoginsAllowed
 

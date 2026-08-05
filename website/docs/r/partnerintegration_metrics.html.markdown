@@ -3,12 +3,22 @@ subcategory: "partnerintegration"
 layout: "intersight"
 page_title: "Intersight: intersight_partnerintegration_metrics"
 description: |-
-        Metrics definition for the endpoint to translate platform API outputs to Intersight Metrics format.
+        The Metrics object defines how platform API outputs are translated into the Intersight Metrics format.
+        #### Purpose
+        It allows for the transformation of raw platform metrics into a standardized format, enabling consistent monitoring and analysis across different storage or networking platforms.
+        #### Key Concepts
+        - **Metric Transformation:** Maps platform-specific metrics to the Intersight Metrics model.
+        - **Standardization:** Ensures that metrics are represented consistently, regardless of the source platform.
 
 ---
 
 # Resource: intersight_partnerintegration_metrics
-Metrics definition for the endpoint to translate platform API outputs to Intersight Metrics format.
+The Metrics object defines how platform API outputs are translated into the Intersight Metrics format.
+#### Purpose
+It allows for the transformation of raw platform metrics into a standardized format, enabling consistent monitoring and analysis across different storage or networking platforms.
+#### Key Concepts
+- **Metric Transformation:** Maps platform-specific metrics to the Intersight Metrics model.
+- **Standardization:** Ensures that metrics are represented consistently, regardless of the source platform.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

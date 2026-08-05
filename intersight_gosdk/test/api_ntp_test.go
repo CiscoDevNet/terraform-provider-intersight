@@ -88,6 +88,32 @@ func Test_intersight_NtpApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test NtpApiService GetNtpPolicyInventoryByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NtpApi.GetNtpPolicyInventoryByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NtpApiService GetNtpPolicyInventoryList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.NtpApi.GetNtpPolicyInventoryList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test NtpApiService GetNtpPolicyList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

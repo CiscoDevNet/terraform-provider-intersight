@@ -3,12 +3,24 @@ subcategory: "iaas"
 layout: "intersight"
 page_title: "Intersight: intersight_iaas_connector_pack"
 description: |-
-        Describes about all the connector pack versions running currently in UCSD.
+        The ConnectorPack object is essential for managing connector pack versions within UCS Director (UCSD), facilitating configuration and dependency management.
+        #### Purpose
+        ConnectorPack documents the versions and states of connector packs, supporting efficient management and deployment of connectors in UCSD.
+        #### Key Concepts
+        - **Version Management:** Tracks connector pack versions, ensuring compatibility and optimal performance.
+        - **Dependency Tracking:** Monitors dependencies, aiding in configuration management and deployment strategies.
+        - **Read-Only Access:** Ensures connector pack information is available for review without alteration.
 
 ---
 
 # Data Source: intersight_iaas_connector_pack
-Describes about all the connector pack versions running currently in UCSD.
+The ConnectorPack object is essential for managing connector pack versions within UCS Director (UCSD), facilitating configuration and dependency management.   
+#### Purpose  
+ConnectorPack documents the versions and states of connector packs, supporting efficient management and deployment of connectors in UCSD.   
+#### Key Concepts  
+- **Version Management:** Tracks connector pack versions, ensuring compatibility and optimal performance. 
+- **Dependency Tracking:** Monitors dependencies, aiding in configuration management and deployment strategies. 
+- **Read-Only Access:** Ensures connector pack information is available for review without alteration.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

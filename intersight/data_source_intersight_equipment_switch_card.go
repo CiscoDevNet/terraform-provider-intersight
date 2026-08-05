@@ -217,6 +217,41 @@ func getEquipmentSwitchCardSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"inter_switch_port": {
+			Description: "A reference to a etherInterSwitchPort resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"inventory_device_info": {
 			Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -606,6 +641,11 @@ func getEquipmentSwitchCardSchema() map[string]*schema.Schema {
 		},
 		"status": {
 			Description: "The connection status of the switch hardware like up/down.\n* `Down` - Connection status of the switch card is down.\n* `Up` - Connection status of the switch card is up.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"stp_mode": {
+			Description: "Spanning Tree Protocol configuration for the switch.\n* `Disabled` - Spanning Tree Protocol (STP) is disabled.\n* `STP` - Spanning Tree Protocol (STP) is enabled and operating in STP.\n* `RSTP` - Spanning Tree Protocol (STP) is enabled and operating in RSTP mode.\n* `MSTP` - Spanning Tree Protocol (STP) is enabled and operating in MSTP mode.\n* `PVST+` - Spanning Tree Protocol (STP) is enabled and operating in PVST mode.\n* `RPVST+` - Spanning Tree Protocol (STP) is enabled and operating in RPVST mode.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1100,6 +1140,49 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 		o.SetHwVersion(x)
 	}
 
+	if v, ok := d.GetOk("inter_switch_port"); ok {
+		p := make([]models.EtherInterSwitchPortRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsEtherInterSwitchPortRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetInterSwitchPort(x)
+		}
+	}
+
 	if v, ok := d.GetOk("inventory_device_info"); ok {
 		p := make([]models.InventoryDeviceInfoRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1557,6 +1640,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 		o.SetStatus(x)
 	}
 
+	if v, ok := d.GetOk("stp_mode"); ok {
+		x := (v.(string))
+		o.SetStpMode(x)
+	}
+
 	if v, ok := d.GetOk("switch_id"); ok {
 		x := (v.(string))
 		o.SetSwitchId(x)
@@ -1785,6 +1873,8 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 				temp["host_ports"] = flattenListEtherHostPortRelationship(s.GetHostPorts(), d)
 				temp["hw_version"] = (s.GetHwVersion())
 
+				temp["inter_switch_port"] = flattenMapEtherInterSwitchPortRelationship(s.GetInterSwitchPort(), d)
+
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 				temp["jumbo_frame_enabled"] = (s.GetJumboFrameEnabled())
@@ -1824,6 +1914,7 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 				temp["slot_id"] = (s.GetSlotId())
 				temp["state"] = (s.GetState())
 				temp["status"] = (s.GetStatus())
+				temp["stp_mode"] = (s.GetStpMode())
 				temp["switch_id"] = (s.GetSwitchId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

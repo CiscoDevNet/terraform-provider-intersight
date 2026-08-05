@@ -7,7 +7,7 @@ description: |-
         #### Purpose
         SharedResourcesInfoHolder acts as the central entity for managing holding shared resources, this object provides a centralized view of all shared resource configurations between two organizations. It supports efficient resource management and organizational integration.
         #### Key Concepts
-        - ** Resource Sharing:** Facilitates the sharing of resources between different organizational units, aiding in collaboration and integration.
+        - **Resource Sharing:** Facilitates the sharing of resources between different organizational units, aiding in collaboration and integration.
         - **Configuration Management:** Manages shared resource configurations, ensuring consistent and organized resource sharing.
         - **Access Control:** Integrates access restrictions to ensure secure and controlled management of shared resources.
 
@@ -18,7 +18,7 @@ The SharedResourcesInfoHolder object manages holds shared resource configuration
 #### Purpose
 SharedResourcesInfoHolder acts as the central entity for managing holding shared resources, this object provides a centralized view of all shared resource configurations between two organizations. It supports efficient resource management and organizational integration.
 #### Key Concepts
-- ** Resource Sharing:** Facilitates the sharing of resources between different organizational units, aiding in collaboration and integration.
+- **Resource Sharing:** Facilitates the sharing of resources between different organizational units, aiding in collaboration and integration.
 - **Configuration Management:** Manages shared resource configurations, ensuring consistent and organized resource sharing.
 - **Access Control:** Integrates access restrictions to ensure secure and controlled management of shared resources.
 ## Argument Reference

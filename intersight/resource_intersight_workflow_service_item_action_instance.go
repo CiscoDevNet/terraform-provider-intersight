@@ -1330,7 +1330,7 @@ func resourceWorkflowServiceItemActionInstanceCreate(c context.Context, d *schem
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1404,7 +1404,7 @@ func resourceWorkflowServiceItemActionInstanceCreate(c context.Context, d *schem
 		}
 	}
 
-	if v, ok := d.GetOk("service_item_action_definition"); ok {
+	if v, ok := d.GetOkExists("service_item_action_definition"); ok {
 		p := make([]models.WorkflowServiceItemActionDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1447,7 +1447,7 @@ func resourceWorkflowServiceItemActionInstanceCreate(c context.Context, d *schem
 		}
 	}
 
-	if v, ok := d.GetOk("service_item_instance"); ok {
+	if v, ok := d.GetOkExists("service_item_instance"); ok {
 		p := make([]models.WorkflowServiceItemInstanceRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

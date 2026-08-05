@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -21,40 +21,40 @@ import (
 // checks if the SdaaciConnection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SdaaciConnection{}
 
-// SdaaciConnection SDA-ACI direct-connect connection.
+// SdaaciConnection The Connection object is an integral part of the network management system, designed to facilitate the establishment and management of direct connections between SDA and ACI environments. This provides a structured approach to configure and monitor network connections, ensuring seamless integration and communication between different network domains. #### Purpose A Connection object represents the configuration and status of a direct link between SDA and ACI systems. It is responsible for managing VN and EPG configurations, facilitating network communication, and ensuring connectivity compliance with organizational requirements. #### Key Concepts - **Connectivity Management:** Enables the configuration of connection parameters such as VN, EPG, and ACI tenant details, ensuring the network is set up correctly. - **Status Monitoring:** Tracks the connection status, providing real-time updates on connectivity health and issues. - **Multi-Component Integration:** Integrates with various network components, including campus fabrics, ACI tenants, and firewalls, supporting comprehensive network management. - **APIC Integration:** Facilitates seamless interaction with APIC environments, ensuring efficient management and configuration of ACI resources.
 type SdaaciConnection struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// ACI L3Out Name User Input.
+	// User input for ACI L3Out name.
 	AciL3Out *string `json:"AciL3Out,omitempty"`
-	// Name of the Match Rule in Cisco APIC.
+	// Match rule name in Cisco APIC.
 	AciMatchRuleName *string `json:"AciMatchRuleName,omitempty"`
-	// ACI tenant Name for Selected APIC Target.
+	// ACI tenant name for the selected APIC target.
 	AciTenant *string `json:"AciTenant,omitempty"`
-	// Campus fabric site id in which the border node has configured.
+	// Campus fabric site Id where the border node is configured.
 	CampusFabricSite *string `json:"CampusFabricSite,omitempty"`
-	// Application EPG Name of this connection.
+	// Application EPG name for this connection.
 	Epg *string `json:"Epg,omitempty"`
-	// EPG Subnet Ipv4Cidr which is configured on APIC.
+	// EPG Subnet Ipv4Cidr configured on APIC.
 	EpgSubnet *string `json:"EpgSubnet,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
-	// Device within the selected domain used to configure Firewall.
+	// Device within the selected domain used for firewall configuration.
 	FirewallDevice *string `json:"FirewallDevice,omitempty"`
-	// Domain used to configure Firewall.
+	// Domain used for firewall configuration.
 	FirewallDomain *string `json:"FirewallDomain,omitempty"`
-	// L3Out Node Profile in Cisco APIC.
+	// L3Out node profile in Cisco APIC.
 	NodeProfile *string `json:"NodeProfile,omitempty"`
-	// Connection status between SDA and ACI. * `NotConnected` - Connection Status NotConnected. * `Connected` - Connection Status Connected.
+	// Connection status between SDA and ACI. * `NotConnected` - Status of the connection:Not connected. * `Connected` - Status of the connection:Connected.
 	Status *string `json:"Status,omitempty"`
-	// Transit id for given border node.
+	// Transit Id for the given border node.
 	Transit *string `json:"Transit,omitempty"`
-	// Virtual Network of this connection.
+	// Virtual Network for this connection.
 	VirtualNetwork *string `json:"VirtualNetwork,omitempty"`
-	// Contains both VN and EPG of this connection.
+	// VN and EPG information for this connection.
 	VnEpg *string `json:"VnEpg,omitempty"`
-	// APIC Tenant VRF from APIC.
+	// Tenant VRF in Cisco APIC.
 	Vrf                  *string                                      `json:"Vrf,omitempty"`
 	ApicTarget           NullableAssetTargetRelationship              `json:"ApicTarget,omitempty"`
 	CatalystCenterTarget NullableAssetTargetRelationship              `json:"CatalystCenterTarget,omitempty"`
@@ -905,33 +905,33 @@ func (o *SdaaciConnection) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// ACI L3Out Name User Input.
+		// User input for ACI L3Out name.
 		AciL3Out *string `json:"AciL3Out,omitempty"`
-		// Name of the Match Rule in Cisco APIC.
+		// Match rule name in Cisco APIC.
 		AciMatchRuleName *string `json:"AciMatchRuleName,omitempty"`
-		// ACI tenant Name for Selected APIC Target.
+		// ACI tenant name for the selected APIC target.
 		AciTenant *string `json:"AciTenant,omitempty"`
-		// Campus fabric site id in which the border node has configured.
+		// Campus fabric site Id where the border node is configured.
 		CampusFabricSite *string `json:"CampusFabricSite,omitempty"`
-		// Application EPG Name of this connection.
+		// Application EPG name for this connection.
 		Epg *string `json:"Epg,omitempty"`
-		// EPG Subnet Ipv4Cidr which is configured on APIC.
+		// EPG Subnet Ipv4Cidr configured on APIC.
 		EpgSubnet *string `json:"EpgSubnet,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
-		// Device within the selected domain used to configure Firewall.
+		// Device within the selected domain used for firewall configuration.
 		FirewallDevice *string `json:"FirewallDevice,omitempty"`
-		// Domain used to configure Firewall.
+		// Domain used for firewall configuration.
 		FirewallDomain *string `json:"FirewallDomain,omitempty"`
-		// L3Out Node Profile in Cisco APIC.
+		// L3Out node profile in Cisco APIC.
 		NodeProfile *string `json:"NodeProfile,omitempty"`
-		// Connection status between SDA and ACI. * `NotConnected` - Connection Status NotConnected. * `Connected` - Connection Status Connected.
+		// Connection status between SDA and ACI. * `NotConnected` - Status of the connection:Not connected. * `Connected` - Status of the connection:Connected.
 		Status *string `json:"Status,omitempty"`
-		// Transit id for given border node.
+		// Transit Id for the given border node.
 		Transit *string `json:"Transit,omitempty"`
-		// Virtual Network of this connection.
+		// Virtual Network for this connection.
 		VirtualNetwork *string `json:"VirtualNetwork,omitempty"`
-		// Contains both VN and EPG of this connection.
+		// VN and EPG information for this connection.
 		VnEpg *string `json:"VnEpg,omitempty"`
-		// APIC Tenant VRF from APIC.
+		// Tenant VRF in Cisco APIC.
 		Vrf                  *string                                      `json:"Vrf,omitempty"`
 		ApicTarget           NullableAssetTargetRelationship              `json:"ApicTarget,omitempty"`
 		CatalystCenterTarget NullableAssetTargetRelationship              `json:"CatalystCenterTarget,omitempty"`

@@ -1259,7 +1259,7 @@ func resourceWorkflowServiceItemInstanceCreate(c context.Context, d *schema.Reso
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1271,7 +1271,7 @@ func resourceWorkflowServiceItemInstanceCreate(c context.Context, d *schema.Reso
 
 	o.SetObjectType("workflow.ServiceItemInstance")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1314,7 +1314,7 @@ func resourceWorkflowServiceItemInstanceCreate(c context.Context, d *schema.Reso
 		}
 	}
 
-	if v, ok := d.GetOk("service_item_definition"); ok {
+	if v, ok := d.GetOkExists("service_item_definition"); ok {
 		p := make([]models.WorkflowServiceItemDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

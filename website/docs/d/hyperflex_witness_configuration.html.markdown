@@ -3,16 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_witness_configuration"
 description: |-
-        The witness configuration of the HyperFlex cluster.
-        Cisco HyperFlex Edge deployments use a witness in their HA arbitration implementations to continue functioning in case of single node failure or network partitions between nodes. HyperFlex administrators have the option to use two different types of witnesses, the Cisco Intersight Invisible Cloud Witness or a local witness deployed within the customers environment.
-        The type of witness and its corresponding configuration is configured within the HX Connect Device Connector UI component and configuration is stored locally on the device. Changes made locally in the device are reflected in Intersight on this object.
+        The WitnessConfiguration object pertains to the witness configuration of the HyperFlex cluster, especially in Cisco HyperFlex Edge deployments. It ensures high availability through witness-based arbitration mechanisms.
+        #### Purpose
+        WitnessConfiguration is critical in maintaining the operational integrity of HyperFlex Edge deployments by providing arbitration capabilities in case of node failures or network partitions. It ensures the cluster continues to function effectively under adverse conditions.
+        #### Key Concepts
+        - **High Availability:** Supports HA arbitration implementations to maintain cluster operations during single-node failures or network issues.
+        - **Witness Types:** Offers flexibility with the option to use the Cisco Intersight Invisible Cloud Witness or a locally deployed witness.
+        - **Configuration Management:** Allows administrators to configure and manage witness settings, ensuring proper cluster arbitration and failover mechanisms.
+        - **Integration:** Seamlessly integrates with the HyperFlex cluster's infrastructure, providing essential support for high availability and resilience.
 
 ---
 
 # Data Source: intersight_hyperflex_witness_configuration
-The witness configuration of the HyperFlex cluster.
-Cisco HyperFlex Edge deployments use a witness in their HA arbitration implementations to continue functioning in case of single node failure or network partitions between nodes. HyperFlex administrators have the option to use two different types of witnesses, the Cisco Intersight Invisible Cloud Witness or a local witness deployed within the customers environment.
-The type of witness and its corresponding configuration is configured within the HX Connect Device Connector UI component and configuration is stored locally on the device. Changes made locally in the device are reflected in Intersight on this object.
+The WitnessConfiguration object pertains to the witness configuration of the HyperFlex cluster, especially in Cisco HyperFlex Edge deployments. It ensures high availability through witness-based arbitration mechanisms.
+#### Purpose
+WitnessConfiguration is critical in maintaining the operational integrity of HyperFlex Edge deployments by providing arbitration capabilities in case of node failures or network partitions. It ensures the cluster continues to function effectively under adverse conditions.
+#### Key Concepts
+- **High Availability:** Supports HA arbitration implementations to maintain cluster operations during single-node failures or network issues.
+- **Witness Types:** Offers flexibility with the option to use the Cisco Intersight Invisible Cloud Witness or a locally deployed witness.
+- **Configuration Management:** Allows administrators to configure and manage witness settings, ensuring proper cluster arbitration and failover mechanisms.
+- **Integration:** Seamlessly integrates with the HyperFlex cluster's infrastructure, providing essential support for high availability and resilience.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

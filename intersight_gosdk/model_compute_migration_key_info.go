@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -36,8 +36,10 @@ type ComputeMigrationKeyInfo struct {
 	// Indicates whether the value of the 'keyValue' property has been set.
 	IsKeyValueSet *bool `json:"IsKeyValueSet,omitempty"`
 	// Identifies the LUN ID associated with the migration key.
-	LunId                *int64   `json:"LunId,omitempty"`
-	TargetAddresses      []string `json:"TargetAddresses,omitempty"`
+	LunId           *int64   `json:"LunId,omitempty"`
+	TargetAddresses []string `json:"TargetAddresses,omitempty"`
+	// Serial Id of the associated TPM module in the server.
+	TpmSerial            *string `json:"TpmSerial,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -318,6 +320,38 @@ func (o *ComputeMigrationKeyInfo) SetTargetAddresses(v []string) {
 	o.TargetAddresses = v
 }
 
+// GetTpmSerial returns the TpmSerial field value if set, zero value otherwise.
+func (o *ComputeMigrationKeyInfo) GetTpmSerial() string {
+	if o == nil || IsNil(o.TpmSerial) {
+		var ret string
+		return ret
+	}
+	return *o.TpmSerial
+}
+
+// GetTpmSerialOk returns a tuple with the TpmSerial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeMigrationKeyInfo) GetTpmSerialOk() (*string, bool) {
+	if o == nil || IsNil(o.TpmSerial) {
+		return nil, false
+	}
+	return o.TpmSerial, true
+}
+
+// HasTpmSerial returns a boolean if a field has been set.
+func (o *ComputeMigrationKeyInfo) HasTpmSerial() bool {
+	if o != nil && !IsNil(o.TpmSerial) {
+		return true
+	}
+
+	return false
+}
+
+// SetTpmSerial gets a reference to the given string and assigns it to the TpmSerial field.
+func (o *ComputeMigrationKeyInfo) SetTpmSerial(v string) {
+	o.TpmSerial = &v
+}
+
 func (o ComputeMigrationKeyInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -361,6 +395,9 @@ func (o ComputeMigrationKeyInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if o.TargetAddresses != nil {
 		toSerialize["TargetAddresses"] = o.TargetAddresses
+	}
+	if !IsNil(o.TpmSerial) {
+		toSerialize["TpmSerial"] = o.TpmSerial
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -427,6 +464,8 @@ func (o *ComputeMigrationKeyInfo) UnmarshalJSON(data []byte) (err error) {
 		// Identifies the LUN ID associated with the migration key.
 		LunId           *int64   `json:"LunId,omitempty"`
 		TargetAddresses []string `json:"TargetAddresses,omitempty"`
+		// Serial Id of the associated TPM module in the server.
+		TpmSerial *string `json:"TpmSerial,omitempty"`
 	}
 
 	varComputeMigrationKeyInfoWithoutEmbeddedStruct := ComputeMigrationKeyInfoWithoutEmbeddedStruct{}
@@ -442,6 +481,7 @@ func (o *ComputeMigrationKeyInfo) UnmarshalJSON(data []byte) (err error) {
 		varComputeMigrationKeyInfo.IsKeyValueSet = varComputeMigrationKeyInfoWithoutEmbeddedStruct.IsKeyValueSet
 		varComputeMigrationKeyInfo.LunId = varComputeMigrationKeyInfoWithoutEmbeddedStruct.LunId
 		varComputeMigrationKeyInfo.TargetAddresses = varComputeMigrationKeyInfoWithoutEmbeddedStruct.TargetAddresses
+		varComputeMigrationKeyInfo.TpmSerial = varComputeMigrationKeyInfoWithoutEmbeddedStruct.TpmSerial
 		*o = ComputeMigrationKeyInfo(varComputeMigrationKeyInfo)
 	} else {
 		return err
@@ -467,6 +507,7 @@ func (o *ComputeMigrationKeyInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "IsKeyValueSet")
 		delete(additionalProperties, "LunId")
 		delete(additionalProperties, "TargetAddresses")
+		delete(additionalProperties, "TpmSerial")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

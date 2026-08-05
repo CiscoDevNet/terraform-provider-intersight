@@ -23,6 +23,18 @@ func Test_intersight_AssetApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test AssetApiService CreateAssetClaimToken", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.AssetApi.CreateAssetClaimToken(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AssetApiService CreateAssetDeviceClaim", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -83,6 +95,19 @@ func Test_intersight_AssetApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test AssetApiService DeleteAssetClaimToken", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.AssetApi.DeleteAssetClaimToken(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AssetApiService DeleteAssetDeviceClaim", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -118,6 +143,32 @@ func Test_intersight_AssetApiService(t *testing.T) {
 		httpRes, err := apiClient.AssetApi.DeleteAssetTarget(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AssetApiService GetAssetClaimTokenByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.AssetApi.GetAssetClaimTokenByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AssetApiService GetAssetClaimTokenList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.AssetApi.GetAssetClaimTokenList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

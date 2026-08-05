@@ -3,12 +3,28 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_sub_request_obj"
 description: |-
-        The sub request object is created for every subrequest in the incoming request.
+        The SubRequestObj object represents an individual API request processed as part of a larger bulk operation. It serves as an internal record for every sub-request included in an incoming bulk request.
+        #### Purpose
+        The SubRequestObj is designed to provide granular tracking and status reporting for each specific operation (Create, Update, or Delete) within a bulk request. It allows the system to manage, monitor, and correlate the execution status of multiple sub-requests, ensuring that each part of a bulk operation is accounted for and processed correctly.
+        #### Key Concepts
+        - **Request Correlation:** Uses a unique request number to correlate individual sub-requests with their corresponding bulk request and response.
+        - **Execution Tracking:** Monitors the lifecycle of each sub-request, including execution start/completion times and current processing status.
+        - **Presence Detection:** Includes flags to detect if an object is already present or if a system-defined object has been triggered, supporting idempotent operations.
+        - **Result Management:** Stores the outcome of the individual API action, including success or failure details, within the `result` property.
+        - **Target Context:** Maintains the target MOID and request body, ensuring that the operation is applied to the correct resource with the intended data payload.
 
 ---
 
 # Data Source: intersight_bulk_sub_request_obj
-The sub request object is created for every subrequest in the incoming request.
+The SubRequestObj object represents an individual API request processed as part of a larger bulk operation. It serves as an internal record for every sub-request included in an incoming bulk request.
+#### Purpose
+The SubRequestObj is designed to provide granular tracking and status reporting for each specific operation (Create, Update, or Delete) within a bulk request. It allows the system to manage, monitor, and correlate the execution status of multiple sub-requests, ensuring that each part of a bulk operation is accounted for and processed correctly.
+#### Key Concepts
+- **Request Correlation:** Uses a unique request number to correlate individual sub-requests with their corresponding bulk request and response.
+- **Execution Tracking:** Monitors the lifecycle of each sub-request, including execution start/completion times and current processing status.
+- **Presence Detection:** Includes flags to detect if an object is already present or if a system-defined object has been triggered, supporting idempotent operations.
+- **Result Management:** Stores the outcome of the individual API action, including success or failure details, within the `result` property.
+- **Target Context:** Maintains the target MOID and request body, ensuring that the operation is applied to the correct resource with the intended data payload.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

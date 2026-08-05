@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.CustomDataTypeProperties"]
 **Cloneable** | Pointer to **bool** | When set to false custom data type is not cloneable. It is set to true only if data type is not internal and it is not using any internal custom data type. | [optional] [readonly] [default to true]
 **ExternalMeta** | Pointer to **bool** | When set to false the custom data type is owned by the system and used for internal services. Such custom data type cannot be directly used by external entities. | [optional] [readonly] [default to false]
+**SupportStatus** | Pointer to **string** | Supported status of the definition. * &#x60;Supported&#x60; - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * &#x60;Beta&#x60; - The definition is a Beta version and this version can under go changes until the version is marked supported. * &#x60;Deprecated&#x60; - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. | [optional] [default to "Supported"]
 
 ## Methods
 
@@ -117,6 +118,31 @@ SetExternalMeta sets ExternalMeta field to given value.
 `func (o *WorkflowCustomDataTypeProperties) HasExternalMeta() bool`
 
 HasExternalMeta returns a boolean if a field has been set.
+
+### GetSupportStatus
+
+`func (o *WorkflowCustomDataTypeProperties) GetSupportStatus() string`
+
+GetSupportStatus returns the SupportStatus field if non-nil, zero value otherwise.
+
+### GetSupportStatusOk
+
+`func (o *WorkflowCustomDataTypeProperties) GetSupportStatusOk() (*string, bool)`
+
+GetSupportStatusOk returns a tuple with the SupportStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportStatus
+
+`func (o *WorkflowCustomDataTypeProperties) SetSupportStatus(v string)`
+
+SetSupportStatus sets SupportStatus field to given value.
+
+### HasSupportStatus
+
+`func (o *WorkflowCustomDataTypeProperties) HasSupportStatus() bool`
+
+HasSupportStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

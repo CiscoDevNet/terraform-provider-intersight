@@ -3,12 +3,26 @@ subcategory: "iwotenant"
 layout: "intersight"
 page_title: "Intersight: intersight_iwotenant_tenant_status"
 description: |-
-        When an Intersight customer activates IWO license, kubernetes resources need to configured, vault policies need to be setup, etc. to run IWO services as pods. The provisioning of these resources takes a few minutes. Any feature dependent on the IWO APIs will fail till these services are healthy. TenantStatus MO provides status and health of the tenants, so user can be notified when tenant creation is in progress or has failed.
+        TenantStatuses provide a customer-visible status and health indicator for IWO tenant provisioning. Because IWO features depend on the tenant namespace becoming healthy, this object exposes whether tenant creation is still in progress, completed, or has failed, with a reference timestamp used to detect timeouts during upgrades/reconfiguration.
+        #### Purpose
+        Expose the operational readiness of an IWO tenant to users and dependent features, enabling UI/automation to inform customers when the tenant is not yet usable or requires attention.
+        #### Key Concepts
+        - **Provisioning lifecycle state:** Reports deployment progress using a simplified status model (NotStarted/InProgress/Completed/Failed).
+        - **Timeout/reference tracking:** Uses `referenceTime` during upgrade/reconfiguration to detect when an operation exceeds expected time bounds.
+        - **Tenant identity anchor:** Uses `iwoId` as the key identifier aligned to the tenant namespace/account context.
+        - **Correlated relationships:** Links to both the account and the underlying Tenant object for navigation and lifecycle coupling.
 
 ---
 
 # Data Source: intersight_iwotenant_tenant_status
-When an Intersight customer activates IWO license, kubernetes resources need to configured, vault policies need to be setup, etc. to run IWO services as pods. The provisioning of these resources takes a few minutes. Any feature dependent on the IWO APIs will fail till these services are healthy. TenantStatus MO provides status and health of the tenants, so user can be notified when tenant creation is in progress or has failed.
+TenantStatuses provide a customer-visible status and health indicator for IWO tenant provisioning. Because IWO features depend on the tenant namespace becoming healthy, this object exposes whether tenant creation is still in progress, completed, or has failed, with a reference timestamp used to detect timeouts during upgrades/reconfiguration.
+#### Purpose
+Expose the operational readiness of an IWO tenant to users and dependent features, enabling UI/automation to inform customers when the tenant is not yet usable or requires attention.
+#### Key Concepts
+- **Provisioning lifecycle state:** Reports deployment progress using a simplified status model (NotStarted/InProgress/Completed/Failed).
+- **Timeout/reference tracking:** Uses `referenceTime` during upgrade/reconfiguration to detect when an operation exceeds expected time bounds.
+- **Tenant identity anchor:** Uses `iwoId` as the key identifier aligned to the tenant namespace/account context.
+- **Correlated relationships:** Links to both the account and the underlying Tenant object for navigation and lifecycle coupling.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

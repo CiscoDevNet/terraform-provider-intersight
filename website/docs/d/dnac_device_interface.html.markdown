@@ -3,12 +3,24 @@ subcategory: "dnac"
 layout: "intersight"
 page_title: "Intersight: intersight_dnac_device_interface"
 description: |-
-        The device interface serves as the gateway between a network and external entities.
+        The DeviceInterface object represents the network device interfaces, offering a structured approach to managing device connections and configurations.
+        #### Purpose
+        A DeviceInterface object provides a detailed framework for managing the interfaces of network devices, supporting efficient communication and connectivity.
+        #### Key Concepts
+        - **Interface Management:** Allows for detailed configuration and tracking of device interfaces, enhancing network control.
+        - **Security and Access:** Ensures secure interaction through privilege sets and controlled access mechanisms.
+        - **Operational Integration:** fInterfaces seamlessly with network devices, promoting robust and efficient connectivity.
 
 ---
 
 # Data Source: intersight_dnac_device_interface
-The device interface serves as the gateway between a network and external entities.
+The DeviceInterface object represents the network device interfaces, offering a structured approach to managing device connections and configurations.
+#### Purpose
+A DeviceInterface object provides a detailed framework for managing the interfaces of network devices, supporting efficient communication and connectivity.
+#### Key Concepts
+- **Interface Management:** Allows for detailed configuration and tracking of device interfaces, enhancing network control.
+- **Security and Access:** Ensures secure interaction through privilege sets and controlled access mechanisms.
+- **Operational Integration:** fInterfaces seamlessly with network devices, promoting robust and efficient connectivity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

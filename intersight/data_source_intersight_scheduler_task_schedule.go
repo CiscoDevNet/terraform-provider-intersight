@@ -502,6 +502,11 @@ func getSchedulerTaskScheduleSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"submitted_by": {
+			Description: "Email address of the user who created the schedule.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"suspend_end_time": {
 			Description: "Suspend a task until an end date. this applies only to the action suspendTill.",
 			Type:        schema.TypeString,
@@ -1259,6 +1264,11 @@ func dataSourceSchedulerTaskScheduleRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("submitted_by"); ok {
+		x := (v.(string))
+		o.SetSubmittedBy(x)
+	}
+
 	if v, ok := d.GetOk("suspend_end_time"); ok {
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
@@ -1623,6 +1633,7 @@ func dataSourceSchedulerTaskScheduleRead(c context.Context, d *schema.ResourceDa
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["status"] = flattenMapSchedulerTaskScheduleStatus(s.GetStatus(), d)
+				temp["submitted_by"] = (s.GetSubmittedBy())
 
 				temp["suspend_end_time"] = (s.GetSuspendEndTime()).String()
 

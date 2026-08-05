@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LdapProvider"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LdapProvider"]
 **Port** | Pointer to **int64** | LDAP Server Port for connection establishment. | [optional] [default to 389]
-**Server** | Pointer to **string** | LDAP Server Address, can be IP address or hostname. | [optional] 
+**Server** | Pointer to **string** | LDAP Server Address, such as an IP address or hostname. | [optional] 
 **Vendor** | Pointer to **string** | LDAP server vendor type used for authentication. * &#x60;OpenLDAP&#x60; - Open source LDAP server for remote authentication. * &#x60;MSAD&#x60; - Microsoft active directory for remote authentication. | [optional] [default to "OpenLDAP"]
 **LdapPolicy** | Pointer to [**NullableIamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
 

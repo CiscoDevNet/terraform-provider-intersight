@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -60,6 +60,8 @@ GetDnacDeviceByMoid Read a 'dnac.Device' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacDeviceByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacDeviceByMoid(ctx context.Context, moid string) ApiGetDnacDeviceByMoidRequest {
 	return ApiGetDnacDeviceByMoidRequest{
@@ -72,6 +74,8 @@ func (a *DnacApiService) GetDnacDeviceByMoid(ctx context.Context, moid string) A
 // Execute executes the request
 //
 //	@return DnacDevice
+//
+// Deprecated
 func (a *DnacApiService) GetDnacDeviceByMoidExecute(r ApiGetDnacDeviceByMoidRequest) (*DnacDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -247,6 +251,8 @@ GetDnacDeviceInterfaceByMoid Read a 'dnac.DeviceInterface' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacDeviceInterfaceByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacDeviceInterfaceByMoid(ctx context.Context, moid string) ApiGetDnacDeviceInterfaceByMoidRequest {
 	return ApiGetDnacDeviceInterfaceByMoidRequest{
@@ -259,6 +265,8 @@ func (a *DnacApiService) GetDnacDeviceInterfaceByMoid(ctx context.Context, moid 
 // Execute executes the request
 //
 //	@return DnacDeviceInterface
+//
+// Deprecated
 func (a *DnacApiService) GetDnacDeviceInterfaceByMoidExecute(r ApiGetDnacDeviceInterfaceByMoidRequest) (*DnacDeviceInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -488,6 +496,8 @@ GetDnacDeviceInterfaceList Read a 'dnac.DeviceInterface' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacDeviceInterfaceListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacDeviceInterfaceList(ctx context.Context) ApiGetDnacDeviceInterfaceListRequest {
 	return ApiGetDnacDeviceInterfaceListRequest{
@@ -499,6 +509,8 @@ func (a *DnacApiService) GetDnacDeviceInterfaceList(ctx context.Context) ApiGetD
 // Execute executes the request
 //
 //	@return DnacDeviceInterfaceResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacDeviceInterfaceListExecute(r ApiGetDnacDeviceInterfaceListRequest) (*DnacDeviceInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -763,6 +775,8 @@ GetDnacDeviceList Read a 'dnac.Device' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacDeviceListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacDeviceList(ctx context.Context) ApiGetDnacDeviceListRequest {
 	return ApiGetDnacDeviceListRequest{
@@ -774,6 +788,8 @@ func (a *DnacApiService) GetDnacDeviceList(ctx context.Context) ApiGetDnacDevice
 // Execute executes the request
 //
 //	@return DnacDeviceResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacDeviceListExecute(r ApiGetDnacDeviceListRequest) (*DnacDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -984,6 +1000,8 @@ GetDnacExternalBorderNodeByMoid Read a 'dnac.ExternalBorderNode' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacExternalBorderNodeByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacExternalBorderNodeByMoid(ctx context.Context, moid string) ApiGetDnacExternalBorderNodeByMoidRequest {
 	return ApiGetDnacExternalBorderNodeByMoidRequest{
@@ -996,6 +1014,8 @@ func (a *DnacApiService) GetDnacExternalBorderNodeByMoid(ctx context.Context, mo
 // Execute executes the request
 //
 //	@return DnacExternalBorderNode
+//
+// Deprecated
 func (a *DnacApiService) GetDnacExternalBorderNodeByMoidExecute(r ApiGetDnacExternalBorderNodeByMoidRequest) (*DnacExternalBorderNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1171,6 +1191,8 @@ GetDnacExternalBorderNodeInterfaceByMoid Read a 'dnac.ExternalBorderNodeInterfac
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacExternalBorderNodeInterfaceByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacExternalBorderNodeInterfaceByMoid(ctx context.Context, moid string) ApiGetDnacExternalBorderNodeInterfaceByMoidRequest {
 	return ApiGetDnacExternalBorderNodeInterfaceByMoidRequest{
@@ -1183,6 +1205,8 @@ func (a *DnacApiService) GetDnacExternalBorderNodeInterfaceByMoid(ctx context.Co
 // Execute executes the request
 //
 //	@return DnacExternalBorderNodeInterface
+//
+// Deprecated
 func (a *DnacApiService) GetDnacExternalBorderNodeInterfaceByMoidExecute(r ApiGetDnacExternalBorderNodeInterfaceByMoidRequest) (*DnacExternalBorderNodeInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1412,6 +1436,8 @@ GetDnacExternalBorderNodeInterfaceList Read a 'dnac.ExternalBorderNodeInterface'
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacExternalBorderNodeInterfaceListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacExternalBorderNodeInterfaceList(ctx context.Context) ApiGetDnacExternalBorderNodeInterfaceListRequest {
 	return ApiGetDnacExternalBorderNodeInterfaceListRequest{
@@ -1423,6 +1449,8 @@ func (a *DnacApiService) GetDnacExternalBorderNodeInterfaceList(ctx context.Cont
 // Execute executes the request
 //
 //	@return DnacExternalBorderNodeInterfaceResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacExternalBorderNodeInterfaceListExecute(r ApiGetDnacExternalBorderNodeInterfaceListRequest) (*DnacExternalBorderNodeInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1687,6 +1715,8 @@ GetDnacExternalBorderNodeList Read a 'dnac.ExternalBorderNode' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacExternalBorderNodeListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacExternalBorderNodeList(ctx context.Context) ApiGetDnacExternalBorderNodeListRequest {
 	return ApiGetDnacExternalBorderNodeListRequest{
@@ -1698,6 +1728,8 @@ func (a *DnacApiService) GetDnacExternalBorderNodeList(ctx context.Context) ApiG
 // Execute executes the request
 //
 //	@return DnacExternalBorderNodeResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacExternalBorderNodeListExecute(r ApiGetDnacExternalBorderNodeListRequest) (*DnacExternalBorderNodeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1908,6 +1940,8 @@ GetDnacFabricSiteByMoid Read a 'dnac.FabricSite' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacFabricSiteByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacFabricSiteByMoid(ctx context.Context, moid string) ApiGetDnacFabricSiteByMoidRequest {
 	return ApiGetDnacFabricSiteByMoidRequest{
@@ -1920,6 +1954,8 @@ func (a *DnacApiService) GetDnacFabricSiteByMoid(ctx context.Context, moid strin
 // Execute executes the request
 //
 //	@return DnacFabricSite
+//
+// Deprecated
 func (a *DnacApiService) GetDnacFabricSiteByMoidExecute(r ApiGetDnacFabricSiteByMoidRequest) (*DnacFabricSite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2149,6 +2185,8 @@ GetDnacFabricSiteList Read a 'dnac.FabricSite' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacFabricSiteListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacFabricSiteList(ctx context.Context) ApiGetDnacFabricSiteListRequest {
 	return ApiGetDnacFabricSiteListRequest{
@@ -2160,6 +2198,8 @@ func (a *DnacApiService) GetDnacFabricSiteList(ctx context.Context) ApiGetDnacFa
 // Execute executes the request
 //
 //	@return DnacFabricSiteResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacFabricSiteListExecute(r ApiGetDnacFabricSiteListRequest) (*DnacFabricSiteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2370,6 +2410,8 @@ GetDnacSiteByMoid Read a 'dnac.Site' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacSiteByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacSiteByMoid(ctx context.Context, moid string) ApiGetDnacSiteByMoidRequest {
 	return ApiGetDnacSiteByMoidRequest{
@@ -2382,6 +2424,8 @@ func (a *DnacApiService) GetDnacSiteByMoid(ctx context.Context, moid string) Api
 // Execute executes the request
 //
 //	@return DnacSite
+//
+// Deprecated
 func (a *DnacApiService) GetDnacSiteByMoidExecute(r ApiGetDnacSiteByMoidRequest) (*DnacSite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2557,6 +2601,8 @@ GetDnacSiteIpPoolByMoid Read a 'dnac.SiteIpPool' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacSiteIpPoolByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacSiteIpPoolByMoid(ctx context.Context, moid string) ApiGetDnacSiteIpPoolByMoidRequest {
 	return ApiGetDnacSiteIpPoolByMoidRequest{
@@ -2569,6 +2615,8 @@ func (a *DnacApiService) GetDnacSiteIpPoolByMoid(ctx context.Context, moid strin
 // Execute executes the request
 //
 //	@return DnacSiteIpPool
+//
+// Deprecated
 func (a *DnacApiService) GetDnacSiteIpPoolByMoidExecute(r ApiGetDnacSiteIpPoolByMoidRequest) (*DnacSiteIpPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2798,6 +2846,8 @@ GetDnacSiteIpPoolList Read a 'dnac.SiteIpPool' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacSiteIpPoolListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacSiteIpPoolList(ctx context.Context) ApiGetDnacSiteIpPoolListRequest {
 	return ApiGetDnacSiteIpPoolListRequest{
@@ -2809,6 +2859,8 @@ func (a *DnacApiService) GetDnacSiteIpPoolList(ctx context.Context) ApiGetDnacSi
 // Execute executes the request
 //
 //	@return DnacSiteIpPoolResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacSiteIpPoolListExecute(r ApiGetDnacSiteIpPoolListRequest) (*DnacSiteIpPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3073,6 +3125,8 @@ GetDnacSiteList Read a 'dnac.Site' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacSiteListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacSiteList(ctx context.Context) ApiGetDnacSiteListRequest {
 	return ApiGetDnacSiteListRequest{
@@ -3084,6 +3138,8 @@ func (a *DnacApiService) GetDnacSiteList(ctx context.Context) ApiGetDnacSiteList
 // Execute executes the request
 //
 //	@return DnacSiteResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacSiteListExecute(r ApiGetDnacSiteListRequest) (*DnacSiteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3294,6 +3350,8 @@ GetDnacTemplateByMoid Read a 'dnac.Template' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacTemplateByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacTemplateByMoid(ctx context.Context, moid string) ApiGetDnacTemplateByMoidRequest {
 	return ApiGetDnacTemplateByMoidRequest{
@@ -3306,6 +3364,8 @@ func (a *DnacApiService) GetDnacTemplateByMoid(ctx context.Context, moid string)
 // Execute executes the request
 //
 //	@return DnacTemplate
+//
+// Deprecated
 func (a *DnacApiService) GetDnacTemplateByMoidExecute(r ApiGetDnacTemplateByMoidRequest) (*DnacTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3535,6 +3595,8 @@ GetDnacTemplateList Read a 'dnac.Template' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacTemplateListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacTemplateList(ctx context.Context) ApiGetDnacTemplateListRequest {
 	return ApiGetDnacTemplateListRequest{
@@ -3546,6 +3608,8 @@ func (a *DnacApiService) GetDnacTemplateList(ctx context.Context) ApiGetDnacTemp
 // Execute executes the request
 //
 //	@return DnacTemplateResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacTemplateListExecute(r ApiGetDnacTemplateListRequest) (*DnacTemplateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3756,6 +3820,8 @@ GetDnacTransitByMoid Read a 'dnac.Transit' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacTransitByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacTransitByMoid(ctx context.Context, moid string) ApiGetDnacTransitByMoidRequest {
 	return ApiGetDnacTransitByMoidRequest{
@@ -3768,6 +3834,8 @@ func (a *DnacApiService) GetDnacTransitByMoid(ctx context.Context, moid string) 
 // Execute executes the request
 //
 //	@return DnacTransit
+//
+// Deprecated
 func (a *DnacApiService) GetDnacTransitByMoidExecute(r ApiGetDnacTransitByMoidRequest) (*DnacTransit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3997,6 +4065,8 @@ GetDnacTransitList Read a 'dnac.Transit' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacTransitListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacTransitList(ctx context.Context) ApiGetDnacTransitListRequest {
 	return ApiGetDnacTransitListRequest{
@@ -4008,6 +4078,8 @@ func (a *DnacApiService) GetDnacTransitList(ctx context.Context) ApiGetDnacTrans
 // Execute executes the request
 //
 //	@return DnacTransitResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacTransitListExecute(r ApiGetDnacTransitListRequest) (*DnacTransitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4218,6 +4290,8 @@ GetDnacVirtualNetworkFabricSiteByMoid Read a 'dnac.VirtualNetworkFabricSite' res
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetDnacVirtualNetworkFabricSiteByMoidRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacVirtualNetworkFabricSiteByMoid(ctx context.Context, moid string) ApiGetDnacVirtualNetworkFabricSiteByMoidRequest {
 	return ApiGetDnacVirtualNetworkFabricSiteByMoidRequest{
@@ -4230,6 +4304,8 @@ func (a *DnacApiService) GetDnacVirtualNetworkFabricSiteByMoid(ctx context.Conte
 // Execute executes the request
 //
 //	@return DnacVirtualNetworkFabricSite
+//
+// Deprecated
 func (a *DnacApiService) GetDnacVirtualNetworkFabricSiteByMoidExecute(r ApiGetDnacVirtualNetworkFabricSiteByMoidRequest) (*DnacVirtualNetworkFabricSite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4459,6 +4535,8 @@ GetDnacVirtualNetworkFabricSiteList Read a 'dnac.VirtualNetworkFabricSite' resou
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDnacVirtualNetworkFabricSiteListRequest
+
+Deprecated
 */
 func (a *DnacApiService) GetDnacVirtualNetworkFabricSiteList(ctx context.Context) ApiGetDnacVirtualNetworkFabricSiteListRequest {
 	return ApiGetDnacVirtualNetworkFabricSiteListRequest{
@@ -4470,6 +4548,8 @@ func (a *DnacApiService) GetDnacVirtualNetworkFabricSiteList(ctx context.Context
 // Execute executes the request
 //
 //	@return DnacVirtualNetworkFabricSiteResponse
+//
+// Deprecated
 func (a *DnacApiService) GetDnacVirtualNetworkFabricSiteListExecute(r ApiGetDnacVirtualNetworkFabricSiteListRequest) (*DnacVirtualNetworkFabricSiteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

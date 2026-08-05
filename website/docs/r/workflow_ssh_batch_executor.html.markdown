@@ -3,20 +3,24 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_ssh_batch_executor"
 description: |-
-        Intersight allows generic tasks to be created by taking the executor request
-        body and a response parser specification in the form of content.Grammar object.
-        SSH Batch associates the list of SSH requests to be executed as part of single
-        task execution. Each SSH request takes the command to execute and a response parser
-        specification based off text to extract fields of interest.
+        The SshBatchExecutor object is a core component of Intersight’s workflow system, specialized in handling the batch execution of SSH commands. It is designed to execute a sequence of SSH requests as part of a single task, improving automation and efficiency in remote command execution.
+        #### Purpose
+        The SshBatchExecutor simplifies the execution of SSH commands by grouping them into batches, enabling streamlined and secure operations across remote systems.
+        #### Key Concepts
+        - **Batch Execution:** Supports executing multiple SSH commands in a single batch to optimize workflow efficiency.
+        - **SSH Session:** Establishes an SSH session from an Intersight-connected endpoint to a remote server, allowing multiple SSH operations to be executed sequentially over the same session.
+        - **File Transfer:** Supports transferring files from an Intersight-connected device to a remote server.
 
 ---
 
 # Resource: intersight_workflow_ssh_batch_executor
-Intersight allows generic tasks to be created by taking the executor request
-body and a response parser specification in the form of content.Grammar object.
-SSH Batch associates the list of SSH requests to be executed as part of single
-task execution. Each SSH request takes the command to execute and a response parser
-specification based off text to extract fields of interest.
+The SshBatchExecutor object is a core component of Intersight’s workflow system, specialized in handling the batch execution of SSH commands. It is designed to execute a sequence of SSH requests as part of a single task, improving automation and efficiency in remote command execution.
+#### Purpose
+The SshBatchExecutor simplifies the execution of SSH commands by grouping them into batches, enabling streamlined and secure operations across remote systems.
+#### Key Concepts
+- **Batch Execution:** Supports executing multiple SSH commands in a single batch to optimize workflow efficiency.
+- **SSH Session:** Establishes an SSH session from an Intersight-connected endpoint to a remote server, allowing multiple SSH operations to be executed sequentially over the same session.
+- **File Transfer:** Supports transferring files from an Intersight-connected device to a remote server.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

@@ -71,7 +71,7 @@ func getFmcDeviceHaPairSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"device_id": {
-			Description: "Unique Identifier of the Device.",
+			Description: "Unique identifier for the device.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -81,7 +81,7 @@ func getFmcDeviceHaPairSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"domain_id": {
-			Description: "Unique Identifier of the Domain.",
+			Description: "Unique identifier for the domain.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -96,7 +96,7 @@ func getFmcDeviceHaPairSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "A user provided name of the Device.",
+			Description: "User assigned name for the device.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

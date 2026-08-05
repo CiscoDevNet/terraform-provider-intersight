@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_snapshot"
 description: |-
-        A snapshot entity in Hitachi storage array.
+        The HitachiSnapshot object represents a snapshot entity within the Hitachi storage array, providing functionalities for managing snapshot data and operations.
+        #### Purpose
+        HitachiSnapshot is designed to handle snapshot operations, facilitating the creation, management, and monitoring of snapshot groups and volumes.
+        #### Key Concepts
+        - **Snapshot Management:** Defines snapshot group names, LDEV numbers, and status information for snapshot operations.
+        - **Privilege Sets:** Ensures secure access and management of snapshot entities with defined privilege sets.
+        - **Licensing:** Supports operations under specified entitlements, complying with licensing requirements.
 
 ---
 
 # Data Source: intersight_storage_hitachi_snapshot
-A snapshot entity in Hitachi storage array.
+The HitachiSnapshot object represents a snapshot entity within the Hitachi storage array, providing functionalities for managing snapshot data and operations.
+#### Purpose
+HitachiSnapshot is designed to handle snapshot operations, facilitating the creation, management, and monitoring of snapshot groups and volumes.
+#### Key Concepts
+- **Snapshot Management:** Defines snapshot group names, LDEV numbers, and status information for snapshot operations.
+- **Privilege Sets:** Ensures secure access and management of snapshot entities with defined privilege sets.
+- **Licensing:** Supports operations under specified entitlements, complying with licensing requirements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

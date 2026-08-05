@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_drive_group"
 description: |-
-        A reusable RAID drive group configuration that specifies a pool of drives and a set of virtual drives that are to be created using this pool of drives.
+        The DriveGroup object specifies a pool of drives and a set of virtual drives to be created using this pool, enabling flexible RAID configurations.
+        #### Purpose
+        The DriveGroup object provides detailed configuration for RAID drive groups, supporting both manual and automatic drive selection. It optimizes drive utilization by organizing drives into efficient RAID setups and offers flexible configuration options through user-defined drive selections.
+        #### Key Concepts
+        - **RAID Level Support:** Configures RAID levels to match storage requirements and optimize data protection.
+        - **Security Features:** Includes options for enabling drive security through manual or remote key management.
 
 ---
 
 # Data Source: intersight_storage_drive_group
-A reusable RAID drive group configuration that specifies a pool of drives and a set of virtual drives that are to be created using this pool of drives.
+The DriveGroup object specifies a pool of drives and a set of virtual drives to be created using this pool, enabling flexible RAID configurations.
+#### Purpose
+The DriveGroup object provides detailed configuration for RAID drive groups, supporting both manual and automatic drive selection. It optimizes drive utilization by organizing drives into efficient RAID setups and offers flexible configuration options through user-defined drive selections.
+#### Key Concepts
+- **RAID Level Support:** Configures RAID levels to match storage requirements and optimize data protection.
+- **Security Features:** Includes options for enabling drive security through manual or remote key management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

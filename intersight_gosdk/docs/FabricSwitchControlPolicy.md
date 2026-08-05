@@ -12,9 +12,11 @@ Name | Type | Description | Notes
 **FabricPcVhbaReset** | Pointer to **string** | When enabled, a Registered State Change Notification (RSCN) is sent to the VIC adapter when any member port within the fabric port-channel goes down and vHBA would reset to restore the connection immediately. When disabled (default), vHBA reset is done only when all the members of a fabric port-channel are down. Fabric port-channel vHBA reset is not supported on Unified Edge and cannot be enabled. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
 **FcSwitchingMode** | Pointer to **string** | Enable or Disable FC End Host Switching Mode. FC is not supported on Unified Edge, so this setting cannot be configured and is ignored. * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [default to "end-host"]
 **IsAesPrimaryKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;aesPrimaryKey&#39; property has been set. | [optional] [readonly] [default to false]
+**LldpSettings** | Pointer to [**NullableFabricLldpGlobalSettings**](FabricLldpGlobalSettings.md) |  | [optional] 
 **MacAgingSettings** | Pointer to [**NullableFabricMacAgingSettings**](FabricMacAgingSettings.md) |  | [optional] 
 **MacLearningSettings** | Pointer to [**NullableFabricMacLearningSettings**](FabricMacLearningSettings.md) |  | [optional] 
 **ReservedVlanStartId** | Pointer to **int64** | The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default. The reserved VLAN range is fixed for Unified Edge, so this setting cannot be configured and is ignored. | [optional] [default to 3915]
+**StpSettings** | Pointer to [**NullableFabricStpGlobalSettings**](FabricStpGlobalSettings.md) |  | [optional] 
 **TargetPlatform** | Pointer to **string** | The target platform type of the Switch Control policy. * &#x60;UCS Domain&#x60; - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * &#x60;Unified Edge&#x60; - Profile/policy type for network, management and chassis configuration on Unified Edge. | [optional] [default to "UCS Domain"]
 **UdldSettings** | Pointer to [**NullableFabricUdldGlobalSettings**](FabricUdldGlobalSettings.md) |  | [optional] 
 **VlanPortOptimizationEnabled** | Pointer to **bool** | To enable or disable the VLAN port count optimization. This feature will always be enabled for Cisco UCS Fabric Interconnect 9108 100G and also enabled on the IMM 6.x Bundle version and onwards. VLAN Port Count Optimization is not applicable for Unified Edge, so this setting cannot be configured. | [optional] [default to false]
@@ -230,6 +232,41 @@ SetIsAesPrimaryKeySet sets IsAesPrimaryKeySet field to given value.
 
 HasIsAesPrimaryKeySet returns a boolean if a field has been set.
 
+### GetLldpSettings
+
+`func (o *FabricSwitchControlPolicy) GetLldpSettings() FabricLldpGlobalSettings`
+
+GetLldpSettings returns the LldpSettings field if non-nil, zero value otherwise.
+
+### GetLldpSettingsOk
+
+`func (o *FabricSwitchControlPolicy) GetLldpSettingsOk() (*FabricLldpGlobalSettings, bool)`
+
+GetLldpSettingsOk returns a tuple with the LldpSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLldpSettings
+
+`func (o *FabricSwitchControlPolicy) SetLldpSettings(v FabricLldpGlobalSettings)`
+
+SetLldpSettings sets LldpSettings field to given value.
+
+### HasLldpSettings
+
+`func (o *FabricSwitchControlPolicy) HasLldpSettings() bool`
+
+HasLldpSettings returns a boolean if a field has been set.
+
+### SetLldpSettingsNil
+
+`func (o *FabricSwitchControlPolicy) SetLldpSettingsNil(b bool)`
+
+ SetLldpSettingsNil sets the value for LldpSettings to be an explicit nil
+
+### UnsetLldpSettings
+`func (o *FabricSwitchControlPolicy) UnsetLldpSettings()`
+
+UnsetLldpSettings ensures that no value is present for LldpSettings, not even an explicit nil
 ### GetMacAgingSettings
 
 `func (o *FabricSwitchControlPolicy) GetMacAgingSettings() FabricMacAgingSettings`
@@ -325,6 +362,41 @@ SetReservedVlanStartId sets ReservedVlanStartId field to given value.
 
 HasReservedVlanStartId returns a boolean if a field has been set.
 
+### GetStpSettings
+
+`func (o *FabricSwitchControlPolicy) GetStpSettings() FabricStpGlobalSettings`
+
+GetStpSettings returns the StpSettings field if non-nil, zero value otherwise.
+
+### GetStpSettingsOk
+
+`func (o *FabricSwitchControlPolicy) GetStpSettingsOk() (*FabricStpGlobalSettings, bool)`
+
+GetStpSettingsOk returns a tuple with the StpSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStpSettings
+
+`func (o *FabricSwitchControlPolicy) SetStpSettings(v FabricStpGlobalSettings)`
+
+SetStpSettings sets StpSettings field to given value.
+
+### HasStpSettings
+
+`func (o *FabricSwitchControlPolicy) HasStpSettings() bool`
+
+HasStpSettings returns a boolean if a field has been set.
+
+### SetStpSettingsNil
+
+`func (o *FabricSwitchControlPolicy) SetStpSettingsNil(b bool)`
+
+ SetStpSettingsNil sets the value for StpSettings to be an explicit nil
+
+### UnsetStpSettings
+`func (o *FabricSwitchControlPolicy) UnsetStpSettings()`
+
+UnsetStpSettings ensures that no value is present for StpSettings, not even an explicit nil
 ### GetTargetPlatform
 
 `func (o *FabricSwitchControlPolicy) GetTargetPlatform() string`

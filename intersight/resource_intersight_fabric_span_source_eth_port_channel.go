@@ -110,7 +110,7 @@ func resourceFabricSpanSourceEthPortChannel() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Receive", "Transmit", "Both"}, false),
 				Optional:     true,
-				Default:      "Receive",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"domain_group_moid": {
@@ -722,12 +722,12 @@ func resourceFabricSpanSourceEthPortChannelCreate(c context.Context, d *schema.R
 
 	o.SetClassId("fabric.SpanSourceEthPortChannel")
 
-	if v, ok := d.GetOk("direction"); ok {
+	if v, ok := d.GetOkExists("direction"); ok {
 		x := (v.(string))
 		o.SetDirection(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -739,7 +739,7 @@ func resourceFabricSpanSourceEthPortChannelCreate(c context.Context, d *schema.R
 		o.SetPcId(x)
 	}
 
-	if v, ok := d.GetOk("span_session"); ok {
+	if v, ok := d.GetOkExists("span_session"); ok {
 		p := make([]models.FabricSpanSessionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

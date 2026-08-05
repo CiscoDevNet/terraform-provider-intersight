@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_datastore_cluster"
 description: |-
-        The VMware Datastore cluster entity with its attributes. Datastore cluster is a collection of datastores with shared resources and a shared management interface.
+        The VmwareDatastoreCluster object represents the datastore cluster entity, comprising shared resources and a unified management interface.
+        #### Purpose
+        VmwareDatastoreCluster enhances resource management and allocation within a VMware environment, providing centralized control over datastore resources and operations.
+        #### Key Concepts
+        - **Shared Resource Management:** Combines multiple datastores under a single cluster, facilitating centralized oversight and resource distribution.
+        - **Operational Automation:** Supports automation levels for storage DRS and other operations, optimizing performance and management efficiency.
+        - **Resource Integration:** Interfaces with datacenters and registered devices, enabling seamless connectivity and resource management.
+        - **Security and Access:** Enforces privilege sets for secure read and update operations, ensuring authorized and controlled access.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_datastore_cluster
-The VMware Datastore cluster entity with its attributes. Datastore cluster is a collection of datastores with shared resources and a shared management interface.
+The VmwareDatastoreCluster object represents the datastore cluster entity, comprising shared resources and a unified management interface.
+#### Purpose
+VmwareDatastoreCluster enhances resource management and allocation within a VMware environment, providing centralized control over datastore resources and operations.
+#### Key Concepts
+- **Shared Resource Management:** Combines multiple datastores under a single cluster, facilitating centralized oversight and resource distribution.
+- **Operational Automation:** Supports automation levels for storage DRS and other operations, optimizing performance and management efficiency.
+- **Resource Integration:** Interfaces with datacenters and registered devices, enabling seamless connectivity and resource management.
+- **Security and Access:** Enforces privilege sets for secure read and update operations, ensuring authorized and controlled access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

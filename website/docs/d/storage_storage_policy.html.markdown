@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_storage_policy"
 description: |-
-        The storage policy models the reusable storage related configuration that can be applied on many servers. This policy allows creation of RAID groups using existing disk group policies and virtual drives on the drive groups. The user has options to move all unused disks to JBOD or Unconfigured good state. The security of drives can be enabled through this policy using remote keys from a KMIP server or Manually configured keys.
+        The StoragePolicy object models reusable storage configurations applicable to multiple servers. It enables RAID group creation and offers flexibility in drive state management.
+        #### Purpose
+        The StoragePolicy object provides a unified framework for configuring and managing storage solutions. It enables the creation of RAID groups using predefined disk group policies and offers flexible drive state management, allowing unused disks to be moved to JBOD or Unconfigured Good states while supporting hybrid slot configurations for transitions between direct and controller modes.
+        #### Key Concepts
+        - **Drive Security:** Enhances data protection through remote or manual key settings for drive encryption.
+        - **Global Hot Spares:** Configures disks as hot spares across RAID groups to improve storage reliability.
+        - **Nvme Drive Management:** Includes settings for NVMe drive attachment modes, supporting both direct and controller attached configurations.
 
 ---
 
 # Data Source: intersight_storage_storage_policy
-The storage policy models the reusable storage related configuration that can be applied on many servers. This policy allows creation of RAID groups using existing disk group policies and virtual drives on the drive groups. The user has options to move all unused disks to JBOD or Unconfigured good state. The security of drives can be enabled through this policy using remote keys from a KMIP server or Manually configured keys.
+The StoragePolicy object models reusable storage configurations applicable to multiple servers. It enables RAID group creation and offers flexibility in drive state management.
+#### Purpose
+The StoragePolicy object provides a unified framework for configuring and managing storage solutions. It enables the creation of RAID groups using predefined disk group policies and offers flexible drive state management, allowing unused disks to be moved to JBOD or Unconfigured Good states while supporting hybrid slot configurations for transitions between direct and controller modes.
+#### Key Concepts
+- **Drive Security:** Enhances data protection through remote or manual key settings for drive encryption.
+- **Global Hot Spares:** Configures disks as hot spares across RAID groups to improve storage reliability.
+- **Nvme Drive Management:** Includes settings for NVMe drive attachment modes, supporting both direct and controller attached configurations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

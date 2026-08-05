@@ -113,12 +113,12 @@ func getIamLdapPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"base_dn": {
-						Description: "Base Distinguished Name (DN). Starting point from where server will search for users and groups.",
+						Description: "Base Distinguished Name (DN), the starting point for searching users and groups.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"bind_dn": {
-						Description: "Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers.",
+						Description: "Distinguished Name (DN) used to authenticate against LDAP servers.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -138,7 +138,7 @@ func getIamLdapPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"enable_encryption": {
-						Description: "If enabled, the endpoint encrypts all information it sends to the LDAP server.",
+						Description: "If enabled, the endpoint encrypts all information sent to the LDAP server.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
@@ -148,7 +148,7 @@ func getIamLdapPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"enable_nested_group_search": {
-						Description: "If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively.",
+						Description: "If enabled, an extended search walks the ancestry chain to the root and returns all groups and subgroups recursively.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
@@ -178,7 +178,7 @@ func getIamLdapPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"password": {
-						Description: "The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters.",
+						Description: "The password for the initial bind process. Must not contain spaces, tabs, or line breaks, and cannot exceed 254 characters.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -187,6 +187,11 @@ func getIamLdapPolicySchema() map[string]*schema.Schema {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"user_search_attribute": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 				},
 			},
 		},
@@ -938,6 +943,20 @@ func dataSourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta
 				{
 					x := int64(v.(int))
 					o.SetTimeout(x)
+				}
+			}
+			if v, ok := l["user_search_attribute"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetUserSearchAttribute(x)
+					}
 				}
 			}
 			p = append(p, *o)

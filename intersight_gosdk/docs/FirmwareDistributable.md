@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.Distributable"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.Distributable"]
+**FeatureFlags** | Pointer to **[]string** |  | [optional] 
 **FileLocation** | Pointer to **string** | The file location of the distributable. | [optional] 
 **ImageCategory** | Pointer to **string** | The category into which the distributable falls into according to the supported platform series. For e.g.; C-Series/B-Series/Infrastructure. | [optional] 
+**IsBeta** | Pointer to **bool** | Whether this distributable is a beta image and participates in OData filtering so callers can explicitly query beta or non-beta firmware images. | [optional] [default to false]
 **Origin** | Pointer to **string** | The source of the distributable. If it has been created by the user or system. * &#x60;System&#x60; - The distributable has been created by the System. * &#x60;User&#x60; - The distributable has been created by the User. | [optional] [default to "System"]
 **Catalog** | Pointer to [**NullableSoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
 
@@ -70,6 +72,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetFeatureFlags
+
+`func (o *FirmwareDistributable) GetFeatureFlags() []string`
+
+GetFeatureFlags returns the FeatureFlags field if non-nil, zero value otherwise.
+
+### GetFeatureFlagsOk
+
+`func (o *FirmwareDistributable) GetFeatureFlagsOk() (*[]string, bool)`
+
+GetFeatureFlagsOk returns a tuple with the FeatureFlags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatureFlags
+
+`func (o *FirmwareDistributable) SetFeatureFlags(v []string)`
+
+SetFeatureFlags sets FeatureFlags field to given value.
+
+### HasFeatureFlags
+
+`func (o *FirmwareDistributable) HasFeatureFlags() bool`
+
+HasFeatureFlags returns a boolean if a field has been set.
+
+### SetFeatureFlagsNil
+
+`func (o *FirmwareDistributable) SetFeatureFlagsNil(b bool)`
+
+ SetFeatureFlagsNil sets the value for FeatureFlags to be an explicit nil
+
+### UnsetFeatureFlags
+`func (o *FirmwareDistributable) UnsetFeatureFlags()`
+
+UnsetFeatureFlags ensures that no value is present for FeatureFlags, not even an explicit nil
 ### GetFileLocation
 
 `func (o *FirmwareDistributable) GetFileLocation() string`
@@ -119,6 +156,31 @@ SetImageCategory sets ImageCategory field to given value.
 `func (o *FirmwareDistributable) HasImageCategory() bool`
 
 HasImageCategory returns a boolean if a field has been set.
+
+### GetIsBeta
+
+`func (o *FirmwareDistributable) GetIsBeta() bool`
+
+GetIsBeta returns the IsBeta field if non-nil, zero value otherwise.
+
+### GetIsBetaOk
+
+`func (o *FirmwareDistributable) GetIsBetaOk() (*bool, bool)`
+
+GetIsBetaOk returns a tuple with the IsBeta field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsBeta
+
+`func (o *FirmwareDistributable) SetIsBeta(v bool)`
+
+SetIsBeta sets IsBeta field to given value.
+
+### HasIsBeta
+
+`func (o *FirmwareDistributable) HasIsBeta() bool`
+
+HasIsBeta returns a boolean if a field has been set.
 
 ### GetOrigin
 

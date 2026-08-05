@@ -718,7 +718,7 @@ func resourceFabricSwitchProfileTemplate() *schema.Resource {
 								return
 							}},
 						"change_status": {
-							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.",
+							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.\n* `Failed` - The status when policy change evaluation report handling failed for a policy.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -1061,7 +1061,7 @@ func resourceFabricSwitchProfileTemplate() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"UCS Domain", "Unified Edge"}, false),
 				Optional:     true,
-				Default:      "UCS Domain",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"template_actions": {
@@ -1465,7 +1465,7 @@ func resourceFabricSwitchProfileTemplateCreate(c context.Context, d *schema.Reso
 		o.SetEnableOverride(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1993,7 +1993,7 @@ func resourceFabricSwitchProfileTemplateCreate(c context.Context, d *schema.Reso
 		}
 	}
 
-	if v, ok := d.GetOk("target_platform"); ok {
+	if v, ok := d.GetOkExists("target_platform"); ok {
 		x := (v.(string))
 		o.SetTargetPlatform(x)
 	}

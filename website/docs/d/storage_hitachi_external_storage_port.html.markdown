@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_external_storage_port"
 description: |-
-        Port entity in Hitachi storage array. A port for an external storage system that is connected to the local storage system.
+        The HitachiExternalStoragePort object defines a port entity for external storage systems connected to the local storage system, facilitating communication and connection management.
+        #### Purpose
+        HitachiExternalStoragePort serves as a critical component for managing external storage ports, supporting settings related to port IDs, WWN, and iSCSI configurations.
+        #### Key Concepts
+        - **Port Configuration:** Provides settings for port IDs, WWN, and iSCSI IP addresses for external storage ports.
+        - **Privilege Sets:** Ensures controlled access for managing external storage port configurations with defined privilege sets.
+        - **Licensing:** Operates under specified entitlements, supporting authorized operations.
 
 ---
 
 # Data Source: intersight_storage_hitachi_external_storage_port
-Port entity in Hitachi storage array. A port for an external storage system that is connected to the local storage system.
+The HitachiExternalStoragePort object defines a port entity for external storage systems connected to the local storage system, facilitating communication and connection management.
+#### Purpose
+HitachiExternalStoragePort serves as a critical component for managing external storage ports, supporting settings related to port IDs, WWN, and iSCSI configurations.
+#### Key Concepts
+- **Port Configuration:** Provides settings for port IDs, WWN, and iSCSI IP addresses for external storage ports.
+- **Privilege Sets:** Ensures controlled access for managing external storage port configurations with defined privilege sets.
+- **Licensing:** Operates under specified entitlements, supporting authorized operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resource.Group"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resource.Group"]
 **Description** | Pointer to **string** | The informative description about the usage of this Resource Group. | [optional] 
+**ExportedSelectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Name** | Pointer to **string** | The name of this resource group. | [optional] 
 **PerTypeCombinedSelector** | Pointer to [**[]ResourcePerTypeCombinedSelector**](ResourcePerTypeCombinedSelector.md) |  | [optional] 
 **Qualifier** | Pointer to **string** | Qualifier shall be used to specify if we want to organize resources using multiple resource group or single For an account, resource groups can be of only one of the above types. (Both the types are mutually exclusive for an account.). * &#x60;Allow-Selectors&#x60; - Resources will be added to resource groups based on ODATA filter. Multiple resource group can be created to organize resources. * &#x60;Allow-All&#x60; - All resources will become part of the Resource Group. Only one resource group can be created to organize resources. | [optional] [default to "Allow-Selectors"]
@@ -100,6 +101,41 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetExportedSelectors
+
+`func (o *ResourceGroup) GetExportedSelectors() []ResourceSelector`
+
+GetExportedSelectors returns the ExportedSelectors field if non-nil, zero value otherwise.
+
+### GetExportedSelectorsOk
+
+`func (o *ResourceGroup) GetExportedSelectorsOk() (*[]ResourceSelector, bool)`
+
+GetExportedSelectorsOk returns a tuple with the ExportedSelectors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExportedSelectors
+
+`func (o *ResourceGroup) SetExportedSelectors(v []ResourceSelector)`
+
+SetExportedSelectors sets ExportedSelectors field to given value.
+
+### HasExportedSelectors
+
+`func (o *ResourceGroup) HasExportedSelectors() bool`
+
+HasExportedSelectors returns a boolean if a field has been set.
+
+### SetExportedSelectorsNil
+
+`func (o *ResourceGroup) SetExportedSelectorsNil(b bool)`
+
+ SetExportedSelectorsNil sets the value for ExportedSelectors to be an explicit nil
+
+### UnsetExportedSelectors
+`func (o *ResourceGroup) UnsetExportedSelectors()`
+
+UnsetExportedSelectors ensures that no value is present for ExportedSelectors, not even an explicit nil
 ### GetName
 
 `func (o *ResourceGroup) GetName() string`

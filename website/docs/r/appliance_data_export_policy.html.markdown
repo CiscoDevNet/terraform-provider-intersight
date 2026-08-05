@@ -3,32 +3,32 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_data_export_policy"
 description: |-
-        Data Export Policy is a category-based data collection policy that enables or disables
-        data export (data collection) from the Intersight Appliance to the Intersight. The Data
-        Export Policy configuration is organized hierarchically as follows.
-        Global:
-        Inventory:
-        Network
-        Storage
-        TechSupport
-        When the DataExportPolicy for a category is enabled/disabled, all the sub-category configurations
-        are enabled/disabled as well. For example, if you enable/disable Inventory, all its sub-category
-        configurations (ie. Network and Storage) are also enabled/disabled.
+        DataExportPolicies define category-based data collection controls for exporting data from an Intersight Appliance to Intersight. The policy is organized as a hierarchy of categories and sub-categories (for example, Global → Inventory → Network/Storage, and TechSupport), allowing administrators to enable or disable export at different levels while preserving a clear parent/child structure.
+        #### Purpose
+        Provide centralized, hierarchical control over which categories of appliance data are collected and exported to Intersight, supporting governance, privacy/compliance needs, and operational control of data collection behavior.
+        #### Key Concepts
+        - **Hierarchical category model**: Policies form a tree of configurations where a parent category (e.g., Inventory) can contain sub-configurations (e.g., Network, Storage).
+        - **Cascading enable/disable semantics**: Enabling or disabling a category implicitly enables/disables all of its sub-categories (e.g., toggling Inventory also affects Network and Storage).
+        - **Primary control switch**: `enable` is the core read/write flag indicating whether data export (collection) is enabled for that category node.
+        - **System-managed naming**: `name` is read-only for API consumers but system-writable (`sysapiaccess: readwrite`), indicating naming may be controlled/seeded by the appliance/system.
+        - **Account-scoped governance**: Inherits permissions from `account`, and relates to `iam.Account` to scope policy ownership and access.
+        - **Parent/child lifecycle handling**: `subConfigs` are children of a given category; deletion cascades to sub-configurations, preserving hierarchy consistency.
+        - **Operational access control**: READ is available to admins/read roles and the “Configure Data Collection Settings” privilege; UPDATE is restricted to administrators with configuration privileges.
 
 ---
 
 # Resource: intersight_appliance_data_export_policy
-Data Export Policy is a category-based data collection policy that enables or disables
-data export (data collection) from the Intersight Appliance to the Intersight. The Data
-Export Policy configuration is organized hierarchically as follows.
-  Global:
-     Inventory:
-        Network
-        Storage
-     TechSupport
-When the DataExportPolicy for a category is enabled/disabled, all the sub-category configurations
-are enabled/disabled as well. For example, if you enable/disable Inventory, all its sub-category
-configurations (ie. Network and Storage) are also enabled/disabled.
+DataExportPolicies define category-based data collection controls for exporting data from an Intersight Appliance to Intersight. The policy is organized as a hierarchy of categories and sub-categories (for example, Global → Inventory → Network/Storage, and TechSupport), allowing administrators to enable or disable export at different levels while preserving a clear parent/child structure.
+#### Purpose
+Provide centralized, hierarchical control over which categories of appliance data are collected and exported to Intersight, supporting governance, privacy/compliance needs, and operational control of data collection behavior.
+#### Key Concepts
+- **Hierarchical category model**: Policies form a tree of configurations where a parent category (e.g., Inventory) can contain sub-configurations (e.g., Network, Storage).
+- **Cascading enable/disable semantics**: Enabling or disabling a category implicitly enables/disables all of its sub-categories (e.g., toggling Inventory also affects Network and Storage).
+- **Primary control switch**: `enable` is the core read/write flag indicating whether data export (collection) is enabled for that category node.
+- **System-managed naming**: `name` is read-only for API consumers but system-writable (`sysapiaccess: readwrite`), indicating naming may be controlled/seeded by the appliance/system.
+- **Account-scoped governance**: Inherits permissions from `account`, and relates to `iam.Account` to scope policy ownership and access.
+- **Parent/child lifecycle handling**: `subConfigs` are children of a given category; deletion cascades to sub-configurations, preserving hierarchy consistency.
+- **Operational access control**: READ is available to admins/read roles and the “Configure Data Collection Settings” privilege; UPDATE is restricted to administrators with configuration privileges.
 ## Usage Example
 ### Resource Creation
 

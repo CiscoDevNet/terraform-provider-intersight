@@ -205,7 +205,7 @@ func getIamLdapProviderSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"server": {
-			Description: "LDAP Server Address, can be IP address or hostname.",
+			Description: "LDAP Server Address, such as an IP address or hostname.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -3,12 +3,12 @@ subcategory: "catalystsdwan"
 layout: "intersight"
 page_title: "Intersight: intersight_catalystsdwan_vedge_device"
 description: |-
-        Details for the Catalyst SDWAN Vedge entities.
+        VedgeDevice is deprecated. Going forward WanEdgeDevice will be used to store details for the Catalyst SDWAN Vedge entities.
 
 ---
 
 # Data Source: intersight_catalystsdwan_vedge_device
-Details for the Catalyst SDWAN Vedge entities.
+VedgeDevice is deprecated. Going forward WanEdgeDevice will be used to store details for the Catalyst SDWAN Vedge entities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

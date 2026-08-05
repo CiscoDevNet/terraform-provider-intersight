@@ -32,8 +32,9 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `enable_lock_out_for_admin_user`:(bool) Determines if the user lock out feature must be enabled for the local admin user. 
-* `failed_login_tracker_window`:(int) Seconds are tracked for consecutive incorrect login attempts. Users will be locked out if they exceed the max number of incorrect login attempts during this duration. 
+* `failed_login_tracker_window`:(int) The duration, in seconds, within which consecutive incorrect login attempts are counted. The system locks out the account if the number of incorrect attempts exceeds the maximum allowed value during this window. 
 * `lock_out_time_period`:(int) The time period, in seconds, during which a user account will remain locked. 
+* `max_days_allowed_with_same_password`:(int) Maximum number of days a password can be used before it must be changed. Set to 0 to disable password expiration. 
 * `max_failed_logins_allowed`:(int) Users will be locked out after exceeding the max consecutive incorrect login attempts allowed within the configured time duration. 
 * `min_char_difference`:(int) Minimum number of characters different from previous password. 
 * `min_days_between_password_change`:(int) Minimum Days allowed between password change. 

@@ -3,12 +3,24 @@ subcategory: "dnac"
 layout: "intersight"
 page_title: "Intersight: intersight_dnac_device"
 description: |-
-        Collection of network devices.
+        The Device object is a comprehensive representation of network devices, facilitating the management and operational integration of network hardware within the system.
+        #### Purpose
+        A Device object provides detailed insights into the configuration, status, and management of network devices, supporting efficient network operations and maintenance.
+        #### Key Concepts
+        - **Device Management:** Supports detailed device configuration and status tracking, enhancing network reliability and efficiency.
+        - **Identity and Access Control:** Utilizes unique identifiers and privilege sets to ensure secure and controlled interaction with device data.
+        - **Operational Integration:** Seamlessly interfaces with other network components, promoting cohesive and efficient network operations.
 
 ---
 
 # Data Source: intersight_dnac_device
-Collection of network devices.
+The Device object is a comprehensive representation of network devices, facilitating the management and operational integration of network hardware within the system.
+#### Purpose
+A Device object provides detailed insights into the configuration, status, and management of network devices, supporting efficient network operations and maintenance.
+#### Key Concepts
+- **Device Management:** Supports detailed device configuration and status tracking, enhancing network reliability and efficiency.
+- **Identity and Access Control:** Utilizes unique identifiers and privilege sets to ensure secure and controlled interaction with device data.
+- **Operational Integration:** Seamlessly interfaces with other network components, promoting cohesive and efficient network operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

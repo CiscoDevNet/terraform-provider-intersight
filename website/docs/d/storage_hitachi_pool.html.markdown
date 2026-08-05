@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_pool"
 description: |-
-        A pool entity in Hitachi storage array.
+        The HitachiPool object represents a pool entity within the Hitachi storage array, designed to manage and configure storage pools efficiently. This provides functionalities for monitoring and executing various operations related to storage pool management.
+        #### Purpose
+        HitachiPool serves as a pivotal element for managing storage pools, supporting the definition of execution modes, monitoring settings, and capacity thresholds.
+        #### Key Concepts
+        - **Capacity Management:** Handles total reserved capacity and threshold settings, ensuring optimal pool performance and resource allocation.
+        - **Monitoring:** Supports performance monitoring execution modes, providing insights into pool operations.
+        - **Privilege Sets:** Offers controlled access for pool management tasks with defined privilege sets.
+        - **Licensing:** Complies with licensing operations under specified entitlements.
 
 ---
 
 # Data Source: intersight_storage_hitachi_pool
-A pool entity in Hitachi storage array.
+The HitachiPool object represents a pool entity within the Hitachi storage array, designed to manage and configure storage pools efficiently. This provides functionalities for monitoring and executing various operations related to storage pool management.
+#### Purpose
+HitachiPool serves as a pivotal element for managing storage pools, supporting the definition of execution modes, monitoring settings, and capacity thresholds.
+#### Key Concepts
+- **Capacity Management:** Handles total reserved capacity and threshold settings, ensuring optimal pool performance and resource allocation.
+- **Monitoring:** Supports performance monitoring execution modes, providing insights into pool operations.
+- **Privilege Sets:** Offers controlled access for pool management tasks with defined privilege sets.
+- **Licensing:** Complies with licensing operations under specified entitlements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

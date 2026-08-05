@@ -35,6 +35,18 @@ func Test_intersight_PowerApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test PowerApiService CreatePowerPowerGroup", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.PowerApi.CreatePowerPowerGroup(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PowerApiService DeletePowerPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -42,6 +54,19 @@ func Test_intersight_PowerApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.PowerApi.DeletePowerPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PowerApiService DeletePowerPowerGroup", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.PowerApi.DeletePowerPowerGroup(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -126,6 +151,58 @@ func Test_intersight_PowerApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test PowerApiService GetPowerPowerGroupByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.PowerApi.GetPowerPowerGroupByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PowerApiService GetPowerPowerGroupList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.PowerApi.GetPowerPowerGroupList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PowerApiService GetPowerPowerGroupMemberByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.PowerApi.GetPowerPowerGroupMemberByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PowerApiService GetPowerPowerGroupMemberList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.PowerApi.GetPowerPowerGroupMemberList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PowerApiService PatchPowerPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -140,6 +217,20 @@ func Test_intersight_PowerApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test PowerApiService PatchPowerPowerGroup", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.PowerApi.PatchPowerPowerGroup(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PowerApiService UpdatePowerPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -147,6 +238,20 @@ func Test_intersight_PowerApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.PowerApi.UpdatePowerPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PowerApiService UpdatePowerPowerGroup", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.PowerApi.UpdatePowerPowerGroup(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

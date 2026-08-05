@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Model** | Pointer to **string** | Type of the platform for which version compatibility is specified. Example - 3GFI, 4GFI, etc. | [optional] [readonly] 
 **PolicyName** | Pointer to **string** | Policy Name for which version compatibility is specified. Example - snmp.Policy, ldap.Policy. | [optional] [readonly] 
 **PortPolicyConstraints** | Pointer to [**NullableCapabilityPortPropertyConstraints**](CapabilityPortPropertyConstraints.md) |  | [optional] 
+**SwitchControlPolicyConstraints** | Pointer to [**NullableCapabilitySwitchControlPolicyConstraints**](CapabilitySwitchControlPolicyConstraints.md) |  | [optional] 
 
 ## Methods
 
@@ -278,6 +279,41 @@ HasPortPolicyConstraints returns a boolean if a field has been set.
 `func (o *CapabilityDomainPolicyRequirement) UnsetPortPolicyConstraints()`
 
 UnsetPortPolicyConstraints ensures that no value is present for PortPolicyConstraints, not even an explicit nil
+### GetSwitchControlPolicyConstraints
+
+`func (o *CapabilityDomainPolicyRequirement) GetSwitchControlPolicyConstraints() CapabilitySwitchControlPolicyConstraints`
+
+GetSwitchControlPolicyConstraints returns the SwitchControlPolicyConstraints field if non-nil, zero value otherwise.
+
+### GetSwitchControlPolicyConstraintsOk
+
+`func (o *CapabilityDomainPolicyRequirement) GetSwitchControlPolicyConstraintsOk() (*CapabilitySwitchControlPolicyConstraints, bool)`
+
+GetSwitchControlPolicyConstraintsOk returns a tuple with the SwitchControlPolicyConstraints field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSwitchControlPolicyConstraints
+
+`func (o *CapabilityDomainPolicyRequirement) SetSwitchControlPolicyConstraints(v CapabilitySwitchControlPolicyConstraints)`
+
+SetSwitchControlPolicyConstraints sets SwitchControlPolicyConstraints field to given value.
+
+### HasSwitchControlPolicyConstraints
+
+`func (o *CapabilityDomainPolicyRequirement) HasSwitchControlPolicyConstraints() bool`
+
+HasSwitchControlPolicyConstraints returns a boolean if a field has been set.
+
+### SetSwitchControlPolicyConstraintsNil
+
+`func (o *CapabilityDomainPolicyRequirement) SetSwitchControlPolicyConstraintsNil(b bool)`
+
+ SetSwitchControlPolicyConstraintsNil sets the value for SwitchControlPolicyConstraints to be an explicit nil
+
+### UnsetSwitchControlPolicyConstraints
+`func (o *CapabilityDomainPolicyRequirement) UnsetSwitchControlPolicyConstraints()`
+
+UnsetSwitchControlPolicyConstraints ensures that no value is present for SwitchControlPolicyConstraints, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

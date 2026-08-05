@@ -304,6 +304,11 @@ func getIqnpoolLeaseSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"preferred_iqn_address": {
+			Description: "The preferred IQN address can be specified only for dynamic lease requests. Intersight will make its best effort to allocate that IQN address if it is available in the pool. If the specified preferred IQN address is not in the range of the pool or if it is already leased or reserved, then the next available IQN address from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease request will fail if it specifies the preferred IQN address property. When the preferred IQN address property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be replaced by the new lease. Migration is supported only for dynamic lease requests.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"reservation": {
 			Description: "The holder of a reference to reservation Moid and the specific details on lease condition for this reservation. Specified to allocate already reserved identities.",
 			Type:        schema.TypeList,
@@ -323,6 +328,11 @@ func getIqnpoolLeaseSchema() map[string]*schema.Schema {
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"reservation_id": {
+						Description: "The identity for which the reference is created. It is used to store the ID allocated to the profile during export. \nReservation id and Reservation moid are mutually exclusive and during export only reservationid will be populated.\nDuring import, If necessary reservation will be created based on reservationId and reservationMoid will be populated in the reference.\nFor IP and UUid IDs, we create reservation, for other Ids we do not create reservations.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -959,6 +969,11 @@ func dataSourceIqnpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	if v, ok := d.GetOk("preferred_iqn_address"); ok {
+		x := (v.(string))
+		o.SetPreferredIqnAddress(x)
+	}
+
 	if v, ok := d.GetOk("reservation"); ok {
 		p := make([]models.IqnpoolReservationReference, 0, 1)
 		s := v.([]interface{})
@@ -980,6 +995,12 @@ func dataSourceIqnpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationId(x)
 				}
 			}
 			if v, ok := l["reservation_moid"]; ok {
@@ -1259,6 +1280,7 @@ func dataSourceIqnpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 				temp["pool"] = flattenMapIqnpoolPoolRelationship(s.GetPool(), d)
 
 				temp["pool_member"] = flattenMapIqnpoolPoolMemberRelationship(s.GetPoolMember(), d)
+				temp["preferred_iqn_address"] = (s.GetPreferredIqnAddress())
 
 				temp["reservation"] = flattenMapIqnpoolReservationReference(s.GetReservation(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

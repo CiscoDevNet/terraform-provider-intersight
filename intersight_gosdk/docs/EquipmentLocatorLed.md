@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **EquipmentFex** | Pointer to [**NullableEquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**NetworkSecureRouter** | Pointer to [**NullableNetworkSecureRouterRelationship**](NetworkSecureRouterRelationship.md) |  | [optional] 
 **PciNode** | Pointer to [**NullablePciNodeRelationship**](PciNodeRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **StoragePhysicalDisk** | Pointer to [**NullableStoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
@@ -337,6 +338,41 @@ HasNetworkElement returns a boolean if a field has been set.
 `func (o *EquipmentLocatorLed) UnsetNetworkElement()`
 
 UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+### GetNetworkSecureRouter
+
+`func (o *EquipmentLocatorLed) GetNetworkSecureRouter() NetworkSecureRouterRelationship`
+
+GetNetworkSecureRouter returns the NetworkSecureRouter field if non-nil, zero value otherwise.
+
+### GetNetworkSecureRouterOk
+
+`func (o *EquipmentLocatorLed) GetNetworkSecureRouterOk() (*NetworkSecureRouterRelationship, bool)`
+
+GetNetworkSecureRouterOk returns a tuple with the NetworkSecureRouter field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkSecureRouter
+
+`func (o *EquipmentLocatorLed) SetNetworkSecureRouter(v NetworkSecureRouterRelationship)`
+
+SetNetworkSecureRouter sets NetworkSecureRouter field to given value.
+
+### HasNetworkSecureRouter
+
+`func (o *EquipmentLocatorLed) HasNetworkSecureRouter() bool`
+
+HasNetworkSecureRouter returns a boolean if a field has been set.
+
+### SetNetworkSecureRouterNil
+
+`func (o *EquipmentLocatorLed) SetNetworkSecureRouterNil(b bool)`
+
+ SetNetworkSecureRouterNil sets the value for NetworkSecureRouter to be an explicit nil
+
+### UnsetNetworkSecureRouter
+`func (o *EquipmentLocatorLed) UnsetNetworkSecureRouter()`
+
+UnsetNetworkSecureRouter ensures that no value is present for NetworkSecureRouter, not even an explicit nil
 ### GetPciNode
 
 `func (o *EquipmentLocatorLed) GetPciNode() PciNodeRelationship`

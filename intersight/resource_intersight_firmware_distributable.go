@@ -310,6 +310,14 @@ func resourceFirmwareDistributable() *schema.Resource {
 					}
 					return
 				}},
+			"feature_flags": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"feature_source": {
 				Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.\n* `ConfigBackupImport` - This indicates the user uploaded configuration backup file.\n* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads.",
 				Type:        schema.TypeString,
@@ -376,6 +384,12 @@ func resourceFirmwareDistributable() *schema.Resource {
 					}
 					return
 				}},
+			"is_beta": {
+				Description: "Whether this distributable is a beta image and participates in OData filtering so callers can explicitly query beta or non-beta firmware images.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"last_access_time": {
 				Description: "The time at which this file was last downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache.",
 				Type:        schema.TypeString,
@@ -999,7 +1013,7 @@ func resourceFirmwareDistributableCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if v, ok := d.GetOk("catalog"); ok {
+	if v, ok := d.GetOkExists("catalog"); ok {
 		p := make([]models.SoftwarerepositoryCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1201,6 +1215,19 @@ func resourceFirmwareDistributableCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("feature_flags"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetFeatureFlags(x)
+		}
+	}
+
 	if v, ok := d.GetOk("file_location"); ok {
 		x := (v.(string))
 		o.SetFileLocation(x)
@@ -1221,12 +1248,17 @@ func resourceFirmwareDistributableCreate(c context.Context, d *schema.ResourceDa
 		o.SetImportAction(x)
 	}
 
+	if v, ok := d.GetOkExists("is_beta"); ok {
+		x := (v.(bool))
+		o.SetIsBeta(x)
+	}
+
 	if v, ok := d.GetOk("md5e_tag"); ok {
 		x := (v.(string))
 		o.SetMd5eTag(x)
 	}
 
-	if v, ok := d.GetOk("md5sum"); ok {
+	if v, ok := d.GetOkExists("md5sum"); ok {
 		x := (v.(string))
 		o.SetMd5sum(x)
 	}
@@ -1241,7 +1273,7 @@ func resourceFirmwareDistributableCreate(c context.Context, d *schema.ResourceDa
 		o.SetModel(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -1311,7 +1343,7 @@ func resourceFirmwareDistributableCreate(c context.Context, d *schema.ResourceDa
 		o.SetReleaseNotesUrl(x)
 	}
 
-	if v, ok := d.GetOk("sha512sum"); ok {
+	if v, ok := d.GetOkExists("sha512sum"); ok {
 		x := (v.(string))
 		o.SetSha512sum(x)
 	}
@@ -1552,6 +1584,10 @@ func resourceFirmwareDistributableRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property DownloadCount in FirmwareDistributable object: %s", err.Error())
 	}
 
+	if err := d.Set("feature_flags", (s.GetFeatureFlags())); err != nil {
+		return diag.Errorf("error occurred while setting property FeatureFlags in FirmwareDistributable object: %s", err.Error())
+	}
+
 	if err := d.Set("feature_source", (s.GetFeatureSource())); err != nil {
 		return diag.Errorf("error occurred while setting property FeatureSource in FirmwareDistributable object: %s", err.Error())
 	}
@@ -1582,6 +1618,10 @@ func resourceFirmwareDistributableRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("imported_time", (s.GetImportedTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ImportedTime in FirmwareDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("is_beta", (s.GetIsBeta())); err != nil {
+		return diag.Errorf("error occurred while setting property IsBeta in FirmwareDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("last_access_time", (s.GetLastAccessTime()).String()); err != nil {
@@ -1923,6 +1963,18 @@ func resourceFirmwareDistributableUpdate(c context.Context, d *schema.ResourceDa
 		o.SetDistributableMetas(x)
 	}
 
+	if d.HasChange("feature_flags") {
+		v := d.Get("feature_flags")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetFeatureFlags(x)
+	}
+
 	if d.HasChange("file_location") {
 		v := d.Get("file_location")
 		x := (v.(string))
@@ -1945,6 +1997,12 @@ func resourceFirmwareDistributableUpdate(c context.Context, d *schema.ResourceDa
 		v := d.Get("import_action")
 		x := (v.(string))
 		o.SetImportAction(x)
+	}
+
+	if d.HasChange("is_beta") {
+		v := d.Get("is_beta")
+		x := (v.(bool))
+		o.SetIsBeta(x)
 	}
 
 	if d.HasChange("md5e_tag") {

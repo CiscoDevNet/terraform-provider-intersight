@@ -225,22 +225,22 @@ func getApplianceBackupPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"protocol": {
-			Description: "Communication protocol used by the file server (e.g. scp, sftp, or CIFS).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
+			Description: "Communication protocol used by backup and restore workflow (e.g. scp, sftp, cifs, or local).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.\n* `local` - Backup file is stored in Intersight Appliance.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"remote_host": {
-			Description: "Hostname of the remote file server.",
+			Description: "Hostname of the remote file server. Not required when protocol is local.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"remote_path": {
-			Description: "File server directory or share name to copy the file.",
+			Description: "File server directory or share name to copy the file. Not required when protocol is local.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"remote_port": {
-			Description: "Remote TCP port on the file server (e.g. 22 for scp).",
+			Description: "Remote TCP port on the file server (e.g. 22 for scp). Not required when protocol is local.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -426,7 +426,7 @@ func getApplianceBackupPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"username": {
-			Description: "Username to authenticate the fileserver.",
+			Description: "Username to authenticate the fileserver. Not required when protocol is local.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

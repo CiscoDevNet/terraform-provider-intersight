@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Device** | Pointer to [**[]AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) | An array of relationships to assetDeviceRegistration resources. | [optional] [readonly] 
 **Distributable** | Pointer to [**NullableFirmwareDistributableRelationship**](FirmwareDistributableRelationship.md) |  | [optional] 
 **NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] 
+**NetworkSecureRouter** | Pointer to [**[]NetworkSecureRouterRelationship**](NetworkSecureRouterRelationship.md) | An array of relationships to networkSecureRouter resources. | [optional] 
 **PciNode** | Pointer to [**[]PciNodeRelationship**](PciNodeRelationship.md) | An array of relationships to pciNode resources. | [optional] 
 **Release** | Pointer to [**NullableSoftwarerepositoryReleaseRelationship**](SoftwarerepositoryReleaseRelationship.md) |  | [optional] 
 **Server** | Pointer to [**[]ComputePhysicalRelationship**](ComputePhysicalRelationship.md) | An array of relationships to computePhysical resources. | [optional] 
@@ -275,6 +276,41 @@ HasNetworkElements returns a boolean if a field has been set.
 `func (o *FirmwareUpgradeImpact) UnsetNetworkElements()`
 
 UnsetNetworkElements ensures that no value is present for NetworkElements, not even an explicit nil
+### GetNetworkSecureRouter
+
+`func (o *FirmwareUpgradeImpact) GetNetworkSecureRouter() []NetworkSecureRouterRelationship`
+
+GetNetworkSecureRouter returns the NetworkSecureRouter field if non-nil, zero value otherwise.
+
+### GetNetworkSecureRouterOk
+
+`func (o *FirmwareUpgradeImpact) GetNetworkSecureRouterOk() (*[]NetworkSecureRouterRelationship, bool)`
+
+GetNetworkSecureRouterOk returns a tuple with the NetworkSecureRouter field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkSecureRouter
+
+`func (o *FirmwareUpgradeImpact) SetNetworkSecureRouter(v []NetworkSecureRouterRelationship)`
+
+SetNetworkSecureRouter sets NetworkSecureRouter field to given value.
+
+### HasNetworkSecureRouter
+
+`func (o *FirmwareUpgradeImpact) HasNetworkSecureRouter() bool`
+
+HasNetworkSecureRouter returns a boolean if a field has been set.
+
+### SetNetworkSecureRouterNil
+
+`func (o *FirmwareUpgradeImpact) SetNetworkSecureRouterNil(b bool)`
+
+ SetNetworkSecureRouterNil sets the value for NetworkSecureRouter to be an explicit nil
+
+### UnsetNetworkSecureRouter
+`func (o *FirmwareUpgradeImpact) UnsetNetworkSecureRouter()`
+
+UnsetNetworkSecureRouter ensures that no value is present for NetworkSecureRouter, not even an explicit nil
 ### GetPciNode
 
 `func (o *FirmwareUpgradeImpact) GetPciNode() []PciNodeRelationship`

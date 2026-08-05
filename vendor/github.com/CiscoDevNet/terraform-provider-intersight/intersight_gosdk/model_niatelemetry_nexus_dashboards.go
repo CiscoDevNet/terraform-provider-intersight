@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -27,7 +27,8 @@ type NiatelemetryNexusDashboards struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType   string   `json:"ObjectType"`
+	BackupStatus []string `json:"BackupStatus,omitempty"`
 	// Feature operational state of bandwidth monitoring.
 	BandwidthUsageMonitoring *bool `json:"BandwidthUsageMonitoring,omitempty"`
 	// Count of total Change Control tickets that have been approved and completed.
@@ -38,10 +39,16 @@ type NiatelemetryNexusDashboards struct {
 	ClusterName *string `json:"ClusterName,omitempty"`
 	// UUID of the Nexus Dashboard cluster.
 	ClusterUuid *string `json:"ClusterUuid,omitempty"`
+	// Number of compliance rules on the fabric.
+	ComplianceRules *int64 `json:"ComplianceRules,omitempty"`
+	// Number of custom dashboard in the fabric.
+	DashboardCount *int64 `json:"DashboardCount,omitempty"`
 	// Count of number of image snapshots taken.
 	DeviceSnapshotsCount *int64 `json:"DeviceSnapshotsCount,omitempty"`
 	// Dn of the objects present for Nexus Dashboard devices.
 	Dn *string `json:"Dn,omitempty"`
+	// Total number of endpoints on fabric.
+	EndpointCount *int64 `json:"EndpointCount,omitempty"`
 	// Count of number of devices with attached image policies.
 	FabricImagePoliciesCount *int64 `json:"FabricImagePoliciesCount,omitempty"`
 	// Feature Operation status of change management.
@@ -53,10 +60,17 @@ type NiatelemetryNexusDashboards struct {
 	// Health of Nexus Dashboard cluster.
 	IsClusterHealthy *string `json:"IsClusterHealthy,omitempty"`
 	// Feature Operation status of Kubernetes Visualizer.
-	K8VisualizerAdminState *string `json:"K8VisualizerAdminState,omitempty"`
+	K8VisualizerAdminState *string  `json:"K8VisualizerAdminState,omitempty"`
+	LatestVersionList      []string `json:"LatestVersionList,omitempty"`
+	// Count of devices with Live Protect shield status enabled.
+	LiveProtectEnabledCount *int64 `json:"LiveProtectEnabledCount,omitempty"`
+	// Number of multicast routes on fabric.
+	MulticastRouteCount *int64 `json:"MulticastRouteCount,omitempty"`
 	// Number of nodes in Nexus Dashboard cluster.
-	NdClusterSize *int64              `json:"NdClusterSize,omitempty"`
-	NdSites       []NiatelemetrySites `json:"NdSites,omitempty"`
+	NdClusterSize *int64 `json:"NdClusterSize,omitempty"`
+	// Health status of the Nexus Dashboard cluster.
+	NdHealthy *bool               `json:"NdHealthy,omitempty"`
+	NdSites   []NiatelemetrySites `json:"NdSites,omitempty"`
 	// Node type in Nexus Dashboard cluster.
 	NdType *string `json:"NdType,omitempty"`
 	// Version running on Nexus Dashboard.
@@ -77,22 +91,34 @@ type NiatelemetryNexusDashboards struct {
 	NumberOfTenantsInMso *int64 `json:"NumberOfTenantsInMso,omitempty"`
 	// Number of sites with vxLan type fabric in Multi-Site Orchestrator.
 	NumberOfVxlanFabricSitesInMso *int64 `json:"NumberOfVxlanFabricSitesInMso,omitempty"`
+	OamEnabled                    []bool `json:"OamEnabled,omitempty"`
 	// Feature operational state of performance Monitoring.
 	PerformanceMonitoring *bool `json:"PerformanceMonitoring,omitempty"`
 	// Count of post upgrade report generation.
 	PostUpgradeReportGenerationCount *int64 `json:"PostUpgradeReportGenerationCount,omitempty"`
 	// Count of pre upgrade report generation.
 	PreUpgradeReportGenerationCount *int64 `json:"PreUpgradeReportGenerationCount,omitempty"`
+	// Number of pre-upgrade validations on the fabric.
+	PreupgradeValidationCount *int64 `json:"PreupgradeValidationCount,omitempty"`
 	// Feature Operation status of Precision Time Protocol Monitoring.
-	PtpAdminState *string `json:"PtpAdminState,omitempty"`
+	PtpAdminState  *string  `json:"PtpAdminState,omitempty"`
+	RecVersionList []string `json:"RecVersionList,omitempty"`
 	// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
-	RecordType *string `json:"RecordType,omitempty"`
+	RecordType     *string  `json:"RecordType,omitempty"`
+	ReleaseVersion []string `json:"ReleaseVersion,omitempty"`
+	// Status of sustainability report on fabric.
+	SustainabilityReportStatus *string `json:"SustainabilityReportStatus,omitempty"`
 	// Type of site added to Multi-Site Orchestrator.
 	TypeOfSiteInMso *string `json:"TypeOfSiteInMso,omitempty"`
+	// Number of vCenters integrated into the fabric.
+	VcenterCount *int64 `json:"VcenterCount,omitempty"`
 	// Feature Operation status of VMM Visualizer.
-	VmmVisualizerAdminState *string                                     `json:"VmmVisualizerAdminState,omitempty"`
-	RegisteredDevice        NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	AdditionalProperties    map[string]interface{}
+	VmmVisualizerAdminState *string `json:"VmmVisualizerAdminState,omitempty"`
+	// The total number of active VXLAN-managed fabrics that have both leaf and spine switches configured.
+	VxLanFabCount        *int64                                      `json:"VxLanFabCount,omitempty"`
+	VxLanFabNames        []string                                    `json:"VxLanFabNames,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NiatelemetryNexusDashboards NiatelemetryNexusDashboards
@@ -176,6 +202,39 @@ func (o *NiatelemetryNexusDashboards) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "niatelemetry.NexusDashboards" of the ObjectType field.
 func (o *NiatelemetryNexusDashboards) GetDefaultObjectType() interface{} {
 	return "niatelemetry.NexusDashboards"
+}
+
+// GetBackupStatus returns the BackupStatus field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNexusDashboards) GetBackupStatus() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.BackupStatus
+}
+
+// GetBackupStatusOk returns a tuple with the BackupStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNexusDashboards) GetBackupStatusOk() ([]string, bool) {
+	if o == nil || IsNil(o.BackupStatus) {
+		return nil, false
+	}
+	return o.BackupStatus, true
+}
+
+// HasBackupStatus returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasBackupStatus() bool {
+	if o != nil && !IsNil(o.BackupStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupStatus gets a reference to the given []string and assigns it to the BackupStatus field.
+func (o *NiatelemetryNexusDashboards) SetBackupStatus(v []string) {
+	o.BackupStatus = v
 }
 
 // GetBandwidthUsageMonitoring returns the BandwidthUsageMonitoring field value if set, zero value otherwise.
@@ -338,6 +397,70 @@ func (o *NiatelemetryNexusDashboards) SetClusterUuid(v string) {
 	o.ClusterUuid = &v
 }
 
+// GetComplianceRules returns the ComplianceRules field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetComplianceRules() int64 {
+	if o == nil || IsNil(o.ComplianceRules) {
+		var ret int64
+		return ret
+	}
+	return *o.ComplianceRules
+}
+
+// GetComplianceRulesOk returns a tuple with the ComplianceRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetComplianceRulesOk() (*int64, bool) {
+	if o == nil || IsNil(o.ComplianceRules) {
+		return nil, false
+	}
+	return o.ComplianceRules, true
+}
+
+// HasComplianceRules returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasComplianceRules() bool {
+	if o != nil && !IsNil(o.ComplianceRules) {
+		return true
+	}
+
+	return false
+}
+
+// SetComplianceRules gets a reference to the given int64 and assigns it to the ComplianceRules field.
+func (o *NiatelemetryNexusDashboards) SetComplianceRules(v int64) {
+	o.ComplianceRules = &v
+}
+
+// GetDashboardCount returns the DashboardCount field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetDashboardCount() int64 {
+	if o == nil || IsNil(o.DashboardCount) {
+		var ret int64
+		return ret
+	}
+	return *o.DashboardCount
+}
+
+// GetDashboardCountOk returns a tuple with the DashboardCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetDashboardCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.DashboardCount) {
+		return nil, false
+	}
+	return o.DashboardCount, true
+}
+
+// HasDashboardCount returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasDashboardCount() bool {
+	if o != nil && !IsNil(o.DashboardCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetDashboardCount gets a reference to the given int64 and assigns it to the DashboardCount field.
+func (o *NiatelemetryNexusDashboards) SetDashboardCount(v int64) {
+	o.DashboardCount = &v
+}
+
 // GetDeviceSnapshotsCount returns the DeviceSnapshotsCount field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetDeviceSnapshotsCount() int64 {
 	if o == nil || IsNil(o.DeviceSnapshotsCount) {
@@ -400,6 +523,38 @@ func (o *NiatelemetryNexusDashboards) HasDn() bool {
 // SetDn gets a reference to the given string and assigns it to the Dn field.
 func (o *NiatelemetryNexusDashboards) SetDn(v string) {
 	o.Dn = &v
+}
+
+// GetEndpointCount returns the EndpointCount field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetEndpointCount() int64 {
+	if o == nil || IsNil(o.EndpointCount) {
+		var ret int64
+		return ret
+	}
+	return *o.EndpointCount
+}
+
+// GetEndpointCountOk returns a tuple with the EndpointCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetEndpointCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.EndpointCount) {
+		return nil, false
+	}
+	return o.EndpointCount, true
+}
+
+// HasEndpointCount returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasEndpointCount() bool {
+	if o != nil && !IsNil(o.EndpointCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndpointCount gets a reference to the given int64 and assigns it to the EndpointCount field.
+func (o *NiatelemetryNexusDashboards) SetEndpointCount(v int64) {
+	o.EndpointCount = &v
 }
 
 // GetFabricImagePoliciesCount returns the FabricImagePoliciesCount field value if set, zero value otherwise.
@@ -594,6 +749,103 @@ func (o *NiatelemetryNexusDashboards) SetK8VisualizerAdminState(v string) {
 	o.K8VisualizerAdminState = &v
 }
 
+// GetLatestVersionList returns the LatestVersionList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNexusDashboards) GetLatestVersionList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.LatestVersionList
+}
+
+// GetLatestVersionListOk returns a tuple with the LatestVersionList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNexusDashboards) GetLatestVersionListOk() ([]string, bool) {
+	if o == nil || IsNil(o.LatestVersionList) {
+		return nil, false
+	}
+	return o.LatestVersionList, true
+}
+
+// HasLatestVersionList returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasLatestVersionList() bool {
+	if o != nil && !IsNil(o.LatestVersionList) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatestVersionList gets a reference to the given []string and assigns it to the LatestVersionList field.
+func (o *NiatelemetryNexusDashboards) SetLatestVersionList(v []string) {
+	o.LatestVersionList = v
+}
+
+// GetLiveProtectEnabledCount returns the LiveProtectEnabledCount field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetLiveProtectEnabledCount() int64 {
+	if o == nil || IsNil(o.LiveProtectEnabledCount) {
+		var ret int64
+		return ret
+	}
+	return *o.LiveProtectEnabledCount
+}
+
+// GetLiveProtectEnabledCountOk returns a tuple with the LiveProtectEnabledCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetLiveProtectEnabledCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.LiveProtectEnabledCount) {
+		return nil, false
+	}
+	return o.LiveProtectEnabledCount, true
+}
+
+// HasLiveProtectEnabledCount returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasLiveProtectEnabledCount() bool {
+	if o != nil && !IsNil(o.LiveProtectEnabledCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetLiveProtectEnabledCount gets a reference to the given int64 and assigns it to the LiveProtectEnabledCount field.
+func (o *NiatelemetryNexusDashboards) SetLiveProtectEnabledCount(v int64) {
+	o.LiveProtectEnabledCount = &v
+}
+
+// GetMulticastRouteCount returns the MulticastRouteCount field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetMulticastRouteCount() int64 {
+	if o == nil || IsNil(o.MulticastRouteCount) {
+		var ret int64
+		return ret
+	}
+	return *o.MulticastRouteCount
+}
+
+// GetMulticastRouteCountOk returns a tuple with the MulticastRouteCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetMulticastRouteCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.MulticastRouteCount) {
+		return nil, false
+	}
+	return o.MulticastRouteCount, true
+}
+
+// HasMulticastRouteCount returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasMulticastRouteCount() bool {
+	if o != nil && !IsNil(o.MulticastRouteCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetMulticastRouteCount gets a reference to the given int64 and assigns it to the MulticastRouteCount field.
+func (o *NiatelemetryNexusDashboards) SetMulticastRouteCount(v int64) {
+	o.MulticastRouteCount = &v
+}
+
 // GetNdClusterSize returns the NdClusterSize field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNdClusterSize() int64 {
 	if o == nil || IsNil(o.NdClusterSize) {
@@ -624,6 +876,38 @@ func (o *NiatelemetryNexusDashboards) HasNdClusterSize() bool {
 // SetNdClusterSize gets a reference to the given int64 and assigns it to the NdClusterSize field.
 func (o *NiatelemetryNexusDashboards) SetNdClusterSize(v int64) {
 	o.NdClusterSize = &v
+}
+
+// GetNdHealthy returns the NdHealthy field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetNdHealthy() bool {
+	if o == nil || IsNil(o.NdHealthy) {
+		var ret bool
+		return ret
+	}
+	return *o.NdHealthy
+}
+
+// GetNdHealthyOk returns a tuple with the NdHealthy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetNdHealthyOk() (*bool, bool) {
+	if o == nil || IsNil(o.NdHealthy) {
+		return nil, false
+	}
+	return o.NdHealthy, true
+}
+
+// HasNdHealthy returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasNdHealthy() bool {
+	if o != nil && !IsNil(o.NdHealthy) {
+		return true
+	}
+
+	return false
+}
+
+// SetNdHealthy gets a reference to the given bool and assigns it to the NdHealthy field.
+func (o *NiatelemetryNexusDashboards) SetNdHealthy(v bool) {
+	o.NdHealthy = &v
 }
 
 // GetNdSites returns the NdSites field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -979,6 +1263,39 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfVxlanFabricSitesInMso(v int64) 
 	o.NumberOfVxlanFabricSitesInMso = &v
 }
 
+// GetOamEnabled returns the OamEnabled field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNexusDashboards) GetOamEnabled() []bool {
+	if o == nil {
+		var ret []bool
+		return ret
+	}
+	return o.OamEnabled
+}
+
+// GetOamEnabledOk returns a tuple with the OamEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNexusDashboards) GetOamEnabledOk() ([]bool, bool) {
+	if o == nil || IsNil(o.OamEnabled) {
+		return nil, false
+	}
+	return o.OamEnabled, true
+}
+
+// HasOamEnabled returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasOamEnabled() bool {
+	if o != nil && !IsNil(o.OamEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetOamEnabled gets a reference to the given []bool and assigns it to the OamEnabled field.
+func (o *NiatelemetryNexusDashboards) SetOamEnabled(v []bool) {
+	o.OamEnabled = v
+}
+
 // GetPerformanceMonitoring returns the PerformanceMonitoring field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetPerformanceMonitoring() bool {
 	if o == nil || IsNil(o.PerformanceMonitoring) {
@@ -1075,6 +1392,38 @@ func (o *NiatelemetryNexusDashboards) SetPreUpgradeReportGenerationCount(v int64
 	o.PreUpgradeReportGenerationCount = &v
 }
 
+// GetPreupgradeValidationCount returns the PreupgradeValidationCount field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetPreupgradeValidationCount() int64 {
+	if o == nil || IsNil(o.PreupgradeValidationCount) {
+		var ret int64
+		return ret
+	}
+	return *o.PreupgradeValidationCount
+}
+
+// GetPreupgradeValidationCountOk returns a tuple with the PreupgradeValidationCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetPreupgradeValidationCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.PreupgradeValidationCount) {
+		return nil, false
+	}
+	return o.PreupgradeValidationCount, true
+}
+
+// HasPreupgradeValidationCount returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasPreupgradeValidationCount() bool {
+	if o != nil && !IsNil(o.PreupgradeValidationCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreupgradeValidationCount gets a reference to the given int64 and assigns it to the PreupgradeValidationCount field.
+func (o *NiatelemetryNexusDashboards) SetPreupgradeValidationCount(v int64) {
+	o.PreupgradeValidationCount = &v
+}
+
 // GetPtpAdminState returns the PtpAdminState field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetPtpAdminState() string {
 	if o == nil || IsNil(o.PtpAdminState) {
@@ -1105,6 +1454,39 @@ func (o *NiatelemetryNexusDashboards) HasPtpAdminState() bool {
 // SetPtpAdminState gets a reference to the given string and assigns it to the PtpAdminState field.
 func (o *NiatelemetryNexusDashboards) SetPtpAdminState(v string) {
 	o.PtpAdminState = &v
+}
+
+// GetRecVersionList returns the RecVersionList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNexusDashboards) GetRecVersionList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.RecVersionList
+}
+
+// GetRecVersionListOk returns a tuple with the RecVersionList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNexusDashboards) GetRecVersionListOk() ([]string, bool) {
+	if o == nil || IsNil(o.RecVersionList) {
+		return nil, false
+	}
+	return o.RecVersionList, true
+}
+
+// HasRecVersionList returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasRecVersionList() bool {
+	if o != nil && !IsNil(o.RecVersionList) {
+		return true
+	}
+
+	return false
+}
+
+// SetRecVersionList gets a reference to the given []string and assigns it to the RecVersionList field.
+func (o *NiatelemetryNexusDashboards) SetRecVersionList(v []string) {
+	o.RecVersionList = v
 }
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
@@ -1139,6 +1521,71 @@ func (o *NiatelemetryNexusDashboards) SetRecordType(v string) {
 	o.RecordType = &v
 }
 
+// GetReleaseVersion returns the ReleaseVersion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNexusDashboards) GetReleaseVersion() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.ReleaseVersion
+}
+
+// GetReleaseVersionOk returns a tuple with the ReleaseVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNexusDashboards) GetReleaseVersionOk() ([]string, bool) {
+	if o == nil || IsNil(o.ReleaseVersion) {
+		return nil, false
+	}
+	return o.ReleaseVersion, true
+}
+
+// HasReleaseVersion returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasReleaseVersion() bool {
+	if o != nil && !IsNil(o.ReleaseVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetReleaseVersion gets a reference to the given []string and assigns it to the ReleaseVersion field.
+func (o *NiatelemetryNexusDashboards) SetReleaseVersion(v []string) {
+	o.ReleaseVersion = v
+}
+
+// GetSustainabilityReportStatus returns the SustainabilityReportStatus field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetSustainabilityReportStatus() string {
+	if o == nil || IsNil(o.SustainabilityReportStatus) {
+		var ret string
+		return ret
+	}
+	return *o.SustainabilityReportStatus
+}
+
+// GetSustainabilityReportStatusOk returns a tuple with the SustainabilityReportStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetSustainabilityReportStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.SustainabilityReportStatus) {
+		return nil, false
+	}
+	return o.SustainabilityReportStatus, true
+}
+
+// HasSustainabilityReportStatus returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasSustainabilityReportStatus() bool {
+	if o != nil && !IsNil(o.SustainabilityReportStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetSustainabilityReportStatus gets a reference to the given string and assigns it to the SustainabilityReportStatus field.
+func (o *NiatelemetryNexusDashboards) SetSustainabilityReportStatus(v string) {
+	o.SustainabilityReportStatus = &v
+}
+
 // GetTypeOfSiteInMso returns the TypeOfSiteInMso field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetTypeOfSiteInMso() string {
 	if o == nil || IsNil(o.TypeOfSiteInMso) {
@@ -1171,6 +1618,38 @@ func (o *NiatelemetryNexusDashboards) SetTypeOfSiteInMso(v string) {
 	o.TypeOfSiteInMso = &v
 }
 
+// GetVcenterCount returns the VcenterCount field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetVcenterCount() int64 {
+	if o == nil || IsNil(o.VcenterCount) {
+		var ret int64
+		return ret
+	}
+	return *o.VcenterCount
+}
+
+// GetVcenterCountOk returns a tuple with the VcenterCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetVcenterCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.VcenterCount) {
+		return nil, false
+	}
+	return o.VcenterCount, true
+}
+
+// HasVcenterCount returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasVcenterCount() bool {
+	if o != nil && !IsNil(o.VcenterCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetVcenterCount gets a reference to the given int64 and assigns it to the VcenterCount field.
+func (o *NiatelemetryNexusDashboards) SetVcenterCount(v int64) {
+	o.VcenterCount = &v
+}
+
 // GetVmmVisualizerAdminState returns the VmmVisualizerAdminState field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetVmmVisualizerAdminState() string {
 	if o == nil || IsNil(o.VmmVisualizerAdminState) {
@@ -1201,6 +1680,71 @@ func (o *NiatelemetryNexusDashboards) HasVmmVisualizerAdminState() bool {
 // SetVmmVisualizerAdminState gets a reference to the given string and assigns it to the VmmVisualizerAdminState field.
 func (o *NiatelemetryNexusDashboards) SetVmmVisualizerAdminState(v string) {
 	o.VmmVisualizerAdminState = &v
+}
+
+// GetVxLanFabCount returns the VxLanFabCount field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetVxLanFabCount() int64 {
+	if o == nil || IsNil(o.VxLanFabCount) {
+		var ret int64
+		return ret
+	}
+	return *o.VxLanFabCount
+}
+
+// GetVxLanFabCountOk returns a tuple with the VxLanFabCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetVxLanFabCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.VxLanFabCount) {
+		return nil, false
+	}
+	return o.VxLanFabCount, true
+}
+
+// HasVxLanFabCount returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasVxLanFabCount() bool {
+	if o != nil && !IsNil(o.VxLanFabCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetVxLanFabCount gets a reference to the given int64 and assigns it to the VxLanFabCount field.
+func (o *NiatelemetryNexusDashboards) SetVxLanFabCount(v int64) {
+	o.VxLanFabCount = &v
+}
+
+// GetVxLanFabNames returns the VxLanFabNames field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNexusDashboards) GetVxLanFabNames() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.VxLanFabNames
+}
+
+// GetVxLanFabNamesOk returns a tuple with the VxLanFabNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNexusDashboards) GetVxLanFabNamesOk() ([]string, bool) {
+	if o == nil || IsNil(o.VxLanFabNames) {
+		return nil, false
+	}
+	return o.VxLanFabNames, true
+}
+
+// HasVxLanFabNames returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasVxLanFabNames() bool {
+	if o != nil && !IsNil(o.VxLanFabNames) {
+		return true
+	}
+
+	return false
+}
+
+// SetVxLanFabNames gets a reference to the given []string and assigns it to the VxLanFabNames field.
+func (o *NiatelemetryNexusDashboards) SetVxLanFabNames(v []string) {
+	o.VxLanFabNames = v
 }
 
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1272,6 +1816,9 @@ func (o NiatelemetryNexusDashboards) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if o.BackupStatus != nil {
+		toSerialize["BackupStatus"] = o.BackupStatus
+	}
 	if !IsNil(o.BandwidthUsageMonitoring) {
 		toSerialize["BandwidthUsageMonitoring"] = o.BandwidthUsageMonitoring
 	}
@@ -1287,11 +1834,20 @@ func (o NiatelemetryNexusDashboards) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ClusterUuid) {
 		toSerialize["ClusterUuid"] = o.ClusterUuid
 	}
+	if !IsNil(o.ComplianceRules) {
+		toSerialize["ComplianceRules"] = o.ComplianceRules
+	}
+	if !IsNil(o.DashboardCount) {
+		toSerialize["DashboardCount"] = o.DashboardCount
+	}
 	if !IsNil(o.DeviceSnapshotsCount) {
 		toSerialize["DeviceSnapshotsCount"] = o.DeviceSnapshotsCount
 	}
 	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
+	}
+	if !IsNil(o.EndpointCount) {
+		toSerialize["EndpointCount"] = o.EndpointCount
 	}
 	if !IsNil(o.FabricImagePoliciesCount) {
 		toSerialize["FabricImagePoliciesCount"] = o.FabricImagePoliciesCount
@@ -1311,8 +1867,20 @@ func (o NiatelemetryNexusDashboards) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.K8VisualizerAdminState) {
 		toSerialize["K8VisualizerAdminState"] = o.K8VisualizerAdminState
 	}
+	if o.LatestVersionList != nil {
+		toSerialize["LatestVersionList"] = o.LatestVersionList
+	}
+	if !IsNil(o.LiveProtectEnabledCount) {
+		toSerialize["LiveProtectEnabledCount"] = o.LiveProtectEnabledCount
+	}
+	if !IsNil(o.MulticastRouteCount) {
+		toSerialize["MulticastRouteCount"] = o.MulticastRouteCount
+	}
 	if !IsNil(o.NdClusterSize) {
 		toSerialize["NdClusterSize"] = o.NdClusterSize
+	}
+	if !IsNil(o.NdHealthy) {
+		toSerialize["NdHealthy"] = o.NdHealthy
 	}
 	if o.NdSites != nil {
 		toSerialize["NdSites"] = o.NdSites
@@ -1347,6 +1915,9 @@ func (o NiatelemetryNexusDashboards) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NumberOfVxlanFabricSitesInMso) {
 		toSerialize["NumberOfVxlanFabricSitesInMso"] = o.NumberOfVxlanFabricSitesInMso
 	}
+	if o.OamEnabled != nil {
+		toSerialize["OamEnabled"] = o.OamEnabled
+	}
 	if !IsNil(o.PerformanceMonitoring) {
 		toSerialize["PerformanceMonitoring"] = o.PerformanceMonitoring
 	}
@@ -1356,17 +1927,38 @@ func (o NiatelemetryNexusDashboards) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PreUpgradeReportGenerationCount) {
 		toSerialize["PreUpgradeReportGenerationCount"] = o.PreUpgradeReportGenerationCount
 	}
+	if !IsNil(o.PreupgradeValidationCount) {
+		toSerialize["PreupgradeValidationCount"] = o.PreupgradeValidationCount
+	}
 	if !IsNil(o.PtpAdminState) {
 		toSerialize["PtpAdminState"] = o.PtpAdminState
+	}
+	if o.RecVersionList != nil {
+		toSerialize["RecVersionList"] = o.RecVersionList
 	}
 	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
+	if o.ReleaseVersion != nil {
+		toSerialize["ReleaseVersion"] = o.ReleaseVersion
+	}
+	if !IsNil(o.SustainabilityReportStatus) {
+		toSerialize["SustainabilityReportStatus"] = o.SustainabilityReportStatus
+	}
 	if !IsNil(o.TypeOfSiteInMso) {
 		toSerialize["TypeOfSiteInMso"] = o.TypeOfSiteInMso
 	}
+	if !IsNil(o.VcenterCount) {
+		toSerialize["VcenterCount"] = o.VcenterCount
+	}
 	if !IsNil(o.VmmVisualizerAdminState) {
 		toSerialize["VmmVisualizerAdminState"] = o.VmmVisualizerAdminState
+	}
+	if !IsNil(o.VxLanFabCount) {
+		toSerialize["VxLanFabCount"] = o.VxLanFabCount
+	}
+	if o.VxLanFabNames != nil {
+		toSerialize["VxLanFabNames"] = o.VxLanFabNames
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
@@ -1425,7 +2017,8 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType   string   `json:"ObjectType"`
+		BackupStatus []string `json:"BackupStatus,omitempty"`
 		// Feature operational state of bandwidth monitoring.
 		BandwidthUsageMonitoring *bool `json:"BandwidthUsageMonitoring,omitempty"`
 		// Count of total Change Control tickets that have been approved and completed.
@@ -1436,10 +2029,16 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		ClusterName *string `json:"ClusterName,omitempty"`
 		// UUID of the Nexus Dashboard cluster.
 		ClusterUuid *string `json:"ClusterUuid,omitempty"`
+		// Number of compliance rules on the fabric.
+		ComplianceRules *int64 `json:"ComplianceRules,omitempty"`
+		// Number of custom dashboard in the fabric.
+		DashboardCount *int64 `json:"DashboardCount,omitempty"`
 		// Count of number of image snapshots taken.
 		DeviceSnapshotsCount *int64 `json:"DeviceSnapshotsCount,omitempty"`
 		// Dn of the objects present for Nexus Dashboard devices.
 		Dn *string `json:"Dn,omitempty"`
+		// Total number of endpoints on fabric.
+		EndpointCount *int64 `json:"EndpointCount,omitempty"`
 		// Count of number of devices with attached image policies.
 		FabricImagePoliciesCount *int64 `json:"FabricImagePoliciesCount,omitempty"`
 		// Feature Operation status of change management.
@@ -1451,10 +2050,17 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		// Health of Nexus Dashboard cluster.
 		IsClusterHealthy *string `json:"IsClusterHealthy,omitempty"`
 		// Feature Operation status of Kubernetes Visualizer.
-		K8VisualizerAdminState *string `json:"K8VisualizerAdminState,omitempty"`
+		K8VisualizerAdminState *string  `json:"K8VisualizerAdminState,omitempty"`
+		LatestVersionList      []string `json:"LatestVersionList,omitempty"`
+		// Count of devices with Live Protect shield status enabled.
+		LiveProtectEnabledCount *int64 `json:"LiveProtectEnabledCount,omitempty"`
+		// Number of multicast routes on fabric.
+		MulticastRouteCount *int64 `json:"MulticastRouteCount,omitempty"`
 		// Number of nodes in Nexus Dashboard cluster.
-		NdClusterSize *int64              `json:"NdClusterSize,omitempty"`
-		NdSites       []NiatelemetrySites `json:"NdSites,omitempty"`
+		NdClusterSize *int64 `json:"NdClusterSize,omitempty"`
+		// Health status of the Nexus Dashboard cluster.
+		NdHealthy *bool               `json:"NdHealthy,omitempty"`
+		NdSites   []NiatelemetrySites `json:"NdSites,omitempty"`
 		// Node type in Nexus Dashboard cluster.
 		NdType *string `json:"NdType,omitempty"`
 		// Version running on Nexus Dashboard.
@@ -1475,21 +2081,33 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		NumberOfTenantsInMso *int64 `json:"NumberOfTenantsInMso,omitempty"`
 		// Number of sites with vxLan type fabric in Multi-Site Orchestrator.
 		NumberOfVxlanFabricSitesInMso *int64 `json:"NumberOfVxlanFabricSitesInMso,omitempty"`
+		OamEnabled                    []bool `json:"OamEnabled,omitempty"`
 		// Feature operational state of performance Monitoring.
 		PerformanceMonitoring *bool `json:"PerformanceMonitoring,omitempty"`
 		// Count of post upgrade report generation.
 		PostUpgradeReportGenerationCount *int64 `json:"PostUpgradeReportGenerationCount,omitempty"`
 		// Count of pre upgrade report generation.
 		PreUpgradeReportGenerationCount *int64 `json:"PreUpgradeReportGenerationCount,omitempty"`
+		// Number of pre-upgrade validations on the fabric.
+		PreupgradeValidationCount *int64 `json:"PreupgradeValidationCount,omitempty"`
 		// Feature Operation status of Precision Time Protocol Monitoring.
-		PtpAdminState *string `json:"PtpAdminState,omitempty"`
+		PtpAdminState  *string  `json:"PtpAdminState,omitempty"`
+		RecVersionList []string `json:"RecVersionList,omitempty"`
 		// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
-		RecordType *string `json:"RecordType,omitempty"`
+		RecordType     *string  `json:"RecordType,omitempty"`
+		ReleaseVersion []string `json:"ReleaseVersion,omitempty"`
+		// Status of sustainability report on fabric.
+		SustainabilityReportStatus *string `json:"SustainabilityReportStatus,omitempty"`
 		// Type of site added to Multi-Site Orchestrator.
 		TypeOfSiteInMso *string `json:"TypeOfSiteInMso,omitempty"`
+		// Number of vCenters integrated into the fabric.
+		VcenterCount *int64 `json:"VcenterCount,omitempty"`
 		// Feature Operation status of VMM Visualizer.
-		VmmVisualizerAdminState *string                                     `json:"VmmVisualizerAdminState,omitempty"`
-		RegisteredDevice        NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VmmVisualizerAdminState *string `json:"VmmVisualizerAdminState,omitempty"`
+		// The total number of active VXLAN-managed fabrics that have both leaf and spine switches configured.
+		VxLanFabCount    *int64                                      `json:"VxLanFabCount,omitempty"`
+		VxLanFabNames    []string                                    `json:"VxLanFabNames,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryNexusDashboardsWithoutEmbeddedStruct := NiatelemetryNexusDashboardsWithoutEmbeddedStruct{}
@@ -1499,20 +2117,28 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetryNexusDashboards := _NiatelemetryNexusDashboards{}
 		varNiatelemetryNexusDashboards.ClassId = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ClassId
 		varNiatelemetryNexusDashboards.ObjectType = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ObjectType
+		varNiatelemetryNexusDashboards.BackupStatus = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.BackupStatus
 		varNiatelemetryNexusDashboards.BandwidthUsageMonitoring = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.BandwidthUsageMonitoring
 		varNiatelemetryNexusDashboards.ChangeApprovalCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ChangeApprovalCount
 		varNiatelemetryNexusDashboards.ChangeRollbackCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ChangeRollbackCount
 		varNiatelemetryNexusDashboards.ClusterName = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ClusterName
 		varNiatelemetryNexusDashboards.ClusterUuid = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ClusterUuid
+		varNiatelemetryNexusDashboards.ComplianceRules = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ComplianceRules
+		varNiatelemetryNexusDashboards.DashboardCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.DashboardCount
 		varNiatelemetryNexusDashboards.DeviceSnapshotsCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.DeviceSnapshotsCount
 		varNiatelemetryNexusDashboards.Dn = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.Dn
+		varNiatelemetryNexusDashboards.EndpointCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.EndpointCount
 		varNiatelemetryNexusDashboards.FabricImagePoliciesCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.FabricImagePoliciesCount
 		varNiatelemetryNexusDashboards.FeatureOperStatus = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.FeatureOperStatus
 		varNiatelemetryNexusDashboards.ImageFileStagingCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ImageFileStagingCount
 		varNiatelemetryNexusDashboards.IpamOperState = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.IpamOperState
 		varNiatelemetryNexusDashboards.IsClusterHealthy = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.IsClusterHealthy
 		varNiatelemetryNexusDashboards.K8VisualizerAdminState = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.K8VisualizerAdminState
+		varNiatelemetryNexusDashboards.LatestVersionList = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.LatestVersionList
+		varNiatelemetryNexusDashboards.LiveProtectEnabledCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.LiveProtectEnabledCount
+		varNiatelemetryNexusDashboards.MulticastRouteCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.MulticastRouteCount
 		varNiatelemetryNexusDashboards.NdClusterSize = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NdClusterSize
+		varNiatelemetryNexusDashboards.NdHealthy = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NdHealthy
 		varNiatelemetryNexusDashboards.NdSites = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NdSites
 		varNiatelemetryNexusDashboards.NdType = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NdType
 		varNiatelemetryNexusDashboards.NdVersion = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NdVersion
@@ -1524,13 +2150,21 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetryNexusDashboards.NumberOfSitesServiced = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NumberOfSitesServiced
 		varNiatelemetryNexusDashboards.NumberOfTenantsInMso = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NumberOfTenantsInMso
 		varNiatelemetryNexusDashboards.NumberOfVxlanFabricSitesInMso = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NumberOfVxlanFabricSitesInMso
+		varNiatelemetryNexusDashboards.OamEnabled = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.OamEnabled
 		varNiatelemetryNexusDashboards.PerformanceMonitoring = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.PerformanceMonitoring
 		varNiatelemetryNexusDashboards.PostUpgradeReportGenerationCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.PostUpgradeReportGenerationCount
 		varNiatelemetryNexusDashboards.PreUpgradeReportGenerationCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.PreUpgradeReportGenerationCount
+		varNiatelemetryNexusDashboards.PreupgradeValidationCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.PreupgradeValidationCount
 		varNiatelemetryNexusDashboards.PtpAdminState = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.PtpAdminState
+		varNiatelemetryNexusDashboards.RecVersionList = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.RecVersionList
 		varNiatelemetryNexusDashboards.RecordType = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.RecordType
+		varNiatelemetryNexusDashboards.ReleaseVersion = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ReleaseVersion
+		varNiatelemetryNexusDashboards.SustainabilityReportStatus = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.SustainabilityReportStatus
 		varNiatelemetryNexusDashboards.TypeOfSiteInMso = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.TypeOfSiteInMso
+		varNiatelemetryNexusDashboards.VcenterCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.VcenterCount
 		varNiatelemetryNexusDashboards.VmmVisualizerAdminState = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.VmmVisualizerAdminState
+		varNiatelemetryNexusDashboards.VxLanFabCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.VxLanFabCount
+		varNiatelemetryNexusDashboards.VxLanFabNames = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.VxLanFabNames
 		varNiatelemetryNexusDashboards.RegisteredDevice = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.RegisteredDevice
 		*o = NiatelemetryNexusDashboards(varNiatelemetryNexusDashboards)
 	} else {
@@ -1551,20 +2185,28 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BackupStatus")
 		delete(additionalProperties, "BandwidthUsageMonitoring")
 		delete(additionalProperties, "ChangeApprovalCount")
 		delete(additionalProperties, "ChangeRollbackCount")
 		delete(additionalProperties, "ClusterName")
 		delete(additionalProperties, "ClusterUuid")
+		delete(additionalProperties, "ComplianceRules")
+		delete(additionalProperties, "DashboardCount")
 		delete(additionalProperties, "DeviceSnapshotsCount")
 		delete(additionalProperties, "Dn")
+		delete(additionalProperties, "EndpointCount")
 		delete(additionalProperties, "FabricImagePoliciesCount")
 		delete(additionalProperties, "FeatureOperStatus")
 		delete(additionalProperties, "ImageFileStagingCount")
 		delete(additionalProperties, "IpamOperState")
 		delete(additionalProperties, "IsClusterHealthy")
 		delete(additionalProperties, "K8VisualizerAdminState")
+		delete(additionalProperties, "LatestVersionList")
+		delete(additionalProperties, "LiveProtectEnabledCount")
+		delete(additionalProperties, "MulticastRouteCount")
 		delete(additionalProperties, "NdClusterSize")
+		delete(additionalProperties, "NdHealthy")
 		delete(additionalProperties, "NdSites")
 		delete(additionalProperties, "NdType")
 		delete(additionalProperties, "NdVersion")
@@ -1576,13 +2218,21 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "NumberOfSitesServiced")
 		delete(additionalProperties, "NumberOfTenantsInMso")
 		delete(additionalProperties, "NumberOfVxlanFabricSitesInMso")
+		delete(additionalProperties, "OamEnabled")
 		delete(additionalProperties, "PerformanceMonitoring")
 		delete(additionalProperties, "PostUpgradeReportGenerationCount")
 		delete(additionalProperties, "PreUpgradeReportGenerationCount")
+		delete(additionalProperties, "PreupgradeValidationCount")
 		delete(additionalProperties, "PtpAdminState")
+		delete(additionalProperties, "RecVersionList")
 		delete(additionalProperties, "RecordType")
+		delete(additionalProperties, "ReleaseVersion")
+		delete(additionalProperties, "SustainabilityReportStatus")
 		delete(additionalProperties, "TypeOfSiteInMso")
+		delete(additionalProperties, "VcenterCount")
 		delete(additionalProperties, "VmmVisualizerAdminState")
+		delete(additionalProperties, "VxLanFabCount")
+		delete(additionalProperties, "VxLanFabNames")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs

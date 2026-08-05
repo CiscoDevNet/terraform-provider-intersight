@@ -90,6 +90,96 @@ func getAuditdPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"log_monitor": {
+			Description: "Log monitor configuration for the AuditD feature.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"all": {
+						Description: "It can be configured to monitor all the log events.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"auth_log_files": {
+						Description: "It can be configured to monitor log events only w.r.t auth log files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cron_files": {
+						Description: "It can be configured to monitor log events only w.r.t cron files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"dns_client_files": {
+						Description: "It can be configured to monitor log events only w.r.t dns client files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"docker": {
+						Description: "It can be configured to monitor log events only w.r.t Docker executions and file changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"kernel_module_mgmt": {
+						Description: "It can be configured to monitor log events only w.r.t kernel module files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"process_audit": {
+						Description: "It can be configured to monitor log events only w.r.t process execution audit.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"system_log_files": {
+						Description: "It can be configured to monitor log events only w.r.t system log files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"system_login_reboot": {
+						Description: "It can be configured to monitor log events only w.r.t system login reboot file changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"system_software": {
+						Description: "It can be configured to monitor log events only w.r.t system software's binaries changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"system_time_change": {
+						Description: "It can be configured to monitor log events only w.r.t system time file changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"user_group_config_files": {
+						Description: "It can be configured to monitor log events only w.r.t User Group Config Files changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"user_privilege_mgmt": {
+						Description: "It can be configured to monitor log events only w.r.t User Privilege management file changes.\n* `no` - Value to disable the specific monitoring rule.\n* `yes` - Value to enable the specific monitoring rule.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -584,6 +674,115 @@ func dataSourceAuditdPolicyRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("log_monitor"); ok {
+		p := make([]models.AuditdLogMonitorType, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.AuditdLogMonitorType{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["all"]; ok {
+				{
+					x := (v.(string))
+					o.SetAll(x)
+				}
+			}
+			if v, ok := l["auth_log_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetAuthLogFiles(x)
+				}
+			}
+			o.SetClassId("auditd.LogMonitorType")
+			if v, ok := l["cron_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetCronFiles(x)
+				}
+			}
+			if v, ok := l["dns_client_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetDnsClientFiles(x)
+				}
+			}
+			if v, ok := l["docker"]; ok {
+				{
+					x := (v.(string))
+					o.SetDocker(x)
+				}
+			}
+			if v, ok := l["kernel_module_mgmt"]; ok {
+				{
+					x := (v.(string))
+					o.SetKernelModuleMgmt(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["process_audit"]; ok {
+				{
+					x := (v.(string))
+					o.SetProcessAudit(x)
+				}
+			}
+			if v, ok := l["system_log_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemLogFiles(x)
+				}
+			}
+			if v, ok := l["system_login_reboot"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemLoginReboot(x)
+				}
+			}
+			if v, ok := l["system_software"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemSoftware(x)
+				}
+			}
+			if v, ok := l["system_time_change"]; ok {
+				{
+					x := (v.(string))
+					o.SetSystemTimeChange(x)
+				}
+			}
+			if v, ok := l["user_group_config_files"]; ok {
+				{
+					x := (v.(string))
+					o.SetUserGroupConfigFiles(x)
+				}
+			}
+			if v, ok := l["user_privilege_mgmt"]; ok {
+				{
+					x := (v.(string))
+					o.SetUserPrivilegeMgmt(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetLogMonitor(x)
+		}
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
@@ -983,6 +1182,8 @@ func dataSourceAuditdPolicyRead(c context.Context, d *schema.ResourceData, meta 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["log_monitor"] = flattenMapAuditdLogMonitorType(s.GetLogMonitor(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

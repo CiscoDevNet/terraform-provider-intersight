@@ -248,6 +248,33 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"bios_configurations": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+			},
 			"bme_dma_mitigation": {
 				Description:  "BIOS Token for setting BME DMA Mitigation configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:         schema.TypeString,
@@ -1385,6 +1412,14 @@ func resourceBiosPolicy() *schema.Resource {
 					}
 					return
 				}},
+			"model": {
+				Description:  "Specifies supported server model.\n* `Not-Applicable` - Represents case where the server model does not apply.\n* `UCSC845A` - Represents UCS C845A server model.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Not-Applicable", "UCSC845A"}, false),
+				Optional:     true,
+				Computed:     true,
+				ForceNew:     true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -1889,6 +1924,14 @@ func resourceBiosPolicy() *schema.Resource {
 					},
 				},
 			},
+			"policy_type": {
+				Description:  "Specifies BIOS policy compatibility type.\n* `Generic` - Generic BIOS type is compatible only for UCS B, C, and X Series models. Do not attempt to proceed if you are using an unsupported model, as this may result in configuration errors.\n* `ModelSpecific` - Model Specific BIOS type is compatible only for UCS C845A model. Do not attempt to proceed if you are using an unsupported model, as this may result in configuration errors.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Generic", "ModelSpecific"}, false),
+				Optional:     true,
+				Computed:     true,
+				ForceNew:     true,
+			},
 			"pop_support": {
 				Description:  "BIOS Token for setting Power ON Password configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:         schema.TypeString,
@@ -2027,9 +2070,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"qpi_link_speed": {
-				Description:  "BIOS Token for setting UPI Link Frequency Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token.\n* `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token.\n* `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token.\n* `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token.\n* `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token.\n* `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token.\n* `24.0GT/s` - Value - 24.0GT/s for configuring QpiLinkSpeed token.\n* `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token.\n* `Auto` - Value - Auto for configuring QpiLinkSpeed token.\n* `Use Per Link Setting` - Value - Use Per Link Setting for configuring QpiLinkSpeed token.",
+				Description:  "BIOS Token for setting UPI Link Frequency Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token.\n* `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token.\n* `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token.\n* `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token.\n* `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token.\n* `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token.\n* `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token.\n* `24.0GT/s` - Value - 24.0GT/s for configuring QpiLinkSpeed token.\n* `Auto` - Value - Auto for configuring QpiLinkSpeed token.\n* `Use Per Link Setting` - Value - Use Per Link Setting for configuring QpiLinkSpeed token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "10.4GT/s", "11.2GT/s", "12.8GT/s", "14.4GT/s", "16.0GT/s", "20.0GT/s", "24.0GT/s", "9.6GT/s", "Auto", "Use Per Link Setting"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "9.6GT/s", "10.4GT/s", "11.2GT/s", "12.8GT/s", "14.4GT/s", "16.0GT/s", "20.0GT/s", "24.0GT/s", "Auto", "Use Per Link Setting"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -4047,6 +4090,36 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetBaudRate(x)
 	}
 
+	if v, ok := d.GetOk("bios_configurations"); ok {
+		x := make([]models.BiosBaseBiosConfiguration, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewBiosBaseBiosConfigurationWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("bios.BaseBiosConfiguration")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetBiosConfigurations(x)
+		}
+	}
+
 	if v, ok := d.GetOk("bme_dma_mitigation"); ok {
 		x := (v.(string))
 		o.SetBmeDmaMitigation(x)
@@ -4834,7 +4907,12 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetMmiohSize(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("model"); ok {
+		x := (v.(string))
+		o.SetModel(x)
+	}
+
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -4891,7 +4969,7 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetOptimizedPowerMode(x)
 	}
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5142,6 +5220,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("pcie_slots_cdn_enable"); ok {
 		x := (v.(string))
 		o.SetPcieSlotsCdnEnable(x)
+	}
+
+	if v, ok := d.GetOkExists("policy_type"); ok {
+		x := (v.(string))
+		o.SetPolicyType(x)
 	}
 
 	if v, ok := d.GetOk("pop_support"); ok {
@@ -6639,6 +6722,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property BaudRate in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("bios_configurations", flattenListBiosBaseBiosConfiguration(s.GetBiosConfigurations(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property BiosConfigurations in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("bme_dma_mitigation", (s.GetBmeDmaMitigation())); err != nil {
 		return diag.Errorf("error occurred while setting property BmeDmaMitigation in BiosPolicy object: %s", err.Error())
 	}
@@ -7283,6 +7370,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property ModTime in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("model", (s.GetModel())); err != nil {
+		return diag.Errorf("error occurred while setting property Model in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property Moid in BiosPolicy object: %s", err.Error())
 	}
@@ -7513,6 +7604,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PermissionResources in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("policy_type", (s.GetPolicyType())); err != nil {
+		return diag.Errorf("error occurred while setting property PolicyType in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pop_support", (s.GetPopSupport())); err != nil {
@@ -8656,6 +8751,35 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetBaudRate(x)
 	}
 
+	if d.HasChange("bios_configurations") {
+		v := d.Get("bios_configurations")
+		x := make([]models.BiosBaseBiosConfiguration, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.BiosBaseBiosConfiguration{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("bios.BaseBiosConfiguration")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetBiosConfigurations(x)
+	}
+
 	if d.HasChange("bme_dma_mitigation") {
 		v := d.Get("bme_dma_mitigation")
 		x := (v.(string))
@@ -9600,6 +9724,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetMmiohSize(x)
 	}
 
+	if d.HasChange("model") {
+		v := d.Get("model")
+		x := (v.(string))
+		o.SetModel(x)
+	}
+
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -9962,6 +10092,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("pcie_slots_cdn_enable")
 		x := (v.(string))
 		o.SetPcieSlotsCdnEnable(x)
+	}
+
+	if d.HasChange("policy_type") {
+		v := d.Get("policy_type")
+		x := (v.(string))
+		o.SetPolicyType(x)
 	}
 
 	if d.HasChange("pop_support") {

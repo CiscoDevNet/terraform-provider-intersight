@@ -1446,17 +1446,17 @@ func resourceAssetDeviceContractNotification() *schema.Resource {
 				}, ForceNew: true,
 			},
 			"state_contract": {
-				Description:  "Internal property used for triggering and tracking actions for contract information.\n* `Update` - Sn2Info/Contract information needs to be updated.\n* `OK` - Sn2Info/Contract information was fetched succcessfuly and updated.\n* `Failed` - Sn2Info/Contract information was not available  or failed while fetching.\n* `Retry` - Sn2Info/Contract information update failed and will be retried later.",
+				Description:  "Internal property used for triggering and tracking actions for contract information.\n* `Update` - Sn2Info/Contract information needs to be updated.\n* `OK` - Sn2Info/Contract information was fetched succcessfuly and updated.\n* `Failed` - Sn2Info/Contract information was not available  or failed while fetching.\n* `Retry` - Sn2Info/Contract information update failed and will be retried later.\n* `Inactive` - Device is not in connected state (offline). No action will be taken when the state is Inactive.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"Update", "OK", "Failed", "Retry"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Update", "OK", "Failed", "Retry", "Inactive"}, false),
 				Optional:     true,
 				Default:      "Update",
 				ForceNew:     true,
 			},
 			"state_sn2_info": {
-				Description:  "Internal property used for triggering and tracking actions for sn2info information.\n* `Update` - Sn2Info/Contract information needs to be updated.\n* `OK` - Sn2Info/Contract information was fetched succcessfuly and updated.\n* `Failed` - Sn2Info/Contract information was not available  or failed while fetching.\n* `Retry` - Sn2Info/Contract information update failed and will be retried later.",
+				Description:  "Internal property used for triggering and tracking actions for sn2info information.\n* `Update` - Sn2Info/Contract information needs to be updated.\n* `OK` - Sn2Info/Contract information was fetched succcessfuly and updated.\n* `Failed` - Sn2Info/Contract information was not available  or failed while fetching.\n* `Retry` - Sn2Info/Contract information update failed and will be retried later.\n* `Inactive` - Device is not in connected state (offline). No action will be taken when the state is Inactive.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"Update", "OK", "Failed", "Retry"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Update", "OK", "Failed", "Retry", "Inactive"}, false),
 				Optional:     true,
 				Default:      "Update",
 				ForceNew:     true,
@@ -1967,7 +1967,7 @@ func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.
 		o.SetMaintenanceSalesOrderNumber(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -22,17 +22,21 @@ import (
 // checks if the ApplianceBackup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApplianceBackup{}
 
-// ApplianceBackup Backup tracks all backup requests to create a full system backup of the Intersight Appliance. There will be only one Backup managed object with a 'Started' state at any time. All other Backup managed objects will be in terminal states.
+// ApplianceBackup The Backup object is essential for managing system backups, ensuring data integrity and continuity through structured backup requests and processes. #### Purpose The Backup object oversees the creation and tracking of system backups, facilitating comprehensive data protection strategies through monitored backup operations. #### Key Concepts - **Managed States:** Enables tracking of backup states from initiation to completion, ensuring the integrity and availability of system data. - **Single Active Instance:** Maintains one active backup instance at any given time to streamline operations and avoid conflicts. - **Manual and Scheduled Modes:** Supports both manual and scheduled backup requests, accommodating diverse operational needs. - **Account Relationships:** Integrates with account management for secure and organized backup processes.
 type ApplianceBackup struct {
 	ApplianceBackupBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Download URL for the backup artifact when available. Only populated for successful local-protocol backups; empty for remote-protocol backups.
+	BackupDownloadUrl *string `json:"BackupDownloadUrl,omitempty"`
 	// Elapsed time in seconds since the backup process has started.
 	ElapsedTime *int64 `json:"ElapsedTime,omitempty"`
 	// End date and time of the backup process.
 	EndTime *time.Time `json:"EndTime,omitempty"`
+	// Set to true to allow deletion of the oldest local backup when local backup retention limit is reached. If false and retention count is reached, the backup operation fails.
+	ForceDelete *bool `json:"ForceDelete,omitempty"`
 	// If true, represents a manual backup. Else represents a scheduled backup.
 	IsManual *bool `json:"IsManual,omitempty"`
 	// Indicates whether the value of the 'password' property has been set.
@@ -43,7 +47,9 @@ type ApplianceBackup struct {
 	// Start date and time of the backup process.
 	StartTime *time.Time `json:"StartTime,omitempty"`
 	// Status of the backup managed object. * `Started` - Backup or restore process has started. * `Created` - Backup or restore is in created state. * `Failed` - Backup or restore process has failed. * `Completed` - Backup or restore process has completed. * `Copied` - Backup file has been copied. * `Cleanup Failed` - Cleanup of the old backup has failed.
-	Status               *string                        `json:"Status,omitempty"`
+	Status *string `json:"Status,omitempty"`
+	// Set to true to inherit credentials, protocol, and file server settings from the appliance backup policy. If false, use explicit settings provided in this backup object.
+	UsePolicySettings    *bool                          `json:"UsePolicySettings,omitempty"`
 	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -133,6 +139,38 @@ func (o *ApplianceBackup) GetDefaultObjectType() interface{} {
 	return "appliance.Backup"
 }
 
+// GetBackupDownloadUrl returns the BackupDownloadUrl field value if set, zero value otherwise.
+func (o *ApplianceBackup) GetBackupDownloadUrl() string {
+	if o == nil || IsNil(o.BackupDownloadUrl) {
+		var ret string
+		return ret
+	}
+	return *o.BackupDownloadUrl
+}
+
+// GetBackupDownloadUrlOk returns a tuple with the BackupDownloadUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceBackup) GetBackupDownloadUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.BackupDownloadUrl) {
+		return nil, false
+	}
+	return o.BackupDownloadUrl, true
+}
+
+// HasBackupDownloadUrl returns a boolean if a field has been set.
+func (o *ApplianceBackup) HasBackupDownloadUrl() bool {
+	if o != nil && !IsNil(o.BackupDownloadUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupDownloadUrl gets a reference to the given string and assigns it to the BackupDownloadUrl field.
+func (o *ApplianceBackup) SetBackupDownloadUrl(v string) {
+	o.BackupDownloadUrl = &v
+}
+
 // GetElapsedTime returns the ElapsedTime field value if set, zero value otherwise.
 func (o *ApplianceBackup) GetElapsedTime() int64 {
 	if o == nil || IsNil(o.ElapsedTime) {
@@ -195,6 +233,38 @@ func (o *ApplianceBackup) HasEndTime() bool {
 // SetEndTime gets a reference to the given time.Time and assigns it to the EndTime field.
 func (o *ApplianceBackup) SetEndTime(v time.Time) {
 	o.EndTime = &v
+}
+
+// GetForceDelete returns the ForceDelete field value if set, zero value otherwise.
+func (o *ApplianceBackup) GetForceDelete() bool {
+	if o == nil || IsNil(o.ForceDelete) {
+		var ret bool
+		return ret
+	}
+	return *o.ForceDelete
+}
+
+// GetForceDeleteOk returns a tuple with the ForceDelete field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceBackup) GetForceDeleteOk() (*bool, bool) {
+	if o == nil || IsNil(o.ForceDelete) {
+		return nil, false
+	}
+	return o.ForceDelete, true
+}
+
+// HasForceDelete returns a boolean if a field has been set.
+func (o *ApplianceBackup) HasForceDelete() bool {
+	if o != nil && !IsNil(o.ForceDelete) {
+		return true
+	}
+
+	return false
+}
+
+// SetForceDelete gets a reference to the given bool and assigns it to the ForceDelete field.
+func (o *ApplianceBackup) SetForceDelete(v bool) {
+	o.ForceDelete = &v
 }
 
 // GetIsManual returns the IsManual field value if set, zero value otherwise.
@@ -390,6 +460,38 @@ func (o *ApplianceBackup) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetUsePolicySettings returns the UsePolicySettings field value if set, zero value otherwise.
+func (o *ApplianceBackup) GetUsePolicySettings() bool {
+	if o == nil || IsNil(o.UsePolicySettings) {
+		var ret bool
+		return ret
+	}
+	return *o.UsePolicySettings
+}
+
+// GetUsePolicySettingsOk returns a tuple with the UsePolicySettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceBackup) GetUsePolicySettingsOk() (*bool, bool) {
+	if o == nil || IsNil(o.UsePolicySettings) {
+		return nil, false
+	}
+	return o.UsePolicySettings, true
+}
+
+// HasUsePolicySettings returns a boolean if a field has been set.
+func (o *ApplianceBackup) HasUsePolicySettings() bool {
+	if o != nil && !IsNil(o.UsePolicySettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsePolicySettings gets a reference to the given bool and assigns it to the UsePolicySettings field.
+func (o *ApplianceBackup) SetUsePolicySettings(v bool) {
+	o.UsePolicySettings = &v
+}
+
 // GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceBackup) GetAccount() IamAccountRelationship {
 	if o == nil || IsNil(o.Account.Get()) {
@@ -459,11 +561,17 @@ func (o ApplianceBackup) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BackupDownloadUrl) {
+		toSerialize["BackupDownloadUrl"] = o.BackupDownloadUrl
+	}
 	if !IsNil(o.ElapsedTime) {
 		toSerialize["ElapsedTime"] = o.ElapsedTime
 	}
 	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
+	}
+	if !IsNil(o.ForceDelete) {
+		toSerialize["ForceDelete"] = o.ForceDelete
 	}
 	if !IsNil(o.IsManual) {
 		toSerialize["IsManual"] = o.IsManual
@@ -482,6 +590,9 @@ func (o ApplianceBackup) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
+	}
+	if !IsNil(o.UsePolicySettings) {
+		toSerialize["UsePolicySettings"] = o.UsePolicySettings
 	}
 	if o.Account.IsSet() {
 		toSerialize["Account"] = o.Account.Get()
@@ -541,10 +652,14 @@ func (o *ApplianceBackup) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Download URL for the backup artifact when available. Only populated for successful local-protocol backups; empty for remote-protocol backups.
+		BackupDownloadUrl *string `json:"BackupDownloadUrl,omitempty"`
 		// Elapsed time in seconds since the backup process has started.
 		ElapsedTime *int64 `json:"ElapsedTime,omitempty"`
 		// End date and time of the backup process.
 		EndTime *time.Time `json:"EndTime,omitempty"`
+		// Set to true to allow deletion of the oldest local backup when local backup retention limit is reached. If false and retention count is reached, the backup operation fails.
+		ForceDelete *bool `json:"ForceDelete,omitempty"`
 		// If true, represents a manual backup. Else represents a scheduled backup.
 		IsManual *bool `json:"IsManual,omitempty"`
 		// Indicates whether the value of the 'password' property has been set.
@@ -555,8 +670,10 @@ func (o *ApplianceBackup) UnmarshalJSON(data []byte) (err error) {
 		// Start date and time of the backup process.
 		StartTime *time.Time `json:"StartTime,omitempty"`
 		// Status of the backup managed object. * `Started` - Backup or restore process has started. * `Created` - Backup or restore is in created state. * `Failed` - Backup or restore process has failed. * `Completed` - Backup or restore process has completed. * `Copied` - Backup file has been copied. * `Cleanup Failed` - Cleanup of the old backup has failed.
-		Status  *string                        `json:"Status,omitempty"`
-		Account NullableIamAccountRelationship `json:"Account,omitempty"`
+		Status *string `json:"Status,omitempty"`
+		// Set to true to inherit credentials, protocol, and file server settings from the appliance backup policy. If false, use explicit settings provided in this backup object.
+		UsePolicySettings *bool                          `json:"UsePolicySettings,omitempty"`
+		Account           NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceBackupWithoutEmbeddedStruct := ApplianceBackupWithoutEmbeddedStruct{}
@@ -566,14 +683,17 @@ func (o *ApplianceBackup) UnmarshalJSON(data []byte) (err error) {
 		varApplianceBackup := _ApplianceBackup{}
 		varApplianceBackup.ClassId = varApplianceBackupWithoutEmbeddedStruct.ClassId
 		varApplianceBackup.ObjectType = varApplianceBackupWithoutEmbeddedStruct.ObjectType
+		varApplianceBackup.BackupDownloadUrl = varApplianceBackupWithoutEmbeddedStruct.BackupDownloadUrl
 		varApplianceBackup.ElapsedTime = varApplianceBackupWithoutEmbeddedStruct.ElapsedTime
 		varApplianceBackup.EndTime = varApplianceBackupWithoutEmbeddedStruct.EndTime
+		varApplianceBackup.ForceDelete = varApplianceBackupWithoutEmbeddedStruct.ForceDelete
 		varApplianceBackup.IsManual = varApplianceBackupWithoutEmbeddedStruct.IsManual
 		varApplianceBackup.IsPasswordSet = varApplianceBackupWithoutEmbeddedStruct.IsPasswordSet
 		varApplianceBackup.Messages = varApplianceBackupWithoutEmbeddedStruct.Messages
 		varApplianceBackup.Password = varApplianceBackupWithoutEmbeddedStruct.Password
 		varApplianceBackup.StartTime = varApplianceBackupWithoutEmbeddedStruct.StartTime
 		varApplianceBackup.Status = varApplianceBackupWithoutEmbeddedStruct.Status
+		varApplianceBackup.UsePolicySettings = varApplianceBackupWithoutEmbeddedStruct.UsePolicySettings
 		varApplianceBackup.Account = varApplianceBackupWithoutEmbeddedStruct.Account
 		*o = ApplianceBackup(varApplianceBackup)
 	} else {
@@ -594,14 +714,17 @@ func (o *ApplianceBackup) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BackupDownloadUrl")
 		delete(additionalProperties, "ElapsedTime")
 		delete(additionalProperties, "EndTime")
+		delete(additionalProperties, "ForceDelete")
 		delete(additionalProperties, "IsManual")
 		delete(additionalProperties, "IsPasswordSet")
 		delete(additionalProperties, "Messages")
 		delete(additionalProperties, "Password")
 		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Status")
+		delete(additionalProperties, "UsePolicySettings")
 		delete(additionalProperties, "Account")
 
 		// remove fields from embedded structs

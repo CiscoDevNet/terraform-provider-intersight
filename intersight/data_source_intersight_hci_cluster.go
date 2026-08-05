@@ -275,6 +275,41 @@ func getHciClusterSchema() map[string]*schema.Schema {
 			Optional: true,
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
+		"cluster_operation": {
+			Description: "A reference to a hciClusterOperation resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"cluster_software_map": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -307,6 +342,11 @@ func getHciClusterSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"cluster_type": {
+			Description: "The type of the cluster. Possible values:\n- HYPER_CONVERGED: Traditional HCI cluster using local storage.\n- COMPUTE: Cluster using external storage.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"compliance": {
 			Description: "A reference to a hciCompliance resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1131,6 +1171,40 @@ func getHciClusterSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"storage_containers": {
+			Description: "An array of relationships to hciStorageContainer resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"storage_usage_bytes": {
 			Description: "The storage usage in bytes of the cluster.",
 			Type:        schema.TypeInt,
@@ -1248,7 +1322,7 @@ func getHciClusterSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"upgrade_status": {
-			Description: "The upgrade status of a cluster includes the following known values: PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED,\nFAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster.",
+			Description: "The upgrade status of a cluster includes the following known values PENDING, DOWNLOADING, QUEUED, PREUPGRADE, UPGRADING, SUCCEEDED,\nFAILED, CANCELLED, and SCHEDULED.The upgrade status of a cluster.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1662,6 +1736,49 @@ func dataSourceHciClusterRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetClusterFunction(x)
 	}
 
+	if v, ok := d.GetOk("cluster_operation"); ok {
+		p := make([]models.HciClusterOperationRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsHciClusterOperationRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClusterOperation(x)
+		}
+	}
+
 	if v, ok := d.GetOk("cluster_software_map"); ok {
 		x := make([]models.HciSoftwareType, 0)
 		s := v.([]interface{})
@@ -1688,6 +1805,11 @@ func dataSourceHciClusterRead(c context.Context, d *schema.ResourceData, meta in
 			x = append(x, *o)
 		}
 		o.SetClusterSoftwareMap(x)
+	}
+
+	if v, ok := d.GetOk("cluster_type"); ok {
+		x := (v.(string))
+		o.SetClusterType(x)
 	}
 
 	if v, ok := d.GetOk("compliance"); ok {
@@ -2437,6 +2559,46 @@ func dataSourceHciClusterRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetStorageCapacityBytes(x)
 	}
 
+	if v, ok := d.GetOk("storage_containers"); ok {
+		x := make([]models.HciStorageContainerRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsHciStorageContainerRelationship(o))
+		}
+		o.SetStorageContainers(x)
+	}
+
 	if v, ok := d.GetOkExists("storage_usage_bytes"); ok {
 		x := int64(v.(int))
 		o.SetStorageUsageBytes(x)
@@ -2783,7 +2945,10 @@ func dataSourceHciClusterRead(c context.Context, d *schema.ResourceData, meta in
 				temp["cluster_ext_id"] = (s.GetClusterExtId())
 				temp["cluster_function"] = (s.GetClusterFunction())
 
+				temp["cluster_operation"] = flattenMapHciClusterOperationRelationship(s.GetClusterOperation(), d)
+
 				temp["cluster_software_map"] = flattenListHciSoftwareType(s.GetClusterSoftwareMap(), d)
+				temp["cluster_type"] = (s.GetClusterType())
 
 				temp["compliance"] = flattenMapHciComplianceRelationship(s.GetCompliance(), d)
 				temp["container_name"] = (s.GetContainerName())
@@ -2848,6 +3013,8 @@ func dataSourceHciClusterRead(c context.Context, d *schema.ResourceData, meta in
 				temp["remote_support"] = (s.GetRemoteSupport())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["storage_capacity_bytes"] = (s.GetStorageCapacityBytes())
+
+				temp["storage_containers"] = flattenListHciStorageContainerRelationship(s.GetStorageContainers(), d)
 				temp["storage_usage_bytes"] = (s.GetStorageUsageBytes())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

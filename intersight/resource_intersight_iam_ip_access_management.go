@@ -639,7 +639,7 @@ func resourceIamIpAccessManagementCreate(c context.Context, d *schema.ResourceDa
 		o.SetEnable(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

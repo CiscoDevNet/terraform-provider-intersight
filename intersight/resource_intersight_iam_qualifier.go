@@ -599,7 +599,7 @@ func resourceIamQualifierCreate(c context.Context, d *schema.ResourceData, meta 
 
 	o.SetClassId("iam.Qualifier")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

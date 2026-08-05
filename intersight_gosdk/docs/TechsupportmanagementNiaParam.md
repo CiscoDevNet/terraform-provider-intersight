@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Period** | Pointer to **int64** | Number of days for which to collect techsupport. | [optional] [default to 2]
 **Pids** | Pointer to **[]string** |  | [optional] 
 **SerialNumbers** | Pointer to **[]string** |  | [optional] 
+**ShowTechOption** | Pointer to **string** | ShowTechOption specifies an optional custom show-tech option/command for NDFC tech support collection. | [optional] 
 **UpgradeLogs** | Pointer to **bool** | UpgradeLogs controls the inclusion of upgrade logs in tech support bundles. | [optional] 
 
 ## Methods
@@ -269,6 +270,31 @@ HasSerialNumbers returns a boolean if a field has been set.
 `func (o *TechsupportmanagementNiaParam) UnsetSerialNumbers()`
 
 UnsetSerialNumbers ensures that no value is present for SerialNumbers, not even an explicit nil
+### GetShowTechOption
+
+`func (o *TechsupportmanagementNiaParam) GetShowTechOption() string`
+
+GetShowTechOption returns the ShowTechOption field if non-nil, zero value otherwise.
+
+### GetShowTechOptionOk
+
+`func (o *TechsupportmanagementNiaParam) GetShowTechOptionOk() (*string, bool)`
+
+GetShowTechOptionOk returns a tuple with the ShowTechOption field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowTechOption
+
+`func (o *TechsupportmanagementNiaParam) SetShowTechOption(v string)`
+
+SetShowTechOption sets ShowTechOption field to given value.
+
+### HasShowTechOption
+
+`func (o *TechsupportmanagementNiaParam) HasShowTechOption() bool`
+
+HasShowTechOption returns a boolean if a field has been set.
+
 ### GetUpgradeLogs
 
 `func (o *TechsupportmanagementNiaParam) GetUpgradeLogs() bool`

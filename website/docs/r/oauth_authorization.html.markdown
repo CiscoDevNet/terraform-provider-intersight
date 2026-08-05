@@ -3,28 +3,26 @@ subcategory: "oauth"
 layout: "intersight"
 page_title: "Intersight: intersight_oauth_authorization"
 description: |-
-        ### Overview
         The Authorization object underpins the OAuth2 authorization process, enabling user consent for external interactions on behalf of their account. It supports secure and efficient management of user credentials for accessing external services.
         #### Purpose
         Authorization serves as the conduit for user consent, allowing Intersight to interact with external software repositories securely on behalf of users, particularly in support of OAuth2 resource owner grant types.
         #### Key Concepts
-        - **User Consent:** - Facilitates secure consent mechanisms for external interactions, ensuring user credentials are protected.
-        - **Security Measures:** - Incorporates encryption and secure handling of user credentials, safeguarding access and interactions.
-        - **Privileged Access:** - Ensures that only authorized administrators can create, update, or read authorizations, maintaining strict access controls.
-        - **Account Integration:** - Associated with the iam.Account object, providing a structured approach to managing user authorization processes.
+        - **User Consent:** Facilitates secure consent mechanisms for external interactions, ensuring user credentials are protected.
+        - **Security Measures:** Incorporates encryption and secure handling of user credentials, safeguarding access and interactions.
+        - **Privileged Access:** Ensures that only authorized administrators can create, update, or read authorizations, maintaining strict access controls.
+        - **Account Integration:** Associated with the iam.Account object, providing a structured approach to managing user authorization processes.
 
 ---
 
 # Resource: intersight_oauth_authorization
-### Overview
 The Authorization object underpins the OAuth2 authorization process, enabling user consent for external interactions on behalf of their account. It supports secure and efficient management of user credentials for accessing external services.
 #### Purpose
 Authorization serves as the conduit for user consent, allowing Intersight to interact with external software repositories securely on behalf of users, particularly in support of OAuth2 resource owner grant types.
 #### Key Concepts
-- **User Consent:** - Facilitates secure consent mechanisms for external interactions, ensuring user credentials are protected.
-- **Security Measures:** - Incorporates encryption and secure handling of user credentials, safeguarding access and interactions.
-- **Privileged Access:** - Ensures that only authorized administrators can create, update, or read authorizations, maintaining strict access controls.
-- **Account Integration:** - Associated with the iam.Account object, providing a structured approach to managing user authorization processes.
+- **User Consent:** Facilitates secure consent mechanisms for external interactions, ensuring user credentials are protected.
+- **Security Measures:** Incorporates encryption and secure handling of user credentials, safeguarding access and interactions.
+- **Privileged Access:** Ensures that only authorized administrators can create, update, or read authorizations, maintaining strict access controls.
+- **Account Integration:** Associated with the iam.Account object, providing a structured approach to managing user authorization processes.
 ## Argument Reference
 The following arguments are supported:
 * `access_token`:(HashMap) -(ReadOnly) A reference to a oauthAccessToken resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

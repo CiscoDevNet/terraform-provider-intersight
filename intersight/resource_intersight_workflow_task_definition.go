@@ -1182,7 +1182,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 				Type:         schema.TypeInt,
 				ValidateFunc: validation.IntAtLeast(1),
 				Optional:     true,
-				Default:      1,
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"version_context": {
@@ -1355,7 +1355,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("catalog"); ok {
+	if v, ok := d.GetOkExists("catalog"); ok {
 		p := make([]models.WorkflowCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1410,7 +1410,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("implemented_tasks"); ok {
+	if v, ok := d.GetOkExists("implemented_tasks"); ok {
 		x := make([]models.WorkflowTaskDefinitionRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1452,7 +1452,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("interface_task"); ok {
+	if v, ok := d.GetOkExists("interface_task"); ok {
 		p := make([]models.WorkflowTaskDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1500,12 +1500,12 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 		o.SetLabel(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("name"); ok {
+	if v, ok := d.GetOkExists("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}

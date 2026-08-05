@@ -619,7 +619,7 @@ func resourceIamPrivateKeySpecCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("algorithm"); ok {
+	if v, ok := d.GetOkExists("algorithm"); ok {
 		p := make([]models.PkixKeyGenerationSpec, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -650,7 +650,7 @@ func resourceIamPrivateKeySpecCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("certificate_request"); ok {
+	if v, ok := d.GetOkExists("certificate_request"); ok {
 		p := make([]models.IamCertificateRequestRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -695,7 +695,7 @@ func resourceIamPrivateKeySpecCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetClassId("iam.PrivateKeySpec")
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

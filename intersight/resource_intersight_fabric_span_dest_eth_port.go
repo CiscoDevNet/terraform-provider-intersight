@@ -667,7 +667,7 @@ func resourceFabricSpanDestEthPortCreate(c context.Context, d *schema.ResourceDa
 		o.SetFec(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -684,7 +684,7 @@ func resourceFabricSpanDestEthPortCreate(c context.Context, d *schema.ResourceDa
 		o.SetSlotId(x)
 	}
 
-	if v, ok := d.GetOk("span_session"); ok {
+	if v, ok := d.GetOkExists("span_session"); ok {
 		p := make([]models.FabricSpanSessionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

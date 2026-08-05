@@ -43,6 +43,7 @@ Name | Type | Description | Notes
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Sasexpanders** | Pointer to [**[]StorageSasExpanderRelationship**](StorageSasExpanderRelationship.md) | An array of relationships to storageSasExpander resources. | [optional] [readonly] 
+**SecureRouters** | Pointer to [**[]NetworkSecureRouterRelationship**](NetworkSecureRouterRelationship.md) | An array of relationships to networkSecureRouter resources. | [optional] [readonly] 
 **Siocs** | Pointer to [**[]EquipmentSystemIoControllerRelationship**](EquipmentSystemIoControllerRelationship.md) | An array of relationships to equipmentSystemIoController resources. | [optional] [readonly] 
 **StorageEnclosures** | Pointer to [**[]StorageEnclosureRelationship**](StorageEnclosureRelationship.md) | An array of relationships to storageEnclosure resources. | [optional] [readonly] 
 **VirtualDriveContainer** | Pointer to [**[]StorageVirtualDriveContainerRelationship**](StorageVirtualDriveContainerRelationship.md) | An array of relationships to storageVirtualDriveContainer resources. | [optional] [readonly] 
@@ -1231,6 +1232,41 @@ HasSasexpanders returns a boolean if a field has been set.
 `func (o *EquipmentChassis) UnsetSasexpanders()`
 
 UnsetSasexpanders ensures that no value is present for Sasexpanders, not even an explicit nil
+### GetSecureRouters
+
+`func (o *EquipmentChassis) GetSecureRouters() []NetworkSecureRouterRelationship`
+
+GetSecureRouters returns the SecureRouters field if non-nil, zero value otherwise.
+
+### GetSecureRoutersOk
+
+`func (o *EquipmentChassis) GetSecureRoutersOk() (*[]NetworkSecureRouterRelationship, bool)`
+
+GetSecureRoutersOk returns a tuple with the SecureRouters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecureRouters
+
+`func (o *EquipmentChassis) SetSecureRouters(v []NetworkSecureRouterRelationship)`
+
+SetSecureRouters sets SecureRouters field to given value.
+
+### HasSecureRouters
+
+`func (o *EquipmentChassis) HasSecureRouters() bool`
+
+HasSecureRouters returns a boolean if a field has been set.
+
+### SetSecureRoutersNil
+
+`func (o *EquipmentChassis) SetSecureRoutersNil(b bool)`
+
+ SetSecureRoutersNil sets the value for SecureRouters to be an explicit nil
+
+### UnsetSecureRouters
+`func (o *EquipmentChassis) UnsetSecureRouters()`
+
+UnsetSecureRouters ensures that no value is present for SecureRouters, not even an explicit nil
 ### GetSiocs
 
 `func (o *EquipmentChassis) GetSiocs() []EquipmentSystemIoControllerRelationship`

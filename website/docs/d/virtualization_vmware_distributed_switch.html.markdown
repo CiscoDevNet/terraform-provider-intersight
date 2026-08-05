@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_distributed_switch"
 description: |-
-        The VMware Distributed Virtual Switch object is represented here.
+        The VmwareDistributedSwitch object represents the VMware Distributed Virtual Switch entity, detailing attributes for network management and configuration.
+        #### Purpose
+        VmwareDistributedSwitch serves as the cornerstone for managing distributed network configurations within a VMware environment, optimizing network resource allocation and control.
+        #### Key Concepts
+        - **Network Management:** Supports configuration of uplinks, port counts, and network IO control, enhancing network efficiency and performance.
+        - **Operational Settings:** Includes features for teaming, failover, and discovery protocols, ensuring resilient and adaptive network operations.
+        - **Integration:** Connects with datacenters and hosts, facilitating cohesive network management and resource distribution.
+        - **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_distributed_switch
-The VMware Distributed Virtual Switch object is represented here.
+The VmwareDistributedSwitch object represents the VMware Distributed Virtual Switch entity, detailing attributes for network management and configuration.
+#### Purpose
+VmwareDistributedSwitch serves as the cornerstone for managing distributed network configurations within a VMware environment, optimizing network resource allocation and control.
+#### Key Concepts
+- **Network Management:** Supports configuration of uplinks, port counts, and network IO control, enhancing network efficiency and performance.
+- **Operational Settings:** Includes features for teaming, failover, and discovery protocols, ensuring resilient and adaptive network operations.
+- **Integration:** Connects with datacenters and hosts, facilitating cohesive network management and resource distribution.
+- **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

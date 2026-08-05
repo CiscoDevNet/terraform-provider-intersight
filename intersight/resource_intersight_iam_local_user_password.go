@@ -238,6 +238,17 @@ func resourceIamLocalUserPassword() *schema.Resource {
 					},
 				},
 			},
+			"password_expires_in_days": {
+				Description: "The passwordExpiresInDays attribute indicates the number of days remaining until a user's password expires,\nwith negative values meaning the password has already expired and zero indicating expiration today.\nThis value is dynamically calculated based on the time since the last password change and the maximum\nallowed password age defined by the password policy. No migration code or default value is required\nduring system upgrades because the value is computed in real-time, and initially, the password age\nproperty defaults to zero, ensuring no passwords are mistakenly marked as expired.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
@@ -648,7 +659,7 @@ func resourceIamLocalUserPasswordCreate(c context.Context, d *schema.ResourceDat
 		o.SetInitialPassword(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -842,6 +853,10 @@ func resourceIamLocalUserPasswordRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("parent", flattenMapMoBaseMoRelationship(s.GetParent(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Parent in IamLocalUserPassword object: %s", err.Error())
+	}
+
+	if err := d.Set("password_expires_in_days", (s.GetPasswordExpiresInDays())); err != nil {
+		return diag.Errorf("error occurred while setting property PasswordExpiresInDays in IamLocalUserPassword object: %s", err.Error())
 	}
 
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {

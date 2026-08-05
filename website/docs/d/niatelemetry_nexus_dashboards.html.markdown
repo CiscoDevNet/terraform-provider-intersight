@@ -20,19 +20,25 @@ The following arguments can be used to get data of already created objects in In
 * `change_rollback_count`:(int) Count the number of change control tickets that have been rolled back. 
 * `cluster_name`:(string) Nexus Dashboard can onboard multiple APIC clusters/sites. 
 * `cluster_uuid`:(string) UUID of the Nexus Dashboard cluster. 
+* `compliance_rules`:(int) Number of compliance rules on the fabric. 
 * `create_time`:(string) The time when this managed object was created. 
+* `dashboard_count`:(int) Number of custom dashboard in the fabric. 
 * `device_snapshots_count`:(int) Count of number of image snapshots taken. 
 * `dn`:(string) Dn of the objects present for Nexus Dashboard devices. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `endpoint_count`:(int) Total number of endpoints on fabric. 
 * `fabric_image_policies_count`:(int) Count of number of devices with attached image policies. 
 * `feature_oper_status`:(bool) Feature Operation status of change management. 
 * `image_file_staging_count`:(int) Count of number of image operations of type stage. 
 * `ipam_oper_state`:(string) Feature Operation status of Integration with IPAM. 
 * `is_cluster_healthy`:(string) Health of Nexus Dashboard cluster. 
 * `k8_visualizer_admin_state`:(string) Feature Operation status of Kubernetes Visualizer. 
+* `live_protect_enabled_count`:(int) Count of devices with Live Protect shield status enabled. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `multicast_route_count`:(int) Number of multicast routes on fabric. 
 * `nd_cluster_size`:(int) Number of nodes in Nexus Dashboard cluster. 
+* `nd_healthy`:(bool) Health status of the Nexus Dashboard cluster. 
 * `nd_type`:(string) Node type in Nexus Dashboard cluster. 
 * `nd_version`:(string) Version running on Nexus Dashboard. 
 * `number_of_apps`:(int) Number of applications installed in the Nexus Dashboard. 
@@ -46,9 +52,13 @@ The following arguments can be used to get data of already created objects in In
 * `performance_monitoring`:(bool) Feature operational state of performance Monitoring. 
 * `post_upgrade_report_generation_count`:(int) Count of post upgrade report generation. 
 * `pre_upgrade_report_generation_count`:(int) Count of pre upgrade report generation. 
+* `preupgrade_validation_count`:(int) Number of pre-upgrade validations on the fabric. 
 * `ptp_admin_state`:(string) Feature Operation status of Precision Time Protocol Monitoring. 
 * `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `sustainability_report_status`:(string) Status of sustainability report on fabric. 
 * `type_of_site_in_mso`:(string) Type of site added to Multi-Site Orchestrator. 
+* `vcenter_count`:(int) Number of vCenters integrated into the fabric. 
 * `vmm_visualizer_admin_state`:(string) Feature Operation status of VMM Visualizer. 
+* `vx_lan_fab_count`:(int) The total number of active VXLAN-managed fabrics that have both leaf and spine switches configured. 
  

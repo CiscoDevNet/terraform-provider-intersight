@@ -709,7 +709,7 @@ func resourceRecommendationPurchaseOrderEstimateCreate(c context.Context, d *sch
 
 	o.SetClassId("recommendation.PurchaseOrderEstimate")
 
-	if v, ok := d.GetOk("cluster_expansion"); ok {
+	if v, ok := d.GetOkExists("cluster_expansion"); ok {
 		p := make([]models.RecommendationClusterExpansionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -752,7 +752,7 @@ func resourceRecommendationPurchaseOrderEstimateCreate(c context.Context, d *sch
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}

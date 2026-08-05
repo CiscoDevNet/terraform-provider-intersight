@@ -49,6 +49,58 @@ func Test_intersight_CatalystsdwanApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanInterfaceByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanInterfaceByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanInterfaceList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanInterfaceList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanPhysicalPortByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanPhysicalPortByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanPhysicalPortList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanPhysicalPortList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CatalystsdwanApiService GetCatalystsdwanPolicyGroupByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -75,6 +127,32 @@ func Test_intersight_CatalystsdwanApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanPortChannelByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanPortChannelByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanPortChannelList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanPortChannelList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CatalystsdwanApiService GetCatalystsdwanVedgeDeviceByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -94,6 +172,58 @@ func Test_intersight_CatalystsdwanApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanVedgeDeviceList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanVlanByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanVlanByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanVlanList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanVlanList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanWanEdgeDeviceByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanWanEdgeDeviceByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CatalystsdwanApiService GetCatalystsdwanWanEdgeDeviceList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CatalystsdwanApi.GetCatalystsdwanWanEdgeDeviceList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

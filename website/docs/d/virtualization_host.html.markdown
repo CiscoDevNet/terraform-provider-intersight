@@ -3,12 +3,24 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_host"
 description: |-
-        Depicts operations to control the life cycle of a Hypervisor Host.
+        The Host object represents a hypervisor host configuration and encapsulates operations to control its life cycle. It is a concrete object that provides a standardized approach to managing hypervisor hosts within virtualization environments.
+        #### Purpose
+        The Host object is designed to facilitate the management of hypervisor host configurations, enabling operations such as creation, power state management, migration, and cloning. It serves as a central element for interacting with hypervisor hosts, ensuring efficient and consistent management across virtualized infrastructure.
+        #### Key Concepts
+        - **Lifecycle Management:** Supports various operations for managing the state and configuration of hypervisor hosts, including maintenance mode transitions.
+        - **Integration with Device Registration:** Directly associates with device registration objects, ensuring seamless integration with inventory and management systems.
+        - **Entitlement and Licensing:** Operates under specific entitlement levels, providing controlled access to host management functions.
 
 ---
 
 # Data Source: intersight_virtualization_host
-Depicts operations to control the life cycle of a Hypervisor Host.
+The Host object represents a hypervisor host configuration and encapsulates operations to control its life cycle. It is a concrete object that provides a standardized approach to managing hypervisor hosts within virtualization environments.
+#### Purpose
+The Host object is designed to facilitate the management of hypervisor host configurations, enabling operations such as creation, power state management, migration, and cloning. It serves as a central element for interacting with hypervisor hosts, ensuring efficient and consistent management across virtualized infrastructure.
+#### Key Concepts
+- **Lifecycle Management:** Supports various operations for managing the state and configuration of hypervisor hosts, including maintenance mode transitions.
+- **Integration with Device Registration:** Directly associates with device registration objects, ensuring seamless integration with inventory and management systems.
+- **Entitlement and Licensing:** Operates under specific entitlement levels, providing controlled access to host management functions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

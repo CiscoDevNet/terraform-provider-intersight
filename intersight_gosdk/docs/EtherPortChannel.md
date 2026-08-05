@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **OperSpeed** | Pointer to **string** | Operational speed of this port-channel. | [optional] [readonly] 
 **OperState** | Pointer to **string** | Operational state of this port-channel. | [optional] [readonly] 
 **OperStateQual** | Pointer to **string** | Reason for this port-channel&#39;s Operational state. | [optional] [readonly] 
+**OperVlans** | Pointer to **string** | Operational VLANs on this port. | [optional] [readonly] 
 **PortChannelId** | Pointer to **int64** | Unique identifier for this port-channel on the FI. | [optional] [readonly] 
 **Role** | Pointer to **string** | This port-channel&#39;s configured role (uplink, server, etc.). | [optional] [readonly] 
 **Status** | Pointer to **string** | Detailed status of this port-channel. | [optional] [readonly] 
@@ -489,6 +490,31 @@ SetOperStateQual sets OperStateQual field to given value.
 `func (o *EtherPortChannel) HasOperStateQual() bool`
 
 HasOperStateQual returns a boolean if a field has been set.
+
+### GetOperVlans
+
+`func (o *EtherPortChannel) GetOperVlans() string`
+
+GetOperVlans returns the OperVlans field if non-nil, zero value otherwise.
+
+### GetOperVlansOk
+
+`func (o *EtherPortChannel) GetOperVlansOk() (*string, bool)`
+
+GetOperVlansOk returns a tuple with the OperVlans field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperVlans
+
+`func (o *EtherPortChannel) SetOperVlans(v string)`
+
+SetOperVlans sets OperVlans field to given value.
+
+### HasOperVlans
+
+`func (o *EtherPortChannel) HasOperVlans() bool`
+
+HasOperVlans returns a boolean if a field has been set.
 
 ### GetPortChannelId
 

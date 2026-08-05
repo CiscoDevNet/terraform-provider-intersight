@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -40,6 +40,8 @@ type TechsupportmanagementNiaParam struct {
 	Period        *int64   `json:"Period,omitempty"`
 	Pids          []string `json:"Pids,omitempty"`
 	SerialNumbers []string `json:"SerialNumbers,omitempty"`
+	// ShowTechOption specifies an optional custom show-tech option/command for NDFC tech support collection.
+	ShowTechOption *string `json:"ShowTechOption,omitempty"`
 	// UpgradeLogs controls the inclusion of upgrade logs in tech support bundles.
 	UpgradeLogs          *bool `json:"UpgradeLogs,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -366,6 +368,38 @@ func (o *TechsupportmanagementNiaParam) SetSerialNumbers(v []string) {
 	o.SerialNumbers = v
 }
 
+// GetShowTechOption returns the ShowTechOption field value if set, zero value otherwise.
+func (o *TechsupportmanagementNiaParam) GetShowTechOption() string {
+	if o == nil || IsNil(o.ShowTechOption) {
+		var ret string
+		return ret
+	}
+	return *o.ShowTechOption
+}
+
+// GetShowTechOptionOk returns a tuple with the ShowTechOption field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TechsupportmanagementNiaParam) GetShowTechOptionOk() (*string, bool) {
+	if o == nil || IsNil(o.ShowTechOption) {
+		return nil, false
+	}
+	return o.ShowTechOption, true
+}
+
+// HasShowTechOption returns a boolean if a field has been set.
+func (o *TechsupportmanagementNiaParam) HasShowTechOption() bool {
+	if o != nil && !IsNil(o.ShowTechOption) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowTechOption gets a reference to the given string and assigns it to the ShowTechOption field.
+func (o *TechsupportmanagementNiaParam) SetShowTechOption(v string) {
+	o.ShowTechOption = &v
+}
+
 // GetUpgradeLogs returns the UpgradeLogs field value if set, zero value otherwise.
 func (o *TechsupportmanagementNiaParam) GetUpgradeLogs() bool {
 	if o == nil || IsNil(o.UpgradeLogs) {
@@ -445,6 +479,9 @@ func (o TechsupportmanagementNiaParam) ToMap() (map[string]interface{}, error) {
 	if o.SerialNumbers != nil {
 		toSerialize["SerialNumbers"] = o.SerialNumbers
 	}
+	if !IsNil(o.ShowTechOption) {
+		toSerialize["ShowTechOption"] = o.ShowTechOption
+	}
 	if !IsNil(o.UpgradeLogs) {
 		toSerialize["UpgradeLogs"] = o.UpgradeLogs
 	}
@@ -515,6 +552,8 @@ func (o *TechsupportmanagementNiaParam) UnmarshalJSON(data []byte) (err error) {
 		Period        *int64   `json:"Period,omitempty"`
 		Pids          []string `json:"Pids,omitempty"`
 		SerialNumbers []string `json:"SerialNumbers,omitempty"`
+		// ShowTechOption specifies an optional custom show-tech option/command for NDFC tech support collection.
+		ShowTechOption *string `json:"ShowTechOption,omitempty"`
 		// UpgradeLogs controls the inclusion of upgrade logs in tech support bundles.
 		UpgradeLogs *bool `json:"UpgradeLogs,omitempty"`
 	}
@@ -533,6 +572,7 @@ func (o *TechsupportmanagementNiaParam) UnmarshalJSON(data []byte) (err error) {
 		varTechsupportmanagementNiaParam.Period = varTechsupportmanagementNiaParamWithoutEmbeddedStruct.Period
 		varTechsupportmanagementNiaParam.Pids = varTechsupportmanagementNiaParamWithoutEmbeddedStruct.Pids
 		varTechsupportmanagementNiaParam.SerialNumbers = varTechsupportmanagementNiaParamWithoutEmbeddedStruct.SerialNumbers
+		varTechsupportmanagementNiaParam.ShowTechOption = varTechsupportmanagementNiaParamWithoutEmbeddedStruct.ShowTechOption
 		varTechsupportmanagementNiaParam.UpgradeLogs = varTechsupportmanagementNiaParamWithoutEmbeddedStruct.UpgradeLogs
 		*o = TechsupportmanagementNiaParam(varTechsupportmanagementNiaParam)
 	} else {
@@ -560,6 +600,7 @@ func (o *TechsupportmanagementNiaParam) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Period")
 		delete(additionalProperties, "Pids")
 		delete(additionalProperties, "SerialNumbers")
+		delete(additionalProperties, "ShowTechOption")
 		delete(additionalProperties, "UpgradeLogs")
 
 		// remove fields from embedded structs

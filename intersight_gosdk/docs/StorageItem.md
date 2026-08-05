@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | The operState of the Local storage. | [optional] [readonly] 
 **Size** | Pointer to **string** | The size (MiB) of the Local storage. | [optional] [readonly] 
 **Used** | Pointer to **string** | The used percent of the Local storage. | [optional] [readonly] 
+**UsedVal** | Pointer to **float32** | The used value (MiB) of the Local storage. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -200,6 +201,31 @@ SetUsed sets Used field to given value.
 `func (o *StorageItem) HasUsed() bool`
 
 HasUsed returns a boolean if a field has been set.
+
+### GetUsedVal
+
+`func (o *StorageItem) GetUsedVal() float32`
+
+GetUsedVal returns the UsedVal field if non-nil, zero value otherwise.
+
+### GetUsedValOk
+
+`func (o *StorageItem) GetUsedValOk() (*float32, bool)`
+
+GetUsedValOk returns a tuple with the UsedVal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsedVal
+
+`func (o *StorageItem) SetUsedVal(v float32)`
+
+SetUsedVal sets UsedVal field to given value.
+
+### HasUsedVal
+
+`func (o *StorageItem) HasUsedVal() bool`
+
+HasUsedVal returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

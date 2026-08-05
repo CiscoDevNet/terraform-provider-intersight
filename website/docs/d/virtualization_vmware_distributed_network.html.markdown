@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_distributed_network"
 description: |-
-        The VMware Distributed Virtual PortGroup object is represented here.
+        The VmwareDistributedNetwork object delineates the VMware Distributed Virtual PortGroup entity, providing detailed configurations for network management and security policies.
+        #### Purpose
+        VmwareDistributedNetwork is integral to managing distributed network configurations, offering comprehensive control over network attributes and settings within VMware environments.
+        #### Key Concepts
+        - **Network Configuration:** Supports VLAN settings, port counts, and security policies, enhancing network management and control.
+        - **Operational Features:** Includes settings for teaming and failover, promoting resilient and adaptive network operations.
+        - **Integration:** Interfaces with distributed switches and hosts, facilitating seamless network management and resource distribution.
+        - **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_distributed_network
-The VMware Distributed Virtual PortGroup object is represented here.
+The VmwareDistributedNetwork object delineates the VMware Distributed Virtual PortGroup entity, providing detailed configurations for network management and security policies.
+#### Purpose
+VmwareDistributedNetwork is integral to managing distributed network configurations, offering comprehensive control over network attributes and settings within VMware environments.
+#### Key Concepts
+- **Network Configuration:** Supports VLAN settings, port counts, and security policies, enhancing network management and control.
+- **Operational Features:** Includes settings for teaming and failover, promoting resilient and adaptive network operations.
+- **Integration:** Interfaces with distributed switches and hosts, facilitating seamless network management and resource distribution.
+- **Security and Access:** Utilizes privilege sets for secure read and update operations, maintaining integrity and authorized access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

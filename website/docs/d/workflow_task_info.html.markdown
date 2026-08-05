@@ -3,12 +3,26 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_task_info"
 description: |-
-        Task instance which represents the run time instance of a task within a workflow.
+        The TaskInfos object  represents the runtime instance of a task executing within a workflow.
+        #### Purpose
+        It tracks the execution lifecycle of a specific task instance, providing real-time status, input/output data, and performance metrics, which is essential for monitoring and debugging workflow progress.
+        ### Key Concepts
+        - **Execution Tracking:** Monitors the state of the task (e.g., Scheduled, InProgress, Completed, Failed).
+        - **Data Context:** Captures the input data used to start the task and the output data generated upon completion.
+        - **Retry Management:** Maintains a history of task retries and failure reasons to support automated recovery.
+        - **Lifecycle Monitoring:** Records timestamps for start and end times to measure task performance.
 
 ---
 
 # Data Source: intersight_workflow_task_info
-Task instance which represents the run time instance of a task within a workflow.
+The TaskInfos object  represents the runtime instance of a task executing within a workflow.
+#### Purpose
+It tracks the execution lifecycle of a specific task instance, providing real-time status, input/output data, and performance metrics, which is essential for monitoring and debugging workflow progress.
+### Key Concepts
+- **Execution Tracking:** Monitors the state of the task (e.g., Scheduled, InProgress, Completed, Failed).
+- **Data Context:** Captures the input data used to start the task and the output data generated upon completion.
+- **Retry Management:** Maintains a history of task retries and failure reasons to support automated recovery.
+- **Lifecycle Monitoring:** Records timestamps for start and end times to measure task performance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

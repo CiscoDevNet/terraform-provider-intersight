@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026041816
+API version: 1.0.11-2026072720
 Contact: intersight@cisco.com
 */
 
@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // checks if the IamCuiIntegration type satisfies the MappedNullable interface at compile time
@@ -29,13 +30,24 @@ type IamCuiIntegration struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// CCC inventory synchronization setting. * `enable` - Cisco Cloud Control inventory synchronization is enabled. * `disable` - Cisco Cloud Control inventory synchronization is disabled.
-	CiscoCloudControlInventorySync *string            `json:"CiscoCloudControlInventorySync,omitempty"`
-	LinkedTenants                  []IamTenantLinking `json:"LinkedTenants,omitempty"`
+	CiscoCloudControlInventorySync *string `json:"CiscoCloudControlInventorySync,omitempty"`
+	// The last-modified timestamp of the tenant as returned by the remote API during the most recent workflow-based synchronization.
+	LastFullSyncTime *time.Time `json:"LastFullSyncTime,omitempty"`
+	// The modified-time carried by the most recent notification applied to this CUI integration MO, used to detect and skip stale or duplicate notifications.
+	LastNotificationModifiedTime *time.Time         `json:"LastNotificationModifiedTime,omitempty"`
+	LinkedTenants                []IamTenantLinking `json:"LinkedTenants,omitempty"`
+	// Indicates whether the account has opted in to CUI identity synchronization.
+	OptIn *bool `json:"OptIn,omitempty"`
+	// Timestamp representing when the customer opted in to CUI identity synchronization.
+	OptInTime *time.Time `json:"OptInTime,omitempty"`
+	// Identity or name of the engineer who performed the opt-in action.
+	OptInUserIdentity *string `json:"OptInUserIdentity,omitempty"`
 	// Current synchronization status of CUI integration data. * `Needs-Sync` - CUI integration data needs to be synchronized. * `InProgress` - CUI integration synchronization is in progress. * `Done` - CUI integration synchronization is completed.
 	SyncStatus *string `json:"SyncStatus,omitempty"`
 	// Primary tenant ID for CUI integration.
 	TenantId             *string                        `json:"TenantId,omitempty"`
 	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
+	User                 NullableIamUserRelationship    `json:"User,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -154,6 +166,70 @@ func (o *IamCuiIntegration) SetCiscoCloudControlInventorySync(v string) {
 	o.CiscoCloudControlInventorySync = &v
 }
 
+// GetLastFullSyncTime returns the LastFullSyncTime field value if set, zero value otherwise.
+func (o *IamCuiIntegration) GetLastFullSyncTime() time.Time {
+	if o == nil || IsNil(o.LastFullSyncTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastFullSyncTime
+}
+
+// GetLastFullSyncTimeOk returns a tuple with the LastFullSyncTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamCuiIntegration) GetLastFullSyncTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.LastFullSyncTime) {
+		return nil, false
+	}
+	return o.LastFullSyncTime, true
+}
+
+// HasLastFullSyncTime returns a boolean if a field has been set.
+func (o *IamCuiIntegration) HasLastFullSyncTime() bool {
+	if o != nil && !IsNil(o.LastFullSyncTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastFullSyncTime gets a reference to the given time.Time and assigns it to the LastFullSyncTime field.
+func (o *IamCuiIntegration) SetLastFullSyncTime(v time.Time) {
+	o.LastFullSyncTime = &v
+}
+
+// GetLastNotificationModifiedTime returns the LastNotificationModifiedTime field value if set, zero value otherwise.
+func (o *IamCuiIntegration) GetLastNotificationModifiedTime() time.Time {
+	if o == nil || IsNil(o.LastNotificationModifiedTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastNotificationModifiedTime
+}
+
+// GetLastNotificationModifiedTimeOk returns a tuple with the LastNotificationModifiedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamCuiIntegration) GetLastNotificationModifiedTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.LastNotificationModifiedTime) {
+		return nil, false
+	}
+	return o.LastNotificationModifiedTime, true
+}
+
+// HasLastNotificationModifiedTime returns a boolean if a field has been set.
+func (o *IamCuiIntegration) HasLastNotificationModifiedTime() bool {
+	if o != nil && !IsNil(o.LastNotificationModifiedTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastNotificationModifiedTime gets a reference to the given time.Time and assigns it to the LastNotificationModifiedTime field.
+func (o *IamCuiIntegration) SetLastNotificationModifiedTime(v time.Time) {
+	o.LastNotificationModifiedTime = &v
+}
+
 // GetLinkedTenants returns the LinkedTenants field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamCuiIntegration) GetLinkedTenants() []IamTenantLinking {
 	if o == nil {
@@ -185,6 +261,102 @@ func (o *IamCuiIntegration) HasLinkedTenants() bool {
 // SetLinkedTenants gets a reference to the given []IamTenantLinking and assigns it to the LinkedTenants field.
 func (o *IamCuiIntegration) SetLinkedTenants(v []IamTenantLinking) {
 	o.LinkedTenants = v
+}
+
+// GetOptIn returns the OptIn field value if set, zero value otherwise.
+func (o *IamCuiIntegration) GetOptIn() bool {
+	if o == nil || IsNil(o.OptIn) {
+		var ret bool
+		return ret
+	}
+	return *o.OptIn
+}
+
+// GetOptInOk returns a tuple with the OptIn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamCuiIntegration) GetOptInOk() (*bool, bool) {
+	if o == nil || IsNil(o.OptIn) {
+		return nil, false
+	}
+	return o.OptIn, true
+}
+
+// HasOptIn returns a boolean if a field has been set.
+func (o *IamCuiIntegration) HasOptIn() bool {
+	if o != nil && !IsNil(o.OptIn) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptIn gets a reference to the given bool and assigns it to the OptIn field.
+func (o *IamCuiIntegration) SetOptIn(v bool) {
+	o.OptIn = &v
+}
+
+// GetOptInTime returns the OptInTime field value if set, zero value otherwise.
+func (o *IamCuiIntegration) GetOptInTime() time.Time {
+	if o == nil || IsNil(o.OptInTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.OptInTime
+}
+
+// GetOptInTimeOk returns a tuple with the OptInTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamCuiIntegration) GetOptInTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.OptInTime) {
+		return nil, false
+	}
+	return o.OptInTime, true
+}
+
+// HasOptInTime returns a boolean if a field has been set.
+func (o *IamCuiIntegration) HasOptInTime() bool {
+	if o != nil && !IsNil(o.OptInTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptInTime gets a reference to the given time.Time and assigns it to the OptInTime field.
+func (o *IamCuiIntegration) SetOptInTime(v time.Time) {
+	o.OptInTime = &v
+}
+
+// GetOptInUserIdentity returns the OptInUserIdentity field value if set, zero value otherwise.
+func (o *IamCuiIntegration) GetOptInUserIdentity() string {
+	if o == nil || IsNil(o.OptInUserIdentity) {
+		var ret string
+		return ret
+	}
+	return *o.OptInUserIdentity
+}
+
+// GetOptInUserIdentityOk returns a tuple with the OptInUserIdentity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamCuiIntegration) GetOptInUserIdentityOk() (*string, bool) {
+	if o == nil || IsNil(o.OptInUserIdentity) {
+		return nil, false
+	}
+	return o.OptInUserIdentity, true
+}
+
+// HasOptInUserIdentity returns a boolean if a field has been set.
+func (o *IamCuiIntegration) HasOptInUserIdentity() bool {
+	if o != nil && !IsNil(o.OptInUserIdentity) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptInUserIdentity gets a reference to the given string and assigns it to the OptInUserIdentity field.
+func (o *IamCuiIntegration) SetOptInUserIdentity(v string) {
+	o.OptInUserIdentity = &v
 }
 
 // GetSyncStatus returns the SyncStatus field value if set, zero value otherwise.
@@ -294,6 +466,49 @@ func (o *IamCuiIntegration) UnsetAccount() {
 	o.Account.Unset()
 }
 
+// GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamCuiIntegration) GetUser() IamUserRelationship {
+	if o == nil || IsNil(o.User.Get()) {
+		var ret IamUserRelationship
+		return ret
+	}
+	return *o.User.Get()
+}
+
+// GetUserOk returns a tuple with the User field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamCuiIntegration) GetUserOk() (*IamUserRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.User.Get(), o.User.IsSet()
+}
+
+// HasUser returns a boolean if a field has been set.
+func (o *IamCuiIntegration) HasUser() bool {
+	if o != nil && o.User.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetUser gets a reference to the given NullableIamUserRelationship and assigns it to the User field.
+func (o *IamCuiIntegration) SetUser(v IamUserRelationship) {
+	o.User.Set(&v)
+}
+
+// SetUserNil sets the value for User to be an explicit nil
+func (o *IamCuiIntegration) SetUserNil() {
+	o.User.Set(nil)
+}
+
+// UnsetUser ensures that no value is present for User, not even an explicit nil
+func (o *IamCuiIntegration) UnsetUser() {
+	o.User.Unset()
+}
+
 func (o IamCuiIntegration) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -323,8 +538,23 @@ func (o IamCuiIntegration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CiscoCloudControlInventorySync) {
 		toSerialize["CiscoCloudControlInventorySync"] = o.CiscoCloudControlInventorySync
 	}
+	if !IsNil(o.LastFullSyncTime) {
+		toSerialize["LastFullSyncTime"] = o.LastFullSyncTime
+	}
+	if !IsNil(o.LastNotificationModifiedTime) {
+		toSerialize["LastNotificationModifiedTime"] = o.LastNotificationModifiedTime
+	}
 	if o.LinkedTenants != nil {
 		toSerialize["LinkedTenants"] = o.LinkedTenants
+	}
+	if !IsNil(o.OptIn) {
+		toSerialize["OptIn"] = o.OptIn
+	}
+	if !IsNil(o.OptInTime) {
+		toSerialize["OptInTime"] = o.OptInTime
+	}
+	if !IsNil(o.OptInUserIdentity) {
+		toSerialize["OptInUserIdentity"] = o.OptInUserIdentity
 	}
 	if !IsNil(o.SyncStatus) {
 		toSerialize["SyncStatus"] = o.SyncStatus
@@ -334,6 +564,9 @@ func (o IamCuiIntegration) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Account.IsSet() {
 		toSerialize["Account"] = o.Account.Get()
+	}
+	if o.User.IsSet() {
+		toSerialize["User"] = o.User.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -391,13 +624,24 @@ func (o *IamCuiIntegration) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// CCC inventory synchronization setting. * `enable` - Cisco Cloud Control inventory synchronization is enabled. * `disable` - Cisco Cloud Control inventory synchronization is disabled.
-		CiscoCloudControlInventorySync *string            `json:"CiscoCloudControlInventorySync,omitempty"`
-		LinkedTenants                  []IamTenantLinking `json:"LinkedTenants,omitempty"`
+		CiscoCloudControlInventorySync *string `json:"CiscoCloudControlInventorySync,omitempty"`
+		// The last-modified timestamp of the tenant as returned by the remote API during the most recent workflow-based synchronization.
+		LastFullSyncTime *time.Time `json:"LastFullSyncTime,omitempty"`
+		// The modified-time carried by the most recent notification applied to this CUI integration MO, used to detect and skip stale or duplicate notifications.
+		LastNotificationModifiedTime *time.Time         `json:"LastNotificationModifiedTime,omitempty"`
+		LinkedTenants                []IamTenantLinking `json:"LinkedTenants,omitempty"`
+		// Indicates whether the account has opted in to CUI identity synchronization.
+		OptIn *bool `json:"OptIn,omitempty"`
+		// Timestamp representing when the customer opted in to CUI identity synchronization.
+		OptInTime *time.Time `json:"OptInTime,omitempty"`
+		// Identity or name of the engineer who performed the opt-in action.
+		OptInUserIdentity *string `json:"OptInUserIdentity,omitempty"`
 		// Current synchronization status of CUI integration data. * `Needs-Sync` - CUI integration data needs to be synchronized. * `InProgress` - CUI integration synchronization is in progress. * `Done` - CUI integration synchronization is completed.
 		SyncStatus *string `json:"SyncStatus,omitempty"`
 		// Primary tenant ID for CUI integration.
 		TenantId *string                        `json:"TenantId,omitempty"`
 		Account  NullableIamAccountRelationship `json:"Account,omitempty"`
+		User     NullableIamUserRelationship    `json:"User,omitempty"`
 	}
 
 	varIamCuiIntegrationWithoutEmbeddedStruct := IamCuiIntegrationWithoutEmbeddedStruct{}
@@ -408,10 +652,16 @@ func (o *IamCuiIntegration) UnmarshalJSON(data []byte) (err error) {
 		varIamCuiIntegration.ClassId = varIamCuiIntegrationWithoutEmbeddedStruct.ClassId
 		varIamCuiIntegration.ObjectType = varIamCuiIntegrationWithoutEmbeddedStruct.ObjectType
 		varIamCuiIntegration.CiscoCloudControlInventorySync = varIamCuiIntegrationWithoutEmbeddedStruct.CiscoCloudControlInventorySync
+		varIamCuiIntegration.LastFullSyncTime = varIamCuiIntegrationWithoutEmbeddedStruct.LastFullSyncTime
+		varIamCuiIntegration.LastNotificationModifiedTime = varIamCuiIntegrationWithoutEmbeddedStruct.LastNotificationModifiedTime
 		varIamCuiIntegration.LinkedTenants = varIamCuiIntegrationWithoutEmbeddedStruct.LinkedTenants
+		varIamCuiIntegration.OptIn = varIamCuiIntegrationWithoutEmbeddedStruct.OptIn
+		varIamCuiIntegration.OptInTime = varIamCuiIntegrationWithoutEmbeddedStruct.OptInTime
+		varIamCuiIntegration.OptInUserIdentity = varIamCuiIntegrationWithoutEmbeddedStruct.OptInUserIdentity
 		varIamCuiIntegration.SyncStatus = varIamCuiIntegrationWithoutEmbeddedStruct.SyncStatus
 		varIamCuiIntegration.TenantId = varIamCuiIntegrationWithoutEmbeddedStruct.TenantId
 		varIamCuiIntegration.Account = varIamCuiIntegrationWithoutEmbeddedStruct.Account
+		varIamCuiIntegration.User = varIamCuiIntegrationWithoutEmbeddedStruct.User
 		*o = IamCuiIntegration(varIamCuiIntegration)
 	} else {
 		return err
@@ -432,10 +682,16 @@ func (o *IamCuiIntegration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CiscoCloudControlInventorySync")
+		delete(additionalProperties, "LastFullSyncTime")
+		delete(additionalProperties, "LastNotificationModifiedTime")
 		delete(additionalProperties, "LinkedTenants")
+		delete(additionalProperties, "OptIn")
+		delete(additionalProperties, "OptInTime")
+		delete(additionalProperties, "OptInUserIdentity")
 		delete(additionalProperties, "SyncStatus")
 		delete(additionalProperties, "TenantId")
 		delete(additionalProperties, "Account")
+		delete(additionalProperties, "User")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

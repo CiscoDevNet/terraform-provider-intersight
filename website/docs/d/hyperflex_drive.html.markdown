@@ -3,14 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_drive"
 description: |-
-        A Hyperflex drive entity attached to a node in a
-        Hyperflex cluster.
+        The Drive object represents a HyperFlex drive entity attached to a node within a HyperFlex cluster. It is an essential component of the storage architecture, providing detailed information and management capabilities for physical storage devices.
+        #### Purpose
+        The Drive object is intended to facilitate the management and monitoring of physical storage devices within a HyperFlex cluster, ensuring their optimal performance and integration with the broader storage system.
+        #### Key Concepts
+        - **Physical Storage Management:** Provides detailed information about each drive, including capacity, usage, and health status, supporting efficient storage management.
+        - **Integration:** Works in conjunction with nodes and other storage components to form a cohesive storage architecture within the cluster.
+        - **Monitoring and Reporting:** Offers capabilities for monitoring drive health and status, enabling proactive maintenance and issue resolution.
+        - **Access Control:** Ensures secure management of drive resources through access control measures and privilege sets.
 
 ---
 
 # Data Source: intersight_hyperflex_drive
-A Hyperflex drive entity attached to a node in a
-Hyperflex cluster.
+The Drive object represents a HyperFlex drive entity attached to a node within a HyperFlex cluster. It is an essential component of the storage architecture, providing detailed information and management capabilities for physical storage devices.
+#### Purpose
+The Drive object is intended to facilitate the management and monitoring of physical storage devices within a HyperFlex cluster, ensuring their optimal performance and integration with the broader storage system.
+#### Key Concepts
+- **Physical Storage Management:** Provides detailed information about each drive, including capacity, usage, and health status, supporting efficient storage management.
+- **Integration:** Works in conjunction with nodes and other storage components to form a cohesive storage architecture within the cluster.
+- **Monitoring and Reporting:** Offers capabilities for monitoring drive health and status, enabling proactive maintenance and issue resolution.
+- **Access Control:** Ensures secure management of drive resources through access control measures and privilege sets.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

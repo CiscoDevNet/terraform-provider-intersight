@@ -3,12 +3,26 @@ subcategory: "iwotenant"
 layout: "intersight"
 page_title: "Intersight: intersight_iwotenant_maintenance_notification"
 description: |-
-        Maintenance related notification to be displayed as UI banner when customer logs in the Intersight UI.
+        MaintenanceNotifications represent maintenance-related messages intended to be shown to users as a UI banner when they log in. The notification is scoped to an IWO tenant (by `iwoId`) and can be tied to an account/tenant relationship for targeted communication.
+        #### Purpose
+        Communicate planned IWO maintenance windows to customers through a time-bounded banner message, improving transparency and reducing surprise during service-impacting operations.
+        #### Key Concepts
+        - **UI banner communication:** Stores message content (or an i18n key) for consistent UI display.
+        - **Time window control:** Defines when to show the message (`showFromTime` → `showUntilTime`) and when maintenance actually starts (`maintenanceStartTime`).
+        - **Tenant identification:** Uses `iwoId` to bind the notification to the intended tenant namespace/account context.
+        - **Lifecycle management:** Admin-controlled create/delete, enabling planned messaging only when needed.
 
 ---
 
 # Data Source: intersight_iwotenant_maintenance_notification
-Maintenance related notification to be displayed as UI banner when customer logs in the Intersight UI.
+MaintenanceNotifications represent maintenance-related messages intended to be shown to users as a UI banner when they log in. The notification is scoped to an IWO tenant (by `iwoId`) and can be tied to an account/tenant relationship for targeted communication.
+#### Purpose
+Communicate planned IWO maintenance windows to customers through a time-bounded banner message, improving transparency and reducing surprise during service-impacting operations.
+#### Key Concepts
+- **UI banner communication:** Stores message content (or an i18n key) for consistent UI display.
+- **Time window control:** Defines when to show the message (`showFromTime` → `showUntilTime`) and when maintenance actually starts (`maintenanceStartTime`).
+- **Tenant identification:** Uses `iwoId` to bind the notification to the intended tenant namespace/account context.
+- **Lifecycle management:** Admin-controlled create/delete, enabling planned messaging only when needed.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

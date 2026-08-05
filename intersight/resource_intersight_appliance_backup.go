@@ -134,6 +134,18 @@ func resourceApplianceBackup() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"backup_download_url": {
+				Description: "Download URL for the backup artifact when available. Only populated for successful local-protocol backups; empty for remote-protocol backups.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -195,6 +207,12 @@ func resourceApplianceBackup() *schema.Resource {
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9_\\.\\-\\+]*$"), ""),
 				Optional:     true,
 				ForceNew:     true,
+			},
+			"force_delete": {
+				Description: "Set to true to allow deletion of the oldest local backup when local backup retention limit is reached. If false and retention count is reached, the backup operation fails.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				ForceNew:    true,
 			},
 			"is_manual": {
 				Description: "If true, represents a manual backup. Else represents a scheduled backup.",
@@ -363,28 +381,28 @@ func resourceApplianceBackup() *schema.Resource {
 				ForceNew: true,
 			},
 			"protocol": {
-				Description:  "Communication protocol used by the file server (e.g. scp, sftp, or CIFS).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
+				Description:  "Communication protocol used by backup and restore workflow (e.g. scp, sftp, cifs, or local).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.\n* `local` - Backup file is stored in Intersight Appliance.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp", "cifs"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp", "cifs", "local"}, false),
 				Optional:     true,
 				Default:      "scp",
 				ForceNew:     true,
 			},
 			"remote_host": {
-				Description: "Hostname of the remote file server.",
+				Description: "Hostname of the remote file server. Not required when protocol is local.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				ForceNew:    true,
 			},
 			"remote_path": {
-				Description:  "File server directory or share name to copy the file.",
+				Description:  "File server directory or share name to copy the file. Not required when protocol is local.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[^`]+$"), ""),
 				Optional:     true,
 				ForceNew:     true,
 			},
 			"remote_port": {
-				Description: "Remote TCP port on the file server (e.g. 22 for scp).",
+				Description: "Remote TCP port on the file server (e.g. 22 for scp). Not required when protocol is local.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				ForceNew:    true,
@@ -582,8 +600,14 @@ func resourceApplianceBackup() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"use_policy_settings": {
+				Description: "Set to true to inherit credentials, protocol, and file server settings from the appliance backup policy. If false, use explicit settings provided in this backup object.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				ForceNew:    true,
+			},
 			"username": {
-				Description:  "Username to authenticate the fileserver.",
+				Description:  "Username to authenticate the fileserver. Not required when protocol is local.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_][a-zA-Z0-9_\\.\\@\\\\\\-\\+]*$"), ""),
 				Optional:     true,
@@ -828,6 +852,11 @@ func resourceApplianceBackupCreate(c context.Context, d *schema.ResourceData, me
 		o.SetFilename(x)
 	}
 
+	if v, ok := d.GetOkExists("force_delete"); ok {
+		x := (v.(bool))
+		o.SetForceDelete(x)
+	}
+
 	if v, ok := d.GetOk("messages"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -841,7 +870,7 @@ func resourceApplianceBackupCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -951,6 +980,11 @@ func resourceApplianceBackupCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOkExists("use_policy_settings"); ok {
+		x := (v.(bool))
+		o.SetUsePolicySettings(x)
+	}
+
 	if v, ok := d.GetOk("username"); ok {
 		x := (v.(string))
 		o.SetUsername(x)
@@ -1018,6 +1052,10 @@ func resourceApplianceBackupRead(c context.Context, d *schema.ResourceData, meta
 		return diag.Errorf("error occurred while setting property Ancestors in ApplianceBackup object: %s", err.Error())
 	}
 
+	if err := d.Set("backup_download_url", (s.GetBackupDownloadUrl())); err != nil {
+		return diag.Errorf("error occurred while setting property BackupDownloadUrl in ApplianceBackup object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in ApplianceBackup object: %s", err.Error())
 	}
@@ -1040,6 +1078,10 @@ func resourceApplianceBackupRead(c context.Context, d *schema.ResourceData, meta
 
 	if err := d.Set("filename", (s.GetFilename())); err != nil {
 		return diag.Errorf("error occurred while setting property Filename in ApplianceBackup object: %s", err.Error())
+	}
+
+	if err := d.Set("force_delete", (s.GetForceDelete())); err != nil {
+		return diag.Errorf("error occurred while setting property ForceDelete in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("is_manual", (s.GetIsManual())); err != nil {
@@ -1108,6 +1150,10 @@ func resourceApplianceBackupRead(c context.Context, d *schema.ResourceData, meta
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in ApplianceBackup object: %s", err.Error())
+	}
+
+	if err := d.Set("use_policy_settings", (s.GetUsePolicySettings())); err != nil {
+		return diag.Errorf("error occurred while setting property UsePolicySettings in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("username", (s.GetUsername())); err != nil {

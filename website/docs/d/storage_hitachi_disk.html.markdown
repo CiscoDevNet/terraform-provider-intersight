@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_disk"
 description: |-
-        Disk entity associated with Hitachi storage array.
+        The HitachiDisk object represents a disk entity associated with a Hitachi storage array. This provides detailed information about disk types and configurations, supporting effective storage resource management.
+        #### Purpose
+        HitachiDisk is integral to managing disks within Hitachi arrays. It delivers insights into disk properties and usage, aiding in optimal storage allocation and monitoring.
+        #### Key Concepts
+        - **Disk Type and Configuration:** Details disk types and configurations, supporting comprehensive management of storage resources.
+        - **Parity Group Association:** Links disks to parity groups, ensuring reliable data redundancy and protection.
+        - **Device Registration:** Connects disks to device registration objects, facilitating seamless integration within the Intersight system.
+        - **Access Control:** Utilizes privilege sets to ensure secure and authorized operations on disks.
 
 ---
 
 # Data Source: intersight_storage_hitachi_disk
-Disk entity associated with Hitachi storage array.
+The HitachiDisk object represents a disk entity associated with a Hitachi storage array. This provides detailed information about disk types and configurations, supporting effective storage resource management.
+#### Purpose
+HitachiDisk is integral to managing disks within Hitachi arrays. It delivers insights into disk properties and usage, aiding in optimal storage allocation and monitoring.
+#### Key Concepts
+- **Disk Type and Configuration:** Details disk types and configurations, supporting comprehensive management of storage resources.
+- **Parity Group Association:** Links disks to parity groups, ensuring reliable data redundancy and protection.
+- **Device Registration:** Connects disks to device registration objects, facilitating seamless integration within the Intersight system.
+- **Access Control:** Utilizes privilege sets to ensure secure and authorized operations on disks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,20 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_entitlement"
 description: |-
-        A license entitlement associated with a cluster.
+        The Entitlement object captures the details of license entitlements associated with clusters. This provides a structured representation of entitlement information.
+        #### Purpose
+        The Entitlement object provides details of license entitlements associated with clusters.
+        #### Key Concepts
+        - **Entitlement of Licensed Features:** Provides insight into which features are provided by the licenses associated with the cluster. This includes how the features are entitled and their respective details.
 
 ---
 
 # Data Source: intersight_hci_entitlement
-A license entitlement associated with a cluster.
+The Entitlement object captures the details of license entitlements associated with clusters. This provides a structured representation of entitlement information.
+#### Purpose  
+The Entitlement object provides details of license entitlements associated with clusters.
+#### Key Concepts  
+- **Entitlement of Licensed Features:** Provides insight into which features are provided by the licenses associated with the cluster. This includes how the features are entitled and their respective details.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

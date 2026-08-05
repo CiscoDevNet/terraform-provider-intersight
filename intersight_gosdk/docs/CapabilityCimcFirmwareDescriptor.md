@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.CimcFirmwareDescriptor"]
 **AdapterEpProxyEnabled** | Pointer to **bool** | Indicates whether the server uses ep proxy to communicate with the adapter. | [optional] [readonly] 
 **LocalUserPswdSupportedVer** | Pointer to **string** | Minimum server firmware version for local users password properties feature support. | [optional] [readonly] 
+**PolicyProfileSupportedVersion** | Pointer to **string** | Minimum server firmware version for policy profile feature support. | [optional] [readonly] 
 **Revision** | Pointer to **string** | Revision information for the server. | [optional] 
 **UuidSupportedVer** | Pointer to **string** | Minimum server firmware version for UUID feature support. | [optional] [readonly] 
 
@@ -119,6 +120,31 @@ SetLocalUserPswdSupportedVer sets LocalUserPswdSupportedVer field to given value
 `func (o *CapabilityCimcFirmwareDescriptor) HasLocalUserPswdSupportedVer() bool`
 
 HasLocalUserPswdSupportedVer returns a boolean if a field has been set.
+
+### GetPolicyProfileSupportedVersion
+
+`func (o *CapabilityCimcFirmwareDescriptor) GetPolicyProfileSupportedVersion() string`
+
+GetPolicyProfileSupportedVersion returns the PolicyProfileSupportedVersion field if non-nil, zero value otherwise.
+
+### GetPolicyProfileSupportedVersionOk
+
+`func (o *CapabilityCimcFirmwareDescriptor) GetPolicyProfileSupportedVersionOk() (*string, bool)`
+
+GetPolicyProfileSupportedVersionOk returns a tuple with the PolicyProfileSupportedVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyProfileSupportedVersion
+
+`func (o *CapabilityCimcFirmwareDescriptor) SetPolicyProfileSupportedVersion(v string)`
+
+SetPolicyProfileSupportedVersion sets PolicyProfileSupportedVersion field to given value.
+
+### HasPolicyProfileSupportedVersion
+
+`func (o *CapabilityCimcFirmwareDescriptor) HasPolicyProfileSupportedVersion() bool`
+
+HasPolicyProfileSupportedVersion returns a boolean if a field has been set.
 
 ### GetRevision
 

@@ -179,6 +179,32 @@ func Test_intersight_HciApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test HciApiService GetHciClusterOperationByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.HciApi.GetHciClusterOperationByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test HciApiService GetHciClusterOperationList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.HciApi.GetHciClusterOperationList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test HciApiService GetHciComplianceByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -361,6 +387,32 @@ func Test_intersight_HciApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test HciApiService GetHciExternalStorageByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.HciApi.GetHciExternalStorageByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test HciApiService GetHciExternalStorageList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.HciApi.GetHciExternalStorageList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test HciApiService GetHciGpuByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -413,6 +465,32 @@ func Test_intersight_HciApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test HciApiService GetHciNccCheckPolicyByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.HciApi.GetHciNccCheckPolicyByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test HciApiService GetHciNccCheckPolicyList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.HciApi.GetHciNccCheckPolicyList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test HciApiService GetHciNodeByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -458,6 +536,32 @@ func Test_intersight_HciApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HciApi.GetHciPhysicalGpuList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test HciApiService GetHciStorageContainerByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.HciApi.GetHciStorageContainerByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test HciApiService GetHciStorageContainerList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.HciApi.GetHciStorageContainerList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -545,6 +649,20 @@ func Test_intersight_HciApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test HciApiService PatchHciClusterOperation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.HciApi.PatchHciClusterOperation(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test HciApiService PatchHciEsxiVm", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -594,6 +712,20 @@ func Test_intersight_HciApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.HciApi.UpdateHciCluster(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test HciApiService UpdateHciClusterOperation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.HciApi.UpdateHciClusterOperation(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

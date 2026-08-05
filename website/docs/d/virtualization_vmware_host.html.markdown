@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_host"
 description: |-
-        The VMware Host entity with its attributes. Every Host belongs to a Datacenter and may run VMs.
+        The VmwareHost object delineates the VMware host entity, detailing attributes and relationships pivotal to hosting virtual machines within a datacenter.
+        #### Purpose
+        VmwareHost serves as the operational node within VMware environments, providing detailed information about host resources, states, and relationships with other VMware entities.
+        #### Key Concepts
+        - **Resource Utilization:** Tracks resource consumption, including CPU and memory, to optimize performance and resource allocation.
+        - **Connectivity Status:** Monitors connection states with vCenter, ensuring accurate status reporting and management.
+        - **Integration:** Interfaces with datacenters, clusters, and virtual machines, fostering cohesive relationships and operational functionality.
+        - **Security and Configuration:** Includes settings for security features like SSH and quarantine mode, supporting secure and reliable host management.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_host
-The VMware Host entity with its attributes. Every Host belongs to a Datacenter and may run VMs.
+The VmwareHost object delineates the VMware host entity, detailing attributes and relationships pivotal to hosting virtual machines within a datacenter.
+#### Purpose
+VmwareHost serves as the operational node within VMware environments, providing detailed information about host resources, states, and relationships with other VMware entities.
+#### Key Concepts
+- **Resource Utilization:** Tracks resource consumption, including CPU and memory, to optimize performance and resource allocation.
+- **Connectivity Status:** Monitors connection states with vCenter, ensuring accurate status reporting and management.
+- **Integration:** Interfaces with datacenters, clusters, and virtual machines, fostering cohesive relationships and operational functionality.
+- **Security and Configuration:** Includes settings for security features like SSH and quarantine mode, supporting secure and reliable host management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

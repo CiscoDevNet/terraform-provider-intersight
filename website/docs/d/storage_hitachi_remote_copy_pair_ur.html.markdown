@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_remote_copy_pair_ur"
 description: |-
-        Universal Replicator pair entity in Hitachi storage array.
+        The HitachiRemoteCopyPairUr object defines a Universal Replicator pair entity within the Hitachi storage array, supporting replication management and operations.
+        #### Purpose
+        HitachiRemoteCopyPairUr serves as a central component for managing Universal Replicator pairs, facilitating replication operations and monitoring of pair settings.
+        #### Key Concepts
+        - **Replication Management:** Provides settings for replication types, LDEV numbers, and status information for Universal Replicator pairs.
+        - **Privilege Sets:** Ensures secure access and management of replication entities with defined privilege sets.
+        - **Licensing:** Operates under specified entitlements, supporting authorized replication operations.
 
 ---
 
 # Data Source: intersight_storage_hitachi_remote_copy_pair_ur
-Universal Replicator pair entity in Hitachi storage array.
+The HitachiRemoteCopyPairUr object defines a Universal Replicator pair entity within the Hitachi storage array, supporting replication management and operations.
+#### Purpose
+HitachiRemoteCopyPairUr serves as a central component for managing Universal Replicator pairs, facilitating replication operations and monitoring of pair settings.
+#### Key Concepts
+- **Replication Management:** Provides settings for replication types, LDEV numbers, and status information for Universal Replicator pairs.
+- **Privilege Sets:** Ensures secure access and management of replication entities with defined privilege sets.
+- **Licensing:** Operates under specified entitlements, supporting authorized replication operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

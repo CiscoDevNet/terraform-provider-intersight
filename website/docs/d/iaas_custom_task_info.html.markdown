@@ -3,12 +3,22 @@ subcategory: "iaas"
 layout: "intersight"
 page_title: "Intersight: intersight_iaas_custom_task_info"
 description: |-
-        List out the execution of the Custom Tasks with Names.
+        The CustomTaskInfo object offers insights into the execution of custom tasks within UCS Director (UCSD), supporting workflow customization and management.
+        #### Purpose
+        CustomTaskInfo documents execution details of custom tasks, aiding in workflow personalization and optimization.
+        #### Key Concepts
+        - **Custom Task Execution:** Tracks execution of custom tasks, supporting process customization and refinement.
+        - **Read-Only Access:** Ensures secure access to custom task data without alteration.
 
 ---
 
 # Data Source: intersight_iaas_custom_task_info
-List out the execution of the Custom Tasks with Names.
+The CustomTaskInfo object offers insights into the execution of custom tasks within UCS Director (UCSD), supporting workflow customization and management.  
+#### Purpose  
+CustomTaskInfo documents execution details of custom tasks, aiding in workflow personalization and optimization.  
+#### Key Concepts 
+- **Custom Task Execution:** Tracks execution of custom tasks, supporting process customization and refinement. 
+- **Read-Only Access:** Ensures secure access to custom task data without alteration.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

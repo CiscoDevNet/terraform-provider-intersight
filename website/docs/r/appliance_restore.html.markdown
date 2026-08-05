@@ -3,16 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_restore"
 description: |-
-        Restore tracks requests to restore the Intersight Appliance. There will be only
-        one Restore managed object with a 'Started' state at any time. All other Restore
-        managed objects will be in terminal states.
+        The Restore object is crucial for handling system restoration requests, enabling recovery operations to maintain system stability and data accuracy.
+        #### Purpose
+        The Restore object facilitates the process of restoring system data from backups, ensuring timely and accurate recovery following disruptions or data loss.
+        #### Key Concepts
+        - **Process Tracking:** Monitors restore processes from start to finish, providing insights into operation progress and status.
+        - **Single Active Instance:** Ensures only one active restoration operation occurs, preventing overlap and conflicts in recovery efforts.
+        - **Secure Operations:** Utilizes secure communication protocols for data transfer, promoting reliability and safety during restoration.
+        - **Relationship Management:** Maintains connections to account structures, supporting coherent and systematic restore operations.
 
 ---
 
 # Resource: intersight_appliance_restore
-Restore tracks requests to restore the Intersight Appliance. There will be only
-one Restore managed object with a 'Started' state at any time. All other Restore
-managed objects will be in terminal states.
+The Restore object is crucial for handling system restoration requests, enabling recovery operations to maintain system stability and data accuracy.
+#### Purpose
+The Restore object facilitates the process of restoring system data from backups, ensuring timely and accurate recovery following disruptions or data loss.
+#### Key Concepts
+- **Process Tracking:** Monitors restore processes from start to finish, providing insights into operation progress and status.
+- **Single Active Instance:** Ensures only one active restoration operation occurs, preventing overlap and conflicts in recovery efforts.
+- **Secure Operations:** Utilizes secure communication protocols for data transfer, promoting reliability and safety during restoration.
+- **Relationship Management:** Maintains connections to account structures, supporting coherent and systematic restore operations.
 ## Usage Example
 ### Resource Creation
 
@@ -75,10 +85,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `protocol`:(string) Communication protocol used by the file server (e.g. scp, sftp, or CIFS).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.* `cifs` - Common Internet File System (CIFS) Protocol to access file server. 
-* `remote_host`:(string) Hostname of the remote file server. 
-* `remote_path`:(string) File server directory or share name to copy the file. 
-* `remote_port`:(int) Remote TCP port on the file server (e.g. 22 for scp). 
+* `protocol`:(string) Communication protocol used by backup and restore workflow (e.g. scp, sftp, cifs, or local).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.* `cifs` - Common Internet File System (CIFS) Protocol to access file server.* `local` - Backup file is stored in Intersight Appliance. 
+* `remote_host`:(string) Hostname of the remote file server. Not required when protocol is local. 
+* `remote_path`:(string) File server directory or share name to copy the file. Not required when protocol is local. 
+* `remote_port`:(int) Remote TCP port on the file server (e.g. 22 for scp). Not required when protocol is local. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `start_time`:(string)(ReadOnly) Start date and time of the restore process. 
 * `status`:(string)(ReadOnly) Status of the restore managed object.* `Started` - Backup or restore process has started.* `Created` - Backup or restore is in created state.* `Failed` - Backup or restore process has failed.* `Completed` - Backup or restore process has completed.* `Copied` - Backup file has been copied.* `Cleanup Failed` - Cleanup of the old backup has failed. 
@@ -99,7 +109,7 @@ This complex property has following sub-properties:
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
-* `username`:(string) Username to authenticate the fileserver. 
+* `username`:(string) Username to authenticate the fileserver. Not required when protocol is local. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

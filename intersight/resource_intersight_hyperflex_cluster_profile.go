@@ -762,7 +762,7 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"FI", "EDGE", "DC-No-FI"}, false),
 				Optional:     true,
-				Default:      "FI",
+				Computed:     true,
 				ForceNew:     true,
 			},
 			"mod_time": {
@@ -1313,7 +1313,7 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 								return
 							}},
 						"change_status": {
-							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.",
+							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.\n* `Failed` - The status when policy change evaluation report handling failed for a policy.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -2656,12 +2656,12 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		o.SetMgmtIpAddress(x)
 	}
 
-	if v, ok := d.GetOk("mgmt_platform"); ok {
+	if v, ok := d.GetOkExists("mgmt_platform"); ok {
 		x := (v.(string))
 		o.SetMgmtPlatform(x)
 	}
 
-	if v, ok := d.GetOk("moid"); ok {
+	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
@@ -2758,7 +2758,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 
 	o.SetObjectType("hyperflex.ClusterProfile")
 
-	if v, ok := d.GetOk("organization"); ok {
+	if v, ok := d.GetOkExists("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

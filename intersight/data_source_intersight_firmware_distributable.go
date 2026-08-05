@@ -242,6 +242,11 @@ func getFirmwareDistributableSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"feature_flags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"feature_source": {
 			Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.\n* `ConfigBackupImport` - This indicates the user uploaded configuration backup file.\n* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads.",
 			Type:        schema.TypeString,
@@ -280,6 +285,11 @@ func getFirmwareDistributableSchema() map[string]*schema.Schema {
 		"imported_time": {
 			Description: "The time at which this image or file was imported/cached into the repositry. if the 'ImportState' is 'Imported', the time at which this image or file was imported. if the 'ImportState' is 'Cached', the time at which this image or file was cached.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_beta": {
+			Description: "Whether this distributable is a beta image and participates in OData filtering so callers can explicitly query beta or non-beta firmware images.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"last_access_time": {
@@ -1043,6 +1053,17 @@ func dataSourceFirmwareDistributableRead(c context.Context, d *schema.ResourceDa
 		o.SetDownloadCount(x)
 	}
 
+	if v, ok := d.GetOk("feature_flags"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetFeatureFlags(x)
+	}
+
 	if v, ok := d.GetOk("feature_source"); ok {
 		x := (v.(string))
 		o.SetFeatureSource(x)
@@ -1082,6 +1103,11 @@ func dataSourceFirmwareDistributableRead(c context.Context, d *schema.ResourceDa
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetImportedTime(x)
+	}
+
+	if v, ok := d.GetOkExists("is_beta"); ok {
+		x := (v.(bool))
+		o.SetIsBeta(x)
 	}
 
 	if v, ok := d.GetOk("last_access_time"); ok {
@@ -1573,6 +1599,7 @@ func dataSourceFirmwareDistributableRead(c context.Context, d *schema.ResourceDa
 				temp["distributable_metas"] = flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["download_count"] = (s.GetDownloadCount())
+				temp["feature_flags"] = (s.GetFeatureFlags())
 				temp["feature_source"] = (s.GetFeatureSource())
 				temp["file_location"] = (s.GetFileLocation())
 				temp["guid"] = (s.GetGuid())
@@ -1582,6 +1609,7 @@ func dataSourceFirmwareDistributableRead(c context.Context, d *schema.ResourceDa
 				temp["import_state"] = (s.GetImportState())
 
 				temp["imported_time"] = (s.GetImportedTime()).String()
+				temp["is_beta"] = (s.GetIsBeta())
 
 				temp["last_access_time"] = (s.GetLastAccessTime()).String()
 				temp["md5e_tag"] = (s.GetMd5eTag())

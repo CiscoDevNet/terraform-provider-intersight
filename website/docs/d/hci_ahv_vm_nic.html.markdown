@@ -28,6 +28,7 @@ The following arguments can be used to get data of already created objects in In
 * `num_queues`:(int) The number of Tx/Rx queue pairs for this NIC. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `should_allow_unknown_macs`:(bool) Indicates whether an unknown unicast traffic is forwarded to this NIC or not, only for the NICs on the overlay subnets. 
+* `vlan_id`:(int) VLAN ID of subnet for this NIC. 
 * `vlan_mode`:(string) By default, all the virtual NICs are created in ACCESS mode, which permits only one VLAN per virtual network. TRUNKED mode allows multiple VLANs on a single VM NIC for network-aware user VMs. 
 * `vm_ext_id`:(string) The unique identifier of the VM. 
  
