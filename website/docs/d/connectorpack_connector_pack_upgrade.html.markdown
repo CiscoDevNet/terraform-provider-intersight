@@ -3,12 +3,30 @@ subcategory: "connectorpack"
 layout: "intersight"
 page_title: "Intersight: intersight_connectorpack_connector_pack_upgrade"
 description: |-
-        Used to download or install connector packs on the target device.
+        ConnectorPackUpgrades represent an operation request used to download and/or install connector packs on a target device (specifically UCS Director in this model). The object captures the requested operation type and links to both the target UCS Director instance and the workflow execution that performs the upgrade.
+        #### Purpose
+        Provide an API-driven mechanism to initiate and track connector pack download/install actions against a specific UCS Director target, enabling controlled upgrades via a workflow-backed operation.
+        #### Key Concepts
+        - **Operation request object**: Created to trigger a connector pack action; supports READ for visibility and DELETE for cleanup.
+        - **Operation type control**: `connectorPackOpType` specifies what action should be performed on UCS Director (for example, download vs install, depending on the enum definition).
+        - **Target binding (create-only)**: `ucsdInfo` identifies the UCS Director instance to which packs are pushed/installed and is `createonly`, preventing retargeting after creation.
+        - **Lifecycle coupling to target**: `onpeerdelete: cascade` on `ucsdInfo` ties the operation record to the UCS Director object.
+        - **Workflow-backed execution**: `workflow` references the runtime `workflow.WorkflowInfo` instance that carries out the upgrade operation, enabling tracking and troubleshooting of execution state.
+        - **Role-governed access**: CREATE/DELETE is restricted to Account Administrator, while READ is available to common operational roles.
 
 ---
 
 # Data Source: intersight_connectorpack_connector_pack_upgrade
-Used to download or install connector packs on the target device.
+ConnectorPackUpgrades represent an operation request used to download and/or install connector packs on a target device (specifically UCS Director in this model). The object captures the requested operation type and links to both the target UCS Director instance and the workflow execution that performs the upgrade.
+#### Purpose
+Provide an API-driven mechanism to initiate and track connector pack download/install actions against a specific UCS Director target, enabling controlled upgrades via a workflow-backed operation.
+#### Key Concepts
+- **Operation request object**: Created to trigger a connector pack action; supports READ for visibility and DELETE for cleanup.
+- **Operation type control**: `connectorPackOpType` specifies what action should be performed on UCS Director (for example, download vs install, depending on the enum definition).
+- **Target binding (create-only)**: `ucsdInfo` identifies the UCS Director instance to which packs are pushed/installed and is `createonly`, preventing retargeting after creation.
+- **Lifecycle coupling to target**: `onpeerdelete: cascade` on `ucsdInfo` ties the operation record to the UCS Director object.
+- **Workflow-backed execution**: `workflow` references the runtime `workflow.WorkflowInfo` instance that carries out the upgrade operation, enabling tracking and troubleshooting of execution state.
+- **Role-governed access**: CREATE/DELETE is restricted to Account Administrator, while READ is available to common operational roles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

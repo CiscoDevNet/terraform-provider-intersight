@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_flash_physical_drive"
 description: |-
-        Physical Drive repersenting a SD Card.
+        FlexFlashPhysicalDrives represent SD-card physical drives managed by a FlexFlash controller, including card status/type and drive status.
+        #### Purpose
+        Expose SD-card hardware inventory under FlexFlash so administrators can monitor card presence/health.
+        #### Key Concepts
+        - **SD card representation:** Models physical SD-card media.
+        - **Health/status signals:** Captures card and drive status attributes.
+        - **Controller context:** Part of the FlexFlash controller hierarchy.
 
 ---
 
 # Data Source: intersight_storage_flex_flash_physical_drive
-Physical Drive repersenting a SD Card.
+FlexFlashPhysicalDrives represent SD-card physical drives managed by a FlexFlash controller, including card status/type and drive status.
+#### Purpose
+Expose SD-card hardware inventory under FlexFlash so administrators can monitor card presence/health.
+#### Key Concepts
+- **SD card representation:** Models physical SD-card media.
+- **Health/status signals:** Captures card and drive status attributes.
+- **Controller context:** Part of the FlexFlash controller hierarchy.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_adapter_update_constraint_meta"
 description: |-
-        Internal meta-data to enable adapter unit update related constraints.
+        The AdapterUpdateConstraintMeta object provides internal metadata used to enforce update-related constraints for adapter units within the firmware upgrade process.
+        #### Purpose
+        It ensures that adapter firmware updates are only performed when the target server model and platform type meet specific version requirements, preventing incompatible firmware deployments.
+        #### Key Concepts
+        - **Constraint Enforcement:** Validates the minimum supported firmware version for specific adapter models.
+        - **Secure Boot Support:** Includes flags to indicate whether secure boot is supported for a given adapter configuration.
+        - **Platform Compatibility:** Maps constraints to specific server models and platform types.
 
 ---
 
 # Data Source: intersight_capability_adapter_update_constraint_meta
-Internal meta-data to enable adapter unit update related constraints.
+The AdapterUpdateConstraintMeta object provides internal metadata used to enforce update-related constraints for adapter units within the firmware upgrade process.
+#### Purpose
+It ensures that adapter firmware updates are only performed when the target server model and platform type meet specific version requirements, preventing incompatible firmware deployments.
+#### Key Concepts
+- **Constraint Enforcement:** Validates the minimum supported firmware version for specific adapter models.
+- **Secure Boot Support:** Includes flags to indicate whether secure boot is supported for a given adapter configuration.
+- **Platform Compatibility:** Maps constraints to specific server models and platform types.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

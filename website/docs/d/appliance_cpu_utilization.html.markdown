@@ -3,16 +3,28 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_cpu_utilization"
 description: |-
-        CPU utilization metrics for Intersight Appliance nodes. Tracks the percentage
-        of CPU capacity being used, helping administrators monitor processor load and
-        identify performance bottlenecks across the cluster.
+        CpuUtilization provides CPU utilization metrics for Intersight Appliance nodes. It tracks the percentage of CPU capacity currently in use, enabling administrators to observe processor load trends and spot potential performance bottlenecks across an appliance cluster.
+        #### Purpose
+        Expose a read-only, system-owned metric stream for monitoring node CPU load to support operational health monitoring and performance troubleshooting.
+        #### Key Concepts
+        - **Node-scoped utilization metric**: Extends `appliance.NodeUtilizationMetric`, indicating it is part of a common appliance node metric framework.
+        - **Percent-based capacity usage**: Represents CPU consumption as a percentage of total available CPU capacity.
+        - **Cluster performance visibility**: Useful for identifying imbalanced load or sustained high CPU conditions across nodes.
+        - **System-owned telemetry**: `owner: system` indicates it is produced and maintained by the platform, not configured by users.
+        - **Restricted read access**: Available via READ to account and system administrators.
 
 ---
 
 # Data Source: intersight_appliance_cpu_utilization
-CPU utilization metrics for Intersight Appliance nodes. Tracks the percentage 
-of CPU capacity being used, helping administrators monitor processor load and 
-identify performance bottlenecks across the cluster.
+CpuUtilization provides CPU utilization metrics for Intersight Appliance nodes. It tracks the percentage of CPU capacity currently in use, enabling administrators to observe processor load trends and spot potential performance bottlenecks across an appliance cluster.
+#### Purpose
+Expose a read-only, system-owned metric stream for monitoring node CPU load to support operational health monitoring and performance troubleshooting.
+#### Key Concepts
+- **Node-scoped utilization metric**: Extends `appliance.NodeUtilizationMetric`, indicating it is part of a common appliance node metric framework.
+- **Percent-based capacity usage**: Represents CPU consumption as a percentage of total available CPU capacity.
+- **Cluster performance visibility**: Useful for identifying imbalanced load or sustained high CPU conditions across nodes.
+- **System-owned telemetry**: `owner: system` indicates it is produced and maintained by the platform, not configured by users.
+- **Restricted read access**: Available via READ to account and system administrators.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

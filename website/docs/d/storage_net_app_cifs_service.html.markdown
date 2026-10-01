@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_cifs_service"
 description: |-
-        NetApp CIFS service represents a CIFS server on a storage virtual machine.
+        The NetAppCifsServices object represents a CIFS server configured on a storage virtual machine (SVM).
+        #### Purpose
+        This provides the necessary configuration details to manage CIFS/SMB file sharing, ensuring that the storage system can effectively serve files to Windows-based clients in an Active Directory environment.
+        #### Key Concepts
+        - **Server Identity:** Manages the CIFS server name and its association with an Active Directory domain.
+        - **Operational Status:** Tracks whether the CIFS service is administratively enabled.
+        - **Domain Integration:** Links the service to specific Active Directory organizational units and FQDNs.
 
 ---
 
 # Data Source: intersight_storage_net_app_cifs_service
-NetApp CIFS service represents a CIFS server on a storage virtual machine.
+The NetAppCifsServices object represents a CIFS server configured on a storage virtual machine (SVM).
+#### Purpose
+This provides the necessary configuration details to manage CIFS/SMB file sharing, ensuring that the storage system can effectively serve files to Windows-based clients in an Active Directory environment.
+#### Key Concepts
+- **Server Identity:** Manages the CIFS server name and its association with an Active Directory domain.
+- **Operational Status:** Tracks whether the CIFS service is administratively enabled.
+- **Domain Integration:** Links the service to specific Active Directory organizational units and FQDNs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

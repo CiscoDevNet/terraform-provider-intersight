@@ -3,12 +3,24 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_hsu_iso_file_support_meta"
 description: |-
-        Internal meta-data to check the HSU support to accept an iso file path in the upgrade request.
+        The HsuIsoFileSupportMeta object provides metadata to verify if the HSU (Host Upgrade) process supports accepting an ISO file path in an upgrade request.
+        #### Purpose
+        It allows the system to determine if a specific server series supports HSU-based ISO upgrades, providing the necessary symbolic links and version requirements.
+        #### Key Concepts
+        - **ISO Support Validation:** Checks if the HSU capability is present based on firmware versions.
+        - **File Referencing:** Maps series to specific ISO file symbolic links.
+        - **Model-Specific Constraints:** Provides granular control over ISO support based on model and version combinations.
 
 ---
 
 # Data Source: intersight_capability_hsu_iso_file_support_meta
-Internal meta-data to check the HSU support to accept an iso file path in the upgrade request.
+The HsuIsoFileSupportMeta object provides metadata to verify if the HSU (Host Upgrade) process supports accepting an ISO file path in an upgrade request.
+#### Purpose
+It allows the system to determine if a specific server series supports HSU-based ISO upgrades, providing the necessary symbolic links and version requirements.
+#### Key Concepts
+- **ISO Support Validation:** Checks if the HSU capability is present based on firmware versions.
+- **File Referencing:** Maps series to specific ISO file symbolic links.
+- **Model-Specific Constraints:** Provides granular control over ISO support based on model and version combinations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

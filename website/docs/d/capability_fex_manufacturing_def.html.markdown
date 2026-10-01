@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_fex_manufacturing_def"
 description: |-
-        Fabric extender manufacturing def properties.
+        The FexManufacturingDef object provides manufacturing and descriptive metadata for a FEX platform.
+        #### Purpose
+        This standardizes product identity and descriptive fields for FEX platforms, supporting consistent UI rendering and enabling catalog-backed identification across inventory and workflows.
+        #### Key Concepts
+        - **Catalog-driven product identity:** Provides canonical PID/SKU and descriptive fields.
+        - **Consistent platform labeling:** Enables uniform naming across systems and reports.
+        - **Model differentiation:** Supports categorizing FEX platforms beyond raw inventory strings.
+        - **Operational usability:** Improves readability and traceability in management workflows.
 
 ---
 
 # Data Source: intersight_capability_fex_manufacturing_def
-Fabric extender manufacturing def properties.
+The FexManufacturingDef object provides manufacturing and descriptive metadata for a FEX platform.
+#### Purpose
+This standardizes product identity and descriptive fields for FEX platforms, supporting consistent UI rendering and enabling catalog-backed identification across inventory and workflows.
+#### Key Concepts
+- **Catalog-driven product identity:** Provides canonical PID/SKU and descriptive fields.
+- **Consistent platform labeling:** Enables uniform naming across systems and reports.
+- **Model differentiation:** Supports categorizing FEX platforms beyond raw inventory strings.
+- **Operational usability:** Improves readability and traceability in management workflows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

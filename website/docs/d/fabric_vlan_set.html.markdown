@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_vlan_set"
 description: |-
-        Auto created object for set of vlans with identical configuration.
+        The VlanSet object represents an automatically created grouping of VLANs that share an identical effective configuration profile.
+        #### Purpose
+        VlanSet provides a normalized, inventory-friendly representation of VLANs that can be treated as a single set due to identical properties. This helps reduce complexity for consumers that need to interpret or display VLAN configurations at scale.
+        #### Key Concepts
+        - **Configuration-based grouping:** Groups VLANs by identical effective settings.
+        - **Scale simplification:** Reduces noise when many VLANs share the same operational policy.
+        - **Read-mostly inventory model:** Primarily a representation of computed/grouped state rather than user-authored intent.
+        - **Policy correlation:** Remains associated with the parent Ethernet network policy context.
 
 ---
 
 # Data Source: intersight_fabric_vlan_set
-Auto created object for set of vlans with identical configuration.
+The VlanSet object represents an automatically created grouping of VLANs that share an identical effective configuration profile.
+#### Purpose
+VlanSet provides a normalized, inventory-friendly representation of VLANs that can be treated as a single set due to identical properties. This helps reduce complexity for consumers that need to interpret or display VLAN configurations at scale.
+#### Key Concepts
+- **Configuration-based grouping:** Groups VLANs by identical effective settings.
+- **Scale simplification:** Reduces noise when many VLANs share the same operational policy.
+- **Read-mostly inventory model:** Primarily a representation of computed/grouped state rather than user-authored intent.
+- **Policy correlation:** Remains associated with the parent Ethernet network policy context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

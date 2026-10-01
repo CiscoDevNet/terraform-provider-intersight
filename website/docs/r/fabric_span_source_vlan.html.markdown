@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_span_source_vlan"
 description: |-
-        Configures a VLAN as the SPAN Source for a given SPAN session. For VLAN that is common to both Fabric Interconnects, VLAN must be added as a source to a SPAN session on the peer Fabric Interconnect to ensure that traffic is mirrored on both Fabric Interconnects.
+        The SpanSourceVlan object represents a VLAN configured as a SPAN traffic source.
+        #### Purpose
+        SpanSourceVlan enables mirroring of traffic that matches a VLAN context into a SPAN session, supporting VLAN-scoped troubleshooting and visibility use cases.
+        #### Key Concepts
+        - **VLAN-scoped mirroring:** Mirrors traffic associated with a VLAN identifier.
+        - **Session-scoped source membership:** Exists as a source attached to a particular SPAN session.
+        - **Fabric-wide visibility aid:** Useful for diagnosing issues tied to VLAN segmentation.
+        - **Directional capture semantics:** Aligns with the SPAN source direction model.
 
 ---
 
 # Resource: intersight_fabric_span_source_vlan
-Configures a VLAN as the SPAN Source for a given SPAN session. For VLAN that is common to both Fabric Interconnects, VLAN must be added as a source to a SPAN session on the peer Fabric Interconnect to ensure that traffic is mirrored on both Fabric Interconnects.
+The SpanSourceVlan object represents a VLAN configured as a SPAN traffic source.
+#### Purpose
+SpanSourceVlan enables mirroring of traffic that matches a VLAN context into a SPAN session, supporting VLAN-scoped troubleshooting and visibility use cases.
+#### Key Concepts
+- **VLAN-scoped mirroring:** Mirrors traffic associated with a VLAN identifier.
+- **Session-scoped source membership:** Exists as a source attached to a particular SPAN session.
+- **Fabric-wide visibility aid:** Useful for diagnosing issues tied to VLAN segmentation.
+- **Directional capture semantics:** Aligns with the SPAN source direction model.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

@@ -3,6 +3,9 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_instance"
 description: |-
+        The account-scoped record of which advisories (PSIRT security advisories, Field Notices, End-of-Life) currently impact an account and its servers or components. Unlike tam.SecurityAdvisory and tam.AdvisoryDefinition, which are global advisory catalogs and do not reflect account impact, this object exists only where an advisory applies to a managed object in the account.
+        Each record represents a single advisory applied to a single managed object, so the record count reflects the number of impacts rather than the number of distinct advisories; an advisory affecting several objects produces several records that reference the same Advisory. Distinct advisories are obtained by grouping on the Advisory reference.
+        Acknowledging an advisory does not remove its impact, so acknowledged advisories continue to appear here; acknowledgement is tracked separately on tam.AdvisoryInfo. The unacknowledged set is the advisories here whose Advisory is not acknowledged in tam.AdvisoryInfo, while acknowledged advisories remain part of an object's impact and are distinguished by their acknowledgement status rather than excluded.
         The AdvisoryInstance object represents instances of advisories applicable to Intersight managed objects,
         maintaining advisory applicability and state changes.
         #### Purpose
@@ -16,6 +19,9 @@ description: |-
 ---
 
 # Data Source: intersight_tam_advisory_instance
+The account-scoped record of which advisories (PSIRT security advisories, Field Notices, End-of-Life) currently impact an account and its servers or components. Unlike tam.SecurityAdvisory and tam.AdvisoryDefinition, which are global advisory catalogs and do not reflect account impact, this object exists only where an advisory applies to a managed object in the account.
+Each record represents a single advisory applied to a single managed object, so the record count reflects the number of impacts rather than the number of distinct advisories; an advisory affecting several objects produces several records that reference the same Advisory. Distinct advisories are obtained by grouping on the Advisory reference.
+Acknowledging an advisory does not remove its impact, so acknowledged advisories continue to appear here; acknowledgement is tracked separately on tam.AdvisoryInfo. The unacknowledged set is the advisories here whose Advisory is not acknowledged in tam.AdvisoryInfo, while acknowledged advisories remain part of an object's impact and are distinguished by their acknowledgement status rather than excluded.
 The AdvisoryInstance object represents instances of advisories applicable to Intersight managed objects,  
 maintaining advisory applicability and state changes.
 #### Purpose
@@ -40,5 +46,5 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `state`:(string) Current state of the advisory instance (Active/Cleared/Unknown etc.).* `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object.* `active` - Advisory instance is currently active and applicable for the affected managed object.* `cleared` - Advisory instance is no longer applicable for the affected managed object. 
+* `state`:(string) Deprecated and retained only for backward compatibility. This field is effectively always 'unknown' and does not reflect whether the advisory currently applies to the affected object. The existence of an AdvisoryInstance record is itself what denotes an applicable, current advisory impact, independent of this value.* `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object.* `active` - Advisory instance is currently active and applicable for the affected managed object.* `cleared` - Advisory instance is no longer applicable for the affected managed object. 
  

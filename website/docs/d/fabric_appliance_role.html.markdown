@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_appliance_role"
 description: |-
-        Configuration object sent by user to create an appliance port.
+        The ApplianceRole object represents configuration intent for an appliance-facing Ethernet port in a port policy.
+        #### Purpose
+        ApplianceRole defines a port intended to connect to an appliance (non-uplink, non-server endpoint) and acts as the attachment point for appliance-specific behaviors such as port mode semantics and QoS prioritization selection.
+        #### Key Concepts
+        - **Appliance connectivity intent:** Declares the port is used for connecting external appliances.
+        - **Mode semantics:** Supports appliance port mode concepts (e.g., trunk/access style behavior).
+        - **QoS alignment:** Provides a way to align appliance traffic with a chosen system QoS class.
+        - **Policy-driven reproducibility:** Enables consistent appliance port configuration across deployments.
 
 ---
 
 # Data Source: intersight_fabric_appliance_role
-Configuration object sent by user to create an appliance port.
+The ApplianceRole object represents configuration intent for an appliance-facing Ethernet port in a port policy.
+#### Purpose
+ApplianceRole defines a port intended to connect to an appliance (non-uplink, non-server endpoint) and acts as the attachment point for appliance-specific behaviors such as port mode semantics and QoS prioritization selection.
+#### Key Concepts
+- **Appliance connectivity intent:** Declares the port is used for connecting external appliances.
+- **Mode semantics:** Supports appliance port mode concepts (e.g., trunk/access style behavior).
+- **QoS alignment:** Provides a way to align appliance traffic with a chosen system QoS class.
+- **Policy-driven reproducibility:** Enables consistent appliance port configuration across deployments.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the StorageFileItem type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StorageFileItem{}
 
-// StorageFileItem The local Storage Files present in a server.
+// StorageFileItem FileItems represent files stored in a server’s local storage repository. They provide an inventory view of file artifacts (for example ISO images or CSV files), including basic metadata such as size, type, visibility/mapping to the host, and the time the file was uploaded or last updated. #### Purpose Expose a read-only inventory of local storage files on servers so administrators can discover available artifacts, validate what is present on local storage, and support workflows that depend on locally stored files (such as mounting media). #### Key Concepts - **Local storage file inventory**: Models individual file artifacts present on server-local storage. - **File identity and metadata**: Captures identifiers and descriptive attributes such as `fileId`, `name`, `description`, `type`, and `size`. - **Host mapping visibility**: `hostVisible` indicates whether the file is mapped/visible for host-side use. - **Recency tracking**: `updateTime` helps determine when the file was uploaded/updated. - **Device association**: `registeredDevice` links the file inventory to the specific managed server/device in Intersight. - **Permission inheritance via storage item**: Inherits permissions from `storageItem`, aligning access with the parent local storage context.
 type StorageFileItem struct {
 	InventoryBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

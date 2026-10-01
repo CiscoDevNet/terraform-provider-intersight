@@ -318,6 +318,11 @@ func getMgmtConfigBackupOperationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_user_password_set": {
+			Description: "Indicates whether the value of the 'userPassword' property has been set.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -1131,6 +1136,11 @@ func dataSourceMgmtConfigBackupOperationRead(c context.Context, d *schema.Resour
 		o.SetIsAesKeySet(x)
 	}
 
+	if v, ok := d.GetOkExists("is_user_password_set"); ok {
+		x := (v.(bool))
+		o.SetIsUserPasswordSet(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
@@ -1657,6 +1667,7 @@ func dataSourceMgmtConfigBackupOperationRead(c context.Context, d *schema.Resour
 
 				temp["end_time"] = (s.GetEndTime()).String()
 				temp["is_aes_key_set"] = (s.GetIsAesKeySet())
+				temp["is_user_password_set"] = (s.GetIsUserPasswordSet())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1682,7 +1693,6 @@ func dataSourceMgmtConfigBackupOperationRead(c context.Context, d *schema.Resour
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["user_backup_file"] = flattenMapMgmtConfigBackupFileRelationship(s.GetUserBackupFile(), d)
-				temp["user_password"] = (s.GetUserPassword())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 

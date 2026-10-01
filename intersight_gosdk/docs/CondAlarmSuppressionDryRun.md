@@ -6,10 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cond.AlarmSuppressionDryRun"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.AlarmSuppressionDryRun"]
-**AlarmRules** | Pointer to [**[]CondAlarmRuleExpression**](CondAlarmRuleExpression.md) |  | [optional] 
+**AlarmRules** | Pointer to [**[]CondAbstractAlarmRule**](CondAbstractAlarmRule.md) |  | [optional] 
 **RulesOperator** | Pointer to **string** | Operation that binds all the different rules together. * &#x60;All&#x60; - All is an AND condition applied against the individual conditions. * &#x60;Any&#x60; - Any is an OR condition applied against the individual conditions. | [optional] [default to "All"]
 **Summary** | Pointer to [**NullableCondAlarmSuppressionDryRunSummary**](CondAlarmSuppressionDryRunSummary.md) |  | [optional] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -72,20 +73,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetAlarmRules
 
-`func (o *CondAlarmSuppressionDryRun) GetAlarmRules() []CondAlarmRuleExpression`
+`func (o *CondAlarmSuppressionDryRun) GetAlarmRules() []CondAbstractAlarmRule`
 
 GetAlarmRules returns the AlarmRules field if non-nil, zero value otherwise.
 
 ### GetAlarmRulesOk
 
-`func (o *CondAlarmSuppressionDryRun) GetAlarmRulesOk() (*[]CondAlarmRuleExpression, bool)`
+`func (o *CondAlarmSuppressionDryRun) GetAlarmRulesOk() (*[]CondAbstractAlarmRule, bool)`
 
 GetAlarmRulesOk returns a tuple with the AlarmRules field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAlarmRules
 
-`func (o *CondAlarmSuppressionDryRun) SetAlarmRules(v []CondAlarmRuleExpression)`
+`func (o *CondAlarmSuppressionDryRun) SetAlarmRules(v []CondAbstractAlarmRule)`
 
 SetAlarmRules sets AlarmRules field to given value.
 
@@ -200,6 +201,41 @@ HasAccount returns a boolean if a field has been set.
 `func (o *CondAlarmSuppressionDryRun) UnsetAccount()`
 
 UnsetAccount ensures that no value is present for Account, not even an explicit nil
+### GetOrganization
+
+`func (o *CondAlarmSuppressionDryRun) GetOrganization() OrganizationOrganizationRelationship`
+
+GetOrganization returns the Organization field if non-nil, zero value otherwise.
+
+### GetOrganizationOk
+
+`func (o *CondAlarmSuppressionDryRun) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool)`
+
+GetOrganizationOk returns a tuple with the Organization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganization
+
+`func (o *CondAlarmSuppressionDryRun) SetOrganization(v OrganizationOrganizationRelationship)`
+
+SetOrganization sets Organization field to given value.
+
+### HasOrganization
+
+`func (o *CondAlarmSuppressionDryRun) HasOrganization() bool`
+
+HasOrganization returns a boolean if a field has been set.
+
+### SetOrganizationNil
+
+`func (o *CondAlarmSuppressionDryRun) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *CondAlarmSuppressionDryRun) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

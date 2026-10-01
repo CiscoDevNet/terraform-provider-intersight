@@ -3,12 +3,28 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_span"
 description: |-
-        Group of disks to configure virtual drive.
+        Spans represent groups of physical disks (by slot membership) used as building blocks for configuring storage layouts, specifically as components of a DiskGroup used to create virtual drives.
+        #### Purpose
+        Model the disk grouping construct that aggregates one or more disks into a “span”, enabling controllers to assemble RAID/disk group configurations from one or more spans.
+        #### Key Concepts
+        - **Disk grouping unit**: A span is a discrete grouping of disks used as input to higher-level constructs like DiskGroups and virtual drive creation.
+        - **Slot-based composition**: `slots` provides a list of drive slot identifiers that belong to the span.
+        - **Unique identification**: `spanId` uniquely identifies the span within the context it is reported.
+        - **Topology relationships**: `physicalDisks` links the span to the actual `storage.PhysicalDisk` objects that comprise it.
+        - **DiskGroup association**: Permission inheritance from `diskGroup` indicates spans are governed/owned through their parent DiskGroup context.
 
 ---
 
 # Data Source: intersight_storage_span
-Group of disks to configure virtual drive.
+Spans represent groups of physical disks (by slot membership) used as building blocks for configuring storage layouts, specifically as components of a DiskGroup used to create virtual drives.
+#### Purpose
+Model the disk grouping construct that aggregates one or more disks into a “span”, enabling controllers to assemble RAID/disk group configurations from one or more spans.
+#### Key Concepts
+- **Disk grouping unit**: A span is a discrete grouping of disks used as input to higher-level constructs like DiskGroups and virtual drive creation.
+- **Slot-based composition**: `slots` provides a list of drive slot identifiers that belong to the span.
+- **Unique identification**: `spanId` uniquely identifies the span within the context it is reported.
+- **Topology relationships**: `physicalDisks` links the span to the actual `storage.PhysicalDisk` objects that comprise it.
+- **DiskGroup association**: Permission inheritance from `diskGroup` indicates spans are governed/owned through their parent DiskGroup context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_physical_disk_extension"
 description: |-
-        Information of disks as reported by controller. In certain cases like S-series servers, disk information will be reported by controller separately and this represents such information.
+        PhysicalDiskExtensions capture additional disk information as reported by the controller separately (for example in certain platforms such as S-series), including disk DN, state, bootable flag, and health.
+        #### Purpose
+        Provide controller-reported disk metadata when disk inventory is surfaced via an auxiliary reporting path.
+        #### Key Concepts
+        - **Controller-reported extension:** Supplements primary disk inventory with controller-scoped details.
+        - **Identity via DN:** Uses disk distinguished name to correlate.
+        - **State/health capture:** Includes disk state/bootable/health fields used for diagnostics.
 
 ---
 
 # Data Source: intersight_storage_physical_disk_extension
-Information of disks as reported by controller. In certain cases like S-series servers, disk information will be reported by controller separately and this represents such information.
+PhysicalDiskExtensions capture additional disk information as reported by the controller separately (for example in certain platforms such as S-series), including disk DN, state, bootable flag, and health.
+#### Purpose
+Provide controller-reported disk metadata when disk inventory is surfaced via an auxiliary reporting path.
+#### Key Concepts
+- **Controller-reported extension:** Supplements primary disk inventory with controller-scoped details.
+- **Identity via DN:** Uses disk distinguished name to correlate.
+- **State/health capture:** Includes disk state/bootable/health fields used for diagnostics.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

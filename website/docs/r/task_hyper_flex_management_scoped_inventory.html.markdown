@@ -3,12 +3,28 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_hyper_flex_management_scoped_inventory"
 description: |-
-        API to trigger on-demand HyperFlex inventory to update modified objects in Intersight report.
+        HyperFlexManagementScopedInventories are task-trigger objects used to initiate an on-demand HyperFlex inventory collection for a specific registered HyperFlex endpoint. They are intended to refresh Intersight’s reported state by collecting updated data for the associated device.
+        #### Purpose
+        Provide an API mechanism to manually trigger inventory collection so that recently changed HyperFlex-managed objects are re-discovered and reflected in Intersight reports without waiting for the next scheduled inventory cycle.
+        #### Key Concepts
+        - **On-demand inventory trigger:** Creating this object starts an immediate inventory refresh workflow for the target device.
+        - **Device-scoped execution:** The operation is explicitly bound to a single `registeredDevice` (an `asset.DeviceRegistration`).
+        - **Scoped inventory base:** Extends `connector.ScopedInventory`, aligning with the platform’s standard pattern for inventory-trigger requests.
+        - **Permission inheritance:** Inherits permissions from `registeredDevice`, ensuring only authorized users can trigger collection for that device.
+        - **Lifecycle coupling:** Uses `onpeerdelete: cascade` so if the device registration is removed, the associated trigger object is cleaned up.
 
 ---
 
 # Resource: intersight_task_hyper_flex_management_scoped_inventory
-API to trigger on-demand HyperFlex inventory to update modified objects in Intersight report.
+HyperFlexManagementScopedInventories are task-trigger objects used to initiate an on-demand HyperFlex inventory collection for a specific registered HyperFlex endpoint. They are intended to refresh Intersight’s reported state by collecting updated data for the associated device.
+#### Purpose
+Provide an API mechanism to manually trigger inventory collection so that recently changed HyperFlex-managed objects are re-discovered and reflected in Intersight reports without waiting for the next scheduled inventory cycle.
+#### Key Concepts
+- **On-demand inventory trigger:** Creating this object starts an immediate inventory refresh workflow for the target device.
+- **Device-scoped execution:** The operation is explicitly bound to a single `registeredDevice` (an `asset.DeviceRegistration`).
+- **Scoped inventory base:** Extends `connector.ScopedInventory`, aligning with the platform’s standard pattern for inventory-trigger requests.
+- **Permission inheritance:** Inherits permissions from `registeredDevice`, ensuring only authorized users can trigger collection for that device.
+- **Lifecycle coupling:** Uses `onpeerdelete: cascade` so if the device registration is removed, the associated trigger object is cleaned up.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

@@ -3,12 +3,28 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_chassis_descriptor"
 description: |-
-        Descriptor that uniquely identifies an chassis enclosure.
+        ChassisDescriptors are capability-catalog hardware descriptors that uniquely identify a chassis enclosure by its vendor, model, version, revision, and catalog section context. They serve as the catalog-level identity record used to recognize and reason about chassis hardware in a standardized way.
+        #### Purpose
+        Provide a canonical catalog entry for chassis enclosure hardware so capabilities, compatibility logic, and platform behavior can be tied to a uniquely identified chassis model/revision.
+        #### Key Concepts
+        - **Catalog-based hardware identity**: Extends `HardwareDescriptor`, indicating it participates in a broader capability-catalog hardware description framework.
+        - **Unique enclosure fingerprint**: Identity is composed of `vendor`, `model`, `version`, `revision`, and `section`, ensuring chassis descriptors are uniquely distinguished in the catalog.
+        - **Revision-aware modeling**: `revision` captures enclosure revision differences that may affect supportability or behavior.
+        - **Section-scoped governance**: Inherits permissions from `section`, tying access and organization to the containing catalog section.
+        - **Catalog-admin lifecycle**: Creation and modification are restricted to `CapabilityCatalog Administrator`, while READ is available to broader operational roles.
 
 ---
 
 # Data Source: intersight_capability_chassis_descriptor
-Descriptor that uniquely identifies an chassis enclosure.
+ChassisDescriptors are capability-catalog hardware descriptors that uniquely identify a chassis enclosure by its vendor, model, version, revision, and catalog section context. They serve as the catalog-level identity record used to recognize and reason about chassis hardware in a standardized way.
+#### Purpose
+Provide a canonical catalog entry for chassis enclosure hardware so capabilities, compatibility logic, and platform behavior can be tied to a uniquely identified chassis model/revision.
+#### Key Concepts
+- **Catalog-based hardware identity**: Extends `HardwareDescriptor`, indicating it participates in a broader capability-catalog hardware description framework.
+- **Unique enclosure fingerprint**: Identity is composed of `vendor`, `model`, `version`, `revision`, and `section`, ensuring chassis descriptors are uniquely distinguished in the catalog.
+- **Revision-aware modeling**: `revision` captures enclosure revision differences that may affect supportability or behavior.
+- **Section-scoped governance**: Inherits permissions from `section`, tying access and organization to the containing catalog section.
+- **Catalog-admin lifecycle**: Creation and modification are restricted to `CapabilityCatalog Administrator`, while READ is available to broader operational roles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

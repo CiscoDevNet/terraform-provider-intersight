@@ -3,12 +3,24 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_shared_adapter_unit"
 description: |-
-        The shared physical adapter present on the XFM module.
+        SharedAdapterUnits represent shared physical adapter units present on a chassis expander module (XFM). They model adapter identity and health and provide linkage to the corresponding per-server adapter instances that consume/map to this shared hardware.
+        #### Purpose
+        Inventory shared adapter hardware in the expander module and enable correlation to server-level adapter units that are mapped to it.
+        #### Key Concepts
+        - **Shared hardware modeling:** Represents an adapter physically hosted in an expander module and shared across servers.
+        - **Health and lifecycle visibility:** Exposes operational state and health reasons for the shared adapter.
+        - **Mapping to server adapters:** Links to one or more `adapter.Unit` objects representing mapped instances on compute servers.
 
 ---
 
 # Data Source: intersight_equipment_shared_adapter_unit
-The shared physical adapter present on the XFM module.
+SharedAdapterUnits represent shared physical adapter units present on a chassis expander module (XFM). They model adapter identity and health and provide linkage to the corresponding per-server adapter instances that consume/map to this shared hardware.
+#### Purpose
+Inventory shared adapter hardware in the expander module and enable correlation to server-level adapter units that are mapped to it.
+#### Key Concepts
+- **Shared hardware modeling:** Represents an adapter physically hosted in an expander module and shared across servers.
+- **Health and lifecycle visibility:** Exposes operational state and health reasons for the shared adapter.
+- **Mapping to server adapters:** Links to one or more `adapter.Unit` objects representing mapped instances on compute servers.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

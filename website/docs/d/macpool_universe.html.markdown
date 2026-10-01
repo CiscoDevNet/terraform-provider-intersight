@@ -3,12 +3,24 @@ subcategory: "macpool"
 layout: "intersight"
 page_title: "Intersight: intersight_macpool_universe"
 description: |-
-        Universe represents a book keeping container to keep track of all IDs for a given account and pool type.
+        Universes are account-level bookkeeping containers used to track all MAC identities for a given account and pool type. They provide the shared context in which uniqueness, allocation, and reservation coordination can be enforced across pools and static assignments.
+        #### Purpose
+        Maintain a centralized accounting boundary for MAC identity usage within an account so allocations and reservations remain consistent across all pools and consumers.
+        #### Key Concepts
+        - **Account-scoped container**: The `account` relationship ties the universe to a specific Intersight account (cascade on account deletion).
+        - **Cross-pool coordination point**: Serves as the reference scope for leases and (indirectly) for reservation/allocation reconciliation.
+        - **Read-focused visibility**: Exposed via READ for operational inspection and correlation rather than direct manipulation.
 
 ---
 
 # Data Source: intersight_macpool_universe
-Universe represents a book keeping container to keep track of all IDs for a given account and pool type.
+Universes are account-level bookkeeping containers used to track all MAC identities for a given account and pool type. They provide the shared context in which uniqueness, allocation, and reservation coordination can be enforced across pools and static assignments.
+#### Purpose
+Maintain a centralized accounting boundary for MAC identity usage within an account so allocations and reservations remain consistent across all pools and consumers.
+#### Key Concepts
+- **Account-scoped container**: The `account` relationship ties the universe to a specific Intersight account (cascade on account deletion).
+- **Cross-pool coordination point**: Serves as the reference scope for leases and (indirectly) for reservation/allocation reconciliation.
+- **Read-focused visibility**: Exposed via READ for operational inspection and correlation rather than direct manipulation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

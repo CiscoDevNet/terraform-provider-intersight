@@ -3,12 +3,24 @@ subcategory: "graphics"
 layout: "intersight"
 page_title: "Intersight: intersight_graphics_controller"
 description: |-
-        Controller for a Graphics Card.
+        Controllers (graphics) represent controllers for a graphics card (for example, individual GPU controllers under a multi-GPU card). They provide per-controller identity and PCI addressing information.
+        #### Purpose
+        Expose per-GPU-controller inventory details under a graphics card to enable precise hardware correlation and diagnostics.
+        #### Key Concepts
+        - **Per-controller modeling:** Represents a controller component beneath a graphics card.
+        - **PCI correlation:** Captures PCI address and slot information to map controllers to host-visible devices.
+        - **Hierarchical relationship:** Typically consumed/related via the parent graphics card context.
 
 ---
 
 # Data Source: intersight_graphics_controller
-Controller for a Graphics Card.
+Controllers (graphics) represent controllers for a graphics card (for example, individual GPU controllers under a multi-GPU card). They provide per-controller identity and PCI addressing information.
+#### Purpose
+Expose per-GPU-controller inventory details under a graphics card to enable precise hardware correlation and diagnostics.
+#### Key Concepts
+- **Per-controller modeling:** Represents a controller component beneath a graphics card.
+- **PCI correlation:** Captures PCI address and slot information to map controllers to host-visible devices.
+- **Hierarchical relationship:** Typically consumed/related via the parent graphics card context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

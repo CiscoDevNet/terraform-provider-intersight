@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_vlan"
 description: |-
-        Configuration object for Virtual LAN.
+        The Vlan object represents a VLAN configuration definition used within a fabric Ethernet network policy context. It expresses intended VLAN identity and behavior as a manageable configuration unit.
+        #### Purpose
+        Vlan provides a structured, policy-managed representation of VLANs that should exist and be allowed in the fabric. It supports consistent VLAN lifecycle management (create/update/delete) and enables VLAN-related validation rules when combined with uplink behavior and policy constraints.
+        #### Key Concepts
+        - **VLAN as a managed resource:** Treats VLANs as policy-defined configuration elements rather than ad-hoc switch constructs.
+        - **Segmentation intent:** Encodes network segmentation intent in a reusable policy model.
+        - **Policy association:** Typically exists in the context of an Ethernet network policy that governs VLAN sets for a domain.
+        - **Deployment lifecycle:** Designed to be validated and deployed through fabric workflows.
 
 ---
 
 # Data Source: intersight_fabric_vlan
-Configuration object for Virtual LAN.
+The Vlan object represents a VLAN configuration definition used within a fabric Ethernet network policy context. It expresses intended VLAN identity and behavior as a manageable configuration unit.
+#### Purpose
+Vlan provides a structured, policy-managed representation of VLANs that should exist and be allowed in the fabric. It supports consistent VLAN lifecycle management (create/update/delete) and enables VLAN-related validation rules when combined with uplink behavior and policy constraints.
+#### Key Concepts
+- **VLAN as a managed resource:** Treats VLANs as policy-defined configuration elements rather than ad-hoc switch constructs.
+- **Segmentation intent:** Encodes network segmentation intent in a reusable policy model.
+- **Policy association:** Typically exists in the context of an Ethernet network policy that governs VLAN sets for a domain.
+- **Deployment lifecycle:** Designed to be validated and deployed through fabric workflows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

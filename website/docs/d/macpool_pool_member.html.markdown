@@ -3,12 +3,28 @@ subcategory: "macpool"
 layout: "intersight"
 page_title: "Intersight: intersight_macpool_pool_member"
 description: |-
-        PoolMember represents a single MAC address that is part of a pool.
+        PoolMembers represent individual MAC addresses that are part of a specific pool. They provide per-address membership tracking and link to the corresponding “universe” lease record for correlation across pool and account-level bookkeeping.
+        #### Purpose
+        Offer a pool-scoped view of each MAC identity in the pool, including how it maps to the universe lease and which entity (if any) currently owns/uses the MAC.
+        #### Key Concepts
+        - **Per-pool identity membership**: Each PoolMember is uniquely identified by the combination of `pool` and `macAddress`.
+        - **Universe correlation**: The `peer` relationship links the pool member to the corresponding `Lease` record in the universe.
+        - **Block provenance**: `blockHead` indicates which IdBlock/range the MAC came from.
+        - **Ownership linkage**: `assignedToEntity` ties the MAC to the consuming entity (e.g., server profile), enabling “who is using this MAC” queries.
+        - **Pool relationship semantics**: `pool` is read-only and cascades on pool deletion, ensuring membership records are cleaned up with the pool.
 
 ---
 
 # Data Source: intersight_macpool_pool_member
-PoolMember represents a single MAC address that is part of a pool.
+PoolMembers represent individual MAC addresses that are part of a specific pool. They provide per-address membership tracking and link to the corresponding “universe” lease record for correlation across pool and account-level bookkeeping.
+#### Purpose
+Offer a pool-scoped view of each MAC identity in the pool, including how it maps to the universe lease and which entity (if any) currently owns/uses the MAC.
+#### Key Concepts
+- **Per-pool identity membership**: Each PoolMember is uniquely identified by the combination of `pool` and `macAddress`.
+- **Universe correlation**: The `peer` relationship links the pool member to the corresponding `Lease` record in the universe.
+- **Block provenance**: `blockHead` indicates which IdBlock/range the MAC came from.
+- **Ownership linkage**: `assignedToEntity` ties the MAC to the consuming entity (e.g., server profile), enabling “who is using this MAC” queries.
+- **Pool relationship semantics**: `pool` is read-only and cascades on pool deletion, ensuring membership records are cleaned up with the pool.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

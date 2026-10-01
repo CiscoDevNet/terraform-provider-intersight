@@ -146,6 +146,7 @@ func resourceIamLdapProvider() *schema.Resource {
 						},
 					},
 				},
+				ForceNew: true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -598,7 +599,7 @@ func resourceIamLdapProviderCreate(c context.Context, d *schema.ResourceData, me
 
 	o.SetClassId("iam.LdapProvider")
 
-	if v, ok := d.GetOk("ldap_policy"); ok {
+	if v, ok := d.GetOkExists("ldap_policy"); ok {
 		p := make([]models.IamLdapPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

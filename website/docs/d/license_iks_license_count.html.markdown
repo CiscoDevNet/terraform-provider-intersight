@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_iks_license_count"
 description: |-
-        Customer operation object to request reservation code.
+        IksLicenseCounts represent aggregated usage metrics for IKS licensing (for example, counts of devices in a specific IKS tier).
+        #### Purpose
+        Provides visibility into IKS tier consumption for monitoring and compliance.
+        #### Key Concepts
+        - **Tier-based aggregation:** Summarizes counts by tier (e.g., Advantage).
+        - **Reporting primitive:** Useful for dashboards and licensing status views.
+        - **System-maintained values:** Often updated by backend processes and exposed read-only to users.
+        - **Account-scoped:** Tied to AccountLicenseData for correct ownership and permissions.
 
 ---
 
 # Data Source: intersight_license_iks_license_count
-Customer operation object to request reservation code.
+IksLicenseCounts represent aggregated usage metrics for IKS licensing (for example, counts of devices in a specific IKS tier).
+#### Purpose
+Provides visibility into IKS tier consumption for monitoring and compliance.
+#### Key Concepts
+- **Tier-based aggregation:** Summarizes counts by tier (e.g., Advantage).
+- **Reporting primitive:** Useful for dashboards and licensing status views.
+- **System-maintained values:** Often updated by backend processes and exposed read-only to users.
+- **Account-scoped:** Tied to AccountLicenseData for correct ownership and permissions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

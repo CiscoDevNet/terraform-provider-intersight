@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_ntp_server"
 description: |-
-        External NTP time servers ONTAP uses for time adjustment and correction.
+        The NetAppNtpServers object defines the external time servers used for clock synchronization.
+        ####  Purpose
+        It ensures that the cluster time is accurate, which is critical for logging, security, and data consistency.
+        ####  Key Concepts
+        - **Time Synchronization:** Manages server addresses and NTP protocol versions.
+        - **Authentication:** Tracks symmetric authentication keys for secure time synchronization.
 
 ---
 
 # Data Source: intersight_storage_net_app_ntp_server
-External NTP time servers ONTAP uses for time adjustment and correction.
+The NetAppNtpServers object defines the external time servers used for clock synchronization.
+####  Purpose
+It ensures that the cluster time is accurate, which is critical for logging, security, and data consistency.
+####  Key Concepts
+- **Time Synchronization:** Manages server addresses and NTP protocol versions.
+- **Authentication:** Tracks symmetric authentication keys for secure time synchronization.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

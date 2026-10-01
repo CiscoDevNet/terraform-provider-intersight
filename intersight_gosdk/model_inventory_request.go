@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the InventoryRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InventoryRequest{}
 
-// InventoryRequest Request MO allows the inventory of specific devices to be collected on demand. The inventory can be collected in three levels - all the MOs of a specific device, MOs of specific MO types for a given device or specific MO instances of specific MO types for a given device. These MO instances are used just to collect the requests and not persisted.
+// InventoryRequest Requests are on-demand inventory request objects that allow targeted inventory collection for a specific registered device. A request can ask for full-device inventory, inventory limited to specific managed object (MO) types, or even specific MO instances within those types. The MO instance selectors in the request are used only to express what to collect and are not persisted as inventory objects. #### Purpose Provide a controlled mechanism to trigger scoped, on-demand inventory collection for a device—ranging from broad (all MOs) to narrowly targeted (specific MO instances)—to update Intersight reporting without waiting for scheduled inventory cycles. #### Key Concepts - **Multi-level scoping:** Supports collecting (1) all MOs for a device, (2) MOs of selected MO types, or (3) specific instances of selected MO types. - **Selector-only MO instances:** The MO instances provided in the request are used to define the collection scope and are not persisted as part of inventory. - **Optional targeting list:** If `mos` is not provided, the request implies full inventory collection for the device. - **Device-bound trigger:** Inherits permissions from the associated `device` (asset.DeviceRegistration) and is cascade-cleaned up if the device registration is deleted.
 type InventoryRequest struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

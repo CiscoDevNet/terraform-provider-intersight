@@ -3,12 +3,24 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_operating_system_vendor"
 description: |-
-        Collection used to store operating system vendors details.
+        OperatingSystemVendors are system-owned catalog records representing operating system vendors (for example, vendor families used by the HCL tool). They provide a normalized set of OS vendor names used for OS selection and compatibility lookups.
+        #### Purpose
+        Provide a canonical list of OS vendors used in HCL compatibility queries and OS-related user workflows.
+        #### Key Concepts
+        - **Normalized vendor identity:** Centralizes OS vendor naming for consistent matching and filtering.
+        - **Foundation for OS catalog:** Used as the parent/reference for OperatingSystem records.
+        - **Read-focused catalog:** Primarily consumed by users and tooling to populate selection lists and drive validation inputs.
 
 ---
 
 # Data Source: intersight_hcl_operating_system_vendor
-Collection used to store operating system vendors details.
+OperatingSystemVendors are system-owned catalog records representing operating system vendors (for example, vendor families used by the HCL tool). They provide a normalized set of OS vendor names used for OS selection and compatibility lookups.
+#### Purpose
+Provide a canonical list of OS vendors used in HCL compatibility queries and OS-related user workflows.
+#### Key Concepts
+- **Normalized vendor identity:** Centralizes OS vendor naming for consistent matching and filtering.
+- **Foundation for OS catalog:** Used as the parent/reference for OperatingSystem records.
+- **Read-focused catalog:** Primarily consumed by users and tooling to populate selection lists and drive validation inputs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

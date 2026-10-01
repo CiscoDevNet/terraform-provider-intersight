@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_svm_event"
 description: |-
-        An event where the impacted resource type is a storage vm.
+        The NetAppSvmEvents object  captures alerts related to storage virtual machines.
+        ####  Purpose
+        It notifies administrators of issues affecting the SVM, such as certificate expirations or audit log status changes.
+        ####  Key Concepts
+        - **SVM Health:** Monitors the operational status of the storage virtual machine.
+        - **Security Alerts:** Notifies on security-related events like audit log disabling or certificate expiration.
 
 ---
 
 # Data Source: intersight_storage_net_app_svm_event
-An event where the impacted resource type is a storage vm.
+The NetAppSvmEvents object  captures alerts related to storage virtual machines.
+####  Purpose
+It notifies administrators of issues affecting the SVM, such as certificate expirations or audit log status changes.
+####  Key Concepts
+- **SVM Health:** Monitors the operational status of the storage virtual machine.
+- **Security Alerts:** Notifies on security-related events like audit log disabling or certificate expiration.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

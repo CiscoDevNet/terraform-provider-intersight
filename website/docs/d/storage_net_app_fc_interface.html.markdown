@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_fc_interface"
 description: |-
-        NetApp FC Interface is a logical interface.
+        The NetAppFcInterfaces object represents a logical interface used for Fibre Channel (SAN) traffic.
+        ####  Purpose
+        It manages the SAN connectivity for hosts, ensuring that LUNs are accessible over the Fibre Channel fabric.
+        ####  Key Concepts
+        - **SAN Connectivity:** Maps logical FC interfaces to physical FC ports.
+        - **Operational State:** Monitors the status of the FC interface.
+        - **SVM Association:** Links the interface to the appropriate Storage VM.
 
 ---
 
 # Data Source: intersight_storage_net_app_fc_interface
-NetApp FC Interface is a logical interface.
+The NetAppFcInterfaces object represents a logical interface used for Fibre Channel (SAN) traffic.
+####  Purpose
+It manages the SAN connectivity for hosts, ensuring that LUNs are accessible over the Fibre Channel fabric.
+####  Key Concepts
+- **SAN Connectivity:** Maps logical FC interfaces to physical FC ports.
+- **Operational State:** Monitors the status of the FC interface.
+- **SVM Association:** Links the interface to the appropriate Storage VM.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

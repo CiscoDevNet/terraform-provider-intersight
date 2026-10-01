@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_expander_module_operation"
 description: |-
-        Contains the properties which can be used to perform chassis expander module operations (Ex- BMC reboot).
+        The ExpanderModuleOperation object models operations that can be performed on a chassis expander module, such as controller reboot actions, with workflow-backed status tracking.
+        #### Purpose
+        ExpanderModuleOperation provides an API-facing operational surface to initiate supported module operations and observe the resulting configuration state, enabling controlled and auditable maintenance actions.
+        #### Key Concepts
+        - **Operational control surface:** Represents “do” actions on an expander module rather than static configuration intent.
+        - **Workflow-backed execution:** Operations are tracked with configuration state and workflow status metadata.
+        - **Targeted maintenance:** Enables precise, module-scoped maintenance actions within a chassis.
+        - **Audit-friendly context:** Uses affected-object naming to improve clarity in logs and operational tooling.
 
 ---
 
 # Data Source: intersight_equipment_expander_module_operation
-Contains the properties which can be used to perform chassis expander module operations (Ex- BMC reboot).
+The ExpanderModuleOperation object models operations that can be performed on a chassis expander module, such as controller reboot actions, with workflow-backed status tracking.
+#### Purpose
+ExpanderModuleOperation provides an API-facing operational surface to initiate supported module operations and observe the resulting configuration state, enabling controlled and auditable maintenance actions.
+#### Key Concepts
+- **Operational control surface:** Represents “do” actions on an expander module rather than static configuration intent.
+- **Workflow-backed execution:** Operations are tracked with configuration state and workflow status metadata.
+- **Targeted maintenance:** Enables precise, module-scoped maintenance actions within a chassis.
+- **Audit-friendly context:** Uses affected-object naming to improve clarity in logs and operational tooling.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

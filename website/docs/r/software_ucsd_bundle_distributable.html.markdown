@@ -3,12 +3,22 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_ucsd_bundle_distributable"
 description: |-
-        A UCSD connector pack image bundle distributed by Cisco for Private Appliance.
+        The UcsdBundleDistributable object represents a UCS Director connector pack image bundle distributed by Cisco for Private Appliance environments.
+        #### Purpose
+        It manages the lifecycle of UCS Director bundles, providing a structured way to download and install bundled software for UCS Director.
+        #### Key Concepts
+        - **Bundle Management:** Groups multiple UCSD distributable images into a single bundle.
+        - **Appliance Support:** Specifically designed for Private Appliance deployments.
 
 ---
 
 # Resource: intersight_software_ucsd_bundle_distributable
-A UCSD connector pack image bundle distributed by Cisco for Private Appliance.
+The UcsdBundleDistributable object represents a UCS Director connector pack image bundle distributed by Cisco for Private Appliance environments.
+#### Purpose
+It manages the lifecycle of UCS Director bundles, providing a structured way to download and install bundled software for UCS Director.
+#### Key Concepts
+- **Bundle Management:** Groups multiple UCSD distributable images into a single bundle.
+- **Appliance Support:** Specifically designed for Private Appliance deployments.
 ## Usage Example
 ### Resource Creation
 

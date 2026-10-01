@@ -3,12 +3,30 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_fabric_mos_scoped_inventory"
 description: |-
-        API to trigger on-demand inventory to update MDS objects in Intersight.
+        FabricMosScopedInventories represent an on-demand inventory trigger used to refresh Fabric/MDS managed objects in Intersight. Creating this object initiates a scoped discovery cycle for the specified MDS registered device so updated fabric objects are collected and reflected in Intersight without waiting for scheduled inventory.
+        #### Purpose
+        Allow administrators to manually trigger a targeted inventory refresh for MDS fabric managed objects to ensure Intersight has the latest MDS object state.
+        #### Key Concepts
+        - **On-demand trigger (CREATE)**: Functions as an action request to start inventory collection rather than a long-lived configuration object.
+        - **Scoped inventory execution**: Extends `connector.ScopedInventory`, indicating the inventory run is constrained to the specified device scope.
+        - **Device targeting (create-only)**: `registeredDevice` identifies the MDS connection to inventory and cannot be changed after creation.
+        - **Lifecycle coupling**: `onpeerdelete: cascade` ensures the trigger record is removed if the device registration is removed.
+        - **Licensed operation**: CREATE requires the **Advantage** entitlement.
+        - **Role-based access**: Intended for account and SAN administrators who manage MDS environments.
 
 ---
 
 # Resource: intersight_task_fabric_mos_scoped_inventory
-API to trigger on-demand inventory to update MDS objects in Intersight.
+FabricMosScopedInventories represent an on-demand inventory trigger used to refresh Fabric/MDS managed objects in Intersight. Creating this object initiates a scoped discovery cycle for the specified MDS registered device so updated fabric objects are collected and reflected in Intersight without waiting for scheduled inventory.
+#### Purpose
+Allow administrators to manually trigger a targeted inventory refresh for MDS fabric managed objects to ensure Intersight has the latest MDS object state.
+#### Key Concepts
+- **On-demand trigger (CREATE)**: Functions as an action request to start inventory collection rather than a long-lived configuration object.
+- **Scoped inventory execution**: Extends `connector.ScopedInventory`, indicating the inventory run is constrained to the specified device scope.
+- **Device targeting (create-only)**: `registeredDevice` identifies the MDS connection to inventory and cannot be changed after creation.
+- **Lifecycle coupling**: `onpeerdelete: cascade` ensures the trigger record is removed if the device registration is removed.
+- **Licensed operation**: CREATE requires the **Advantage** entitlement.
+- **Role-based access**: Intended for account and SAN administrators who manage MDS environments.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

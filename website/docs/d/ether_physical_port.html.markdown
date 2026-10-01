@@ -3,12 +3,30 @@ subcategory: "ether"
 layout: "intersight"
 page_title: "Intersight: intersight_ether_physical_port"
 description: |-
-        Physical ethernet port present on a FI.
+        PhysicalPorts represent the actual, hardware-backed Ethernet interfaces on a Fabric Interconnect (FI). They model individual front-panel ports, including breakout member ports, and expose administrative configuration, operational characteristics, and associated security/telemetry data (such as MACsec operational details).
+        #### Purpose
+        Provide an inventory and operational view of FI Ethernet port hardware so administrators can monitor port state, understand configured speed/state, correlate ports to peer/acknowledged peer interfaces, and troubleshoot connectivity at the physical layer.
+        #### Key Concepts
+        - **Hardware-backed interface**: A PhysicalPort corresponds to a real FI Ethernet port (including breakout member ports via `aggregatePortId`).
+        - **Admin vs. operational characteristics**: Administrative settings like `adminSpeed` and `adminState` represent configured intent, while other port attributes and indexes support querying by role, transceiver type, and operational state.
+        - **Licensing awareness**: `licenseState` and `licenseGrace` expose whether the port is licensed and whether it is operating within any grace period window.
+        - **MACsec observability**: `macsecOperData` surfaces operational/configuration information associated with a MACsec policy applied to an uplink port or uplink port channel.
+        - **Identification and labeling**: `name` provides the port’s canonical identifier; `userLabel` supports human-friendly labeling for operations and documentation.
+        - **Topology correlation**: Peer/acknowledged-peer interface indexes enable correlating ports to their connectivity relationships for troubleshooting and inventory queries.
 
 ---
 
 # Data Source: intersight_ether_physical_port
-Physical ethernet port present on a FI.
+PhysicalPorts represent the actual, hardware-backed Ethernet interfaces on a Fabric Interconnect (FI). They model individual front-panel ports, including breakout member ports, and expose administrative configuration, operational characteristics, and associated security/telemetry data (such as MACsec operational details).
+#### Purpose
+Provide an inventory and operational view of FI Ethernet port hardware so administrators can monitor port state, understand configured speed/state, correlate ports to peer/acknowledged peer interfaces, and troubleshoot connectivity at the physical layer.
+#### Key Concepts
+- **Hardware-backed interface**: A PhysicalPort corresponds to a real FI Ethernet port (including breakout member ports via `aggregatePortId`).
+- **Admin vs. operational characteristics**: Administrative settings like `adminSpeed` and `adminState` represent configured intent, while other port attributes and indexes support querying by role, transceiver type, and operational state.
+- **Licensing awareness**: `licenseState` and `licenseGrace` expose whether the port is licensed and whether it is operating within any grace period window.
+- **MACsec observability**: `macsecOperData` surfaces operational/configuration information associated with a MACsec policy applied to an uplink port or uplink port channel.
+- **Identification and labeling**: `name` provides the port’s canonical identifier; `userLabel` supports human-friendly labeling for operations and documentation.
+- **Topology correlation**: Peer/acknowledged-peer interface indexes enable correlating ports to their connectivity relationships for troubleshooting and inventory queries.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

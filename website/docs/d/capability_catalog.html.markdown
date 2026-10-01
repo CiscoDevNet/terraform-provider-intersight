@@ -3,14 +3,28 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_catalog"
 description: |-
-        Container for capability information of managed systems.
-        This catalog will be managed by devops using a specific role in the Catalog Admin account.
+        Catalog is an organization-owned container for capability information associated with managed systems. It serves as the top-level grouping construct for organizing capability metadata into logical sections, and is intended to be maintained by DevOps users operating with the appropriate catalog administration privileges.
+        #### Purpose
+        Provide a centrally managed “capability repository” that can be queried by consumers (read-only roles) and maintained by authorized administrators, enabling consistent organization and lifecycle management of capability data.
+        #### Key Concepts
+        - **Container for capability data**: The Catalog is the root object that groups capability information for managed systems.
+        - **Section-based organization**: The `sections` relationship holds the set of Section objects defined within the catalog, enabling hierarchical structuring of capabilities.
+        - **Controlled administration**: Updates are restricted to the `CapabilityCatalog Administrator` role, reflecting DevOps-managed curation.
+        - **Stable identity**: `name` is create-only and forms the object identity, ensuring the catalog can be referenced consistently over time.
+        - **Cascade lifecycle for contents**: Deleting a catalog cascades deletion to its `sections`, keeping catalog content consistent with the container lifecycle.
 
 ---
 
 # Data Source: intersight_capability_catalog
-Container for capability information of managed systems.
-This catalog will be managed by devops using a specific role in the Catalog Admin account.
+Catalog is an organization-owned container for capability information associated with managed systems. It serves as the top-level grouping construct for organizing capability metadata into logical sections, and is intended to be maintained by DevOps users operating with the appropriate catalog administration privileges.
+#### Purpose
+Provide a centrally managed “capability repository” that can be queried by consumers (read-only roles) and maintained by authorized administrators, enabling consistent organization and lifecycle management of capability data.
+#### Key Concepts
+- **Container for capability data**: The Catalog is the root object that groups capability information for managed systems.
+- **Section-based organization**: The `sections` relationship holds the set of Section objects defined within the catalog, enabling hierarchical structuring of capabilities.
+- **Controlled administration**: Updates are restricted to the `CapabilityCatalog Administrator` role, reflecting DevOps-managed curation.
+- **Stable identity**: `name` is create-only and forms the object identity, ensuring the catalog can be referenced consistently over time.
+- **Cascade lifecycle for contents**: Deleting a catalog cascades deletion to its `sections`, keeping catalog content consistent with the container lifecycle.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

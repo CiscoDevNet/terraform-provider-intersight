@@ -3,12 +3,22 @@ subcategory: "pool"
 layout: "intersight"
 page_title: "Intersight: intersight_pool_id_mapping_policy"
 description: |-
-        A policy to define a grouping of deployment targets (resource groups and organizations) which can be mapped to ID blocks.
+        The IdMappingPolicies object defines a grouping of deployment targets (resource groups and organizations) that can be mapped to specific ID blocks.
+        #### Purpose
+        It provides a way to restrict which ID blocks can be used by specific deployment targets, ensuring logical separation and controlled resource distribution.
+        #### Key Concepts
+        - **Target Mapping:** Maps ID blocks to specific organizations or resource groups.
+        - **Usage Tracking:** Monitors how many ID pools are attached to the policy.
 
 ---
 
 # Data Source: intersight_pool_id_mapping_policy
-A policy to define a grouping of deployment targets (resource groups and organizations) which can be mapped to ID blocks.
+The IdMappingPolicies object defines a grouping of deployment targets (resource groups and organizations) that can be mapped to specific ID blocks.
+#### Purpose
+It provides a way to restrict which ID blocks can be used by specific deployment targets, ensuring logical separation and controlled resource distribution.
+#### Key Concepts
+- **Target Mapping:** Maps ID blocks to specific organizations or resource groups.
+- **Usage Tracking:** Monitors how many ID pools are attached to the policy.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

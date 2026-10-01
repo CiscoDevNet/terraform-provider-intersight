@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_adapter_firmware_requirement"
 description: |-
-        Firmware requirements for enabling Intersight based management for an adaptor.
+        The AdapterFirmwareRequirement object captures firmware compatibility requirements for enabling or maintaining Intersight-managed capabilities on specific adapter series and models.
+        #### Purpose
+        This provides a centralized way to express minimum and recommended firmware versions (for BMC and adapter components) needed for an adapter family, enabling automated readiness checks, upgrade gating, and consistent enforcement of supported configurations.
+        #### Key Concepts
+        - **Compatibility gating:** Expresses minimum levels required before management features are considered supported.
+        - **Series-based grouping:** Models requirements by adapter series and applies them across supported models.
+        - **Operational safety:** Helps prevent upgrades or feature activation when versions are unknown or incompatible.
+        - **Upgrade decision support:** Distinguishes between “minimum supported” and “recommended” version guidance.
 
 ---
 
 # Data Source: intersight_capability_adapter_firmware_requirement
-Firmware requirements for enabling Intersight based management for an adaptor.
+The AdapterFirmwareRequirement object captures firmware compatibility requirements for enabling or maintaining Intersight-managed capabilities on specific adapter series and models.
+#### Purpose
+This provides a centralized way to express minimum and recommended firmware versions (for BMC and adapter components) needed for an adapter family, enabling automated readiness checks, upgrade gating, and consistent enforcement of supported configurations.
+#### Key Concepts
+- **Compatibility gating:** Expresses minimum levels required before management features are considered supported.
+- **Series-based grouping:** Models requirements by adapter series and applies them across supported models.
+- **Operational safety:** Helps prevent upgrades or feature activation when versions are unknown or incompatible.
+- **Upgrade decision support:** Distinguishes between “minimum supported” and “recommended” version guidance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

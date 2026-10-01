@@ -3,12 +3,26 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_exempted_catalog"
 description: |-
-        Collection used to store exempted products (ie. adapters, storage controllers, etc). These products should be ignored for HCL validation purposes.
+        ExemptedCatalogs represent a system-maintained list of product exceptions that should be ignored during HCL validation. Each entry describes an exemption scope (server/processor/OS/UCS version/product models/type, and optional personality) and includes a human-readable reason.
+        #### Purpose
+        Allow the platform to treat specific products or configurations as exempt from HCL compatibility validation, preventing known/approved exceptions from generating validation failures.
+        #### Key Concepts
+        - **Validation bypass list:** Entries explicitly mark products/configurations that should not be considered for HCL pass/fail decisions.
+        - **Scoped matching:** Exemptions can be constrained by UCS version/type, server PID, processor, OS vendor/version, and product model/type.
+        - **Auditable intent:** Includes a unique name and comments to document the rationale for the exemption.
+        - **System catalog semantics:** Modeled as a system-owned catalog-like collection, readable by authorized roles.
 
 ---
 
 # Data Source: intersight_hcl_exempted_catalog
-Collection used to store exempted products (ie. adapters, storage controllers, etc). These products should be ignored for HCL validation purposes.
+ExemptedCatalogs represent a system-maintained list of product exceptions that should be ignored during HCL validation. Each entry describes an exemption scope (server/processor/OS/UCS version/product models/type, and optional personality) and includes a human-readable reason.
+#### Purpose
+Allow the platform to treat specific products or configurations as exempt from HCL compatibility validation, preventing known/approved exceptions from generating validation failures.
+#### Key Concepts
+- **Validation bypass list:** Entries explicitly mark products/configurations that should not be considered for HCL pass/fail decisions.
+- **Scoped matching:** Exemptions can be constrained by UCS version/type, server PID, processor, OS vendor/version, and product model/type.
+- **Auditable intent:** Includes a unique name and comments to document the rationale for the exemption.
+- **System catalog semantics:** Modeled as a system-owned catalog-like collection, readable by authorized roles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

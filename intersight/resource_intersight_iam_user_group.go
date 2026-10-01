@@ -128,6 +128,13 @@ func resourceIamUserGroup() *schema.Resource {
 					}
 					return
 				}},
+			"dynamic_user_retention_days": {
+				Description:  "Number of days a CUI-authenticated dynamic user's membership remains valid after the most recent successful regular CUI login. Zero disables retained membership for this UserGroup.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 365),
+				Optional:     true,
+				Default:      30,
+			},
 			"group_type": {
 				Description:  "Group type determines the type of groups that is being associated with users. By default, Default User group will be used for associating dynamic user login. If the value of the User Group is set to guest, then this type of user group will be used for guest user login.\n* `Default` - Default User Group Type used for dynamic users login.\n* `Guest` - Guest User Group type used for guest users login.",
 				Type:         schema.TypeString,
@@ -417,6 +424,43 @@ func resourceIamUserGroup() *schema.Resource {
 					},
 				},
 			},
+			"routing_rules": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "iam.RoutingRuleReference",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "iam.RoutingRuleReference",
+						},
+						"rule_id": {
+							Description: "Stable external identity-provider routing-rule identifier.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"rule_name": {
+							Description: "Display name of the external identity-provider routing rule.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -577,6 +621,45 @@ func resourceIamUserGroup() *schema.Resource {
 					}
 					return
 				}},
+			"user_group_memberships": {
+				Description: "An array of relationships to iamUserGroupMembership resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"users": {
 				Description: "An array of relationships to iamUser resources.",
 				Type:        schema.TypeList,
@@ -799,6 +882,11 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 
 	o.SetClassId("iam.UserGroup")
 
+	if v, ok := d.GetOkExists("dynamic_user_retention_days"); ok {
+		x := int64(v.(int))
+		o.SetDynamicUserRetentionDays(x)
+	}
+
 	if v, ok := d.GetOk("group_type"); ok {
 		x := (v.(string))
 		o.SetGroupType(x)
@@ -992,6 +1080,48 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	if v, ok := d.GetOk("routing_rules"); ok {
+		x := make([]models.IamRoutingRuleReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewIamRoutingRuleReferenceWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("iam.RoutingRuleReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["rule_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetRuleId(x)
+				}
+			}
+			if v, ok := l["rule_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetRuleName(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetRoutingRules(x)
+		}
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1152,6 +1282,10 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in IamUserGroup object: %s", err.Error())
 	}
 
+	if err := d.Set("dynamic_user_retention_days", (s.GetDynamicUserRetentionDays())); err != nil {
+		return diag.Errorf("error occurred while setting property DynamicUserRetentionDays in IamUserGroup object: %s", err.Error())
+	}
+
 	if err := d.Set("group_type", (s.GetGroupType())); err != nil {
 		return diag.Errorf("error occurred while setting property GroupType in IamUserGroup object: %s", err.Error())
 	}
@@ -1204,6 +1338,10 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 		return diag.Errorf("error occurred while setting property Qualifier in IamUserGroup object: %s", err.Error())
 	}
 
+	if err := d.Set("routing_rules", flattenListIamRoutingRuleReference(s.GetRoutingRules(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property RoutingRules in IamUserGroup object: %s", err.Error())
+	}
+
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in IamUserGroup object: %s", err.Error())
 	}
@@ -1214,6 +1352,10 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 
 	if err := d.Set("unique_reference_id", (s.GetUniqueReferenceId())); err != nil {
 		return diag.Errorf("error occurred while setting property UniqueReferenceId in IamUserGroup object: %s", err.Error())
+	}
+
+	if err := d.Set("user_group_memberships", flattenListIamUserGroupMembershipRelationship(s.GetUserGroupMemberships(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property UserGroupMemberships in IamUserGroup object: %s", err.Error())
 	}
 
 	if err := d.Set("users", flattenListIamUserRelationship(s.GetUsers(), d)); err != nil {
@@ -1259,6 +1401,12 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	o.SetClassId("iam.UserGroup")
+
+	if d.HasChange("dynamic_user_retention_days") {
+		v := d.Get("dynamic_user_retention_days")
+		x := int64(v.(int))
+		o.SetDynamicUserRetentionDays(x)
+	}
 
 	if d.HasChange("group_type") {
 		v := d.Get("group_type")
@@ -1457,6 +1605,47 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 			x := p[0]
 			o.SetQualifier(x)
 		}
+	}
+
+	if d.HasChange("routing_rules") {
+		v := d.Get("routing_rules")
+		x := make([]models.IamRoutingRuleReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.IamRoutingRuleReference{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("iam.RoutingRuleReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["rule_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetRuleId(x)
+				}
+			}
+			if v, ok := l["rule_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetRuleName(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetRoutingRules(x)
 	}
 
 	if d.HasChange("tags") {

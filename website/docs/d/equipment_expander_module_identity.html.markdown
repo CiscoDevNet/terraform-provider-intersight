@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_expander_module_identity"
 description: |-
-        Identity object that uniquely represents a chassis XFM under a FI Device Registration.
+        The ExpanderModuleIdentity object represents the identity anchor for a chassis expander module (X-Fabric Module) under a device registration.
+        #### Purpose
+        ExpanderModuleIdentity uniquely identifies an expander module and provides the stable reference used for lifecycle tracking, correlation to inventory, and targeting module-specific operations.
+        #### Key Concepts
+        - **Unique module identification:** Combines hardware identity with registration context to ensure one-to-one mapping.
+        - **Inventory correlation:** Links identity to the underlying inventoried `equipment.ExpanderModule`.
+        - **Chassis placement context:** Captures the module’s chassis/slot presence semantics for topology mapping.
+        - **Lifecycle management alignment:** Supports operations and workflows that target a specific module instance.
 
 ---
 
 # Data Source: intersight_equipment_expander_module_identity
-Identity object that uniquely represents a chassis XFM under a FI Device Registration.
+The ExpanderModuleIdentity object represents the identity anchor for a chassis expander module (X-Fabric Module) under a device registration.
+#### Purpose
+ExpanderModuleIdentity uniquely identifies an expander module and provides the stable reference used for lifecycle tracking, correlation to inventory, and targeting module-specific operations.
+#### Key Concepts
+- **Unique module identification:** Combines hardware identity with registration context to ensure one-to-one mapping.
+- **Inventory correlation:** Links identity to the underlying inventoried `equipment.ExpanderModule`.
+- **Chassis placement context:** Captures the module’s chassis/slot presence semantics for topology mapping.
+- **Lifecycle management alignment:** Supports operations and workflows that target a specific module instance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

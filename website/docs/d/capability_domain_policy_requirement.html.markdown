@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_domain_policy_requirement"
 description: |-
-        Version Constraint requirement for a domian policy.
+        The DomainPolicyRequirement object defines minimum version requirements and constraints for policies when used in a fabric/domain context.
+        #### Purpose
+        This provides a version-compatibility contract for policies (for example, LDAP or certificates) so the system can validate whether a policy is supported on a given platform model and enforce platform-specific constraints.
+        #### Key Concepts
+        - **Policy-to-platform compatibility:** Expresses the minimum versions required for specific policy types.
+        - **Constraint packaging:** Carries policy-specific limits (e.g., LDAP or certificate constraints) tied to a platform.
+        - **Pre-deploy validation:** Enables early detection of unsupported configurations before deployment.
+        - **Operational consistency:** Ensures policies behave predictably across heterogeneous platform generations.
 
 ---
 
 # Data Source: intersight_capability_domain_policy_requirement
-Version Constraint requirement for a domian policy.
+The DomainPolicyRequirement object defines minimum version requirements and constraints for policies when used in a fabric/domain context.
+#### Purpose
+This provides a version-compatibility contract for policies (for example, LDAP or certificates) so the system can validate whether a policy is supported on a given platform model and enforce platform-specific constraints.
+#### Key Concepts
+- **Policy-to-platform compatibility:** Expresses the minimum versions required for specific policy types.
+- **Constraint packaging:** Carries policy-specific limits (e.g., LDAP or certificate constraints) tied to a platform.
+- **Pre-deploy validation:** Enables early detection of unsupported configurations before deployment.
+- **Operational consistency:** Ensures policies behave predictably across heterogeneous platform generations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_alarm"
 description: |-
-        An alert from an HCI cluster reported from the Prism Central serviceability/Alerts API.
+        Alarms represent alerts reported from Prism Central serviceability/alerts APIs for HCI clusters. They are normalized alarm inventory objects with severity, lifecycle timestamps, and source-entity linkage.
+        #### Purpose
+        Provide a centralized, queryable view of HCI alerts for monitoring and operational response across clusters and their managed entities.
+        #### Key Concepts
+        - **Normalized alert record:** Captures title/message, code (alertType), and severity in a consistent model.
+        - **Lifecycle tracking:** Includes creation, acknowledgement, and resolution state/timestamps as reported by the endpoint.
+        - **Source correlation:** Links alarms to the originating entity via external IDs and type/name fields.
+        - **Cluster context:** Associates the alarm with the relevant cluster for scoping and navigation.
 
 ---
 
 # Data Source: intersight_hci_alarm
-An alert from an HCI cluster reported from the Prism Central serviceability/Alerts API.
+Alarms represent alerts reported from Prism Central serviceability/alerts APIs for HCI clusters. They are normalized alarm inventory objects with severity, lifecycle timestamps, and source-entity linkage.
+#### Purpose
+Provide a centralized, queryable view of HCI alerts for monitoring and operational response across clusters and their managed entities.
+#### Key Concepts
+- **Normalized alert record:** Captures title/message, code (alertType), and severity in a consistent model.
+- **Lifecycle tracking:** Includes creation, acknowledgement, and resolution state/timestamps as reported by the endpoint.
+- **Source correlation:** Links alarms to the originating entity via external IDs and type/name fields.
+- **Cluster context:** Associates the alarm with the relevant cluster for scoping and navigation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

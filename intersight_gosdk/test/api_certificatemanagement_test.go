@@ -1,5 +1,5 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Testing CertificatemanagementApiService
 
@@ -55,32 +55,6 @@ func Test_intersight_CertificatemanagementApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.CertificatemanagementApi.GetCertificatemanagementPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test CertificatemanagementApiService GetCertificatemanagementPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.CertificatemanagementApi.GetCertificatemanagementPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test CertificatemanagementApiService GetCertificatemanagementPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.CertificatemanagementApi.GetCertificatemanagementPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

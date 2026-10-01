@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_switch_manufacturing_def"
 description: |-
-        Switch/Fabric-Interconnect manufacturing def properties.
+        The SwitchManufacturingDef object captures manufacturing and descriptive metadata for a switch/fabric-interconnect platform.
+        #### Purpose
+        This standardizes product identity and descriptive fields (caption, product name, part number, etc.) so catalog-driven UI and workflows can consistently represent the platform.
+        #### Key Concepts
+        - **Product identity standardization:** Centralizes canonical names and part identifiers.
+        - **Catalog-driven UX:** Enables consistent display and reporting across device families.
+        - **Platform traceability:** Helps correlate discovered switch inventory to known product definitions.
+        - **Separation of concerns:** Keeps identity/description separate from operational configuration state.
 
 ---
 
 # Data Source: intersight_capability_switch_manufacturing_def
-Switch/Fabric-Interconnect manufacturing def properties.
+The SwitchManufacturingDef object captures manufacturing and descriptive metadata for a switch/fabric-interconnect platform.
+#### Purpose
+This standardizes product identity and descriptive fields (caption, product name, part number, etc.) so catalog-driven UI and workflows can consistently represent the platform.
+#### Key Concepts
+- **Product identity standardization:** Centralizes canonical names and part identifiers.
+- **Catalog-driven UX:** Enables consistent display and reporting across device families.
+- **Platform traceability:** Helps correlate discovered switch inventory to known product definitions.
+- **Separation of concerns:** Keeps identity/description separate from operational configuration state.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

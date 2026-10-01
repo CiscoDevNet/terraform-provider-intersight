@@ -3,12 +3,24 @@ subcategory: "iqnpool"
 layout: "intersight"
 page_title: "Intersight: intersight_iqnpool_block"
 description: |-
-        A block of contiguous IQNs that are part of a pool.
+        The Blocks object represents a contiguous range of identifiers that are part of a larger pool.
+        #### Purpose
+        It defines a specific range of addresses or identifiers within a pool, facilitating organized management and efficient allocation of resources.
+        #### Key Concepts
+        - **Range Definition:** Represents a contiguous range of identifiers with defined start and end values.
+        - **Pool Association:** Functions as a core component within pools for structured resource management.
+        - **Contiguity:** Ensures sequential and non-overlapping address allocation.
 
 ---
 
 # Data Source: intersight_iqnpool_block
-A block of contiguous IQNs that are part of a pool.
+The Blocks object represents a contiguous range of identifiers that are part of a larger pool.
+#### Purpose
+It defines a specific range of addresses or identifiers within a pool, facilitating organized management and efficient allocation of resources.
+#### Key Concepts
+- **Range Definition:** Represents a contiguous range of identifiers with defined start and end values.
+- **Pool Association:** Functions as a core component within pools for structured resource management.
+- **Contiguity:** Ensures sequential and non-overlapping address allocation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

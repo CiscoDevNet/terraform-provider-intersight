@@ -5,7 +5,7 @@ page_title: "Intersight: intersight_task_pure_flash_blade_scoped_inventory"
 description: |-
         The PureFlashBladeScopedInventory object provides on-demand inventory management for FlashBlade storage arrays, enabling dynamic updates to managed objects following operational changes.
         #### Purpose
-        This object is used to trigger inventory refreshes, ensuring that any modifications to the FlashBlade array are accurately reflected in management reports. It supports administrators in maintaining up-to-date information for audit, compliance, and operational efficiency.
+        This is used to trigger inventory refreshes, ensuring that any modifications to the FlashBlade array are accurately reflected in management reports. It supports administrators in maintaining up-to-date information for audit, compliance, and operational efficiency.
         #### Key Concepts
         - **Inventory Refresh**: Allows for immediate updating of FlashBlade inventory post-operations, enhancing data accuracy.
         - **Automation Support**: Integrates with batch API executors, enabling automated inventory management workflows.
@@ -17,7 +17,7 @@ description: |-
 # Resource: intersight_task_pure_flash_blade_scoped_inventory
 The PureFlashBladeScopedInventory object provides on-demand inventory management for FlashBlade storage arrays, enabling dynamic updates to managed objects following operational changes.
 #### Purpose
-This object is used to trigger inventory refreshes, ensuring that any modifications to the FlashBlade array are accurately reflected in management reports. It supports administrators in maintaining up-to-date information for audit, compliance, and operational efficiency.
+This is used to trigger inventory refreshes, ensuring that any modifications to the FlashBlade array are accurately reflected in management reports. It supports administrators in maintaining up-to-date information for audit, compliance, and operational efficiency.
 #### Key Concepts
 - **Inventory Refresh**: Allows for immediate updating of FlashBlade inventory post-operations, enhancing data accuracy.
 - **Automation Support**: Integrates with batch API executors, enabling automated inventory management workflows.

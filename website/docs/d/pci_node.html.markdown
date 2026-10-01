@@ -3,12 +3,26 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_node"
 description: |-
-        External PCIe nodes connected to a server.
+        Nodes (pci) represent external PCIe nodes connected to a server. They provide inventory/health for the node and serve as a container for PCIe devices such as GPUs, shared GPUs, locator LEDs, and interconnects.
+        #### Purpose
+        Expose external PCIe node inventory and its contained PCIe resources to support topology and resource management.
+        
+        #### Key Concepts
+        - **External expansion inventory:** Represents a PCIe node attached to a chassis/server.
+        - **Health and readiness:** Reports the operational state and whether the inventory is complete.
+        - **Contained resources:** Links to GPUs, shared GPUs, the locator LED, and interconnect groupings.
 
 ---
 
 # Data Source: intersight_pci_node
-External PCIe nodes connected to a server.
+Nodes (pci) represent external PCIe nodes connected to a server. They provide inventory/health for the node and serve as a container for PCIe devices such as GPUs, shared GPUs, locator LEDs, and interconnects.
+#### Purpose
+Expose external PCIe node inventory and its contained PCIe resources to support topology and resource management.
+ 
+#### Key Concepts
+- **External expansion inventory:** Represents a PCIe node attached to a chassis/server.
+- **Health and readiness:** Reports the operational state and whether the inventory is complete.
+- **Contained resources:** Links to GPUs, shared GPUs, the locator LED, and interconnect groupings.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

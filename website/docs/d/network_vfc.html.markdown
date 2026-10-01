@@ -3,12 +3,28 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_vfc"
 description: |-
-        Vfc configured on a Fabric Interconnect.
+        Vfcs represent virtual Fibre Channel interfaces (vHBA peers) configured on a Fabric Interconnect. They track binding/pinning to FC ports or FC port-channels and provide operational state/reason and QoS shaping parameters.
+        #### Purpose
+        Expose vHBA peer inventory on the Fabric Interconnect so operators can validate SAN bindings, troubleshoot link state, and correlate to server-side host FC interfaces.
+        #### Key Concepts
+        - **Virtual SAN interface inventory:** Represents a vFC endpoint on the switch side.
+        - **Binding and pinning:** Identifies the configured interface DN and pinned uplink DN used for vFC traffic.
+        - **Operational diagnostics:** Provides operState and operReason to explain down/no-license/error-disabled conditions.
+        - **Adapter correlation:** Can relate back to the corresponding adapter host FC interface.
+        - **QoS visibility:** Includes rate limit and burst parameters applied to the vFC.
 
 ---
 
 # Data Source: intersight_network_vfc
-Vfc configured on a Fabric Interconnect.
+Vfcs represent virtual Fibre Channel interfaces (vHBA peers) configured on a Fabric Interconnect. They track binding/pinning to FC ports or FC port-channels and provide operational state/reason and QoS shaping parameters.
+#### Purpose
+Expose vHBA peer inventory on the Fabric Interconnect so operators can validate SAN bindings, troubleshoot link state, and correlate to server-side host FC interfaces.
+#### Key Concepts
+- **Virtual SAN interface inventory:** Represents a vFC endpoint on the switch side.
+- **Binding and pinning:** Identifies the configured interface DN and pinned uplink DN used for vFC traffic.
+- **Operational diagnostics:** Provides operState and operReason to explain down/no-license/error-disabled conditions.
+- **Adapter correlation:** Can relate back to the corresponding adapter host FC interface.
+- **QoS visibility:** Includes rate limit and burst parameters applied to the vFC.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

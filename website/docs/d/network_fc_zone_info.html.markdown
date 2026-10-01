@@ -3,12 +3,24 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_fc_zone_info"
 description: |-
-        FC Zone information of a Fabric Interconnect.
+        FcZoneInfos represent Fibre Channel zoning capacity information for a Fabric Interconnect. They report the zone limits and current zone counts (total and user zones), enabling administrators to understand zoning scale and consumption.
+        #### Purpose
+        Provide FC zoning capacity and usage visibility for a Fabric Interconnect.
+        #### Key Concepts
+        - **Zoning scale tracking:** Reports maximum zone limits and current zone counts.
+        - **User vs total zones:** Distinguishes user-zone limits/counts from overall zoning capacity.
+        - **Switch-scoped inventory:** Attached to the corresponding network element for context.
 
 ---
 
 # Data Source: intersight_network_fc_zone_info
-FC Zone information of a Fabric Interconnect.
+FcZoneInfos represent Fibre Channel zoning capacity information for a Fabric Interconnect. They report the zone limits and current zone counts (total and user zones), enabling administrators to understand zoning scale and consumption.
+#### Purpose
+Provide FC zoning capacity and usage visibility for a Fabric Interconnect.
+#### Key Concepts
+- **Zoning scale tracking:** Reports maximum zone limits and current zone counts.
+- **User vs total zones:** Distinguishes user-zone limits/counts from overall zoning capacity.
+- **Switch-scoped inventory:** Attached to the corresponding network element for context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

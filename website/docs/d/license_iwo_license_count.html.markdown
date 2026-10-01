@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_iwo_license_count"
 description: |-
-        Customer operation object to request reservation code.
+        IwoLicenseCounts represent aggregated consumption for IWO licensing (for example, total VM/device license count associated with the account).
+        #### Purpose
+        Exposes summarized IWO consumption metrics for monitoring and licensing governance.
+        #### Key Concepts
+        - **Consumption summary:** Provides totals rather than per-resource usage detail.
+        - **Visibility and compliance:** Supports licensing status pages and compliance checks.
+        - **Backend-maintained values:** Typically computed and updated by system processes.
+        - **Account-scoped:** Related to AccountLicenseData for correct association and permissions.
 
 ---
 
 # Data Source: intersight_license_iwo_license_count
-Customer operation object to request reservation code.
+IwoLicenseCounts represent aggregated consumption for IWO licensing (for example, total VM/device license count associated with the account).
+#### Purpose
+Exposes summarized IWO consumption metrics for monitoring and licensing governance.
+#### Key Concepts
+- **Consumption summary:** Provides totals rather than per-resource usage detail.
+- **Visibility and compliance:** Supports licensing status pages and compliance checks.
+- **Backend-maintained values:** Typically computed and updated by system processes.
+- **Account-scoped:** Related to AccountLicenseData for correct association and permissions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

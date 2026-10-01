@@ -3,12 +3,26 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_ahv_vm_disk"
 description: |-
-        A disk associated with an AHV VM.
+        AhvVmDisks represent virtual disks attached to AHV VMs. They provide per-disk inventory describing sizing, bus type, indexing, and backing storage identifiers.
+        #### Purpose
+        Expose AHV VM virtual disk inventory so storage attachment, capacity, and backing constructs can be monitored and correlated.
+        #### Key Concepts
+        - **Per-VM disk inventory:** Models each attached disk with identifiers and slot-like index.
+        - **Backing reference:** Includes references to the storage container or alternative backing constructs used by the Nutanix storage layer.
+        - **Operational flags:** Includes attributes that indicate disk behaviors such as flash-mode pinning or migration state.
+        - **Endpoint-scoped provenance:** Each disk record is associated with a registered device source.
 
 ---
 
 # Data Source: intersight_hci_ahv_vm_disk
-A disk associated with an AHV VM.
+AhvVmDisks represent virtual disks attached to AHV VMs. They provide per-disk inventory describing sizing, bus type, indexing, and backing storage identifiers.
+#### Purpose
+Expose AHV VM virtual disk inventory so storage attachment, capacity, and backing constructs can be monitored and correlated.
+#### Key Concepts
+- **Per-VM disk inventory:** Models each attached disk with identifiers and slot-like index.
+- **Backing reference:** Includes references to the storage container or alternative backing constructs used by the Nutanix storage layer.
+- **Operational flags:** Includes attributes that indicate disk behaviors such as flash-mode pinning or migration state.
+- **Endpoint-scoped provenance:** Each disk record is associated with a registered device source.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_appliance_pc_role"
 description: |-
-        Configuration object sent by user to create an appliance port channel.
+        The AppliancePcRole object represents configuration intent for an appliance-facing Ethernet port-channel.
+        #### Purpose
+        AppliancePcRole models an appliance connection using an aggregated port-channel and provides the policy attachment points needed for consistent appliance connectivity across multiple member links.
+        #### Key Concepts
+        - **Aggregated appliance intent:** Represents appliance connectivity via port-channel rather than a single port.
+        - **Policy attachments:** Acts as the anchor for network group/control policies and link aggregation behavior.
+        - **Operational stability:** Supports consistent behavior for appliance connectivity at scale.
+        - **Policy-scoped identity:** Identifies the appliance port-channel uniquely within a port policy context.
 
 ---
 
 # Resource: intersight_fabric_appliance_pc_role
-Configuration object sent by user to create an appliance port channel.
+The AppliancePcRole object represents configuration intent for an appliance-facing Ethernet port-channel.
+#### Purpose
+AppliancePcRole models an appliance connection using an aggregated port-channel and provides the policy attachment points needed for consistent appliance connectivity across multiple member links.
+#### Key Concepts
+- **Aggregated appliance intent:** Represents appliance connectivity via port-channel rather than a single port.
+- **Policy attachments:** Acts as the anchor for network group/control policies and link aggregation behavior.
+- **Operational stability:** Supports consistent behavior for appliance connectivity at scale.
+- **Policy-scoped identity:** Identifies the appliance port-channel uniquely within a port policy context.
 ## Usage Example
 ### Resource Creation
 

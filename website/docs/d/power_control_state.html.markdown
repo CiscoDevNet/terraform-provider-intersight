@@ -3,12 +3,26 @@ subcategory: "power"
 layout: "intersight"
 page_title: "Intersight: intersight_power_control_state"
 description: |-
-        Managed object used to track chassis power capping information.
+        ControlStates track chassis power capping and power capacity characteristics. They report available power under different redundancy modes (non-redundant, N+1, N+2, grid), required power ranges, and chassis-level power management feature states such as power save mode, extended power capacity, and power rebalancing.
+        #### Purpose
+        Provide chassis-level power-capacity and power-capping inventory so administrators can understand available/allocated power budgets and how chassis power management features affect capacity.
+        #### Key Concepts
+        - **Power capacity modeling:** Reports the chassis’s available power budgets under multiple redundancy policies (non-redundant, N+1, N+2, grid).
+        - **Required vs allocated power:** Exposes min/max required power and currently allocated power to support power planning.
+        - **Chassis power management modes:** Indicates whether power save mode, extended power capacity, and power rebalancing are enabled/disabled.
+        - **Chassis-scoped and device-linked:** Inherits permissions from the chassis context and is associated with a registered device for provenance.
 
 ---
 
 # Data Source: intersight_power_control_state
-Managed object used to track chassis power capping information.
+ControlStates track chassis power capping and power capacity characteristics. They report available power under different redundancy modes (non-redundant, N+1, N+2, grid), required power ranges, and chassis-level power management feature states such as power save mode, extended power capacity, and power rebalancing.
+#### Purpose
+Provide chassis-level power-capacity and power-capping inventory so administrators can understand available/allocated power budgets and how chassis power management features affect capacity.
+#### Key Concepts
+- **Power capacity modeling:** Reports the chassis’s available power budgets under multiple redundancy policies (non-redundant, N+1, N+2, grid).
+- **Required vs allocated power:** Exposes min/max required power and currently allocated power to support power planning.
+- **Chassis power management modes:** Indicates whether power save mode, extended power capacity, and power rebalancing are enabled/disabled.
+- **Chassis-scoped and device-linked:** Inherits permissions from the chassis context and is associated with a registered device for provenance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

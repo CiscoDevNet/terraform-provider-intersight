@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_iks_license_count"
 description: |-
-        Customer operation object to request reservation code.
+        IksLicenseCounts represent aggregated usage metrics for IKS licensing (for example, counts of devices in a specific IKS tier).
+        #### Purpose
+        Provides visibility into IKS tier consumption for monitoring and compliance.
+        #### Key Concepts
+        - **Tier-based aggregation:** Summarizes counts by tier (e.g., Advantage).
+        - **Reporting primitive:** Useful for dashboards and licensing status views.
+        - **System-maintained values:** Often updated by backend processes and exposed read-only to users.
+        - **Account-scoped:** Tied to AccountLicenseData for correct ownership and permissions.
 
 ---
 
 # Resource: intersight_license_iks_license_count
-Customer operation object to request reservation code.
+IksLicenseCounts represent aggregated usage metrics for IKS licensing (for example, counts of devices in a specific IKS tier).
+#### Purpose
+Provides visibility into IKS tier consumption for monitoring and compliance.
+#### Key Concepts
+- **Tier-based aggregation:** Summarizes counts by tier (e.g., Advantage).
+- **Reporting primitive:** Useful for dashboards and licensing status views.
+- **System-maintained values:** Often updated by backend processes and exposed read-only to users.
+- **Account-scoped:** Tied to AccountLicenseData for correct ownership and permissions.
 ## Argument Reference
 The following arguments are supported:
 * `account_license_data`:(HashMap) - A reference to a licenseAccountLicenseData resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

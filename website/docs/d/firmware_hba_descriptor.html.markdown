@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_hba_descriptor"
 description: |-
-        Descriptor to uniquely identify a HBA component.
+        The HbaDescriptors object provides internal metadata to uniquely identify Host Bus Adapter (HBA) components.
+        #### Purpose
+        It ensures that HBAs are correctly identified for storage connectivity, supporting firmware management and compatibility checks.
+        #### Key Concepts
+        - **Component Identification:** Uniquely identifies HBA hardware using vendor, model, and revision details.
+        - **Hardware Integration:** Facilitates the mapping of HBA hardware to system-level policies.
 
 ---
 
 # Data Source: intersight_firmware_hba_descriptor
-Descriptor to uniquely identify a HBA component.
+The HbaDescriptors object provides internal metadata to uniquely identify Host Bus Adapter (HBA) components.
+#### Purpose
+It ensures that HBAs are correctly identified for storage connectivity, supporting firmware management and compatibility checks.
+#### Key Concepts
+- **Component Identification:** Uniquely identifies HBA hardware using vendor, model, and revision details.
+- **Hardware Integration:** Facilitates the mapping of HBA hardware to system-level policies.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

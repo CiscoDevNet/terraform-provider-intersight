@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_ethernet_port_event"
 description: |-
-        An event where the impacted resource type is an ethernet port.
+        The NetAppEthernetPortEvents object  captures alerts related to ethernet port health and utilization.
+        ### Purpose
+        It alerts administrators to port failures, utilization spikes, or connectivity issues at the physical network layer.
+        ####  Key Concepts
+        - **Performance Monitoring:** Alerts on port utilization thresholds.
+        - **Health Alerts:** Notifies on port state changes (e.g., port going down).
 
 ---
 
 # Data Source: intersight_storage_net_app_ethernet_port_event
-An event where the impacted resource type is an ethernet port.
+The NetAppEthernetPortEvents object  captures alerts related to ethernet port health and utilization.
+### Purpose
+It alerts administrators to port failures, utilization spikes, or connectivity issues at the physical network layer.
+####  Key Concepts
+- **Performance Monitoring:** Alerts on port utilization thresholds.
+- **Health Alerts:** Notifies on port state changes (e.g., port going down).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

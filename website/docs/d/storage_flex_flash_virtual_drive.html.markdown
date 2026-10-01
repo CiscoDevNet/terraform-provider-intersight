@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_flash_virtual_drive"
 description: |-
-        Virtual Drive repersenting a SD Card.
+        FlexFlashVirtualDrives represent virtual drives on a FlexFlash controller (often backed by SD cards). They provide inventory and status for logical FlexFlash storage constructs, including size, status, partition identity, and any resident image information.
+        #### Purpose
+        Provide visibility into FlexFlash logical storage (virtual drives) so administrators can monitor status and understand how FlexFlash media is partitioned and used on supported systems.
+        #### Key Concepts
+        - **Controller-scoped logical storage**: A virtual drive exists under a FlexFlash controller and represents a logical unit/partitioning of FlexFlash media.
+        - **Partition and scope metadata**: Fields like `partitionId` and `driveScope` describe how the virtual drive is defined and used.
+        - **Operational visibility**: `driveStatus` summarizes the health/state of the virtual drive; `size` provides capacity.
+        - **Boot/media image awareness**: `residentImage` captures what image (if any) resides on the virtual drive.
 
 ---
 
 # Data Source: intersight_storage_flex_flash_virtual_drive
-Virtual Drive repersenting a SD Card.
+FlexFlashVirtualDrives represent virtual drives on a FlexFlash controller (often backed by SD cards). They provide inventory and status for logical FlexFlash storage constructs, including size, status, partition identity, and any resident image information.
+#### Purpose
+Provide visibility into FlexFlash logical storage (virtual drives) so administrators can monitor status and understand how FlexFlash media is partitioned and used on supported systems.
+#### Key Concepts
+- **Controller-scoped logical storage**: A virtual drive exists under a FlexFlash controller and represents a logical unit/partitioning of FlexFlash media.
+- **Partition and scope metadata**: Fields like `partitionId` and `driveScope` describe how the virtual drive is defined and used.
+- **Operational visibility**: `driveStatus` summarizes the health/state of the virtual drive; `size` provides capacity.
+- **Boot/media image awareness**: `residentImage` captures what image (if any) resides on the virtual drive.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

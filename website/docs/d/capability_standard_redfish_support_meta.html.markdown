@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_standard_redfish_support_meta"
 description: |-
-        Internal meta-data to check standard redfish support by Platform type.
+        The StandardRedfishSupportMeta object provides internal metadata to verify if a platform supports the standard Redfish SimpleUpdate operation.
+        #### Purpose
+        It enables the system to determine if a server platform can utilize the Redfish standard for firmware updates, ensuring the correct upgrade protocol is selected.
+        #### Key Concepts
+        - **Standardization:** Identifies platforms that adhere to Redfish SimpleUpdate standards.
+        - **Protocol Selection:** Guides the system in choosing the appropriate firmware upgrade mechanism.
 
 ---
 
 # Data Source: intersight_capability_standard_redfish_support_meta
-Internal meta-data to check standard redfish support by Platform type.
+The StandardRedfishSupportMeta object provides internal metadata to verify if a platform supports the standard Redfish SimpleUpdate operation.
+#### Purpose
+It enables the system to determine if a server platform can utilize the Redfish standard for firmware updates, ensuring the correct upgrade protocol is selected.
+#### Key Concepts
+- **Standardization:** Identifies platforms that adhere to Redfish SimpleUpdate standards.
+- **Protocol Selection:** Guides the system in choosing the appropriate firmware upgrade mechanism.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

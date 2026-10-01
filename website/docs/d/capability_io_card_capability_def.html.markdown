@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_io_card_capability_def"
 description: |-
-        Chassis Iocard module capabilities.
+        The IoCardCapabilityDef object describes capabilities for chassis I/O modules (IOMs) in the capability catalog.
+        #### Purpose
+        This expresses platform-specific IOM feature support so the system can validate configurations and tailor workflows based on what the IOM hardware can support.
+        #### Key Concepts
+        - **IOM feature flags:** Declares supported behaviors (e.g., connector support) per IOM platform.
+        - **Policy/workflow adaptation:** Enables platform-aware configuration logic and validation.
+        - **Inventory-to-capability mapping:** Supports deterministic behavior across mixed chassis deployments.
+        - **Catalog governance:** Centralizes IOM capability differences for long-term maintainability.
 
 ---
 
 # Data Source: intersight_capability_io_card_capability_def
-Chassis Iocard module capabilities.
+The IoCardCapabilityDef object describes capabilities for chassis I/O modules (IOMs) in the capability catalog.
+#### Purpose
+This expresses platform-specific IOM feature support so the system can validate configurations and tailor workflows based on what the IOM hardware can support.
+#### Key Concepts
+- **IOM feature flags:** Declares supported behaviors (e.g., connector support) per IOM platform.
+- **Policy/workflow adaptation:** Enables platform-aware configuration logic and validation.
+- **Inventory-to-capability mapping:** Supports deterministic behavior across mixed chassis deployments.
+- **Catalog governance:** Centralizes IOM capability differences for long-term maintainability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

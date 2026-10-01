@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_cifs_share"
 description: |-
-        NetApp CIFS share is a named access point in a volume which is tied to the CIFS server on the SVM.
+        The NetAppCifsShares object  represents a named access point within a volume that is exposed to clients via the CIFS protocol.
+        ### Purpose
+        This manages the exposure of storage volumes, allowing administrators to define specific paths, access permissions, and security settings for file sharing.
+        ### Key Concepts
+        - **Access Control:** Uses Access Control Lists (ACLs) to define user and group permissions.
+        - **Share Configuration:** Defines the path, comments, and encryption requirements for the share.
+        - **Lifecycle Management:** Manages the association between the share, the volume, and the underlying CIFS server.
 
 ---
 
 # Data Source: intersight_storage_net_app_cifs_share
-NetApp CIFS share is a named access point in a volume which is tied to the CIFS server on the SVM.
+The NetAppCifsShares object  represents a named access point within a volume that is exposed to clients via the CIFS protocol.
+### Purpose
+This manages the exposure of storage volumes, allowing administrators to define specific paths, access permissions, and security settings for file sharing.
+### Key Concepts
+- **Access Control:** Uses Access Control Lists (ACLs) to define user and group permissions.
+- **Share Configuration:** Defines the path, comments, and encryption requirements for the share.
+- **Lifecycle Management:** Manages the association between the share, the volume, and the underlying CIFS server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

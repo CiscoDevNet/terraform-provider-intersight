@@ -88,7 +88,7 @@ This complex property has following sub-properties:
   + `bind_dn`:(string) Distinguished Name (DN) used to authenticate against LDAP servers. 
   + `bind_method`:(string) Authentication method to access LDAP servers.* `LoginCredentials` - Requires the user credentials. If the bind process fails, then user is denied access.* `Anonymous` - Requires no username and password. If this option is selected and the LDAP server is configured for Anonymous logins, then the user gains access.* `ConfiguredCredentials` - Requires a known set of credentials to be specified for the initial bind process. If the initial bind process succeeds, then the distinguished name (DN) of the user name is queried and re-used for the re-binding process. If the re-binding process fails, then the user is denied access. 
   + `domain`:(string) The IPv4 domain that all users must be in. 
-  + `enable_encryption`:(bool) If enabled, the endpoint encrypts all information sent to the LDAP server. 
+  + `enable_encryption`:(bool) If enabled, the endpoint encrypts all information it sends to the LDAP server. LDAP encryption uses StartTLS over port 389. 
   + `enable_group_authorization`:(bool) If enabled, user authorization is also done at the group level for LDAP users not in the local user database. 
   + `enable_nested_group_search`:(bool) If enabled, an extended search walks the ancestry chain to the root and returns all groups and subgroups recursively. 
   + `filter`:(string) Criteria to identify entries in search requests. 

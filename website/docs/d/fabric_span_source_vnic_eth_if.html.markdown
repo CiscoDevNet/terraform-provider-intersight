@@ -3,16 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_span_source_vnic_eth_if"
 description: |-
-        Configures a VNIC as the SPAN Source for a given SPAN session. For failover VNICs, VNIC must be added as a
-        source to a SPAN session on the peer Fabric Interconnect to ensure that traffic is mirrored on both
-        Fabric Interconnects.
+        The SpanSourceVnicEthIf object represents a vNIC (virtual Ethernet interface) configured as a SPAN traffic source.
+        #### Purpose
+        SpanSourceVnicEthIf enables mirroring of traffic from a server’s virtual interface as it is represented in the fabric, supporting troubleshooting and analysis for workloads tied to specific vNICs (including failover scenarios across fabric sides).
+        #### Key Concepts
+        - **Virtual-interface mirroring:** Mirrors traffic at the vNIC level rather than physical port level.
+        - **Failover awareness:** Requires appropriate session placement to capture traffic across both fabric sides for failover vNICs.
+        - **Session membership:** Represents a SPAN source bound to a SPAN session.
+        - **Server-profile correlation:** Ties troubleshooting directly to the virtual interface identity used in server profiles.
 
 ---
 
 # Data Source: intersight_fabric_span_source_vnic_eth_if
-Configures a VNIC as the SPAN Source for a given SPAN session. For failover VNICs, VNIC must be added as a
-source to a SPAN session on the peer Fabric Interconnect to ensure that traffic is mirrored on both
-Fabric Interconnects.
+The SpanSourceVnicEthIf object represents a vNIC (virtual Ethernet interface) configured as a SPAN traffic source.
+#### Purpose
+SpanSourceVnicEthIf enables mirroring of traffic from a server’s virtual interface as it is represented in the fabric, supporting troubleshooting and analysis for workloads tied to specific vNICs (including failover scenarios across fabric sides).
+#### Key Concepts
+- **Virtual-interface mirroring:** Mirrors traffic at the vNIC level rather than physical port level.
+- **Failover awareness:** Requires appropriate session placement to capture traffic across both fabric sides for failover vNICs.
+- **Session membership:** Represents a SPAN source bound to a SPAN session.
+- **Server-profile correlation:** Ties troubleshooting directly to the virtual interface identity used in server profiles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

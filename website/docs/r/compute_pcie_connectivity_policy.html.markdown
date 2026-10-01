@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_pcie_connectivity_policy"
 description: |-
-        Configures PCIe connectivity policy to map GPUs and Adapters to a server.
+        PcieConnectivityPolicies define the intended PCIe connectivity for a server profile by describing one or more PCIe zones. Each zone specifies a root PCIe endpoint (CPU) and a set of PCIe endpoint targets (GPUs and/or adapters) selected via property filters such as model and count.
+        #### Purpose
+        Express user intent for mapping PCIe devices (GPUs/adapters) to server CPUs so the platform can apply and enforce a supported PCIe connectivity configuration.
+        #### Key Concepts
+        - **Zone-based intent model:** A policy is composed of one or more zones that group endpoints under a root CPU selection.
+        - **Root vs target endpoints:** Distinguishes initiators (CPU/root endpoint) from targets (GPU/adapter endpoints).
+        - **Property-filtered selection:** Endpoints can be selected by model and count, enabling reusable intent across compatible hardware.
+        - **Profile attachability:** Designed to attach to server profiles and participate in deployment workflows where policy intent becomes applied configuration.
 
 ---
 
 # Resource: intersight_compute_pcie_connectivity_policy
-Configures PCIe connectivity policy to map GPUs and Adapters to a server.
+PcieConnectivityPolicies define the intended PCIe connectivity for a server profile by describing one or more PCIe zones. Each zone specifies a root PCIe endpoint (CPU) and a set of PCIe endpoint targets (GPUs and/or adapters) selected via property filters such as model and count.
+#### Purpose
+Express user intent for mapping PCIe devices (GPUs/adapters) to server CPUs so the platform can apply and enforce a supported PCIe connectivity configuration.
+#### Key Concepts
+- **Zone-based intent model:** A policy is composed of one or more zones that group endpoints under a root CPU selection.
+- **Root vs target endpoints:** Distinguishes initiators (CPU/root endpoint) from targets (GPU/adapter endpoints).
+- **Property-filtered selection:** Endpoints can be selected by model and count, enabling reusable intent across compatible hardware.
+- **Profile attachability:** Designed to attach to server profiles and participate in deployment workflows where policy intent becomes applied configuration.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

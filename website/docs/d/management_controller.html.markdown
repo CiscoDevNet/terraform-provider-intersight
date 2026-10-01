@@ -3,12 +3,26 @@ subcategory: "management"
 layout: "intersight"
 page_title: "Intersight: intersight_management_controller"
 description: |-
-        A specialized service processor that monitors the physical state of a server, using sensors and communicating with the system administrator through an independent connection.
+        Controllers (management) represent a management controller (service processor) that monitors server physical state via sensors and communicates out-of-band. It may also report replay-config status for Fabric Interconnect reboot replay behavior.
+        #### Purpose
+        Provide inventory and operational visibility for the management controller, including certificates and management interface relationships.
+        #### Key Concepts
+        - **Out-of-band control-plane:** Represents the service processor used for monitoring and management.
+        - **Security artifacts:** Can reference certificates used for authorization and trust establishment.
+        - **Replay status (FI):** Includes replay config status/timestamps for post-reboot config replay visibility.
+        - **Interface inventory linkage:** Related to one or more management Interfaces that expose IP/MAC/VLAN settings.
 
 ---
 
 # Data Source: intersight_management_controller
-A specialized service processor that monitors the physical state of a server, using sensors and communicating with the system administrator through an independent connection.
+Controllers (management) represent a management controller (service processor) that monitors server physical state via sensors and communicates out-of-band. It may also report replay-config status for Fabric Interconnect reboot replay behavior.
+#### Purpose
+Provide inventory and operational visibility for the management controller, including certificates and management interface relationships.
+#### Key Concepts
+- **Out-of-band control-plane:** Represents the service processor used for monitoring and management.
+- **Security artifacts:** Can reference certificates used for authorization and trust establishment.
+- **Replay status (FI):** Includes replay config status/timestamps for post-reboot config replay visibility.
+- **Interface inventory linkage:** Related to one or more management Interfaces that expose IP/MAC/VLAN settings.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

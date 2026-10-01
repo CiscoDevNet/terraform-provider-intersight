@@ -3,12 +3,24 @@ subcategory: "inventory"
 layout: "intersight"
 page_title: "Intersight: intersight_inventory_generic_inventory"
 description: |-
-        Any inventory which is represented as a key / value pair. Example - moInvKv in UCSM representing OS tools running on ESX.
+        GenericInventories represent arbitrary inventory expressed as key/value pairs (for example, OS tools inventory from UCSM). They are used when the inventory schema is not modeled as dedicated typed objects.
+        #### Purpose
+        Provide a flexible mechanism to store and query unstructured or semi-structured inventory data as key/value entries.
+        #### Key Concepts
+        - **Key/value inventory:** Represents inventory items where the structure is best expressed as a key and value.
+        - **Schema flexibility:** Allows capturing inventory not worth modeling as strongly typed managed objects.
+        - **Holder association:** Typically grouped under a GenericInventoryHolder for an endpoint context.
 
 ---
 
 # Data Source: intersight_inventory_generic_inventory
-Any inventory which is represented as a key / value pair. Example - moInvKv in UCSM representing OS tools running on ESX.
+GenericInventories represent arbitrary inventory expressed as key/value pairs (for example, OS tools inventory from UCSM). They are used when the inventory schema is not modeled as dedicated typed objects.
+#### Purpose
+Provide a flexible mechanism to store and query unstructured or semi-structured inventory data as key/value entries.
+#### Key Concepts
+- **Key/value inventory:** Represents inventory items where the structure is best expressed as a key and value.
+- **Schema flexibility:** Allows capturing inventory not worth modeling as strongly typed managed objects.
+- **Holder association:** Typically grouped under a GenericInventoryHolder for an endpoint context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

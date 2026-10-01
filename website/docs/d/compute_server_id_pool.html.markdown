@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_server_id_pool"
 description: |-
-        Identifier pool that generates a unique number for a server object.
+        The ServerIdPool object represents the identifier pool used to allocate server IDs for rack or blade servers within a domain/device-registration scope.
+        #### Purpose
+        ServerIdPool provides a consistent allocation mechanism for server identifiers to ensure stable, predictable references for servers in inventory and lifecycle operations, including honoring preferred IDs where applicable.
+        #### Key Concepts
+        - **Stable server identifiers:** Allocates unique IDs to servers for consistent referencing.
+        - **Preferred-ID handling:** Integrates policy-driven “preferred IDs” into allocation behavior where supported.
+        - **Domain-scoped uniqueness:** Prevents identifier collisions by scoping to the domain/device registration.
+        - **Supports lifecycle workflows:** Enables consistent identity across discovery, recommission, and replacement flows.
 
 ---
 
 # Data Source: intersight_compute_server_id_pool
-Identifier pool that generates a unique number for a server object.
+The ServerIdPool object represents the identifier pool used to allocate server IDs for rack or blade servers within a domain/device-registration scope.
+#### Purpose
+ServerIdPool provides a consistent allocation mechanism for server identifiers to ensure stable, predictable references for servers in inventory and lifecycle operations, including honoring preferred IDs where applicable.
+#### Key Concepts
+- **Stable server identifiers:** Allocates unique IDs to servers for consistent referencing.
+- **Preferred-ID handling:** Integrates policy-driven “preferred IDs” into allocation behavior where supported.
+- **Domain-scoped uniqueness:** Prevents identifier collisions by scoping to the domain/device registration.
+- **Supports lifecycle workflows:** Enables consistent identity across discovery, recommission, and replacement flows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

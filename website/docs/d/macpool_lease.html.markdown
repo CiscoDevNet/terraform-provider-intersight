@@ -3,12 +3,32 @@ subcategory: "macpool"
 layout: "intersight"
 page_title: "Intersight: intersight_macpool_lease"
 description: |-
-        Lease represents a single MAC address that is part of the universe, allocated either from a pool or through static assignment.
+        Leases represent individual MAC addresses allocated from a MAC pool (dynamic allocation) or obtained via static assignment within the MAC universe. A lease is the “in-use” record that ties a MAC address to an owning entity such as a server profile.
+        #### Purpose
+        Track allocation of MAC addresses, enforce uniqueness, support reserved-identity allocation, and provide an ownership link between a MAC address and the entity consuming it.
+        #### Key Concepts
+        - **Allocated identity record**: `macAddress` is the leased MAC and is create-only, ensuring stable identity once issued.
+        - **Reservation-aware allocation**: `reservation` can be provided to allocate an already-reserved identity and carry reservation details/conditions.
+        - **Preferred MAC behavior (dynamic only)**: `preferredMacAddress` allows best-effort selection during dynamic requests; if unavailable/out of range/reserved/leased, the next available MAC is allocated.
+        - **Migration support (dynamic only)**: When used with a migrate behavior (not shown here but referenced), an existing lease can be replaced.
+        - **Ownership linkage**: `assignedToEntity` links the lease to the consuming managed object (e.g., a server profile), enabling traceability and cleanup workflows.
+        - **Universe containment**: `universe` ties the lease to the account-wide MAC bookkeeping container (cascade on universe deletion).
+        - **Pool selection at creation**: `pool` is create-only, reflecting that the lease is requested/issued against a specific pool.
 
 ---
 
 # Data Source: intersight_macpool_lease
-Lease represents a single MAC address that is part of the universe, allocated either from a pool or through static assignment.
+Leases represent individual MAC addresses allocated from a MAC pool (dynamic allocation) or obtained via static assignment within the MAC universe. A lease is the “in-use” record that ties a MAC address to an owning entity such as a server profile.
+#### Purpose
+Track allocation of MAC addresses, enforce uniqueness, support reserved-identity allocation, and provide an ownership link between a MAC address and the entity consuming it.
+#### Key Concepts
+- **Allocated identity record**: `macAddress` is the leased MAC and is create-only, ensuring stable identity once issued.
+- **Reservation-aware allocation**: `reservation` can be provided to allocate an already-reserved identity and carry reservation details/conditions.
+- **Preferred MAC behavior (dynamic only)**: `preferredMacAddress` allows best-effort selection during dynamic requests; if unavailable/out of range/reserved/leased, the next available MAC is allocated.
+- **Migration support (dynamic only)**: When used with a migrate behavior (not shown here but referenced), an existing lease can be replaced.
+- **Ownership linkage**: `assignedToEntity` links the lease to the consuming managed object (e.g., a server profile), enabling traceability and cleanup workflows.
+- **Universe containment**: `universe` ties the lease to the account-wide MAC bookkeeping container (cascade on universe deletion).
+- **Pool selection at creation**: `pool` is create-only, reflecting that the lease is requested/issued against a specific pool.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

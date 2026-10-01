@@ -3,12 +3,24 @@ subcategory: "management"
 layout: "intersight"
 page_title: "Intersight: intersight_management_entity"
 description: |-
-        Logical representation that captures the role of each Fabric Interconnect in UCS Manager.
+        Entities (management) represent the logical role and clustering state of each Fabric Interconnect in UCS Manager (e.g., Primary/Subordinate and cluster readiness/state/link state).
+        #### Purpose
+        Expose FI role and cluster state so administrators can understand HA posture and interconnect leadership.
+        #### Key Concepts
+        - **FI role modeling:** Captures leadership (Primary/Subordinate).
+        - **Cluster state visibility:** Includes readiness, cluster state, and cluster link/umbilical state.
+        - **UCSM logical layer:** Represents the UCSM logical perspective of FI clustering.
 
 ---
 
 # Data Source: intersight_management_entity
-Logical representation that captures the role of each Fabric Interconnect in UCS Manager.
+Entities (management) represent the logical role and clustering state of each Fabric Interconnect in UCS Manager (e.g., Primary/Subordinate and cluster readiness/state/link state).
+#### Purpose
+Expose FI role and cluster state so administrators can understand HA posture and interconnect leadership.
+#### Key Concepts
+- **FI role modeling:** Captures leadership (Primary/Subordinate).
+- **Cluster state visibility:** Includes readiness, cluster state, and cluster link/umbilical state.
+- **UCSM logical layer:** Represents the UCSM logical perspective of FI clustering.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

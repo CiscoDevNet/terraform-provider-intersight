@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_server_pcie_connectivity_catalog"
 description: |-
-        Catalog of supported physical connectivity layouts from server to PCIe devices for topology validation.
+        ServerPcieConnectivityCatalogs are capability-catalog entries that define *valid, supported* physical PCIe connectivity layouts for servers. They model the expected end-to-end topology (CPU → PCIe switch/fabric elements → GPU/adapter endpoints) so the system can validate whether a requested or discovered wiring/layout is supported.
+        #### Purpose
+        Provide a canonical catalog of supported server-to-PCIe-device physical topologies used for topology validation and compatibility checks.
+        #### Key Concepts
+        - **Topology validation catalog:** Encodes known-good layouts that can be matched against intended configuration or discovered inventory.
+        - **Layout-driven compatibility:** A layout describes how CPUs, slots, and PCIe switches relate to connected GPUs/adapters.
+        - **Endpoint mapping primitives:** Uses connection-point groupings (GPU/adapter connection points) to describe where endpoints are attached in the topology.
+        - **Capability model integration:** Implemented as a `capability.Capability`- derived object, intended to be curated/managed like other capability catalog entries.
 
 ---
 
 # Data Source: intersight_capability_server_pcie_connectivity_catalog
-Catalog of supported physical connectivity layouts from server to PCIe devices for topology validation.
+ServerPcieConnectivityCatalogs are capability-catalog entries that define *valid, supported* physical PCIe connectivity layouts for servers. They model the expected end-to-end topology (CPU → PCIe switch/fabric elements → GPU/adapter endpoints) so the system can validate whether a requested or discovered wiring/layout is supported.
+#### Purpose
+Provide a canonical catalog of supported server-to-PCIe-device physical topologies used for topology validation and compatibility checks.
+#### Key Concepts
+- **Topology validation catalog:** Encodes known-good layouts that can be matched against intended configuration or discovered inventory.
+- **Layout-driven compatibility:** A layout describes how CPUs, slots, and PCIe switches relate to connected GPUs/adapters.
+- **Endpoint mapping primitives:** Uses connection-point groupings (GPU/adapter connection points) to describe where endpoints are attached in the topology.
+- **Capability model integration:** Implemented as a `capability.Capability`- derived object, intended to be curated/managed like other capability catalog entries.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

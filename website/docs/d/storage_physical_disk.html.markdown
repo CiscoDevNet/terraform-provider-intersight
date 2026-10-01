@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_physical_disk"
 description: |-
-        Physical Disk on a server.
+        PhysicalDisks represent physical disks installed in a server, including identity, capacity, protocol/type, encryption indicators, operational/health state, and relationships to locator LEDs, firmware, SAS ports, and usage mappings.
+        #### Purpose
+        Expose server disk inventory and health to support storage monitoring, troubleshooting, and lifecycle management.
+        #### Key Concepts
+        - **Hardware disk inventory:** Identifies disks by diskId/serial and provides capacity and type/protocol.
+        - **Health diagnostics:** Captures oper state/reasons and additional health fields/messages.
+        - **Firmware and locator linkage:** Relates to running firmware and locator LED for maintenance workflows.
+        - **Connectivity mapping:** Can relate to SAS ports and disk extension/usage objects for topology.
 
 ---
 
 # Data Source: intersight_storage_physical_disk
-Physical Disk on a server.
+PhysicalDisks represent physical disks installed in a server, including identity, capacity, protocol/type, encryption indicators, operational/health state, and relationships to locator LEDs, firmware, SAS ports, and usage mappings.
+#### Purpose
+Expose server disk inventory and health to support storage monitoring, troubleshooting, and lifecycle management.
+#### Key Concepts
+- **Hardware disk inventory:** Identifies disks by diskId/serial and provides capacity and type/protocol.
+- **Health diagnostics:** Captures oper state/reasons and additional health fields/messages.
+- **Firmware and locator linkage:** Relates to running firmware and locator LED for maintenance workflows.
+- **Connectivity mapping:** Can relate to SAS ports and disk extension/usage objects for topology.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

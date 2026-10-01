@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_nfs_service"
 description: |-
-        An NFS service retrieves the NFS configuration of a storage virtual machine.
+        The NetAppNfsServices object retrieves the NFS configuration for an SVM.
+        ####  Purpose
+        It manages the NFS protocol versions (v3, v4, v4.1) enabled on the storage system, controlling how clients access files.
+        ####  Key Concepts
+        - **Protocol Configuration:** Enables or disables specific NFS versions.
+        - **SVM Integration:** Scopes the service to a specific Storage Virtual Machine.
 
 ---
 
 # Data Source: intersight_storage_net_app_nfs_service
-An NFS service retrieves the NFS configuration of a storage virtual machine.
+The NetAppNfsServices object retrieves the NFS configuration for an SVM.
+####  Purpose
+It manages the NFS protocol versions (v3, v4, v4.1) enabled on the storage system, controlling how clients access files.
+####  Key Concepts
+- **Protocol Configuration:** Enables or disables specific NFS versions.
+- **SVM Integration:** Scopes the service to a specific Storage Virtual Machine.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

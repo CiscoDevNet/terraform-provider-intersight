@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_enclosure_disk"
 description: |-
-        Physical Disk on the enclosure.
+        EnclosureDisks represent physical disks as seen within an enclosure context, including slot identity, size/block characteristics, state, and health, and linkage back to the server physical disk object.
+        #### Purpose
+        Expose enclosure-scoped disk inventory and correlate it to the corresponding server physical disk representation.
+        #### Key Concepts
+        - **Enclosure viewpoint:** Represents disks as installed in enclosure slots.
+        - **Capacity/geometry:** Provides size, block count, and block size attributes.
+        - **Correlation to server disk:** Relates to `storage.PhysicalDisk` for unified disk identity.
 
 ---
 
 # Data Source: intersight_storage_enclosure_disk
-Physical Disk on the enclosure.
+EnclosureDisks represent physical disks as seen within an enclosure context, including slot identity, size/block characteristics, state, and health, and linkage back to the server physical disk object.
+#### Purpose
+Expose enclosure-scoped disk inventory and correlate it to the corresponding server physical disk representation.
+#### Key Concepts
+- **Enclosure viewpoint:** Represents disks as installed in enclosure slots.
+- **Capacity/geometry:** Provides size, block count, and block size attributes.
+- **Correlation to server disk:** Relates to `storage.PhysicalDisk` for unified disk identity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

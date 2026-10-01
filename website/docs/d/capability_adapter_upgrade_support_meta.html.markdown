@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_adapter_upgrade_support_meta"
 description: |-
-        Internal meta-data to enable adapter upgrade related decision making.
+        The AdapterUpgradeSupportMeta object provides internal metadata to facilitate decision-making regarding adapter firmware upgrades.
+        #### Purpose
+        It acts as a reference for the system to determine which adapter series and models are eligible for firmware operations, ensuring that only supported hardware is targeted.
+        #### Key Concepts
+        - **Series Identification:** Classifies adapters into series for bulk firmware management.
+        - **Model Support:** Maintains a list of specific adapter models supported under each series.
 
 ---
 
 # Data Source: intersight_capability_adapter_upgrade_support_meta
-Internal meta-data to enable adapter upgrade related decision making.
+The AdapterUpgradeSupportMeta object provides internal metadata to facilitate decision-making regarding adapter firmware upgrades.
+#### Purpose
+It acts as a reference for the system to determine which adapter series and models are eligible for firmware operations, ensuring that only supported hardware is targeted.
+#### Key Concepts
+- **Series Identification:** Classifies adapters into series for bulk firmware management.
+- **Model Support:** Maintains a list of specific adapter models supported under each series.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

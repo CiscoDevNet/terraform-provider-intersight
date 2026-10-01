@@ -3,12 +3,26 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_vlan_port_info"
 description: |-
-        Vlan Port information of a Fabric Interconnect.
+        VlanPortInfos represent VLAN port capacity and usage information for a Fabric Interconnect. They report platform VLAN port limits and counts (access/border/total), and include computed compressed/uncompressed counts derived by the VLAN port group library.
+        #### Purpose
+        Provide visibility into VLAN port scaling and consumption to help operators understand capacity headroom and configuration impact.
+        #### Key Concepts
+        - **Capacity tracking:** Reports VLAN port limits and current utilization counts.
+        - **Port type breakdown:** Distinguishes access vs border VLAN port counts.
+        - **Computed optimization metrics:** Includes compressed/uncompressed counts computed by internal logic for better visibility.
+        - **Switch-scoped inventory:** Attached to a network element for context.
 
 ---
 
 # Data Source: intersight_network_vlan_port_info
-Vlan Port information of a Fabric Interconnect.
+VlanPortInfos represent VLAN port capacity and usage information for a Fabric Interconnect. They report platform VLAN port limits and counts (access/border/total), and include computed compressed/uncompressed counts derived by the VLAN port group library.
+#### Purpose
+Provide visibility into VLAN port scaling and consumption to help operators understand capacity headroom and configuration impact.
+#### Key Concepts
+- **Capacity tracking:** Reports VLAN port limits and current utilization counts.
+- **Port type breakdown:** Distinguishes access vs border VLAN port counts.
+- **Computed optimization metrics:** Includes compressed/uncompressed counts computed by internal logic for better visibility.
+- **Switch-scoped inventory:** Attached to a network element for context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_server_role"
 description: |-
-        Configuration object sent by user to create a server port.
+        The ServerRole object represents configuration intent for a server-facing port in a port policy.
+        #### Purpose
+        ServerRole is used to declare a specific port as a server port and to express server-port-specific configuration intent required for correct server connectivity, including platform-specific behaviors required for certain FEX/IOM combinations.
+        #### Key Concepts
+        - **Server-facing port intent:** Declares a port’s role as server connectivity rather than uplink/appliance.
+        - **Hardware-specific considerations:** Supports platform-dependent server port requirements (e.g., negotiated speed/FEC constraints).
+        - **Policy-scoped identity:** Identifies the port precisely within a port policy context.
+        - **Repeatable deployment:** Enables consistent server port configuration across deployments using the same policy.
 
 ---
 
 # Data Source: intersight_fabric_server_role
-Configuration object sent by user to create a server port.
+The ServerRole object represents configuration intent for a server-facing port in a port policy.
+#### Purpose
+ServerRole is used to declare a specific port as a server port and to express server-port-specific configuration intent required for correct server connectivity, including platform-specific behaviors required for certain FEX/IOM combinations.
+#### Key Concepts
+- **Server-facing port intent:** Declares a port’s role as server connectivity rather than uplink/appliance.
+- **Hardware-specific considerations:** Supports platform-dependent server port requirements (e.g., negotiated speed/FEC constraints).
+- **Policy-scoped identity:** Identifies the port precisely within a port policy context.
+- **Repeatable deployment:** Enables consistent server port configuration across deployments using the same policy.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

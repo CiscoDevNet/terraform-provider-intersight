@@ -485,6 +485,11 @@ func getTechsupportmanagementTechSupportStatusSchema() map[string]*schema.Schema
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"reason": {
+						Description: "Reason for techsupport failure, if any.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"techsupport_download_url": {
 						Description: "The Url to download the techsupport file.",
 						Type:        schema.TypeString,

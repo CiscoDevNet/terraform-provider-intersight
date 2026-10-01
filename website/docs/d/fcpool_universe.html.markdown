@@ -3,12 +3,28 @@ subcategory: "fcpool"
 layout: "intersight"
 page_title: "Intersight: intersight_fcpool_universe"
 description: |-
-        Universe represents a book keeping container to keep track of all IDs for a given account and pool type.
+        Universes are bookkeeping containers used to track all allocated and reserved identities for a given Intersight account and pool type (for example, WWNN/WWPN identity pools). They provide the account-scoped boundary in which identity uniqueness and allocation tracking can be maintained consistently.
+        #### Purpose
+        Maintain an authoritative, account-level container for identity tracking so pool operations (allocation, reservation, membership) can reference a consistent universe for correlation, audit, and lifecycle management.
+        #### Key Concepts
+        - **Account-scoped identity domain**: The `account` relationship anchors the Universe to a specific `iam.Account`, establishing the scope for identity tracking.
+        - **Pool-type bookkeeping container**: Intended as the shared reference point for “all IDs” of a particular pool type within an account (e.g., WWNN/WWPN pools).
+        - **Read-focused consumption**: Exposed via READ to support inspection and correlation rather than direct user-driven manipulation.
+        - **Lifecycle coupling to account**: `onpeerdelete: cascade` on `account` ties Universe lifecycle to the account—when the account is removed, the Universe is removed as well.
+        - **Broad operational visibility**: READ privileges include both general read roles and WWNN/WWPN pool read roles, supporting inventory and troubleshooting workflows.
 
 ---
 
 # Data Source: intersight_fcpool_universe
-Universe represents a book keeping container to keep track of all IDs for a given account and pool type.
+Universes are bookkeeping containers used to track all allocated and reserved identities for a given Intersight account and pool type (for example, WWNN/WWPN identity pools). They provide the account-scoped boundary in which identity uniqueness and allocation tracking can be maintained consistently.
+#### Purpose
+Maintain an authoritative, account-level container for identity tracking so pool operations (allocation, reservation, membership) can reference a consistent universe for correlation, audit, and lifecycle management.
+#### Key Concepts
+- **Account-scoped identity domain**: The `account` relationship anchors the Universe to a specific `iam.Account`, establishing the scope for identity tracking.
+- **Pool-type bookkeeping container**: Intended as the shared reference point for “all IDs” of a particular pool type within an account (e.g., WWNN/WWPN pools).
+- **Read-focused consumption**: Exposed via READ to support inspection and correlation rather than direct user-driven manipulation.
+- **Lifecycle coupling to account**: `onpeerdelete: cascade` on `account` ties Universe lifecycle to the account—when the account is removed, the Universe is removed as well.
+- **Broad operational visibility**: READ privileges include both general read roles and WWNN/WWPN pool read roles, supporting inventory and troubleshooting workflows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

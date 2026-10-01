@@ -3,12 +3,22 @@ subcategory: "fc"
 layout: "intersight"
 page_title: "Intersight: intersight_fc_neighbor"
 description: |-
-        Concrete class for switch and N port virtualization neighbors present in various interfaces of a switch.
+        Neighbors are referenced by FC PhysicalPorts and FC PortChannels as `fc.Neighbor`, representing discovered Fibre Channel neighbor relationships for a port or port-channel.
+        #### Purpose
+        Provide topology visibility for FC connectivity by showing what neighbor is associated with a given FC port or FC port-channel.
+        #### Key Concepts
+        - **FC topology adjacency:** Represents neighbor relationships learned/discovered on FC interfaces.
+        - **Port and port-channel association:** Back-referenced from both `fc.PhysicalPort` and `fc.PortChannel`.
 
 ---
 
 # Data Source: intersight_fc_neighbor
-Concrete class for switch and N port virtualization neighbors present in various interfaces of a switch.
+Neighbors are referenced by FC PhysicalPorts and FC PortChannels as `fc.Neighbor`, representing discovered Fibre Channel neighbor relationships for a port or port-channel.
+#### Purpose
+Provide topology visibility for FC connectivity by showing what neighbor is associated with a given FC port or FC port-channel.
+#### Key Concepts
+- **FC topology adjacency:** Represents neighbor relationships learned/discovered on FC interfaces.
+- **Port and port-channel association:** Back-referenced from both `fc.PhysicalPort` and `fc.PortChannel`.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

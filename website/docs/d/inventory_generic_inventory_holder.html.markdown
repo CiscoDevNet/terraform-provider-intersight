@@ -3,12 +3,24 @@ subcategory: "inventory"
 layout: "intersight"
 page_title: "Intersight: intersight_inventory_generic_inventory_holder"
 description: |-
-        A container class for generic inventory.
+        GenericInventoryHolders are container objects that group a collection of GenericInventories for a given endpoint. They provide an anchor for organizing generic key/value inventory sets.
+        #### Purpose
+        Organize and scope generic inventory entries for an endpoint so consumers can retrieve a cohesive set of key/value inventory data.
+        #### Key Concepts
+        - **Container pattern:** Holds a collection of GenericInventory entries.
+        - **Endpoint scoping:** Represents the endpoint whose generic inventory is being reported.
+        - **Structured access to generic data:** Enables consistent retrieval even when the contained inventory is unstructured.
 
 ---
 
 # Data Source: intersight_inventory_generic_inventory_holder
-A container class for generic inventory.
+GenericInventoryHolders are container objects that group a collection of GenericInventories for a given endpoint. They provide an anchor for organizing generic key/value inventory sets.
+#### Purpose
+Organize and scope generic inventory entries for an endpoint so consumers can retrieve a cohesive set of key/value inventory data.
+#### Key Concepts
+- **Container pattern:** Holds a collection of GenericInventory entries.
+- **Endpoint scoping:** Represents the endpoint whose generic inventory is being reported.
+- **Structured access to generic data:** Enables consistent retrieval even when the contained inventory is unstructured.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_switch_control_policy"
 description: |-
-        A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range, Jumbo frames.
+        The SwitchControlPolicy object defines domain-wide switching behavior and global switch control settings, such as switching modes and operational controls that shape how the Fabric Interconnect behaves as a switch.
+        #### Purpose
+        SwitchControlPolicy provides a centralized policy for foundational switch behavior (for example, Ethernet/FC switching mode selection and related global controls). It ensures consistent switch-wide behavior across profiles and enables validation/deployment workflows to treat these settings as managed policy intent.
+        #### Key Concepts
+        - **Global switch behavior:** Represents switch-wide settings that apply broadly rather than to individual ports.
+        - **Switching mode control:** Encapsulates the high-level behavior of the fabric (e.g., end-host vs switch modes where applicable).
+        - **Operational consistency:** Ensures consistent baseline behavior when applied across multiple switches/domains.
+        - **Policy lifecycle integration:** Designed to be validated and deployed as part of domain/profile workflows.
 
 ---
 
 # Resource: intersight_fabric_switch_control_policy
-A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range, Jumbo frames.
+The SwitchControlPolicy object defines domain-wide switching behavior and global switch control settings, such as switching modes and operational controls that shape how the Fabric Interconnect behaves as a switch.
+#### Purpose
+SwitchControlPolicy provides a centralized policy for foundational switch behavior (for example, Ethernet/FC switching mode selection and related global controls). It ensures consistent switch-wide behavior across profiles and enables validation/deployment workflows to treat these settings as managed policy intent.
+#### Key Concepts
+- **Global switch behavior:** Represents switch-wide settings that apply broadly rather than to individual ports.
+- **Switching mode control:** Encapsulates the high-level behavior of the fabric (e.g., end-host vs switch modes where applicable).
+- **Operational consistency:** Ensures consistent baseline behavior when applied across multiple switches/domains.
+- **Policy lifecycle integration:** Designed to be validated and deployed as part of domain/profile workflows.
 ## Usage Example
 ### Resource Creation
 
@@ -111,7 +125,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `message_interval`:(int) Configures the time between UDLD probe messages on ports that are in advertisement mode and arecurrently determined to be bidirectional.Valid values are from 1 to 90 seconds. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `recovery_action`:(string) UDLD recovery when enabled, attempts to bring an UDLD error-disabled port out of reset.* `none` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `reset` - The expanded 4th generation UCS Fabric Interconnect with 108 ports. 
+  + `recovery_action`:(string) Specifies whether a port placed in the error-disabled state by UDLD is automatically reset.* `none` - Maintains the port in its current error-disabled state.* `reset` - Automatically resets a port placed in the error-disabled state by UDLD to retry link detection. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

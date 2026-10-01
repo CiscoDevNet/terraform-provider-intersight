@@ -3,12 +3,24 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_ip_lease"
 description: |-
-        IpLease represents an IP address that is allocated from a pool to a specific entity like server profile.
+        The IpLeases object represents an IPv4 or IPv6 address that has been allocated from a pool or through static assignment to a specific entity.
+        #### Purpose
+        It maintains the association between an allocated IP address and its consumer (e.g., a server profile), tracking the usage and lifecycle of the IP address within the system.
+        #### Key Concepts
+        - **Lease Management:** Tracks the allocation of IP addresses.
+        - **Configuration Details:** Stores associated network settings, including netmask, gateway, and DNS information.
+        - **Entity Association:** Links the IP address to the specific entity that owns the lease.
 
 ---
 
 # Data Source: intersight_ippool_ip_lease
-IpLease represents an IP address that is allocated from a pool to a specific entity like server profile.
+The IpLeases object represents an IPv4 or IPv6 address that has been allocated from a pool or through static assignment to a specific entity.
+#### Purpose
+It maintains the association between an allocated IP address and its consumer (e.g., a server profile), tracking the usage and lifecycle of the IP address within the system.
+#### Key Concepts
+- **Lease Management:** Tracks the allocation of IP addresses.
+- **Configuration Details:** Stores associated network settings, including netmask, gateway, and DNS information.
+- **Entity Association:** Links the IP address to the specific entity that owns the lease.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_aggregate_event"
 description: |-
-        An event where the impacted resource type is an aggregate.
+        The NetAppAggregateEvents object captures alerts and notifications specifically associated with NetApp aggregates.
+        #### Purpose
+        It notifies administrators of critical conditions or threshold breaches at the aggregate level, such as storage capacity depletion or RAID-related hardware issues.
+        #### Key Concepts
+        - **Event Management:** Tracks the lifecycle of aggregate-level events from creation to resolution.
+        - **Impact Analysis:** Categorizes events by their impact on storage availability and capacity.
+        - **Remediation:** Provides context and cause information to guide administrative response to storage alerts.
 
 ---
 
 # Data Source: intersight_storage_net_app_aggregate_event
-An event where the impacted resource type is an aggregate.
+The NetAppAggregateEvents object captures alerts and notifications specifically associated with NetApp aggregates.
+#### Purpose
+It notifies administrators of critical conditions or threshold breaches at the aggregate level, such as storage capacity depletion or RAID-related hardware issues.
+#### Key Concepts
+- **Event Management:** Tracks the lifecycle of aggregate-level events from creation to resolution.
+- **Impact Analysis:** Categorizes events by their impact on storage availability and capacity.
+- **Remediation:** Provides context and cause information to guide administrative response to storage alerts.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

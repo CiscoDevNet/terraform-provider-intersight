@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_chassis_controller"
 description: |-
-        Chassis Controller represents the controller embedded within a network element that manages a chassis.
+        ChassisControllers represent the controller embedded within a network element that manages a chassis. They provide inventory and health visibility into the chassis management controller component responsible for chassis-level monitoring and coordination.
+        #### Purpose
+        Expose the identity and operational health of the chassis management controller so administrators can validate chassis control-plane readiness and troubleshoot chassis-level issues.
+        
+        #### Key Concepts
+        - **Chassis control-plane component:** Represents the embedded controller that manages the chassis.
+        - **Health visibility:** Reports operational state and detailed health reasons to explain degraded conditions.
+        - **Chassis/platform context:** Inherits permissions from the associated network element, tying it to the fabric/device that manages the chassis.
 
 ---
 
 # Data Source: intersight_equipment_chassis_controller
-Chassis Controller represents the controller embedded within a network element that manages a chassis.
+ChassisControllers represent the controller embedded within a network element that manages a chassis. They provide inventory and health visibility into the chassis management controller component responsible for chassis-level monitoring and coordination.
+#### Purpose
+ Expose the identity and operational health of the chassis management controller so administrators can validate chassis control-plane readiness and troubleshoot chassis-level issues.
+ 
+ #### Key Concepts
+ - **Chassis control-plane component:** Represents the embedded controller that manages the chassis.
+ - **Health visibility:** Reports operational state and detailed health reasons to explain degraded conditions.
+ - **Chassis/platform context:** Inherits permissions from the associated network element, tying it to the fabric/device that manages the chassis.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

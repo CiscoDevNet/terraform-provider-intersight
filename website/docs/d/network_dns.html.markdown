@@ -3,12 +3,26 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_dns"
 description: |-
-        Concrete class for list of DNS servers configured on the nexus end point.
+        Dns represents the set of DNS settings configured on a Nexus endpoint, scoped to a specific VRF. It captures which domains are used for name resolution and which DNS servers are consulted when resolving names from that VRF context.
+        #### Purpose
+        Provide read-only visibility into per-VRF DNS configuration (default domain, additional search domains, and name server addresses) for troubleshooting, audit, and operational validation.
+        #### Key Concepts
+        - **VRF-scoped DNS**: DNS configuration is associated with a particular VRF (`vrfName`), reflecting segmented routing contexts.
+        - **Search domain behavior**: `defaultDomain` and `additionalDomains` indicate the domains appended during hostname resolution.
+        - **Resolver targets**: `nameServers` lists the DNS server addresses used for queries.
+        - **Device association**: `registeredDevice` links the DNS configuration to the specific onboarded Nexus device.
 
 ---
 
 # Data Source: intersight_network_dns
-Concrete class for list of DNS servers configured on the nexus end point.
+Dns represents the set of DNS settings configured on a Nexus endpoint, scoped to a specific VRF. It captures which domains are used for name resolution and which DNS servers are consulted when resolving names from that VRF context.
+#### Purpose
+Provide read-only visibility into per-VRF DNS configuration (default domain, additional search domains, and name server addresses) for troubleshooting, audit, and operational validation.
+#### Key Concepts
+- **VRF-scoped DNS**: DNS configuration is associated with a particular VRF (`vrfName`), reflecting segmented routing contexts.
+- **Search domain behavior**: `defaultDomain` and `additionalDomains` indicate the domains appended during hostname resolution.
+- **Resolver targets**: `nameServers` lists the DNS server addresses used for queries.
+- **Device association**: `registeredDevice` links the DNS configuration to the specific onboarded Nexus device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

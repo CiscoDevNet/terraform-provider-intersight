@@ -3,12 +3,28 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_vpc_member"
 description: |-
-        Concrete class for VPC configured on a network device.
+        VpcMembers represent individual vPC instances (member port-channels) configured on a network device within a vPC domain. Each VpcMember describes a specific vPC ID and the associated port-channel used to provide a multi-chassis aggregated link.
+        #### Purpose
+        Expose per-vPC membership and operational state so operators can verify which port-channels participate in vPC and whether they are functioning as expected.
+        #### Key Concepts
+        - **Domain and vPC identity**: `vpcDomainId` associates the member to a vPC domain; `vpcMemberId` identifies the specific vPC.
+        - **Port-channel binding**: `portChannel` and `portChannelId` identify the port-channel that implements the vPC.
+        - **Runtime status**: `operationalState` indicates whether the vPC member is up/healthy from the device perspective.
+        - **Relationship to interface model**: `etherPortChannel` links to the underlying port-channel object for deeper interface details.
+        - **Device association**: `registeredDevice` ties the vPC member to the onboarded device.
 
 ---
 
 # Data Source: intersight_network_vpc_member
-Concrete class for VPC configured on a network device.
+VpcMembers represent individual vPC instances (member port-channels) configured on a network device within a vPC domain. Each VpcMember describes a specific vPC ID and the associated port-channel used to provide a multi-chassis aggregated link.
+#### Purpose
+Expose per-vPC membership and operational state so operators can verify which port-channels participate in vPC and whether they are functioning as expected.
+#### Key Concepts
+- **Domain and vPC identity**: `vpcDomainId` associates the member to a vPC domain; `vpcMemberId` identifies the specific vPC.
+- **Port-channel binding**: `portChannel` and `portChannelId` identify the port-channel that implements the vPC.
+- **Runtime status**: `operationalState` indicates whether the vPC member is up/healthy from the device perspective.
+- **Relationship to interface model**: `etherPortChannel` links to the underlying port-channel object for deeper interface details.
+- **Device association**: `registeredDevice` ties the vPC member to the onboarded device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

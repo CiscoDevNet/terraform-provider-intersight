@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_fex_capability_def"
 description: |-
-        Fabric Extender module capabilities.
+        The FexCapabilityDef object describes capability flags for a Fabric Extender (FEX) platform in the capability catalog.
+        #### Purpose
+        This captures feature support (for example, whether certain port-level configurations are supported) so the system can validate and tailor configuration workflows for the specific FEX platform.
+        #### Key Concepts
+        - **Feature discovery:** Declares what a FEX platform supports (capability flags).
+        - **Validation enablement:** Drives platform-aware checks before applying configuration.
+        - **Platform-specific behavior:** Helps avoid applying unsupported settings on certain FEX models.
+        - **Catalog governance:** Provides a single source of truth for FEX capability differences.
 
 ---
 
 # Data Source: intersight_capability_fex_capability_def
-Fabric Extender module capabilities.
+The FexCapabilityDef object describes capability flags for a Fabric Extender (FEX) platform in the capability catalog.
+#### Purpose
+This captures feature support (for example, whether certain port-level configurations are supported) so the system can validate and tailor configuration workflows for the specific FEX platform.
+#### Key Concepts
+- **Feature discovery:** Declares what a FEX platform supports (capability flags).
+- **Validation enablement:** Drives platform-aware checks before applying configuration.
+- **Platform-specific behavior:** Helps avoid applying unsupported settings on certain FEX models.
+- **Catalog governance:** Provides a single source of truth for FEX capability differences.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_disk_slot"
 description: |-
-        Information of disk slots as reported by a storage controller.
+        DiskSlots represent disk slot inventory as reported by a storage controller. A DiskSlot can optionally reference the physical disk currently present and the controller that owns/observes that slot, enabling a slot-centric view of local storage topology.
+        #### Purpose
+        Provide a normalized slot-level inventory so consumers can determine which slots exist, which disks are present in those slots, and which storage controller the slot is associated with.
+        #### Key Concepts
+        - **Slot-centric topology**: Extends `equipment.Slot`, emphasizing physical location (`slotId`) as the primary anchor.
+        - **Optional disk occupancy**: `physicalDisk` may be null when a slot is empty or not currently mapped.
+        - **Controller association**: `storageController` relates the slot to the controller reporting/managing it (cascade on controller deletion).
+        - **Correlation and lookup**: Indexing by physical disk reference supports “find slot by disk” queries.
 
 ---
 
 # Data Source: intersight_storage_disk_slot
-Information of disk slots as reported by a storage controller.
+DiskSlots represent disk slot inventory as reported by a storage controller. A DiskSlot can optionally reference the physical disk currently present and the controller that owns/observes that slot, enabling a slot-centric view of local storage topology.
+#### Purpose
+Provide a normalized slot-level inventory so consumers can determine which slots exist, which disks are present in those slots, and which storage controller the slot is associated with.
+#### Key Concepts
+- **Slot-centric topology**: Extends `equipment.Slot`, emphasizing physical location (`slotId`) as the primary anchor.
+- **Optional disk occupancy**: `physicalDisk` may be null when a slot is empty or not currently mapped.
+- **Controller association**: `storageController` relates the slot to the controller reporting/managing it (cascade on controller deletion).
+- **Correlation and lookup**: Indexing by physical disk reference supports “find slot by disk” queries.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

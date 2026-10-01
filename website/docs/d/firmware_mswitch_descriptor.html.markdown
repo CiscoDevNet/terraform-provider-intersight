@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_mswitch_descriptor"
 description: |-
-        Descriptor to uniquely identify a mSwitch component.
+        The MswitchDescriptors object provides internal metadata to uniquely identify mSwitch components.
+        #### Purpose
+        It enables the identification and management of mSwitch hardware, supporting network fabric operations.
+        #### Key Concepts
+        - **Component Identification:** Uniquely identifies mSwitch hardware using vendor, model, and revision details.
+        - **Hardware Integration:** Facilitates the mapping of mSwitch hardware to system-level policies.
 
 ---
 
 # Data Source: intersight_firmware_mswitch_descriptor
-Descriptor to uniquely identify a mSwitch component.
+The MswitchDescriptors object provides internal metadata to uniquely identify mSwitch components.
+#### Purpose
+It enables the identification and management of mSwitch hardware, supporting network fabric operations.
+#### Key Concepts
+- **Component Identification:** Uniquely identifies mSwitch hardware using vendor, model, and revision details.
+- **Hardware Integration:** Facilitates the mapping of mSwitch hardware to system-level policies.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

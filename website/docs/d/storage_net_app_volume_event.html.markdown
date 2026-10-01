@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_volume_event"
 description: |-
-        An event where the impacted resource type is a volume.
+        The NetAppVolumeEvents object captures alerts and notifications related to NetApp volumes.
+        #### Purpose
+        It alerts administrators to issues affecting individual volumes, such as snapshot reserve exhaustion, capacity thresholds, or volume state transitions.
+        #### Key Concepts
+        - **Volume Health:** Monitors the operational status and health of volumes.
+        - **Threshold Alerts:** Notifies on capacity-related breaches (e.g., days until full).
+        - **Event Context:** Links events to specific volumes to facilitate rapid troubleshooting.
 
 ---
 
 # Data Source: intersight_storage_net_app_volume_event
-An event where the impacted resource type is a volume.
+The NetAppVolumeEvents object captures alerts and notifications related to NetApp volumes.
+#### Purpose
+It alerts administrators to issues affecting individual volumes, such as snapshot reserve exhaustion, capacity thresholds, or volume state transitions.
+#### Key Concepts
+- **Volume Health:** Monitors the operational status and health of volumes.
+- **Threshold Alerts:** Notifies on capacity-related breaches (e.g., days until full).
+- **Event Context:** Links events to specific volumes to facilitate rapid troubleshooting.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

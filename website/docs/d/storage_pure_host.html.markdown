@@ -3,16 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_host"
 description: |-
-        A host entity in PureStorage FlashArray. It is an abstraction used by PureStorage to organize
-        the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names)
-        of client computers and to control communications between clients and volumes.
+        PureHosts represent initiator endpoints (typically servers) that connect to a PureStorage array and are granted access to storage resources.
+        #### Purpose
+        Model host identity and connectivity so volumes can be mapped/authorized to the correct compute consumers.
+        #### Key Concepts
+        - **Access endpoint:** A host is the principal to which storage access is granted.
+        - **Volume mapping context:**  Hosts are used to define which volumes are presented to which initiators (often through related LUN/mapping objects).
 
 ---
 
 # Data Source: intersight_storage_pure_host
-A host entity in PureStorage FlashArray. It is an abstraction used by PureStorage to organize
-the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names)
-of client computers and to control communications between clients and volumes.
+PureHosts represent initiator endpoints (typically servers) that connect to a PureStorage array and are granted access to storage resources.
+#### Purpose
+Model host identity and connectivity so volumes can be mapped/authorized to the correct compute consumers.
+#### Key Concepts
+- **Access endpoint:** A host is the principal to which storage access is granted.
+- **Volume mapping context:**  Hosts are used to define which volumes are presented to which initiators (often through related LUN/mapping objects).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

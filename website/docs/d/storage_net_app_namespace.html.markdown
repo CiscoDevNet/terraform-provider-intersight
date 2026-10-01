@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_namespace"
 description: |-
-        NetApp Namespace is a collection of addressable logical blocks presented to hosts connected to the storage virtual machine using the NVMe over Fabrics protocol.
+        The NetAppNamespaces object represents addressable logical blocks presented via NVMe over Fabrics.
+        ####  Purpose
+        It allows for high-performance block storage access using the NVMe protocol, serving as the NVMe equivalent of a LUN.
+        ####  Key Concepts
+        - **NVMe Protocol:** Provides access to storage using NVMe controllers.
+        - **Namespace Management:** Manages path, state, and mapping to NVMe subsystems.
+        - **Resource Utilization:** Tracks capacity usage of the namespace.
 
 ---
 
 # Data Source: intersight_storage_net_app_namespace
-NetApp Namespace is a collection of addressable logical blocks presented to hosts connected to the storage virtual machine using the NVMe over Fabrics protocol.
+The NetAppNamespaces object represents addressable logical blocks presented via NVMe over Fabrics.
+####  Purpose
+It allows for high-performance block storage access using the NVMe protocol, serving as the NVMe equivalent of a LUN.
+####  Key Concepts
+- **NVMe Protocol:** Provides access to storage using NVMe controllers.
+- **Namespace Management:** Manages path, state, and mapping to NVMe subsystems.
+- **Resource Utilization:** Tracks capacity usage of the namespace.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_vd_member_ep"
 description: |-
-        Reference to LocalDisk to build up a VirtualDrive.
+        VdMemberEps represent references from a virtual drive to the local disks that compose it (membership), including span id and disk role (normal/hot-spare) and presence/state qualifiers.
+        #### Purpose
+        Expose the composition of a virtual drive in terms of its member physical disks for RAID/layout visibility and troubleshooting.
+        #### Key Concepts
+        - **VD composition record:** Maps virtual drive membership to local disk slots.
+        - **Span awareness:** Includes spanId for spanned RAID levels.
+        - **Role indication:** Identifies member role (data vs hot spare) in the VD.
 
 ---
 
 # Data Source: intersight_storage_vd_member_ep
-Reference to LocalDisk to build up a VirtualDrive.
+VdMemberEps represent references from a virtual drive to the local disks that compose it (membership), including span id and disk role (normal/hot-spare) and presence/state qualifiers.
+#### Purpose
+Expose the composition of a virtual drive in terms of its member physical disks for RAID/layout visibility and troubleshooting.
+#### Key Concepts
+- **VD composition record:** Maps virtual drive membership to local disk slots.
+- **Span awareness:** Includes spanId for spanned RAID levels.
+- **Role indication:** Identifies member role (data vs hot spare) in the VD.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

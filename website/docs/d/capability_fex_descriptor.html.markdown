@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_fex_descriptor"
 description: |-
-        Descriptor that uniquely identifies an Fabric extender.
+        The FexDescriptor object uniquely identifies a FEX hardware platform (vendor/model/revision identity) for catalog correlation.
+        #### Purpose
+        This provides a stable descriptor used to match discovered hardware inventory to a known platform definition, enabling consistent capability lookups and policy validation across deployments.
+        #### Key Concepts
+        - **Hardware identity key:** Encodes the identifying attributes needed to match a FEX platform.
+        - **Inventory correlation:** Bridges discovered components to their catalog-defined representation.
+        - **Version/revision specificity:** Supports differentiation between similar models with different revisions.
+        - **Reusable reference:** Enables multiple capability definitions to reference a consistent descriptor.
 
 ---
 
 # Data Source: intersight_capability_fex_descriptor
-Descriptor that uniquely identifies an Fabric extender.
+The FexDescriptor object uniquely identifies a FEX hardware platform (vendor/model/revision identity) for catalog correlation.
+#### Purpose
+This provides a stable descriptor used to match discovered hardware inventory to a known platform definition, enabling consistent capability lookups and policy validation across deployments.
+#### Key Concepts
+- **Hardware identity key:** Encodes the identifying attributes needed to match a FEX platform.
+- **Inventory correlation:** Bridges discovered components to their catalog-defined representation.
+- **Version/revision specificity:** Supports differentiation between similar models with different revisions.
+- **Reusable reference:** Enables multiple capability definitions to reference a consistent descriptor.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

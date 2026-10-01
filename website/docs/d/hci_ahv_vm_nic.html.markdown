@@ -3,12 +3,26 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_ahv_vm_nic"
 description: |-
-        A NIC associated with an AHV VM.
+        AhvVmNics represent virtual network interfaces attached to AHV VMs. They capture L2 identity (MAC), connectivity state, VLAN mode semantics, and IP addressing learned from the platform/guest.
+        #### Purpose
+        Expose VM network attachment inventory and configuration characteristics for connectivity monitoring and operational correlation.
+        #### Key Concepts
+        - **VM connectivity inventory:** Tracks whether a NIC is connected and its MAC identity.
+        - **VLAN semantics:** Supports access vs trunked behaviors, including explicit VLAN lists and trunk definitions.
+        - **IP address reporting:** Includes both configured/known and guest-learned IP address collections where available.
+        - **NIC type differentiation:** Distinguishes specialized NIC types (e.g., normal, direct, network-function, SPAN destination).
 
 ---
 
 # Data Source: intersight_hci_ahv_vm_nic
-A NIC associated with an AHV VM.
+AhvVmNics represent virtual network interfaces attached to AHV VMs. They capture L2 identity (MAC), connectivity state, VLAN mode semantics, and IP addressing learned from the platform/guest.
+#### Purpose
+Expose VM network attachment inventory and configuration characteristics for connectivity monitoring and operational correlation.
+#### Key Concepts
+- **VM connectivity inventory:** Tracks whether a NIC is connected and its MAC identity.
+- **VLAN semantics:** Supports access vs trunked behaviors, including explicit VLAN lists and trunk definitions.
+- **IP address reporting:** Includes both configured/known and guest-learned IP address collections where available.
+- **NIC type differentiation:** Distinguishes specialized NIC types (e.g., normal, direct, network-function, SPAN destination).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

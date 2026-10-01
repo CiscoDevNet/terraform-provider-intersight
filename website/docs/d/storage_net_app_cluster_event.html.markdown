@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_cluster_event"
 description: |-
-        An event where the impacted resource type is a cluster.
+        The NetAppClusterEvents object  represents notifications generated when a cluster-level condition occurs or a threshold is crossed.
+        ####  Purpose
+        This provides a centralized mechanism for alerting administrators to cluster-wide issues, such as performance bottlenecks or configuration changes.
+        ####  Key Concepts
+        - **Event Lifecycle:** Tracks the state of an event from 'new' to 'resolved'.
+        - **Impact Analysis:** Categorizes events by impact area (e.g., availability, performance) and severity.
+        - **Remediation:** Provides context and cause information to guide administrative response to storage alerts.
 
 ---
 
 # Data Source: intersight_storage_net_app_cluster_event
-An event where the impacted resource type is a cluster.
+The NetAppClusterEvents object  represents notifications generated when a cluster-level condition occurs or a threshold is crossed.
+####  Purpose
+This provides a centralized mechanism for alerting administrators to cluster-wide issues, such as performance bottlenecks or configuration changes.
+####  Key Concepts
+- **Event Lifecycle:** Tracks the state of an event from 'new' to 'resolved'.
+- **Impact Analysis:** Categorizes events by impact area (e.g., availability, performance) and severity.
+- **Remediation:** Provides context and cause information to guide administrative response to storage alerts.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

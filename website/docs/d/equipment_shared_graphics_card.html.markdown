@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_shared_graphics_card"
 description: |-
-        Graphics card within a PCIe node that can be shared by one or more servers.
+        SharedGraphicsCards represent GPU cards located in a PCIe node that can be shared by one or more servers. They expose GPU identity (IDs and vendor/device identifiers), operational state, firmware, and physical slot location, and allow mapping to server-level GPU inventory.
+        #### Purpose
+        Inventory shared GPU hardware and support correlation to the GPU instances visible on compute servers that are mapped to the shared device.
+        #### Key Concepts
+        - **Shared GPU inventory:** Represents a GPU card in a PCIe node that is not exclusively tied to a single server.
+        - **Hardware identity:** Captures GPU identifiers and vendor/device/subsystem IDs for precise matching.
+        - **Operational state and firmware:** Supports troubleshooting and lifecycle management for shared GPUs.
+        - **Server mapping correlation:** Links to `graphics.Card` instances that represent the mapped GPU on servers.
 
 ---
 
 # Data Source: intersight_equipment_shared_graphics_card
-Graphics card within a PCIe node that can be shared by one or more servers.
+SharedGraphicsCards represent GPU cards located in a PCIe node that can be shared by one or more servers. They expose GPU identity (IDs and vendor/device identifiers), operational state, firmware, and physical slot location, and allow mapping to server-level GPU inventory.
+#### Purpose
+Inventory shared GPU hardware and support correlation to the GPU instances visible on compute servers that are mapped to the shared device.
+#### Key Concepts
+- **Shared GPU inventory:** Represents a GPU card in a PCIe node that is not exclusively tied to a single server.
+- **Hardware identity:** Captures GPU identifiers and vendor/device/subsystem IDs for precise matching.
+- **Operational state and firmware:** Supports troubleshooting and lifecycle management for shared GPUs.
+- **Server mapping correlation:** Links to `graphics.Card` instances that represent the mapped GPU on servers.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_switch_descriptor"
 description: |-
-        Descriptor that uniquely identifies a Fabric interconnect.
+        The SwitchDescriptor object uniquely identifies a switch/fabric-interconnect platform for capability catalog mapping.
+        #### Purpose
+        This enables consistent matching of discovered Fabric Interconnect inventory to catalog definitions, ensuring the system can retrieve the correct capability and constraint definitions for that hardware.
+        #### Key Concepts
+        - **Platform identification:** Provides stable keys for platform correlation.
+        - **Catalog-backed validation:** Enables retrieving platform-specific capability/limit definitions.
+        - **Revision-aware mapping:** Allows differentiation among revisions of similar models.
+        - **Reusable catalog anchor:** Supports consistent references across multiple capability definitions.
 
 ---
 
 # Data Source: intersight_capability_switch_descriptor
-Descriptor that uniquely identifies a Fabric interconnect.
+The SwitchDescriptor object uniquely identifies a switch/fabric-interconnect platform for capability catalog mapping.
+#### Purpose
+This enables consistent matching of discovered Fabric Interconnect inventory to catalog definitions, ensuring the system can retrieve the correct capability and constraint definitions for that hardware.
+#### Key Concepts
+- **Platform identification:** Provides stable keys for platform correlation.
+- **Catalog-backed validation:** Enables retrieving platform-specific capability/limit definitions.
+- **Revision-aware mapping:** Allows differentiation among revisions of similar models.
+- **Reusable catalog anchor:** Supports consistent references across multiple capability definitions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

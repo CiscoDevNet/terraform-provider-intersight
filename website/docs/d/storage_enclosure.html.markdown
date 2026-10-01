@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_enclosure"
 description: |-
-        Storage Enclosure for physical disks.
+        Enclosures (storage) represent storage enclosures that house physical disks, including enclosure identity, type, and slot count, and relationships to disks and disk-slot endpoints.
+        #### Purpose
+        Provide enclosure-level inventory so users can understand disk housing topology and enumerate enclosure-contained disks/slots.
+        #### Key Concepts
+        - **Disk housing container:** Represents the enclosure that contains disks and slots.
+        - **Topology context:** Can include chassis/server identifiers for placement context.
+        - **Slot and disk relationships:** Links to enclosure disk slots and enclosure disk inventory objects.
 
 ---
 
 # Data Source: intersight_storage_enclosure
-Storage Enclosure for physical disks.
+Enclosures (storage) represent storage enclosures that house physical disks, including enclosure identity, type, and slot count, and relationships to disks and disk-slot endpoints.
+#### Purpose
+Provide enclosure-level inventory so users can understand disk housing topology and enumerate enclosure-contained disks/slots.
+#### Key Concepts
+- **Disk housing container:** Represents the enclosure that contains disks and slots.
+- **Topology context:** Can include chassis/server identifiers for placement context.
+- **Slot and disk relationships:** Links to enclosure disk slots and enclosure disk inventory objects.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

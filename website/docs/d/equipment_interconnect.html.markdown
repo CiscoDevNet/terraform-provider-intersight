@@ -3,12 +3,24 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_interconnect"
 description: |-
-        Object representing a set of endpoints that are interconnected via some interconnectivity technology.
+        Interconnects represent a set of endpoints that are interconnected via a specific interconnect technology (for example NVLink). They provide an inventory-level grouping of GPUs (shared or directly attached) that participate in the same interconnect domain.
+        #### Purpose
+        Model and expose interconnect groupings so consumers can understand which GPU endpoints are part of a shared high-bandwidth interconnect set.
+        #### Key Concepts
+        - **Interconnect domain modeling:** Groups endpoints that participate in the same interconnect fabric.
+        - **Interconnect type awareness:** Identifies the technology used (e.g., NVLink).
+        - **Endpoint membership:** Maintains relationships to both shared GPUs and server-mapped GPU instances that participate in the interconnect set.
 
 ---
 
 # Data Source: intersight_equipment_interconnect
-Object representing a set of endpoints that are interconnected via some interconnectivity technology.
+Interconnects represent a set of endpoints that are interconnected via a specific interconnect technology (for example NVLink). They provide an inventory-level grouping of GPUs (shared or directly attached) that participate in the same interconnect domain.
+#### Purpose
+Model and expose interconnect groupings so consumers can understand which GPU endpoints are part of a shared high-bandwidth interconnect set.
+#### Key Concepts
+- **Interconnect domain modeling:** Groups endpoints that participate in the same interconnect fabric.
+- **Interconnect type awareness:** Identifies the technology used (e.g., NVLink).
+- **Endpoint membership:** Maintains relationships to both shared GPUs and server-mapped GPU instances that participate in the interconnect set.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

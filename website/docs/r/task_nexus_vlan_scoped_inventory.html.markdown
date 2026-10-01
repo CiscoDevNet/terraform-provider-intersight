@@ -3,12 +3,32 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_nexus_vlan_scoped_inventory"
 description: |-
-        API to trigger on-demand Nexus VLAN inventory to update modified objects in Intersight report.
+        NexusVlanScopedInventories represent an on-demand inventory trigger specifically for Nexus VLAN inventory. Creating this object initiates a scoped discovery cycle so Intersight can refresh VLAN-related objects for the specified Nexus registered device and update reporting without waiting for scheduled inventory.
+        #### Purpose
+        Enable administrators to manually trigger a targeted VLAN inventory refresh on a Nexus device to promptly reflect VLAN changes in Intersight.
+        #### Key Concepts
+        - **VLAN-focused on-demand trigger**: Intended to refresh VLAN inventory objects rather than performing a full device inventory.
+        - **Scoped inventory execution**: Extends `connector.ScopedInventory`, limiting the run to the specified device registration.
+        - **Device targeting via registration (create-only)**: `registeredDevice` identifies the Nexus connection being inventoried and cannot be changed after creation.
+        - **Permission inheritance**: Inherits permissions from `registeredDevice`, aligning access control with the device registration.
+        - **Lifecycle coupling**: `onpeerdelete: cascade` removes the trigger record if the device registration is removed.
+        - **Licensed operation**: CREATE requires the **Advantage** entitlement.
+        - **Role-based access**: Intended for account and network administrators.
 
 ---
 
 # Resource: intersight_task_nexus_vlan_scoped_inventory
-API to trigger on-demand Nexus VLAN inventory to update modified objects in Intersight report.
+NexusVlanScopedInventories represent an on-demand inventory trigger specifically for Nexus VLAN inventory. Creating this object initiates a scoped discovery cycle so Intersight can refresh VLAN-related objects for the specified Nexus registered device and update reporting without waiting for scheduled inventory.
+#### Purpose
+Enable administrators to manually trigger a targeted VLAN inventory refresh on a Nexus device to promptly reflect VLAN changes in Intersight.
+#### Key Concepts
+- **VLAN-focused on-demand trigger**: Intended to refresh VLAN inventory objects rather than performing a full device inventory.
+- **Scoped inventory execution**: Extends `connector.ScopedInventory`, limiting the run to the specified device registration.
+- **Device targeting via registration (create-only)**: `registeredDevice` identifies the Nexus connection being inventoried and cannot be changed after creation.
+- **Permission inheritance**: Inherits permissions from `registeredDevice`, aligning access control with the device registration.
+- **Lifecycle coupling**: `onpeerdelete: cascade` removes the trigger record if the device registration is removed.
+- **Licensed operation**: CREATE requires the **Advantage** entitlement.
+- **Role-based access**: Intended for account and network administrators.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

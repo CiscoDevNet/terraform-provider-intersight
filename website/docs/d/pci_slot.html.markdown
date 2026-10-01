@@ -3,12 +3,26 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_slot"
 description: |-
-        The PCI Slot with Name and Presence details.
+        Slots (pci) represent PCI slots with name and presence details for rack units.
+        #### Purpose
+        Provide a simple inventory record of PCI slot presence/identity for hardware visibility.
+        
+        #### Key Concepts
+        - **Slot identity:** Captures slotId as the unique identifier.
+        - **Presence-focused:** Intended to express whether/what is present in a slot.
+        - **Server association:** Scoped to a rack unit context.
 
 ---
 
 # Data Source: intersight_pci_slot
-The PCI Slot with Name and Presence details.
+Slots (pci) represent PCI slots with name and presence details for rack units.
+ #### Purpose
+ Provide a simple inventory record of PCI slot presence/identity for hardware visibility.
+ 
+ #### Key Concepts
+ - **Slot identity:** Captures slotId as the unique identifier.
+ - **Presence-focused:** Intended to express whether/what is present in a slot.
+ - **Server association:** Scoped to a rack unit context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

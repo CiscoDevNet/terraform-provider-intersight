@@ -3,12 +3,22 @@ subcategory: "resourcepool"
 layout: "intersight"
 page_title: "Intersight: intersight_resourcepool_lease_resource"
 description: |-
-        Lease API is for reserve or unreserve the resource from the pool. Those reserved resource details are maintained in LeaseResource.
+        The LeaseResources object maintains the details of a resource reserved as part of a lease operation.
+        #### Purpose
+        It keeps track of the specific resource (e.g., server, chassis) that has been reserved, ensuring that the reservation is accurately maintained and associated with the lease.
+        #### Key Concepts
+        - **Resource Details:** Maintains the reference to the reserved resource.
+        - **Lease Association:** Links the resource to the lease operation.
 
 ---
 
 # Data Source: intersight_resourcepool_lease_resource
-Lease API is for reserve or unreserve the resource from the pool. Those reserved resource details are maintained in LeaseResource.
+The LeaseResources object maintains the details of a resource reserved as part of a lease operation.
+#### Purpose
+It keeps track of the specific resource (e.g., server, chassis) that has been reserved, ensuring that the reservation is accurately maintained and associated with the lease.
+#### Key Concepts
+- **Resource Details:** Maintains the reference to the reserved resource.
+- **Lease Association:** Links the resource to the lease operation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

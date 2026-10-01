@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_erp_license_count"
 description: |-
-        Customer operation object to request reservation code.
+        ErpLicenseCounts represent aggregated usage/count information for ERP licensing tiers within an account. It is typically used for reporting, compliance, and UI display of consumption.
+        #### Purpose
+        Exposes ERP licensing consumption totals (e.g., how many devices are claimed/consuming within a tier) for visibility and governance.
+        #### Key Concepts
+        - **Aggregated accounting:** Captures summarized counts rather than per-device assignments.
+        - **Tier visibility:** Provides quick insight into tier-level consumption.
+        - **Read-mostly semantics:** Typically computed/maintained by system processes and surfaced to users for monitoring.
+        - **Tied to AccountLicenseData:** Ensures counts align to the correct account licensing context.
 
 ---
 
 # Data Source: intersight_license_erp_license_count
-Customer operation object to request reservation code.
+ErpLicenseCounts represent aggregated usage/count information for ERP licensing tiers within an account. It is typically used for reporting, compliance, and UI display of consumption.
+#### Purpose
+Exposes ERP licensing consumption totals (e.g., how many devices are claimed/consuming within a tier) for visibility and governance.
+#### Key Concepts
+- **Aggregated accounting:** Captures summarized counts rather than per-device assignments.
+- **Tier visibility:** Provides quick insight into tier-level consumption.
+- **Read-mostly semantics:** Typically computed/maintained by system processes and surfaced to users for monitoring.
+- **Tied to AccountLicenseData:** Ensures counts align to the correct account licensing context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

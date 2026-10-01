@@ -351,9 +351,9 @@ func resourceApplianceRestore() *schema.Resource {
 				ForceNew: true,
 			},
 			"protocol": {
-				Description:  "Communication protocol used by backup and restore workflow (e.g. scp, sftp, cifs, or local).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.\n* `local` - Backup file is stored in Intersight Appliance.",
+				Description:  "Communication protocol used by backup and restore workflow (e.g. scp, sftp, cifs, or local).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.\n* `local` - Backup file is stored in Intersight Appliance.\n* `https` - Hypertext Transfer Protocol Secure (HTTPS) to access a file from a remote URL.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp", "cifs", "local"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp", "cifs", "local", "https"}, false),
 				Optional:     true,
 				Default:      "scp",
 				ForceNew:     true,
@@ -569,6 +569,18 @@ func resourceApplianceRestore() *schema.Resource {
 					},
 				},
 				ForceNew: true,
+			},
+			"tls_certificate": {
+				Description: "PEM-encoded certificate used to verify the HTTPS server certificate during the Transport Layer Security (TLS) handshake. Required when the server certificate is not signed by a publicly trusted certificate authority (CA). Provide either the CA that signed the server certificate, a CA bundle containing the issuer, or the server's own certificate when it is self-signed. Verifying the server certificate prevents man-in-the-middle attacks during the download. Leaving this field empty disables TLS verification, and the download accepts any certificate the server presents.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
+			},
+			"url": {
+				Description: "HTTPS URL of the backup archive to restore. The URL must use the HTTPS scheme (https://), and any other scheme is rejected during validation. When the server requires authentication, the appliance uses the username and password properties on this object as HTTP basic authentication credentials.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
 			},
 			"username": {
 				Description:  "Username to authenticate the fileserver. Not required when protocol is local.",
@@ -897,6 +909,16 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if v, ok := d.GetOk("tls_certificate"); ok {
+		x := (v.(string))
+		o.SetTlsCertificate(x)
+	}
+
+	if v, ok := d.GetOk("url"); ok {
+		x := (v.(string))
+		o.SetUrl(x)
+	}
+
 	if v, ok := d.GetOk("username"); ok {
 		x := (v.(string))
 		o.SetUsername(x)
@@ -1050,6 +1072,14 @@ func resourceApplianceRestoreRead(c context.Context, d *schema.ResourceData, met
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in ApplianceRestore object: %s", err.Error())
+	}
+
+	if err := d.Set("tls_certificate", (s.GetTlsCertificate())); err != nil {
+		return diag.Errorf("error occurred while setting property TlsCertificate in ApplianceRestore object: %s", err.Error())
+	}
+
+	if err := d.Set("url", (s.GetUrl())); err != nil {
+		return diag.Errorf("error occurred while setting property Url in ApplianceRestore object: %s", err.Error())
 	}
 
 	if err := d.Set("username", (s.GetUsername())); err != nil {

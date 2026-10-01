@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_cluster_snapshot_policy"
 description: |-
-        NetApp Snapshot policy that is scoped to a cluster. The policy controls the behavior and schedule of snapshots when applied to a volume.
+        The NetAppClusterSnapshotPolicies object controls the creation and retention of volume snapshots at the cluster level.
+        #### Purpose
+        It automates data protection by defining when and how often snapshots are taken, ensuring that recovery points are consistently maintained.
+        ####  Key Concepts
+        - **Snapshot Automation:** Defines intervals and schedules for snapshot creation.
+        - **Retention Management:** Specifies the number of copies to maintain for each schedule.
+        - **Policy Scope:** Manages policies globally across the cluster.
 
 ---
 
 # Data Source: intersight_storage_net_app_cluster_snapshot_policy
-NetApp Snapshot policy that is scoped to a cluster. The policy controls the behavior and schedule of snapshots when applied to a volume.
+The NetAppClusterSnapshotPolicies object controls the creation and retention of volume snapshots at the cluster level.
+#### Purpose
+It automates data protection by defining when and how often snapshots are taken, ensuring that recovery points are consistently maintained.
+####  Key Concepts
+- **Snapshot Automation:** Defines intervals and schedules for snapshot creation.
+- **Retention Management:** Specifies the number of copies to maintain for each schedule.
+- **Policy Scope:** Manages policies globally across the cluster.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

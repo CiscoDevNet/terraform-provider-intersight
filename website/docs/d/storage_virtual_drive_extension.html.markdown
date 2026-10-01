@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_virtual_drive_extension"
 description: |-
-        Information of virtual drives as reported by a storage controller. In certain cases like S-series servers, virtual drive information will be reported by the controller separately and this represents such information.
+        VirtualDriveExtensions represent controller-reported supplemental information about virtual drives (notably for certain platforms like S-series), including distinguished names, bootability, state, uuid/vendor uuid, and container ids, and a reference back to the primary VirtualDrive.
+        #### Purpose
+        Provide auxiliary virtual drive inventory fields when the controller reports extended VD data via a separate channel.
+        #### Key Concepts
+        - **Controller-reported extension:** Supplements the base VirtualDrive object with additional identifiers/fields.
+        - **DN-based correlation:** Uses VirtualDriveDn and related identifiers for mapping.
+        - **Reference linkage:** Relates back to the primary VirtualDrive for unified management.
 
 ---
 
 # Data Source: intersight_storage_virtual_drive_extension
-Information of virtual drives as reported by a storage controller. In certain cases like S-series servers, virtual drive information will be reported by the controller separately and this represents such information.
+VirtualDriveExtensions represent controller-reported supplemental information about virtual drives (notably for certain platforms like S-series), including distinguished names, bootability, state, uuid/vendor uuid, and container ids, and a reference back to the primary VirtualDrive.
+#### Purpose
+Provide auxiliary virtual drive inventory fields when the controller reports extended VD data via a separate channel.
+#### Key Concepts
+- **Controller-reported extension:** Supplements the base VirtualDrive object with additional identifiers/fields.
+- **DN-based correlation:** Uses VirtualDriveDn and related identifiers for mapping.
+- **Reference linkage:** Relates back to the primary VirtualDrive for unified management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

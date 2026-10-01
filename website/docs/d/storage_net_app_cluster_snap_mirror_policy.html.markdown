@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_cluster_snap_mirror_policy"
 description: |-
-        NetApp SnapMirror policy owned by the cluster. NetApp SnapMirror policy when applied to a SnapMirror relationship, controls the behavior of the relationship and specifies the configuration attributes for that relationship.
+        The NetAppClusterSnapMirrorPolicies object  defines the behavior and schedule for SnapMirror data replication relationships at the cluster level.
+        ####  Purpose
+        It standardizes data replication behavior, ensuring that data protection workflows follow consistent policies regarding schedules and retention.
+        #### Key Concepts
+        - **Policy Control:** Defines whether replication is asynchronous, synchronous, or continuous.
+        - **Schedule Management:** Links replication tasks to specific schedules.
+        - **Retention:** Specifies how many snapshots are maintained at the destination.
 
 ---
 
 # Data Source: intersight_storage_net_app_cluster_snap_mirror_policy
-NetApp SnapMirror policy owned by the cluster. NetApp SnapMirror policy when applied to a SnapMirror relationship, controls the behavior of the relationship and specifies the configuration attributes for that relationship.
+The NetAppClusterSnapMirrorPolicies object  defines the behavior and schedule for SnapMirror data replication relationships at the cluster level.
+####  Purpose
+It standardizes data replication behavior, ensuring that data protection workflows follow consistent policies regarding schedules and retention.
+#### Key Concepts
+- **Policy Control:** Defines whether replication is asynchronous, synchronous, or continuous.
+- **Schedule Management:** Links replication tasks to specific schedules.
+- **Retention:** Specifies how many snapshots are maintained at the destination.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

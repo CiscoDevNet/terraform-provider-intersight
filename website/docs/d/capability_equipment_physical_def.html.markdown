@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_equipment_physical_def"
 description: |-
-        Type to represent additional switch specific capabilities.
+        The EquipmentPhysicalDef object describes physical characteristics of a switch/fabric-interconnect platform within the capability catalog.
+        #### Purpose
+        This provides a normalized set of physical attributes (dimensions, weight, power envelopes) to support UI presentation, planning, and operational documentation for a given switch platform.
+        #### Key Concepts
+        - **Platform physical metadata:** Encodes size/weight/power expectations for a hardware model.
+        - **Catalog standardization:** Ensures consistent representation across platforms and releases.
+        - **Operational planning:** Supports rack/power planning workflows driven from catalog definitions.
+        - **Decoupled from inventory:** Represents platform facts independent of a specific deployed device.
 
 ---
 
 # Data Source: intersight_capability_equipment_physical_def
-Type to represent additional switch specific capabilities.
+The EquipmentPhysicalDef object describes physical characteristics of a switch/fabric-interconnect platform within the capability catalog.
+#### Purpose
+This provides a normalized set of physical attributes (dimensions, weight, power envelopes) to support UI presentation, planning, and operational documentation for a given switch platform.
+#### Key Concepts
+- **Platform physical metadata:** Encodes size/weight/power expectations for a hardware model.
+- **Catalog standardization:** Ensures consistent representation across platforms and releases.
+- **Operational planning:** Supports rack/power planning workflows driven from catalog definitions.
+- **Decoupled from inventory:** Represents platform facts independent of a specific deployed device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

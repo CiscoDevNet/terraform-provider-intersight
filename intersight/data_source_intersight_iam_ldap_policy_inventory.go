@@ -103,7 +103,7 @@ func getIamLdapPolicyInventorySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"enable_encryption": {
-						Description: "If enabled, the endpoint encrypts all information sent to the LDAP server.",
+						Description: "If enabled, the endpoint encrypts all information it sends to the LDAP server. LDAP encryption uses StartTLS over port 389.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},

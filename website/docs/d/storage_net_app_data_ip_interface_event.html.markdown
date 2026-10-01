@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_data_ip_interface_event"
 description: |-
-        An event where the impacted resource type is an ip interface.
+        The NetAppDataIpInterfaceEvents object captures alerts related to data-specific logical interfaces.
+        ####  Purpose
+        It notifies administrators of connectivity issues or threshold breaches affecting data LIFs, which are critical for client access.
+        ####  Key Concepts
+        - **Event Monitoring:** Tracks operational status and performance events for data interfaces.
+        - **Troubleshooting:** Provides specific context on why a data interface might be experiencing issues.
 
 ---
 
 # Data Source: intersight_storage_net_app_data_ip_interface_event
-An event where the impacted resource type is an ip interface.
+The NetAppDataIpInterfaceEvents object captures alerts related to data-specific logical interfaces.
+####  Purpose
+It notifies administrators of connectivity issues or threshold breaches affecting data LIFs, which are critical for client access.
+####  Key Concepts
+- **Event Monitoring:** Tracks operational status and performance events for data interfaces.
+- **Troubleshooting:** Provides specific context on why a data interface might be experiencing issues.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

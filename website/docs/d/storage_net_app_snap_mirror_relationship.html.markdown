@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_snap_mirror_relationship"
 description: |-
-        NetApp SnapMirror relationship.
+        The NetAppSnapMirrorRelationships object  represents the data replication link between a source and a destination.
+        ####  Purpose
+        It manages the data protection lifecycle, allowing administrators to monitor replication status, health, and lag time.
+        ####  Key Concepts
+        - **Replication Monitoring:** Tracks state, health, and lag time of the relationship.
+        - **Path Management:** Defines source and destination paths.
+        - **Policy Association:** Links the relationship to a specific SnapMirror policy.
 
 ---
 
 # Data Source: intersight_storage_net_app_snap_mirror_relationship
-NetApp SnapMirror relationship.
+The NetAppSnapMirrorRelationships object  represents the data replication link between a source and a destination.
+####  Purpose
+It manages the data protection lifecycle, allowing administrators to monitor replication status, health, and lag time.
+####  Key Concepts
+- **Replication Monitoring:** Tracks state, health, and lag time of the relationship.
+- **Path Management:** Defines source and destination paths.
+- **Policy Association:** Links the relationship to a specific SnapMirror policy.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

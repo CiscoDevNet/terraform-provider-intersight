@@ -3,12 +3,22 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_scp_status"
 description: |-
-        An internal MO to check if a SCP can be deployed or not on a specific Server Profile.
+        The ScpStatus object checks if a SAN Connectivity Policy (SCP) can be deployed on a specific server profile.
+        #### Purpose
+        It validates the deployment readiness of an SCP, reporting any errors before the deployment is executed.
+        #### Key Concepts
+        - **Deployment Validation:** Assesses if an SCP is ready for deployment.
+        - **Status Reporting:** Provides detailed reasons for validation failures.
 
 ---
 
 # Data Source: intersight_vnic_scp_status
-An internal MO to check if a SCP can be deployed or not on a specific Server Profile.
+The ScpStatus object checks if a SAN Connectivity Policy (SCP) can be deployed on a specific server profile.
+#### Purpose
+It validates the deployment readiness of an SCP, reporting any errors before the deployment is executed.
+#### Key Concepts
+- **Deployment Validation:** Assesses if an SCP is ready for deployment.
+- **Status Reporting:** Provides detailed reasons for validation failures.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

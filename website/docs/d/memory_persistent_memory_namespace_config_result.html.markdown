@@ -3,12 +3,24 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_namespace_config_result"
 description: |-
-        Result of a previously configured Persistent Memory Namespace on a server.
+        PersistentMemoryNamespaces represent persistent memory namespaces created within a persistent memory region, including name, UUID, capacity, mode, and health.
+        #### Purpose
+        Provide inventory for PMem namespaces so users can see the logical PMem devices configured on the platform.
+        #### Key Concepts
+        - **Logical PMem device:** A namespace is a logical allocation within a region.
+        - **Capacity/mode visibility:** Exposes size and operating mode.
+        - **Identity:** Uses UUID and name for referencing and correlation.
 
 ---
 
 # Data Source: intersight_memory_persistent_memory_namespace_config_result
-Result of a previously configured Persistent Memory Namespace on a server.
+PersistentMemoryNamespaces represent persistent memory namespaces created within a persistent memory region, including name, UUID, capacity, mode, and health.
+#### Purpose
+Provide inventory for PMem namespaces so users can see the logical PMem devices configured on the platform.
+#### Key Concepts
+- **Logical PMem device:** A namespace is a logical allocation within a region.
+- **Capacity/mode visibility:** Exposes size and operating mode.
+- **Identity:** Uses UUID and name for referencing and correlation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

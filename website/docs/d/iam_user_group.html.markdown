@@ -34,6 +34,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `dynamic_user_retention_days`:(int) Number of days a CUI-authenticated dynamic user's membership remains valid after the most recent successful regular CUI login. Zero disables retained membership for this UserGroup. 
 * `group_type`:(string) Group type determines the type of groups that is being associated with users. By default, Default User group will be used for associating dynamic user login. If the value of the User Group is set to guest, then this type of user group will be used for guest user login.* `Default` - Default User Group Type used for dynamic users login.* `Guest` - Guest User Group type used for guest users login. 
 * `instruction`:(string) Instruction property holds detailed guidance and information intended for individuals  accessing the system as guest users. It holds the information to assist guests in navigating the platform,  understanding policies, and performing necessary actions to ensure a seamless and secure user experience. 
 * `mod_time`:(string) The time when this managed object was last modified. 

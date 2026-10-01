@@ -547,7 +547,7 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"recovery_action": {
-						Description: "UDLD recovery when enabled, attempts to bring an UDLD error-disabled port out of reset.\n* `none` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `reset` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.",
+						Description: "Specifies whether a port placed in the error-disabled state by UDLD is automatically reset.\n* `none` - Maintains the port in its current error-disabled state.\n* `reset` - Automatically resets a port placed in the error-disabled state by UDLD to retry link detection.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

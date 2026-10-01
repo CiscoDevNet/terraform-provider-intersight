@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_base_disk"
 description: |-
-        NetApp base disk is a storage array disk.
+        The NetAppBaseDisks object represents the physical storage disks within a NetApp storage array.
+        ### Purpose
+        This enables administrators to monitor the physical health and status of disks, facilitating proactive management of storage hardware and replacement cycles.
+        ### Key Concepts
+        - **Disk Health Monitoring:** Tracks the operational state (e.g., spare, broken, reconstructing) of individual disks.
+        - **Hardware Identification:** Stores serial numbers and shelf information to assist in physical maintenance and troubleshooting.
+        - **Containerization:** Identifies the container type (e.g., aggregate, spare) to show how the disk is utilized.
 
 ---
 
 # Data Source: intersight_storage_net_app_base_disk
-NetApp base disk is a storage array disk.
+The NetAppBaseDisks object represents the physical storage disks within a NetApp storage array.
+### Purpose
+This enables administrators to monitor the physical health and status of disks, facilitating proactive management of storage hardware and replacement cycles.
+### Key Concepts
+- **Disk Health Monitoring:** Tracks the operational state (e.g., spare, broken, reconstructing) of individual disks.
+- **Hardware Identification:** Stores serial numbers and shelf information to assist in physical maintenance and troubleshooting.
+- **Containerization:** Identifies the container type (e.g., aggregate, spare) to show how the disk is utilized.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

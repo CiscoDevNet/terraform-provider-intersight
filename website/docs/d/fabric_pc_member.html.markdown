@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_pc_member"
 description: |-
-        PcMember object is to establish the relationship between port parameters and pcId.
+        The PcMember object models membership of a specific physical port in a port-channel, tying together port identity and the port-channel identifier within a port policy context.
+        #### Purpose
+        PcMember enables a structured representation of which ports belong to which port-channel definitions. It supports deterministic identification of membership within a policy and helps drive configuration/deployment logic for port-channels.
+        #### Key Concepts
+        - **Port-channel membership binding:** Represents a single port’s association to a port-channel ID.
+        - **Policy-scoped identity:** Membership is evaluated in the context of a specific port policy.
+        - **Deterministic mapping:** Supports stable membership definitions for repeatable deployments.
+        - **Foundation for aggregation:** Enables port-channel roles and operations to reason about members consistently.
 
 ---
 
 # Data Source: intersight_fabric_pc_member
-PcMember object is to establish the relationship between port parameters and pcId.
+The PcMember object models membership of a specific physical port in a port-channel, tying together port identity and the port-channel identifier within a port policy context.
+#### Purpose
+PcMember enables a structured representation of which ports belong to which port-channel definitions. It supports deterministic identification of membership within a policy and helps drive configuration/deployment logic for port-channels.
+#### Key Concepts
+- **Port-channel membership binding:** Represents a single port’s association to a port-channel ID.
+- **Policy-scoped identity:** Membership is evaluated in the context of a specific port policy.
+- **Deterministic mapping:** Supports stable membership definitions for repeatable deployments.
+- **Foundation for aggregation:** Enables port-channel roles and operations to reason about members consistently.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

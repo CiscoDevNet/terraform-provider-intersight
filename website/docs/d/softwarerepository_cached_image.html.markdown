@@ -3,12 +3,24 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_cached_image"
 description: |-
-        The image cached in the customer's datacenter.
+        The CachedImages object  represents an image cached within a customer's datacenter.
+        #### Purpose
+        It ensures that firmware images are readily available locally, minimizing network dependency and speeding up upgrade operations.
+        #### Key Concepts
+        - **Local Caching:** Stores images on the Fabric Interconnect or endpoint for efficient access.
+        - **Integrity Validation:** Uses MD5/SHA checksums to validate the cached image.
+        - **Cache Lifecycle:** Tracks cache state and usage to manage cache eviction.
 
 ---
 
 # Data Source: intersight_softwarerepository_cached_image
-The image cached in the customer's datacenter.
+The CachedImages object  represents an image cached within a customer's datacenter.
+#### Purpose
+It ensures that firmware images are readily available locally, minimizing network dependency and speeding up upgrade operations.
+#### Key Concepts
+- **Local Caching:** Stores images on the Fabric Interconnect or endpoint for efficient access.
+- **Integrity Validation:** Uses MD5/SHA checksums to validate the cached image.
+- **Cache Lifecycle:** Tracks cache state and usage to manage cache eviction.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

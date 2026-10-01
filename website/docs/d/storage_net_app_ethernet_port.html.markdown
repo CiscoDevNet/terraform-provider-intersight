@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_ethernet_port"
 description: |-
-        Ethernet port is a port on a node in a storage array.
+        The NetAppEthernetPorts object represents the physical or logical (VLAN/LAG) ethernet ports on a storage node.
+        ####  Purpose
+        This provides visibility into the network hardware layer, allowing administrators to monitor port status, speed, and configuration.
+        ####  Key Concepts
+        - **Network Configuration:** Manages MTU, speed, and broadcast domains.
+        - **Logical Port Support:** Handles VLAN and LAG configurations.
+        - **Operational Monitoring:** Tracks the state (Up/Down/Degraded) of the port.
 
 ---
 
 # Data Source: intersight_storage_net_app_ethernet_port
-Ethernet port is a port on a node in a storage array.
+The NetAppEthernetPorts object represents the physical or logical (VLAN/LAG) ethernet ports on a storage node.
+####  Purpose
+This provides visibility into the network hardware layer, allowing administrators to monitor port status, speed, and configuration.
+####  Key Concepts
+- **Network Configuration:** Manages MTU, speed, and broadcast domains.
+- **Logical Port Support:** Handles VLAN and LAG configurations.
+- **Operational Monitoring:** Tracks the state (Up/Down/Degraded) of the port.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

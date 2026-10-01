@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_upgrade_impact_status"
 description: |-
-        Captures the impact for an upgrade.
+        The UpgradeImpactStatuses object captures the status of an upgrade impact calculation.
+        #### Purpose
+        It tracks the progress and outcome of the impact analysis process, ensuring that administrators know if the assessment is complete, in progress, or failed.
+        #### Key Concepts
+        - **Computation Tracking:** Monitors the status of the impact calculation.
+        - **Result Availability:** Indicates if the impact analysis is ready for review.
 
 ---
 
 # Data Source: intersight_firmware_upgrade_impact_status
-Captures the impact for an upgrade.
+The UpgradeImpactStatuses object captures the status of an upgrade impact calculation.
+#### Purpose
+It tracks the progress and outcome of the impact analysis process, ensuring that administrators know if the assessment is complete, in progress, or failed.
+#### Key Concepts
+- **Computation Tracking:** Monitors the status of the impact calculation.
+- **Result Availability:** Indicates if the impact analysis is ready for review.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

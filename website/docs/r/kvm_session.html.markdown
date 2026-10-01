@@ -3,12 +3,28 @@ subcategory: "kvm"
 layout: "intersight"
 page_title: "Intersight: intersight_kvm_session"
 description: |-
-        Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server. The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
+        The Session object represents a virtual KVM (vKVM) session that provides Single Sign-On (SSO) access to the vKVM console of a managed server.
+        #### Purpose
+        The Session object is designed to facilitate secure, remote console access to servers. It supports both direct vKVM connections and tunneled connections, providing a flexible and secure way for administrators to interact with server hardware remotely.
+        #### Key Concepts
+        - **Single Sign-On (SSO) Access:** Provides seamless authentication to the vKVM console, reducing the need for manual login steps at the server level.
+        - **Connection Flexibility:** Supports both direct access and tunneled access, allowing for secure connections even in restricted network environments.
+        - **Role-Based Access Control:** Integrates with specific privilege sets, ensuring that only authorized users can launch vKVM sessions or manage/terminate existing sessions.
+        - **Session Lifecycle:** Captures unique session identifiers, launch URLs, and one-time passwords (OTP) to maintain secure, temporary access tokens for console sessions.
+        - **Infrastructure Integration:** Establishes clear relationships with the target server and the specific network tunnel used for the connection, ensuring auditability and proper resource mapping.
 
 ---
 
 # Resource: intersight_kvm_session
-Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server. The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
+The Session object represents a virtual KVM (vKVM) session that provides Single Sign-On (SSO) access to the vKVM console of a managed server.
+#### Purpose
+The Session object is designed to facilitate secure, remote console access to servers. It supports both direct vKVM connections and tunneled connections, providing a flexible and secure way for administrators to interact with server hardware remotely.
+#### Key Concepts
+- **Single Sign-On (SSO) Access:** Provides seamless authentication to the vKVM console, reducing the need for manual login steps at the server level.
+- **Connection Flexibility:** Supports both direct access and tunneled access, allowing for secure connections even in restricted network environments.
+- **Role-Based Access Control:** Integrates with specific privilege sets, ensuring that only authorized users can launch vKVM sessions or manage/terminate existing sessions.
+- **Session Lifecycle:** Captures unique session identifiers, launch URLs, and one-time passwords (OTP) to maintain secure, temporary access tokens for console sessions.
+- **Infrastructure Integration:** Establishes clear relationships with the target server and the specific network tunnel used for the connection, ensuring auditability and proper resource mapping.
 ## Usage Example
 ### Resource Creation
 

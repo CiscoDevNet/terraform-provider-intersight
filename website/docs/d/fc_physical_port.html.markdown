@@ -3,12 +3,28 @@ subcategory: "fc"
 layout: "intersight"
 page_title: "Intersight: intersight_fc_physical_port"
 description: |-
-        The physical interface on the Fabric Interconnect to which a Fibre Channel (FC) target can be connected to within a data center.
+        PhysicalPorts (FC) represent physical Fibre Channel interfaces on a Fabric Interconnect. They capture identity (WWN), transceiver type, mode, speed, VSAN association, and provide linkage to FC neighbor discovery.
+        #### Purpose
+        Expose FC physical interface inventory and operational attributes to support SAN connectivity monitoring, validation, and troubleshooting.
+        #### Key Concepts
+        - **Physical SAN interface:** Models a hardware FC port on the Fabric Interconnect.
+        - **SAN identity:** WWN uniquely identifies the FC port in the fabric.
+        - **Connectivity and performance:** Captures admin/oper speed and mode (e.g., N-port proxy/F/E).
+        - **Fabric context:** Includes VSAN association and breakout/aggregate port membership where applicable.
+        - **Topology correlation:** Links to FC neighbor information for adjacency visibility.
 
 ---
 
 # Data Source: intersight_fc_physical_port
-The physical interface on the Fabric Interconnect to which a Fibre Channel (FC) target can be connected to within a data center.
+PhysicalPorts (FC) represent physical Fibre Channel interfaces on a Fabric Interconnect. They capture identity (WWN), transceiver type, mode, speed, VSAN association, and provide linkage to FC neighbor discovery.
+#### Purpose
+Expose FC physical interface inventory and operational attributes to support SAN connectivity monitoring, validation, and troubleshooting.
+#### Key Concepts
+- **Physical SAN interface:** Models a hardware FC port on the Fabric Interconnect.
+- **SAN identity:** WWN uniquely identifies the FC port in the fabric.
+- **Connectivity and performance:** Captures admin/oper speed and mode (e.g., N-port proxy/F/E).
+- **Fabric context:** Includes VSAN association and breakout/aggregate port membership where applicable.
+- **Topology correlation:** Links to FC neighbor information for adjacency visibility.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,32 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_block_lease"
 description: |-
-        BlockLease represents an IP address that is allocated from a pool to a specific entity like server profile.
+        BlockLeases represent an IP address allocation record issued from an IP pool to a specific consuming entity (for example, a server profile). The object acts as the “holder” for an allocated address (or block context) and provides the correlation points needed to track which universe/VRF scope the address belongs to and which entity currently owns it.
+        #### Purpose
+        Track and manage IP allocations at the block level so the system can enforce uniqueness, associate the allocation with the correct IP universe and VRF scope, and relate the allocation to the set of underlying IP lease objects.
+        #### Key Concepts
+        - **Pool-based allocation record**: Represents an IP address allocated from a pool for use by a specific consumer.
+        - **Universe-scoped bookkeeping**: The `universe` relationship anchors the allocation in the IP Universe (with cascade on universe deletion) and is used for permission inheritance.
+        - **VRF-scoped allocation**: `vrf` is `createonly`, ensuring the routing context for the allocation is fixed at creation time.
+        - **Ownership correlation**: `assignedToEntity` links the allocation to the consuming managed object (e.g., server profile) for traceability and lifecycle management.
+        - **Lease grouping**: `ipLeases` provides a collection of related `IpLease` objects, enabling a single block-level record to reference one or more concrete lease entries.
+        - **System-managed lifecycle**: While users can READ, CREATE/UPDATE/DELETE are system API methods, reflecting that allocations are typically created/managed by internal workflows rather than directly by end users.
+        - **Allocation intent detail**: `ipType` indicates the type of IP address requested (e.g., IPv4/IPv6 or other model-defined types).
 
 ---
 
 # Data Source: intersight_ippool_block_lease
-BlockLease represents an IP address that is allocated from a pool to a specific entity like server profile.
+BlockLeases represent an IP address allocation record issued from an IP pool to a specific consuming entity (for example, a server profile). The object acts as the “holder” for an allocated address (or block context) and provides the correlation points needed to track which universe/VRF scope the address belongs to and which entity currently owns it.
+#### Purpose
+Track and manage IP allocations at the block level so the system can enforce uniqueness, associate the allocation with the correct IP universe and VRF scope, and relate the allocation to the set of underlying IP lease objects.
+#### Key Concepts
+- **Pool-based allocation record**: Represents an IP address allocated from a pool for use by a specific consumer.
+- **Universe-scoped bookkeeping**: The `universe` relationship anchors the allocation in the IP Universe (with cascade on universe deletion) and is used for permission inheritance.
+- **VRF-scoped allocation**: `vrf` is `createonly`, ensuring the routing context for the allocation is fixed at creation time.
+- **Ownership correlation**: `assignedToEntity` links the allocation to the consuming managed object (e.g., server profile) for traceability and lifecycle management.
+- **Lease grouping**: `ipLeases` provides a collection of related `IpLease` objects, enabling a single block-level record to reference one or more concrete lease entries.
+- **System-managed lifecycle**: While users can READ, CREATE/UPDATE/DELETE are system API methods, reflecting that allocations are typically created/managed by internal workflows rather than directly by end users.
+- **Allocation intent detail**: `ipType` indicates the type of IP address requested (e.g., IPv4/IPv6 or other model-defined types).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

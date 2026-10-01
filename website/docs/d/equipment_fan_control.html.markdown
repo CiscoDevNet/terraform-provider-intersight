@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fan_control"
 description: |-
-        This represents the states of Fan equipment.
+        FanControls represent the active fan control settings for equipment (typically a chassis). They capture the currently effective fan control mode in the endpoint, such as Balanced, LowPower, MaximumPower, etc.
+        #### Purpose
+        Expose the currently applied thermal management policy so administrators can verify the fan mode in effect and correlate cooling behavior with power/acoustics objectives.
+        
+        #### Key Concepts
+        - **Thermal policy inventory:** Reports the active fan control mode configured on the endpoint.
+        - **Verification of applied state:** Reflects what is currently in effect, not an intent/policy object.
+        - **Chassis-level scope:** Typically associated with a chassis and inherits chassis permissions.
 
 ---
 
 # Data Source: intersight_equipment_fan_control
-This represents the states of Fan equipment.
+FanControls represent the active fan control settings for equipment (typically a chassis). They capture the currently effective fan control mode in the endpoint, such as Balanced, LowPower, MaximumPower, etc.
+ #### Purpose
+ Expose the currently applied thermal management policy so administrators can verify the fan mode in effect and correlate cooling behavior with power/acoustics objectives.
+ 
+ #### Key Concepts
+ - **Thermal policy inventory:** Reports the active fan control mode configured on the endpoint.
+ - **Verification of applied state:** Reflects what is currently in effect, not an intent/policy object.
+ - **Chassis-level scope:** Typically associated with a chassis and inherits chassis permissions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

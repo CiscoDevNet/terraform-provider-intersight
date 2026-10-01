@@ -3,12 +3,26 @@ subcategory: "graphics"
 layout: "intersight"
 page_title: "Intersight: intersight_graphics_card"
 description: |-
-        Graphics Card present in a server.
+        Cards (graphics) represent graphics cards present in a server. They provide inventory for the GPU card as a whole and expose properties such as PCI addressing, firmware version, operational state, and platform support indicators.
+        #### Purpose
+        Inventory GPU card hardware in servers and provide a parent container for one or more GPU controller components on the card.
+        #### Key Concepts
+        - **Server GPU hardware inventory:** Represents the installed graphics card assembly.
+        - **PCI identity and placement:** Captures PCI address and slot identification for correlation and troubleshooting.
+        - **Operational state and health:** Supports monitoring and fault analysis via state and health indicators.
+        - **Controller hierarchy:** Acts as a container for one or more `graphics.Controller` objects representing controllers/GPUs under the card.
 
 ---
 
 # Data Source: intersight_graphics_card
-Graphics Card present in a server.
+Cards (graphics) represent graphics cards present in a server. They provide inventory for the GPU card as a whole and expose properties such as PCI addressing, firmware version, operational state, and platform support indicators.
+#### Purpose
+Inventory GPU card hardware in servers and provide a parent container for one or more GPU controller components on the card.
+#### Key Concepts
+- **Server GPU hardware inventory:** Represents the installed graphics card assembly.
+- **PCI identity and placement:** Captures PCI address and slot identification for correlation and troubleshooting.
+- **Operational state and health:** Supports monitoring and fault analysis via state and health indicators.
+- **Controller hierarchy:** Acts as a container for one or more `graphics.Controller` objects representing controllers/GPUs under the card.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

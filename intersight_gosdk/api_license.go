@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -604,6 +604,8 @@ CreateLicenseIwoLicenseCount Create a 'license.IwoLicenseCount' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateLicenseIwoLicenseCountRequest
+
+Deprecated
 */
 func (a *LicenseApiService) CreateLicenseIwoLicenseCount(ctx context.Context) ApiCreateLicenseIwoLicenseCountRequest {
 	return ApiCreateLicenseIwoLicenseCountRequest{
@@ -615,6 +617,8 @@ func (a *LicenseApiService) CreateLicenseIwoLicenseCount(ctx context.Context) Ap
 // Execute executes the request
 //
 //	@return LicenseIwoLicenseCount
+//
+// Deprecated
 func (a *LicenseApiService) CreateLicenseIwoLicenseCountExecute(r ApiCreateLicenseIwoLicenseCountRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4848,6 +4852,8 @@ GetLicenseIwoCustomerOpByMoid Read a 'license.IwoCustomerOp' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetLicenseIwoCustomerOpByMoidRequest
+
+Deprecated
 */
 func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoid(ctx context.Context, moid string) ApiGetLicenseIwoCustomerOpByMoidRequest {
 	return ApiGetLicenseIwoCustomerOpByMoidRequest{
@@ -4860,6 +4866,8 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoid(ctx context.Context, m
 // Execute executes the request
 //
 //	@return LicenseIwoCustomerOp
+//
+// Deprecated
 func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoidExecute(r ApiGetLicenseIwoCustomerOpByMoidRequest) (*LicenseIwoCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5089,6 +5097,8 @@ GetLicenseIwoCustomerOpList Read a 'license.IwoCustomerOp' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetLicenseIwoCustomerOpListRequest
+
+Deprecated
 */
 func (a *LicenseApiService) GetLicenseIwoCustomerOpList(ctx context.Context) ApiGetLicenseIwoCustomerOpListRequest {
 	return ApiGetLicenseIwoCustomerOpListRequest{
@@ -5100,6 +5110,8 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpList(ctx context.Context) Api
 // Execute executes the request
 //
 //	@return LicenseIwoCustomerOpResponse
+//
+// Deprecated
 func (a *LicenseApiService) GetLicenseIwoCustomerOpListExecute(r ApiGetLicenseIwoCustomerOpListRequest) (*LicenseIwoCustomerOpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5310,6 +5322,8 @@ GetLicenseIwoLicenseCountByMoid Read a 'license.IwoLicenseCount' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetLicenseIwoLicenseCountByMoidRequest
+
+Deprecated
 */
 func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoid(ctx context.Context, moid string) ApiGetLicenseIwoLicenseCountByMoidRequest {
 	return ApiGetLicenseIwoLicenseCountByMoidRequest{
@@ -5322,6 +5336,8 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoid(ctx context.Context,
 // Execute executes the request
 //
 //	@return LicenseIwoLicenseCount
+//
+// Deprecated
 func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoidExecute(r ApiGetLicenseIwoLicenseCountByMoidRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5551,6 +5567,8 @@ GetLicenseIwoLicenseCountList Read a 'license.IwoLicenseCount' resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetLicenseIwoLicenseCountListRequest
+
+Deprecated
 */
 func (a *LicenseApiService) GetLicenseIwoLicenseCountList(ctx context.Context) ApiGetLicenseIwoLicenseCountListRequest {
 	return ApiGetLicenseIwoLicenseCountListRequest{
@@ -5562,6 +5580,8 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountList(ctx context.Context) A
 // Execute executes the request
 //
 //	@return LicenseIwoLicenseCountResponse
+//
+// Deprecated
 func (a *LicenseApiService) GetLicenseIwoLicenseCountListExecute(r ApiGetLicenseIwoLicenseCountListRequest) (*LicenseIwoLicenseCountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9307,6 +9327,8 @@ PatchLicenseIwoCustomerOp Update a 'license.IwoCustomerOp' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiPatchLicenseIwoCustomerOpRequest
+
+Deprecated
 */
 func (a *LicenseApiService) PatchLicenseIwoCustomerOp(ctx context.Context, moid string) ApiPatchLicenseIwoCustomerOpRequest {
 	return ApiPatchLicenseIwoCustomerOpRequest{
@@ -9319,6 +9341,8 @@ func (a *LicenseApiService) PatchLicenseIwoCustomerOp(ctx context.Context, moid 
 // Execute executes the request
 //
 //	@return LicenseIwoCustomerOp
+//
+// Deprecated
 func (a *LicenseApiService) PatchLicenseIwoCustomerOpExecute(r ApiPatchLicenseIwoCustomerOpRequest) (*LicenseIwoCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -9483,6 +9507,8 @@ PatchLicenseIwoLicenseCount Update a 'license.IwoLicenseCount' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiPatchLicenseIwoLicenseCountRequest
+
+Deprecated
 */
 func (a *LicenseApiService) PatchLicenseIwoLicenseCount(ctx context.Context, moid string) ApiPatchLicenseIwoLicenseCountRequest {
 	return ApiPatchLicenseIwoLicenseCountRequest{
@@ -9495,6 +9521,8 @@ func (a *LicenseApiService) PatchLicenseIwoLicenseCount(ctx context.Context, moi
 // Execute executes the request
 //
 //	@return LicenseIwoLicenseCount
+//
+// Deprecated
 func (a *LicenseApiService) PatchLicenseIwoLicenseCountExecute(r ApiPatchLicenseIwoLicenseCountRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11595,6 +11623,8 @@ UpdateLicenseIwoCustomerOp Update a 'license.IwoCustomerOp' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiUpdateLicenseIwoCustomerOpRequest
+
+Deprecated
 */
 func (a *LicenseApiService) UpdateLicenseIwoCustomerOp(ctx context.Context, moid string) ApiUpdateLicenseIwoCustomerOpRequest {
 	return ApiUpdateLicenseIwoCustomerOpRequest{
@@ -11607,6 +11637,8 @@ func (a *LicenseApiService) UpdateLicenseIwoCustomerOp(ctx context.Context, moid
 // Execute executes the request
 //
 //	@return LicenseIwoCustomerOp
+//
+// Deprecated
 func (a *LicenseApiService) UpdateLicenseIwoCustomerOpExecute(r ApiUpdateLicenseIwoCustomerOpRequest) (*LicenseIwoCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -11771,6 +11803,8 @@ UpdateLicenseIwoLicenseCount Update a 'license.IwoLicenseCount' resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiUpdateLicenseIwoLicenseCountRequest
+
+Deprecated
 */
 func (a *LicenseApiService) UpdateLicenseIwoLicenseCount(ctx context.Context, moid string) ApiUpdateLicenseIwoLicenseCountRequest {
 	return ApiUpdateLicenseIwoLicenseCountRequest{
@@ -11783,6 +11817,8 @@ func (a *LicenseApiService) UpdateLicenseIwoLicenseCount(ctx context.Context, mo
 // Execute executes the request
 //
 //	@return LicenseIwoLicenseCount
+//
+// Deprecated
 func (a *LicenseApiService) UpdateLicenseIwoLicenseCountExecute(r ApiUpdateLicenseIwoLicenseCountRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

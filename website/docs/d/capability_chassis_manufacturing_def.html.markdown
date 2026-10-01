@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_chassis_manufacturing_def"
 description: |-
-        Chassis enclosure manufacturing def properties.
+        The ChassisManufacturingDef object represents manufacturing and product-identification metadata for a chassis platform in the capability catalog.
+        #### Purpose
+        This standardizes chassis product identity fields (such as PID/SKU and descriptive metadata) so management and UI layers can consistently render chassis identity and correlate discovered inventory to catalog-backed platform definitions.
+        #### Key Concepts
+        - **Catalog-backed identity:** Links physical chassis inventory to a known definition in the capability catalog.
+        - **Consistent labeling:** Provides canonical naming/description fields used across views and workflows.
+        - **Platform classification:** Enables downstream logic that depends on chassis platform characteristics.
+        - **Lifecycle portability:** Keeps “what this chassis is” independent from “where it is deployed.
 
 ---
 
 # Data Source: intersight_capability_chassis_manufacturing_def
-Chassis enclosure manufacturing def properties.
+The ChassisManufacturingDef object represents manufacturing and product-identification metadata for a chassis platform in the capability catalog.
+#### Purpose
+This standardizes chassis product identity fields (such as PID/SKU and descriptive metadata) so management and UI layers can consistently render chassis identity and correlate discovered inventory to catalog-backed platform definitions.
+#### Key Concepts
+- **Catalog-backed identity:** Links physical chassis inventory to a known definition in the capability catalog.
+- **Consistent labeling:** Provides canonical naming/description fields used across views and workflows.
+- **Platform classification:** Enables downstream logic that depends on chassis platform characteristics.
+- **Lifecycle portability:** Keeps “what this chassis is” independent from “where it is deployed.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

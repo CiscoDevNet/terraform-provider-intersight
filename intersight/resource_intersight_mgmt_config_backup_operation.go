@@ -448,6 +448,17 @@ func resourceMgmtConfigBackupOperation() *schema.Resource {
 					}
 					return
 				}},
+			"is_user_password_set": {
+				Description: "Indicates whether the value of the 'userPassword' property has been set.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -893,7 +904,6 @@ func resourceMgmtConfigBackupOperation() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9=!&#$%+^@_*-]{8,127}$"), ""),
 				Optional:     true,
-				ForceNew:     true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -1459,7 +1469,7 @@ func resourceMgmtConfigBackupOperationCreate(c context.Context, d *schema.Resour
 		}
 	}
 
-	if v, ok := d.GetOkExists("user_password"); ok {
+	if v, ok := d.GetOk("user_password"); ok {
 		x := (v.(string))
 		o.SetUserPassword(x)
 	}
@@ -1619,6 +1629,10 @@ func resourceMgmtConfigBackupOperationRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property IsAesKeySet in MgmtConfigBackupOperation object: %s", err.Error())
 	}
 
+	if err := d.Set("is_user_password_set", (s.GetIsUserPasswordSet())); err != nil {
+		return diag.Errorf("error occurred while setting property IsUserPasswordSet in MgmtConfigBackupOperation object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in MgmtConfigBackupOperation object: %s", err.Error())
 	}
@@ -1685,10 +1699,6 @@ func resourceMgmtConfigBackupOperationRead(c context.Context, d *schema.Resource
 
 	if err := d.Set("user_backup_file", flattenMapMgmtConfigBackupFileRelationship(s.GetUserBackupFile(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property UserBackupFile in MgmtConfigBackupOperation object: %s", err.Error())
-	}
-
-	if err := d.Set("user_password", (s.GetUserPassword())); err != nil {
-		return diag.Errorf("error occurred while setting property UserPassword in MgmtConfigBackupOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {

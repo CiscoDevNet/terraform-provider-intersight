@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **OauthTokens** | Pointer to [**[]IamOAuthTokenRelationship**](IamOAuthTokenRelationship.md) | An array of relationships to iamOAuthToken resources. | [optional] [readonly] 
 **Permissions** | Pointer to [**[]IamPermissionRelationship**](IamPermissionRelationship.md) | An array of relationships to iamPermission resources. | [optional] 
 **Sessions** | Pointer to [**[]IamSessionRelationship**](IamSessionRelationship.md) | An array of relationships to iamSession resources. | [optional] [readonly] 
+**UserGroupMemberships** | Pointer to [**[]IamUserGroupMembershipRelationship**](IamUserGroupMembershipRelationship.md) | An array of relationships to iamUserGroupMembership resources. | [optional] [readonly] 
 **Usergroup** | Pointer to [**[]IamUserGroupRelationship**](IamUserGroupRelationship.md) | An array of relationships to iamUserGroup resources. | [optional] [readonly] 
 
 ## Methods
@@ -667,6 +668,41 @@ HasSessions returns a boolean if a field has been set.
 `func (o *IamUser) UnsetSessions()`
 
 UnsetSessions ensures that no value is present for Sessions, not even an explicit nil
+### GetUserGroupMemberships
+
+`func (o *IamUser) GetUserGroupMemberships() []IamUserGroupMembershipRelationship`
+
+GetUserGroupMemberships returns the UserGroupMemberships field if non-nil, zero value otherwise.
+
+### GetUserGroupMembershipsOk
+
+`func (o *IamUser) GetUserGroupMembershipsOk() (*[]IamUserGroupMembershipRelationship, bool)`
+
+GetUserGroupMembershipsOk returns a tuple with the UserGroupMemberships field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserGroupMemberships
+
+`func (o *IamUser) SetUserGroupMemberships(v []IamUserGroupMembershipRelationship)`
+
+SetUserGroupMemberships sets UserGroupMemberships field to given value.
+
+### HasUserGroupMemberships
+
+`func (o *IamUser) HasUserGroupMemberships() bool`
+
+HasUserGroupMemberships returns a boolean if a field has been set.
+
+### SetUserGroupMembershipsNil
+
+`func (o *IamUser) SetUserGroupMembershipsNil(b bool)`
+
+ SetUserGroupMembershipsNil sets the value for UserGroupMemberships to be an explicit nil
+
+### UnsetUserGroupMemberships
+`func (o *IamUser) UnsetUserGroupMemberships()`
+
+UnsetUserGroupMemberships ensures that no value is present for UserGroupMemberships, not even an explicit nil
 ### GetUsergroup
 
 `func (o *IamUser) GetUsergroup() []IamUserGroupRelationship`

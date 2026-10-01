@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_storage_controller_update_constraint_meta"
 description: |-
-        Internal meta-data to enable storage controller update related constraints.
+        The StorageControllerUpdateConstraintMeta object provides internal metadata to enforce update-related constraints for storage controllers.
+        #### Purpose
+        It ensures that storage controller firmware updates are validated against supported versions and models, preventing configuration drifts or failures.
+        #### Key Concepts
+        - **Update Validation:** Sets minimum version requirements for storage controller firmware.
+        - **Model-Specific Rules:** Enforces constraints tailored to specific controller models.
 
 ---
 
 # Data Source: intersight_capability_storage_controller_update_constraint_meta
-Internal meta-data to enable storage controller update related constraints.
+The StorageControllerUpdateConstraintMeta object provides internal metadata to enforce update-related constraints for storage controllers.
+#### Purpose
+It ensures that storage controller firmware updates are validated against supported versions and models, preventing configuration drifts or failures.
+#### Key Concepts
+- **Update Validation:** Sets minimum version requirements for storage controller firmware.
+- **Model-Specific Rules:** Enforces constraints tailored to specific controller models.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

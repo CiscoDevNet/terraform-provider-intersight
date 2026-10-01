@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_license_reservation_op"
 description: |-
-        Customer operation object to request reservation code.
+        LicenseReservationOps supports license reservation lifecycle operations for Private Virtual Appliance deployments, including request code generation, authorization code installation, and return/confirmation code generation.
+        #### Purpose
+        Provides an operational interface for reserving licenses and completing the associated code-based exchange flows with external smart licensing systems.
+        #### Key Concepts
+        - **Reservation lifecycle control:** Supports request, install, return, and confirm steps via explicit operation triggers.
+        - **Code exchange model:** Manages request/auth/return/confirm codes used in reservation workflows.
+        - **Operational intent signals:** Boolean flags trigger backend generation actions (e.g., generate request/return code).
+        - **Account relationship:** Scoped to an account for ownership and privilege enforcement.
 
 ---
 
 # Resource: intersight_license_license_reservation_op
-Customer operation object to request reservation code.
+LicenseReservationOps supports license reservation lifecycle operations for Private Virtual Appliance deployments, including request code generation, authorization code installation, and return/confirmation code generation.
+#### Purpose
+Provides an operational interface for reserving licenses and completing the associated code-based exchange flows with external smart licensing systems.
+#### Key Concepts
+- **Reservation lifecycle control:** Supports request, install, return, and confirm steps via explicit operation triggers.
+- **Code exchange model:** Manages request/auth/return/confirm codes used in reservation workflows.
+- **Operational intent signals:** Boolean flags trigger backend generation actions (e.g., generate request/return code).
+- **Account relationship:** Scoped to an account for ownership and privilege enforcement.
 ## Usage Example
 ### Resource Creation
 

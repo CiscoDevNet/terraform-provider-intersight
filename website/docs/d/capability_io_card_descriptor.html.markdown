@@ -3,12 +3,32 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_io_card_descriptor"
 description: |-
-        Descriptor that uniquely identifies an IO card module.
+        IoCardDescriptors are capability-catalog hardware descriptors that uniquely identify an IO card module and describe key connectivity and behavior characteristics needed for platform compatibility and topology modeling. Beyond basic vendor/model/version/revision identity, they capture host-port counts, bifurcation details, UIF connectivity, native-speed behavior, and policy applicability.
+        #### Purpose
+        Provide a canonical, capability-aware catalog entry for IO card modules so the platform can determine how a given IO card should be modeled, connected, and constrained in supported configurations.
+        #### Key Concepts
+        - **Extended hardware identity**: Identity includes `vendor`, `model`, `version`, `revision`, `numHifPorts`, `uifConnectivity`, and `section`, reflecting that connectivity characteristics are part of what makes an IO card variant unique.
+        - **Host interface topology**: `numHifPorts` describes host-interface port count per blade, which is important for connectivity planning and validation.
+        - **Port mapping/bifurcation behavior**: `bifPortNum` and `uifConnectivity` model how uplink/UIF ports relate to IOM ports and how the card’s connectivity is structured.
+        - **Native-speed behavior**: `nativeSpeedMasterPortNum` and `nativeHifPortChannelRequired` describe how native-speed configurations should be anchored and whether host port-channeling is required.
+        - **Platform-specific classification**: `isUcsxDirectIoCard` indicates whether the IO card belongs to a UCS X Direct chassis context.
+        - **Policy applicability constraints**: `unsupportedPolicies` lists policies that do not apply to the IO card, enabling validation and UI/workflow guardrails.
+        - **Section-scoped catalog control**: Inherits permissions from `section`, with CRUD reserved for `CapabilityCatalog Administrator`.
 
 ---
 
 # Data Source: intersight_capability_io_card_descriptor
-Descriptor that uniquely identifies an IO card module.
+IoCardDescriptors are capability-catalog hardware descriptors that uniquely identify an IO card module and describe key connectivity and behavior characteristics needed for platform compatibility and topology modeling. Beyond basic vendor/model/version/revision identity, they capture host-port counts, bifurcation details, UIF connectivity, native-speed behavior, and policy applicability.
+#### Purpose
+Provide a canonical, capability-aware catalog entry for IO card modules so the platform can determine how a given IO card should be modeled, connected, and constrained in supported configurations.
+#### Key Concepts
+- **Extended hardware identity**: Identity includes `vendor`, `model`, `version`, `revision`, `numHifPorts`, `uifConnectivity`, and `section`, reflecting that connectivity characteristics are part of what makes an IO card variant unique.
+- **Host interface topology**: `numHifPorts` describes host-interface port count per blade, which is important for connectivity planning and validation.
+- **Port mapping/bifurcation behavior**: `bifPortNum` and `uifConnectivity` model how uplink/UIF ports relate to IOM ports and how the card’s connectivity is structured.
+- **Native-speed behavior**: `nativeSpeedMasterPortNum` and `nativeHifPortChannelRequired` describe how native-speed configurations should be anchored and whether host port-channeling is required.
+- **Platform-specific classification**: `isUcsxDirectIoCard` indicates whether the IO card belongs to a UCS X Direct chassis context.
+- **Policy applicability constraints**: `unsupportedPolicies` lists policies that do not apply to the IO card, enabling validation and UI/workflow guardrails.
+- **Section-scoped catalog control**: Inherits permissions from `section`, with CRUD reserved for `CapabilityCatalog Administrator`.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

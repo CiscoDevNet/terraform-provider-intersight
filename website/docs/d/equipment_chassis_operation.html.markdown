@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_chassis_operation"
 description: |-
-        Models the configurable properties of Chassis.
+        The ChassisOperation object models operational actions that can be executed on a chassis (for example, chassis locator LED actions and slot power-cycle/reset operations), with workflow-backed status tracking.
+        #### Purpose
+        ChassisOperation provides a controlled API surface for chassis-level maintenance operations and exposes their execution state. It enables administrators to trigger targeted operational actions on chassis components while tracking progress and outcomes in a consistent way.
+        #### Key Concepts
+        - **Operational control surface:** Represents “do” actions on a chassis rather than steady-state configuration intent.
+        - **Workflow-backed state tracking:** Uses configuration state/status to reflect operation progress and outcome.
+        - **Targeted maintenance operations:** Supports chassis-level actions such as locator LED control and slot-level power operations.
+        - **Privilege-gated behavior:** Operational actions are controlled through explicit privileges to reduce risk.
 
 ---
 
 # Data Source: intersight_equipment_chassis_operation
-Models the configurable properties of Chassis.
+The ChassisOperation object models operational actions that can be executed on a chassis (for example, chassis locator LED actions and slot power-cycle/reset operations), with workflow-backed status tracking.
+#### Purpose
+ChassisOperation provides a controlled API surface for chassis-level maintenance operations and exposes their execution state. It enables administrators to trigger targeted operational actions on chassis components while tracking progress and outcomes in a consistent way.
+#### Key Concepts
+- **Operational control surface:** Represents “do” actions on a chassis rather than steady-state configuration intent.
+- **Workflow-backed state tracking:** Uses configuration state/status to reflect operation progress and outcome.
+- **Targeted maintenance operations:** Supports chassis-level actions such as locator LED control and slot-level power operations.
+- **Privilege-gated behavior:** Operational actions are controlled through explicit privileges to reduce risk.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

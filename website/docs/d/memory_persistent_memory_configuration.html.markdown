@@ -3,12 +3,24 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_configuration"
 description: |-
-        Persistent Memory configuration on all the Persistent Memory Modules on a server.
+        PersistentMemoryConfigurations represent the aggregate configuration state of all persistent memory modules on a server, including capacity breakdown, security state, and region/namespace relationships.
+        #### Purpose
+        Provide a server-level view of PMem configuration posture and the associated regions/namespaces and config result records.
+        #### Key Concepts
+        - **Aggregate PMem configuration:** Summarizes capacities and security state across modules.
+        - **Region and namespace hierarchy:** Links to regions and results for detailed structure.
+        - **Audit and verification:** Enables checking whether the server’s PMem layout matches expectations.
 
 ---
 
 # Data Source: intersight_memory_persistent_memory_configuration
-Persistent Memory configuration on all the Persistent Memory Modules on a server.
+PersistentMemoryConfigurations represent the aggregate configuration state of all persistent memory modules on a server, including capacity breakdown, security state, and region/namespace relationships.
+#### Purpose
+Provide a server-level view of PMem configuration posture and the associated regions/namespaces and config result records.
+#### Key Concepts
+- **Aggregate PMem configuration:** Summarizes capacities and security state across modules.
+- **Region and namespace hierarchy:** Links to regions and results for detailed structure.
+- **Audit and verification:** Enables checking whether the server’s PMem layout matches expectations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

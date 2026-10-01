@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_flash_controller_props"
 description: |-
-        Flex flash controller properties.
+        FlexFlashControllerProps represent detailed controller properties for FlexFlash controllers, including names, firmware versions, modes, counts, and internal state.
+        #### Purpose
+        Provide extended property inventory for FlexFlash controllers to support diagnostics and operational understanding.
+        #### Key Concepts
+        - **Extended telemetry:** Captures detailed status/mode/firmware fields beyond the base controller object.
+        - **Operational characterization:** Provides controller and internal state indicators and manageable card counts.
+        - **Inventory organization:** Typically queried alongside FlexFlashController for a fuller picture.
 
 ---
 
 # Data Source: intersight_storage_flex_flash_controller_props
-Flex flash controller properties.
+FlexFlashControllerProps represent detailed controller properties for FlexFlash controllers, including names, firmware versions, modes, counts, and internal state.
+#### Purpose
+Provide extended property inventory for FlexFlash controllers to support diagnostics and operational understanding.
+#### Key Concepts
+- **Extended telemetry:** Captures detailed status/mode/firmware fields beyond the base controller object.
+- **Operational characterization:** Provides controller and internal state indicators and manageable card counts.
+- **Inventory organization:** Typically queried alongside FlexFlashController for a fuller picture.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

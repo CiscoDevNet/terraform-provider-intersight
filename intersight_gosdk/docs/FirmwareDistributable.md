@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **FileLocation** | Pointer to **string** | The file location of the distributable. | [optional] 
 **ImageCategory** | Pointer to **string** | The category into which the distributable falls into according to the supported platform series. For e.g.; C-Series/B-Series/Infrastructure. | [optional] 
 **IsBeta** | Pointer to **bool** | Whether this distributable is a beta image and participates in OData filtering so callers can explicitly query beta or non-beta firmware images. | [optional] [default to false]
-**Origin** | Pointer to **string** | The source of the distributable. If it has been created by the user or system. * &#x60;System&#x60; - The distributable has been created by the System. * &#x60;User&#x60; - The distributable has been created by the User. | [optional] [default to "System"]
+**Origin** | Pointer to **string** | The Distributables object represents firmware or software images distributed by Cisco for system components. #### Purpose It manages the lifecycle of distributable images, from download and caching to installation and verification on target endpoints. #### Key Concepts - **Image Distribution:** Provides a standardized way to manage images for various hardware components. - **Lifecycle Management:** Orchestrates the download, staging, and installation of firmware images. - **Compatibility:** Ensures that the correct image is applied to the appropriate hardware model. * &#x60;System&#x60; - The distributable has been created by the System. * &#x60;User&#x60; - The distributable has been created by the User. | [optional] [default to "System"]
 **Catalog** | Pointer to [**NullableSoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
 
 ## Methods

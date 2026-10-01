@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_dimm_descriptor"
 description: |-
-        Descriptor to uniquely identify a DIMM.
+        The DimmDescriptors object provides internal metadata to uniquely identify Dual In-line Memory Module (DIMM) components.
+        #### Purpose
+        It supports inventory and compatibility management for memory modules, ensuring that installed DIMMs are correctly identified and validated.
+        #### Key Concepts
+        - **Component Identification:** Uniquely identifies DIMMs using vendor, model, and revision information.
+        - **Hardware Inventory:** Facilitates accurate tracking of memory hardware within the system.
 
 ---
 
 # Data Source: intersight_firmware_dimm_descriptor
-Descriptor to uniquely identify a DIMM.
+The DimmDescriptors object provides internal metadata to uniquely identify Dual In-line Memory Module (DIMM) components.
+#### Purpose
+It supports inventory and compatibility management for memory modules, ensuring that installed DIMMs are correctly identified and validated.
+#### Key Concepts
+- **Component Identification:** Uniquely identifies DIMMs using vendor, model, and revision information.
+- **Hardware Inventory:** Facilitates accurate tracking of memory hardware within the system.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

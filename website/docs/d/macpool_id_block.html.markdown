@@ -3,12 +3,26 @@ subcategory: "macpool"
 layout: "intersight"
 page_title: "Intersight: intersight_macpool_id_block"
 description: |-
-        A block of contiguous MAC addresses that are part of a pool.
+        IdBlocks represent contiguous blocks of MAC addresses that belong to a specific MAC pool. They act as the pool’s concrete address supply, defining the exact from/to range that can be allocated, reserved, and tracked.
+        #### Purpose
+        Provide a manageable, queryable block construct for MAC pools so the system can allocate MACs efficiently, validate uniqueness, and correlate pool membership and reservations back to a specific contiguous range.
+        #### Key Concepts
+        - **Contiguous range definition**: Each IdBlock encapsulates a `macBlock` (with `from` and `to`) describing the MAC range.
+        - **Pool-scoped supply**: Blocks are correlated to a pool (index on `pool.Moid`) and are the source of addresses for leases and pool members.
+        - **Uniqueness and lookup**: Indexing on `macBlock.From`/`macBlock.To` supports fast range queries and uniqueness checks.
+        - **Permission inheritance**: Inherits permissions from the associated `pool`, aligning access control with pool ownership.
 
 ---
 
 # Data Source: intersight_macpool_id_block
-A block of contiguous MAC addresses that are part of a pool.
+IdBlocks represent contiguous blocks of MAC addresses that belong to a specific MAC pool. They act as the pool’s concrete address supply, defining the exact from/to range that can be allocated, reserved, and tracked.
+#### Purpose
+Provide a manageable, queryable block construct for MAC pools so the system can allocate MACs efficiently, validate uniqueness, and correlate pool membership and reservations back to a specific contiguous range.
+#### Key Concepts
+- **Contiguous range definition**: Each IdBlock encapsulates a `macBlock` (with `from` and `to`) describing the MAC range.
+- **Pool-scoped supply**: Blocks are correlated to a pool (index on `pool.Moid`) and are the source of addresses for leases and pool members.
+- **Uniqueness and lookup**: Indexing on `macBlock.From`/`macBlock.To` supports fast range queries and uniqueness checks.
+- **Permission inheritance**: Inherits permissions from the associated `pool`, aligning access control with pool ownership.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

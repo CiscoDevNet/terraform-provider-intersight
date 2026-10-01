@@ -3,12 +3,26 @@ subcategory: "monitoring"
 layout: "intersight"
 page_title: "Intersight: intersight_monitoring_health_status"
 description: |-
-        High level, aggregated status of Intersight components for a given Intersight account user. Meant to inform the user if there's an issue with Intersight components that needs her attention. At this point, Aggregated status is reported for 'Licensing', 'Advisories' and 'Alarms' components. Specifically designed to be easily consumed by external dashboards to display an at-a-glance status of Intersight components. This conforms to the health data API schema published as part of Cisco PlatformSuite.
+        HealthStatus provides a high-level, aggregated view of overall Intersight component health for a given Intersight account user. It is designed to quickly indicate whether there are issues that require user attention, and to be easily consumed by external dashboards for an at-a-glance status display. The model conforms to the health data API schema published as part of Cisco PlatformSuite.
+        #### Purpose
+        Expose a single, dashboard-friendly health signal summarizing key Intersight categories—currently including **Licensing**, **Advisories**, and **Alarms**—so users and external monitoring systems can detect account-impacting conditions without querying multiple feature-specific APIs.
+        #### Key Concepts
+        - **Category-based aggregation**: `categoryStatus` provides a list of health categories (e.g., Advisories, Licensing, Alarms) with their individual statuses and supporting details.
+        - **Schema compliance**: `healthDataSchemaVersion` identifies the version of the PlatformSuite-compliant health schema the response adheres to.
+        - **Multi-source federation**: `source` is set to `Intersight` to enable external dashboards to combine health signals from multiple platforms (for example, Intersight and other Cisco sources) while preserving attribution.
+        - **Near-real-time reporting**: `statusTimeStamp` indicates when the health summary was generated; consumers should account for a potential lag of up to ~5 minutes versus real-time state.
 
 ---
 
 # Data Source: intersight_monitoring_health_status
-High level, aggregated status of Intersight components for a given Intersight account user. Meant to inform the user if there's an issue with Intersight components that needs her attention. At this point, Aggregated status is reported for 'Licensing', 'Advisories' and 'Alarms' components. Specifically designed to be easily consumed by external dashboards to display an at-a-glance status of Intersight components. This conforms to the health data API schema published as part of Cisco PlatformSuite.
+HealthStatus provides a high-level, aggregated view of overall Intersight component health for a given Intersight account user. It is designed to quickly indicate whether there are issues that require user attention, and to be easily consumed by external dashboards for an at-a-glance status display. The model conforms to the health data API schema published as part of Cisco PlatformSuite.
+  #### Purpose
+  Expose a single, dashboard-friendly health signal summarizing key Intersight categories—currently including **Licensing**, **Advisories**, and **Alarms**—so users and external monitoring systems can detect account-impacting conditions without querying multiple feature-specific APIs.
+  #### Key Concepts
+  - **Category-based aggregation**: `categoryStatus` provides a list of health categories (e.g., Advisories, Licensing, Alarms) with their individual statuses and supporting details.
+  - **Schema compliance**: `healthDataSchemaVersion` identifies the version of the PlatformSuite-compliant health schema the response adheres to.
+  - **Multi-source federation**: `source` is set to `Intersight` to enable external dashboards to combine health signals from multiple platforms (for example, Intersight and other Cisco sources) while preserving attribution.
+  - **Near-real-time reporting**: `statusTimeStamp` indicates when the health summary was generated; consumers should account for a potential lag of up to ~5 minutes versus real-time state.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

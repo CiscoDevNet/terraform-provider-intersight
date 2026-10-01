@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_switch_upgrade_support_meta"
 description: |-
-        Internal meta-data to enable block domain upgrade/downgrade when certain components are connected.
+        The SwitchUpgradeSupportMeta object provides internal metadata to manage firmware upgrade and downgrade constraints for Fabric Interconnect components.
+        #### Purpose
+        It prevents incompatible firmware operations by defining version boundaries (min/max) for specific switch components.
+        #### Key Concepts
+        - **Version Boundaries:** Defines the minimum and maximum Fabric Interconnect versions supported for specific components.
+        - **Component Compatibility:** Ensures that switch components are upgraded only within supported version ranges.
 
 ---
 
 # Data Source: intersight_capability_switch_upgrade_support_meta
-Internal meta-data to enable block domain upgrade/downgrade when certain components are connected.
+The SwitchUpgradeSupportMeta object provides internal metadata to manage firmware upgrade and downgrade constraints for Fabric Interconnect components.
+#### Purpose
+It prevents incompatible firmware operations by defining version boundaries (min/max) for specific switch components.
+#### Key Concepts
+- **Version Boundaries:** Defines the minimum and maximum Fabric Interconnect versions supported for specific components.
+- **Component Compatibility:** Ensures that switch components are upgraded only within supported version ranges.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

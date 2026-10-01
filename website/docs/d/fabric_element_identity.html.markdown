@@ -3,12 +3,28 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_element_identity"
 description: |-
-        Identity object that uniquely represents a network element object under the domain.
+        ElementIdentities uniquely represent network element identity within a fabric domain. They serve as the canonical identity object for a network element (such as a Fabric Interconnect) and are used to correlate the element across discovery, inventory, and lifecycle operations—especially actions that affect the identity or replacement of the underlying hardware.
+        #### Purpose
+        Provide a stable, domain-scoped identity anchor for network elements so Intersight can uniquely track and manage a network element throughout its lifecycle, including controlled administrative updates such as replacement operations.
+        #### Key Concepts
+        - **Domain-scoped unique identity**: Represents the unique identity of a network element `under the domain`, supporting consistent correlation across related managed objects.
+        - **Identity-centric modeling**: Extends `equipment.Identity`, indicating it follows the standard identity model with potential additional lifecycle fields (noted `postDiscoveryAction`).
+        - **Governed updates for lifecycle actions**: UPDATE is permitted for administrators managing Fabric Interconnects, enabling controlled changes to identity-related admin actions.
+        - **Conditional privilege for replacement**: A dedicated conditional privilege set (`Replace`) is required when performing a replace operation (`AdminAction eq 'Replace'`), restricting sensitive replacement attributes (`AdminAction`, `ReplacementType`, `ReplacementTarget`) to users with the Replace Fabric Interconnect privilege.
+        - **Read visibility for operators**: READ is available to common operational and FI-specific roles to support inventory visibility and lifecycle planning.
 
 ---
 
 # Data Source: intersight_fabric_element_identity
-Identity object that uniquely represents a network element object under the domain.
+ElementIdentities uniquely represent network element identity within a fabric domain. They serve as the canonical identity object for a network element (such as a Fabric Interconnect) and are used to correlate the element across discovery, inventory, and lifecycle operations—especially actions that affect the identity or replacement of the underlying hardware.
+#### Purpose
+Provide a stable, domain-scoped identity anchor for network elements so Intersight can uniquely track and manage a network element throughout its lifecycle, including controlled administrative updates such as replacement operations.
+#### Key Concepts
+- **Domain-scoped unique identity**: Represents the unique identity of a network element `under the domain`, supporting consistent correlation across related managed objects.
+- **Identity-centric modeling**: Extends `equipment.Identity`, indicating it follows the standard identity model with potential additional lifecycle fields (noted `postDiscoveryAction`).
+- **Governed updates for lifecycle actions**: UPDATE is permitted for administrators managing Fabric Interconnects, enabling controlled changes to identity-related admin actions.
+- **Conditional privilege for replacement**: A dedicated conditional privilege set (`Replace`) is required when performing a replace operation (`AdminAction eq 'Replace'`), restricting sensitive replacement attributes (`AdminAction`, `ReplacementType`, `ReplacementTarget`) to users with the "Replace Fabric Interconnect" privilege.
+- **Read visibility for operators**: READ is available to common operational and FI-specific roles to support inventory visibility and lifecycle planning.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

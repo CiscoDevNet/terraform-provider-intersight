@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_management_access_policy"
 description: |-
-        Displays a list of policies that define management access rules and privileges.
+        PureManagementAccessPolicies represent administrative access control intent for managing PureStorage systems.
+        #### Purpose
+        Define and track how management-plane access is allowed or restricted for the array environment.
+        #### Key Concepts
+        - **Management-plane control:** Focused on administrative access rather than data-path access to volumes.
+        - **Policy abstraction:** Captures desired governance/controls as a reusable object.
+        - **Separation of concerns:** Distinct from host/volume presentation, which governs storage consumption.
 
 ---
 
 # Data Source: intersight_storage_pure_management_access_policy
-Displays a list of policies that define management access rules and privileges.
+PureManagementAccessPolicies represent administrative access control intent for managing PureStorage systems.
+#### Purpose
+Define and track how management-plane access is allowed or restricted for the array environment.
+#### Key Concepts
+- **Management-plane control:** Focused on administrative access rather than data-path access to volumes.
+- **Policy abstraction:** Captures desired governance/controls as a reusable object.
+- **Separation of concerns:** Distinct from host/volume presentation, which governs storage consumption.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

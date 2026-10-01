@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_span_source_eth_port"
 description: |-
-        Configures Ethernet SPAN Source Port (Uplink) for a given SPAN session.
+        The SpanSourceEthPort object represents an Ethernet physical port configured as a SPAN traffic source for a session.
+        #### Purpose
+        SpanSourceEthPort enables a specific Ethernet port’s traffic (ingress/egress/both) to be mirrored into a SPAN session, supporting port-level traffic analysis and diagnostics.
+        #### Key Concepts
+        - **Port-level mirroring:** Mirrors traffic from a specific Ethernet port.
+        - **Direction semantics:** Supports selecting ingress, egress, or both directions for capture.
+        - **Session-scoped membership:** Acts as a source member within a SPAN session.
+        - **Topology-aware targeting:** Uses slot/port/breakout identifiers consistent with port modeling.
 
 ---
 
 # Resource: intersight_fabric_span_source_eth_port
-Configures Ethernet SPAN Source Port (Uplink) for a given SPAN session.
+The SpanSourceEthPort object represents an Ethernet physical port configured as a SPAN traffic source for a session.
+#### Purpose
+SpanSourceEthPort enables a specific Ethernet port’s traffic (ingress/egress/both) to be mirrored into a SPAN session, supporting port-level traffic analysis and diagnostics.
+#### Key Concepts
+- **Port-level mirroring:** Mirrors traffic from a specific Ethernet port.
+- **Direction semantics:** Supports selecting ingress, egress, or both directions for capture.
+- **Session-scoped membership:** Acts as a source member within a SPAN session.
+- **Topology-aware targeting:** Uses slot/port/breakout identifiers consistent with port modeling.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

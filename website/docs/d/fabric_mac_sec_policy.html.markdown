@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_mac_sec_policy"
 description: |-
-        A placeholder for MACSec (Media Access Control Security) configuration parameters, Primary/Fallback key chain and EAPol (Extensible Authentication Protocol over LAN) configurations.
+        The MacSecPolicy object defines MACsec (Media Access Control Security) configuration intent used to secure traffic at the MAC layer.
+        #### Purpose
+        MacSecPolicy provides a reusable policy representation of MACsec parameters and keychain-related configuration intent so MACsec can be applied consistently to eligible ports and validated as part of domain workflows.
+        #### Key Concepts
+        - **MAC-layer encryption intent:** Represents security settings for encrypting and authenticating Ethernet frames.
+        - **Policy reuse and governance:** Enables consistent MACsec configuration across multiple ports/profiles.
+        - **Keying/negotiation model:** Captures the policy context for MACsec key agreement and operational enforcement.
+        - **Platform-aware applicability:** Intended to be used only where the platform supports MACsec behavior.
 
 ---
 
 # Data Source: intersight_fabric_mac_sec_policy
-A placeholder for MACSec (Media Access Control Security) configuration parameters, Primary/Fallback key chain and EAPol (Extensible Authentication Protocol over LAN) configurations.
+The MacSecPolicy object defines MACsec (Media Access Control Security) configuration intent used to secure traffic at the MAC layer.
+#### Purpose
+MacSecPolicy provides a reusable policy representation of MACsec parameters and keychain-related configuration intent so MACsec can be applied consistently to eligible ports and validated as part of domain workflows.
+#### Key Concepts
+- **MAC-layer encryption intent:** Represents security settings for encrypting and authenticating Ethernet frames.
+- **Policy reuse and governance:** Enables consistent MACsec configuration across multiple ports/profiles.
+- **Keying/negotiation model:** Captures the policy context for MACsec key agreement and operational enforcement.
+- **Platform-aware applicability:** Intended to be used only where the platform supports MACsec behavior.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

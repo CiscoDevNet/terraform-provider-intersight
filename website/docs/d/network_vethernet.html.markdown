@@ -3,12 +3,28 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_vethernet"
 description: |-
-        Vethernet configured on a Fabric Interconnect.
+        Vethernets represent virtual Ethernet interfaces (vNIC peers) configured on a Fabric Interconnect. They track binding/pinning to physical ports or port-channels, operational state/reason, and QoS shaping parameters.
+        #### Purpose
+        Expose vNIC peer inventory on the Fabric Interconnect so operators can validate bindings, troubleshoot operational state, and correlate to the server-side adapter interfaces.
+        #### Key Concepts
+        - **Virtual interface inventory:** Represents a virtual Ethernet endpoint on the switch side.
+        - **Binding and pinning:** Tracks configured (bound) interface DN and pinned uplink DN for traffic placement.
+        - **Operational state and diagnostics:** Provides operState and operReason for rapid troubleshooting.
+        - **Adapter correlation:** Can relate back to the corresponding adapter host Ethernet interface.
+        - **QoS visibility:** Includes rate limit and burst parameters applied to the veth.
 
 ---
 
 # Data Source: intersight_network_vethernet
-Vethernet configured on a Fabric Interconnect.
+Vethernets represent virtual Ethernet interfaces (vNIC peers) configured on a Fabric Interconnect. They track binding/pinning to physical ports or port-channels, operational state/reason, and QoS shaping parameters.
+#### Purpose
+Expose vNIC peer inventory on the Fabric Interconnect so operators can validate bindings, troubleshoot operational state, and correlate to the server-side adapter interfaces.
+#### Key Concepts
+- **Virtual interface inventory:** Represents a virtual Ethernet endpoint on the switch side.
+- **Binding and pinning:** Tracks configured (bound) interface DN and pinned uplink DN for traffic placement.
+- **Operational state and diagnostics:** Provides operState and operReason for rapid troubleshooting.
+- **Adapter correlation:** Can relate back to the corresponding adapter host Ethernet interface.
+- **QoS visibility:** Includes rate limit and burst parameters applied to the veth.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

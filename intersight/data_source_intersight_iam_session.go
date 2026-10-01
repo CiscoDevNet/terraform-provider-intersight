@@ -84,6 +84,11 @@ func getIamSessionSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"external_identifier": {
+						Description: "The external identifier of the account object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"home_region": {
 						Description: "Region where account belongs.",
 						Type:        schema.TypeString,
@@ -229,6 +234,11 @@ func getIamSessionSchema() map[string]*schema.Schema {
 		},
 		"expiration": {
 			Description: "Expiration time for the session.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"external_identifier": {
+			Description: "External identifier for the session, used for integration with external identity systems.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1017,6 +1027,11 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetExpiration(x)
 	}
 
+	if v, ok := d.GetOk("external_identifier"); ok {
+		x := (v.(string))
+		o.SetExternalIdentifier(x)
+	}
+
 	if v, ok := d.GetOkExists("failed_logins"); ok {
 		x := int64(v.(int))
 		o.SetFailedLogins(x)
@@ -1527,6 +1542,7 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 				temp["end_time"] = (s.GetEndTime()).String()
 
 				temp["expiration"] = (s.GetExpiration()).String()
+				temp["external_identifier"] = (s.GetExternalIdentifier())
 				temp["failed_logins"] = (s.GetFailedLogins())
 
 				temp["idle_time_expiration"] = (s.GetIdleTimeExpiration()).String()

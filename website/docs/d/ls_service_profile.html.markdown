@@ -3,12 +3,24 @@ subcategory: "ls"
 layout: "intersight"
 page_title: "Intersight: intersight_ls_service_profile"
 description: |-
-        Logical Profile that can be associated to a physical server.
+        ServiceProfiles represent UCS Manager logical profiles that can be associated to a physical server. They capture profile identity and association/configuration/operational state.
+        #### Purpose
+        Expose UCSM service profile inventory so users can understand which logical profile is bound to which server and what its current association/configuration state is.
+        #### Key Concepts
+        - **Logical identity:** Represents a UCSM service profile as a managed inventory object.
+        - **Server binding:** Tracks the associated server DN and association state.
+        - **Lifecycle visibility:** Exposes assign/config/operational states to help diagnose profile deployment issues.
 
 ---
 
 # Data Source: intersight_ls_service_profile
-Logical Profile that can be associated to a physical server.
+ServiceProfiles represent UCS Manager logical profiles that can be associated to a physical server. They capture profile identity and association/configuration/operational state.
+#### Purpose
+Expose UCSM service profile inventory so users can understand which logical profile is bound to which server and what its current association/configuration state is.
+#### Key Concepts
+- **Logical identity:** Represents a UCSM service profile as a managed inventory object.
+- **Server binding:** Tracks the associated server DN and association state.
+- **Lifecycle visibility:** Exposes assign/config/operational states to help diagnose profile deployment issues.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

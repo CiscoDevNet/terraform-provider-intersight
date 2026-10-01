@@ -3,12 +3,28 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_vpc_peer"
 description: |-
-        Concrete class for VPC peer configured on a network device.
+        VpcPeers represent the vPC peer-link configuration on a network device. The peer link is the critical inter-switch port-channel that carries control traffic and, depending on design, some data-plane traffic between the two vPC peers.
+        #### Purpose
+        Provide visibility into peer-link identity and operational state so operators can validate peer-link health and diagnose vPC peer connectivity issues.
+        #### Key Concepts
+        - **Domain association**: `vpcDomainId` ties the peer link to its vPC domain.
+        - **Peer-link identity**: `vpcPeerId` identifies the peer-link record; `portChannel`/`portChannelId` identify the peer-link port-channel.
+        - **Operational state**: `operationalState` indicates whether the peer link is functioning.
+        - **Relationship to interface model**: `etherPortChannel` links to the underlying port-channel for interface-level inspection.
+        - **Device association**: `registeredDevice` links the peer-link configuration to the specific device.
 
 ---
 
 # Data Source: intersight_network_vpc_peer
-Concrete class for VPC peer configured on a network device.
+VpcPeers represent the vPC peer-link configuration on a network device. The peer link is the critical inter-switch port-channel that carries control traffic and, depending on design, some data-plane traffic between the two vPC peers.
+#### Purpose
+Provide visibility into peer-link identity and operational state so operators can validate peer-link health and diagnose vPC peer connectivity issues.
+#### Key Concepts
+- **Domain association**: `vpcDomainId` ties the peer link to its vPC domain.
+- **Peer-link identity**: `vpcPeerId` identifies the peer-link record; `portChannel`/`portChannelId` identify the peer-link port-channel.
+- **Operational state**: `operationalState` indicates whether the peer link is functioning.
+- **Relationship to interface model**: `etherPortChannel` links to the underlying port-channel for interface-level inspection.
+- **Device association**: `registeredDevice` links the peer-link configuration to the specific device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

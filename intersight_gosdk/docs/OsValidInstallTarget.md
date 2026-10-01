@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **MraidJbod** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **MraidVirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](OsVirtualDriveResponse.md) |  | [optional] 
 **MstorNvme** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
+**N1Nvme** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **Src** | Pointer to **string** | Flag to denote the source of the request. If the call is from Orchestration UI, only the flat list of Install targets can be sent as response. | [optional] 
 **U2Nvme** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **Servers** | Pointer to [**[]ComputePhysicalRelationship**](ComputePhysicalRelationship.md) | An array of relationships to computePhysical resources. | [optional] 
@@ -455,6 +456,41 @@ HasMstorNvme returns a boolean if a field has been set.
 `func (o *OsValidInstallTarget) UnsetMstorNvme()`
 
 UnsetMstorNvme ensures that no value is present for MstorNvme, not even an explicit nil
+### GetN1Nvme
+
+`func (o *OsValidInstallTarget) GetN1Nvme() []OsPhysicalDiskResponse`
+
+GetN1Nvme returns the N1Nvme field if non-nil, zero value otherwise.
+
+### GetN1NvmeOk
+
+`func (o *OsValidInstallTarget) GetN1NvmeOk() (*[]OsPhysicalDiskResponse, bool)`
+
+GetN1NvmeOk returns a tuple with the N1Nvme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetN1Nvme
+
+`func (o *OsValidInstallTarget) SetN1Nvme(v []OsPhysicalDiskResponse)`
+
+SetN1Nvme sets N1Nvme field to given value.
+
+### HasN1Nvme
+
+`func (o *OsValidInstallTarget) HasN1Nvme() bool`
+
+HasN1Nvme returns a boolean if a field has been set.
+
+### SetN1NvmeNil
+
+`func (o *OsValidInstallTarget) SetN1NvmeNil(b bool)`
+
+ SetN1NvmeNil sets the value for N1Nvme to be an explicit nil
+
+### UnsetN1Nvme
+`func (o *OsValidInstallTarget) UnsetN1Nvme()`
+
+UnsetN1Nvme ensures that no value is present for N1Nvme, not even an explicit nil
 ### GetSrc
 
 `func (o *OsValidInstallTarget) GetSrc() string`

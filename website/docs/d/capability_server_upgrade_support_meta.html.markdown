@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_server_upgrade_support_meta"
 description: |-
-        Internal meta-data to map server family classification from server model, used in f/w policy also.
+        The ServerUpgradeSupportMeta object provides internal metadata to map server family classifications, which are used in firmware policy enforcement.
+        #### Purpose
+        It categorizes server models into families, allowing firmware policies to be applied consistently across similar hardware platforms.
+        #### Key Concepts
+        - **Family Classification:** Maps various server models to a unified server family.
+        - **Platform Mapping:** Associates server families with their target platforms for policy enforcement.
 
 ---
 
 # Data Source: intersight_capability_server_upgrade_support_meta
-Internal meta-data to map server family classification from server model, used in f/w policy also.
+The ServerUpgradeSupportMeta object provides internal metadata to map server family classifications, which are used in firmware policy enforcement.
+#### Purpose
+It categorizes server models into families, allowing firmware policies to be applied consistently across similar hardware platforms.
+#### Key Concepts
+- **Family Classification:** Maps various server models to a unified server family.
+- **Platform Mapping:** Associates server families with their target platforms for policy enforcement.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_unsupported_version_upgrade"
 description: |-
-        This represents an operation managed object used for upgrading equipment that cannot be discovered due to unsupported firmware. Currently, it only supports blade upgrades.
+        The UnsupportedVersionUpgrade object represents an operation used to upgrade equipment that cannot be fully discovered or managed due to unsupported running firmware versions.
+        #### Purpose
+        This provides a workflow-managed upgrade path for devices that are currently outside the supported firmware baseline, enabling them to be brought into a supported state so normal discovery and managed-mode operations can proceed.
+        #### Key Concepts
+        - **Recovery-to-supported baseline:** Focuses on moving devices from unsupported firmware into supported ranges.
+        - **Workflow-managed upgrade:** Represents an upgrade operation with trackable upgrade state.
+        - **Identity-scoped targeting:** Ties the operation to a specific physical identity to avoid ambiguity.
+        - **Operational bridge:** Enables management onboarding by resolving firmware incompatibility blockers.
 
 ---
 
 # Resource: intersight_firmware_unsupported_version_upgrade
-This represents an operation managed object used for upgrading equipment that cannot be discovered due to unsupported firmware. Currently, it only supports blade upgrades.
+The UnsupportedVersionUpgrade object represents an operation used to upgrade equipment that cannot be fully discovered or managed due to unsupported running firmware versions.
+#### Purpose
+This provides a workflow-managed upgrade path for devices that are currently outside the supported firmware baseline, enabling them to be brought into a supported state so normal discovery and managed-mode operations can proceed.
+#### Key Concepts
+- **Recovery-to-supported baseline:** Focuses on moving devices from unsupported firmware into supported ranges.
+- **Workflow-managed upgrade:** Represents an upgrade operation with trackable upgrade state.
+- **Identity-scoped targeting:** Ties the operation to a specific physical identity to avoid ambiguity.
+- **Operational bridge:** Enables management onboarding by resolving firmware incompatibility blockers.
 ## Usage Example
 ### Resource Creation
 

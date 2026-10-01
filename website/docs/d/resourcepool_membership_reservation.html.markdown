@@ -3,14 +3,22 @@ subcategory: "resourcepool"
 layout: "intersight"
 page_title: "Intersight: intersight_resourcepool_membership_reservation"
 description: |-
-        A MembershipReservation is created when a resource that belongs to a pool is decommissioned. The MembershipReservation is mapped to pools that have the resource chosen for decommissioning. This MembershipReservation will be utilized in the future to pre-provision servers based on membership serials.
-        The system automatically generates the membership during decommissioning, and its permissions are updated for all organizations associated with the pools. Users of the pool have the authority to remove the pool from the membership. The membership will be removed either during recommissioning or when all the associated pools are deleted.
+        The MembershipReservations object is created when a resource that belongs to a pool is decommissioned.
+        #### Purpose
+        It ensures that decommissioned resources are tracked and can be utilized for future pre-provisioning based on membership serials.
+        #### Key Concepts
+        - **Decommission Tracking:** Records resources as they are removed from service.
+        - **Pre-provisioning Support:** Facilitates future resource allocation based on historical membership.
 
 ---
 
 # Data Source: intersight_resourcepool_membership_reservation
-A MembershipReservation is created when a resource that belongs to a pool is decommissioned. The MembershipReservation is mapped to pools that have the resource chosen for decommissioning. This MembershipReservation will be utilized in the future to pre-provision servers based on membership serials.
-The system automatically generates the membership during decommissioning, and its permissions are updated for all organizations associated with the pools. Users of the pool have the authority to remove the pool from the membership. The membership will be removed either during recommissioning or when all the associated pools are deleted.
+The MembershipReservations object is created when a resource that belongs to a pool is decommissioned.
+#### Purpose
+It ensures that decommissioned resources are tracked and can be utilized for future pre-provisioning based on membership serials.
+#### Key Concepts
+- **Decommission Tracking:** Records resources as they are removed from service.
+- **Pre-provisioning Support:** Facilitates future resource allocation based on historical membership.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

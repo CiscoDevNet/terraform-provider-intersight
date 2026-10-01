@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_enclosure_disk_slot_ep"
 description: |-
-        Physical Disk slots on the enclosure.
+        EnclosureDiskSlotEps represent physical disk slots on an enclosure, including slot id, presence, zoning/drive path, and health of the disk in the slot.
+        #### Purpose
+        Provide per-slot inventory for enclosures to support slot-level presence/health monitoring and zoning visibility.
+        #### Key Concepts
+        - **Slot inventory:** Identifies each enclosure slot and whether a disk is present.
+        - **Zoning/path context:** Captures applied drive path/zoning information.
+        - **Health at slot level:** Reports health of the inserted disk as seen from the slot.
 
 ---
 
 # Data Source: intersight_storage_enclosure_disk_slot_ep
-Physical Disk slots on the enclosure.
+EnclosureDiskSlotEps represent physical disk slots on an enclosure, including slot id, presence, zoning/drive path, and health of the disk in the slot.
+#### Purpose
+Provide per-slot inventory for enclosures to support slot-level presence/health monitoring and zoning visibility.
+#### Key Concepts
+- **Slot inventory:** Identifies each enclosure slot and whether a disk is present.
+- **Zoning/path context:** Captures applied drive path/zoning information.
+- **Health at slot level:** Reports health of the inserted disk as seen from the slot.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_item"
 description: |-
-        The local Storage information.
+        Items (storage) represent local storage information, including name, size, utilization, operational state, and alarm type, and can relate to file inventory objects.
+        #### Purpose
+        Provide high-level visibility into local storage items for monitoring capacity/health and enumerating associated file items.
+        #### Key Concepts
+        - **Local storage summary:** Tracks size and used percentage.
+        - **Operational signals:** Includes oper state and alarm type.
+        - **File relationship:** Can relate to file item objects representing stored content.
 
 ---
 
 # Data Source: intersight_storage_item
-The local Storage information.
+Items (storage) represent local storage information, including name, size, utilization, operational state, and alarm type, and can relate to file inventory objects.
+#### Purpose
+Provide high-level visibility into local storage items for monitoring capacity/health and enumerating associated file items.
+#### Key Concepts
+- **Local storage summary:** Tracks size and used percentage.
+- **Operational signals:** Includes oper state and alarm type.
+- **File relationship:** Can relate to file item objects representing stored content.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

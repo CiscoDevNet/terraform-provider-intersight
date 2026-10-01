@@ -3,12 +3,28 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_boot_device"
 description: |-
-        Actual boot devices of the system as enumerated by BIOS.
+        BootDevices represent the actual bootable devices enumerated by a server’s BIOS. Each BootDevice captures the device identity and type as the BIOS currently sees it, forming the per-entry list that makes up the system’s effective boot sequence.
+        #### Purpose
+        Provide a read-only inventory of BIOS-enumerated boot devices so administrators can verify what the system can boot from and troubleshoot boot-order or boot-device discovery issues.
+        #### Key Concepts
+        - **Observed (BIOS) reality vs policy intent**: This is the *actual* device list reported by BIOS, not a desired boot policy configuration.
+        - **Device identity and classification**: `deviceName` identifies the boot entry; `deviceType` indicates what kind of boot device it is.
+        - **System association**: `registeredDevice` links the boot device inventory to the specific managed server/device in Intersight.
+        - **Lifecycle handling**: `onpeerdelete: unset` on `registeredDevice` preserves the BootDevice record semantics when the registration relationship is removed.
+        - **Collection workflow support**: `GetActualBootOrderTask` is the async task responsible for retrieving the actual boot order information from the endpoint (with retries/timeouts for resilience).
 
 ---
 
 # Data Source: intersight_bios_boot_device
-Actual boot devices of the system as enumerated by BIOS.
+BootDevices represent the actual bootable devices enumerated by a server’s BIOS. Each BootDevice captures the device identity and type as the BIOS currently sees it, forming the per-entry list that makes up the system’s effective boot sequence.
+#### Purpose
+Provide a read-only inventory of BIOS-enumerated boot devices so administrators can verify what the system can boot from and troubleshoot boot-order or boot-device discovery issues.
+#### Key Concepts
+- **Observed (BIOS) reality vs policy intent**: This is the *actual* device list reported by BIOS, not a desired boot policy configuration.
+- **Device identity and classification**: `deviceName` identifies the boot entry; `deviceType` indicates what kind of boot device it is.
+- **System association**: `registeredDevice` links the boot device inventory to the specific managed server/device in Intersight.
+- **Lifecycle handling**: `onpeerdelete: unset` on `registeredDevice` preserves the BootDevice record semantics when the registration relationship is removed.
+- **Collection workflow support**: `GetActualBootOrderTask` is the async task responsible for retrieving the actual boot order information from the endpoint (with retries/timeouts for resilience).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

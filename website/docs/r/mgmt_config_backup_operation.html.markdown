@@ -69,6 +69,7 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `end_time`:(string)(ReadOnly) End date and time of the backup operation. 
 * `is_aes_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'aesKey' property has been set. 
+* `is_user_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'userPassword' property has been set. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) User provided identifier for the backup operation. 

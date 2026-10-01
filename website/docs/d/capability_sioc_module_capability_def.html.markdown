@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_sioc_module_capability_def"
 description: |-
-        Chassis SIOC module capabilities.
+        The SiocModuleCapabilityDef object describes capability flags for SIOC modules (used in S-Series architectures) in the capability catalog.
+        #### Purpose
+        SiocModuleCapabilityDef provides platform-specific capability declarations for SIOC modules so configuration and operational workflows can be validated and tailored to supported behaviors.
+        #### Key Concepts
+        - **Module capability flags:** Declares supported features for SIOC platforms.
+        - **Validation enablement:** Supports platform-aware checks before enabling or applying configurations.
+        - **Catalog governance:** Centralizes capability differences across SIOC module variants.
+        - **Operational consistency:** Ensures consistent behavior across deployments and releases.
 
 ---
 
 # Data Source: intersight_capability_sioc_module_capability_def
-Chassis SIOC module capabilities.
+The SiocModuleCapabilityDef object describes capability flags for SIOC modules (used in S-Series architectures) in the capability catalog.
+#### Purpose
+SiocModuleCapabilityDef provides platform-specific capability declarations for SIOC modules so configuration and operational workflows can be validated and tailored to supported behaviors.
+#### Key Concepts
+- **Module capability flags:** Declares supported features for SIOC platforms.
+- **Validation enablement:** Supports platform-aware checks before enabling or applying configurations.
+- **Catalog governance:** Centralizes capability differences across SIOC module variants.
+- **Operational consistency:** Ensures consistent behavior across deployments and releases.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

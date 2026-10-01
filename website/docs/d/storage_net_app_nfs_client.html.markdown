@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_nfs_client"
 description: |-
-        A currently connected NFS client.
+        The NetAppNfsClients object tracks NFS clients currently connected to a volume.
+        ####  Purpose
+        This provides visibility into client activity, helping administrators identify active users and troubleshoot connectivity or performance issues.
+        ####  Key Concepts
+        - **Client Monitoring:** Tracks client IP addresses and protocol versions.
+        - **Activity Tracking:** Monitors idle duration to identify inactive connections.
 
 ---
 
 # Data Source: intersight_storage_net_app_nfs_client
-A currently connected NFS client.
+The NetAppNfsClients object tracks NFS clients currently connected to a volume.
+####  Purpose
+This provides visibility into client activity, helping administrators identify active users and troubleshoot connectivity or performance issues.
+####  Key Concepts
+- **Client Monitoring:** Tracks client IP addresses and protocol versions.
+- **Activity Tracking:** Monitors idle duration to identify inactive connections.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

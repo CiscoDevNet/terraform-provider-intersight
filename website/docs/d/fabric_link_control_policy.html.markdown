@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_link_control_policy"
 description: |-
-        A policy to configure the link settings for all the ports (including UDLD).
+        The LinkControlPolicy object defines link-level control behavior for ports and port-channels, such as UDLD-related behavior, expressed as reusable policy intent.
+        #### Purpose
+        LinkControlPolicy provides consistent link control settings that can be applied across many interfaces. It is intended to reduce per-interface drift and provide a standard mechanism for link integrity and control behaviors.
+        #### Key Concepts
+        - **Link integrity controls:** Encapsulates link-level control behaviors intended to protect or monitor links.
+        - **Policy reuse:** Supports consistent application across many ports and port-channels.
+        - **Port-role integration:** Typically attached by port role objects where link control is required.
+        - **Operational predictability:** Minimizes interface-by-interface inconsistency in link control behavior.
 
 ---
 
 # Data Source: intersight_fabric_link_control_policy
-A policy to configure the link settings for all the ports (including UDLD).
+The LinkControlPolicy object defines link-level control behavior for ports and port-channels, such as UDLD-related behavior, expressed as reusable policy intent.
+#### Purpose
+LinkControlPolicy provides consistent link control settings that can be applied across many interfaces. It is intended to reduce per-interface drift and provide a standard mechanism for link integrity and control behaviors.
+#### Key Concepts
+- **Link integrity controls:** Encapsulates link-level control behaviors intended to protect or monitor links.
+- **Policy reuse:** Supports consistent application across many ports and port-channels.
+- **Port-role integration:** Typically attached by port role objects where link control is required.
+- **Operational predictability:** Minimizes interface-by-interface inconsistency in link control behavior.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_license"
 description: |-
-        NetApp licenses for NetApp Ontap.
+        The NetAppLicenses object tracks the status of software licenses installed on the NetApp cluster.
+        ####  Purpose
+        It allows administrators to monitor license compliance, ensuring that features (e.g., SnapMirror, CIFS) are properly licensed.
+        ####  Key Concepts
+        - **Compliance Monitoring:** Reports whether the license state is compliant, non-compliant, or unlicensed.
+        - **Package Management:** Tracks individual license packages installed on the system.
 
 ---
 
 # Data Source: intersight_storage_net_app_license
-NetApp licenses for NetApp Ontap.
+The NetAppLicenses object tracks the status of software licenses installed on the NetApp cluster.
+####  Purpose
+It allows administrators to monitor license compliance, ensuring that features (e.g., SnapMirror, CIFS) are properly licensed.
+####  Key Concepts
+- **Compliance Monitoring:** Reports whether the license state is compliant, non-compliant, or unlicensed.
+- **Package Management:** Tracks individual license packages installed on the system.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

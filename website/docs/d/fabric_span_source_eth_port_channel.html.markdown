@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_span_source_eth_port_channel"
 description: |-
-        Configures Ethernet SPAN Source Port Channel (Uplink) for a given SPAN session.
+        The SpanSourceEthPortChannel object represents an Ethernet port-channel configured as a SPAN traffic source.
+        #### Purpose
+        SpanSourceEthPortChannel enables mirroring of traffic from an aggregated Ethernet interface, supporting troubleshooting and analysis at the logical port-channel level rather than per-member ports.
+        #### Key Concepts
+        - **Port-channel mirroring:** Mirrors traffic from a logical aggregated interface.
+        - **Direction semantics:** Supports capture direction selection for the port-channel.
+        - **Session membership:** Represents a source attached to a specific SPAN session.
+        - **Logical-interface diagnostics:** Supports analysis for aggregated uplinks/appliance PCs.
 
 ---
 
 # Data Source: intersight_fabric_span_source_eth_port_channel
-Configures Ethernet SPAN Source Port Channel (Uplink) for a given SPAN session.
+The SpanSourceEthPortChannel object represents an Ethernet port-channel configured as a SPAN traffic source.
+#### Purpose
+SpanSourceEthPortChannel enables mirroring of traffic from an aggregated Ethernet interface, supporting troubleshooting and analysis at the logical port-channel level rather than per-member ports.
+#### Key Concepts
+- **Port-channel mirroring:** Mirrors traffic from a logical aggregated interface.
+- **Direction semantics:** Supports capture direction selection for the port-channel.
+- **Session membership:** Represents a source attached to a specific SPAN session.
+- **Logical-interface diagnostics:** Supports analysis for aggregated uplinks/appliance PCs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

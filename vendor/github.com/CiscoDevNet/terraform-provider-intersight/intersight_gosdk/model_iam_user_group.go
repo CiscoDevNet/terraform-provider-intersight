@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -35,12 +35,15 @@ type IamUserGroup struct {
 	AccessExpiryTime *time.Time `json:"AccessExpiryTime,omitempty"`
 	// AccessLink using which the guest user uses to log in to Intersight.
 	AccessLink *string `json:"AccessLink,omitempty"`
+	// Number of days a CUI-authenticated dynamic user's membership remains valid after the most recent successful regular CUI login. Zero disables retained membership for this UserGroup.
+	DynamicUserRetentionDays *int64 `json:"DynamicUserRetentionDays,omitempty"`
 	// Group type determines the type of groups that is being associated with users. By default, Default User group will be used for associating dynamic user login. If the value of the User Group is set to guest, then this type of user group will be used for guest user login. * `Default` - Default User Group Type used for dynamic users login. * `Guest` - Guest User Group type used for guest users login.
 	GroupType *string `json:"GroupType,omitempty"`
 	// Instruction property holds detailed guidance and information intended for individuals  accessing the system as guest users. It holds the information to assist guests in navigating the platform,  understanding policies, and performing necessary actions to ensure a seamless and secure user experience.
 	Instruction *string `json:"Instruction,omitempty"`
 	// The name of the user group which the dynamic/or guest user belongs to.
-	Name *string `json:"Name,omitempty"`
+	Name         *string                   `json:"Name,omitempty"`
+	RoutingRules []IamRoutingRuleReference `json:"RoutingRules,omitempty"`
 	// A random mixed character string which is unique per user groups. UniqueReferenceId is used as key for identifying the guest user groups.
 	UniqueReferenceId *string                             `json:"UniqueReferenceId,omitempty"`
 	Idp               NullableIamIdpRelationship          `json:"Idp,omitempty"`
@@ -48,6 +51,8 @@ type IamUserGroup struct {
 	// An array of relationships to iamPermission resources.
 	Permissions []IamPermissionRelationship              `json:"Permissions,omitempty"`
 	Qualifier   NullableIamAbstractQualifierRelationship `json:"Qualifier,omitempty"`
+	// An array of relationships to iamUserGroupMembership resources.
+	UserGroupMemberships []IamUserGroupMembershipRelationship `json:"UserGroupMemberships,omitempty"`
 	// An array of relationships to iamUser resources.
 	Users                []IamUserRelationship `json:"Users,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -63,6 +68,8 @@ func NewIamUserGroup(classId string, objectType string) *IamUserGroup {
 	this := IamUserGroup{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var dynamicUserRetentionDays int64 = 30
+	this.DynamicUserRetentionDays = &dynamicUserRetentionDays
 	var groupType string = "Default"
 	this.GroupType = &groupType
 	return &this
@@ -77,6 +84,8 @@ func NewIamUserGroupWithDefaults() *IamUserGroup {
 	this.ClassId = classId
 	var objectType string = "iam.UserGroup"
 	this.ObjectType = objectType
+	var dynamicUserRetentionDays int64 = 30
+	this.DynamicUserRetentionDays = &dynamicUserRetentionDays
 	var groupType string = "Default"
 	this.GroupType = &groupType
 	return &this
@@ -236,6 +245,38 @@ func (o *IamUserGroup) SetAccessLink(v string) {
 	o.AccessLink = &v
 }
 
+// GetDynamicUserRetentionDays returns the DynamicUserRetentionDays field value if set, zero value otherwise.
+func (o *IamUserGroup) GetDynamicUserRetentionDays() int64 {
+	if o == nil || IsNil(o.DynamicUserRetentionDays) {
+		var ret int64
+		return ret
+	}
+	return *o.DynamicUserRetentionDays
+}
+
+// GetDynamicUserRetentionDaysOk returns a tuple with the DynamicUserRetentionDays field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamUserGroup) GetDynamicUserRetentionDaysOk() (*int64, bool) {
+	if o == nil || IsNil(o.DynamicUserRetentionDays) {
+		return nil, false
+	}
+	return o.DynamicUserRetentionDays, true
+}
+
+// HasDynamicUserRetentionDays returns a boolean if a field has been set.
+func (o *IamUserGroup) HasDynamicUserRetentionDays() bool {
+	if o != nil && !IsNil(o.DynamicUserRetentionDays) {
+		return true
+	}
+
+	return false
+}
+
+// SetDynamicUserRetentionDays gets a reference to the given int64 and assigns it to the DynamicUserRetentionDays field.
+func (o *IamUserGroup) SetDynamicUserRetentionDays(v int64) {
+	o.DynamicUserRetentionDays = &v
+}
+
 // GetGroupType returns the GroupType field value if set, zero value otherwise.
 func (o *IamUserGroup) GetGroupType() string {
 	if o == nil || IsNil(o.GroupType) {
@@ -330,6 +371,39 @@ func (o *IamUserGroup) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *IamUserGroup) SetName(v string) {
 	o.Name = &v
+}
+
+// GetRoutingRules returns the RoutingRules field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamUserGroup) GetRoutingRules() []IamRoutingRuleReference {
+	if o == nil {
+		var ret []IamRoutingRuleReference
+		return ret
+	}
+	return o.RoutingRules
+}
+
+// GetRoutingRulesOk returns a tuple with the RoutingRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamUserGroup) GetRoutingRulesOk() ([]IamRoutingRuleReference, bool) {
+	if o == nil || IsNil(o.RoutingRules) {
+		return nil, false
+	}
+	return o.RoutingRules, true
+}
+
+// HasRoutingRules returns a boolean if a field has been set.
+func (o *IamUserGroup) HasRoutingRules() bool {
+	if o != nil && !IsNil(o.RoutingRules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRoutingRules gets a reference to the given []IamRoutingRuleReference and assigns it to the RoutingRules field.
+func (o *IamUserGroup) SetRoutingRules(v []IamRoutingRuleReference) {
+	o.RoutingRules = v
 }
 
 // GetUniqueReferenceId returns the UniqueReferenceId field value if set, zero value otherwise.
@@ -526,6 +600,39 @@ func (o *IamUserGroup) UnsetQualifier() {
 	o.Qualifier.Unset()
 }
 
+// GetUserGroupMemberships returns the UserGroupMemberships field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamUserGroup) GetUserGroupMemberships() []IamUserGroupMembershipRelationship {
+	if o == nil {
+		var ret []IamUserGroupMembershipRelationship
+		return ret
+	}
+	return o.UserGroupMemberships
+}
+
+// GetUserGroupMembershipsOk returns a tuple with the UserGroupMemberships field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamUserGroup) GetUserGroupMembershipsOk() ([]IamUserGroupMembershipRelationship, bool) {
+	if o == nil || IsNil(o.UserGroupMemberships) {
+		return nil, false
+	}
+	return o.UserGroupMemberships, true
+}
+
+// HasUserGroupMemberships returns a boolean if a field has been set.
+func (o *IamUserGroup) HasUserGroupMemberships() bool {
+	if o != nil && !IsNil(o.UserGroupMemberships) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserGroupMemberships gets a reference to the given []IamUserGroupMembershipRelationship and assigns it to the UserGroupMemberships field.
+func (o *IamUserGroup) SetUserGroupMemberships(v []IamUserGroupMembershipRelationship) {
+	o.UserGroupMemberships = v
+}
+
 // GetUsers returns the Users field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamUserGroup) GetUsers() []IamUserRelationship {
 	if o == nil {
@@ -594,6 +701,9 @@ func (o IamUserGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccessLink) {
 		toSerialize["AccessLink"] = o.AccessLink
 	}
+	if !IsNil(o.DynamicUserRetentionDays) {
+		toSerialize["DynamicUserRetentionDays"] = o.DynamicUserRetentionDays
+	}
 	if !IsNil(o.GroupType) {
 		toSerialize["GroupType"] = o.GroupType
 	}
@@ -602,6 +712,9 @@ func (o IamUserGroup) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
+	}
+	if o.RoutingRules != nil {
+		toSerialize["RoutingRules"] = o.RoutingRules
 	}
 	if !IsNil(o.UniqueReferenceId) {
 		toSerialize["UniqueReferenceId"] = o.UniqueReferenceId
@@ -617,6 +730,9 @@ func (o IamUserGroup) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Qualifier.IsSet() {
 		toSerialize["Qualifier"] = o.Qualifier.Get()
+	}
+	if o.UserGroupMemberships != nil {
+		toSerialize["UserGroupMemberships"] = o.UserGroupMemberships
 	}
 	if o.Users != nil {
 		toSerialize["Users"] = o.Users
@@ -682,12 +798,15 @@ func (o *IamUserGroup) UnmarshalJSON(data []byte) (err error) {
 		AccessExpiryTime *time.Time `json:"AccessExpiryTime,omitempty"`
 		// AccessLink using which the guest user uses to log in to Intersight.
 		AccessLink *string `json:"AccessLink,omitempty"`
+		// Number of days a CUI-authenticated dynamic user's membership remains valid after the most recent successful regular CUI login. Zero disables retained membership for this UserGroup.
+		DynamicUserRetentionDays *int64 `json:"DynamicUserRetentionDays,omitempty"`
 		// Group type determines the type of groups that is being associated with users. By default, Default User group will be used for associating dynamic user login. If the value of the User Group is set to guest, then this type of user group will be used for guest user login. * `Default` - Default User Group Type used for dynamic users login. * `Guest` - Guest User Group type used for guest users login.
 		GroupType *string `json:"GroupType,omitempty"`
 		// Instruction property holds detailed guidance and information intended for individuals  accessing the system as guest users. It holds the information to assist guests in navigating the platform,  understanding policies, and performing necessary actions to ensure a seamless and secure user experience.
 		Instruction *string `json:"Instruction,omitempty"`
 		// The name of the user group which the dynamic/or guest user belongs to.
-		Name *string `json:"Name,omitempty"`
+		Name         *string                   `json:"Name,omitempty"`
+		RoutingRules []IamRoutingRuleReference `json:"RoutingRules,omitempty"`
 		// A random mixed character string which is unique per user groups. UniqueReferenceId is used as key for identifying the guest user groups.
 		UniqueReferenceId *string                             `json:"UniqueReferenceId,omitempty"`
 		Idp               NullableIamIdpRelationship          `json:"Idp,omitempty"`
@@ -695,6 +814,8 @@ func (o *IamUserGroup) UnmarshalJSON(data []byte) (err error) {
 		// An array of relationships to iamPermission resources.
 		Permissions []IamPermissionRelationship              `json:"Permissions,omitempty"`
 		Qualifier   NullableIamAbstractQualifierRelationship `json:"Qualifier,omitempty"`
+		// An array of relationships to iamUserGroupMembership resources.
+		UserGroupMemberships []IamUserGroupMembershipRelationship `json:"UserGroupMemberships,omitempty"`
 		// An array of relationships to iamUser resources.
 		Users []IamUserRelationship `json:"Users,omitempty"`
 	}
@@ -709,14 +830,17 @@ func (o *IamUserGroup) UnmarshalJSON(data []byte) (err error) {
 		varIamUserGroup.AccessActivationTime = varIamUserGroupWithoutEmbeddedStruct.AccessActivationTime
 		varIamUserGroup.AccessExpiryTime = varIamUserGroupWithoutEmbeddedStruct.AccessExpiryTime
 		varIamUserGroup.AccessLink = varIamUserGroupWithoutEmbeddedStruct.AccessLink
+		varIamUserGroup.DynamicUserRetentionDays = varIamUserGroupWithoutEmbeddedStruct.DynamicUserRetentionDays
 		varIamUserGroup.GroupType = varIamUserGroupWithoutEmbeddedStruct.GroupType
 		varIamUserGroup.Instruction = varIamUserGroupWithoutEmbeddedStruct.Instruction
 		varIamUserGroup.Name = varIamUserGroupWithoutEmbeddedStruct.Name
+		varIamUserGroup.RoutingRules = varIamUserGroupWithoutEmbeddedStruct.RoutingRules
 		varIamUserGroup.UniqueReferenceId = varIamUserGroupWithoutEmbeddedStruct.UniqueReferenceId
 		varIamUserGroup.Idp = varIamUserGroupWithoutEmbeddedStruct.Idp
 		varIamUserGroup.Idpreference = varIamUserGroupWithoutEmbeddedStruct.Idpreference
 		varIamUserGroup.Permissions = varIamUserGroupWithoutEmbeddedStruct.Permissions
 		varIamUserGroup.Qualifier = varIamUserGroupWithoutEmbeddedStruct.Qualifier
+		varIamUserGroup.UserGroupMemberships = varIamUserGroupWithoutEmbeddedStruct.UserGroupMemberships
 		varIamUserGroup.Users = varIamUserGroupWithoutEmbeddedStruct.Users
 		*o = IamUserGroup(varIamUserGroup)
 	} else {
@@ -740,14 +864,17 @@ func (o *IamUserGroup) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "AccessActivationTime")
 		delete(additionalProperties, "AccessExpiryTime")
 		delete(additionalProperties, "AccessLink")
+		delete(additionalProperties, "DynamicUserRetentionDays")
 		delete(additionalProperties, "GroupType")
 		delete(additionalProperties, "Instruction")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "RoutingRules")
 		delete(additionalProperties, "UniqueReferenceId")
 		delete(additionalProperties, "Idp")
 		delete(additionalProperties, "Idpreference")
 		delete(additionalProperties, "Permissions")
 		delete(additionalProperties, "Qualifier")
+		delete(additionalProperties, "UserGroupMemberships")
 		delete(additionalProperties, "Users")
 
 		// remove fields from embedded structs

@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_pc_operation"
 description: |-
-        PcOperation objects allows the user to alter the state of the port channel.
+        The PcOperation object represents an operational control surface for port-channels, allowing administrative operations such as enabling/disabling or related admin-driven actions.
+        #### Purpose
+        PcOperation provides an API-facing model for port-channel operational actions that affect the current state of a port-channel on the switch. It supports controlled, auditable port-channel state changes through managed workflows.
+        #### Key Concepts
+        - **Operational action model:** Represents “do” operations on a port-channel rather than desired steady-state design intent.
+        - **Administrative state control:** Enables controlled enable/disable-like operations via API.
+        - **Workflow-backed behavior:** Often implemented through asynchronous workflows and config-state reporting.
+        - **Network-element scoping:** Actions are tied to a specific network element context.
 
 ---
 
 # Data Source: intersight_fabric_pc_operation
-PcOperation objects allows the user to alter the state of the port channel.
+The PcOperation object represents an operational control surface for port-channels, allowing administrative operations such as enabling/disabling or related admin-driven actions.
+#### Purpose
+PcOperation provides an API-facing model for port-channel operational actions that affect the current state of a port-channel on the switch. It supports controlled, auditable port-channel state changes through managed workflows.
+#### Key Concepts
+- **Operational action model:** Represents “do” operations on a port-channel rather than desired steady-state design intent.
+- **Administrative state control:** Enables controlled enable/disable-like operations via API.
+- **Workflow-backed behavior:** Often implemented through asynchronous workflows and config-state reporting.
+- **Network-element scoping:** Actions are tied to a specific network element context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

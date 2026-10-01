@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_virtual_drive_container"
 description: |-
-        A Virtual Disk Drive Container.
+        VirtualDriveContainers represent containers that group virtual drives under chassis context, providing an organizational boundary for enumerating virtual drives.
+        #### Purpose
+        Provide a container structure for virtual drives to simplify inventory hierarchy and querying under chassis/server contexts.
+        #### Key Concepts
+        - **Container pattern:** Groups virtual drives under a container id.
+        - **Hierarchy support:** Enables cleaner parent-child relationships for virtual drive inventory.
 
 ---
 
 # Data Source: intersight_storage_virtual_drive_container
-A Virtual Disk Drive Container.
+VirtualDriveContainers represent containers that group virtual drives under chassis context, providing an organizational boundary for enumerating virtual drives.
+#### Purpose
+Provide a container structure for virtual drives to simplify inventory hierarchy and querying under chassis/server contexts.
+#### Key Concepts
+- **Container pattern:** Groups virtual drives under a container id.
+- **Hierarchy support:** Enables cleaner parent-child relationships for virtual drive inventory.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

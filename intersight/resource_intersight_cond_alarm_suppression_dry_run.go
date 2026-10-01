@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -102,39 +101,18 @@ func resourceCondAlarmSuppressionDryRun() *schema.Resource {
 							ForceNew:         true,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "cond.AlarmRuleExpression",
+							Computed:    true,
 							ForceNew:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "cond.AlarmRuleExpression",
+							Computed:    true,
 							ForceNew:    true,
-						},
-						"operator": {
-							Description: "The operator to apply. Operators supported are: eq, contains, in.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-						},
-						"property": {
-							Description: "The property name keyword to filter on. For a list of supported property keywords\nsee the Intersight Help Center.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-						},
-						"value": {
-							Type:       schema.TypeList,
-							Optional:   true,
-							ConfigMode: schema.SchemaConfigModeAttr,
-							Computed:   true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							}, ForceNew: true,
 						},
 					},
 				},
@@ -241,6 +219,52 @@ func resourceCondAlarmSuppressionDryRun() *schema.Resource {
 				Optional:    true,
 				Default:     "cond.AlarmSuppressionDryRun",
 				ForceNew:    true,
+			},
+			"organization": {
+				Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+							ForceNew:         true,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+							ForceNew:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ForceNew:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ForceNew:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+						},
+					},
+				},
+				ForceNew: true,
 			},
 			"owners": {
 				Type:       schema.TypeList,
@@ -892,10 +916,10 @@ func resourceCondAlarmSuppressionDryRunCreate(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("alarm_rules"); ok {
-		x := make([]models.CondAlarmRuleExpression, 0)
+		x := make([]models.CondAbstractAlarmRule, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCondAlarmRuleExpressionWithDefaults()
+			o := models.NewCondAbstractAlarmRuleWithDefaults()
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -907,37 +931,11 @@ func resourceCondAlarmSuppressionDryRunCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("cond.AlarmRuleExpression")
+			o.SetClassId("cond.AbstractAlarmRule")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["operator"]; ok {
-				{
-					x := (v.(string))
-					o.SetOperator(x)
-				}
-			}
-			if v, ok := l["property"]; ok {
-				{
-					x := (v.(string))
-					o.SetProperty(x)
-				}
-			}
-			if v, ok := l["value"]; ok {
-				{
-					x := make([]string, 0)
-					y := reflect.ValueOf(v)
-					for i := 0; i < y.Len(); i++ {
-						if y.Index(i).Interface() != nil {
-							x = append(x, y.Index(i).Interface().(string))
-						}
-					}
-					if len(x) > 0 {
-						o.SetValue(x)
-					}
 				}
 			}
 			x = append(x, *o)
@@ -955,6 +953,49 @@ func resourceCondAlarmSuppressionDryRunCreate(c context.Context, d *schema.Resou
 	}
 
 	o.SetObjectType("cond.AlarmSuppressionDryRun")
+
+	if v, ok := d.GetOk("organization"); ok {
+		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsOrganizationOrganizationRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetOrganization(x)
+		}
+	}
 
 	if v, ok := d.GetOk("rules_operator"); ok {
 		x := (v.(string))

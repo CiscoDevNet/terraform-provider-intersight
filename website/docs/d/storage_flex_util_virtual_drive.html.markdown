@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_util_virtual_drive"
 description: |-
-        Storage Flex Util Virtual Drive.
+        FlexUtilVirtualDrives represent virtual drives/partitions managed by a Flex Util controller, including partition identity, size, status, and host accessibility.
+        #### Purpose
+        Expose logical storage constructs on FlexUtil controllers for monitoring and operational use.
+        #### Key Concepts
+        - **Partition identity:** Partition id and name used to uniquely identify the virtual drive.
+        - **Status visibility:** Includes drive status and resident image.
+        - **Host accessibility:** Reports whether the host can access the virtual drive.
 
 ---
 
 # Data Source: intersight_storage_flex_util_virtual_drive
-Storage Flex Util Virtual Drive.
+FlexUtilVirtualDrives represent virtual drives/partitions managed by a Flex Util controller, including partition identity, size, status, and host accessibility.
+#### Purpose
+Expose logical storage constructs on FlexUtil controllers for monitoring and operational use.
+#### Key Concepts
+- **Partition identity:** Partition id and name used to uniquely identify the virtual drive.
+- **Status visibility:** Includes drive status and resident image.
+- **Host accessibility:** Reports whether the host can access the virtual drive.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

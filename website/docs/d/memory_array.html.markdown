@@ -3,12 +3,24 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_array"
 description: |-
-        Holder housing multiple memory units.
+        Arrays (memory) represent memory arrays (banks/channels) in a server that house multiple memory units (DIMMs and persistent memory modules), including capacity and error-correction characteristics.
+        #### Purpose
+        Provide a container-level view of server memory topology and aggregate capacity per array.
+        #### Key Concepts
+        - **Topology container:** Groups DIMMs/PMem modules by array.
+        - **Capacity aggregation:** Tracks max/current capacity across units.
+        - **Unit relationships:** Links to both regular memory Units and PersistentMemoryUnits.
 
 ---
 
 # Data Source: intersight_memory_array
-Holder housing multiple memory units.
+Arrays (memory) represent memory arrays (banks/channels) in a server that house multiple memory units (DIMMs and persistent memory modules), including capacity and error-correction characteristics.
+#### Purpose
+Provide a container-level view of server memory topology and aggregate capacity per array.
+#### Key Concepts
+- **Topology container:** Groups DIMMs/PMem modules by array.
+- **Capacity aggregation:** Tracks max/current capacity across units.
+- **Unit relationships:** Links to both regular memory Units and PersistentMemoryUnits.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

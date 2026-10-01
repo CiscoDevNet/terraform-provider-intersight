@@ -3,12 +3,28 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_supervisor_card"
 description: |-
-        Concrete class for supervisor card.
+        SupervisorCards represent supervisor modules present in a network device, exposing their identity and operational health/status. They provide inventory and state visibility for the control-plane hardware responsible for managing chassis/switch operations.
+        #### Purpose
+        Enable monitoring and troubleshooting of supervisor module presence, health, and capabilities (such as port counts), and correlate supervisors to their owned FC port inventory.
+        #### Key Concepts
+        - **Operational health**: `operState`, `operReason`, `status`, and `powerState` describe runtime condition and fault context.
+        - **Hardware identification**: `supervisorId`, `partNumber`, `hardwareVersion`, and `type` help uniquely identify the module.
+        - **Capacity visibility**: `numberOfPorts` summarizes port capacity exposed by the supervisor.
+        - **Port ownership**: `fcPorts` relates the supervisor to its Fibre Channel physical ports.
+        - **Device association**: `registeredDevice` ties the supervisor card inventory to a specific registered device.
 
 ---
 
 # Data Source: intersight_network_supervisor_card
-Concrete class for supervisor card.
+SupervisorCards represent supervisor modules present in a network device, exposing their identity and operational health/status. They provide inventory and state visibility for the control-plane hardware responsible for managing chassis/switch operations.
+#### Purpose
+Enable monitoring and troubleshooting of supervisor module presence, health, and capabilities (such as port counts), and correlate supervisors to their owned FC port inventory.
+#### Key Concepts
+- **Operational health**: `operState`, `operReason`, `status`, and `powerState` describe runtime condition and fault context.
+- **Hardware identification**: `supervisorId`, `partNumber`, `hardwareVersion`, and `type` help uniquely identify the module.
+- **Capacity visibility**: `numberOfPorts` summarizes port capacity exposed by the supervisor.
+- **Port ownership**: `fcPorts` relates the supervisor to its Fibre Channel physical ports.
+- **Device association**: `registeredDevice` ties the supervisor card inventory to a specific registered device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

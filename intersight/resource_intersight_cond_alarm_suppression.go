@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -95,35 +94,17 @@ func resourceCondAlarmSuppression() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "cond.AlarmRuleExpression",
+							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "cond.AlarmRuleExpression",
+							Computed:    true,
 						},
-						"operator": {
-							Description: "The operator to apply. Operators supported are: eq, contains, in.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"property": {
-							Description: "The property name keyword to filter on. For a list of supported property keywords\nsee the Intersight Help Center.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Type:       schema.TypeList,
-							Optional:   true,
-							ConfigMode: schema.SchemaConfigModeAttr,
-							Computed:   true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							}},
 					},
 				},
 			},
@@ -250,6 +231,46 @@ func resourceCondAlarmSuppression() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"end_task": {
+				Description: "A reference to a schedulerTaskSchedule resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"entity": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -290,6 +311,45 @@ func resourceCondAlarmSuppression() *schema.Resource {
 					},
 				},
 				ForceNew: true,
+			},
+			"filter_refs": {
+				Description: "An array of relationships to moBaseMo resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -332,6 +392,46 @@ func resourceCondAlarmSuppression() *schema.Resource {
 					}
 					return
 				}},
+			"organization": {
+				Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"owners": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -441,6 +541,46 @@ func resourceCondAlarmSuppression() *schema.Resource {
 				Description: "The start date for enabling this alarm suppression rule. The date must follow\nthe RFC 3339 format for date and time representation. If this date more than\n60 seconds in the past, the suppression rule will be rejected. If the date is\nwithin 60 seconds of the present time (plus or minus), the suppression will be\nstarted immediately. Otherwise, the suppression will be scheduled to start at\nthe requested time.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"start_task": {
+				Description: "A reference to a schedulerTaskSchedule resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -751,10 +891,10 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("alarm_rules"); ok {
-		x := make([]models.CondAlarmRuleExpression, 0)
+		x := make([]models.CondAbstractAlarmRule, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCondAlarmRuleExpressionWithDefaults()
+			o := models.NewCondAbstractAlarmRuleWithDefaults()
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -766,37 +906,11 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("cond.AlarmRuleExpression")
+			o.SetClassId("cond.AbstractAlarmRule")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["operator"]; ok {
-				{
-					x := (v.(string))
-					o.SetOperator(x)
-				}
-			}
-			if v, ok := l["property"]; ok {
-				{
-					x := (v.(string))
-					o.SetProperty(x)
-				}
-			}
-			if v, ok := l["value"]; ok {
-				{
-					x := make([]string, 0)
-					y := reflect.ValueOf(v)
-					for i := 0; i < y.Len(); i++ {
-						if y.Index(i).Interface() != nil {
-							x = append(x, y.Index(i).Interface().(string))
-						}
-					}
-					if len(x) > 0 {
-						o.SetValue(x)
-					}
 				}
 			}
 			x = append(x, *o)
@@ -866,6 +980,49 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 		o.SetEndDate(x)
 	}
 
+	if v, ok := d.GetOk("end_task"); ok {
+		p := make([]models.SchedulerTaskScheduleRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsSchedulerTaskScheduleRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetEndTask(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("entity"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
@@ -909,6 +1066,48 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("filter_refs"); ok {
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetFilterRefs(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -921,6 +1120,49 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetObjectType("cond.AlarmSuppression")
 
+	if v, ok := d.GetOk("organization"); ok {
+		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsOrganizationOrganizationRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetOrganization(x)
+		}
+	}
+
 	if v, ok := d.GetOk("rules_operator"); ok {
 		x := (v.(string))
 		o.SetRulesOperator(x)
@@ -930,6 +1172,49 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetStartDate(x)
+	}
+
+	if v, ok := d.GetOk("start_task"); ok {
+		p := make([]models.SchedulerTaskScheduleRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsSchedulerTaskScheduleRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStartTask(x)
+		}
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1068,7 +1353,7 @@ func resourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property AdditionalProperties in CondAlarmSuppression object: %s", err.Error())
 	}
 
-	if err := d.Set("alarm_rules", flattenListCondAlarmRuleExpression(s.GetAlarmRules(), d)); err != nil {
+	if err := d.Set("alarm_rules", flattenListCondAbstractAlarmRule(s.GetAlarmRules(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property AlarmRules in CondAlarmSuppression object: %s", err.Error())
 	}
 
@@ -1104,8 +1389,16 @@ func resourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property EndDate in CondAlarmSuppression object: %s", err.Error())
 	}
 
+	if err := d.Set("end_task", flattenMapSchedulerTaskScheduleRelationship(s.GetEndTask(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property EndTask in CondAlarmSuppression object: %s", err.Error())
+	}
+
 	if err := d.Set("entity", flattenMapMoBaseMoRelationship(s.GetEntity(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Entity in CondAlarmSuppression object: %s", err.Error())
+	}
+
+	if err := d.Set("filter_refs", flattenListMoBaseMoRelationship(s.GetFilterRefs(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property FilterRefs in CondAlarmSuppression object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -1126,6 +1419,10 @@ func resourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("odata_filter_internal", (s.GetOdataFilterInternal())); err != nil {
 		return diag.Errorf("error occurred while setting property OdataFilterInternal in CondAlarmSuppression object: %s", err.Error())
+	}
+
+	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Organization in CondAlarmSuppression object: %s", err.Error())
 	}
 
 	if err := d.Set("owners", (s.GetOwners())); err != nil {
@@ -1150,6 +1447,10 @@ func resourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("start_date", (s.GetStartDate()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property StartDate in CondAlarmSuppression object: %s", err.Error())
+	}
+
+	if err := d.Set("start_task", flattenMapSchedulerTaskScheduleRelationship(s.GetStartTask(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property StartTask in CondAlarmSuppression object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
@@ -1183,10 +1484,10 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 
 	if d.HasChange("alarm_rules") {
 		v := d.Get("alarm_rules")
-		x := make([]models.CondAlarmRuleExpression, 0)
+		x := make([]models.CondAbstractAlarmRule, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := &models.CondAlarmRuleExpression{}
+			o := &models.CondAbstractAlarmRule{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -1198,37 +1499,11 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("cond.AlarmRuleExpression")
+			o.SetClassId("cond.AbstractAlarmRule")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["operator"]; ok {
-				{
-					x := (v.(string))
-					o.SetOperator(x)
-				}
-			}
-			if v, ok := l["property"]; ok {
-				{
-					x := (v.(string))
-					o.SetProperty(x)
-				}
-			}
-			if v, ok := l["value"]; ok {
-				{
-					x := make([]string, 0)
-					y := reflect.ValueOf(v)
-					for i := 0; i < y.Len(); i++ {
-						if y.Index(i).Interface() != nil {
-							x = append(x, y.Index(i).Interface().(string))
-						}
-					}
-					if len(x) > 0 {
-						o.SetValue(x)
-					}
 				}
 			}
 			x = append(x, *o)
@@ -1298,6 +1573,50 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 		o.SetEndDate(x)
 	}
 
+	if d.HasChange("end_task") {
+		v := d.Get("end_task")
+		p := make([]models.SchedulerTaskScheduleRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsSchedulerTaskScheduleRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetEndTask(x)
+		}
+	}
+
 	if d.HasChange("entity") {
 		v := d.Get("entity")
 		p := make([]models.MoBaseMoRelationship, 0, 1)
@@ -1342,6 +1661,47 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if d.HasChange("filter_refs") {
+		v := d.Get("filter_refs")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetFilterRefs(x)
+	}
+
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -1356,6 +1716,50 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 
 	o.SetObjectType("cond.AlarmSuppression")
 
+	if d.HasChange("organization") {
+		v := d.Get("organization")
+		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsOrganizationOrganizationRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetOrganization(x)
+		}
+	}
+
 	if d.HasChange("rules_operator") {
 		v := d.Get("rules_operator")
 		x := (v.(string))
@@ -1367,6 +1771,50 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetStartDate(x)
+	}
+
+	if d.HasChange("start_task") {
+		v := d.Get("start_task")
+		p := make([]models.SchedulerTaskScheduleRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsSchedulerTaskScheduleRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStartTask(x)
+		}
 	}
 
 	if d.HasChange("tags") {

@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -40,6 +40,7 @@ type OsValidInstallTarget struct {
 	MraidJbod               []OsPhysicalDiskResponse  `json:"MraidJbod,omitempty"`
 	MraidVirtualDrives      []OsVirtualDriveResponse  `json:"MraidVirtualDrives,omitempty"`
 	MstorNvme               []OsPhysicalDiskResponse  `json:"MstorNvme,omitempty"`
+	N1Nvme                  []OsPhysicalDiskResponse  `json:"N1Nvme,omitempty"`
 	// Flag to denote the source of the request. If the call is from Orchestration UI, only the flat list of Install targets can be sent as response.
 	Src    *string                  `json:"Src,omitempty"`
 	U2Nvme []OsPhysicalDiskResponse `json:"U2Nvme,omitempty"`
@@ -493,6 +494,39 @@ func (o *OsValidInstallTarget) SetMstorNvme(v []OsPhysicalDiskResponse) {
 	o.MstorNvme = v
 }
 
+// GetN1Nvme returns the N1Nvme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OsValidInstallTarget) GetN1Nvme() []OsPhysicalDiskResponse {
+	if o == nil {
+		var ret []OsPhysicalDiskResponse
+		return ret
+	}
+	return o.N1Nvme
+}
+
+// GetN1NvmeOk returns a tuple with the N1Nvme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OsValidInstallTarget) GetN1NvmeOk() ([]OsPhysicalDiskResponse, bool) {
+	if o == nil || IsNil(o.N1Nvme) {
+		return nil, false
+	}
+	return o.N1Nvme, true
+}
+
+// HasN1Nvme returns a boolean if a field has been set.
+func (o *OsValidInstallTarget) HasN1Nvme() bool {
+	if o != nil && !IsNil(o.N1Nvme) {
+		return true
+	}
+
+	return false
+}
+
+// SetN1Nvme gets a reference to the given []OsPhysicalDiskResponse and assigns it to the N1Nvme field.
+func (o *OsValidInstallTarget) SetN1Nvme(v []OsPhysicalDiskResponse) {
+	o.N1Nvme = v
+}
+
 // GetSrc returns the Src field value if set, zero value otherwise.
 func (o *OsValidInstallTarget) GetSrc() string {
 	if o == nil || IsNil(o.Src) {
@@ -650,6 +684,9 @@ func (o OsValidInstallTarget) ToMap() (map[string]interface{}, error) {
 	if o.MstorNvme != nil {
 		toSerialize["MstorNvme"] = o.MstorNvme
 	}
+	if o.N1Nvme != nil {
+		toSerialize["N1Nvme"] = o.N1Nvme
+	}
 	if !IsNil(o.Src) {
 		toSerialize["Src"] = o.Src
 	}
@@ -726,6 +763,7 @@ func (o *OsValidInstallTarget) UnmarshalJSON(data []byte) (err error) {
 		MraidJbod               []OsPhysicalDiskResponse  `json:"MraidJbod,omitempty"`
 		MraidVirtualDrives      []OsVirtualDriveResponse  `json:"MraidVirtualDrives,omitempty"`
 		MstorNvme               []OsPhysicalDiskResponse  `json:"MstorNvme,omitempty"`
+		N1Nvme                  []OsPhysicalDiskResponse  `json:"N1Nvme,omitempty"`
 		// Flag to denote the source of the request. If the call is from Orchestration UI, only the flat list of Install targets can be sent as response.
 		Src    *string                  `json:"Src,omitempty"`
 		U2Nvme []OsPhysicalDiskResponse `json:"U2Nvme,omitempty"`
@@ -751,6 +789,7 @@ func (o *OsValidInstallTarget) UnmarshalJSON(data []byte) (err error) {
 		varOsValidInstallTarget.MraidJbod = varOsValidInstallTargetWithoutEmbeddedStruct.MraidJbod
 		varOsValidInstallTarget.MraidVirtualDrives = varOsValidInstallTargetWithoutEmbeddedStruct.MraidVirtualDrives
 		varOsValidInstallTarget.MstorNvme = varOsValidInstallTargetWithoutEmbeddedStruct.MstorNvme
+		varOsValidInstallTarget.N1Nvme = varOsValidInstallTargetWithoutEmbeddedStruct.N1Nvme
 		varOsValidInstallTarget.Src = varOsValidInstallTargetWithoutEmbeddedStruct.Src
 		varOsValidInstallTarget.U2Nvme = varOsValidInstallTargetWithoutEmbeddedStruct.U2Nvme
 		varOsValidInstallTarget.Servers = varOsValidInstallTargetWithoutEmbeddedStruct.Servers
@@ -784,6 +823,7 @@ func (o *OsValidInstallTarget) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "MraidJbod")
 		delete(additionalProperties, "MraidVirtualDrives")
 		delete(additionalProperties, "MstorNvme")
+		delete(additionalProperties, "N1Nvme")
 		delete(additionalProperties, "Src")
 		delete(additionalProperties, "U2Nvme")
 		delete(additionalProperties, "Servers")

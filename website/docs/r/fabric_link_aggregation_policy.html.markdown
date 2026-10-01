@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_link_aggregation_policy"
 description: |-
-        A policy to configure the link settings for all the port channels (including LACP).
+        The LinkAggregationPolicy object defines link aggregation behavior (including LACP-related intent) used for port-channels and aggregated links.
+        #### Purpose
+        LinkAggregationPolicy enables consistent configuration of aggregated links by defining LACP behavior and link aggregation controls in a reusable policy form, supporting predictable port-channel behavior across deployments.
+        #### Key Concepts
+        - **Port-channel behavior definition:** Encodes how aggregated links should negotiate and operate.
+        - **Reusable policy intent:** Allows consistent LAG configuration across many port-channels and profiles.
+        - **Operational stability:** Helps standardize aggregation behavior to reduce misconfiguration risk.
+        - **Integration with port roles:** Typically consumed by port-channel role objects that define port-channel membership.
 
 ---
 
 # Resource: intersight_fabric_link_aggregation_policy
-A policy to configure the link settings for all the port channels (including LACP).
+The LinkAggregationPolicy object defines link aggregation behavior (including LACP-related intent) used for port-channels and aggregated links.
+#### Purpose
+LinkAggregationPolicy enables consistent configuration of aggregated links by defining LACP behavior and link aggregation controls in a reusable policy form, supporting predictable port-channel behavior across deployments.
+#### Key Concepts
+- **Port-channel behavior definition:** Encodes how aggregated links should negotiate and operate.
+- **Reusable policy intent:** Allows consistent LAG configuration across many port-channels and profiles.
+- **Operational stability:** Helps standardize aggregation behavior to reduce misconfiguration risk.
+- **Integration with port roles:** Typically consumed by port-channel role objects that define port-channel membership.
 ## Usage Example
 ### Resource Creation
 
@@ -36,7 +50,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `lacp_rate`:(string) Flag used to indicate whether LACP PDUs are to be sent 'fast', i.e., every 1 second.* `normal` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `fast` - The standard 4th generation UCS Fabric Interconnect with 54 ports. 
+* `lacp_rate`:(string) Configures the LACP control-packet rate. Fast sends a packet every second and Normal sends one every 30 seconds.* `normal` - Sends LACP control packets once every 30 seconds.* `fast` - Sends LACP control packets once every second. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 

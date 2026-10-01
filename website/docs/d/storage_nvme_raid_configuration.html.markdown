@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_nvme_raid_configuration"
 description: |-
-        Object that stores Nvme Raid Configuration data under a Server Profile, used for creation of vd, update pd state for NVMe on reboot.
+        NvmeRaidConfigurations store NVMe HW-RAID configuration under a server profile for a specific controller. They capture drive-group definitions, virtual drive configurations, dedicated hot spares, and physical disk state changes that are meant to be applied at the endpoint on reboot (used in activation workflows).
+        #### Purpose
+        Persist the computed NVMe RAID plan per controller for a given Server Profile so the system can apply the correct NVMe HW-RAID configuration during the activation step.
+        #### Key Concepts
+        - **NVMe HW-RAID activation plan:** Encodes what should be created/changed for NVMe RAID after reboot.
+        - **Controller-scoped configuration:** Tied to a specific controller DN/MOID (and series for behavior-specific calculations).
+        - **Composite config model:** Includes drive groups (with virtual drives), dedicated hot spares, and disk-state updates.
+        - **Profile and policy correlation:** Links back to the StoragePolicy used to generate the plan and the Server Profile where it applies.
 
 ---
 
 # Data Source: intersight_storage_nvme_raid_configuration
-Object that stores Nvme Raid Configuration data under a Server Profile, used for creation of vd, update pd state for NVMe on reboot.
+NvmeRaidConfigurations store NVMe HW-RAID configuration under a server profile for a specific controller. They capture drive-group definitions, virtual drive configurations, dedicated hot spares, and physical disk state changes that are meant to be applied at the endpoint on reboot (used in activation workflows).
+#### Purpose
+Persist the computed NVMe RAID plan per controller for a given Server Profile so the system can apply the correct NVMe HW-RAID configuration during the activation step.
+#### Key Concepts
+- **NVMe HW-RAID activation plan:** Encodes what should be created/changed for NVMe RAID after reboot.
+- **Controller-scoped configuration:** Tied to a specific controller DN/MOID (and series for behavior-specific calculations).
+- **Composite config model:** Includes drive groups (with virtual drives), dedicated hot spares, and disk-state updates.
+- **Profile and policy correlation:** Links back to the StoragePolicy used to generate the plan and the Server Profile where it applies.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,36 @@ subcategory: "rack"
 layout: "intersight"
 page_title: "Intersight: intersight_rack_unit_personality"
 description: |-
-        This can be used internally to model a server based on a defined personality without having to reprogram the server PID.
+        UnitPersonalities represent “rack unit personality” records that model a server as if it had a particular defined personality, without requiring the server’s product identifier (PID) to be reprogrammed. This enables internal workflows and inventory consumers to treat a rack server as a specific personality profile for capability, compatibility, or behavior modeling.
+        #### Purpose
+        Provide a read-only (and selectively updatable) inventory object that captures an assigned personality identity and descriptive metadata for a rack unit, allowing the platform to model and reason about the server’s effective personality independent of its physical PID programming.
+        #### Key Concepts
+        - **Personality-based modeling**: Enables representing a server according to a defined personality (`personalityId`/`name`) without changing hardware PID.
+        - **Rack unit scope**: Labeled “RackUnit Personality” and permission-inherited from `computeRackUnit`, tying access and applicability to the underlying rack unit.
+        - **Inventory object pattern**: Extends `inventory.Base`, indicating it is an observed/recorded entity used for inventory and correlation.
+        - **Identity and metadata**:
+        - `personalityId` uniquely identifies the personality applied/recognized.
+        - `name` provides a human-readable personality name.
+        - `additionalInfo` carries supporting descriptive context.
+        - **Source integration**: Includes handlers for UCSM (`computePersonality`) and CIMC (`rackUnitPersonality`) queries, showing it can be populated from multiple management endpoints.
+        - **Governed updates**: UPDATE is limited to administrators who manage servers, reflecting controlled modification of the modeled personality context.
 
 ---
 
 # Data Source: intersight_rack_unit_personality
-This can be used internally to model a server based on a defined personality without having to reprogram the server PID.
+UnitPersonalities represent “rack unit personality” records that model a server as if it had a particular defined personality, without requiring the server’s product identifier (PID) to be reprogrammed. This enables internal workflows and inventory consumers to treat a rack server as a specific personality profile for capability, compatibility, or behavior modeling.
+#### Purpose
+Provide a read-only (and selectively updatable) inventory object that captures an assigned personality identity and descriptive metadata for a rack unit, allowing the platform to model and reason about the server’s effective personality independent of its physical PID programming.
+#### Key Concepts
+- **Personality-based modeling**: Enables representing a server according to a defined personality (`personalityId`/`name`) without changing hardware PID.
+- **Rack unit scope**: Labeled “RackUnit Personality” and permission-inherited from `computeRackUnit`, tying access and applicability to the underlying rack unit.
+- **Inventory object pattern**: Extends `inventory.Base`, indicating it is an observed/recorded entity used for inventory and correlation.
+- **Identity and metadata**:
+  - `personalityId` uniquely identifies the personality applied/recognized.
+  - `name` provides a human-readable personality name.
+  - `additionalInfo` carries supporting descriptive context.
+- **Source integration**: Includes handlers for UCSM (`computePersonality`) and CIMC (`rackUnitPersonality`) queries, showing it can be populated from multiple management endpoints.
+- **Governed updates**: UPDATE is limited to administrators who manage servers, reflecting controlled modification of the modeled personality context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

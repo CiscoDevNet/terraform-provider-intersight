@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_inc_license_count"
 description: |-
-        Customer operation object to request reservation code.
+        IncLicenseCounts represent aggregated consumption across multiple Nexus Cloud tiers/variants (for example, fixed and modular tier counts at different capacities).
+        #### Purpose
+        Provides a summarized view of Nexus Cloud tier consumption to support reporting and compliance.
+        #### Key Concepts
+        - **Multi-tier aggregation:** Tracks counts across several tier shapes (e.g., fixed bandwidth tiers and modular slot tiers).
+        - **Dashboard-ready metrics:** Intended for quick visibility into what’s claimed/consuming.
+        - **System-updated counters:** Values are typically maintained by services rather than direct user input.
+        - **Account-scoped:** Associated to AccountLicenseData to align with account licensing state.
 
 ---
 
 # Data Source: intersight_license_inc_license_count
-Customer operation object to request reservation code.
+IncLicenseCounts represent aggregated consumption across multiple Nexus Cloud tiers/variants (for example, fixed and modular tier counts at different capacities).
+#### Purpose
+Provides a summarized view of Nexus Cloud tier consumption to support reporting and compliance.
+#### Key Concepts
+- **Multi-tier aggregation:** Tracks counts across several tier shapes (e.g., fixed bandwidth tiers and modular slot tiers).
+- **Dashboard-ready metrics:** Intended for quick visibility into what’s claimed/consuming.
+- **System-updated counters:** Values are typically maintained by services rather than direct user input.
+- **Account-scoped:** Associated to AccountLicenseData to align with account licensing state.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

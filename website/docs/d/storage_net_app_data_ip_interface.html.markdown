@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_data_ip_interface"
 description: |-
-        NetApp Data IP interface is a logical interface for data within the svm scope.
+        The NetAppDataIpInterfaces object represents a logical interface (LIF) used for data traffic within an SVM.
+        ####  Purpose
+        It manages the network connectivity used by clients to access data, providing the IP addressing and port mapping required for storage access.
+        ####  Key Concepts
+        - **Connectivity:** Maps logical interfaces to physical ports and nodes.
+        - **Service Management:** Defines the services (e.g., NFS, CIFS) supported by the interface.
+        - **Failover:** Tracks the home node and port to ensure resilient data access.
 
 ---
 
 # Data Source: intersight_storage_net_app_data_ip_interface
-NetApp Data IP interface is a logical interface for data within the svm scope.
+The NetAppDataIpInterfaces object represents a logical interface (LIF) used for data traffic within an SVM.
+####  Purpose
+It manages the network connectivity used by clients to access data, providing the IP addressing and port mapping required for storage access.
+####  Key Concepts
+- **Connectivity:** Maps logical interfaces to physical ports and nodes.
+- **Service Management:** Defines the services (e.g., NFS, CIFS) supported by the interface.
+- **Failover:** Tracks the home node and port to ensure resilient data access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

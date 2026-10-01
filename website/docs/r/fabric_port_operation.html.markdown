@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_port_operation"
 description: |-
-        PortOperation objects allows the user to alter the state of the port.
+        The PortOperation object represents an operational control surface for individual ports, allowing administrative actions such as enable/disable and specific admin-triggered operations.
+        #### Purpose
+        PortOperation enables controlled and auditable port-level operations through the API, allowing administrators to change port operational/admin state or trigger supported port operations under appropriate permissions.
+        #### Key Concepts
+        - **Port operational controls:** Models administrative actions that affect a port’s active behavior.
+        - **Workflow-oriented state:** Uses config/operational state reporting to reflect apply progress and outcomes.
+        - **Scoped targeting:** Identifies a precise port via slot/port/breakout coordinates (and optional FEX/IOM context).
+        - **Safety and access control:** Designed for privileged operations, often with explicit privilege gating.
 
 ---
 
 # Resource: intersight_fabric_port_operation
-PortOperation objects allows the user to alter the state of the port.
+The PortOperation object represents an operational control surface for individual ports, allowing administrative actions such as enable/disable and specific admin-triggered operations.
+#### Purpose
+PortOperation enables controlled and auditable port-level operations through the API, allowing administrators to change port operational/admin state or trigger supported port operations under appropriate permissions.
+#### Key Concepts
+- **Port operational controls:** Models administrative actions that affect a port’s active behavior.
+- **Workflow-oriented state:** Uses config/operational state reporting to reflect apply progress and outcomes.
+- **Scoped targeting:** Identifies a precise port via slot/port/breakout coordinates (and optional FEX/IOM context).
+- **Safety and access control:** Designed for privileged operations, often with explicit privilege gating.
 ## Usage Example
 ### Resource Creation
 

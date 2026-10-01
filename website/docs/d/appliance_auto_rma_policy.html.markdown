@@ -3,12 +3,28 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_auto_rma_policy"
 description: |-
-        Auto rma policy to decide whether rma data should be collected.
+        AutoRmaPolicies control whether RMA-related data collection is enabled for a given registered device. The policy provides a simple on/off switch that determines if the system should collect the diagnostic data needed to support automated or streamlined return-material-authorization (RMA) workflows.
+        #### Purpose
+        Allow controlled enablement of RMA data collection on a per-device basis, so administrators can turn collection on when needed (or keep it disabled) while maintaining a clear association to the device that the policy governs.
+        #### Key Concepts
+        - **Per-device applicability**: The policy identity is the `registeredDevice`, indicating there is effectively one policy context per device registration.
+        - **Data collection toggle**: `enable` is the primary control; when `true`, RMA data collection is enabled.
+        - **Device lifecycle coupling**: `onpeerdelete: cascade` ties the policy to the registered device—if the device registration is removed, the associated policy is removed as well.
+        - **Governed administration**: Broad READ visibility is provided across common operator roles, while CREATE/UPDATE is restricted to `System Administrator`.
+        - **Inventory/alarm context linkage**: The `registeredDevice` relationship description indicates the policy is associated with the device reporting inventory on which alarms may be raised, supporting operational traceability.
 
 ---
 
 # Data Source: intersight_appliance_auto_rma_policy
-Auto rma policy to decide whether rma data should be collected.
+AutoRmaPolicies control whether RMA-related data collection is enabled for a given registered device. The policy provides a simple on/off switch that determines if the system should collect the diagnostic data needed to support automated or streamlined return-material-authorization (RMA) workflows.
+#### Purpose
+Allow controlled enablement of RMA data collection on a per-device basis, so administrators can turn collection on when needed (or keep it disabled) while maintaining a clear association to the device that the policy governs.
+#### Key Concepts
+- **Per-device applicability**: The policy identity is the `registeredDevice`, indicating there is effectively one policy context per device registration.
+- **Data collection toggle**: `enable` is the primary control; when `true`, RMA data collection is enabled.
+- **Device lifecycle coupling**: `onpeerdelete: cascade` ties the policy to the registered device—if the device registration is removed, the associated policy is removed as well.
+- **Governed administration**: Broad READ visibility is provided across common operator roles, while CREATE/UPDATE is restricted to `System Administrator`.
+- **Inventory/alarm context linkage**: The `registeredDevice` relationship description indicates the policy is associated with the device reporting inventory on which alarms may be raised, supporting operational traceability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

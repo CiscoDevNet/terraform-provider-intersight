@@ -3,12 +3,30 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_file_item"
 description: |-
-        The local Storage Files present in a server.
+        FileItems represent files stored in a server’s local storage repository. They provide an inventory view of file artifacts (for example ISO images or CSV files), including basic metadata such as size, type, visibility/mapping to the host, and the time the file was uploaded or last updated.
+        #### Purpose
+        Expose a read-only inventory of local storage files on servers so administrators can discover available artifacts, validate what is present on local storage, and support workflows that depend on locally stored files (such as mounting media).
+        #### Key Concepts
+        - **Local storage file inventory**: Models individual file artifacts present on server-local storage.
+        - **File identity and metadata**: Captures identifiers and descriptive attributes such as `fileId`, `name`, `description`, `type`, and `size`.
+        - **Host mapping visibility**: `hostVisible` indicates whether the file is mapped/visible for host-side use.
+        - **Recency tracking**: `updateTime` helps determine when the file was uploaded/updated.
+        - **Device association**: `registeredDevice` links the file inventory to the specific managed server/device in Intersight.
+        - **Permission inheritance via storage item**: Inherits permissions from `storageItem`, aligning access with the parent local storage context.
 
 ---
 
 # Data Source: intersight_storage_file_item
-The local Storage Files present in a server.
+FileItems represent files stored in a server’s local storage repository. They provide an inventory view of file artifacts (for example ISO images or CSV files), including basic metadata such as size, type, visibility/mapping to the host, and the time the file was uploaded or last updated.
+#### Purpose
+Expose a read-only inventory of local storage files on servers so administrators can discover available artifacts, validate what is present on local storage, and support workflows that depend on locally stored files (such as mounting media).
+#### Key Concepts
+- **Local storage file inventory**: Models individual file artifacts present on server-local storage.
+- **File identity and metadata**: Captures identifiers and descriptive attributes such as `fileId`, `name`, `description`, `type`, and `size`.
+- **Host mapping visibility**: `hostVisible` indicates whether the file is mapped/visible for host-side use.
+- **Recency tracking**: `updateTime` helps determine when the file was uploaded/updated.
+- **Device association**: `registeredDevice` links the file inventory to the specific managed server/device in Intersight.
+- **Permission inheritance via storage item**: Inherits permissions from `storageItem`, aligning access with the parent local storage context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

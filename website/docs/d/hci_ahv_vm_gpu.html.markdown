@@ -3,12 +3,26 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_ahv_vm_gpu"
 description: |-
-        A GPU associated with an AHV VM.
+        AhvVmGpus represent GPU allocations attached to AHV VMs. They describe which GPU resource is assigned, the allocation fraction, and relevant PCI addressing and driver signals.
+        #### Purpose
+        Provide visibility into vGPU/GPU assignments for AHV VMs to support monitoring, troubleshooting, and capacity planning for GPU-enabled workloads.
+        #### Key Concepts
+        - **GPU allocation record:** Represents the attachment/allocation of GPU resources to a specific VM.
+        - **Fractional assignment model:** Captures how a physical GPU is partitioned/assigned to a VM (fraction semantics).
+        - **PCI identity:** Includes PCI address/SBDF-style identifiers to correlate with host/cluster GPU inventory.
+        - **Guest readiness signals:** Tracks guest driver version and other GPU allocation metadata relevant to operability.
 
 ---
 
 # Data Source: intersight_hci_ahv_vm_gpu
-A GPU associated with an AHV VM.
+AhvVmGpus represent GPU allocations attached to AHV VMs. They describe which GPU resource is assigned, the allocation fraction, and relevant PCI addressing and driver signals.
+#### Purpose
+Provide visibility into vGPU/GPU assignments for AHV VMs to support monitoring, troubleshooting, and capacity planning for GPU-enabled workloads.
+#### Key Concepts
+- **GPU allocation record:** Represents the attachment/allocation of GPU resources to a specific VM.
+- **Fractional assignment model:** Captures how a physical GPU is partitioned/assigned to a VM (fraction semantics).
+- **PCI identity:** Includes PCI address/SBDF-style identifiers to correlate with host/cluster GPU inventory.
+- **Guest readiness signals:** Tracks guest driver version and other GPU allocation metadata relevant to operability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_export_policy"
 description: |-
-        NetApp export policies enable client access control to volumes. Clients that match specific IP addresses and/or specific authentication types are granted access.
+        The NetAppExportPolicies object defines the rules that control client access to volumes via NFS.
+        ####  Purpose
+        This provides granular security control, specifying which clients can access volumes and what level of access (Read-Only/Read-Write) they are granted.
+        ####  Key Concepts
+        - **Rule-Based Access:** Uses client matching and security types (e.g., sys, krb5) to grant access.
+        - **Security Style:** Defines how permissions are enforced (UNIX vs. NTFS).
+        - **Policy Management:** Groups export rules into policies that can be applied to volumes.
 
 ---
 
 # Data Source: intersight_storage_net_app_export_policy
-NetApp export policies enable client access control to volumes. Clients that match specific IP addresses and/or specific authentication types are granted access.
+The NetAppExportPolicies object defines the rules that control client access to volumes via NFS.
+####  Purpose
+This provides granular security control, specifying which clients can access volumes and what level of access (Read-Only/Read-Write) they are granted.
+####  Key Concepts
+- **Rule-Based Access:** Uses client matching and security types (e.g., sys, krb5) to grant access.
+- **Security Style:** Defines how permissions are enforced (UNIX vs. NTFS).
+- **Policy Management:** Groups export rules into policies that can be applied to volumes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,22 +3,26 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_disk"
 description: |-
-        The physical disk belonging to a node in a Nutanix cluster.
+        Disks represent physical disks belonging to nodes within a Nutanix cluster. They provide inventory and operational status for the storage devices that contribute capacity and performance to the cluster.
         #### Purpose
-        The Disk object provides a detailed view of disk configurations.
+        Provide detailed disk-level inventory and status for cluster storage monitoring, troubleshooting, and lifecycle operations.
         #### Key Concepts
-        - **Configuration Details:** Offers insights into disk attributes like storage tier, size, model, and status.
-        - **Operational Status:** Monitors disk operational state and storage utilization.
+        - **Node-associated hardware component:** A disk belongs to a specific node and is reported in the context of its cluster.
+        - **Tier and capacity characteristics:** Captures storage tier classification and capacity/usage-related attributes for analysis.
+        - **Operational state flags:** Includes a rich set of booleans for health, removal/migration, mount state, online/offline, and diagnostics.
+        - **Firmware awareness:** Tracks current and target firmware versions to support upgrade planning and compliance checks.
 
 ---
 
 # Data Source: intersight_hci_disk
-The physical disk belonging to a node in a Nutanix cluster.
+Disks represent physical disks belonging to nodes within a Nutanix cluster. They provide inventory and operational status for the storage devices that contribute capacity and performance to the cluster.
 #### Purpose
-The Disk object provides a detailed view of disk configurations.
+Provide detailed disk-level inventory and status for cluster storage monitoring, troubleshooting, and lifecycle operations.
 #### Key Concepts
-- **Configuration Details:** Offers insights into disk attributes like storage tier, size, model, and status.
-- **Operational Status:** Monitors disk operational state and storage utilization.
+- **Node-associated hardware component:** A disk belongs to a specific node and is reported in the context of its cluster.
+- **Tier and capacity characteristics:** Captures storage tier classification and capacity/usage-related attributes for analysis.
+- **Operational state flags:** Includes a rich set of booleans for health, removal/migration, mount state, online/offline, and diagnostics.
+- **Firmware awareness:** Tracks current and target firmware versions to support upgrade planning and compliance checks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
