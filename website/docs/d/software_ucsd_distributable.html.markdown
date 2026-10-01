@@ -3,12 +3,22 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_ucsd_distributable"
 description: |-
-        A UCSD connector pack image distributed by Cisco.
+        The UcsdDistributables object represents a UCS Director connector pack image distributed by Cisco.
+        #### Purpose
+        It manages the lifecycle of UCS Director images, ensuring that the connector packs are available for deployment and upgrades.
+        #### Key Concepts
+        - **UCSD Distribution:** Provides a standardized way to manage images for UCS Director.
+        - **Lifecycle Management:** Orchestrates the download, staging, and installation of UCSD images.
 
 ---
 
 # Data Source: intersight_software_ucsd_distributable
-A UCSD connector pack image distributed by Cisco.
+The UcsdDistributables object represents a UCS Director connector pack image distributed by Cisco.
+#### Purpose
+It manages the lifecycle of UCS Director images, ensuring that the connector packs are available for deployment and upgrades.
+#### Key Concepts
+- **UCSD Distribution:** Provides a standardized way to manage images for UCS Director.
+- **Lifecycle Management:** Orchestrates the download, staging, and installation of UCSD images.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

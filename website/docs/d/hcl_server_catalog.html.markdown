@@ -3,12 +3,26 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_server_catalog"
 description: |-
-        Collection used to store the server catalog information. This contails details about all the supported cpu models for the selected Server model.
+        ServerCatalogs are system-owned catalog entries that map a server PID (three-part server identifier) to the set of supported processor families for that server model. This supports HCL-driven validation and guided selection of compatible CPU families.
+        #### Purpose
+        Expose server model → supported processor family mappings so users and automation can construct valid server/CPU combinations for HCL compatibility evaluation.
+        #### Key Concepts
+        - **Server model identifier:** Uses `serverPid` as the canonical lookup key for the server model.
+        - **Processor family mapping:** Lists supported processor families associated with the server PID.
+        - **Compatibility guidance:** Enables front-end selection and backend validation to avoid unsupported server/CPU combinations.
+        - **System catalog semantics:** Maintained as system-owned reference data and exposed read-only to authorized roles.
 
 ---
 
 # Data Source: intersight_hcl_server_catalog
-Collection used to store the server catalog information. This contails details about all the supported cpu models for the selected Server model.
+ServerCatalogs are system-owned catalog entries that map a server PID (three-part server identifier) to the set of supported processor families for that server model. This supports HCL-driven validation and guided selection of compatible CPU families.
+#### Purpose
+Expose server model → supported processor family mappings so users and automation can construct valid server/CPU combinations for HCL compatibility evaluation.
+#### Key Concepts
+- **Server model identifier:** Uses `serverPid` as the canonical lookup key for the server model.
+- **Processor family mapping:** Lists supported processor families associated with the server PID.
+- **Compatibility guidance:** Enables front-end selection and backend validation to avoid unsupported server/CPU combinations.
+- **System catalog semantics:** Maintained as system-owned reference data and exposed read-only to authorized roles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

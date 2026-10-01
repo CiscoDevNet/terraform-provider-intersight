@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_array"
 description: |-
-        The details of the Pure storage array.
+        The PureArrays object represents a Pure Storage array managed within the system.
+        #### Purpose
+        It serves as the top-level container for all Pure Storage hardware and software resources, providing a central point for array management and monitoring.
+        #### Key Concepts
+        - **Array Identity:** Tracks the unique identifier and name of the Pure Storage array.
+        - **Connectivity:** Manages the registration and connection status of the array.
+        - **Resource Management:** Acts as the parent for all controllers, volumes, and hosts associated with the array.
 
 ---
 
 # Data Source: intersight_storage_pure_array
-The details of the Pure storage array.
+The PureArrays object represents a Pure Storage array managed within the system.
+#### Purpose
+It serves as the top-level container for all Pure Storage hardware and software resources, providing a central point for array management and monitoring.
+#### Key Concepts
+- **Array Identity:** Tracks the unique identifier and name of the Pure Storage array.
+- **Connectivity:** Manages the registration and connection status of the array.
+- **Resource Management:** Acts as the parent for all controllers, volumes, and hosts associated with the array.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

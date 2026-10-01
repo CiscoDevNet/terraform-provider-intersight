@@ -3,12 +3,32 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_disk_group"
 description: |-
-        Group of one or more Spans to configure virtual drive.
+        DiskGroups represent a group of one or more Spans used to configure virtual drives. They capture disk-group identity and RAID intent and tie together spans, virtual drives, and dedicated hot spares under a specific storage controller.
+        #### Purpose
+        Provide a controller-scoped construct for organizing disks (via spans) into RAID-oriented groups that can then produce one or more virtual drives.
+        #### Key Concepts
+        - **RAID grouping construct**: `raidType` expresses the RAID level intended for virtual drives created from the disk group.
+        - **Human-identifiable naming**: `name` identifies the disk group on the controller.
+        - **Span composition**: `spans` is a collection of `storage.Span` objects (cascade on delete), defining the physical makeup of the disk group.
+        - **Virtual drive association**: `virtualDrives` links to the virtual drives built from the disk group (unset on delete to avoid forced removal of VDs).
+        - **Hot spare modeling**: `dedicatedHotSpares` lists physical drives configured as dedicated hot spares for the disk group.
+        - **Controller anchoring**: `storageController` ties the disk group to the controller where it is created (cascade on controller delete).
+        - **Inventory context**: `registeredDevice` provides device association for inventory scoping and correlation.
 
 ---
 
 # Data Source: intersight_storage_disk_group
-Group of one or more Spans to configure virtual drive.
+DiskGroups represent a group of one or more Spans used to configure virtual drives. They capture disk-group identity and RAID intent and tie together spans, virtual drives, and dedicated hot spares under a specific storage controller.
+#### Purpose
+Provide a controller-scoped construct for organizing disks (via spans) into RAID-oriented groups that can then produce one or more virtual drives.
+#### Key Concepts
+- **RAID grouping construct**: `raidType` expresses the RAID level intended for virtual drives created from the disk group.
+- **Human-identifiable naming**: `name` identifies the disk group on the controller.
+- **Span composition**: `spans` is a collection of `storage.Span` objects (cascade on delete), defining the physical makeup of the disk group.
+- **Virtual drive association**: `virtualDrives` links to the virtual drives built from the disk group (unset on delete to avoid forced removal of VDs).
+- **Hot spare modeling**: `dedicatedHotSpares` lists physical drives configured as dedicated hot spares for the disk group.
+- **Controller anchoring**: `storageController` ties the disk group to the controller where it is created (cascade on controller delete).
+- **Inventory context**: `registeredDevice` provides device association for inventory scoping and correlation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

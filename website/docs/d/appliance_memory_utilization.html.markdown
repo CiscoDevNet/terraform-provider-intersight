@@ -3,16 +3,28 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_memory_utilization"
 description: |-
-        Memory utilization metrics for Intersight Appliance nodes. Measures the percentage
-        of physical RAM being consumed, enabling monitoring of memory pressure and capacity
-        planning for optimal cluster performance.
+        MemoryUtilization provides memory utilization metrics for Intersight Appliance nodes. It measures the percentage of physical RAM in use, helping administrators detect memory pressure and plan capacity to maintain cluster performance.
+        #### Purpose
+        Expose a read-only, system-owned metric stream for monitoring node memory usage to support operational health monitoring, troubleshooting, and capacity planning.
+        #### Key Concepts
+        - **Node-scoped utilization metric**: Extends `appliance.NodeUtilizationMetric`, aligning it with the same appliance node metric framework as CPU utilization.
+        - **Percent-based RAM consumption**: Represents physical memory usage as a percentage of installed/available RAM.
+        - **Memory pressure detection**: Supports identifying sustained high utilization that may impact stability or performance.
+        - **System-owned telemetry**: `owner: system` indicates it is emitted and managed by the appliance/system.
+        - **Restricted read access**: Available via READ to account and system administrators.
 
 ---
 
 # Data Source: intersight_appliance_memory_utilization
-Memory utilization metrics for Intersight Appliance nodes. Measures the percentage 
-of physical RAM being consumed, enabling monitoring of memory pressure and capacity 
-planning for optimal cluster performance.
+MemoryUtilization provides memory utilization metrics for Intersight Appliance nodes. It measures the percentage of physical RAM in use, helping administrators detect memory pressure and plan capacity to maintain cluster performance.
+#### Purpose
+Expose a read-only, system-owned metric stream for monitoring node memory usage to support operational health monitoring, troubleshooting, and capacity planning.
+#### Key Concepts
+- **Node-scoped utilization metric**: Extends `appliance.NodeUtilizationMetric`, aligning it with the same appliance node metric framework as CPU utilization.
+- **Percent-based RAM consumption**: Represents physical memory usage as a percentage of installed/available RAM.
+- **Memory pressure detection**: Supports identifying sustained high utilization that may impact stability or performance.
+- **System-owned telemetry**: `owner: system` indicates it is emitted and managed by the appliance/system.
+- **Restricted read access**: Available via READ to account and system administrators.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,32 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_disk"
 description: |-
-        Depicts disk configuration used to create a virtual disk on a hypervisor datastore.
+        VmwareVirtualDisks represent the disk configuration and identity used to create and manage a virtual disk on a VMware hypervisor datastore. The object captures how a VM’s disk is provisioned (allocation type, mode, sharing), where it resides (disk path and datastore), and how it maps to underlying storage constructs (such as RDM LUN identifiers and compatibility mode).
+        #### Purpose
+        Provide a consistent, manageable representation of a VMware VM disk so operators and automation can inspect and (where permitted) update disk-related settings, correlate the disk to its VM and datastore, and troubleshoot performance or storage-mapping issues.
+        #### Key Concepts
+        - **VM-scoped identity**: The disk is uniquely identified in context using a combination of `key`, `vmIdentity`, and `registeredDevice`, reflecting that disks are managed relative to a VM and its owning vCenter/endpoint.
+        - **Provisioning and persistence semantics**: `storageAllocationType`, `diskMode`, `diskType`, `compatibilityMode`, and `sharing` describe whether the disk is a standard virtual disk or RDM, how it persists changes, and how it may be shared.
+        - **Performance controls**: `shares` and `limit` express I/O scheduling priority and an upper bound on IOPS to enforce consistent performance behavior.
+        - **Placement and pathing**: `virtualDiskPath` and the `datastore` relationship identify where the disk file lives and which datastore provides the backing storage.
+        - **Storage mapping (RDM visibility)**: Fields like `deviceName`, `lunUuid`, `vendor`, and `serial` help correlate a VM disk to an underlying LUN/device and diagnose masking/presentation problems.
+        - **VM composition details**: `controllerKey` and `unitNumber` describe where the disk is attached within the VM’s virtual hardware topology.
+        - **Cross-object correlation**: Relationships to `virtualMachine` and `datastore` tie the disk to the VM that owns it and the datastore that stores it, enabling end-to-end inventory and impact analysis.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_disk
-Depicts disk configuration used to create a virtual disk on a hypervisor datastore.
+VmwareVirtualDisks represent the disk configuration and identity used to create and manage a virtual disk on a VMware hypervisor datastore. The object captures how a VM’s disk is provisioned (allocation type, mode, sharing), where it resides (disk path and datastore), and how it maps to underlying storage constructs (such as RDM LUN identifiers and compatibility mode).
+#### Purpose
+Provide a consistent, manageable representation of a VMware VM disk so operators and automation can inspect and (where permitted) update disk-related settings, correlate the disk to its VM and datastore, and troubleshoot performance or storage-mapping issues.
+#### Key Concepts
+- **VM-scoped identity**: The disk is uniquely identified in context using a combination of `key`, `vmIdentity`, and `registeredDevice`, reflecting that disks are managed relative to a VM and its owning vCenter/endpoint.
+- **Provisioning and persistence semantics**: `storageAllocationType`, `diskMode`, `diskType`, `compatibilityMode`, and `sharing` describe whether the disk is a standard virtual disk or RDM, how it persists changes, and how it may be shared.
+- **Performance controls**: `shares` and `limit` express I/O scheduling priority and an upper bound on IOPS to enforce consistent performance behavior.
+- **Placement and pathing**: `virtualDiskPath` and the `datastore` relationship identify where the disk file lives and which datastore provides the backing storage.
+- **Storage mapping (RDM visibility)**: Fields like `deviceName`, `lunUuid`, `vendor`, and `serial` help correlate a VM disk to an underlying LUN/device and diagnose masking/presentation problems.
+- **VM composition details**: `controllerKey` and `unitNumber` describe where the disk is attached within the VM’s virtual hardware topology.
+- **Cross-object correlation**: Relationships to `virtualMachine` and `datastore` tie the disk to the VM that owns it and the datastore that stores it, enabling end-to-end inventory and impact analysis.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,28 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_element_summary"
 description: |-
-        View MO which aggregates information pertaining to a network element from mutiple MOs.
+        ElementSummaries are view (read-only) managed objects that aggregate information about a network element across multiple underlying managed objects. They provide a single summarized record that can be used for efficient listing, filtering, and UI/reporting without needing to query many individual MOs.
+        #### Purpose
+        Offer an aggregated, query-friendly summary of a network element’s key inventory and operational indicators (for example: model/version/serial, port counts, and fault summary) to support dashboards and fast inventory browsing.
+        #### Key Concepts
+        - **Aggregation view MO:** Combines attributes from multiple source MOs into one consolidated summary object.
+        - **Read-only consumption:** Exposed via READ for reporting/UI use cases rather than configuration.
+        - **Index-optimized querying:** Includes indexes for common filters such as model/port counts, serial, version, fault summary, management mode/name, device Moid, and bundle version.
+        - **Device and chassis context:** Maintains relationships to the `registeredDevice` (the associated endpoint) and, when applicable, an `equipment.Chassis` that houses the element.
+        - **Permission alignment:** Inherits permissions from an inventory parent context, ensuring summary visibility matches the underlying inventory scope.
 
 ---
 
 # Data Source: intersight_network_element_summary
-View MO which aggregates information pertaining to a network element from mutiple MOs.
+ElementSummaries are view (read-only) managed objects that aggregate information about a network element across multiple underlying managed objects. They provide a single summarized record that can be used for efficient listing, filtering, and UI/reporting without needing to query many individual MOs.
+#### Purpose
+Offer an aggregated, query-friendly summary of a network element’s key inventory and operational indicators (for example: model/version/serial, port counts, and fault summary) to support dashboards and fast inventory browsing.
+#### Key Concepts
+- **Aggregation view MO:** Combines attributes from multiple source MOs into one consolidated summary object.
+- **Read-only consumption:** Exposed via READ for reporting/UI use cases rather than configuration.
+- **Index-optimized querying:** Includes indexes for common filters such as model/port counts, serial, version, fault summary, management mode/name, device Moid, and bundle version.
+- **Device and chassis context:** Maintains relationships to the `registeredDevice` (the associated endpoint) and, when applicable, an `equipment.Chassis` that houses the element.
+- **Permission alignment:** Inherits permissions from an inventory parent context, ensuring summary visibility matches the underlying inventory scope.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "auditd"
 layout: "intersight"
 page_title: "Intersight: intersight_auditd_policy"
 description: |-
-        A policy to configure the kernel level AuditD settings in the Fabric Interconnect/Servers.
+        The auditd.Policy object defines AuditD configuration intent for Fabric Interconnects (and supported endpoints), providing policy-driven control over kernel-level auditing behavior.
+        #### Purpose
+        AuditD Policy allows administrators to enable/disable AuditD and to standardize AuditD logging behavior using a policy model. It supports consistent security/audit posture across managed environments by making auditing configuration repeatable and deployable.
+        #### Key Concepts
+        - **Policy-based auditing control:** Encodes audit enablement and logging-level intent in a reusable policy.
+        - **Security posture standardization:** Helps enforce consistent audit configuration across fabric deployments.
+        - **Workflow deployment integration:** Designed to be validated and deployed through fabric/domain workflows.
+        - **Operational traceability:** Supports security and compliance use cases by ensuring auditing behavior is explicitly managed.
 
 ---
 
 # Resource: intersight_auditd_policy
-A policy to configure the kernel level AuditD settings in the Fabric Interconnect/Servers.
+The auditd.Policy object defines AuditD configuration intent for Fabric Interconnects (and supported endpoints), providing policy-driven control over kernel-level auditing behavior.
+#### Purpose
+AuditD Policy allows administrators to enable/disable AuditD and to standardize AuditD logging behavior using a policy model. It supports consistent security/audit posture across managed environments by making auditing configuration repeatable and deployable.
+#### Key Concepts
+- **Policy-based auditing control:** Encodes audit enablement and logging-level intent in a reusable policy.
+- **Security posture standardization:** Helps enforce consistent audit configuration across fabric deployments.
+- **Workflow deployment integration:** Designed to be validated and deployed through fabric/domain workflows.
+- **Operational traceability:** Supports security and compliance use cases by ensuring auditing behavior is explicitly managed.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_port_policy"
 description: |-
-        A policy for all the physical ports of the Fabric Interconnect.
+        The PortPolicy object is the primary policy container for defining how physical ports on a Fabric Interconnect are intended to be configured and used. This provides the policy scope under which port roles, port-channel roles, and port-mode settings are created and managed.
+        #### Purpose
+        PortPolicy establishes a consistent, reusable framework for port configuration across one or more Fabric Interconnect profiles. It centralizes the definition of port intent (server/uplink/appliance, port-channels, unified/breakout behaviors) and serves as the anchor relationship for role objects that apply configuration to specific ports or port groups.
+        #### Key Concepts
+        - **Policy anchor for port intent:** Acts as the parent context for port roles, port-channel roles, and port-mode definitions.
+        - **Reuse via profile association:** Designed to be referenced by multiple switch profiles to ensure consistent configuration.
+        - **Platform-aware behavior:** Can capture platform model intent (e.g., device model targeting) so validation and deployment align with hardware capabilities.
+        - **Role-driven modeling:** Uses role objects (server/uplink/appliance, FC/FCoE roles) to describe intent without exposing low-level CLI constructs.
 
 ---
 
 # Data Source: intersight_fabric_port_policy
-A policy for all the physical ports of the Fabric Interconnect.
+The PortPolicy object is the primary policy container for defining how physical ports on a Fabric Interconnect are intended to be configured and used. This provides the policy scope under which port roles, port-channel roles, and port-mode settings are created and managed.
+#### Purpose
+PortPolicy establishes a consistent, reusable framework for port configuration across one or more Fabric Interconnect profiles. It centralizes the definition of port intent (server/uplink/appliance, port-channels, unified/breakout behaviors) and serves as the anchor relationship for role objects that apply configuration to specific ports or port groups.
+#### Key Concepts
+- **Policy anchor for port intent:** Acts as the parent context for port roles, port-channel roles, and port-mode definitions.
+- **Reuse via profile association:** Designed to be referenced by multiple switch profiles to ensure consistent configuration.
+- **Platform-aware behavior:** Can capture platform model intent (e.g., device model targeting) so validation and deployment align with hardware capabilities.
+- **Role-driven modeling:** Uses role objects (server/uplink/appliance, FC/FCoE roles) to describe intent without exposing low-level CLI constructs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

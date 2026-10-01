@@ -3,12 +3,24 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_usb_device"
 description: |-
-        Usb Boot Device configured on the server.
+        UsbDevices represent USB boot devices configured in the server’s boot policy.
+        #### Purpose
+        Allow USB to be included as a boot option in the server’s policy-defined boot order.
+        #### Key Concepts
+        - **Boot policy element:** A USB device is a configured boot target in policy.
+        - **Order and state:** Includes ordering and enabled/disabled semantics via the configured device base.
+        - **Server association:** Applies to a specific server through its boot policy context.
 
 ---
 
 # Data Source: intersight_boot_usb_device
-Usb Boot Device configured on the server.
+UsbDevices represent USB boot devices configured in the server’s boot policy.
+#### Purpose
+Allow USB to be included as a boot option in the server’s policy-defined boot order.
+#### Key Concepts
+- **Boot policy element:** A USB device is a configured boot target in policy.
+- **Order and state:** Includes ordering and enabled/disabled semantics via the configured device base.
+- **Server association:** Applies to a specific server through its boot policy context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

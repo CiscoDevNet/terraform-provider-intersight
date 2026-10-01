@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_sioc_module_descriptor"
 description: |-
-        Descriptor that uniquely identifies an SIOC module.
+        The SiocModuleDescriptor object uniquely identifies an SIOC module platform in the capability catalog.
+        #### Purpose
+        This provides a descriptor key that allows discovered SIOC hardware to be matched to catalog definitions, enabling consistent capability/constraint evaluation for S-Series I/O controller modules.
+        #### Key Concepts
+        - **Module identity key:** Encodes identifying attributes to match SIOC modules to catalog entries.
+        - **Catalog correlation:** Connects physical inventory to capability-driven behaviors.
+        - **Revision awareness:** Supports differentiation by revision where applicable.
+        - **Platform standardization:** Provides a consistent identification mechanism across environments.
 
 ---
 
 # Data Source: intersight_capability_sioc_module_descriptor
-Descriptor that uniquely identifies an SIOC module.
+The SiocModuleDescriptor object uniquely identifies an SIOC module platform in the capability catalog.
+#### Purpose
+This provides a descriptor key that allows discovered SIOC hardware to be matched to catalog definitions, enabling consistent capability/constraint evaluation for S-Series I/O controller modules.
+#### Key Concepts
+- **Module identity key:** Encodes identifying attributes to match SIOC modules to catalog entries.
+- **Catalog correlation:** Connects physical inventory to capability-driven behaviors.
+- **Revision awareness:** Supports differentiation by revision where applicable.
+- **Platform standardization:** Provides a consistent identification mechanism across environments.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

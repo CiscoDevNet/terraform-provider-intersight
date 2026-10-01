@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -32,6 +32,8 @@ type TechsupportmanagementTechSupportFileInfo struct {
 	FileName *string `json:"FileName,omitempty"`
 	// Techsupport file size in bytes.
 	FileSize *int64 `json:"FileSize,omitempty"`
+	// Reason for techsupport failure, if any.
+	Reason *string `json:"Reason,omitempty"`
 	// The Url to download the techsupport file.
 	TechsupportDownloadUrl *string `json:"TechsupportDownloadUrl,omitempty"`
 	// The upload status of the techsupport file.
@@ -186,6 +188,38 @@ func (o *TechsupportmanagementTechSupportFileInfo) SetFileSize(v int64) {
 	o.FileSize = &v
 }
 
+// GetReason returns the Reason field value if set, zero value otherwise.
+func (o *TechsupportmanagementTechSupportFileInfo) GetReason() string {
+	if o == nil || IsNil(o.Reason) {
+		var ret string
+		return ret
+	}
+	return *o.Reason
+}
+
+// GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TechsupportmanagementTechSupportFileInfo) GetReasonOk() (*string, bool) {
+	if o == nil || IsNil(o.Reason) {
+		return nil, false
+	}
+	return o.Reason, true
+}
+
+// HasReason returns a boolean if a field has been set.
+func (o *TechsupportmanagementTechSupportFileInfo) HasReason() bool {
+	if o != nil && !IsNil(o.Reason) {
+		return true
+	}
+
+	return false
+}
+
+// SetReason gets a reference to the given string and assigns it to the Reason field.
+func (o *TechsupportmanagementTechSupportFileInfo) SetReason(v string) {
+	o.Reason = &v
+}
+
 // GetTechsupportDownloadUrl returns the TechsupportDownloadUrl field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportFileInfo) GetTechsupportDownloadUrl() string {
 	if o == nil || IsNil(o.TechsupportDownloadUrl) {
@@ -282,6 +316,9 @@ func (o TechsupportmanagementTechSupportFileInfo) ToMap() (map[string]interface{
 	if !IsNil(o.FileSize) {
 		toSerialize["FileSize"] = o.FileSize
 	}
+	if !IsNil(o.Reason) {
+		toSerialize["Reason"] = o.Reason
+	}
 	if !IsNil(o.TechsupportDownloadUrl) {
 		toSerialize["TechsupportDownloadUrl"] = o.TechsupportDownloadUrl
 	}
@@ -347,6 +384,8 @@ func (o *TechsupportmanagementTechSupportFileInfo) UnmarshalJSON(data []byte) (e
 		FileName *string `json:"FileName,omitempty"`
 		// Techsupport file size in bytes.
 		FileSize *int64 `json:"FileSize,omitempty"`
+		// Reason for techsupport failure, if any.
+		Reason *string `json:"Reason,omitempty"`
 		// The Url to download the techsupport file.
 		TechsupportDownloadUrl *string `json:"TechsupportDownloadUrl,omitempty"`
 		// The upload status of the techsupport file.
@@ -362,6 +401,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) UnmarshalJSON(data []byte) (e
 		varTechsupportmanagementTechSupportFileInfo.ObjectType = varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct.ObjectType
 		varTechsupportmanagementTechSupportFileInfo.FileName = varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct.FileName
 		varTechsupportmanagementTechSupportFileInfo.FileSize = varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct.FileSize
+		varTechsupportmanagementTechSupportFileInfo.Reason = varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct.Reason
 		varTechsupportmanagementTechSupportFileInfo.TechsupportDownloadUrl = varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct.TechsupportDownloadUrl
 		varTechsupportmanagementTechSupportFileInfo.UploadStatus = varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct.UploadStatus
 		*o = TechsupportmanagementTechSupportFileInfo(varTechsupportmanagementTechSupportFileInfo)
@@ -385,6 +425,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) UnmarshalJSON(data []byte) (e
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileName")
 		delete(additionalProperties, "FileSize")
+		delete(additionalProperties, "Reason")
 		delete(additionalProperties, "TechsupportDownloadUrl")
 		delete(additionalProperties, "UploadStatus")
 

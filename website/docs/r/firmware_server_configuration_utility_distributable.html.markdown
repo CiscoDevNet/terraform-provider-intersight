@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_server_configuration_utility_distributable"
 description: |-
-        A server configuration utility image distributed by Cisco.
+        The ServerConfigurationUtilityDistributables object  represents a Server Configuration Utility (SCU) image distributed by Cisco.
+        #### Purpose
+        It manages the lifecycle of SCU images, which are used to configure and maintain server hardware.
+        #### Key Concepts
+        - **Utility Distribution:** Provides a standardized way to manage SCU images.
+        - **Lifecycle Management:** Orchestrates the availability and use of SCU images for server configuration.
 
 ---
 
 # Resource: intersight_firmware_server_configuration_utility_distributable
-A server configuration utility image distributed by Cisco.
+The ServerConfigurationUtilityDistributables object  represents a Server Configuration Utility (SCU) image distributed by Cisco.
+#### Purpose
+It manages the lifecycle of SCU images, which are used to configure and maintain server hardware.
+#### Key Concepts
+- **Utility Distribution:** Provides a standardized way to manage SCU images.
+- **Lifecycle Management:** Orchestrates the availability and use of SCU images for server configuration.
 ## Usage Example
 ### Resource Creation
 

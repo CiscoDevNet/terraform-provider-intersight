@@ -3,12 +3,24 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_config_result"
 description: |-
-        Result of a previously applied Persistent Memory configuration on a server.
+        PersistentMemoryConfigResults represent the outcome of a previously applied persistent memory configuration on a server, including configuration result/state/sequence and any error description.
+        #### Purpose
+        Expose applied configuration results so users can determine if prior PMem configuration actions succeeded and why failures occurred.
+        #### Key Concepts
+        - **Result record:** Captures outcome and error details for applied PMem configuration.
+        - **Sequence tracking:** Includes sequence numbers to correlate to configuration attempts.
+        - **Namespace result linkage:** Can relate to per-namespace configuration result records.
 
 ---
 
 # Data Source: intersight_memory_persistent_memory_config_result
-Result of a previously applied Persistent Memory configuration on a server.
+PersistentMemoryConfigResults represent the outcome of a previously applied persistent memory configuration on a server, including configuration result/state/sequence and any error description.
+#### Purpose
+Expose applied configuration results so users can determine if prior PMem configuration actions succeeded and why failures occurred.
+#### Key Concepts
+- **Result record:** Captures outcome and error details for applied PMem configuration.
+- **Sequence tracking:** Includes sequence numbers to correlate to configuration attempts.
+- **Namespace result linkage:** Can relate to per-namespace configuration result records.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_ip_interface"
 description: |-
-        NetApp IP interface is a logical interface.
+        The NetAppIpInterfaces object represents logical IP interfaces used for management or data traffic.
+        ####  Purpose
+        This provides the network identity for the storage system, enabling communication across the cluster or to external clients.
+        ####  Key Concepts
+        - **Network Identity:** Manages IP addresses, netmasks, and IP families.
+        - **Service Association:** Links interfaces to specific services and policies.
+        - **Home Mapping:** Tracks the home node and port for failover purposes.
 
 ---
 
 # Data Source: intersight_storage_net_app_ip_interface
-NetApp IP interface is a logical interface.
+The NetAppIpInterfaces object represents logical IP interfaces used for management or data traffic.
+####  Purpose
+This provides the network identity for the storage system, enabling communication across the cluster or to external clients.
+####  Key Concepts
+- **Network Identity:** Manages IP addresses, netmasks, and IP families.
+- **Service Association:** Links interfaces to specific services and policies.
+- **Home Mapping:** Tracks the home node and port for failover purposes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

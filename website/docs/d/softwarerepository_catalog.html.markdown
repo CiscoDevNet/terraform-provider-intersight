@@ -3,12 +3,24 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_catalog"
 description: |-
-        A container MO that holds references to the files in an account's image repository. It is internally created for each account and is used to hold information about all user uploaded files.
+        The Catalogs object serves as a container MO that holds references to files in an account's image repository.
+        #### Purpose
+        It organizes user-uploaded and system-provided files, providing a central management point for all images and files within an account context.
+        #### Key Concepts
+        - **Containerization:** Groups files and images within an account or system context.
+        - **Synchronization:** Tracks the status of image catalog synchronization operations.
+        - **Account Isolation:** Ensures that catalogs are isolated per user account.
 
 ---
 
 # Data Source: intersight_softwarerepository_catalog
-A container MO that holds references to the files in an account's image repository. It is internally created for each account and is used to hold information about all user uploaded files.
+The Catalogs object serves as a container MO that holds references to files in an account's image repository.
+#### Purpose
+It organizes user-uploaded and system-provided files, providing a central management point for all images and files within an account context.
+#### Key Concepts
+- **Containerization:** Groups files and images within an account or system context.
+- **Synchronization:** Tracks the status of image catalog synchronization operations.
+- **Account Isolation:** Ensures that catalogs are isolated per user account.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

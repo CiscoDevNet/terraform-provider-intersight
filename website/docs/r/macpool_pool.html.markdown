@@ -3,12 +3,28 @@ subcategory: "macpool"
 layout: "intersight"
 page_title: "Intersight: intersight_macpool_pool"
 description: |-
-        Pool represents a collection of MAC addresses that can be allocated to VNICs of a server profile.
+        Pools represent a collection of MAC addresses that can be allocated to consumers (for example, VNICs associated with server profiles). A pool defines one or more MAC blocks that collectively make up the available allocation space.
+        #### Purpose
+        Provide the administrative construct for defining, managing, and reusing MAC address ranges across policies/profiles, enabling consistent and conflict-free MAC assignment at scale.
+        #### Key Concepts
+        - **Administrative container for MAC ranges**: `macBlocks` defines one or more address ranges (blocks) that compose the pool.
+        - **System-managed block objects**: `blockHeads` provides read-only pointers to the realized IdBlock objects created for the pool.
+        - **Lifecycle controls and tagging**: Supports CRUD operations and conditional privileges for setting/unsetting tags (policy governance).
+        - **Stable identity**: The pool is identified by `name`, allowing consistent references from reservations and allocation flows.
+        - **Downstream consumers**: The pool exists to serve allocations (leases) and to back pool membership tracking (pool members).
 
 ---
 
 # Resource: intersight_macpool_pool
-Pool represents a collection of MAC addresses that can be allocated to VNICs of a server profile.
+Pools represent a collection of MAC addresses that can be allocated to consumers (for example, VNICs associated with server profiles). A pool defines one or more MAC blocks that collectively make up the available allocation space.
+#### Purpose
+Provide the administrative construct for defining, managing, and reusing MAC address ranges across policies/profiles, enabling consistent and conflict-free MAC assignment at scale.
+#### Key Concepts
+- **Administrative container for MAC ranges**: `macBlocks` defines one or more address ranges (blocks) that compose the pool.
+- **System-managed block objects**: `blockHeads` provides read-only pointers to the realized IdBlock objects created for the pool.
+- **Lifecycle controls and tagging**: Supports CRUD operations and conditional privileges for setting/unsetting tags (policy governance).
+- **Stable identity**: The pool is identified by `name`, allowing consistent references from reservations and allocation flows.
+- **Downstream consumers**: The pool exists to serve allocations (leases) and to back pool membership tracking (pool members).
 ## Usage Example
 ### Resource Creation
 For a pool of 1000 MAC addresses.

@@ -3,12 +3,28 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_controller"
 description: |-
-        Storage Controller present in a server.
+        Controllers represent storage controllers present in a server (for example RAID or FlexFlash controllers). They expose controller identity, capabilities (RAID support, cache characteristics, max volumes), operational/health state, and relationships to the physical disks and virtual drives managed by the controller.
+        #### Purpose
+        Provide inventory and operational visibility into server storage controllers so administrators can monitor controller health/firmware, understand supported storage features, and correlate controllers to the disks and virtual drives they manage.
+        #### Key Concepts
+        - **Server storage control-plane**: The controller is the managing entity for attached disks and any created virtual drives.
+        - **Operational and health awareness**: Properties such as `operState`, `operability`, and `operReason` capture runtime condition and health issues.
+        - **Capabilities and configuration context**: Fields like `raidSupport`, cache sizes, supported strip sizes, and max volumes summarize what the controller can do.
+        - **Firmware correlation**: `runningFirmware` ties the controller to its running firmware versions for lifecycle and compliance views.
+        - **Topology relationships**: Links to `physicalDisks`, `physicalDiskExtensions`, `virtualDrives`, and `virtualDriveExtensions` establish how the controller maps to attached storage.
 
 ---
 
 # Data Source: intersight_storage_controller
-Storage Controller present in a server.
+Controllers represent storage controllers present in a server (for example RAID or FlexFlash controllers). They expose controller identity, capabilities (RAID support, cache characteristics, max volumes), operational/health state, and relationships to the physical disks and virtual drives managed by the controller.
+#### Purpose
+Provide inventory and operational visibility into server storage controllers so administrators can monitor controller health/firmware, understand supported storage features, and correlate controllers to the disks and virtual drives they manage.
+#### Key Concepts
+- **Server storage control-plane**: The controller is the managing entity for attached disks and any created virtual drives.
+- **Operational and health awareness**: Properties such as `operState`, `operability`, and `operReason` capture runtime condition and health issues.
+- **Capabilities and configuration context**: Fields like `raidSupport`, cache sizes, supported strip sizes, and max volumes summarize what the controller can do.
+- **Firmware correlation**: `runningFirmware` ties the controller to its running firmware versions for lifecycle and compliance views.
+- **Topology relationships**: Links to `physicalDisks`, `physicalDiskExtensions`, `virtualDrives`, and `virtualDriveExtensions` establish how the controller maps to attached storage.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

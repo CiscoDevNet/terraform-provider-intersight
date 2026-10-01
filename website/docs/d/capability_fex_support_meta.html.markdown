@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_fex_support_meta"
 description: |-
-        Internal meta-data to enable block domain upgrade when certain FEX models are connected.
+        The FexSupportMeta object provides internal metadata used to manage Fabric Extender (FEX) firmware upgrade compatibility.
+        #### Purpose
+        It enables the system to identify which FEX models are supported or unsupported during firmware operations, helping to block or allow domain upgrades based on connected FEX hardware.
+        #### Key Concepts
+        - **Compatibility Rules:** Defines series and models of FEX hardware that are subject to specific firmware upgrade constraints.
+        - **Operational Safety:** Prevents incompatible firmware operations when specific FEX models are detected.
 
 ---
 
 # Data Source: intersight_capability_fex_support_meta
-Internal meta-data to enable block domain upgrade when certain FEX models are connected.
+The FexSupportMeta object provides internal metadata used to manage Fabric Extender (FEX) firmware upgrade compatibility.
+#### Purpose
+It enables the system to identify which FEX models are supported or unsupported during firmware operations, helping to block or allow domain upgrades based on connected FEX hardware.
+#### Key Concepts
+- **Compatibility Rules:** Defines series and models of FEX hardware that are subject to specific firmware upgrade constraints.
+- **Operational Safety:** Prevents incompatible firmware operations when specific FEX models are detected.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

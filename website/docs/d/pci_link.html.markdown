@@ -3,12 +3,24 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_link"
 description: |-
-        The PCI Switch Link connected to PCIe Switch.
+        Links (pci) represent PCI switch links connected to a PCIe switch and provide upstream link status, speed, width, and slot/health context for connected PCI devices.
+        #### Purpose
+        Expose link-level connectivity characteristics between PCI devices and the PCIe switch.
+        #### Key Concepts
+        - **Connectivity telemetry:** Reports link speed/width/status.
+        - **Device association:** Describes the connected adapter/device and its slot.
+        - **Troubleshooting aid:** Helps diagnose degraded link performance or connectivity faults.
 
 ---
 
 # Data Source: intersight_pci_link
-The PCI Switch Link connected to PCIe Switch.
+Links (pci) represent PCI switch links connected to a PCIe switch and provide upstream link status, speed, width, and slot/health context for connected PCI devices.
+#### Purpose
+Expose link-level connectivity characteristics between PCI devices and the PCIe switch.
+#### Key Concepts
+- **Connectivity telemetry:** Reports link speed/width/status.
+- **Device association:** Describes the connected adapter/device and its slot.
+- **Troubleshooting aid:** Helps diagnose degraded link performance or connectivity faults.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

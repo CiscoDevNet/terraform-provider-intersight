@@ -9,14 +9,17 @@ Name | Type | Description | Notes
 **AccessActivationTime** | Pointer to **time.Time** | AccessActivationTime indicates the activation time for the guest user&#39;s access to the Account.  Before this time, if guest user tries to login to the account, access the account will be denied. | [optional] 
 **AccessExpiryTime** | Pointer to **time.Time** | AccessExpiryTime indicates the expiration time for the guest user&#39;s access to the Account. Its value can only be  assigned a date that falls within the range determined by the maximum expiration time configured for the  API entries. The AccessExpiry date can be edited to be earlier or later. | [optional] 
 **AccessLink** | Pointer to **string** | AccessLink using which the guest user uses to log in to Intersight. | [optional] [readonly] 
+**DynamicUserRetentionDays** | Pointer to **int64** | Number of days a CUI-authenticated dynamic user&#39;s membership remains valid after the most recent successful regular CUI login. Zero disables retained membership for this UserGroup. | [optional] [default to 30]
 **GroupType** | Pointer to **string** | Group type determines the type of groups that is being associated with users. By default, Default User group will be used for associating dynamic user login. If the value of the User Group is set to guest, then this type of user group will be used for guest user login. * &#x60;Default&#x60; - Default User Group Type used for dynamic users login. * &#x60;Guest&#x60; - Guest User Group type used for guest users login. | [optional] [default to "Default"]
 **Instruction** | Pointer to **string** | Instruction property holds detailed guidance and information intended for individuals  accessing the system as guest users. It holds the information to assist guests in navigating the platform,  understanding policies, and performing necessary actions to ensure a seamless and secure user experience. | [optional] 
 **Name** | Pointer to **string** | The name of the user group which the dynamic/or guest user belongs to. | [optional] 
+**RoutingRules** | Pointer to [**[]IamRoutingRuleReference**](IamRoutingRuleReference.md) |  | [optional] 
 **UniqueReferenceId** | Pointer to **string** | A random mixed character string which is unique per user groups. UniqueReferenceId is used as key for identifying the guest user groups. | [optional] [readonly] 
 **Idp** | Pointer to [**NullableIamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
 **Idpreference** | Pointer to [**NullableIamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
 **Permissions** | Pointer to [**[]IamPermissionRelationship**](IamPermissionRelationship.md) | An array of relationships to iamPermission resources. | [optional] 
 **Qualifier** | Pointer to [**NullableIamAbstractQualifierRelationship**](IamAbstractQualifierRelationship.md) |  | [optional] 
+**UserGroupMemberships** | Pointer to [**[]IamUserGroupMembershipRelationship**](IamUserGroupMembershipRelationship.md) | An array of relationships to iamUserGroupMembership resources. | [optional] [readonly] 
 **Users** | Pointer to [**[]IamUserRelationship**](IamUserRelationship.md) | An array of relationships to iamUser resources. | [optional] [readonly] 
 
 ## Methods
@@ -153,6 +156,31 @@ SetAccessLink sets AccessLink field to given value.
 
 HasAccessLink returns a boolean if a field has been set.
 
+### GetDynamicUserRetentionDays
+
+`func (o *IamUserGroup) GetDynamicUserRetentionDays() int64`
+
+GetDynamicUserRetentionDays returns the DynamicUserRetentionDays field if non-nil, zero value otherwise.
+
+### GetDynamicUserRetentionDaysOk
+
+`func (o *IamUserGroup) GetDynamicUserRetentionDaysOk() (*int64, bool)`
+
+GetDynamicUserRetentionDaysOk returns a tuple with the DynamicUserRetentionDays field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDynamicUserRetentionDays
+
+`func (o *IamUserGroup) SetDynamicUserRetentionDays(v int64)`
+
+SetDynamicUserRetentionDays sets DynamicUserRetentionDays field to given value.
+
+### HasDynamicUserRetentionDays
+
+`func (o *IamUserGroup) HasDynamicUserRetentionDays() bool`
+
+HasDynamicUserRetentionDays returns a boolean if a field has been set.
+
 ### GetGroupType
 
 `func (o *IamUserGroup) GetGroupType() string`
@@ -228,6 +256,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetRoutingRules
+
+`func (o *IamUserGroup) GetRoutingRules() []IamRoutingRuleReference`
+
+GetRoutingRules returns the RoutingRules field if non-nil, zero value otherwise.
+
+### GetRoutingRulesOk
+
+`func (o *IamUserGroup) GetRoutingRulesOk() (*[]IamRoutingRuleReference, bool)`
+
+GetRoutingRulesOk returns a tuple with the RoutingRules field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoutingRules
+
+`func (o *IamUserGroup) SetRoutingRules(v []IamRoutingRuleReference)`
+
+SetRoutingRules sets RoutingRules field to given value.
+
+### HasRoutingRules
+
+`func (o *IamUserGroup) HasRoutingRules() bool`
+
+HasRoutingRules returns a boolean if a field has been set.
+
+### SetRoutingRulesNil
+
+`func (o *IamUserGroup) SetRoutingRulesNil(b bool)`
+
+ SetRoutingRulesNil sets the value for RoutingRules to be an explicit nil
+
+### UnsetRoutingRules
+`func (o *IamUserGroup) UnsetRoutingRules()`
+
+UnsetRoutingRules ensures that no value is present for RoutingRules, not even an explicit nil
 ### GetUniqueReferenceId
 
 `func (o *IamUserGroup) GetUniqueReferenceId() string`
@@ -393,6 +456,41 @@ HasQualifier returns a boolean if a field has been set.
 `func (o *IamUserGroup) UnsetQualifier()`
 
 UnsetQualifier ensures that no value is present for Qualifier, not even an explicit nil
+### GetUserGroupMemberships
+
+`func (o *IamUserGroup) GetUserGroupMemberships() []IamUserGroupMembershipRelationship`
+
+GetUserGroupMemberships returns the UserGroupMemberships field if non-nil, zero value otherwise.
+
+### GetUserGroupMembershipsOk
+
+`func (o *IamUserGroup) GetUserGroupMembershipsOk() (*[]IamUserGroupMembershipRelationship, bool)`
+
+GetUserGroupMembershipsOk returns a tuple with the UserGroupMemberships field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserGroupMemberships
+
+`func (o *IamUserGroup) SetUserGroupMemberships(v []IamUserGroupMembershipRelationship)`
+
+SetUserGroupMemberships sets UserGroupMemberships field to given value.
+
+### HasUserGroupMemberships
+
+`func (o *IamUserGroup) HasUserGroupMemberships() bool`
+
+HasUserGroupMemberships returns a boolean if a field has been set.
+
+### SetUserGroupMembershipsNil
+
+`func (o *IamUserGroup) SetUserGroupMembershipsNil(b bool)`
+
+ SetUserGroupMembershipsNil sets the value for UserGroupMemberships to be an explicit nil
+
+### UnsetUserGroupMemberships
+`func (o *IamUserGroup) UnsetUserGroupMemberships()`
+
+UnsetUserGroupMemberships ensures that no value is present for UserGroupMemberships, not even an explicit nil
 ### GetUsers
 
 `func (o *IamUserGroup) GetUsers() []IamUserRelationship`

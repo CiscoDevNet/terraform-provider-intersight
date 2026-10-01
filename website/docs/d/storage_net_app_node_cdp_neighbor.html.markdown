@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_node_cdp_neighbor"
 description: |-
-        Information about the CDP neighbor connected to a given NetApp node port.
+        The NetAppNodeCdpNeighbors object provides information about devices connected to a node port via the Cisco Discovery Protocol.
+        ####  Purpose
+        It assists in network topology discovery, allowing administrators to see what switches or devices are connected to the storage array.
+        ####  Key Concepts
+        - **Topology Discovery:** Identifies connected devices, their IP addresses, and platforms.
+        - **Protocol Insights:** Tracks the protocol version and capabilities of the neighbor.
 
 ---
 
 # Data Source: intersight_storage_net_app_node_cdp_neighbor
-Information about the CDP neighbor connected to a given NetApp node port.
+The NetAppNodeCdpNeighbors object provides information about devices connected to a node port via the Cisco Discovery Protocol.
+####  Purpose
+It assists in network topology discovery, allowing administrators to see what switches or devices are connected to the storage array.
+####  Key Concepts
+- **Topology Discovery:** Identifies connected devices, their IP addresses, and platforms.
+- **Protocol Insights:** Tracks the protocol version and capabilities of the neighbor.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

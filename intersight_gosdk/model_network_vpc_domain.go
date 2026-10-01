@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the NetworkVpcDomain type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NetworkVpcDomain{}
 
-// NetworkVpcDomain Concrete class for VPC domain configured on a network device. VPC (Virtual Port Channel) domain is used to connect two different switches logically to a single switch.
+// NetworkVpcDomain VpcDomains represent Virtual Port Channel (vPC) domains configured on a network device. A vPC domain logically pairs two switches so they can behave like a single logical switch for downstream connectivity and port-channeling use cases. #### Purpose Provide visibility into the overall vPC domain configuration and health—peer relationship status, role, keepalive state, and consistency—supporting audits and troubleshooting of vPC behavior. #### Key Concepts - **Domain identity**: `vpcDomainId` uniquely identifies the vPC domain on the device. - **Peer relationship health**: `peerStatus` and `keepAliveStatus` describe whether the two peers are communicating correctly. - **Split-brain mitigation**: `autoRecoveryStatus` and `dualActiveExcludedVlans` relate to recovery behavior and VLAN handling during dual-active scenarios. - **Role and consistency**: `role` and `consistencyStatus` describe domain role and configuration consistency across peers. - **Scale indicator**: `vpcsConfiguredCount` shows how many vPCs are configured within the domain. - **Device association**: `registeredDevice` links the vPC domain to its device.
 type NetworkVpcDomain struct {
 	InventoryBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

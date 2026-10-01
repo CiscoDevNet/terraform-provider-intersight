@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_physical_disk_usage"
 description: |-
-        Has usage map between physical disks and virtual drives.
+        PhysicalDiskUsages represent mapping between physical disks and virtual drives, including span membership, starting block, block count, and current usage state.
+        #### Purpose
+        Expose how physical disks are consumed by virtual drives to support RAID/layout visibility and troubleshooting.
+        #### Key Concepts
+        - **Disk-to-VD mapping:** Indicates which VD a physical disk contributes to.
+        - **Layout details:** Captures span and block range allocation.
+        - **State reporting:** Includes current usage state for operational understanding.
 
 ---
 
 # Data Source: intersight_storage_physical_disk_usage
-Has usage map between physical disks and virtual drives.
+PhysicalDiskUsages represent mapping between physical disks and virtual drives, including span membership, starting block, block count, and current usage state.
+#### Purpose
+Expose how physical disks are consumed by virtual drives to support RAID/layout visibility and troubleshooting.
+#### Key Concepts
+- **Disk-to-VD mapping:** Indicates which VD a physical disk contributes to.
+- **Layout details:** Captures span and block range allocation.
+- **State reporting:** Includes current usage state for operational understanding.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

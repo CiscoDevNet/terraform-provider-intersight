@@ -3,12 +3,24 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_discovered_neighbor"
 description: |-
-        L2 neighbor (LLDP and CDP) available on the switch.
+        DiscoveredNeighbors represent Layer-2 neighbor information learned by a network element (Fabric Interconnect) via discovery protocols such as CDP and LLDP. These objects provide adjacency visibility for troubleshooting and topology mapping.
+        #### Purpose
+        Expose CDP/LLDP neighbor discovery results so operators can validate cabling, upstream/downstream connectivity, and physical topology.
+        #### Key Concepts
+        - **L2 adjacency inventory:** Captures discovered neighbors as reported by the switch.
+        - **Protocol source:** Neighbors are associated to the network element through CDP or LLDP collections.
+        - **Topology troubleshooting:** Enables identification of what is connected to which switch/port at L2.
 
 ---
 
 # Data Source: intersight_network_discovered_neighbor
-L2 neighbor (LLDP and CDP) available on the switch.
+DiscoveredNeighbors represent Layer-2 neighbor information learned by a network element (Fabric Interconnect) via discovery protocols such as CDP and LLDP. These objects provide adjacency visibility for troubleshooting and topology mapping.
+#### Purpose
+Expose CDP/LLDP neighbor discovery results so operators can validate cabling, upstream/downstream connectivity, and physical topology.
+#### Key Concepts
+- **L2 adjacency inventory:** Captures discovered neighbors as reported by the switch.
+- **Protocol source:** Neighbors are associated to the network element through CDP or LLDP collections.
+- **Topology troubleshooting:** Enables identification of what is connected to which switch/port at L2.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

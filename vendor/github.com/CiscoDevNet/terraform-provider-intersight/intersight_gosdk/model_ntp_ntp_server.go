@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the NtpNtpServer type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NtpNtpServer{}
 
-// NtpNtpServer Concrete class for NTP server configured on a network device. Network Time Protocol (NTP) is used to synchronize with computer clock time sources in a network.
+// NtpNtpServer NtpServers represent configured Network Time Protocol (NTP) peers/servers on a managed network device. They provide read-only visibility into which NTP endpoints a device uses for time synchronization and how those peers are characterized (stratum, polling interval, VRF). #### Purpose Expose NTP configuration inventory for network devices so administrators can validate time-synchronization sources and troubleshoot time drift or connectivity issues. #### Key Concepts - **Time synchronization inventory:** Captures the configured NTP server/peer IP address and associated parameters. - **Server vs peer semantics:** The `type` distinguishes whether the configured endpoint is an NTP server or a peer. - **Quality and cadence indicators:** `stratum` and `poll` reflect the peer’s hierarchy level and polling interval behavior. - **Routing context:** `vrfName` indicates which VRF the device uses to reach the NTP endpoint. - **Device association:** Each NtpServer is tied to a specific registered device and inherits permissions from the network element context.
 type NtpNtpServer struct {
 	InventoryBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

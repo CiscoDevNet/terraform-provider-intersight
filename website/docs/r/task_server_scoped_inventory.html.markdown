@@ -3,12 +3,28 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_server_scoped_inventory"
 description: |-
-        API to trigger on-demand Server inventory to update modified objects in Intersight report.
+        ServerScopedInventories are task-trigger objects used to initiate an on-demand inventory collection for a specific server registered in Intersight. Creating this object requests an immediate refresh so recently changed server-managed objects are re-collected and reflected in Intersight reports.
+        #### Purpose
+        Provide a user-invokable API mechanism to refresh server inventory on demand, reducing the need to wait for the next scheduled inventory cycle.
+        #### Key Concepts
+        - **On-demand inventory trigger:** A CREATE action initiates an inventory collection workflow for the target server.
+        - **Device-scoped execution:** The request is explicitly bound to a single `registeredDevice` (`asset.DeviceRegistration`).
+        - **Scoped inventory pattern:** Extends `connector.ScopedInventory`, aligning with the standard “trigger MO” pattern for inventory refresh.
+        - **Permission inheritance:** Inherits permissions from `registeredDevice`, ensuring only authorized users can trigger inventory for that server.
+        - **Lifecycle coupling:** Uses `onpeerdelete: cascade` so the trigger object is cleaned up when the device registration is removed.
 
 ---
 
 # Resource: intersight_task_server_scoped_inventory
-API to trigger on-demand Server inventory to update modified objects in Intersight report.
+ServerScopedInventories are task-trigger objects used to initiate an on-demand inventory collection for a specific server registered in Intersight. Creating this object requests an immediate refresh so recently changed server-managed objects are re-collected and reflected in Intersight reports.
+#### Purpose
+Provide a user-invokable API mechanism to refresh server inventory on demand, reducing the need to wait for the next scheduled inventory cycle.
+#### Key Concepts
+- **On-demand inventory trigger:** A CREATE action initiates an inventory collection workflow for the target server.
+- **Device-scoped execution:** The request is explicitly bound to a single `registeredDevice` (`asset.DeviceRegistration`).
+- **Scoped inventory pattern:** Extends `connector.ScopedInventory`, aligning with the standard “trigger MO” pattern for inventory refresh.
+- **Permission inheritance:** Inherits permissions from `registeredDevice`, ensuring only authorized users can trigger inventory for that server.
+- **Lifecycle coupling:** Uses `onpeerdelete: cascade` so the trigger object is cleaned up when the device registration is removed.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

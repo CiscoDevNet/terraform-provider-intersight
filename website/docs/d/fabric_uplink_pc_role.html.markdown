@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_uplink_pc_role"
 description: |-
-        Object sent by user to configure a ethernet uplink port-channel on the collection of ports.
+        The UplinkPcRole object represents configuration intent for an Ethernet uplink port-channel in a port policy.
+        #### Purpose
+        UplinkPcRole models an uplink built from multiple member ports. This provides the structure for defining port-channel intent, applying uplink-related policy attachments, and enabling consistent deployment and validation of aggregated uplinks.
+        #### Key Concepts
+        - **Aggregated uplink intent:** Represents an uplink composed of multiple physical ports.
+        - **Policy attachment for port-channels:** Provides an anchor for link aggregation, flow control, link control, VLAN allow-lists, and MACsec associations.
+        - **Scale and resiliency modeling:** Enables consistent modeling of redundant/high-bandwidth uplinks.
+        - **Policy-scoped identity:** Identifies the port-channel within a port policy context.
 
 ---
 
 # Data Source: intersight_fabric_uplink_pc_role
-Object sent by user to configure a ethernet uplink port-channel on the collection of ports.
+The UplinkPcRole object represents configuration intent for an Ethernet uplink port-channel in a port policy.
+#### Purpose
+UplinkPcRole models an uplink built from multiple member ports. This provides the structure for defining port-channel intent, applying uplink-related policy attachments, and enabling consistent deployment and validation of aggregated uplinks.
+#### Key Concepts
+- **Aggregated uplink intent:** Represents an uplink composed of multiple physical ports.
+- **Policy attachment for port-channels:** Provides an anchor for link aggregation, flow control, link control, VLAN allow-lists, and MACsec associations.
+- **Scale and resiliency modeling:** Enables consistent modeling of redundant/high-bandwidth uplinks.
+- **Policy-scoped identity:** Identifies the port-channel within a port policy context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

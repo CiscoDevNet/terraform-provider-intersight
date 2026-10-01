@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_equipment_slot_array"
 description: |-
-        Type to represent additional switch specific capabilities.
+        The EquipmentSlotArray object represents slot-layout and visual/positional metadata for a switch platform.
+        #### Purpose
+        This captures how slots/ports are arranged and indexed so interfaces can be rendered and reasoned about consistently (e.g., UI layouts, slot maps, and physical-to-logical mapping).
+        #### Key Concepts
+        - **Layout description:** Encodes the geometric/positional structure of slots for a hardware platform.
+        - **UI-friendly modeling:** Enables consistent port/slot visualization across devices.
+        - **Slot indexing semantics:** Defines how slots are numbered and grouped for interpretation.
+        - **Platform abstraction:** Keeps layout rules catalog-driven rather than hard-coded per model.
 
 ---
 
 # Data Source: intersight_capability_equipment_slot_array
-Type to represent additional switch specific capabilities.
+The EquipmentSlotArray object represents slot-layout and visual/positional metadata for a switch platform.
+#### Purpose
+This captures how slots/ports are arranged and indexed so interfaces can be rendered and reasoned about consistently (e.g., UI layouts, slot maps, and physical-to-logical mapping).
+#### Key Concepts
+- **Layout description:** Encodes the geometric/positional structure of slots for a hardware platform.
+- **UI-friendly modeling:** Enables consistent port/slot visualization across devices.
+- **Slot indexing semantics:** Defines how slots are numbered and grouped for interpretation.
+- **Platform abstraction:** Keeps layout rules catalog-driven rather than hard-coded per model.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_qtree"
 description: |-
-        NetApp qtree is a logically defined file system that can exist as a special subdirectory of the root directory within a volume.
+        The NetAppQtrees object represents a logically defined file system within a volume.
+        ####  Purpose
+        This provides a way to partition a volume, allowing for quotas and security settings to be applied to specific subdirectories.
+        ####  Key Concepts
+        - **Partitioning:** Creates a logical boundary within a volume.
+        - **Quota Management:** Enables per-qtree capacity management.
+        - **Security Style:** Defines how access permissions are controlled (UNIX/NTFS).
 
 ---
 
 # Data Source: intersight_storage_net_app_qtree
-NetApp qtree is a logically defined file system that can exist as a special subdirectory of the root directory within a volume.
+The NetAppQtrees object represents a logically defined file system within a volume.
+####  Purpose
+This provides a way to partition a volume, allowing for quotas and security settings to be applied to specific subdirectories.
+####  Key Concepts
+- **Partitioning:** Creates a logical boundary within a volume.
+- **Quota Management:** Enables per-qtree capacity management.
+- **Security Style:** Defines how access permissions are controlled (UNIX/NTFS).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

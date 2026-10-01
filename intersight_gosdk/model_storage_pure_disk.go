@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the StoragePureDisk type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StoragePureDisk{}
 
-// StoragePureDisk Disk entity associated with Pure FlashArray.
+// StoragePureDisk PureDisks represent the physical disk devices installed in a PureStorage array, forming the underlying capacity and performance layer used by higher-level storage constructs. #### Purpose Track disk inventory and health/state as part of modeling the array’s physical composition and operational readiness. #### Key Concepts - **Physical component modeling:** A PureDisk is a hardware element (as opposed to a logical entity like a volume). - **Array membership:** Disks are associated to an array/cluster context through relationships to other Pure physical objects. - **Lifecycle/health representation:** Used to reason about capacity availability and component failures at the hardware layer.
 type StoragePureDisk struct {
 	StorageBaseArrayDisk
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

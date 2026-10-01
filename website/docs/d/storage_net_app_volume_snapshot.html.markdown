@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_volume_snapshot"
 description: |-
-        NetApp Volume Snapshot is a read-only image of a traditional or FlexVol volume, or an aggregate, that captures the state of the file system at a point in time.
+        The NetAppVolumeSnapshots object represents a read-only, point-in-time image of a volume or aggregate.
+        #### Purpose
+        This provides the mechanism for data recovery and protection, capturing the state of the file system at a specific moment to allow for restoration in the event of data loss or corruption.
+        #### Key Concepts
+        - **Point-in-Time Recovery:** Enables restoration of data to the state captured by the snapshot.
+        - **Data Protection:** Serves as the base for SnapMirror replication and local data recovery.
+        - **Lifecycle Management:** Tracks snapshot metadata, including creation time and UUIDs, for efficient management.
 
 ---
 
 # Data Source: intersight_storage_net_app_volume_snapshot
-NetApp Volume Snapshot is a read-only image of a traditional or FlexVol volume, or an aggregate, that captures the state of the file system at a point in time.
+The NetAppVolumeSnapshots object represents a read-only, point-in-time image of a volume or aggregate.
+#### Purpose
+This provides the mechanism for data recovery and protection, capturing the state of the file system at a specific moment to allow for restoration in the event of data loss or corruption.
+#### Key Concepts
+- **Point-in-Time Recovery:** Enables restoration of data to the state captured by the snapshot.
+- **Data Protection:** Serves as the base for SnapMirror replication and local data recovery.
+- **Lifecycle Management:** Tracks snapshot metadata, including creation time and UUIDs, for efficient management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

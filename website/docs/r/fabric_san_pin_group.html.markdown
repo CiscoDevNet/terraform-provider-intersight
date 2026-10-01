@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_san_pin_group"
 description: |-
-        SAN PinGroup configuration sent by user for static pinning.
+        The SanPinGroup object represents a SAN static pinning group that defines which FC/FCoE uplink interface roles are eligible pin targets for SAN traffic.
+        #### Purpose
+        SanPinGroup enables deterministic SAN pinning by grouping eligible SAN uplink interfaces. It supports consistent vHBA or SAN traffic pinning behavior and helps ensure predictable pathing across the fabric.
+        #### Key Concepts
+        - **Static pinning model (SAN):** Defines deterministic uplink selection behavior for SAN traffic.
+        - **SAN interface-role targeting:** References eligible FC/FCoE uplink roles (ports or port-channels).
+        - **Policy-scoped management:** Governed within a port policy context.
+        - **Path stability:** Improves SAN troubleshooting and consistency by reducing dynamic variability.
 
 ---
 
 # Resource: intersight_fabric_san_pin_group
-SAN PinGroup configuration sent by user for static pinning.
+The SanPinGroup object represents a SAN static pinning group that defines which FC/FCoE uplink interface roles are eligible pin targets for SAN traffic.
+#### Purpose
+SanPinGroup enables deterministic SAN pinning by grouping eligible SAN uplink interfaces. It supports consistent vHBA or SAN traffic pinning behavior and helps ensure predictable pathing across the fabric.
+#### Key Concepts
+- **Static pinning model (SAN):** Defines deterministic uplink selection behavior for SAN traffic.
+- **SAN interface-role targeting:** References eligible FC/FCoE uplink roles (ports or port-channels).
+- **Policy-scoped management:** Governed within a port policy context.
+- **Path stability:** Improves SAN troubleshooting and consistency by reducing dynamic variability.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

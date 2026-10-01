@@ -3,12 +3,26 @@ subcategory: "management"
 layout: "intersight"
 page_title: "Intersight: intersight_management_interface"
 description: |-
-        Interface that provides access to the management controller.
+        Interfaces (management) represent network interfaces that provide access to the management controller, including IPv4/IPv6 addressing, gateway/mask, VLAN configuration, and event channel connection status.
+        #### Purpose
+        Provide management network interface inventory to support reachability validation, troubleshooting, and configuration verification.
+        #### Key Concepts
+        - **Management reachability:** Captures IP addressing and routing details for controller access.
+        - **Dual-stack support:** Includes IPv4 and IPv6 address fields.
+        - **Event channel status:** Reports UEM connection status for event streaming where applicable.
+        - **Controller association:** Represents interfaces belonging to a management controller context.
 
 ---
 
 # Data Source: intersight_management_interface
-Interface that provides access to the management controller.
+Interfaces (management) represent network interfaces that provide access to the management controller, including IPv4/IPv6 addressing, gateway/mask, VLAN configuration, and event channel connection status.
+#### Purpose
+Provide management network interface inventory to support reachability validation, troubleshooting, and configuration verification.
+#### Key Concepts
+- **Management reachability:** Captures IP addressing and routing details for controller access.
+- **Dual-stack support:** Includes IPv4 and IPv6 address fields.
+- **Event channel status:** Reports UEM connection status for event streaming where applicable.
+- **Controller association:** Represents interfaces belonging to a management controller context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -1248,9 +1248,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"latency_optimized_mode": {
-				Description:  "BIOS Token for setting Latency Optimized Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Description:  "BIOS Token for setting Latency Optimized Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring LatencyOptimizedMode token.\n* `disabled` - Value - disabled for configuring LatencyOptimizedMode token.\n* `enabled` - Value - enabled for configuring LatencyOptimizedMode token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},

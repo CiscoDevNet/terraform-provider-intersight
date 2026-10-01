@@ -3,11 +3,27 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_flow_control_policy"
 description: |-
+        The FlowControlPolicy object defines link-level flow control behavior, including priority-based flow control (PFC) intent for ports.
+        #### Purpose
+        FlowControlPolicy provides a policy-managed mechanism for setting flow control behavior on interfaces. It supports consistent adoption of PFC and flow control direction behaviors where needed for lossless traffic classes and predictable performance.
+        #### Key Concepts
+        - **Policy-based flow control:** Encapsulates flow-control behavior as reusable intent.
+        - **PFC enablement semantics:** Supports consistent lossless behavior expectations where required.
+        - **Interface-level applicability:** Typically attached to ports/roles that require specific flow control behavior.
+        - **Alignment with QoS:** Works with system QoS intent so lossless priorities can be enforced coherently.
         Priority Flow Control setting for each port.
 
 ---
 
 # Data Source: intersight_fabric_flow_control_policy
+The FlowControlPolicy object defines link-level flow control behavior, including priority-based flow control (PFC) intent for ports.
+#### Purpose
+FlowControlPolicy provides a policy-managed mechanism for setting flow control behavior on interfaces. It supports consistent adoption of PFC and flow control direction behaviors where needed for lossless traffic classes and predictable performance.
+#### Key Concepts
+- **Policy-based flow control:** Encapsulates flow-control behavior as reusable intent.
+- **PFC enablement semantics:** Supports consistent lossless behavior expectations where required.
+- **Interface-level applicability:** Typically attached to ports/roles that require specific flow control behavior.
+- **Alignment with QoS:** Works with system QoS intent so lossless priorities can be enforced coherently.
 Priority Flow Control setting for each port.
 ## Argument Reference
 The results of this data source are stored in `results` property.

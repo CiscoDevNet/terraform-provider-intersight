@@ -3,12 +3,26 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_coprocessor_card"
 description: |-
-        PCIe Compression and Cryptographic CPU Offload Card.
+        CoprocessorCards represent PCIe compression and cryptographic CPU offload cards inventoried from UCSM.
+        #### Purpose
+        Inventory and identify offload accelerator cards present in servers for capacity/feature awareness.
+        
+        #### Key Concepts
+        - **Specialized accelerator inventory:** Represents offload hardware (crypto/compression).
+        - **PCI placement:** Tracks PCI slot location for physical correlation.
+        - **Server hardware context:** A server-attached PCIe inventory object.
 
 ---
 
 # Data Source: intersight_pci_coprocessor_card
-PCIe Compression and Cryptographic CPU Offload Card.
+CoprocessorCards represent PCIe compression and cryptographic CPU offload cards inventoried from UCSM.
+#### Purpose
+Inventory and identify offload accelerator cards present in servers for capacity/feature awareness.
+ 
+#### Key Concepts
+- **Specialized accelerator inventory:** Represents offload hardware (crypto/compression).
+- **PCI placement:** Tracks PCI slot location for physical correlation.
+- **Server hardware context:** A server-attached PCIe inventory object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

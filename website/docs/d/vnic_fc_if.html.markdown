@@ -3,12 +3,24 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_fc_if"
 description: |-
-        Virtual Fibre Channel Interface.
+        The Virtual Fibre Channel Interface object represents a virtual Fibre Channel interface (vHBA) within the Cisco environment.
+        #### Purpose
+        It provides a programmable interface for defining, deploying, and managing vHBAs, ensuring that storage resources are accessible and policy-compliant.
+        #### Key Concepts
+        - **Storage Connectivity Abstraction:** Represents the vHBA as a managed object.
+        - **Policy-Driven Configuration:** Associates with SAN, QoS, and adapter policies for end-to-end control.
+        - **Template Support:** Supports derivation from templates with property overrides.
 
 ---
 
 # Data Source: intersight_vnic_fc_if
-Virtual Fibre Channel Interface.
+The Virtual Fibre Channel Interface object represents a virtual Fibre Channel interface (vHBA) within the Cisco environment.
+#### Purpose
+It provides a programmable interface for defining, deploying, and managing vHBAs, ensuring that storage resources are accessible and policy-compliant.
+#### Key Concepts
+- **Storage Connectivity Abstraction:** Represents the vHBA as a managed object.
+- **Policy-Driven Configuration:** Associates with SAN, QoS, and adapter policies for end-to-end control.
+- **Template Support:** Supports derivation from templates with property overrides.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

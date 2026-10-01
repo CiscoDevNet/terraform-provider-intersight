@@ -1,5 +1,5 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Testing SdcardApiService
 
@@ -55,32 +55,6 @@ func Test_intersight_SdcardApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.SdcardApi.GetSdcardPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SdcardApiService GetSdcardPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SdcardApi.GetSdcardPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SdcardApiService GetSdcardPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.SdcardApi.GetSdcardPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -3,12 +3,22 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_iks_bundle_distributable"
 description: |-
-        An IKS image bundle distributed by Cisco for Private Appliance.
+        The IksBundleDistributable object represents an IKS (Intersight Kubernetes Service) image bundle distributed by Cisco for Private Appliance environments.
+        #### Purpose
+        It manages the lifecycle of IKS bundles, providing a structured way to download and install bundled software for Kubernetes environments.
+        #### Key Concepts
+        - **Bundle Management:** Groups multiple IKS distributable images into a single bundle.
+        - **Appliance Support:** Specifically designed for Private Appliance deployments.
 
 ---
 
 # Data Source: intersight_software_iks_bundle_distributable
-An IKS image bundle distributed by Cisco for Private Appliance.
+The IksBundleDistributable object represents an IKS (Intersight Kubernetes Service) image bundle distributed by Cisco for Private Appliance environments.
+#### Purpose
+It manages the lifecycle of IKS bundles, providing a structured way to download and install bundled software for Kubernetes environments.
+#### Key Concepts
+- **Bundle Management:** Groups multiple IKS distributable images into a single bundle.
+- **Appliance Support:** Specifically designed for Private Appliance deployments.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

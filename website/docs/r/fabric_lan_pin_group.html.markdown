@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_lan_pin_group"
 description: |-
-        LAN PinGroup configuration sent by user for static pinning.
+        The LanPinGroup object represents a LAN static pinning group that defines which uplink interface roles are eligible pin targets for LAN traffic.
+        #### Purpose
+        LanPinGroup enables deterministic LAN pinning behavior by grouping eligible uplink interfaces. It supports consistent and repeatable pinning for LAN traffic (e.g., vNIC pinning), improving predictability and reducing reliance on dynamic selection.
+        #### Key Concepts
+        - **Static pinning model (LAN):** Defines deterministic uplink selection behavior for LAN traffic.
+        - **Interface-role targeting:** References eligible uplink roles (uplink ports or uplink port-channels).
+        - **Policy-scoped identity:** Managed within the scope of a port policy.
+        - **Traffic predictability:** Promotes stable LAN traffic placement and troubleshooting clarity.
 
 ---
 
 # Resource: intersight_fabric_lan_pin_group
-LAN PinGroup configuration sent by user for static pinning.
+The LanPinGroup object represents a LAN static pinning group that defines which uplink interface roles are eligible pin targets for LAN traffic.
+#### Purpose
+LanPinGroup enables deterministic LAN pinning behavior by grouping eligible uplink interfaces. It supports consistent and repeatable pinning for LAN traffic (e.g., vNIC pinning), improving predictability and reducing reliance on dynamic selection.
+#### Key Concepts
+- **Static pinning model (LAN):** Defines deterministic uplink selection behavior for LAN traffic.
+- **Interface-role targeting:** References eligible uplink roles (uplink ports or uplink port-channels).
+- **Policy-scoped identity:** Managed within the scope of a port policy.
+- **Traffic predictability:** Promotes stable LAN traffic placement and troubleshooting clarity.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

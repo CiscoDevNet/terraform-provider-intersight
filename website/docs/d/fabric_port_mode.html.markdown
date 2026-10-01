@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_port_mode"
 description: |-
-        Object sent by user to configure range of unified ports as FC/Ethernet or ports as breakout.
+        The PortMode object represents configuration intent for converting unified ports (e.g., FC/Ethernet) and/or establishing breakout configurations over a defined port range.
+        #### Purpose
+        PortMode provides a structured, policy-driven way to describe port-mode transformations that apply across a contiguous range of ports, supporting consistent rollout of unified-port mode changes and breakout enablement.
+        #### Key Concepts
+        - **Range-based configuration:** Applies a mode intent across a defined port range.
+        - **Unified/breakout modeling:** Represents transformations such as FC/Ethernet mode changes or breakout configurations.
+        - **Policy anchoring:** Exists in the scope of a port policy so it can be validated and deployed predictably.
+        - **Platform-aware constraints:** Intended to be validated against platform capabilities and allowable port ranges.
 
 ---
 
 # Data Source: intersight_fabric_port_mode
-Object sent by user to configure range of unified ports as FC/Ethernet or ports as breakout.
+The PortMode object represents configuration intent for converting unified ports (e.g., FC/Ethernet) and/or establishing breakout configurations over a defined port range.
+#### Purpose
+PortMode provides a structured, policy-driven way to describe port-mode transformations that apply across a contiguous range of ports, supporting consistent rollout of unified-port mode changes and breakout enablement.
+#### Key Concepts
+- **Range-based configuration:** Applies a mode intent across a defined port range.
+- **Unified/breakout modeling:** Represents transformations such as FC/Ethernet mode changes or breakout configurations.
+- **Policy anchoring:** Exists in the scope of a port policy so it can be validated and deployed predictably.
+- **Platform-aware constraints:** Intended to be validated against platform capabilities and allowable port ranges.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

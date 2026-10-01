@@ -3,12 +3,22 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_vif_id_pool"
 description: |-
-        Identifier pool that generates a unique identity to be used for provisioning the virtual path between the vethernet / vfc and the corresponding vNIC / vHBA on the adapter.
+        The VifIdPools object manages the pool of unique identifiers (Vif IDs) used for provisioning virtual paths between switches and vNICs/vHBAs.
+        #### Purpose
+        It ensures that each virtual interface is assigned a unique identifier, which is critical for establishing correct data paths in fabric-attached environments.
+        #### Key Concepts
+        - **Identifier Allocation:** Tracks available and allocated Vif IDs.
+        - **Path Provisioning:** Provides the necessary IDs to set up data paths on the switch.
 
 ---
 
 # Data Source: intersight_vnic_vif_id_pool
-Identifier pool that generates a unique identity to be used for provisioning the virtual path between the vethernet / vfc and the corresponding vNIC / vHBA on the adapter.
+The VifIdPools object manages the pool of unique identifiers (Vif IDs) used for provisioning virtual paths between switches and vNICs/vHBAs.
+#### Purpose
+It ensures that each virtual interface is assigned a unique identifier, which is critical for establishing correct data paths in fabric-attached environments.
+#### Key Concepts
+- **Identifier Allocation:** Tracks available and allocated Vif IDs.
+- **Path Provisioning:** Provides the necessary IDs to set up data paths on the switch.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

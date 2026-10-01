@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_disk"
 description: |-
-        Disk entity associated with Pure FlashArray.
+        PureDisks represent the physical disk devices installed in a PureStorage array, forming the underlying capacity and performance layer used by higher-level storage constructs.
+        #### Purpose
+        Track disk inventory and health/state as part of modeling the array’s physical composition and operational readiness.
+        #### Key Concepts
+        - **Physical component modeling:** A PureDisk is a hardware element (as opposed to a logical entity like a volume).
+        - **Array membership:** Disks are associated to an array/cluster context through relationships to other Pure physical objects.
+        - **Lifecycle/health representation:** Used to reason about capacity availability and component failures at the hardware layer.
 
 ---
 
 # Data Source: intersight_storage_pure_disk
-Disk entity associated with Pure FlashArray.
+PureDisks represent the physical disk devices installed in a PureStorage array, forming the underlying capacity and performance layer used by higher-level storage constructs.
+#### Purpose
+Track disk inventory and health/state as part of modeling the array’s physical composition and operational readiness.
+#### Key Concepts
+- **Physical component modeling:** A PureDisk is a hardware element (as opposed to a logical entity like a volume).
+- **Array membership:** Disks are associated to an array/cluster context through relationships to other Pure physical objects.
+- **Lifecycle/health representation:** Used to reason about capacity availability and component failures at the hardware layer.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

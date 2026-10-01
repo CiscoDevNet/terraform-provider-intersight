@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_update_order_meta"
 description: |-
-        Internal meta-data to map update order.
+        The UpdateOrderMeta object provides internal metadata to map the required order of operations for firmware updates.
+        #### Purpose
+        It defines the sequence of versions an endpoint must pass through to reach the target firmware version, ensuring a safe and successful upgrade path.
+        #### Key Concepts
+        - **Sequencing:** Lists update orders (source -> interim -> target) for specific groups of hardware.
+        - **Platform Tagging:** Categorizes update orders by platform and component category.
 
 ---
 
 # Data Source: intersight_capability_update_order_meta
-Internal meta-data to map update order.
+The UpdateOrderMeta object provides internal metadata to map the required order of operations for firmware updates.
+#### Purpose
+It defines the sequence of versions an endpoint must pass through to reach the target firmware version, ensuring a safe and successful upgrade path.
+#### Key Concepts
+- **Sequencing:** Lists update orders (source -> interim -> target) for specific groups of hardware.
+- **Platform Tagging:** Categorizes update orders by platform and component category.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

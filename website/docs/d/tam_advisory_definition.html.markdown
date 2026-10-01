@@ -3,6 +3,7 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_definition"
 description: |-
+        Global catalog of Field Notice / EOL / EOS advisories, NOT scoped to an account. To find which advisories impact an account or its servers, query tam.AdvisoryInstance instead; use this object only to look up a specific advisory's details by Moid or AdvisoryId.
         The AdvisoryDefinition object is a critical component in Intersight. It encompasses various types of advisories, including Field Notices, End of Life (EOL), End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
         #### Purpose
         AdvisoryDefinition provides a comprehensive framework for defining potential advisories that may impact managed objects in the datacenter. It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.
@@ -14,6 +15,7 @@ description: |-
 ---
 
 # Data Source: intersight_tam_advisory_definition
+Global catalog of Field Notice / EOL / EOS advisories, NOT scoped to an account. To find which advisories impact an account or its servers, query tam.AdvisoryInstance instead; use this object only to look up a specific advisory's details by Moid or AdvisoryId.
 The AdvisoryDefinition object is a critical component in Intersight. It encompasses various types of advisories, including Field Notices, End of Life (EOL), End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
 #### Purpose
 AdvisoryDefinition provides a comprehensive framework for defining potential advisories that may impact managed objects in the datacenter. It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.

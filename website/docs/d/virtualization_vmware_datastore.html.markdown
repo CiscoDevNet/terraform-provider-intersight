@@ -3,12 +3,26 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_datastore"
 description: |-
-        The VMware Datastore entity with its attributes. Each Datastore belongs to a Datacenter and maybe attached to VMs.
+        The VMware Datastores object represents the storage entity within a VMware environment, encapsulating the attributes and connectivity details of datastores.
+        #### Purpose
+        This object provides visibility into storage resources, enabling administrators to monitor accessibility, capacity, and health status, serving as the bridge between VMs and physical storage.
+        #### Key Concepts
+        - **Storage Management:** Tracks critical metrics including committed space and maintenance modes.
+        - **Resource Connectivity:** Manages relationships between datastores, hosts, and clusters.
+        - **Health Monitoring:** Reports on the health status of datastores for proactive issue identification.
+        - **Operational Control:** Supports secure read and update operations for storage configurations.
 
 ---
 
 # Data Source: intersight_virtualization_vmware_datastore
-The VMware Datastore entity with its attributes. Each Datastore belongs to a Datacenter and maybe attached to VMs.
+The VMware Datastores object represents the storage entity within a VMware environment, encapsulating the attributes and connectivity details of datastores.
+#### Purpose
+This object provides visibility into storage resources, enabling administrators to monitor accessibility, capacity, and health status, serving as the bridge between VMs and physical storage.
+#### Key Concepts
+- **Storage Management:** Tracks critical metrics including committed space and maintenance modes.
+- **Resource Connectivity:** Manages relationships between datastores, hosts, and clusters.
+- **Health Monitoring:** Reports on the health status of datastores for proactive issue identification.
+- **Operational Control:** Supports secure read and update operations for storage configurations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

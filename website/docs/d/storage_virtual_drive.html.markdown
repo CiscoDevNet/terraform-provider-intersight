@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_virtual_drive"
 description: |-
-        A Virtual Disk Drive or Logical Unit Number.
+        VirtualDrives represent logical disk drives (virtual disks/LUNs) created by a storage controller, including RAID level, size, cache/read/write policies, bootable state, operational health, and disk usage relationships.
+        #### Purpose
+        Provide inventory and operational visibility for controller-created logical storage used by the host OS.
+        #### Key Concepts
+        - **Logical storage unit:** Represents a RAID virtual drive/logical unit.
+        - **Policy and cache semantics:** Captures read/write/cache/access policy attributes.
+        - **Operational health:** Includes oper state and health reasons for troubleshooting.
+        - **Physical backing:** Links to physical disk usage/membership to show which disks back the VD.
 
 ---
 
 # Data Source: intersight_storage_virtual_drive
-A Virtual Disk Drive or Logical Unit Number.
+VirtualDrives represent logical disk drives (virtual disks/LUNs) created by a storage controller, including RAID level, size, cache/read/write policies, bootable state, operational health, and disk usage relationships.
+#### Purpose
+Provide inventory and operational visibility for controller-created logical storage used by the host OS.
+#### Key Concepts
+- **Logical storage unit:** Represents a RAID virtual drive/logical unit.
+- **Policy and cache semantics:** Captures read/write/cache/access policy attributes.
+- **Operational health:** Includes oper state and health reasons for troubleshooting.
+- **Physical backing:** Links to physical disk usage/membership to show which disks back the VD.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

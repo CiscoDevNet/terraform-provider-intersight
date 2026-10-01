@@ -37,7 +37,7 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) The endpoint model for which this firmware image is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the file. It is populated as part of the image import operation. 
-* `origin`:(string) The source of the distributable. If it has been created by the user or system.* `System` - The distributable has been created by the System.* `User` - The distributable has been created by the User. 
+* `origin`:(string) The Distributables object represents firmware or software images distributed by Cisco for system components.#### PurposeIt manages the lifecycle of distributable images, from download and caching to installation and verification on target endpoints.#### Key Concepts- **Image Distribution:** Provides a standardized way to manage images for various hardware components.- **Lifecycle Management:** Orchestrates the download, staging, and installation of firmware images.- **Compatibility:** Ensures that the correct image is applied to the appropriate hardware model.* `System` - The distributable has been created by the System.* `User` - The distributable has been created by the User. 
 * `platform_type`:(string) The platform type of the image. 
 * `recommended_build`:(string) The build which is recommended by Cisco. 
 * `release_date`:(string) The date on which the file was released or distributed by its vendor. 

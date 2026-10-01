@@ -3,12 +3,28 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_endpoint"
 description: |-
-        PCIe endpoints that are connected to a PCIe switch.
+        Endpoints (pci) represent logical PCIe endpoints connected to a PCIe switch, mapping to actual physical devices such as GPUs, network adapters, or CPUs.
+        #### Purpose
+        Model the endpoint connectivity under a PCIe switch for topology visibility and health monitoring.
+        
+        #### Key Concepts
+        - **Logical endpoint mapping:** Points to actual physical devices by type and IDs.
+        - **Health reporting:** Captures operational state and health reasons.
+        - **Switch-port linkage:** Relates to the PCIe switch port to which the endpoint is connected.
+        - **Shared device references:** Can link to shared adapter units or shared GPUs when the endpoint points to shared hardware.
 
 ---
 
 # Data Source: intersight_pci_endpoint
-PCIe endpoints that are connected to a PCIe switch.
+Endpoints (pci) represent logical PCIe endpoints connected to a PCIe switch, mapping to actual physical devices such as GPUs, network adapters, or CPUs.
+#### Purpose
+Model the endpoint connectivity under a PCIe switch for topology visibility and health monitoring.
+ 
+#### Key Concepts
+- **Logical endpoint mapping:** Points to actual physical devices by type and IDs.
+- **Health reporting:** Captures operational state and health reasons.
+- **Switch-port linkage:** Relates to the PCIe switch port to which the endpoint is connected.
+- **Shared device references:** Can link to shared adapter units or shared GPUs when the endpoint points to shared hardware.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

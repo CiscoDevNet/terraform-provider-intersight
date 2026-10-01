@@ -3,12 +3,22 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_lan_settings"
 description: |-
-        An internal MO to track the LAN settings that are applied to a server profile (like iQNLease).
+        The LanSettings object is an internal record tracking LAN settings applied to a server profile.
+        #### Purpose
+        It preserves specific LAN configuration details, such as iQN leases, ensuring that settings are maintained during profile operations.
+        #### Key Concepts
+        - **State Preservation:** Tracks LAN-specific configuration details.
+        - **Profile Integration:** Links settings to specific server profile instances.
 
 ---
 
 # Data Source: intersight_vnic_lan_settings
-An internal MO to track the LAN settings that are applied to a server profile (like iQNLease).
+The LanSettings object is an internal record tracking LAN settings applied to a server profile.
+#### Purpose
+It preserves specific LAN configuration details, such as iQN leases, ensuring that settings are maintained during profile operations.
+#### Key Concepts
+- **State Preservation:** Tracks LAN-specific configuration details.
+- **Profile Integration:** Links settings to specific server profile instances.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

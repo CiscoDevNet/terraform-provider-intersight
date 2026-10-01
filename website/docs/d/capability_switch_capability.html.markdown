@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_switch_capability"
 description: |-
-        Type to represent additional switch specific capabilities.
+        The SwitchCapability object describes switch/fabric-interconnect capabilities and limits for a given platform.
+        #### Purpose
+        This provides a catalog-backed representation of what a switch platform supports (port speed ranges, breakout/unified support, feature flags, and scale limits), enabling validation and platform-aware configuration experiences.
+        #### Key Concepts
+        - **Port capability modeling:** Describes which port ranges support which speeds and roles.
+        - **Scale/limit governance:** Encodes maximums for VLANs, port-channels, VSANs, and other scale dimensions.
+        - **Feature flags:** Indicates platform support for capabilities like locator LEDs, MACsec, breakout, etc.
+        - **Version-dependent features:** Supports expressing minimum versions required for specific switch features.
 
 ---
 
 # Data Source: intersight_capability_switch_capability
-Type to represent additional switch specific capabilities.
+The SwitchCapability object describes switch/fabric-interconnect capabilities and limits for a given platform.
+#### Purpose
+This provides a catalog-backed representation of what a switch platform supports (port speed ranges, breakout/unified support, feature flags, and scale limits), enabling validation and platform-aware configuration experiences.
+#### Key Concepts
+- **Port capability modeling:** Describes which port ranges support which speeds and roles.
+- **Scale/limit governance:** Encodes maximums for VLANs, port-channels, VSANs, and other scale dimensions.
+- **Feature flags:** Indicates platform support for capabilities like locator LEDs, MACsec, breakout, etc.
+- **Version-dependent features:** Supports expressing minimum versions required for specific switch features.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -1,5 +1,5 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Testing ThermalApiService
 
@@ -55,32 +55,6 @@ func Test_intersight_ThermalApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.ThermalApi.GetThermalPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ThermalApiService GetThermalPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.ThermalApi.GetThermalPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ThermalApiService GetThermalPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.ThermalApi.GetThermalPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

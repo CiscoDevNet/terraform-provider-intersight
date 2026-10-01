@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_schedule"
 description: |-
-        NetApp schedule is a configurable entity on which various tasks (for instance, volume Snapshot copies and mirror replications) are run.
+        The NetAppSchedules object defines the timing for automated tasks like snapshots or replication.
+        ####  Purpose
+        This provides a centralized way to manage the frequency and timing of background storage operations.
+        ####  Key Concepts
+        - **Task Scheduling:** Supports cron or interval-based schedules.
+        - **Task Association:** Links schedules to snapshots and mirror relationships.
 
 ---
 
 # Data Source: intersight_storage_net_app_schedule
-NetApp schedule is a configurable entity on which various tasks (for instance, volume Snapshot copies and mirror replications) are run.
+The NetAppSchedules object defines the timing for automated tasks like snapshots or replication.
+####  Purpose
+This provides a centralized way to manage the frequency and timing of background storage operations.
+####  Key Concepts
+- **Task Scheduling:** Supports cron or interval-based schedules.
+- **Task Association:** Links schedules to snapshots and mirror relationships.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

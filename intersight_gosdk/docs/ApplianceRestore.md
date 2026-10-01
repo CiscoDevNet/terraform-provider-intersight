@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **Password** | Pointer to **string** | Password for authenticating with the file server. | [optional] 
 **StartTime** | Pointer to **time.Time** | Start date and time of the restore process. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the restore managed object. * &#x60;Started&#x60; - Backup or restore process has started. * &#x60;Created&#x60; - Backup or restore is in created state. * &#x60;Failed&#x60; - Backup or restore process has failed. * &#x60;Completed&#x60; - Backup or restore process has completed. * &#x60;Copied&#x60; - Backup file has been copied. * &#x60;Cleanup Failed&#x60; - Cleanup of the old backup has failed. | [optional] [readonly] [default to "Started"]
+**TlsCertificate** | Pointer to **string** | PEM-encoded certificate used to verify the HTTPS server certificate during the Transport Layer Security (TLS) handshake. Required when the server certificate is not signed by a publicly trusted certificate authority (CA). Provide either the CA that signed the server certificate, a CA bundle containing the issuer, or the server&#39;s own certificate when it is self-signed. Verifying the server certificate prevents man-in-the-middle attacks during the download. Leaving this field empty disables TLS verification, and the download accepts any certificate the server presents. | [optional] 
+**Url** | Pointer to **string** | HTTPS URL of the backup archive to restore. The URL must use the HTTPS scheme (https://), and any other scheme is rejected during validation. When the server requires authentication, the appliance uses the username and password properties on this object as HTTP basic authentication credentials. | [optional] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
@@ -258,6 +260,56 @@ SetStatus sets Status field to given value.
 `func (o *ApplianceRestore) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetTlsCertificate
+
+`func (o *ApplianceRestore) GetTlsCertificate() string`
+
+GetTlsCertificate returns the TlsCertificate field if non-nil, zero value otherwise.
+
+### GetTlsCertificateOk
+
+`func (o *ApplianceRestore) GetTlsCertificateOk() (*string, bool)`
+
+GetTlsCertificateOk returns a tuple with the TlsCertificate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTlsCertificate
+
+`func (o *ApplianceRestore) SetTlsCertificate(v string)`
+
+SetTlsCertificate sets TlsCertificate field to given value.
+
+### HasTlsCertificate
+
+`func (o *ApplianceRestore) HasTlsCertificate() bool`
+
+HasTlsCertificate returns a boolean if a field has been set.
+
+### GetUrl
+
+`func (o *ApplianceRestore) GetUrl() string`
+
+GetUrl returns the Url field if non-nil, zero value otherwise.
+
+### GetUrlOk
+
+`func (o *ApplianceRestore) GetUrlOk() (*string, bool)`
+
+GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUrl
+
+`func (o *ApplianceRestore) SetUrl(v string)`
+
+SetUrl sets Url field to given value.
+
+### HasUrl
+
+`func (o *ApplianceRestore) HasUrl() bool`
+
+HasUrl returns a boolean if a field has been set.
 
 ### GetAccount
 

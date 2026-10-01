@@ -3,12 +3,22 @@ subcategory: "pool"
 layout: "intersight"
 page_title: "Intersight: intersight_pool_id_mapping_member"
 description: |-
-        A resolved member of the ID mapping policy.
+        The IdMappingMembers object represents a resolved member of an ID mapping policy.
+        #### Purpose
+        It maintains the link between a specific resource and an ID mapping policy, ensuring that the mapping is enforced for that resource.
+        #### Key Concepts
+        - **Resolution:** Represents the resolved association between a resource and a policy.
+        - **Mapping Enforcement:** Links the resource to the ID mapping policy to govern ID block assignment.
 
 ---
 
 # Data Source: intersight_pool_id_mapping_member
-A resolved member of the ID mapping policy.
+The IdMappingMembers object represents a resolved member of an ID mapping policy.
+#### Purpose
+It maintains the link between a specific resource and an ID mapping policy, ensuring that the mapping is enforced for that resource.
+#### Key Concepts
+- **Resolution:** Represents the resolved association between a resource and a policy.
+- **Mapping Enforcement:** Links the resource to the ID mapping policy to govern ID block assignment.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

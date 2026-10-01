@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_fc_port_event"
 description: |-
-        An event where the impacted resource type is a FC port.
+        The NetAppFcPortEvents object captures alerts related to physical Fibre Channel ports.
+        ####  Purpose
+        It alerts administrators to physical layer issues in the SAN fabric, such as port failures or utilization issues.
+        ####  Key Concepts
+        - **Hardware Health:** Alerts on port status changes.
+        - **Utilization Alerts:** Notifies on utilization threshold breaches.
 
 ---
 
 # Data Source: intersight_storage_net_app_fc_port_event
-An event where the impacted resource type is a FC port.
+The NetAppFcPortEvents object captures alerts related to physical Fibre Channel ports.
+####  Purpose
+It alerts administrators to physical layer issues in the SAN fabric, such as port failures or utilization issues.
+####  Key Concepts
+- **Hardware Health:** Alerts on port status changes.
+- **Utilization Alerts:** Notifies on utilization threshold breaches.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

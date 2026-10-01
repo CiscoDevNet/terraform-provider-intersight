@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_cimc_descriptor"
 description: |-
-        Descriptor to uniquely identify a Cisco IMC.
+        The CimcDescriptors object provides internal metadata to uniquely identify Cisco Integrated Management Controller (CIMC) components.
+        #### Purpose
+        It enables the system to identify CIMC hardware, which is essential for managing server out-of-band management and firmware upgrade operations.
+        #### Key Concepts
+        - **Component Identification:** Uniquely identifies CIMC hardware using vendor, model, and revision details.
+        - **Management Support:** Supports the identification of hardware required for server management and monitoring.
 
 ---
 
 # Data Source: intersight_firmware_cimc_descriptor
-Descriptor to uniquely identify a Cisco IMC.
+The CimcDescriptors object provides internal metadata to uniquely identify Cisco Integrated Management Controller (CIMC) components.
+#### Purpose
+It enables the system to identify CIMC hardware, which is essential for managing server out-of-band management and firmware upgrade operations.
+#### Key Concepts
+- **Component Identification:** Uniquely identifies CIMC hardware using vendor, model, and revision details.
+- **Management Support:** Supports the identification of hardware required for server management and monitoring.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_region"
 description: |-
-        Persistent Memory Region configured on the Persistent Memory Modules on a server.
+        PersistentMemoryRegions represent PMem regions configured on persistent memory modules, including region identity, capacity, type, and health, and containing a collection of namespaces.
+        #### Purpose
+        Expose the region structure that underpins PMem namespace allocation and capacity accounting.
+        #### Key Concepts
+        - **Region container:** Defines a capacity pool from which namespaces are allocated.
+        - **Topology attributes:** Includes socket and locator set membership.
+        - **Namespace hierarchy:** Acts as parent container for persistent memory namespaces.
 
 ---
 
 # Data Source: intersight_memory_persistent_memory_region
-Persistent Memory Region configured on the Persistent Memory Modules on a server.
+PersistentMemoryRegions represent PMem regions configured on persistent memory modules, including region identity, capacity, type, and health, and containing a collection of namespaces.
+#### Purpose
+Expose the region structure that underpins PMem namespace allocation and capacity accounting.
+#### Key Concepts
+- **Region container:** Defines a capacity pool from which namespaces are allocated.
+- **Topology attributes:** Includes socket and locator set membership.
+- **Namespace hierarchy:** Acts as parent container for persistent memory namespaces.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

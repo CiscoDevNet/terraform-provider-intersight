@@ -3,12 +3,28 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_port"
 description: |-
-        PCIe Switch port on the PCIe Switch.
+        Ports (pci) represent PCIe switch ports on a PCIe switch. They describe port role (upstream/downstream), operational state, width, and health reasons.
+        #### Purpose
+        Provide port-level topology and health visibility for PCIe switches to support troubleshooting and endpoint mapping.
+        
+        #### Key Concepts
+        - **Role modeling:** Distinguishes upstream vs downstream connectivity.
+        - **Link characteristics:** Reports link width and operational status.
+        - **Health diagnostics:** Provides health reasons for degraded conditions.
+        - **Switch-scoped:** Inherits permissions from the parent PCIe switch.
 
 ---
 
 # Data Source: intersight_pci_port
-PCIe Switch port on the PCIe Switch.
+Ports (pci) represent PCIe switch ports on a PCIe switch. They describe port role (upstream/downstream), operational state, width, and health reasons.
+#### Purpose
+Provide port-level topology and health visibility for PCIe switches to support troubleshooting and endpoint mapping.
+ 
+#### Key Concepts
+- **Role modeling:** Distinguishes upstream vs downstream connectivity.
+- **Link characteristics:** Reports link width and operational status.
+- **Health diagnostics:** Provides health reasons for degraded conditions.
+- **Switch-scoped:** Inherits permissions from the parent PCIe switch.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

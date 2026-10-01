@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_vsan"
 description: |-
-        Configuration object sent by user to create VSAN configurations.
+        The Vsan object represents a VSAN configuration definition used in Fibre Channel network policy contexts. It models SAN segmentation intent and associated VSAN identity.
+        #### Purpose
+        Vsan provides a policy-driven way to define VSANs that should exist and be configured in the SAN fabric. It enables consistent SAN segmentation and supports validation/deployment workflows for FC-related configuration.
+        #### Key Concepts
+        - **SAN segmentation intent:** Encodes VSAN identity and intended behavior for FC fabrics.
+        - **Policy association:** Exists under an FC network policy that governs SAN configuration.
+        - **Reusable configuration unit:** Supports repeating the same VSAN definitions across profiles/domains.
+        - **Lifecycle through workflows:** Designed for validation and deployment through fabric workflows.
 
 ---
 
 # Resource: intersight_fabric_vsan
-Configuration object sent by user to create VSAN configurations.
+The Vsan object represents a VSAN configuration definition used in Fibre Channel network policy contexts. It models SAN segmentation intent and associated VSAN identity.
+#### Purpose
+Vsan provides a policy-driven way to define VSANs that should exist and be configured in the SAN fabric. It enables consistent SAN segmentation and supports validation/deployment workflows for FC-related configuration.
+#### Key Concepts
+- **SAN segmentation intent:** Encodes VSAN identity and intended behavior for FC fabrics.
+- **Policy association:** Exists under an FC network policy that governs SAN configuration.
+- **Reusable configuration unit:** Supports repeating the same VSAN definitions across profiles/domains.
+- **Lifecycle through workflows:** Designed for validation and deployment through fabric workflows.
 ## Usage Example
 ### Resource Creation
 

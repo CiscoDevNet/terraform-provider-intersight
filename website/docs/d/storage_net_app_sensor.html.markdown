@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_sensor"
 description: |-
-        Information for a particular sensor on a NetApp storage array controller.
+        The NetAppSensors object provides information for a particular sensor on a NetApp storage array controller.
+        ####  Purpose
+        It enables monitoring of physical hardware health, such as temperature, fan speed, or voltage, ensuring the controller is operating within safe parameters.
+        ####  Key Concepts
+        - **Hardware Monitoring:** Tracks sensor states and values.
+        - **Operational Health:** Alerts on sensor deviations that could indicate hardware stress.
 
 ---
 
 # Data Source: intersight_storage_net_app_sensor
-Information for a particular sensor on a NetApp storage array controller.
+The NetAppSensors object provides information for a particular sensor on a NetApp storage array controller.
+####  Purpose
+It enables monitoring of physical hardware health, such as temperature, fan speed, or voltage, ensuring the controller is operating within safe parameters.
+####  Key Concepts
+- **Hardware Monitoring:** Tracks sensor states and values.
+- **Operational Health:** Alerts on sensor deviations that could indicate hardware stress.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

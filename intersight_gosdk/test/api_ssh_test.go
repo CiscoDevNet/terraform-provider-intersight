@@ -1,5 +1,5 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Testing SshApiService
 
@@ -55,32 +55,6 @@ func Test_intersight_SshApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.SshApi.GetSshPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SshApiService GetSshPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.SshApi.GetSshPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SshApiService GetSshPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.SshApi.GetSshPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

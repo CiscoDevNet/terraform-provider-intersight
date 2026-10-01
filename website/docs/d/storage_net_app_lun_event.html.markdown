@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_lun_event"
 description: |-
-        An event where the impacted resource type is a lun.
+        The NetAppLunEvents object captures alerts related to LUNs (Logical Unit Numbers).
+        ####  Purpose
+        It notifies administrators of LUN performance issues, state changes, or threshold breaches.
+        ####  Key Concepts
+        - **Performance Monitoring:** Alerts on IOPS or latency thresholds.
+        - **State Changes:** Notifies when a LUN goes offline or encounters an error.
 
 ---
 
 # Data Source: intersight_storage_net_app_lun_event
-An event where the impacted resource type is a lun.
+The NetAppLunEvents object captures alerts related to LUNs (Logical Unit Numbers).
+####  Purpose
+It notifies administrators of LUN performance issues, state changes, or threshold breaches.
+####  Key Concepts
+- **Performance Monitoring:** Alerts on IOPS or latency thresholds.
+- **State Changes:** Notifies when a LUN goes offline or encounters an error.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

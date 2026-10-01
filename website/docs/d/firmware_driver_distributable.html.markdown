@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_driver_distributable"
 description: |-
-        A device driver image distributed by Cisco.
+        The DriverDistributables object represents device driver images distributed by Cisco for various operating systems.
+        #### Purpose
+        It manages the distribution and installation of hardware drivers, ensuring that components are correctly recognized and performant within the host operating system.
+        #### Key Concepts
+        - **OS Compatibility:** Tracks driver compatibility with specific operating systems and versions.
+        - **Deployment Support:** Facilitates the deployment of drivers to ensure hardware functionality.
 
 ---
 
 # Data Source: intersight_firmware_driver_distributable
-A device driver image distributed by Cisco.
+The DriverDistributables object represents device driver images distributed by Cisco for various operating systems.
+#### Purpose
+It manages the distribution and installation of hardware drivers, ensuring that components are correctly recognized and performant within the host operating system.
+#### Key Concepts
+- **OS Compatibility:** Tracks driver compatibility with specific operating systems and versions.
+- **Deployment Support:** Facilitates the deployment of drivers to ensure hardware functionality.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

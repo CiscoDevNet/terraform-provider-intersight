@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_switch_operation"
 description: |-
-        Models the operational states of a Switch in Intersight.
+        The SwitchOperation object models operational actions on a Fabric Interconnect / switch (e.g., locator LED actions, evacuation state, reboot actions) with status tracking.
+        #### Purpose
+        SwitchOperation provides a unified operational control surface for switch maintenance actions that are workflow-backed and privilege-controlled, allowing safe execution and consistent status reporting.
+        #### Key Concepts
+        - **Switch maintenance controls:** Represents operational actions such as reboot and evacuation mode.
+        - **Workflow-backed state:** Tracks action execution via configuration/action state.
+        - **Safety and privilege gating:** Protects disruptive actions through privilege checks.
+        - **Operational observability:** Provides a stable object to monitor action outcomes and progress.
 
 ---
 
 # Data Source: intersight_equipment_switch_operation
-Models the operational states of a Switch in Intersight.
+The SwitchOperation object models operational actions on a Fabric Interconnect / switch (e.g., locator LED actions, evacuation state, reboot actions) with status tracking.
+#### Purpose
+SwitchOperation provides a unified operational control surface for switch maintenance actions that are workflow-backed and privilege-controlled, allowing safe execution and consistent status reporting.
+#### Key Concepts
+- **Switch maintenance controls:** Represents operational actions such as reboot and evacuation mode.
+- **Workflow-backed state:** Tracks action execution via configuration/action state.
+- **Safety and privilege gating:** Protects disruptive actions through privilege checks.
+- **Operational observability:** Provides a stable object to monitor action outcomes and progress.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

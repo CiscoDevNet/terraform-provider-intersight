@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "techsupportmanagement.TechSupportFileInfo"]
 **FileName** | Pointer to **string** | The name of the techsupport file. | [optional] [readonly] 
 **FileSize** | Pointer to **int64** | Techsupport file size in bytes. | [optional] [readonly] 
+**Reason** | Pointer to **string** | Reason for techsupport failure, if any. | [optional] [readonly] 
 **TechsupportDownloadUrl** | Pointer to **string** | The Url to download the techsupport file. | [optional] [readonly] 
 **UploadStatus** | Pointer to **string** | The upload status of the techsupport file. | [optional] [readonly] [default to "UploadQueued"]
 
@@ -119,6 +120,31 @@ SetFileSize sets FileSize field to given value.
 `func (o *TechsupportmanagementTechSupportFileInfo) HasFileSize() bool`
 
 HasFileSize returns a boolean if a field has been set.
+
+### GetReason
+
+`func (o *TechsupportmanagementTechSupportFileInfo) GetReason() string`
+
+GetReason returns the Reason field if non-nil, zero value otherwise.
+
+### GetReasonOk
+
+`func (o *TechsupportmanagementTechSupportFileInfo) GetReasonOk() (*string, bool)`
+
+GetReasonOk returns a tuple with the Reason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReason
+
+`func (o *TechsupportmanagementTechSupportFileInfo) SetReason(v string)`
+
+SetReason sets Reason field to given value.
+
+### HasReason
+
+`func (o *TechsupportmanagementTechSupportFileInfo) HasReason() bool`
+
+HasReason returns a boolean if a field has been set.
 
 ### GetTechsupportDownloadUrl
 

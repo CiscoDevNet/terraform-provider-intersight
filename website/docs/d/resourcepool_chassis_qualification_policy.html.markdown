@@ -3,12 +3,22 @@ subcategory: "resourcepool"
 layout: "intersight"
 page_title: "Intersight: intersight_resourcepool_chassis_qualification_policy"
 description: |-
-        The ChassisQualificationPolicy maintains the qualifiers, and each qualifier manages a set of conditions to qualify the chassis and servers that connected to it. The ChassisQualificationPolicy can be attached to the pool to extract the resources that match the qualifiers specified in the policy.
+        The ChassisQualificationPolicies object defines the criteria used to dynamically extract resources into a resource pool.
+        #### Purpose
+        It provides the rules and conditions that govern the dynamic discovery and inclusion of chassis and server resources into resource pools.
+        #### Key Concepts
+        - **Dynamic Extraction:** Uses qualifiers as criteria to automatically add resources to a pool.
+        - **Adaptive Allocation:** Contributes to the flexible and adaptive nature of the resource allocation process.
 
 ---
 
 # Data Source: intersight_resourcepool_chassis_qualification_policy
-The ChassisQualificationPolicy maintains the qualifiers, and each qualifier manages a set of conditions to qualify the chassis and servers that connected to it. The ChassisQualificationPolicy can be attached to the pool to extract the resources that match the qualifiers specified in the policy.
+The ChassisQualificationPolicies object defines the criteria used to dynamically extract resources into a resource pool.
+#### Purpose
+It provides the rules and conditions that govern the dynamic discovery and inclusion of chassis and server resources into resource pools.
+#### Key Concepts
+- **Dynamic Extraction:** Uses qualifiers as criteria to automatically add resources to a pool.
+- **Adaptive Allocation:** Contributes to the flexible and adaptive nature of the resource allocation process.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

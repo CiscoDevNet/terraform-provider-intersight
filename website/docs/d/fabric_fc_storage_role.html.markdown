@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fc_storage_role"
 description: |-
-        Configuration object sent by user to create a fc uplink port.
+        The FcStorageRole object represents configuration intent for FC ports used for storage connectivity within the SAN fabric context.
+        #### Purpose
+        FcStorageRole models storage-facing FC connectivity intent, enabling SAN ports to be described and deployed consistently where storage segmentation and speed behavior must be managed as policy.
+        #### Key Concepts
+        - **Storage-facing FC intent:** Distinguishes storage connectivity role from uplink role semantics.
+        - **VSAN-based segmentation:** Aligns storage FC ports with the appropriate VSAN.
+        - **Policy-driven SAN configuration:** Supports repeatable storage fabric configuration.
+        - **Operational predictability:** Helps standardize storage port behavior across environments.
 
 ---
 
 # Data Source: intersight_fabric_fc_storage_role
-Configuration object sent by user to create a fc uplink port.
+The FcStorageRole object represents configuration intent for FC ports used for storage connectivity within the SAN fabric context.
+#### Purpose
+FcStorageRole models storage-facing FC connectivity intent, enabling SAN ports to be described and deployed consistently where storage segmentation and speed behavior must be managed as policy.
+#### Key Concepts
+- **Storage-facing FC intent:** Distinguishes storage connectivity role from uplink role semantics.
+- **VSAN-based segmentation:** Aligns storage FC ports with the appropriate VSAN.
+- **Policy-driven SAN configuration:** Supports repeatable storage fabric configuration.
+- **Operational predictability:** Helps standardize storage port behavior across environments.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

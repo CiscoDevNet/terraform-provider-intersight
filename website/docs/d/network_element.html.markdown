@@ -3,12 +3,28 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_element"
 description: |-
-        The Cisco UCS Fabric Interconnect module within a domain supporting a range of models including the 6400, 6500 series etc.
+        Elements represent network switching elements managed in the platform—most commonly Cisco UCS Fabric Interconnects, but also modeled to cover other switch types (e.g., Nexus, MDS, Edge chassis controllers) via the `switchType` property. An Element serves as the top-level inventory object for switch identity, management addressing, operational mode (Ethernet/FC switching mode), health/alarms, and major hardware components.
+        #### Purpose
+        Provide the authoritative inventory representation of a managed switch so administrators can monitor health, validate management connectivity, and navigate to related configuration/inventory objects (ports, port-channels, NTP, VRFs, neighbors, etc.).
+        #### Key Concepts
+        - **Switch identity and access:** Captures switchId, management IP (inband and out-of-band), MAC, and labeling for identification.
+        - **Operational mode reporting:** Distinguishes Ethernet and FC switching modes (End-Host vs Switch) and evacuation state.
+        - **Health and alarms:** Includes alarm summary and overall operability indicators for fast assessment.
+        - **Hardware inventory hub:** Relates to switch cards, PSUs, fan modules, supervisors, processors, sensors, and locator LED.
+        - **Configuration ecosystem anchor:** Serves as the parent for many switch-scoped configuration objects (NTP, DNS, VRF, vPC, interface lists, veth/vfc, etc.).
 
 ---
 
 # Data Source: intersight_network_element
-The Cisco UCS Fabric Interconnect module within a domain supporting a range of models including the 6400, 6500 series etc.
+Elements represent network switching elements managed in the platform—most commonly Cisco UCS Fabric Interconnects, but also modeled to cover other switch types (e.g., Nexus, MDS, Edge chassis controllers) via the `switchType` property. An Element serves as the top-level inventory object for switch identity, management addressing, operational mode (Ethernet/FC switching mode), health/alarms, and major hardware components.
+#### Purpose
+Provide the authoritative inventory representation of a managed switch so administrators can monitor health, validate management connectivity, and navigate to related configuration/inventory objects (ports, port-channels, NTP, VRFs, neighbors, etc.).
+#### Key Concepts
+- **Switch identity and access:** Captures switchId, management IP (inband and out-of-band), MAC, and labeling for identification.
+- **Operational mode reporting:** Distinguishes Ethernet and FC switching modes (End-Host vs Switch) and evacuation state.
+- **Health and alarms:** Includes alarm summary and overall operability indicators for fast assessment.
+- **Hardware inventory hub:** Relates to switch cards, PSUs, fan modules, supervisors, processors, sensors, and locator LED.
+- **Configuration ecosystem anchor:** Serves as the parent for many switch-scoped configuration objects (NTP, DNS, VRF, vPC, interface lists, veth/vfc, etc.).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

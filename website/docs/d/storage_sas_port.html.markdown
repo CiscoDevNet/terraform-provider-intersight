@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_sas_port"
 description: |-
-        Sas Port details of the SAS endpoint.
+        SasPorts represent SAS port details of a SAS endpoint (address, endpoint id, disk id, and negotiated link speed/description).
+        #### Purpose
+        Provide per-port connectivity details used to correlate disks to SAS topology and link characteristics.
+        #### Key Concepts
+        - **SAS addressing:** Captures SAS address and endpoint identifiers.
+        - **Link telemetry:** Includes negotiated link speed and link description.
+        - **Disk association:** Includes disk id for mapping to physical disks.
 
 ---
 
 # Data Source: intersight_storage_sas_port
-Sas Port details of the SAS endpoint.
+SasPorts represent SAS port details of a SAS endpoint (address, endpoint id, disk id, and negotiated link speed/description).
+#### Purpose
+Provide per-port connectivity details used to correlate disks to SAS topology and link characteristics.
+#### Key Concepts
+- **SAS addressing:** Captures SAS address and endpoint identifiers.
+- **Link telemetry:** Includes negotiated link speed and link description.
+- **Disk association:** Includes disk id for mapping to physical disks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

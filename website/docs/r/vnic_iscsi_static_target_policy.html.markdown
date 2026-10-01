@@ -4,7 +4,7 @@ layout: "intersight"
 page_title: "Intersight: intersight_vnic_iscsi_static_target_policy"
 description: |-
         The IscsiStaticTargetPolicy object defines the parameters for connecting to specific iSCSI targets, ensuring reachability and correct configuration for iSCSI boot or storage access.
-        ####Purpose
+        #### Purpose
         IscsiStaticTargetPolicy provides a standardized way to specify static iSCSI targets, including target names, IP addresses, ports, and associated LUN configurations.
         #### Key Concepts
         - **Target Specification:** Standardizes the definition of iSCSI targets for boot or data access.
@@ -14,7 +14,7 @@ description: |-
 
 # Resource: intersight_vnic_iscsi_static_target_policy
 The IscsiStaticTargetPolicy object defines the parameters for connecting to specific iSCSI targets, ensuring reachability and correct configuration for iSCSI boot or storage access.
-####Purpose
+#### Purpose
 IscsiStaticTargetPolicy provides a standardized way to specify static iSCSI targets, including target names, IP addresses, ports, and associated LUN configurations.
 #### Key Concepts
 - **Target Specification:** Standardizes the definition of iSCSI targets for boot or data access.

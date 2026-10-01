@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_processor_unit_update_constraint_meta"
 description: |-
-        Internal meta-data to enable processor unit update related constraints.
+        The ProcessorUnitUpdateConstraintMeta object provides internal metadata to enforce update-related constraints for processor units.
+        #### Purpose
+        It ensures that firmware updates for processor units are performed within supported version boundaries, maintaining system stability.
+        #### Key Concepts
+        - **Versioning Constraints:** Defines the minimum supported version for processor unit firmware updates.
+        - **Platform Validation:** Enforces constraints based on the server model and platform type.
 
 ---
 
 # Data Source: intersight_capability_processor_unit_update_constraint_meta
-Internal meta-data to enable processor unit update related constraints.
+The ProcessorUnitUpdateConstraintMeta object provides internal metadata to enforce update-related constraints for processor units.
+#### Purpose
+It ensures that firmware updates for processor units are performed within supported version boundaries, maintaining system stability.
+#### Key Concepts
+- **Versioning Constraints:** Defines the minimum supported version for processor unit firmware updates.
+- **Platform Validation:** Enforces constraints based on the server model and platform type.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

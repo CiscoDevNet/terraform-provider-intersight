@@ -3,6 +3,7 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_remote_file_import"
 description: |-
+        The RemoteFileImport object is deprecated and will no longer be supported after July 31, 2027.
         The RemoteFileImport object supports the import of firmware images to the Intersight Appliance. It facilitates remote requests via SCP or SFTP to download files.
         #### Purpose
         RemoteFileImport provides a mechanism for importing firmware images, enabling administrators to perform remote file transfers to the appliance. It supports both SCP and SFTP protocols for secure and efficient file management.
@@ -14,6 +15,7 @@ description: |-
 ---
 
 # Data Source: intersight_appliance_remote_file_import
+The RemoteFileImport object is deprecated and will no longer be supported after July 31, 2027.
 The RemoteFileImport object supports the import of firmware images to the Intersight Appliance. It facilitates remote requests via SCP or SFTP to download files.
 #### Purpose
 RemoteFileImport provides a mechanism for importing firmware images, enabling administrators to perform remote file transfers to the appliance. It supports both SCP and SFTP protocols for secure and efficient file management.
@@ -37,7 +39,7 @@ The following arguments can be used to get data of already created objects in In
 * `password`:(string) Password for remote requiest. 
 * `path`:(string) The port that should be used for the remote request. 
 * `port`:(int) The port that should be used for the remote request. 
-* `protocol`:(string) Specifies if this is an scp or sftp request.* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.* `cifs` - Common Internet File System (CIFS) Protocol to access file server.* `local` - Backup file is stored in Intersight Appliance. 
+* `protocol`:(string) Specifies if this is an scp or sftp request.* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.* `cifs` - Common Internet File System (CIFS) Protocol to access file server.* `local` - Backup file is stored in Intersight Appliance.* `https` - Hypertext Transfer Protocol Secure (HTTPS) to access a file from a remote URL. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `username`:(string) The username for the remote request. 
  

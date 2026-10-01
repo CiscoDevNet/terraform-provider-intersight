@@ -3,12 +3,24 @@ subcategory: "fc"
 layout: "intersight"
 page_title: "Intersight: intersight_fc_port_channel"
 description: |-
-        Fibre Channel (FC) port channels in a Fabric Interconnect are logical links that aggregate multiple physical Fibre Channel (FC) ports into a single virtual connection. This configuration is primarily used to enhance the bandwidth and redundancy of storage network connections within a data center.
+        PortChannels (FC) represent Fibre Channel port channels on a Fabric Interconnect. They are logical aggregated links combining multiple FC physical ports into one virtual connection to improve bandwidth and redundancy.
+        #### Purpose
+        Model FC link aggregation so administrators can monitor and reason about SAN uplink/storage connections that use multiple member ports.
+        #### Key Concepts
+        - **Logical aggregation:** Presents multiple physical FC ports as a single logical link.
+        - **Redundancy and bandwidth:** Improves resiliency and throughput for SAN connectivity.
+        - **Fabric context:** Includes switch-local identifiers, VSAN association, operational state/speed, and role.
 
 ---
 
 # Data Source: intersight_fc_port_channel
-Fibre Channel (FC) port channels in a Fabric Interconnect are logical links that aggregate multiple physical Fibre Channel (FC) ports into a single virtual connection. This configuration is primarily used to enhance the bandwidth and redundancy of storage network connections within a data center.
+PortChannels (FC) represent Fibre Channel port channels on a Fabric Interconnect. They are logical aggregated links combining multiple FC physical ports into one virtual connection to improve bandwidth and redundancy.
+#### Purpose
+Model FC link aggregation so administrators can monitor and reason about SAN uplink/storage connections that use multiple member ports.
+#### Key Concepts
+- **Logical aggregation:** Presents multiple physical FC ports as a single logical link.
+- **Redundancy and bandwidth:** Improves resiliency and throughput for SAN connectivity.
+- **Fabric context:** Includes switch-local identifiers, VSAN association, operational state/speed, and role.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

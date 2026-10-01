@@ -1,5 +1,5 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Testing VnicApiService
 
@@ -412,32 +412,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test VnicApiService GetVnicEthAdapterPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthAdapterPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicEthAdapterPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthAdapterPolicyInventoryList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test VnicApiService GetVnicEthAdapterPolicyList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -457,32 +431,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.VnicApi.GetVnicEthIfByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicEthIfInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthIfInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicEthIfInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthIfInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -516,32 +464,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test VnicApiService GetVnicEthNetworkPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthNetworkPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicEthNetworkPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthNetworkPolicyInventoryList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test VnicApiService GetVnicEthNetworkPolicyList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -568,89 +490,11 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test VnicApiService GetVnicEthQosPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthQosPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicEthQosPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthQosPolicyInventoryList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test VnicApiService GetVnicEthQosPolicyList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.VnicApi.GetVnicEthQosPolicyList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicEthVethInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthVethInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicEthVethInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthVethInventoryList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicEthVnicInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthVnicInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicEthVnicInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicEthVnicInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -665,32 +509,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.VnicApi.GetVnicFcAdapterPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcAdapterPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcAdapterPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcAdapterPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcAdapterPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -724,32 +542,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test VnicApiService GetVnicFcIfInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcIfInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcIfInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcIfInventoryList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test VnicApiService GetVnicFcIfList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -769,32 +561,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.VnicApi.GetVnicFcNetworkPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcNetworkPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcNetworkPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcNetworkPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcNetworkPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -828,89 +594,11 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test VnicApiService GetVnicFcQosPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcQosPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcQosPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcQosPolicyInventoryList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test VnicApiService GetVnicFcQosPolicyList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.VnicApi.GetVnicFcQosPolicyList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcVethInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcVethInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcVethInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcVethInventoryList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcVhbaPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcVhbaPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicFcVhbaPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicFcVhbaPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -925,32 +613,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.VnicApi.GetVnicIscsiAdapterPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicIscsiAdapterPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicIscsiAdapterPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicIscsiAdapterPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicIscsiAdapterPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -984,32 +646,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test VnicApiService GetVnicIscsiBootPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicIscsiBootPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicIscsiBootPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicIscsiBootPolicyInventoryList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test VnicApiService GetVnicIscsiBootPolicyList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1036,32 +672,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test VnicApiService GetVnicIscsiStaticTargetPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicIscsiStaticTargetPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicIscsiStaticTargetPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicIscsiStaticTargetPolicyInventoryList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test VnicApiService GetVnicIscsiStaticTargetPolicyList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1081,32 +691,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.VnicApi.GetVnicLanConnectivityPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicLanConnectivityPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicLanConnectivityPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicLanConnectivityPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicLanConnectivityPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1185,32 +769,6 @@ func Test_intersight_VnicApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.VnicApi.GetVnicSanConnectivityPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicSanConnectivityPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicSanConnectivityPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test VnicApiService GetVnicSanConnectivityPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.VnicApi.GetVnicSanConnectivityPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

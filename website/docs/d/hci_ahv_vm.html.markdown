@@ -3,12 +3,26 @@ subcategory: "hci"
 layout: "intersight"
 page_title: "Intersight: intersight_hci_ahv_vm"
 description: |-
-        An AHV VM reported by Prism Central.
+        AhvVms represent Nutanix AHV virtual machines as reported by Prism Central. They are concrete VM inventory objects that extend the common VM base model and add AHV-specific runtime and configuration attributes.
+        #### Purpose
+        Provide an inventory and management view of AHV VMs so administrators can monitor VM characteristics and perform supported lifecycle updates within the HCI cluster context.
+        #### Key Concepts
+        - **AHV-specific VM specialization:** Extends a shared VM base to add AHV-only attributes (creation/update metadata, CPU/memory behaviors, migration capabilities).
+        - **Cluster and node association:** Each VM is scoped to the Nutanix environment (cluster/node) and is tied back to the registered device endpoint.
+        - **Operational visibility:** Captures platform capability flags (e.g., live migration capable, CPU passthrough, memory overcommit) to explain VM behavior and constraints.
+        - **Child resource modeling:** Acts as a parent for related VM components such as vNICs, vDisks, and vGPUs.
 
 ---
 
 # Data Source: intersight_hci_ahv_vm
-An AHV VM reported by Prism Central.
+AhvVms represent Nutanix AHV virtual machines as reported by Prism Central. They are concrete VM inventory objects that extend the common VM base model and add AHV-specific runtime and configuration attributes.
+#### Purpose
+Provide an inventory and management view of AHV VMs so administrators can monitor VM characteristics and perform supported lifecycle updates within the HCI cluster context.
+#### Key Concepts
+- **AHV-specific VM specialization:** Extends a shared VM base to add AHV-only attributes (creation/update metadata, CPU/memory behaviors, migration capabilities).
+- **Cluster and node association:** Each VM is scoped to the Nutanix environment (cluster/node) and is tied back to the registered device endpoint.
+- **Operational visibility:** Captures platform capability flags (e.g., live migration capable, CPU passthrough, memory overcommit) to explain VM behavior and constraints.
+- **Child resource modeling:** Acts as a parent for related VM components such as vNICs, vDisks, and vGPUs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

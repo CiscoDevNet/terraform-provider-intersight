@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_non_data_ip_interface"
 description: |-
-        NetApp Non-Data IP interface is a logical interface for management within the cluster scope.
+        The NetAppNonDataIpInterfaces object represents logical interfaces used for cluster management.
+        ####  Purpose
+        It manages the management-plane connectivity, ensuring that the cluster can be administered and monitored.
+        ####  Key Concepts
+        - **Management Connectivity:** Provides IP access for cluster management.
+        - **Failover:** Tracks the home node and port for management interfaces.
 
 ---
 
 # Data Source: intersight_storage_net_app_non_data_ip_interface
-NetApp Non-Data IP interface is a logical interface for management within the cluster scope.
+The NetAppNonDataIpInterfaces object represents logical interfaces used for cluster management.
+####  Purpose
+It manages the management-plane connectivity, ensuring that the cluster can be administered and monitored.
+####  Key Concepts
+- **Management Connectivity:** Provides IP access for cluster management.
+- **Failover:** Tracks the home node and port for management interfaces.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

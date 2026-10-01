@@ -338,7 +338,7 @@ func getFirmwareDistributableSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"origin": {
-			Description: "The source of the distributable. If it has been created by the user or system.\n* `System` - The distributable has been created by the System.\n* `User` - The distributable has been created by the User.",
+			Description: "The Distributables object represents firmware or software images distributed by Cisco for system components.\n#### Purpose\nIt manages the lifecycle of distributable images, from download and caching to installation and verification on target endpoints.\n#### Key Concepts\n- **Image Distribution:** Provides a standardized way to manage images for various hardware components.\n- **Lifecycle Management:** Orchestrates the download, staging, and installation of firmware images.\n- **Compatibility:** Ensures that the correct image is applied to the appropriate hardware model.\n* `System` - The distributable has been created by the System.\n* `User` - The distributable has been created by the User.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

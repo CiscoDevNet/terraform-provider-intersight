@@ -3,12 +3,22 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_download_history"
 description: |-
-        An object to keep track of software downloads from the Private Appliance portal in SaaS.
+        The DownloadHistories object tracks software download operations from the Private Appliance portal.
+        #### Purpose
+        It provides an audit trail of software downloads, including product details, versions, and user information.
+        #### Key Concepts
+        - **Audit Trail:** Records all software download activities for accountability.
+        - **Usage Tracking:** Tracks which software versions were downloaded by which users.
 
 ---
 
 # Data Source: intersight_software_download_history
-An object to keep track of software downloads from the Private Appliance portal in SaaS.
+The DownloadHistories object tracks software download operations from the Private Appliance portal.
+#### Purpose
+It provides an audit trail of software downloads, including product details, versions, and user information.
+#### Key Concepts
+- **Audit Trail:** Records all software download activities for accountability.
+- **Usage Tracking:** Tracks which software versions were downloaded by which users.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

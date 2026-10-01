@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_server_topology_map"
 description: |-
-        Mapping of server models to their supported PCIe topology configurations and compatibility matrix.
+        ServerTopologyMaps map specific server models (and related infrastructure components like XFM and PCIe nodes) to a supported PCIe topology configuration and an associated handler identifier. This forms a compatibility matrix that links “what hardware is present” to “which topology definition applies.”
+        #### Purpose
+        Associate hardware model inventory (server/XFM/PCIe node) with the appropriate supported PCIe topology configuration used for validation and orchestration.
+        #### Key Concepts
+        - **Model-to-topology mapping:** Connects a server model definition to the topology rules it supports.
+        - **Device inventory descriptors:** Uses inventory-like descriptors (model + min/max version bounds) to define compatibility.
+        - **Cross-component compatibility:** Captures that topology support depends on the combination of server, XFM, and PCIe node models/versions.
+        - **Handler-based processing:** Includes a handler identifier to route topology interpretation/validation to the correct logic.
 
 ---
 
 # Data Source: intersight_capability_server_topology_map
-Mapping of server models to their supported PCIe topology configurations and compatibility matrix.
+ServerTopologyMaps map specific server models (and related infrastructure components like XFM and PCIe nodes) to a supported PCIe topology configuration and an associated handler identifier. This forms a compatibility matrix that links “what hardware is present” to “which topology definition applies.”
+#### Purpose
+Associate hardware model inventory (server/XFM/PCIe node) with the appropriate supported PCIe topology configuration used for validation and orchestration.
+#### Key Concepts
+- **Model-to-topology mapping:** Connects a server model definition to the topology rules it supports.
+- **Device inventory descriptors:** Uses inventory-like descriptors (model + min/max version bounds) to define compatibility.
+- **Cross-component compatibility:** Captures that topology support depends on the combination of server, XFM, and PCIe node models/versions.
+- **Handler-based processing:** Includes a handler identifier to route topology interpretation/validation to the correct logic.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

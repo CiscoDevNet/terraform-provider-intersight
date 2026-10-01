@@ -1,5 +1,5 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Testing NetworkconfigApiService
 
@@ -55,32 +55,6 @@ func Test_intersight_NetworkconfigApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.NetworkconfigApi.GetNetworkconfigPolicyByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NetworkconfigApiService GetNetworkconfigPolicyInventoryByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.NetworkconfigApi.GetNetworkconfigPolicyInventoryByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test NetworkconfigApiService GetNetworkconfigPolicyInventoryList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.NetworkconfigApi.GetNetworkconfigPolicyInventoryList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

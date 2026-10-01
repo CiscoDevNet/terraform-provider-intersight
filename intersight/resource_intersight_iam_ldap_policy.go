@@ -173,7 +173,7 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Optional:     true,
 						},
 						"enable_encryption": {
-							Description: "If enabled, the endpoint encrypts all information sent to the LDAP server.",
+							Description: "If enabled, the endpoint encrypts all information it sends to the LDAP server. LDAP encryption uses StartTLS over port 389.",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
@@ -615,6 +615,7 @@ func resourceIamLdapPolicy() *schema.Resource {
 						},
 					},
 				},
+				ForceNew: true,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -1313,7 +1314,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if v, ok := d.GetOk("nr_providers"); ok {
+	if v, ok := d.GetOkExists("nr_providers"); ok {
 		x := make([]models.IamLdapProviderRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {

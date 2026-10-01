@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_server_models_capability_def"
 description: |-
-        Used to categorize server models.
+        The ServerModelsCapabilityDef object categorizes server models into logical groupings (for example, by server family or generation).
+        #### Purpose
+        ServerModelsCapabilityDef provides a catalog-backed classification mechanism for server models, enabling feature targeting, policy applicability checks, or UI grouping based on server type.
+        #### Key Concepts
+        - **Model categorization:** Groups many model strings under a meaningful server type label.
+        - **Feature targeting:** Enables applying behavior or validation to a category rather than individual model strings.
+        - **Scalable cataloging:** Reduces duplication by centralizing model-to-type mapping.
+        - **Cross-service consistency:** Improves consistent interpretation of “server family” across workflows.
 
 ---
 
 # Data Source: intersight_capability_server_models_capability_def
-Used to categorize server models.
+The ServerModelsCapabilityDef object categorizes server models into logical groupings (for example, by server family or generation).
+#### Purpose
+ServerModelsCapabilityDef provides a catalog-backed classification mechanism for server models, enabling feature targeting, policy applicability checks, or UI grouping based on server type.
+#### Key Concepts
+- **Model categorization:** Groups many model strings under a meaningful server type label.
+- **Feature targeting:** Enables applying behavior or validation to a category rather than individual model strings.
+- **Scalable cataloging:** Reduces duplication by centralizing model-to-type mapping.
+- **Cross-service consistency:** Improves consistent interpretation of “server family” across workflows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

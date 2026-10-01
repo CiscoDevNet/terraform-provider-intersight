@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_board_controller_descriptor"
 description: |-
-        Descriptor to uniquely identify a board controller.
+        The BoardControllerDescriptors object provides internal metadata to uniquely identify board controller components within the system.
+        #### Purpose
+        It supports hardware identification and compatibility verification, ensuring that board controllers are correctly recognized during inventory and firmware management processes.
+        #### Key Concepts
+        - **Component Identification:** Uniquely identifies board controllers using vendor, model, and revision details.
+        - **Hardware Integration:** Facilitates the mapping of board controller hardware to system-level policies.
 
 ---
 
 # Data Source: intersight_firmware_board_controller_descriptor
-Descriptor to uniquely identify a board controller.
+The BoardControllerDescriptors object provides internal metadata to uniquely identify board controller components within the system.
+#### Purpose
+It supports hardware identification and compatibility verification, ensuring that board controllers are correctly recognized during inventory and firmware management processes.
+#### Key Concepts
+- **Component Identification:** Uniquely identifies board controllers using vendor, model, and revision details.
+- **Hardware Integration:** Facilitates the mapping of board controller hardware to system-level policies.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

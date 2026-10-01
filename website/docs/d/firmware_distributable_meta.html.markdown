@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_distributable_meta"
 description: |-
-        Meta information for various firmware images stored in the database. Gives information on the particular category for a product.
+        The DistributableMeta object provides internal metadata for firmware images, mapping them to specific product categories and hardware models.
+        #### Purpose
+        It enables the system to categorize and identify images correctly, ensuring that the right firmware is applied to the right hardware.
+        #### Key Concepts
+        - **Metadata Mapping:** Links images to specific software types, categories, and supported hardware models.
+        - **Categorization:** Facilitates efficient image discovery based on product and component types.
 
 ---
 
 # Data Source: intersight_firmware_distributable_meta
-Meta information for various firmware images stored in the database. Gives information on the particular category for a product.
+The DistributableMeta object provides internal metadata for firmware images, mapping them to specific product categories and hardware models.
+#### Purpose
+It enables the system to categorize and identify images correctly, ensuring that the right firmware is applied to the right hardware.
+#### Key Concepts
+- **Metadata Mapping:** Links images to specific software types, categories, and supported hardware models.
+- **Categorization:** Facilitates efficient image discovery based on product and component types.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

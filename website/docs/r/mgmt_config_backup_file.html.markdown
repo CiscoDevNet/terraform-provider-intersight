@@ -3,12 +3,22 @@ subcategory: "mgmt"
 layout: "intersight"
 page_title: "Intersight: intersight_mgmt_config_backup_file"
 description: |-
-        A configuration backup file that user can upload in Intersight so that the uploaded backup can be restored in Intersight when needed.
+        The ConfigBackupFiles object represents a configuration backup file uploaded to Intersight.
+        #### Purpose
+        It allows users to store and manage configuration backups, ensuring that system states can be restored if necessary.
+        #### Key Concepts
+        - **Backup Management:** Manages the lifecycle of uploaded configuration backup files.
+        - **Restore Capability:** Provides the necessary data to restore system configurations.
 
 ---
 
 # Resource: intersight_mgmt_config_backup_file
-A configuration backup file that user can upload in Intersight so that the uploaded backup can be restored in Intersight when needed.
+The ConfigBackupFiles object represents a configuration backup file uploaded to Intersight.
+#### Purpose
+It allows users to store and manage configuration backups, ensuring that system states can be restored if necessary.
+#### Key Concepts
+- **Backup Management:** Manages the lifecycle of uploaded configuration backup files.
+- **Restore Capability:** Provides the necessary data to restore system configurations.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

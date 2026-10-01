@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -43,7 +43,7 @@ var (
 	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
-// APIClient manages communication with the Cisco Intersight API v1.0.11-2026072720
+// APIClient manages communication with the Cisco Intersight Sdk API v1.1.8-0-20260828115928667
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -73,8 +73,6 @@ type APIClient struct {
 
 	CapabilityApi *CapabilityApiService
 
-	CatalystsdwanApi *CatalystsdwanApiService
-
 	CertificatemanagementApi *CertificatemanagementApiService
 
 	ChassisApi *ChassisApiService
@@ -97,13 +95,7 @@ type APIClient struct {
 
 	CoremanagementApi *CoremanagementApiService
 
-	CrdApi *CrdApiService
-
 	DeviceconnectorApi *DeviceconnectorApiService
-
-	DnacApi *DnacApiService
-
-	EnergyApi *EnergyApiService
 
 	EquipmentApi *EquipmentApiService
 
@@ -122,8 +114,6 @@ type APIClient struct {
 	FeedbackApi *FeedbackApiService
 
 	FirmwareApi *FirmwareApiService
-
-	FmcApi *FmcApiService
 
 	ForecastApi *ForecastApiService
 
@@ -147,8 +137,6 @@ type APIClient struct {
 
 	IqnpoolApi *IqnpoolApiService
 
-	IwotenantApi *IwotenantApiService
-
 	KvmApi *KvmApiService
 
 	LicenseApi *LicenseApiService
@@ -161,8 +149,6 @@ type APIClient struct {
 
 	MemoryApi *MemoryApiService
 
-	MerakiApi *MerakiApiService
-
 	MetaApi *MetaApiService
 
 	MetricsApi *MetricsApiService
@@ -174,10 +160,6 @@ type APIClient struct {
 	NetworkApi *NetworkApiService
 
 	NetworkconfigApi *NetworkconfigApiService
-
-	NiaapiApi *NiaapiApiService
-
-	NiatelemetryApi *NiatelemetryApiService
 
 	NotificationApi *NotificationApiService
 
@@ -221,8 +203,6 @@ type APIClient struct {
 
 	SchedulerApi *SchedulerApiService
 
-	SdaaciApi *SdaaciApiService
-
 	SdcardApi *SdcardApiService
 
 	SearchApi *SearchApiService
@@ -230,8 +210,6 @@ type APIClient struct {
 	SecurityApi *SecurityApiService
 
 	ServerApi *ServerApiService
-
-	ServicenowApi *ServicenowApiService
 
 	SmtpApi *SmtpApiService
 
@@ -313,7 +291,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.BootApi = (*BootApiService)(&c.common)
 	c.BulkApi = (*BulkApiService)(&c.common)
 	c.CapabilityApi = (*CapabilityApiService)(&c.common)
-	c.CatalystsdwanApi = (*CatalystsdwanApiService)(&c.common)
 	c.CertificatemanagementApi = (*CertificatemanagementApiService)(&c.common)
 	c.ChassisApi = (*ChassisApiService)(&c.common)
 	c.CliApi = (*CliApiService)(&c.common)
@@ -325,10 +302,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ConsoleApi = (*ConsoleApiService)(&c.common)
 	c.ConvergedinfraApi = (*ConvergedinfraApiService)(&c.common)
 	c.CoremanagementApi = (*CoremanagementApiService)(&c.common)
-	c.CrdApi = (*CrdApiService)(&c.common)
 	c.DeviceconnectorApi = (*DeviceconnectorApiService)(&c.common)
-	c.DnacApi = (*DnacApiService)(&c.common)
-	c.EnergyApi = (*EnergyApiService)(&c.common)
 	c.EquipmentApi = (*EquipmentApiService)(&c.common)
 	c.EtherApi = (*EtherApiService)(&c.common)
 	c.ExternalsiteApi = (*ExternalsiteApiService)(&c.common)
@@ -338,7 +312,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.FcpoolApi = (*FcpoolApiService)(&c.common)
 	c.FeedbackApi = (*FeedbackApiService)(&c.common)
 	c.FirmwareApi = (*FirmwareApiService)(&c.common)
-	c.FmcApi = (*FmcApiService)(&c.common)
 	c.ForecastApi = (*ForecastApiService)(&c.common)
 	c.GraphicsApi = (*GraphicsApiService)(&c.common)
 	c.HciApi = (*HciApiService)(&c.common)
@@ -350,22 +323,18 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.IpmioverlanApi = (*IpmioverlanApiService)(&c.common)
 	c.IppoolApi = (*IppoolApiService)(&c.common)
 	c.IqnpoolApi = (*IqnpoolApiService)(&c.common)
-	c.IwotenantApi = (*IwotenantApiService)(&c.common)
 	c.KvmApi = (*KvmApiService)(&c.common)
 	c.LicenseApi = (*LicenseApiService)(&c.common)
 	c.LsApi = (*LsApiService)(&c.common)
 	c.MacpoolApi = (*MacpoolApiService)(&c.common)
 	c.ManagementApi = (*ManagementApiService)(&c.common)
 	c.MemoryApi = (*MemoryApiService)(&c.common)
-	c.MerakiApi = (*MerakiApiService)(&c.common)
 	c.MetaApi = (*MetaApiService)(&c.common)
 	c.MetricsApi = (*MetricsApiService)(&c.common)
 	c.MgmtApi = (*MgmtApiService)(&c.common)
 	c.MonitoringApi = (*MonitoringApiService)(&c.common)
 	c.NetworkApi = (*NetworkApiService)(&c.common)
 	c.NetworkconfigApi = (*NetworkconfigApiService)(&c.common)
-	c.NiaapiApi = (*NiaapiApiService)(&c.common)
-	c.NiatelemetryApi = (*NiatelemetryApiService)(&c.common)
 	c.NotificationApi = (*NotificationApiService)(&c.common)
 	c.NtpApi = (*NtpApiService)(&c.common)
 	c.OauthApi = (*OauthApiService)(&c.common)
@@ -387,12 +356,10 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ResourcepoolApi = (*ResourcepoolApiService)(&c.common)
 	c.RproxyApi = (*RproxyApiService)(&c.common)
 	c.SchedulerApi = (*SchedulerApiService)(&c.common)
-	c.SdaaciApi = (*SdaaciApiService)(&c.common)
 	c.SdcardApi = (*SdcardApiService)(&c.common)
 	c.SearchApi = (*SearchApiService)(&c.common)
 	c.SecurityApi = (*SecurityApiService)(&c.common)
 	c.ServerApi = (*ServerApiService)(&c.common)
-	c.ServicenowApi = (*ServicenowApiService)(&c.common)
 	c.SmtpApi = (*SmtpApiService)(&c.common)
 	c.SnmpApi = (*SnmpApiService)(&c.common)
 	c.SoftwareApi = (*SoftwareApiService)(&c.common)

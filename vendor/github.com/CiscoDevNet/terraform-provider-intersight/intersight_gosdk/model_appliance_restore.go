@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -41,7 +41,11 @@ type ApplianceRestore struct {
 	// Start date and time of the restore process.
 	StartTime *time.Time `json:"StartTime,omitempty"`
 	// Status of the restore managed object. * `Started` - Backup or restore process has started. * `Created` - Backup or restore is in created state. * `Failed` - Backup or restore process has failed. * `Completed` - Backup or restore process has completed. * `Copied` - Backup file has been copied. * `Cleanup Failed` - Cleanup of the old backup has failed.
-	Status               *string                        `json:"Status,omitempty"`
+	Status *string `json:"Status,omitempty"`
+	// PEM-encoded certificate used to verify the HTTPS server certificate during the Transport Layer Security (TLS) handshake. Required when the server certificate is not signed by a publicly trusted certificate authority (CA). Provide either the CA that signed the server certificate, a CA bundle containing the issuer, or the server's own certificate when it is self-signed. Verifying the server certificate prevents man-in-the-middle attacks during the download. Leaving this field empty disables TLS verification, and the download accepts any certificate the server presents.
+	TlsCertificate *string `json:"TlsCertificate,omitempty"`
+	// HTTPS URL of the backup archive to restore. The URL must use the HTTPS scheme (https://), and any other scheme is rejected during validation. When the server requires authentication, the appliance uses the username and password properties on this object as HTTP basic authentication credentials.
+	Url                  *string                        `json:"Url,omitempty"`
 	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -356,6 +360,70 @@ func (o *ApplianceRestore) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetTlsCertificate returns the TlsCertificate field value if set, zero value otherwise.
+func (o *ApplianceRestore) GetTlsCertificate() string {
+	if o == nil || IsNil(o.TlsCertificate) {
+		var ret string
+		return ret
+	}
+	return *o.TlsCertificate
+}
+
+// GetTlsCertificateOk returns a tuple with the TlsCertificate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceRestore) GetTlsCertificateOk() (*string, bool) {
+	if o == nil || IsNil(o.TlsCertificate) {
+		return nil, false
+	}
+	return o.TlsCertificate, true
+}
+
+// HasTlsCertificate returns a boolean if a field has been set.
+func (o *ApplianceRestore) HasTlsCertificate() bool {
+	if o != nil && !IsNil(o.TlsCertificate) {
+		return true
+	}
+
+	return false
+}
+
+// SetTlsCertificate gets a reference to the given string and assigns it to the TlsCertificate field.
+func (o *ApplianceRestore) SetTlsCertificate(v string) {
+	o.TlsCertificate = &v
+}
+
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *ApplianceRestore) GetUrl() string {
+	if o == nil || IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceRestore) GetUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *ApplianceRestore) HasUrl() bool {
+	if o != nil && !IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *ApplianceRestore) SetUrl(v string) {
+	o.Url = &v
+}
+
 // GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceRestore) GetAccount() IamAccountRelationship {
 	if o == nil || IsNil(o.Account.Get()) {
@@ -446,6 +514,12 @@ func (o ApplianceRestore) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
+	if !IsNil(o.TlsCertificate) {
+		toSerialize["TlsCertificate"] = o.TlsCertificate
+	}
+	if !IsNil(o.Url) {
+		toSerialize["Url"] = o.Url
+	}
 	if o.Account.IsSet() {
 		toSerialize["Account"] = o.Account.Get()
 	}
@@ -516,7 +590,11 @@ func (o *ApplianceRestore) UnmarshalJSON(data []byte) (err error) {
 		// Start date and time of the restore process.
 		StartTime *time.Time `json:"StartTime,omitempty"`
 		// Status of the restore managed object. * `Started` - Backup or restore process has started. * `Created` - Backup or restore is in created state. * `Failed` - Backup or restore process has failed. * `Completed` - Backup or restore process has completed. * `Copied` - Backup file has been copied. * `Cleanup Failed` - Cleanup of the old backup has failed.
-		Status  *string                        `json:"Status,omitempty"`
+		Status *string `json:"Status,omitempty"`
+		// PEM-encoded certificate used to verify the HTTPS server certificate during the Transport Layer Security (TLS) handshake. Required when the server certificate is not signed by a publicly trusted certificate authority (CA). Provide either the CA that signed the server certificate, a CA bundle containing the issuer, or the server's own certificate when it is self-signed. Verifying the server certificate prevents man-in-the-middle attacks during the download. Leaving this field empty disables TLS verification, and the download accepts any certificate the server presents.
+		TlsCertificate *string `json:"TlsCertificate,omitempty"`
+		// HTTPS URL of the backup archive to restore. The URL must use the HTTPS scheme (https://), and any other scheme is rejected during validation. When the server requires authentication, the appliance uses the username and password properties on this object as HTTP basic authentication credentials.
+		Url     *string                        `json:"Url,omitempty"`
 		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
@@ -534,6 +612,8 @@ func (o *ApplianceRestore) UnmarshalJSON(data []byte) (err error) {
 		varApplianceRestore.Password = varApplianceRestoreWithoutEmbeddedStruct.Password
 		varApplianceRestore.StartTime = varApplianceRestoreWithoutEmbeddedStruct.StartTime
 		varApplianceRestore.Status = varApplianceRestoreWithoutEmbeddedStruct.Status
+		varApplianceRestore.TlsCertificate = varApplianceRestoreWithoutEmbeddedStruct.TlsCertificate
+		varApplianceRestore.Url = varApplianceRestoreWithoutEmbeddedStruct.Url
 		varApplianceRestore.Account = varApplianceRestoreWithoutEmbeddedStruct.Account
 		*o = ApplianceRestore(varApplianceRestore)
 	} else {
@@ -561,6 +641,8 @@ func (o *ApplianceRestore) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Password")
 		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Status")
+		delete(additionalProperties, "TlsCertificate")
+		delete(additionalProperties, "Url")
 		delete(additionalProperties, "Account")
 
 		// remove fields from embedded structs

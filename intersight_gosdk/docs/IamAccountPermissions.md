@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **AccountName** | Pointer to **string** | Name of the account which a user can select after authentication. | [optional] [readonly] 
 **AccountPermissionTags** | Pointer to [**[]IamAccountTags**](IamAccountTags.md) |  | [optional] 
 **AccountStatus** | Pointer to **string** | Status of the account. Account remains inactive until a device is claimed to the account. | [optional] [readonly] 
+**ExternalIdentifier** | Pointer to **string** | The external identifier of the account object. | [optional] [readonly] 
 **HomeRegion** | Pointer to **string** | Region where account belongs. | [optional] [readonly] 
 **Permissions** | Pointer to [**[]IamPermissionReference**](IamPermissionReference.md) |  | [optional] 
 
@@ -181,6 +182,31 @@ SetAccountStatus sets AccountStatus field to given value.
 `func (o *IamAccountPermissions) HasAccountStatus() bool`
 
 HasAccountStatus returns a boolean if a field has been set.
+
+### GetExternalIdentifier
+
+`func (o *IamAccountPermissions) GetExternalIdentifier() string`
+
+GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetExternalIdentifierOk
+
+`func (o *IamAccountPermissions) GetExternalIdentifierOk() (*string, bool)`
+
+GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIdentifier
+
+`func (o *IamAccountPermissions) SetExternalIdentifier(v string)`
+
+SetExternalIdentifier sets ExternalIdentifier field to given value.
+
+### HasExternalIdentifier
+
+`func (o *IamAccountPermissions) HasExternalIdentifier() bool`
+
+HasExternalIdentifier returns a boolean if a field has been set.
 
 ### GetHomeRegion
 

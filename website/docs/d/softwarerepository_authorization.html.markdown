@@ -3,12 +3,24 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_authorization"
 description: |-
-        User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user.
+        The Authorizations object tracks user consent for Intersight to contact external software repositories (e.g., cisco.com) to download images on the user's behalf.
+        #### Purpose
+        It manages the secure storage of credentials and authentication modes required to access external repositories, ensuring that software downloads are authorized and secure.
+        #### Key Concepts
+        - **Credential Management:** Securely manages usernames and passwords for external repositories.
+        - **Authentication Modes:** Defines the OAuth2 mechanisms used for secure communication.
+        - **Repository Access:** Authorizes Intersight to act on behalf of the user account for software retrieval.
 
 ---
 
 # Data Source: intersight_softwarerepository_authorization
-User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user.
+The Authorizations object tracks user consent for Intersight to contact external software repositories (e.g., cisco.com) to download images on the user's behalf.
+#### Purpose
+It manages the secure storage of credentials and authentication modes required to access external repositories, ensuring that software downloads are authorized and secure.
+#### Key Concepts
+- **Credential Management:** Securely manages usernames and passwords for external repositories.
+- **Authentication Modes:** Defines the OAuth2 mechanisms used for secure communication.
+- **Repository Access:** Authorizes Intersight to act on behalf of the user account for software retrieval.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

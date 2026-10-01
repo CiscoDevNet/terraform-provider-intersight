@@ -3,14 +3,28 @@ subcategory: "onprem"
 layout: "intersight"
 page_title: "Intersight: intersight_onprem_appliance_system_info"
 description: |-
-        ApplianceSystemInfo managed object stores the Intersight Appliance System information.
-        It is created during the Intersight Appliance setup. It is updated periodically with current system information and it is applicable only for Cisco Assist deployment currently.
+        ApplianceSystemInfo stores system-level information for an Intersight Appliance node. It is created as part of the Intersight Appliance setup flow and is periodically updated by the system to reflect current appliance/node information. This managed object is currently applicable only for Cisco Assist deployments.
+        #### Purpose
+        Provide a system-maintained inventory of Intersight Appliance node identity and basic addressing details so the platform can track nodes within an appliance cluster and expose read-only system information for operational visibility.
+        #### Key Concepts
+        - **System-owned, system-managed**: `owner: system` with system API methods (CREATE/UPDATE/DELETE) indicates the platform, not end users, controls the lifecycle and updates.
+        - **Setup-time creation with periodic refresh**: Created during appliance setup and then updated on an ongoing basis to reflect current state.
+        - **Cluster node identity**: `nodeId` is a system-assigned unique node identifier within the appliance cluster (incrementing from 1).
+        - **Node addressing/FQDN**: `hostname` captures the node’s FQDN or IP address (supports hostname/IPv4/IPv6 formats).
+        - **Read-only consumer access**: Exposed to users via READ for visibility rather than configuration.
 
 ---
 
 # Data Source: intersight_onprem_appliance_system_info
-ApplianceSystemInfo managed object stores the Intersight Appliance System information.
-It is created during the Intersight Appliance setup. It is updated periodically with current system information and it is applicable only for Cisco Assist deployment currently.
+ApplianceSystemInfo stores system-level information for an Intersight Appliance node. It is created as part of the Intersight Appliance setup flow and is periodically updated by the system to reflect current appliance/node information. This managed object is currently applicable only for Cisco Assist deployments.
+#### Purpose
+Provide a system-maintained inventory of Intersight Appliance node identity and basic addressing details so the platform can track nodes within an appliance cluster and expose read-only system information for operational visibility.
+#### Key Concepts
+- **System-owned, system-managed**: `owner: system` with system API methods (CREATE/UPDATE/DELETE) indicates the platform, not end users, controls the lifecycle and updates.
+- **Setup-time creation with periodic refresh**: Created during appliance setup and then updated on an ongoing basis to reflect current state.
+- **Cluster node identity**: `nodeId` is a system-assigned unique node identifier within the appliance cluster (incrementing from 1).
+- **Node addressing/FQDN**: `hostname` captures the node’s FQDN or IP address (supports hostname/IPv4/IPv6 formats).
+- **Read-only consumer access**: Exposed to users via READ for visibility rather than configuration.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

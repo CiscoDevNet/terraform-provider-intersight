@@ -3,6 +3,7 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_security_advisory"
 description: |-
+        Global catalog of PSIRT advisories, NOT scoped to an account. To find which advisories impact an account or its servers, query tam.AdvisoryInstance instead; use this object only to look up a specific advisory's details (CVEs, CVSS) by Moid or AdvisoryId.
         The SecurityAdvisory object represents the Intersight adaptation of Cisco PSIRT advisories, focusing on security issues with associated CVE identifiers and CVSS scores. It helps users identify and address security vulnerabilities within their managed objects.
         #### Purpose
         SecurityAdvisory provides a structured representation of security advisories, enabling users to understand vulnerabilities and take appropriate actions to secure their systems.
@@ -14,6 +15,7 @@ description: |-
 ---
 
 # Data Source: intersight_tam_security_advisory
+Global catalog of PSIRT advisories, NOT scoped to an account. To find which advisories impact an account or its servers, query tam.AdvisoryInstance instead; use this object only to look up a specific advisory's details (CVEs, CVSS) by Moid or AdvisoryId.
 The SecurityAdvisory object represents the Intersight adaptation of Cisco PSIRT advisories, focusing on security issues with associated CVE identifiers and CVSS scores. It helps users identify and address security vulnerabilities within their managed objects.
 #### Purpose
 SecurityAdvisory provides a structured representation of security advisories, enabling users to understand vulnerabilities and take appropriate actions to secure their systems.

@@ -3,12 +3,28 @@ subcategory: "ntp"
 layout: "intersight"
 page_title: "Intersight: intersight_ntp_ntp_server"
 description: |-
-        Concrete class for NTP server configured on a network device. Network Time Protocol (NTP) is used to synchronize with computer clock time sources in a network.
+        NtpServers represent configured Network Time Protocol (NTP) peers/servers on a managed network device. They provide read-only visibility into which NTP endpoints a device uses for time synchronization and how those peers are characterized (stratum, polling interval, VRF).
+        #### Purpose
+        Expose NTP configuration inventory for network devices so administrators can validate time-synchronization sources and troubleshoot time drift or connectivity issues.
+        #### Key Concepts
+        - **Time synchronization inventory:** Captures the configured NTP server/peer IP address and associated parameters.
+        - **Server vs peer semantics:** The `type` distinguishes whether the configured endpoint is an NTP server or a peer.
+        - **Quality and cadence indicators:** `stratum` and `poll` reflect the peer’s hierarchy level and polling interval behavior.
+        - **Routing context:** `vrfName` indicates which VRF the device uses to reach the NTP endpoint.
+        - **Device association:** Each NtpServer is tied to a specific registered device and inherits permissions from the network element context.
 
 ---
 
 # Data Source: intersight_ntp_ntp_server
-Concrete class for NTP server configured on a network device. Network Time Protocol (NTP) is used to synchronize with computer clock time sources in a network.
+NtpServers represent configured Network Time Protocol (NTP) peers/servers on a managed network device. They provide read-only visibility into which NTP endpoints a device uses for time synchronization and how those peers are characterized (stratum, polling interval, VRF).
+#### Purpose
+Expose NTP configuration inventory for network devices so administrators can validate time-synchronization sources and troubleshoot time drift or connectivity issues.
+#### Key Concepts
+- **Time synchronization inventory:** Captures the configured NTP server/peer IP address and associated parameters.
+- **Server vs peer semantics:** The `type` distinguishes whether the configured endpoint is an NTP server or a peer.
+- **Quality and cadence indicators:** `stratum` and `poll` reflect the peer’s hierarchy level and polling interval behavior.
+- **Routing context:** `vrfName` indicates which VRF the device uses to reach the NTP endpoint.
+- **Device association:** Each NtpServer is tied to a specific registered device and inherits permissions from the network element context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

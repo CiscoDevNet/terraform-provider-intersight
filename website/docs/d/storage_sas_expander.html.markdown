@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_sas_expander"
 description: |-
-        SAS Expander present in a server.
+        SasExpanders represent SAS expander modules present in a server or chassis. They provide operational state and SAS address context and relate to a management controller.
+        #### Purpose
+        Expose SAS expander inventory to support storage connectivity visibility in platforms that use expanders between controllers and disks.
+        #### Key Concepts
+        - **Connectivity component:** Represents the expander used to fan out SAS connectivity.
+        - **Operational state/operability:** Provides health/state signals for the expander.
+        - **Controller relationship:** Links to a management controller that represents the expander’s service processor context.
 
 ---
 
 # Data Source: intersight_storage_sas_expander
-SAS Expander present in a server.
+SasExpanders represent SAS expander modules present in a server or chassis. They provide operational state and SAS address context and relate to a management controller.
+#### Purpose
+Expose SAS expander inventory to support storage connectivity visibility in platforms that use expanders between controllers and disks.
+#### Key Concepts
+- **Connectivity component:** Represents the expander used to fan out SAS connectivity.
+- **Operational state/operability:** Provides health/state signals for the expander.
+- **Controller relationship:** Links to a management controller that represents the expander’s service processor context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

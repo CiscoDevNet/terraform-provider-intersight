@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -53,6 +53,7 @@ type ApplianceDeviceClaim struct {
 	Account              NullableIamAccountRelationship          `json:"Account,omitempty"`
 	AssignedLocation     NullableAssetGeoLocationRelationship    `json:"AssignedLocation,omitempty"`
 	Reservation          NullableResourceReservationRelationship `json:"Reservation,omitempty"`
+	TlsCertificate       NullableIamTrustPointRelationship       `json:"TlsCertificate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -628,6 +629,49 @@ func (o *ApplianceDeviceClaim) UnsetReservation() {
 	o.Reservation.Unset()
 }
 
+// GetTlsCertificate returns the TlsCertificate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ApplianceDeviceClaim) GetTlsCertificate() IamTrustPointRelationship {
+	if o == nil || IsNil(o.TlsCertificate.Get()) {
+		var ret IamTrustPointRelationship
+		return ret
+	}
+	return *o.TlsCertificate.Get()
+}
+
+// GetTlsCertificateOk returns a tuple with the TlsCertificate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ApplianceDeviceClaim) GetTlsCertificateOk() (*IamTrustPointRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TlsCertificate.Get(), o.TlsCertificate.IsSet()
+}
+
+// HasTlsCertificate returns a boolean if a field has been set.
+func (o *ApplianceDeviceClaim) HasTlsCertificate() bool {
+	if o != nil && o.TlsCertificate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTlsCertificate gets a reference to the given NullableIamTrustPointRelationship and assigns it to the TlsCertificate field.
+func (o *ApplianceDeviceClaim) SetTlsCertificate(v IamTrustPointRelationship) {
+	o.TlsCertificate.Set(&v)
+}
+
+// SetTlsCertificateNil sets the value for TlsCertificate to be an explicit nil
+func (o *ApplianceDeviceClaim) SetTlsCertificateNil() {
+	o.TlsCertificate.Set(nil)
+}
+
+// UnsetTlsCertificate ensures that no value is present for TlsCertificate, not even an explicit nil
+func (o *ApplianceDeviceClaim) UnsetTlsCertificate() {
+	o.TlsCertificate.Unset()
+}
+
 func (o ApplianceDeviceClaim) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -695,6 +739,9 @@ func (o ApplianceDeviceClaim) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Reservation.IsSet() {
 		toSerialize["Reservation"] = o.Reservation.Get()
+	}
+	if o.TlsCertificate.IsSet() {
+		toSerialize["TlsCertificate"] = o.TlsCertificate.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -776,6 +823,7 @@ func (o *ApplianceDeviceClaim) UnmarshalJSON(data []byte) (err error) {
 		Account          NullableIamAccountRelationship          `json:"Account,omitempty"`
 		AssignedLocation NullableAssetGeoLocationRelationship    `json:"AssignedLocation,omitempty"`
 		Reservation      NullableResourceReservationRelationship `json:"Reservation,omitempty"`
+		TlsCertificate   NullableIamTrustPointRelationship       `json:"TlsCertificate,omitempty"`
 	}
 
 	varApplianceDeviceClaimWithoutEmbeddedStruct := ApplianceDeviceClaimWithoutEmbeddedStruct{}
@@ -799,6 +847,7 @@ func (o *ApplianceDeviceClaim) UnmarshalJSON(data []byte) (err error) {
 		varApplianceDeviceClaim.Account = varApplianceDeviceClaimWithoutEmbeddedStruct.Account
 		varApplianceDeviceClaim.AssignedLocation = varApplianceDeviceClaimWithoutEmbeddedStruct.AssignedLocation
 		varApplianceDeviceClaim.Reservation = varApplianceDeviceClaimWithoutEmbeddedStruct.Reservation
+		varApplianceDeviceClaim.TlsCertificate = varApplianceDeviceClaimWithoutEmbeddedStruct.TlsCertificate
 		*o = ApplianceDeviceClaim(varApplianceDeviceClaim)
 	} else {
 		return err
@@ -832,6 +881,7 @@ func (o *ApplianceDeviceClaim) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AssignedLocation")
 		delete(additionalProperties, "Reservation")
+		delete(additionalProperties, "TlsCertificate")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

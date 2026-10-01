@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_pod"
 description: |-
-        Logical containers used to group and manage volumes, protection groups, and configurations for mobility, replication, and multi-array management.
+        PurePods represent a logical grouping construct used to organize and manage collections of PureStorage resources together (commonly associated with coordinated mobility/replication semantics in some Pure architectures).
+        #### Purpose
+        Provide a higher-level container to manage sets of storage objects as a unit for operational workflows.
+        #### Key Concepts
+        - **Grouped resource management:** Pods aggregate related volumes/resources for coordinated operations.
+        - **Policy/workflow alignment:** Often used to align protection/replication/placement behaviors at a group scope.
+        - **Logical abstraction:** Not a physical component; it organizes logical entities.
 
 ---
 
 # Data Source: intersight_storage_pure_pod
-Logical containers used to group and manage volumes, protection groups, and configurations for mobility, replication, and multi-array management.
+PurePods represent a logical grouping construct used to organize and manage collections of PureStorage resources together (commonly associated with coordinated mobility/replication semantics in some Pure architectures).
+#### Purpose
+Provide a higher-level container to manage sets of storage objects as a unit for operational workflows.
+#### Key Concepts
+- **Grouped resource management:** Pods aggregate related volumes/resources for coordinated operations.
+- **Policy/workflow alignment:** Often used to align protection/replication/placement behaviors at a group scope.
+- **Logical abstraction:** Not a physical component; it organizes logical entities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

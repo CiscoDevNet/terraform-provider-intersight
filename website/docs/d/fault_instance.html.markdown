@@ -3,12 +3,26 @@ subcategory: "fault"
 layout: "intersight"
 page_title: "Intersight: intersight_fault_instance"
 description: |-
-        An endpoint anomaly is represented by this object.
+        Instances (fault) represent endpoint anomalies as fault records. They capture fault identity, severity, rule, timestamps, occurrence count, acknowledgement state, and references to both the affected managed object and the root ancestor inventory object.
+        #### Purpose
+        Provide a normalized fault record stream to support monitoring, alert triage, auditing, and correlation of issues to the correct inventory objects.
+        #### Key Concepts
+        - **Anomaly/fault modeling:** Represents a discrete fault condition reported by an endpoint.
+        - **Severity and lifecycle:** Tracks severity (current/original/previous), timestamps, and occurrence count.
+        - **Acknowledgement workflow:** Supports user acknowledgement state updates.
+        - **Correlation links:** Provides relationships to the nearest affected inventory object and to the root ancestor object for context.
 
 ---
 
 # Data Source: intersight_fault_instance
-An endpoint anomaly is represented by this object.
+Instances (fault) represent endpoint anomalies as fault records. They capture fault identity, severity, rule, timestamps, occurrence count, acknowledgement state, and references to both the affected managed object and the root ancestor inventory object.
+#### Purpose
+Provide a normalized fault record stream to support monitoring, alert triage, auditing, and correlation of issues to the correct inventory objects.
+#### Key Concepts
+- **Anomaly/fault modeling:** Represents a discrete fault condition reported by an endpoint.
+- **Severity and lifecycle:** Tracks severity (current/original/previous), timestamps, and occurrence count.
+- **Acknowledgement workflow:** Supports user acknowledgement state updates.
+- **Correlation links:** Provides relationships to the nearest affected inventory object and to the root ancestor object for context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

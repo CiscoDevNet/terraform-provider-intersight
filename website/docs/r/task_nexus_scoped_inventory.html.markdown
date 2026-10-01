@@ -3,12 +3,30 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_nexus_scoped_inventory"
 description: |-
-        API to trigger on-demand Nexus inventory to update modified objects in Intersight report.
+        NexusScopedInventories represent an on-demand inventory trigger used to refresh Nexus inventory and update modified objects in Intersight reporting. Creating one of these objects initiates a scoped discovery cycle for a specific Nexus registered device without waiting for scheduled inventory.
+        #### Purpose
+        Allow administrators to explicitly trigger a targeted Nexus inventory refresh so the latest device state is reflected in Intersight reports.
+        #### Key Concepts
+        - **On-demand trigger (CREATE)**: Functions as an action request rather than a long-lived configuration object.
+        - **Scoped execution**: Extends `connector.ScopedInventory`, limiting the inventory run to the specified device registration.
+        - **Device targeting**: `registeredDevice` is create-only and identifies the Nexus connection to inventory.
+        - **Permission inheritance**: Inherits permissions from `registeredDevice`, aligning authorization with the device registration.
+        - **Licensed operation**: CREATE requires the **Advantage** entitlement (per the provided model block).
+        - **Lifecycle coupling**: `onpeerdelete: cascade` removes the trigger record if the device registration is removed.
 
 ---
 
 # Resource: intersight_task_nexus_scoped_inventory
-API to trigger on-demand Nexus inventory to update modified objects in Intersight report.
+NexusScopedInventories represent an on-demand inventory trigger used to refresh Nexus inventory and update modified objects in Intersight reporting. Creating one of these objects initiates a scoped discovery cycle for a specific Nexus registered device without waiting for scheduled inventory.
+#### Purpose
+Allow administrators to explicitly trigger a targeted Nexus inventory refresh so the latest device state is reflected in Intersight reports.
+#### Key Concepts
+- **On-demand trigger (CREATE)**: Functions as an action request rather than a long-lived configuration object.
+- **Scoped execution**: Extends `connector.ScopedInventory`, limiting the inventory run to the specified device registration.
+- **Device targeting**: `registeredDevice` is create-only and identifies the Nexus connection to inventory.
+- **Permission inheritance**: Inherits permissions from `registeredDevice`, aligning authorization with the device registration.
+- **Licensed operation**: CREATE requires the **Advantage** entitlement (per the provided model block).
+- **Lifecycle coupling**: `onpeerdelete: cascade` removes the trigger record if the device registration is removed.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

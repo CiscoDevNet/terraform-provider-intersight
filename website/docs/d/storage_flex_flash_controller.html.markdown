@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_flash_controller"
 description: |-
-        Storage Flex Flash Controller.
+        FlexFlashControllers represent FlexFlash storage controllers in a server, typically managing SD-card based storage, and relate to running firmware and FlexFlash physical/virtual drive objects.
+        #### Purpose
+        Expose FlexFlash controller inventory and its managed media so administrators can monitor controller state and associated SD-card storage.
+        #### Key Concepts
+        - **Controller inventory:** Represents the FlexFlash controller identity and state.
+        - **Firmware linkage:** Can relate to running firmware records.
+        - **Media hierarchy:** Links to FlexFlash physical drives (cards) and virtual drives (partitions/volumes).
 
 ---
 
 # Data Source: intersight_storage_flex_flash_controller
-Storage Flex Flash Controller.
+FlexFlashControllers represent FlexFlash storage controllers in a server, typically managing SD-card based storage, and relate to running firmware and FlexFlash physical/virtual drive objects.
+#### Purpose
+Expose FlexFlash controller inventory and its managed media so administrators can monitor controller state and associated SD-card storage.
+#### Key Concepts
+- **Controller inventory:** Represents the FlexFlash controller identity and state.
+- **Firmware linkage:** Can relate to running firmware records.
+- **Media hierarchy:** Links to FlexFlash physical drives (cards) and virtual drives (partitions/volumes).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

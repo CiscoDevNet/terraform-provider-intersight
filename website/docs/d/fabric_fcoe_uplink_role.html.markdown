@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fcoe_uplink_role"
 description: |-
-        Configuration object sent by user to create a fcoe uplink port.
+        The FcoeUplinkRole object represents configuration intent for an FCoE uplink port.
+        #### Purpose
+        FcoeUplinkRole defines a port’s role for carrying Fibre Channel over Ethernet (FCoE) traffic uplink, enabling consistent configuration intent and policy attachment where FCoE is used.
+        #### Key Concepts
+        - **FCoE uplink intent:** Declares a port’s role for FCoE uplink traffic.
+        - **Policy attachment readiness:** Supports association with link control behaviors where required.
+        - **Hybrid fabric behavior:** Bridges Ethernet transport with FC semantics under a unified policy model.
+        - **Platform constraints:** Intended to be validated against switch capabilities and supported port ranges.
 
 ---
 
 # Data Source: intersight_fabric_fcoe_uplink_role
-Configuration object sent by user to create a fcoe uplink port.
+The FcoeUplinkRole object represents configuration intent for an FCoE uplink port.
+#### Purpose
+FcoeUplinkRole defines a port’s role for carrying Fibre Channel over Ethernet (FCoE) traffic uplink, enabling consistent configuration intent and policy attachment where FCoE is used.
+#### Key Concepts
+- **FCoE uplink intent:** Declares a port’s role for FCoE uplink traffic.
+- **Policy attachment readiness:** Supports association with link control behaviors where required.
+- **Hybrid fabric behavior:** Bridges Ethernet transport with FC semantics under a unified policy model.
+- **Platform constraints:** Intended to be validated against switch capabilities and supported port ranges.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

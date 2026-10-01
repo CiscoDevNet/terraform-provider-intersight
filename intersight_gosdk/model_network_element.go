@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the NetworkElement type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NetworkElement{}
 
-// NetworkElement The Cisco UCS Fabric Interconnect module within a domain supporting a range of models including the 6400, 6500 series etc.
+// NetworkElement Elements represent network switching elements managed in the platform—most commonly Cisco UCS Fabric Interconnects, but also modeled to cover other switch types (e.g., Nexus, MDS, Edge chassis controllers) via the `switchType` property. An Element serves as the top-level inventory object for switch identity, management addressing, operational mode (Ethernet/FC switching mode), health/alarms, and major hardware components. #### Purpose Provide the authoritative inventory representation of a managed switch so administrators can monitor health, validate management connectivity, and navigate to related configuration/inventory objects (ports, port-channels, NTP, VRFs, neighbors, etc.). #### Key Concepts - **Switch identity and access:** Captures switchId, management IP (inband and out-of-band), MAC, and labeling for identification. - **Operational mode reporting:** Distinguishes Ethernet and FC switching modes (End-Host vs Switch) and evacuation state. - **Health and alarms:** Includes alarm summary and overall operability indicators for fast assessment. - **Hardware inventory hub:** Relates to switch cards, PSUs, fan modules, supervisors, processors, sensors, and locator LED. - **Configuration ecosystem anchor:** Serves as the parent for many switch-scoped configuration objects (NTP, DNS, VRF, vPC, interface lists, veth/vfc, etc.).
 type NetworkElement struct {
 	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

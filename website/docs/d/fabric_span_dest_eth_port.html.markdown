@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_span_dest_eth_port"
 description: |-
-        Configures Ethernet SPAN Destination Port for a given SPAN session.
+        The SpanDestEthPort object represents the Ethernet destination port for a SPAN session.
+        #### Purpose
+        SpanDestEthPort defines where mirrored traffic is sent for a given SPAN session, providing the attachment point for the monitoring tool or analyzer receiving the copied packets.
+        #### Key Concepts
+        - **Single destination semantics:** Represents the monitoring endpoint for a SPAN session.
+        - **Session-scoped configuration:** Exists in the context of a specific SPAN session.
+        - **Port identity modeling:** Uses standard slot/port/breakout identifiers for precise targeting.
+        - **Operational monitoring attachment:** Enables tooling to consume mirrored traffic reliably.
 
 ---
 
 # Data Source: intersight_fabric_span_dest_eth_port
-Configures Ethernet SPAN Destination Port for a given SPAN session.
+The SpanDestEthPort object represents the Ethernet destination port for a SPAN session.
+#### Purpose
+SpanDestEthPort defines where mirrored traffic is sent for a given SPAN session, providing the attachment point for the monitoring tool or analyzer receiving the copied packets.
+#### Key Concepts
+- **Single destination semantics:** Represents the monitoring endpoint for a SPAN session.
+- **Session-scoped configuration:** Exists in the context of a specific SPAN session.
+- **Port identity modeling:** Uses standard slot/port/breakout identifiers for precise targeting.
+- **Operational monitoring attachment:** Enables tooling to consume mirrored traffic reliably.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

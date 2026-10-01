@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_disk_event"
 description: |-
-        An event where the impacted resource type is a disk.
+        The NetAppDiskEvents object  captures alerts specifically related to the physical disks in the storage array.
+        ####  Purpose
+        This provides early warning of disk failures, firmware issues, or shelf connectivity problems.
+        ####  Key Concepts
+        - **Hardware Reliability:** Alerts on disk health status changes.
+        - **Connectivity Alerts:** Reports on shelf path issues.
 
 ---
 
 # Data Source: intersight_storage_net_app_disk_event
-An event where the impacted resource type is a disk.
+The NetAppDiskEvents object  captures alerts specifically related to the physical disks in the storage array.
+####  Purpose
+This provides early warning of disk failures, firmware issues, or shelf connectivity problems.
+####  Key Concepts
+- **Hardware Reliability:** Alerts on disk health status changes.
+- **Connectivity Alerts:** Reports on shelf path issues.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

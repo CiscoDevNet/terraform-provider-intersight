@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_switch_control_policy"
 description: |-
-        A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range, Jumbo frames.
+        The SwitchControlPolicy object defines domain-wide switching behavior and global switch control settings, such as switching modes and operational controls that shape how the Fabric Interconnect behaves as a switch.
+        #### Purpose
+        SwitchControlPolicy provides a centralized policy for foundational switch behavior (for example, Ethernet/FC switching mode selection and related global controls). It ensures consistent switch-wide behavior across profiles and enables validation/deployment workflows to treat these settings as managed policy intent.
+        #### Key Concepts
+        - **Global switch behavior:** Represents switch-wide settings that apply broadly rather than to individual ports.
+        - **Switching mode control:** Encapsulates the high-level behavior of the fabric (e.g., end-host vs switch modes where applicable).
+        - **Operational consistency:** Ensures consistent baseline behavior when applied across multiple switches/domains.
+        - **Policy lifecycle integration:** Designed to be validated and deployed as part of domain/profile workflows.
 
 ---
 
 # Data Source: intersight_fabric_switch_control_policy
-A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range, Jumbo frames.
+The SwitchControlPolicy object defines domain-wide switching behavior and global switch control settings, such as switching modes and operational controls that shape how the Fabric Interconnect behaves as a switch.
+#### Purpose
+SwitchControlPolicy provides a centralized policy for foundational switch behavior (for example, Ethernet/FC switching mode selection and related global controls). It ensures consistent switch-wide behavior across profiles and enables validation/deployment workflows to treat these settings as managed policy intent.
+#### Key Concepts
+- **Global switch behavior:** Represents switch-wide settings that apply broadly rather than to individual ports.
+- **Switching mode control:** Encapsulates the high-level behavior of the fabric (e.g., end-host vs switch modes where applicable).
+- **Operational consistency:** Ensures consistent baseline behavior when applied across multiple switches/domains.
+- **Policy lifecycle integration:** Designed to be validated and deployed as part of domain/profile workflows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

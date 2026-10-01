@@ -3,12 +3,22 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_shadow_pool"
 description: |-
-        Shadow Pool is a tracking object created on behalf of an IP pool, for each VRF.
+        The ShadowPools object acts as a tracking object created on behalf of an IP pool, scoped specifically to a VRF.
+        #### Purpose
+        It provides a mechanism to monitor IP pool usage, availability, and address distribution within individual routing contexts.
+        #### Key Concepts
+        - **VRF-Specific Tracking:** Maintains pool state and usage metrics per VRF.
+        - **Resource Monitoring:** Tracks the size and assigned count of IPv4/IPv6 addresses within the shadow context.
 
 ---
 
 # Data Source: intersight_ippool_shadow_pool
-Shadow Pool is a tracking object created on behalf of an IP pool, for each VRF.
+The ShadowPools object acts as a tracking object created on behalf of an IP pool, scoped specifically to a VRF.
+#### Purpose
+It provides a mechanism to monitor IP pool usage, availability, and address distribution within individual routing contexts.
+#### Key Concepts
+- **VRF-Specific Tracking:** Maintains pool state and usage metrics per VRF.
+- **Resource Monitoring:** Tracks the size and assigned count of IPv4/IPv6 addresses within the shadow context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

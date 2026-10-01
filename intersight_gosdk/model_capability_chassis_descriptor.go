@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the CapabilityChassisDescriptor type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CapabilityChassisDescriptor{}
 
-// CapabilityChassisDescriptor Descriptor that uniquely identifies an chassis enclosure.
+// CapabilityChassisDescriptor ChassisDescriptors are capability-catalog hardware descriptors that uniquely identify a chassis enclosure by its vendor, model, version, revision, and catalog section context. They serve as the catalog-level identity record used to recognize and reason about chassis hardware in a standardized way. #### Purpose Provide a canonical catalog entry for chassis enclosure hardware so capabilities, compatibility logic, and platform behavior can be tied to a uniquely identified chassis model/revision. #### Key Concepts - **Catalog-based hardware identity**: Extends `HardwareDescriptor`, indicating it participates in a broader capability-catalog hardware description framework. - **Unique enclosure fingerprint**: Identity is composed of `vendor`, `model`, `version`, `revision`, and `section`, ensuring chassis descriptors are uniquely distinguished in the catalog. - **Revision-aware modeling**: `revision` captures enclosure revision differences that may affect supportability or behavior. - **Section-scoped governance**: Inherits permissions from `section`, tying access and organization to the containing catalog section. - **Catalog-admin lifecycle**: Creation and modification are restricted to `CapabilityCatalog Administrator`, while READ is available to broader operational roles.
 type CapabilityChassisDescriptor struct {
 	CapabilityHardwareDescriptor
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

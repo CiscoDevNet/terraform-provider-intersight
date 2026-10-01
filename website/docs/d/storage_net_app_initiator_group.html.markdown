@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_initiator_group"
 description: |-
-        NetApp Initiator Group specifies host access to LUNs on the storage system.
+        The NetAppInitiatorGroups object specifies host access control for LUNs.
+        ####  Purpose
+        It manages SAN security by defining which host initiators (HBA WWNs or iSCSI IQNs) are allowed to access specific LUNs.
+        ####  Key Concepts
+        - **Access Control:** Grants LUN access based on initiator group membership.
+        - **Protocol Support:** Supports FCP and iSCSI protocols.
+        - **Security:** Ensures that only authorized hosts can mount provisioned LUNs.
 
 ---
 
 # Data Source: intersight_storage_net_app_initiator_group
-NetApp Initiator Group specifies host access to LUNs on the storage system.
+The NetAppInitiatorGroups object specifies host access control for LUNs.
+####  Purpose
+It manages SAN security by defining which host initiators (HBA WWNs or iSCSI IQNs) are allowed to access specific LUNs.
+####  Key Concepts
+- **Access Control:** Grants LUN access based on initiator group membership.
+- **Protocol Support:** Supports FCP and iSCSI protocols.
+- **Security:** Ensures that only authorized hosts can mount provisioned LUNs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

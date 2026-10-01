@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_nxos_descriptor"
 description: |-
-        Descriptor to uniquely identify a Fabric interconnect.
+        The NxosDescriptors object provides internal metadata to uniquely identify Fabric Interconnects.
+        #### Purpose
+        It supports the identification and management of Fabric Interconnect hardware, which is essential for network fabric operations.
+        #### Key Concepts
+        - **Component Identification:** Uniquely identifies Fabric Interconnect hardware using vendor, model, and revision details.
+        - **Hardware Integration:** Facilitates the mapping of Fabric Interconnect hardware to system-level policies.
 
 ---
 
 # Data Source: intersight_firmware_nxos_descriptor
-Descriptor to uniquely identify a Fabric interconnect.
+The NxosDescriptors object provides internal metadata to uniquely identify Fabric Interconnects.
+#### Purpose
+It supports the identification and management of Fabric Interconnect hardware, which is essential for network fabric operations.
+#### Key Concepts
+- **Component Identification:** Uniquely identifies Fabric Interconnect hardware using vendor, model, and revision details.
+- **Hardware Integration:** Facilitates the mapping of Fabric Interconnect hardware to system-level policies.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_aggregate"
 description: |-
-        NetApp aggregate is a collection of disks arranged into one or more RAID groups.
+        The NetAppAggregates object represents a collection of physical disks arranged into one or more RAID groups within a NetApp storage system.
+        #### Purpose
+        It serves as the fundamental unit of storage allocation, providing the necessary capacity for volumes to be created. It allows administrators to monitor the health, RAID configuration, and performance metrics of the aggregate.
+        #### Key Concepts
+        - **RAID Configuration:** Manages disks in RAID groups to ensure data protection and availability.
+        - **Performance Monitoring:** Tracks average performance metrics to ensure the aggregate meets workload demands.
+        - **Operational State:** Monitors the aggregate status (e.g., online, offline, inconsistent) to ensure storage availability.
 
 ---
 
 # Data Source: intersight_storage_net_app_aggregate
-NetApp aggregate is a collection of disks arranged into one or more RAID groups.
+The NetAppAggregates object represents a collection of physical disks arranged into one or more RAID groups within a NetApp storage system.
+#### Purpose
+It serves as the fundamental unit of storage allocation, providing the necessary capacity for volumes to be created. It allows administrators to monitor the health, RAID configuration, and performance metrics of the aggregate.
+#### Key Concepts
+- **RAID Configuration:** Manages disks in RAID groups to ensure data protection and availability.
+- **Performance Monitoring:** Tracks average performance metrics to ensure the aggregate meets workload demands.
+- **Operational State:** Monitors the aggregate status (e.g., online, offline, inconsistent) to ensure storage availability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

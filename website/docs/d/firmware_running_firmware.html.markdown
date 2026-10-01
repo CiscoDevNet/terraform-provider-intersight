@@ -3,12 +3,28 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_running_firmware"
 description: |-
-        Running Firmware on an endpoint.
+        RunningFirmwares represent the firmware currently running on a managed endpoint component. They provide an inventory view of “what version is actually active” for a broad range of hardware and management components (servers, storage controllers/disks, BIOS, PSUs, PCIe switches, graphics cards, and more), enabling firmware visibility and lifecycle correlation across the infrastructure.
+        #### Purpose
+        Expose the effective (running) firmware state of endpoint components so administrators can audit versions, validate compliance, and support firmware lifecycle operations and troubleshooting.
+        #### Key Concepts
+        - **Observed running state (not desired)**: Captures the firmware version that is currently active on a component, independent of any upgrade plan or policy intent.
+        - **Cross-component applicability**: Inherits permissions from many component contexts (BIOS units, storage controllers/disks, management controller, PSUs, PCI switches, graphics cards, etc.), reflecting that firmware is tracked across diverse hardware types.
+        - **Endpoint inventory integration**: Extends `inventory.Base`, aligning it with inventory/discovery pipelines and allowing it to be referenced by other inventory objects.
+        - **Efficient correlation by component and ancestry**: Indexed by `Ancestors` and `Component`, supporting queries like “show me running firmware for all components under this server/chassis/device.”
+        - **Governed updates**: UPDATE is available only to server/FI management roles, reflecting controlled workflows that may refresh or reconcile firmware state as part of management operations.
 
 ---
 
 # Data Source: intersight_firmware_running_firmware
-Running Firmware on an endpoint.
+RunningFirmwares represent the firmware currently running on a managed endpoint component. They provide an inventory view of “what version is actually active” for a broad range of hardware and management components (servers, storage controllers/disks, BIOS, PSUs, PCIe switches, graphics cards, and more), enabling firmware visibility and lifecycle correlation across the infrastructure.
+#### Purpose
+Expose the effective (running) firmware state of endpoint components so administrators can audit versions, validate compliance, and support firmware lifecycle operations and troubleshooting.
+#### Key Concepts
+- **Observed running state (not desired)**: Captures the firmware version that is currently active on a component, independent of any upgrade plan or policy intent.
+- **Cross-component applicability**: Inherits permissions from many component contexts (BIOS units, storage controllers/disks, management controller, PSUs, PCI switches, graphics cards, etc.), reflecting that firmware is tracked across diverse hardware types.
+- **Endpoint inventory integration**: Extends `inventory.Base`, aligning it with inventory/discovery pipelines and allowing it to be referenced by other inventory objects.
+- **Efficient correlation by component and ancestry**: Indexed by `Ancestors` and `Component`, supporting queries like “show me running firmware for all components under this server/chassis/device.”
+- **Governed updates**: UPDATE is available only to server/FI management roles, reflecting controlled workflows that may refresh or reconcile firmware state as part of management operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

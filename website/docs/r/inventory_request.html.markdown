@@ -3,12 +3,26 @@ subcategory: "inventory"
 layout: "intersight"
 page_title: "Intersight: intersight_inventory_request"
 description: |-
-        Request MO allows the inventory of specific devices to be collected on demand. The inventory can be collected in three levels - all the MOs of a specific device, MOs of specific MO types for a given device or specific MO instances of specific MO types for a given device. These MO instances are used just to collect the requests and not persisted.
+        Requests are on-demand inventory request objects that allow targeted inventory collection for a specific registered device. A request can ask for full-device inventory, inventory limited to specific managed object (MO) types, or even specific MO instances within those types. The MO instance selectors in the request are used only to express what to collect and are not persisted as inventory objects.
+        #### Purpose
+        Provide a controlled mechanism to trigger scoped, on-demand inventory collection for a device—ranging from broad (all MOs) to narrowly targeted (specific MO instances)—to update Intersight reporting without waiting for scheduled inventory cycles.
+        #### Key Concepts
+        - **Multi-level scoping:** Supports collecting (1) all MOs for a device, (2) MOs of selected MO types, or (3) specific instances of selected MO types.
+        - **Selector-only MO instances:** The MO instances provided in the request are used to define the collection scope and are not persisted as part of inventory.
+        - **Optional targeting list:** If `mos` is not provided, the request implies full inventory collection for the device.
+        - **Device-bound trigger:** Inherits permissions from the associated `device` (asset.DeviceRegistration) and is cascade-cleaned up if the device registration is deleted.
 
 ---
 
 # Resource: intersight_inventory_request
-Request MO allows the inventory of specific devices to be collected on demand. The inventory can be collected in three levels - all the MOs of a specific device, MOs of specific MO types for a given device or specific MO instances of specific MO types for a given device. These MO instances are used just to collect the requests and not persisted.
+Requests are on-demand inventory request objects that allow targeted inventory collection for a specific registered device. A request can ask for full-device inventory, inventory limited to specific managed object (MO) types, or even specific MO instances within those types. The MO instance selectors in the request are used only to express what to collect and are not persisted as inventory objects.
+#### Purpose
+Provide a controlled mechanism to trigger scoped, on-demand inventory collection for a device—ranging from broad (all MOs) to narrowly targeted (specific MO instances)—to update Intersight reporting without waiting for scheduled inventory cycles.
+#### Key Concepts
+- **Multi-level scoping:** Supports collecting (1) all MOs for a device, (2) MOs of selected MO types, or (3) specific instances of selected MO types.
+- **Selector-only MO instances:** The MO instances provided in the request are used to define the collection scope and are not persisted as part of inventory.
+- **Optional targeting list:** If `mos` is not provided, the request implies full inventory collection for the device.
+- **Device-bound trigger:** Inherits permissions from the associated `device` (asset.DeviceRegistration) and is cascade-cleaned up if the device registration is deleted.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

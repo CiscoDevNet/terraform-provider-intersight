@@ -3,12 +3,22 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_hyperflex_bundle_distributable"
 description: |-
-        A HyperFlex image bundle distributed by Cisco for Private Appliance.
+        The HyperflexBundleDistributable object represents a HyperFlex image bundle distributed by Cisco for Private Appliance environments.
+        #### Purpose
+        It manages the lifecycle of HyperFlex bundles, providing a structured way to download and install bundled software for HyperFlex systems.
+        #### Key Concepts
+        - **Bundle Management:** Groups multiple HyperFlex distributable images into a single bundle.
+        - **Appliance Support:** Specifically designed for Private Appliance deployments.
 
 ---
 
 # Data Source: intersight_software_hyperflex_bundle_distributable
-A HyperFlex image bundle distributed by Cisco for Private Appliance.
+The HyperflexBundleDistributable object represents a HyperFlex image bundle distributed by Cisco for Private Appliance environments.
+#### Purpose
+It manages the lifecycle of HyperFlex bundles, providing a structured way to download and install bundled software for HyperFlex systems.
+#### Key Concepts
+- **Bundle Management:** Groups multiple HyperFlex distributable images into a single bundle.
+- **Appliance Support:** Specifically designed for Private Appliance deployments.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

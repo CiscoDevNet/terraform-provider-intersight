@@ -3,12 +3,34 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_interface_list"
 description: |-
-        List of interfaces available on the switch to describe the available port inventory information.
+        InterfaceLists provide a read-only inventory-style listing of interfaces available on a switch, capturing key operational and descriptive attributes per interface. They are designed to support “port inventory” and quick inspection workflows.
+        #### Purpose
+        Offer a uniform way to view interface availability and high-level interface characteristics (admin/oper state, VLANs, addressing, speed/MTU, and port-channel association) without requiring deep per-interface modeling.
+        #### Key Concepts
+        - **Port inventory view**: Presents interfaces with identifiers and labels such as `Name`, `DisplayName`, and `SlotId`.
+        - **Operational vs. administrative state**: `AdminState` and `OperState` distinguish configured intent from observed runtime behavior.
+        - **Segmentation details**: `VLAN` and `AllowedVlans` summarize VLAN configuration context for the interface.
+        - **Addressing and identity**: `Mac`, `IpAddress`, and `IpSubnet` capture L2/L3 identity hints for the interface.
+        - **Performance characteristics**: `Speed`, `SpeedGroup`, and `Mtu` provide key operational parameters.
+        - **Interface subtype support**: `PortType` and `PortSubType` cover interface categories such as subinterfaces or breakout interfaces.
+        - **Aggregation correlation**: `PortChannelId` helps relate the interface to port-channel constructs where applicable.
+        - **Device association**: `RegisteredDevice` ties the interface list entry to its parent device.
 
 ---
 
 # Data Source: intersight_network_interface_list
-List of interfaces available on the switch to describe the available port inventory information.
+InterfaceLists provide a read-only inventory-style listing of interfaces available on a switch, capturing key operational and descriptive attributes per interface. They are designed to support “port inventory” and quick inspection workflows.
+#### Purpose
+Offer a uniform way to view interface availability and high-level interface characteristics (admin/oper state, VLANs, addressing, speed/MTU, and port-channel association) without requiring deep per-interface modeling.
+#### Key Concepts
+- **Port inventory view**: Presents interfaces with identifiers and labels such as `Name`, `DisplayName`, and `SlotId`.
+- **Operational vs. administrative state**: `AdminState` and `OperState` distinguish configured intent from observed runtime behavior.
+- **Segmentation details**: `VLAN` and `AllowedVlans` summarize VLAN configuration context for the interface.
+- **Addressing and identity**: `Mac`, `IpAddress`, and `IpSubnet` capture L2/L3 identity hints for the interface.
+- **Performance characteristics**: `Speed`, `SpeedGroup`, and `Mtu` provide key operational parameters.
+- **Interface subtype support**: `PortType` and `PortSubType` cover interface categories such as subinterfaces or breakout interfaces.
+- **Aggregation correlation**: `PortChannelId` helps relate the interface to port-channel constructs where applicable.
+- **Device association**: `RegisteredDevice` ties the interface list entry to its parent device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

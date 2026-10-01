@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_chassis_id_pool"
 description: |-
-        ChassisIdPool object contains pool of chassisId's that can be allocated for newly discovered chassis.
+        The ChassisIdPool object represents the identifier pool used to allocate chassis IDs for newly discovered chassis within a device registration/domain context.
+        #### Purpose
+        ChassisIdPool provides a controlled mechanism for allocating chassis identifiers, enabling consistent addressing and correlation for chassis entities discovered and managed within a domain. It also supports honoring preferred IDs defined through higher-level policy intent.
+        #### Key Concepts
+        - **Deterministic ID allocation:** Ensures chassis identifiers are assigned in a controlled, conflict-free manner.
+        - **Preferred-ID integration:** Supports propagation of user-preferred IDs (where defined) into the allocation pool behavior.
+        - **Domain scoping:** Tied to a specific device registration context to prevent cross-domain collisions.
+        - **Lifecycle-aligned existence:** Exists as long as the corresponding device registration/domain context exists.
 
 ---
 
 # Data Source: intersight_equipment_chassis_id_pool
-ChassisIdPool object contains pool of chassisId's that can be allocated for newly discovered chassis.
+The ChassisIdPool object represents the identifier pool used to allocate chassis IDs for newly discovered chassis within a device registration/domain context.
+#### Purpose
+ChassisIdPool provides a controlled mechanism for allocating chassis identifiers, enabling consistent addressing and correlation for chassis entities discovered and managed within a domain. It also supports honoring preferred IDs defined through higher-level policy intent.
+#### Key Concepts
+- **Deterministic ID allocation:** Ensures chassis identifiers are assigned in a controlled, conflict-free manner.
+- **Preferred-ID integration:** Supports propagation of user-preferred IDs (where defined) into the allocation pool behavior.
+- **Domain scoping:** Tied to a specific device registration context to prevent cross-domain collisions.
+- **Lifecycle-aligned existence:** Exists as long as the corresponding device registration/domain context exists.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

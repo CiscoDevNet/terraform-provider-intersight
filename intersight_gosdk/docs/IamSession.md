@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Session"]
 **AccountPermissions** | Pointer to [**[]IamAccountPermissions**](IamAccountPermissions.md) |  | [optional] 
 **Expiration** | Pointer to **time.Time** | Expiration time for the session. | [optional] [readonly] 
+**ExternalIdentifier** | Pointer to **string** | External identifier for the session, used for integration with external identity systems. | [optional] [readonly] 
 **FailedLogins** | Pointer to **int64** | Failed logins since last login for admin user. | [optional] [readonly] 
 **IdleTimeExpiration** | Pointer to **time.Time** | Idle time expiration for the session. | [optional] [readonly] 
 **LastLoginClient** | Pointer to **string** | The client address from which last login is initiated. | [optional] [readonly] 
@@ -136,6 +137,31 @@ SetExpiration sets Expiration field to given value.
 `func (o *IamSession) HasExpiration() bool`
 
 HasExpiration returns a boolean if a field has been set.
+
+### GetExternalIdentifier
+
+`func (o *IamSession) GetExternalIdentifier() string`
+
+GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetExternalIdentifierOk
+
+`func (o *IamSession) GetExternalIdentifierOk() (*string, bool)`
+
+GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIdentifier
+
+`func (o *IamSession) SetExternalIdentifier(v string)`
+
+SetExternalIdentifier sets ExternalIdentifier field to given value.
+
+### HasExternalIdentifier
+
+`func (o *IamSession) HasExternalIdentifier() bool`
+
+HasExternalIdentifier returns a boolean if a field has been set.
 
 ### GetFailedLogins
 

@@ -3,12 +3,24 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_shadow_block"
 description: |-
-        A block of Contiguous IP addresses that are part of a shadow pool.
+        The ShadowBlocks object represents a block of contiguous IP addresses that are part of a shadow pool.
+        #### Purpose
+        It manages the specific ranges of IP addresses available for allocation within a shadow pool context, which is created per VRF to track IP usage.
+        #### Key Concepts
+        - **Range Management:** Defines contiguous blocks of IPv4 or IPv6 addresses.
+        - **VRF Association:** Links IP blocks to specific Virtual Routing and Forwarding (VRF) domains.
+        - **Pool Integration:** Functions as a core component of shadow pools for structured IP tracking.
 
 ---
 
 # Data Source: intersight_ippool_shadow_block
-A block of Contiguous IP addresses that are part of a shadow pool.
+The ShadowBlocks object represents a block of contiguous IP addresses that are part of a shadow pool.
+#### Purpose
+It manages the specific ranges of IP addresses available for allocation within a shadow pool context, which is created per VRF to track IP usage.
+#### Key Concepts
+- **Range Management:** Defines contiguous blocks of IPv4 or IPv6 addresses.
+- **VRF Association:** Links IP blocks to specific Virtual Routing and Forwarding (VRF) domains.
+- **Pool Integration:** Functions as a core component of shadow pools for structured IP tracking.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

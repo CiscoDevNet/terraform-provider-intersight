@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cond.AlarmSuppression"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.AlarmSuppression"]
-**AlarmRules** | Pointer to [**[]CondAlarmRuleExpression**](CondAlarmRuleExpression.md) |  | [optional] 
+**AlarmRules** | Pointer to [**[]CondAbstractAlarmRule**](CondAbstractAlarmRule.md) |  | [optional] 
 **Description** | Pointer to **string** | User given description on why the suppression is enabled at this entity. | [optional] 
 **Enabled** | Pointer to **bool** | Indicates whether the suppression is enabled by the user or not. The user should be able to toggle this between true and false. The property is set to true when the suppression is created. The user can set this to false to disable the suppression. The suppression rule should be active only if both systemEnabled and enabled are true. | [optional] [default to true]
 **EndDate** | Pointer to **time.Time** | The end date for this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation. | [optional] 
@@ -16,7 +16,11 @@ Name | Type | Description | Notes
 **StartDate** | Pointer to **time.Time** | The start date for enabling this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation. If this date more than 60 seconds in the past, the suppression rule will be rejected. If the date is within 60 seconds of the present time (plus or minus), the suppression will be started immediately. Otherwise, the suppression will be scheduled to start at the requested time. | [optional] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **Classifications** | Pointer to [**[]CondAlarmClassificationRelationship**](CondAlarmClassificationRelationship.md) | An array of relationships to condAlarmClassification resources. | [optional] 
+**EndTask** | Pointer to [**NullableSchedulerTaskScheduleRelationship**](SchedulerTaskScheduleRelationship.md) |  | [optional] 
 **Entity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**FilterRefs** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**StartTask** | Pointer to [**NullableSchedulerTaskScheduleRelationship**](SchedulerTaskScheduleRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -79,20 +83,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetAlarmRules
 
-`func (o *CondAlarmSuppression) GetAlarmRules() []CondAlarmRuleExpression`
+`func (o *CondAlarmSuppression) GetAlarmRules() []CondAbstractAlarmRule`
 
 GetAlarmRules returns the AlarmRules field if non-nil, zero value otherwise.
 
 ### GetAlarmRulesOk
 
-`func (o *CondAlarmSuppression) GetAlarmRulesOk() (*[]CondAlarmRuleExpression, bool)`
+`func (o *CondAlarmSuppression) GetAlarmRulesOk() (*[]CondAbstractAlarmRule, bool)`
 
 GetAlarmRulesOk returns a tuple with the AlarmRules field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAlarmRules
 
-`func (o *CondAlarmSuppression) SetAlarmRules(v []CondAlarmRuleExpression)`
+`func (o *CondAlarmSuppression) SetAlarmRules(v []CondAbstractAlarmRule)`
 
 SetAlarmRules sets AlarmRules field to given value.
 
@@ -357,6 +361,41 @@ HasClassifications returns a boolean if a field has been set.
 `func (o *CondAlarmSuppression) UnsetClassifications()`
 
 UnsetClassifications ensures that no value is present for Classifications, not even an explicit nil
+### GetEndTask
+
+`func (o *CondAlarmSuppression) GetEndTask() SchedulerTaskScheduleRelationship`
+
+GetEndTask returns the EndTask field if non-nil, zero value otherwise.
+
+### GetEndTaskOk
+
+`func (o *CondAlarmSuppression) GetEndTaskOk() (*SchedulerTaskScheduleRelationship, bool)`
+
+GetEndTaskOk returns a tuple with the EndTask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndTask
+
+`func (o *CondAlarmSuppression) SetEndTask(v SchedulerTaskScheduleRelationship)`
+
+SetEndTask sets EndTask field to given value.
+
+### HasEndTask
+
+`func (o *CondAlarmSuppression) HasEndTask() bool`
+
+HasEndTask returns a boolean if a field has been set.
+
+### SetEndTaskNil
+
+`func (o *CondAlarmSuppression) SetEndTaskNil(b bool)`
+
+ SetEndTaskNil sets the value for EndTask to be an explicit nil
+
+### UnsetEndTask
+`func (o *CondAlarmSuppression) UnsetEndTask()`
+
+UnsetEndTask ensures that no value is present for EndTask, not even an explicit nil
 ### GetEntity
 
 `func (o *CondAlarmSuppression) GetEntity() MoBaseMoRelationship`
@@ -392,6 +431,111 @@ HasEntity returns a boolean if a field has been set.
 `func (o *CondAlarmSuppression) UnsetEntity()`
 
 UnsetEntity ensures that no value is present for Entity, not even an explicit nil
+### GetFilterRefs
+
+`func (o *CondAlarmSuppression) GetFilterRefs() []MoBaseMoRelationship`
+
+GetFilterRefs returns the FilterRefs field if non-nil, zero value otherwise.
+
+### GetFilterRefsOk
+
+`func (o *CondAlarmSuppression) GetFilterRefsOk() (*[]MoBaseMoRelationship, bool)`
+
+GetFilterRefsOk returns a tuple with the FilterRefs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterRefs
+
+`func (o *CondAlarmSuppression) SetFilterRefs(v []MoBaseMoRelationship)`
+
+SetFilterRefs sets FilterRefs field to given value.
+
+### HasFilterRefs
+
+`func (o *CondAlarmSuppression) HasFilterRefs() bool`
+
+HasFilterRefs returns a boolean if a field has been set.
+
+### SetFilterRefsNil
+
+`func (o *CondAlarmSuppression) SetFilterRefsNil(b bool)`
+
+ SetFilterRefsNil sets the value for FilterRefs to be an explicit nil
+
+### UnsetFilterRefs
+`func (o *CondAlarmSuppression) UnsetFilterRefs()`
+
+UnsetFilterRefs ensures that no value is present for FilterRefs, not even an explicit nil
+### GetOrganization
+
+`func (o *CondAlarmSuppression) GetOrganization() OrganizationOrganizationRelationship`
+
+GetOrganization returns the Organization field if non-nil, zero value otherwise.
+
+### GetOrganizationOk
+
+`func (o *CondAlarmSuppression) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool)`
+
+GetOrganizationOk returns a tuple with the Organization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganization
+
+`func (o *CondAlarmSuppression) SetOrganization(v OrganizationOrganizationRelationship)`
+
+SetOrganization sets Organization field to given value.
+
+### HasOrganization
+
+`func (o *CondAlarmSuppression) HasOrganization() bool`
+
+HasOrganization returns a boolean if a field has been set.
+
+### SetOrganizationNil
+
+`func (o *CondAlarmSuppression) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *CondAlarmSuppression) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+### GetStartTask
+
+`func (o *CondAlarmSuppression) GetStartTask() SchedulerTaskScheduleRelationship`
+
+GetStartTask returns the StartTask field if non-nil, zero value otherwise.
+
+### GetStartTaskOk
+
+`func (o *CondAlarmSuppression) GetStartTaskOk() (*SchedulerTaskScheduleRelationship, bool)`
+
+GetStartTaskOk returns a tuple with the StartTask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartTask
+
+`func (o *CondAlarmSuppression) SetStartTask(v SchedulerTaskScheduleRelationship)`
+
+SetStartTask sets StartTask field to given value.
+
+### HasStartTask
+
+`func (o *CondAlarmSuppression) HasStartTask() bool`
+
+HasStartTask returns a boolean if a field has been set.
+
+### SetStartTaskNil
+
+`func (o *CondAlarmSuppression) SetStartTaskNil(b bool)`
+
+ SetStartTaskNil sets the value for StartTask to be an explicit nil
+
+### UnsetStartTask
+`func (o *CondAlarmSuppression) UnsetStartTask()`
+
+UnsetStartTask ensures that no value is present for StartTask, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_iom_upgrade_support_meta"
 description: |-
-        Internal meta-data to enable IOM upgrade related decision making.
+        The IomUpgradeSupportMeta object provides internal metadata to enable I/O Module (IOM) firmware upgrade decision-making.
+        #### Purpose
+        It helps the system identify IOM series and models eligible for firmware upgrades, including whether they support direct upgrade requests via a Device Connector.
+        #### Key Concepts
+        - **Direct Upgrade Capability:** Indicates if an IOM model supports direct upgrade requests.
+        - **Series Management:** Groups IOM models into series for consistent firmware handling.
 
 ---
 
 # Data Source: intersight_capability_iom_upgrade_support_meta
-Internal meta-data to enable IOM upgrade related decision making.
+The IomUpgradeSupportMeta object provides internal metadata to enable I/O Module (IOM) firmware upgrade decision-making.
+#### Purpose
+It helps the system identify IOM series and models eligible for firmware upgrades, including whether they support direct upgrade requests via a Device Connector.
+#### Key Concepts
+- **Direct Upgrade Capability:** Indicates if an IOM model supports direct upgrade requests.
+- **Series Management:** Groups IOM models into series for consistent firmware handling.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

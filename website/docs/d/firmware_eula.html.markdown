@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_eula"
 description: |-
-        End User License Agreement (EULA) acceptance status for an account to access cisco.com and download software.
+        The Eulas object tracks the End User License Agreement (EULA) and K9 acceptance status for an account.
+        #### Purpose
+        It ensures that users have legally accepted the necessary terms and conditions before accessing Cisco software repositories or downloading images.
+        #### Key Concepts
+        - **Compliance:** Manages the acceptance status for EULA and K9 terms.
+        - **Access Control:** Controls access to software download capabilities based on acceptance status.
 
 ---
 
 # Data Source: intersight_firmware_eula
-End User License Agreement (EULA) acceptance status for an account to access cisco.com and download software.
+The Eulas object tracks the End User License Agreement (EULA) and K9 acceptance status for an account.
+ #### Purpose
+ It ensures that users have legally accepted the necessary terms and conditions before accessing Cisco software repositories or downloading images.
+ #### Key Concepts
+ - **Compliance:** Manages the acceptance status for EULA and K9 terms.
+ - **Access Control:** Controls access to software download capabilities based on acceptance status.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

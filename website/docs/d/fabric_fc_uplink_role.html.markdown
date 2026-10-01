@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fc_uplink_role"
 description: |-
-        Configuration object sent by user to create a fc uplink port.
+        The FcUplinkRole object represents configuration intent for a Fibre Channel uplink port in a port policy.
+        #### Purpose
+        FcUplinkRole defines a port’s role as an FC uplink and expresses FC-uplink-specific configuration intent such as VSAN association and FC port behavior, enabling consistent SAN uplink configuration.
+        #### Key Concepts
+        - **FC uplink intent:** Declares a port is used for SAN uplink connectivity.
+        - **VSAN association:** Represents SAN segmentation alignment for uplink ports.
+        - **Policy-driven SAN configuration:** Enables consistent FC uplink deployment across profiles.
+        - **Validation readiness:** Intended to be validated against FC policy and platform constraints.
 
 ---
 
 # Data Source: intersight_fabric_fc_uplink_role
-Configuration object sent by user to create a fc uplink port.
+The FcUplinkRole object represents configuration intent for a Fibre Channel uplink port in a port policy.
+#### Purpose
+FcUplinkRole defines a port’s role as an FC uplink and expresses FC-uplink-specific configuration intent such as VSAN association and FC port behavior, enabling consistent SAN uplink configuration.
+#### Key Concepts
+- **FC uplink intent:** Declares a port is used for SAN uplink connectivity.
+- **VSAN association:** Represents SAN segmentation alignment for uplink ports.
+- **Policy-driven SAN configuration:** Enables consistent FC uplink deployment across profiles.
+- **Validation readiness:** Intended to be validated against FC policy and platform constraints.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

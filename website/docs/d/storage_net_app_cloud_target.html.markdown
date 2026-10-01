@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_cloud_target"
 description: |-
-        Cloud target is a collection of cloud provider configuration information for targets e.g., AWS_S3 or Azure_Cloud.
+        The NetAppCloudTargets object represents the configuration for cloud-based storage providers (e.g., Amazon Simple Storage Service, Azure) used for FabricPool or SnapMirror operations.
+        ####  Purpose
+        It acts as a bridge between the on-premises storage cluster and external cloud storage, enabling tiering and data protection workflows in the cloud.
+        ####  Key Concepts
+        - **Provider Integration:** Supports various cloud providers and authentication types.
+        - **Usage Tracking:** Monitors the amount of cloud space used by aggregates.
+        - **Feature Association:** Defines whether the target is used for FabricPool (tiering) or SnapMirror (protection).
 
 ---
 
 # Data Source: intersight_storage_net_app_cloud_target
-Cloud target is a collection of cloud provider configuration information for targets e.g., AWS_S3 or Azure_Cloud.
+The NetAppCloudTargets object represents the configuration for cloud-based storage providers (e.g., Amazon Simple Storage Service, Azure) used for FabricPool or SnapMirror operations.
+####  Purpose
+It acts as a bridge between the on-premises storage cluster and external cloud storage, enabling tiering and data protection workflows in the cloud.
+####  Key Concepts
+- **Provider Integration:** Supports various cloud providers and authentication types.
+- **Usage Tracking:** Monitors the amount of cloud space used by aggregates.
+- **Feature Association:** Defines whether the target is used for FabricPool (tiering) or SnapMirror (protection).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

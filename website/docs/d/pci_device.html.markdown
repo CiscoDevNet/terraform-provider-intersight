@@ -3,12 +3,24 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_device"
 description: |-
-        PCI device present in a server.
+        Devices (pci) represent PCI devices present in a server, including slot identity and firmware/product identification. They can relate to GPU devices connected through that PCI device.
+        #### Purpose
+        Expose PCI slot-level device inventory for hardware visibility and correlation to attached GPU devices.
+        #### Key Concepts
+        - **PCI slot inventory:** Captures slot identifiers and device/product IDs.
+        - **Firmware visibility:** Can report running firmware version.
+        - **GPU correlation:** May link to one or more graphics cards connected via this PCI device.
 
 ---
 
 # Data Source: intersight_pci_device
-PCI device present in a server.
+Devices (pci) represent PCI devices present in a server, including slot identity and firmware/product identification. They can relate to GPU devices connected through that PCI device.
+#### Purpose
+Expose PCI slot-level device inventory for hardware visibility and correlation to attached GPU devices.
+#### Key Concepts
+- **PCI slot inventory:** Captures slot identifiers and device/product IDs.
+- **Firmware visibility:** Can report running firmware version.
+- **GPU correlation:** May link to one or more graphics cards connected via this PCI device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

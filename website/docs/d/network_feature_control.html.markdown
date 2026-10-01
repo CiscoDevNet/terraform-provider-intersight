@@ -3,12 +3,28 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_feature_control"
 description: |-
-        List of features available on a switch along with the index and admin state. These features will allow the user to perform certain set of actions on the switch and get a view of the status of the sub-set feature names.
+        FeatureControls represent switch feature inventory entries that expose which features are available on a network element and their current administrative and operational states. Each FeatureControl record identifies a feature, how many instances exist, and provides a status message for additional detail.
+        #### Purpose
+        Provide read-only visibility into switch feature availability and state so administrators can understand which switch capabilities are enabled/active and diagnose feature readiness issues.
+        #### Key Concepts
+        - **Feature inventory:** Each record represents a specific feature available on the switch (identified by `name`).
+        - **State reporting:** Captures both **admin state** (configured/desired enablement) and **operational state** (runtime status).
+        - **Instance awareness:** `instance` indicates the number of instances of the feature present/active on the device.
+        - **Operational diagnostics:** `statusMsg` provides detail/context for the current admin/operational state.
+        - **Device association and scoping:** Tied to a specific `registeredDevice` and inherits permissions from the `networkElement` context for consistent RBAC.
 
 ---
 
 # Data Source: intersight_network_feature_control
-List of features available on a switch along with the index and admin state. These features will allow the user to perform certain set of actions on the switch and get a view of the status of the sub-set feature names.
+FeatureControls represent switch feature inventory entries that expose which features are available on a network element and their current administrative and operational states. Each FeatureControl record identifies a feature, how many instances exist, and provides a status message for additional detail.
+#### Purpose
+Provide read-only visibility into switch feature availability and state so administrators can understand which switch capabilities are enabled/active and diagnose feature readiness issues.
+#### Key Concepts
+- **Feature inventory:** Each record represents a specific feature available on the switch (identified by `name`).
+- **State reporting:** Captures both **admin state** (configured/desired enablement) and **operational state** (runtime status).
+- **Instance awareness:** `instance` indicates the number of instances of the feature present/active on the device.
+- **Operational diagnostics:** `statusMsg` provides detail/context for the current admin/operational state.
+- **Device association and scoping:** Tied to a specific `registeredDevice` and inherits permissions from the `networkElement` context for consistent RBAC.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

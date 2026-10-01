@@ -39,6 +39,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `end_time`:(string) End date and time of the backup operation. 
 * `is_aes_key_set`:(bool) Indicates whether the value of the 'aesKey' property has been set. 
+* `is_user_password_set`:(bool) Indicates whether the value of the 'userPassword' property has been set. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) User provided identifier for the backup operation. 

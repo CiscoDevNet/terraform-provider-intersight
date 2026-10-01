@@ -1,5 +1,5 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Testing OpenapiApiService
 
@@ -35,43 +35,6 @@ func Test_intersight_OpenapiApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test OpenapiApiService CreateOpenapiProcessFile", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.OpenapiApi.CreateOpenapiProcessFile(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService CreateOpenapiTaskGenerationRequest", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.OpenapiApi.CreateOpenapiTaskGenerationRequest(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService DeleteOpenapiApiMethodMeta", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.OpenapiApi.DeleteOpenapiApiMethodMeta(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test OpenapiApiService DeleteOpenapiOpenApiSpecification", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -81,71 +44,6 @@ func Test_intersight_OpenapiApiService(t *testing.T) {
 		httpRes, err := apiClient.OpenapiApi.DeleteOpenapiOpenApiSpecification(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService DeleteOpenapiProcessFile", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.OpenapiApi.DeleteOpenapiProcessFile(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService DeleteOpenapiTaskGenerationRequest", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.OpenapiApi.DeleteOpenapiTaskGenerationRequest(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService DeleteOpenapiTaskGenerationResult", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		httpRes, err := apiClient.OpenapiApi.DeleteOpenapiTaskGenerationResult(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService GetOpenapiApiMethodMetaByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.OpenapiApi.GetOpenapiApiMethodMetaByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService GetOpenapiApiMethodMetaList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.OpenapiApi.GetOpenapiApiMethodMetaList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -176,84 +74,6 @@ func Test_intersight_OpenapiApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test OpenapiApiService GetOpenapiProcessFileByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.OpenapiApi.GetOpenapiProcessFileByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService GetOpenapiProcessFileList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.OpenapiApi.GetOpenapiProcessFileList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService GetOpenapiTaskGenerationRequestByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.OpenapiApi.GetOpenapiTaskGenerationRequestByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService GetOpenapiTaskGenerationRequestList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.OpenapiApi.GetOpenapiTaskGenerationRequestList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService GetOpenapiTaskGenerationResultByMoid", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.OpenapiApi.GetOpenapiTaskGenerationResultByMoid(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService GetOpenapiTaskGenerationResultList", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.OpenapiApi.GetOpenapiTaskGenerationResultList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test OpenapiApiService PatchOpenapiOpenApiSpecification", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -268,20 +88,6 @@ func Test_intersight_OpenapiApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test OpenapiApiService PatchOpenapiTaskGenerationRequest", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.OpenapiApi.PatchOpenapiTaskGenerationRequest(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test OpenapiApiService UpdateOpenapiOpenApiSpecification", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -289,20 +95,6 @@ func Test_intersight_OpenapiApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.OpenapiApi.UpdateOpenapiOpenApiSpecification(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test OpenapiApiService UpdateOpenapiTaskGenerationRequest", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.OpenapiApi.UpdateOpenapiTaskGenerationRequest(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

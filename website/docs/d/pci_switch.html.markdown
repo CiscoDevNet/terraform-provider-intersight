@@ -3,12 +3,28 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_switch"
 description: |-
-        PCIe switch present in the system which connects PCIe devices (CPU, GPU and the PCIe adapter).
+        Switches (pci) represent PCIe switches present in the system that connect PCIe devices (CPU, GPU, and PCIe adapters). They include identity, health, and relationships to links, ports, and endpoints.
+        #### Purpose
+        Expose PCIe switch inventory to support PCIe topology visibility, device connectivity mapping, and troubleshooting.
+        
+        #### Key Concepts
+        - **Topology hub:** Connects ports/endpoints and describes the fabric between CPU/root complexes and devices.
+        - **Health and oper state:** Provides operational state for the switch itself.
+        - **Contained topology elements:** Links to PCIe links, ports, and endpoints.
+        - **Firmware visibility:** Can relate to running firmware records for lifecycle management.
 
 ---
 
 # Data Source: intersight_pci_switch
-PCIe switch present in the system which connects PCIe devices (CPU, GPU and the PCIe adapter).
+Switches (pci) represent PCIe switches present in the system that connect PCIe devices (CPU, GPU, and PCIe adapters). They include identity, health, and relationships to links, ports, and endpoints.
+ #### Purpose
+ Expose PCIe switch inventory to support PCIe topology visibility, device connectivity mapping, and troubleshooting.
+ 
+ #### Key Concepts
+ - **Topology hub:** Connects ports/endpoints and describes the fabric between CPU/root complexes and devices.
+ - **Health and oper state:** Provides operational state for the switch itself.
+ - **Contained topology elements:** Links to PCIe links, ports, and endpoints.
+ - **Firmware visibility:** Can relate to running firmware records for lifecycle management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

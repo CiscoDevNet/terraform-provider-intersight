@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **AssignedLocation** | Pointer to [**NullableAssetGeoLocationRelationship**](AssetGeoLocationRelationship.md) |  | [optional] 
 **Reservation** | Pointer to [**NullableResourceReservationRelationship**](ResourceReservationRelationship.md) |  | [optional] 
+**TlsCertificate** | Pointer to [**NullableIamTrustPointRelationship**](IamTrustPointRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -460,6 +461,41 @@ HasReservation returns a boolean if a field has been set.
 `func (o *ApplianceDeviceClaim) UnsetReservation()`
 
 UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
+### GetTlsCertificate
+
+`func (o *ApplianceDeviceClaim) GetTlsCertificate() IamTrustPointRelationship`
+
+GetTlsCertificate returns the TlsCertificate field if non-nil, zero value otherwise.
+
+### GetTlsCertificateOk
+
+`func (o *ApplianceDeviceClaim) GetTlsCertificateOk() (*IamTrustPointRelationship, bool)`
+
+GetTlsCertificateOk returns a tuple with the TlsCertificate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTlsCertificate
+
+`func (o *ApplianceDeviceClaim) SetTlsCertificate(v IamTrustPointRelationship)`
+
+SetTlsCertificate sets TlsCertificate field to given value.
+
+### HasTlsCertificate
+
+`func (o *ApplianceDeviceClaim) HasTlsCertificate() bool`
+
+HasTlsCertificate returns a boolean if a field has been set.
+
+### SetTlsCertificateNil
+
+`func (o *ApplianceDeviceClaim) SetTlsCertificateNil(b bool)`
+
+ SetTlsCertificateNil sets the value for TlsCertificate to be an explicit nil
+
+### UnsetTlsCertificate
+`func (o *ApplianceDeviceClaim) UnsetTlsCertificate()`
+
+UnsetTlsCertificate ensures that no value is present for TlsCertificate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

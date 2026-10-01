@@ -3,12 +3,26 @@ subcategory: "inventory"
 layout: "intersight"
 page_title: "Intersight: intersight_inventory_dn_mo_binding"
 description: |-
-        DnMoBinding provides a binding between a Intersight MO and a UCSM MO which has a DN.
+        DnMoBindings provide a mapping between an Intersight managed object and a UCSM managed object that is uniquely identified by a Distinguished Name (DN). This binding enables correlation between Intersight MO identities and UCSM DN-based identities for the same underlying entity.
+        #### Purpose
+        Enable reliable cross-system correlation by binding UCSM DN identifiers to the corresponding Intersight target MO identifiers and types.
+        #### Key Concepts
+        - **DN-based identity mapping:** Stores the UCSM Distinguished Name (`dn`) as the key identifier for the binding.
+        - **Target MO reference:** Captures the Intersight target MO identity (`targetMoId`) and classification (`targetMoType`) associated with that DN.
+        - **Device context:** Optionally associated with a `registeredDevice` to scope bindings to the correct UCSM/endpoint context, with cascade cleanup on device deletion.
+        - **Read-only reference data:** Exposed via READ for lookup/correlation workflows rather than as a mutable configuration object.
 
 ---
 
 # Data Source: intersight_inventory_dn_mo_binding
-DnMoBinding provides a binding between a Intersight MO and a UCSM MO which has a DN.
+DnMoBindings provide a mapping between an Intersight managed object and a UCSM managed object that is uniquely identified by a Distinguished Name (DN). This binding enables correlation between Intersight MO identities and UCSM DN-based identities for the same underlying entity.
+#### Purpose
+Enable reliable cross-system correlation by binding UCSM DN identifiers to the corresponding Intersight target MO identifiers and types.
+#### Key Concepts
+- **DN-based identity mapping:** Stores the UCSM Distinguished Name (`dn`) as the key identifier for the binding.
+- **Target MO reference:** Captures the Intersight target MO identity (`targetMoId`) and classification (`targetMoType`) associated with that DN.
+- **Device context:** Optionally associated with a `registeredDevice` to scope bindings to the correct UCSM/endpoint context, with cascade cleanup on device deletion.
+- **Read-only reference data:** Exposed via READ for lookup/correlation workflows rather than as a mutable configuration object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

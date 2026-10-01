@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_pcie_descriptor"
 description: |-
-        Descriptor to uniquely identify a PCIE component.
+        The PcieDescriptors object provides internal metadata to uniquely identify PCIe components.
+        #### Purpose
+        It enables the identification and management of PCIe hardware, supporting configuration and compatibility checks.
+        #### Key Concepts
+        - **Component Identification:** Uniquely identifies PCIe hardware using vendor, model, and revision details.
+        - **Hardware Integration:** Facilitates the mapping of PCIe hardware to system-level policies.
 
 ---
 
 # Data Source: intersight_firmware_pcie_descriptor
-Descriptor to uniquely identify a PCIE component.
+The PcieDescriptors object provides internal metadata to uniquely identify PCIe components.
+#### Purpose
+It enables the identification and management of PCIe hardware, supporting configuration and compatibility checks.
+#### Key Concepts
+- **Component Identification:** Uniquely identifies PCIe hardware using vendor, model, and revision details.
+- **Hardware Integration:** Facilitates the mapping of PCIe hardware to system-level policies.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

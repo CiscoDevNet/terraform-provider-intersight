@@ -3,12 +3,24 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_zone"
 description: |-
-        PCIe endpoints that are zoned (logically connected together) through a PCIe switch.
+        Zones (pci) represent logical PCIe endpoint zones where PCIe devices are zoned (logically connected together) through a PCIe switch.
+        #### Purpose
+        Model logical connectivity groupings of PCIe endpoints to reflect zoning/partitioning constructs used by the platform.
+        #### Key Concepts
+        - **Logical grouping:** Groups multiple PCIe endpoints into a zone.
+        - **Operational visibility:** Reports oper state and health reasons.
+        - **Endpoint membership:** Relates to the collection of PCIe endpoints in the zone.
 
 ---
 
 # Data Source: intersight_pci_zone
-PCIe endpoints that are zoned (logically connected together) through a PCIe switch.
+Zones (pci) represent logical PCIe endpoint zones where PCIe devices are zoned (logically connected together) through a PCIe switch.
+#### Purpose
+Model logical connectivity groupings of PCIe endpoints to reflect zoning/partitioning constructs used by the platform.
+#### Key Concepts
+- **Logical grouping:** Groups multiple PCIe endpoints into a zone.
+- **Operational visibility:** Reports oper state and health reasons.
+- **Endpoint membership:** Relates to the collection of PCIe endpoints in the zone.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

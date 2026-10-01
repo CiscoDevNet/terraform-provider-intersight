@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the BiosBootDevice type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BiosBootDevice{}
 
-// BiosBootDevice Actual boot devices of the system as enumerated by BIOS.
+// BiosBootDevice BootDevices represent the actual bootable devices enumerated by a server’s BIOS. Each BootDevice captures the device identity and type as the BIOS currently sees it, forming the per-entry list that makes up the system’s effective boot sequence. #### Purpose Provide a read-only inventory of BIOS-enumerated boot devices so administrators can verify what the system can boot from and troubleshoot boot-order or boot-device discovery issues. #### Key Concepts - **Observed (BIOS) reality vs policy intent**: This is the *actual* device list reported by BIOS, not a desired boot policy configuration. - **Device identity and classification**: `deviceName` identifies the boot entry; `deviceType` indicates what kind of boot device it is. - **System association**: `registeredDevice` links the boot device inventory to the specific managed server/device in Intersight. - **Lifecycle handling**: `onpeerdelete: unset` on `registeredDevice` preserves the BootDevice record semantics when the registration relationship is removed. - **Collection workflow support**: `GetActualBootOrderTask` is the async task responsible for retrieving the actual boot order information from the endpoint (with retries/timeouts for resilience).
 type BiosBootDevice struct {
 	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

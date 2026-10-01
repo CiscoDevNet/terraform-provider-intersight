@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Destination** | Pointer to **string** | Indicates whether the backup was created locally or imported. * &#x60;Local&#x60; - A local Intersight location. * &#x60;Uploaded&#x60; - A local location where the backup file is uploaded as mgmt.ConfigBackupFile MO. Intersight creates the backup from the uploaded location when this location type is set. * &#x60;Remote&#x60; - A remote location hosted in the user&#39;s datacenter. | [optional] [default to "Local"]
 **EndTime** | Pointer to **time.Time** | End date and time of the backup operation. | [optional] [readonly] 
 **IsAesKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;aesKey&#39; property has been set. | [optional] [readonly] [default to false]
+**IsUserPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;userPassword&#39; property has been set. | [optional] [readonly] [default to false]
 **Name** | Pointer to **string** | User provided identifier for the backup operation. | [optional] 
 **Options** | Pointer to [**NullableMgmtBackupOptions**](MgmtBackupOptions.md) |  | [optional] 
 **RetentionLock** | Pointer to **bool** | When set, ensures that the backup archive is protected from deletion and rollover operations. The value for retention lock is in sync with the backup instance created as part of this operation. | [optional] [readonly] 
@@ -270,6 +271,31 @@ SetIsAesKeySet sets IsAesKeySet field to given value.
 `func (o *MgmtConfigBackupOperation) HasIsAesKeySet() bool`
 
 HasIsAesKeySet returns a boolean if a field has been set.
+
+### GetIsUserPasswordSet
+
+`func (o *MgmtConfigBackupOperation) GetIsUserPasswordSet() bool`
+
+GetIsUserPasswordSet returns the IsUserPasswordSet field if non-nil, zero value otherwise.
+
+### GetIsUserPasswordSetOk
+
+`func (o *MgmtConfigBackupOperation) GetIsUserPasswordSetOk() (*bool, bool)`
+
+GetIsUserPasswordSetOk returns a tuple with the IsUserPasswordSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUserPasswordSet
+
+`func (o *MgmtConfigBackupOperation) SetIsUserPasswordSet(v bool)`
+
+SetIsUserPasswordSet sets IsUserPasswordSet field to given value.
+
+### HasIsUserPasswordSet
+
+`func (o *MgmtConfigBackupOperation) HasIsUserPasswordSet() bool`
+
+HasIsUserPasswordSet returns a boolean if a field has been set.
 
 ### GetName
 

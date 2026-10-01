@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the CapabilityServerTopologyMap type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CapabilityServerTopologyMap{}
 
-// CapabilityServerTopologyMap Mapping of server models to their supported PCIe topology configurations and compatibility matrix.
+// CapabilityServerTopologyMap ServerTopologyMaps map specific server models (and related infrastructure components like XFM and PCIe nodes) to a supported PCIe topology configuration and an associated handler identifier. This forms a compatibility matrix that links “what hardware is present” to “which topology definition applies.” #### Purpose Associate hardware model inventory (server/XFM/PCIe node) with the appropriate supported PCIe topology configuration used for validation and orchestration. #### Key Concepts - **Model-to-topology mapping:** Connects a server model definition to the topology rules it supports. - **Device inventory descriptors:** Uses inventory-like descriptors (model + min/max version bounds) to define compatibility. - **Cross-component compatibility:** Captures that topology support depends on the combination of server, XFM, and PCIe node models/versions. - **Handler-based processing:** Includes a handler identifier to route topology interpretation/validation to the correct logic.
 type CapabilityServerTopologyMap struct {
 	CapabilityCapability
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

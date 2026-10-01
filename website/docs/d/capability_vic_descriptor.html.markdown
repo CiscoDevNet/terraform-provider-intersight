@@ -3,12 +3,22 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_vic_descriptor"
 description: |-
-        Descriptor that caches VIC ID to PID relation.
+        The VicDescriptors object caches the relationship between Virtual Interface Card (VIC) IDs and their corresponding PIDs.
+        #### Purpose
+        It provides a lookup mechanism for identifying adapter hardware, which is essential for determining the correct firmware and capability support for VIC adapters.
+        #### Key Concepts
+        - **ID Mapping:** Maps VIC IDs to specific hardware models (PIDs).
+        - **Capability Lookup:** Facilitates the identification of adapter capabilities based on hardware ID.
 
 ---
 
 # Data Source: intersight_capability_vic_descriptor
-Descriptor that caches VIC ID to PID relation.
+The VicDescriptors object caches the relationship between Virtual Interface Card (VIC) IDs and their corresponding PIDs.
+#### Purpose
+It provides a lookup mechanism for identifying adapter hardware, which is essential for determining the correct firmware and capability support for VIC adapters.
+#### Key Concepts
+- **ID Mapping:** Maps VIC IDs to specific hardware models (PIDs).
+- **Capability Lookup:** Facilitates the identification of adapter capabilities based on hardware ID.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_io_card_manufacturing_def"
 description: |-
-        Chassis Iocard module properties.
+        The IoCardCapabilityDef object describes capabilities for chassis I/O modules (IOM/IO cards) in the capability catalog.
+        #### Purpose
+        IoCardCapabilityDef provides platform-specific capability flags (for example, connector support characteristics) that drive validation, deployment logic, and conditional behavior for chassis networking components.
+        #### Key Concepts
+        - **IOM feature declaration:** Encodes what an IOM model supports so configurations are constrained accordingly.
+        - **Platform-aware validation:** Enables policy validation and workflow selection based on IOM capabilities.
+        - **Catalog-backed behavior:** Prevents clients and services from relying on hard-coded per-model rules.
+        - **Consistent chassis operations:** Ensures multi-chassis or mixed-platform environments behave predictably.
 
 ---
 
 # Data Source: intersight_capability_io_card_manufacturing_def
-Chassis Iocard module properties.
+The IoCardCapabilityDef object describes capabilities for chassis I/O modules (IOM/IO cards) in the capability catalog.
+#### Purpose
+IoCardCapabilityDef provides platform-specific capability flags (for example, connector support characteristics) that drive validation, deployment logic, and conditional behavior for chassis networking components.
+#### Key Concepts
+- **IOM feature declaration:** Encodes what an IOM model supports so configurations are constrained accordingly.
+- **Platform-aware validation:** Enables policy validation and workflow selection based on IOM capabilities.
+- **Catalog-backed behavior:** Prevents clients and services from relying on hard-coded per-model rules.
+- **Consistent chassis operations:** Ensures multi-chassis or mixed-platform environments behave predictably.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

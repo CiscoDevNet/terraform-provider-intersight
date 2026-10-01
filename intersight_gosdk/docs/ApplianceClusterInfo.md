@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **PartitionVarLog** | Pointer to **int64** | The partition size for /var of this node. | [optional] 
 **Peerkey** | Pointer to **string** | The public key of peer host. | [optional] 
 **Responsekey** | Pointer to **string** | Public key returned to the client. | [optional] 
+**SignedManifest** | Pointer to **string** | The signed manifest content for verifying integrity of cluster artifacts. | [optional] 
 **Status** | Pointer to **string** | The status of the cluster join process. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. * &#x60;WorkerNodeInstInProgress&#x60; - The worker node installation is in progress. * &#x60;WorkerNodeInstSuccess&#x60; - The worker node installation succeeded. * &#x60;WorkerNodeInstFailed&#x60; - The worker node installation failed. | [optional] [readonly] [default to "Unknown"]
 **Subnetmask** | Pointer to **string** | Subnet Mask of the peer node. | [optional] 
 **Uuid** | Pointer to **string** | The UUID of the peer appliance. | [optional] 
@@ -537,6 +538,31 @@ SetResponsekey sets Responsekey field to given value.
 `func (o *ApplianceClusterInfo) HasResponsekey() bool`
 
 HasResponsekey returns a boolean if a field has been set.
+
+### GetSignedManifest
+
+`func (o *ApplianceClusterInfo) GetSignedManifest() string`
+
+GetSignedManifest returns the SignedManifest field if non-nil, zero value otherwise.
+
+### GetSignedManifestOk
+
+`func (o *ApplianceClusterInfo) GetSignedManifestOk() (*string, bool)`
+
+GetSignedManifestOk returns a tuple with the SignedManifest field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSignedManifest
+
+`func (o *ApplianceClusterInfo) SetSignedManifest(v string)`
+
+SetSignedManifest sets SignedManifest field to given value.
+
+### HasSignedManifest
+
+`func (o *ApplianceClusterInfo) HasSignedManifest() bool`
+
+HasSignedManifest returns a boolean if a field has been set.
 
 ### GetStatus
 

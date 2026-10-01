@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_fc_port"
 description: |-
-        Fibre Channel (FC) port is a port on a node in a storage array.
+        The NetAppFcPorts object represents the physical Fibre Channel ports on a storage node.
+        ####  Purpose
+        This provides visibility into the physical SAN infrastructure, allowing administrators to manage port speeds and connectivity.
+        ####  Key Concepts
+        - **Physical Connectivity:** Monitors the physical state of FC ports.
+        - **Speed Management:** Manages maximum and configured port speeds.
+        - **Hardware Monitoring:** Tracks port status within the storage array.
 
 ---
 
 # Data Source: intersight_storage_net_app_fc_port
-Fibre Channel (FC) port is a port on a node in a storage array.
+The NetAppFcPorts object represents the physical Fibre Channel ports on a storage node.
+####  Purpose
+This provides visibility into the physical SAN infrastructure, allowing administrators to manage port speeds and connectivity.
+####  Key Concepts
+- **Physical Connectivity:** Monitors the physical state of FC ports.
+- **Speed Management:** Manages maximum and configured port speeds.
+- **Hardware Monitoring:** Tracks port status within the storage array.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

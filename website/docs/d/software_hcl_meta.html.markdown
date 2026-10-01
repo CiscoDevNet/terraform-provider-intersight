@@ -3,12 +3,22 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_hcl_meta"
 description: |-
-        A JSON file wth HCL metadata uploaded for consumption by the HCL service.
+        The HclMeta object represents HCL (Hardware Compatibility List) metadata uploaded for consumption by the HCL service.
+        #### Purpose
+        It provides the system with up-to-date compatibility data, ensuring that hardware and software combinations are validated against the latest HCL.
+        #### Key Concepts
+        - **Metadata Management:** Stores HCL metadata for service consumption.
+        - **Compatibility Validation:** Enables the HCL service to perform accurate compatibility checks.
 
 ---
 
 # Data Source: intersight_software_hcl_meta
-A JSON file wth HCL metadata uploaded for consumption by the HCL service.
+The HclMeta object represents HCL (Hardware Compatibility List) metadata uploaded for consumption by the HCL service.
+#### Purpose
+It provides the system with up-to-date compatibility data, ensuring that hardware and software combinations are validated against the latest HCL.
+#### Key Concepts
+- **Metadata Management:** Stores HCL metadata for service consumption.
+- **Compatibility Validation:** Enables the HCL service to perform accurate compatibility checks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

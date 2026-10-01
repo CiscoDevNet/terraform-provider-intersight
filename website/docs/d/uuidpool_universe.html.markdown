@@ -3,12 +3,24 @@ subcategory: "uuidpool"
 layout: "intersight"
 page_title: "Intersight: intersight_uuidpool_universe"
 description: |-
-        Universe represents a book keeping container to keep track of all UUIDs for a given account.
+        The Universes object serves as a centralized bookkeeping container designed to track the state and allocation of identifiers within a specific account or routing context.
+        #### Purpose
+        It maintains an authoritative view of all identifiers currently in use or available, ensuring that the system can accurately track resource consumption and prevent identity collisions across the infrastructure.
+        #### Key Concepts
+        - **Bookkeeping:** Acts as the primary registry for all identifiers for a given account or VRF.
+        - **Scope Management:** Ensures that identifier tracking is scoped correctly to the appropriate account or routing domain.
+        - **Lifecycle Foundation:** Provides the necessary context for lease and reservation operations.
 
 ---
 
 # Data Source: intersight_uuidpool_universe
-Universe represents a book keeping container to keep track of all UUIDs for a given account.
+The Universes object serves as a centralized bookkeeping container designed to track the state and allocation of identifiers within a specific account or routing context.
+#### Purpose
+It maintains an authoritative view of all identifiers currently in use or available, ensuring that the system can accurately track resource consumption and prevent identity collisions across the infrastructure.
+#### Key Concepts
+- **Bookkeeping:** Acts as the primary registry for all identifiers for a given account or VRF.
+- **Scope Management:** Ensures that identifier tracking is scoped correctly to the appropriate account or routing domain.
+- **Lifecycle Foundation:** Provides the necessary context for lease and reservation operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

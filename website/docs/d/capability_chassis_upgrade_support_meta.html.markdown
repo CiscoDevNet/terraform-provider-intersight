@@ -3,12 +3,24 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_chassis_upgrade_support_meta"
 description: |-
-        Internal meta-data to enable chassis upgrade related decision making.
+        The ChassisUpgradeSupportMeta object provides internal metadata to enable chassis firmware upgrade decision-making.
+        #### Purpose
+        It allows the system to determine the eligibility of chassis models for firmware upgrades, including specific support for power supply (PSU) and XFM components.
+        #### Key Concepts
+        - **Chassis Classification:** Groups chassis models into series for streamlined upgrade management.
+        - **Component Support:** Tracks support for specific PSU and XFM models within a chassis series.
+        - **HSU Integration:** Indicates if server adapters within the chassis are upgraded via the Host Upgrade (HSU) process.
 
 ---
 
 # Data Source: intersight_capability_chassis_upgrade_support_meta
-Internal meta-data to enable chassis upgrade related decision making.
+The ChassisUpgradeSupportMeta object provides internal metadata to enable chassis firmware upgrade decision-making.
+#### Purpose
+It allows the system to determine the eligibility of chassis models for firmware upgrades, including specific support for power supply (PSU) and XFM components.
+#### Key Concepts
+- **Chassis Classification:** Groups chassis models into series for streamlined upgrade management.
+- **Component Support:** Tracks support for specific PSU and XFM models within a chassis series.
+- **HSU Integration:** Indicates if server adapters within the chassis are upgraded via the Host Upgrade (HSU) process.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

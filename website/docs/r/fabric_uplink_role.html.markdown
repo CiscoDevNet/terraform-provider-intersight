@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_uplink_role"
 description: |-
-        Configuration object sent by user to create a uplink port.
+        The UplinkRole object represents configuration intent for an Ethernet uplink port in a port policy.
+        #### Purpose
+        UplinkRole defines a port’s role as an uplink and provides the policy attachment points for uplink-related behavior (such as link control, flow control, allowed VLAN sets via network group policy, and MACsec policy association).
+        #### Key Concepts
+        - **Uplink port intent:** Declares a port’s role for upstream connectivity.
+        - **Policy composition:** Serves as the attachment point for other relevant policies (link/flow control, VLAN allow-lists, MACsec).
+        - **Fabric-wide consistency:** Enables consistent uplink behavior across profiles and domains.
+        - **Validation & constraints:** Intended to be validated against VLAN rules and platform capabilities.
 
 ---
 
 # Resource: intersight_fabric_uplink_role
-Configuration object sent by user to create a uplink port.
+The UplinkRole object represents configuration intent for an Ethernet uplink port in a port policy.
+#### Purpose
+UplinkRole defines a port’s role as an uplink and provides the policy attachment points for uplink-related behavior (such as link control, flow control, allowed VLAN sets via network group policy, and MACsec policy association).
+#### Key Concepts
+- **Uplink port intent:** Declares a port’s role for upstream connectivity.
+- **Policy composition:** Serves as the attachment point for other relevant policies (link/flow control, VLAN allow-lists, MACsec).
+- **Fabric-wide consistency:** Enables consistent uplink behavior across profiles and domains.
+- **Validation & constraints:** Intended to be validated against VLAN rules and platform capabilities.
 ## Usage Example
 ### Resource Creation
 

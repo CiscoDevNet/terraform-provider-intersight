@@ -3,12 +3,22 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_hci_bundle_distributable"
 description: |-
-        An HCI image bundle distributed by Cisco for Private Appliance.
+        The HciBundleDistributable object represents an HCI image bundle distributed by Cisco for Private Appliance environments.
+        #### Purpose
+        It manages the lifecycle of HCI bundles, providing a structured way to download and install bundled software for HCI systems.
+        #### Key Concepts
+        - **Bundle Management:** Groups multiple HCI distributable images into a single bundle.
+        - **Appliance Support:** Specifically designed for Private Appliance deployments.
 
 ---
 
 # Resource: intersight_software_hci_bundle_distributable
-An HCI image bundle distributed by Cisco for Private Appliance.
+The HciBundleDistributable object represents an HCI image bundle distributed by Cisco for Private Appliance environments.
+#### Purpose
+It manages the lifecycle of HCI bundles, providing a structured way to download and install bundled software for HCI systems.
+#### Key Concepts
+- **Bundle Management:** Groups multiple HCI distributable images into a single bundle.
+- **Appliance Support:** Specifically designed for Private Appliance deployments.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

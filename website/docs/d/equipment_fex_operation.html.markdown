@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fex_operation"
 description: |-
-        Models the configuration states of a FEX in Intersight.
+        The FexOperation object models operational actions that can be executed on a Fabric Extender (FEX), such as locator LED control, with workflow-backed status reporting.
+        #### Purpose
+        FexOperation provides a consistent API mechanism to initiate FEX maintenance actions and observe their completion state, enabling safe and auditable operational control of fabric extenders.
+        ### Key Concepts
+        - **FEX operational actions:** Represents targeted maintenance actions for a specific FEX instance.
+        - **Workflow-driven execution:** Tracks operation progress and completion via action/config state.
+        - **Inventory correlation:** Tied to the inventoried FEX object to ensure actions target the correct hardware.
+        - **Access control and safety:** Uses privilege gating for operational actions to minimize disruption risk.
 
 ---
 
 # Data Source: intersight_equipment_fex_operation
-Models the configuration states of a FEX in Intersight.
+The FexOperation object models operational actions that can be executed on a Fabric Extender (FEX), such as locator LED control, with workflow-backed status reporting.
+#### Purpose
+FexOperation provides a consistent API mechanism to initiate FEX maintenance actions and observe their completion state, enabling safe and auditable operational control of fabric extenders.
+### Key Concepts
+- **FEX operational actions:** Represents targeted maintenance actions for a specific FEX instance.
+- **Workflow-driven execution:** Tracks operation progress and completion via action/config state.
+- **Inventory correlation:** Tied to the inventoried FEX object to ensure actions target the correct hardware.
+- **Access control and safety:** Uses privilege gating for operational actions to minimize disruption risk.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

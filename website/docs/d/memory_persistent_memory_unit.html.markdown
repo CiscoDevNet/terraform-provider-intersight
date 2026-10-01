@@ -3,12 +3,26 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_unit"
 description: |-
-        Persistent Memory Module on a server.
+        PersistentMemoryUnits represent persistent memory modules installed in a server (PMem DIMMs), including capacity breakdowns, firmware, health, and security/lock/freeze status indicators.
+        #### Purpose
+        Provide inventory and health visibility for PMem modules at the hardware-device level.
+        #### Key Concepts
+        - **Hardware PMem module:** Represents an installed persistent memory DIMM.
+        - **Capacity breakdown:** Captures total vs persistent vs memory vs app-direct capacities.
+        - **Security posture:** Includes security/lock/frozen indicators for operational readiness.
+        - **Firmware visibility:** Tracks module firmware version.
 
 ---
 
 # Data Source: intersight_memory_persistent_memory_unit
-Persistent Memory Module on a server.
+PersistentMemoryUnits represent persistent memory modules installed in a server (PMem DIMMs), including capacity breakdowns, firmware, health, and security/lock/freeze status indicators.
+#### Purpose
+Provide inventory and health visibility for PMem modules at the hardware-device level.
+#### Key Concepts
+- **Hardware PMem module:** Represents an installed persistent memory DIMM.
+- **Capacity breakdown:** Captures total vs persistent vs memory vs app-direct capacities.
+- **Security posture:** Includes security/lock/frozen indicators for operational readiness.
+- **Firmware visibility:** Tracks module firmware version.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

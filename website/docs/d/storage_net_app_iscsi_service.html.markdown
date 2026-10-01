@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_iscsi_service"
 description: |-
-        An iSCSI service defines the properties of the iSCSI target for an SVM. There can be at most one iSCSI service for an SVM. An SVM's iSCSI service must be created before iSCSI initiators can log in to the SVM.
+        The NetAppIscsiServices object defines the iSCSI target properties for an SVM.
+        ####  Purpose
+        It enables iSCSI block storage access, allowing hosts to log in and access LUNs over the network.
+        ####  Key Concepts
+        - **Target Identity:** Manages the iSCSI target name and alias.
+        - **Lifecycle Management:** Ensures the service is active before hosts attempt to log in.
 
 ---
 
 # Data Source: intersight_storage_net_app_iscsi_service
-An iSCSI service defines the properties of the iSCSI target for an SVM. There can be at most one iSCSI service for an SVM. An SVM's iSCSI service must be created before iSCSI initiators can log in to the SVM.
+The NetAppIscsiServices object defines the iSCSI target properties for an SVM.
+####  Purpose
+It enables iSCSI block storage access, allowing hosts to log in and access LUNs over the network.
+####  Key Concepts
+- **Target Identity:** Manages the iSCSI target name and alias.
+- **Lifecycle Management:** Ensures the service is active before hosts attempt to log in.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

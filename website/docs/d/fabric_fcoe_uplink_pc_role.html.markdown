@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fcoe_uplink_pc_role"
 description: |-
-        Object sent by user to configure a fcoe uplink port-channel on the collection of ports.
+        The FcoeUplinkPcRole object represents configuration intent for an FCoE uplink port-channel.
+        #### Purpose
+        FcoeUplinkPcRole models an aggregated uplink for FCoE traffic using a port-channel, providing consistent deployment intent and supporting resilient FCoE designs.
+        #### Key Concepts
+        - **Aggregated FCoE uplink intent:** Represents FCoE uplinks built from multiple ports.
+        - **Consistent application:** Defines port-channel semantics for FCoE under a port policy context.
+        - **Operational resiliency:** Supports redundancy and bandwidth scaling for FCoE uplinks.
+        - **Policy-based governance:** Integrates with link control and platform validation workflows.
 
 ---
 
 # Data Source: intersight_fabric_fcoe_uplink_pc_role
-Object sent by user to configure a fcoe uplink port-channel on the collection of ports.
+The FcoeUplinkPcRole object represents configuration intent for an FCoE uplink port-channel.
+#### Purpose
+FcoeUplinkPcRole models an aggregated uplink for FCoE traffic using a port-channel, providing consistent deployment intent and supporting resilient FCoE designs.
+#### Key Concepts
+- **Aggregated FCoE uplink intent:** Represents FCoE uplinks built from multiple ports.
+- **Consistent application:** Defines port-channel semantics for FCoE under a port policy context.
+- **Operational resiliency:** Supports redundancy and bandwidth scaling for FCoE uplinks.
+- **Policy-based governance:** Integrates with link control and platform validation workflows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

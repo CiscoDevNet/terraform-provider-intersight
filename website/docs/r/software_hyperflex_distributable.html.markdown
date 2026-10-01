@@ -3,12 +3,22 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_hyperflex_distributable"
 description: |-
-        A HyperFlex image distributed by Cisco.
+        The HyperflexDistributables object represents a HyperFlex image distributed by Cisco.
+        #### Purpose
+        It manages the lifecycle of HyperFlex images, from download and caching to installation and verification on target clusters.
+        #### Key Concepts
+        - **HyperFlex Distribution:** Provides a standardized way to manage images for HyperFlex clusters.
+        - **Lifecycle Management:** Orchestrates the download, staging, and installation of HyperFlex firmware/software.
 
 ---
 
 # Resource: intersight_software_hyperflex_distributable
-A HyperFlex image distributed by Cisco.
+The HyperflexDistributables object represents a HyperFlex image distributed by Cisco.
+#### Purpose
+It manages the lifecycle of HyperFlex images, from download and caching to installation and verification on target clusters.
+#### Key Concepts
+- **HyperFlex Distribution:** Provides a standardized way to manage images for HyperFlex clusters.
+- **Lifecycle Management:** Orchestrates the download, staging, and installation of HyperFlex firmware/software.
 ## Usage Example
 ### Resource Creation
 

@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_io_card_operation"
 description: |-
-        Models the configurable properties of a iomodule in Intersight.
+        The IoCardOperation object models user-triggerable operations on an IO module (IOM/IFM), such as reset/reboot actions, along with status tracking for operations and workflows.
+        #### Purpose
+        `equipment.IoCardOperation` provides a controlled interface for initiating IO module operations and monitoring their execution. It supports safe operational management of chassis connectivity components via privilege-gated actions.
+        #### Key Concepts
+        - **IOM/IFM operational actions:** Represents maintenance actions (e.g., reboot) applied to IO modules.
+        - **Config state tracking:** Captures applied/applying/failed semantics for operational workflows.
+        - **Chassis component targeting:** Tied to a specific inventoried IO module.
+        - **Privilege-gated operations:** Ensures operational actions are controlled through explicit privileges.
 
 ---
 
 # Data Source: intersight_equipment_io_card_operation
-Models the configurable properties of a iomodule in Intersight.
+The IoCardOperation object models user-triggerable operations on an IO module (IOM/IFM), such as reset/reboot actions, along with status tracking for operations and workflows.
+#### Purpose
+`equipment.IoCardOperation` provides a controlled interface for initiating IO module operations and monitoring their execution. It supports safe operational management of chassis connectivity components via privilege-gated actions.
+#### Key Concepts
+- **IOM/IFM operational actions:** Represents maintenance actions (e.g., reboot) applied to IO modules.
+- **Config state tracking:** Captures applied/applying/failed semantics for operational workflows.
+- **Chassis component targeting:** Tied to a specific inventoried IO module.
+- **Privilege-gated operations:** Ensures operational actions are controlled through explicit privileges.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_util_physical_drive"
 description: |-
-        Storage Flex Util Physical Drive.
+        FlexUtilPhysicalDrives represent physical drives managed by a Flex Util controller, capturing manufacturer/product info, capacity, health, error counts, and write enablement.
+        #### Purpose
+        Provide detailed inventory and health telemetry for FlexUtil-managed physical media.
+        #### Key Concepts
+        - **Media characterization:** Includes manufacturer/product revision/date metadata.
+        - **Capacity/geometry:** Tracks block size and capacity.
+        - **Health and reliability:** Includes health and read/write error counts and thresholds.
 
 ---
 
 # Data Source: intersight_storage_flex_util_physical_drive
-Storage Flex Util Physical Drive.
+FlexUtilPhysicalDrives represent physical drives managed by a Flex Util controller, capturing manufacturer/product info, capacity, health, error counts, and write enablement.
+#### Purpose
+Provide detailed inventory and health telemetry for FlexUtil-managed physical media.
+#### Key Concepts
+- **Media characterization:** Includes manufacturer/product revision/date metadata.
+- **Capacity/geometry:** Tracks block size and capacity.
+- **Health and reliability:** Includes health and read/write error counts and thresholds.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

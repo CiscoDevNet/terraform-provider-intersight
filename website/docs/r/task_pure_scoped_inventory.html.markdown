@@ -3,12 +3,28 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_pure_scoped_inventory"
 description: |-
-        API to trigger on-demand PureStorage FlashArray inventory to update modified objects in Intersight report.
+        PureScopedInventories represent an on-demand inventory trigger for PureStorage FlashArray integrations. Creating a PureScopedInventory request initiates a targeted discovery cycle so Intersight can refresh and report updated/modified PureStorage objects without waiting for the next scheduled inventory run.
+        #### Purpose
+        Allow administrators to manually trigger a PureStorage FlashArray inventory refresh for a specific registered array connection, ensuring the Intersight inventory/report reflects recent changes promptly.
+        #### Key Concepts
+        - **On-demand inventory trigger**: This is primarily an action/request (CREATE) rather than a long-lived configuration policy.
+        - **Scoped execution**: Extends `connector.ScopedInventory`, indicating the operation is constrained to a particular connector/device scope rather than a global inventory sweep.
+        - **Device targeting via registration**: The `registeredDevice` relationship specifies which PureStorage array connection the inventory operation applies to.
+        - **Controlled lifecycle**: `registeredDevice` is `createonly` and uses `onpeerdelete: cascade`, tying the trigger’s existence and validity to the underlying device registration object.
+        - **Licensed operation**: Requires the **Advantage** entitlement for the CREATE operation.
 
 ---
 
 # Resource: intersight_task_pure_scoped_inventory
-API to trigger on-demand PureStorage FlashArray inventory to update modified objects in Intersight report.
+PureScopedInventories represent an on-demand inventory trigger for PureStorage FlashArray integrations. Creating a PureScopedInventory request initiates a targeted discovery cycle so Intersight can refresh and report updated/modified PureStorage objects without waiting for the next scheduled inventory run.
+#### Purpose
+Allow administrators to manually trigger a PureStorage FlashArray inventory refresh for a specific registered array connection, ensuring the Intersight inventory/report reflects recent changes promptly.
+#### Key Concepts
+- **On-demand inventory trigger**: This is primarily an action/request (CREATE) rather than a long-lived configuration policy.
+- **Scoped execution**: Extends `connector.ScopedInventory`, indicating the operation is constrained to a particular connector/device scope rather than a global inventory sweep.
+- **Device targeting via registration**: The `registeredDevice` relationship specifies which PureStorage array connection the inventory operation applies to.
+- **Controlled lifecycle**: `registeredDevice` is `createonly` and uses `onpeerdelete: cascade`, tying the trigger’s existence and validity to the underlying device registration object.
+- **Licensed operation**: Requires the **Advantage** entitlement for the CREATE operation.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

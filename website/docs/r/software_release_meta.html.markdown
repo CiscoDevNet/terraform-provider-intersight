@@ -3,12 +3,22 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_release_meta"
 description: |-
-        Release information for various software images. Gives information on the latest released version of a product.
+        The ReleaseMeta object provides release information for various software images, identifying the latest released version of a product.
+        #### Purpose
+        It allows the system and users to quickly identify the most recent software versions available for specific products.
+        #### Key Concepts
+        - **Release Tracking:** Identifies the latest version for each software type.
+        - **Metadata Management:** Maps software types and categories to their latest release information.
 
 ---
 
 # Resource: intersight_software_release_meta
-Release information for various software images. Gives information on the latest released version of a product.
+The ReleaseMeta object provides release information for various software images, identifying the latest released version of a product.
+#### Purpose
+It allows the system and users to quickly identify the most recent software versions available for specific products.
+#### Key Concepts
+- **Release Tracking:** Identifies the latest version for each software type.
+- **Metadata Management:** Maps software types and categories to their latest release information.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

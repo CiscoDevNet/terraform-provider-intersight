@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_svm_snapshot_policy"
 description: |-
-        NetApp Snapshot policy that is scoped to a storage virtual machine. The policy controls the behavior and schedule of snapshots when applied to a volume.
+        The NetAppSvmSnapshotPolicies object defines the snapshot creation and retention rules scoped to a specific Storage Virtual Machine (SVM).
+        #### Purpose
+        It automates the data protection lifecycle by scheduling snapshots for volumes within the SVM, ensuring that recovery points are consistently maintained.
+        #### Key Concepts
+        - **Snapshot Automation:** Defines intervals and schedules for snapshot creation.
+        - **Retention Management:** Specifies the number of snapshot copies to maintain.
+        - **SVM Scoping:** Allows for isolated snapshot policies per storage virtual machine.
 
 ---
 
 # Data Source: intersight_storage_net_app_svm_snapshot_policy
-NetApp Snapshot policy that is scoped to a storage virtual machine. The policy controls the behavior and schedule of snapshots when applied to a volume.
+The NetAppSvmSnapshotPolicies object defines the snapshot creation and retention rules scoped to a specific Storage Virtual Machine (SVM).
+#### Purpose
+It automates the data protection lifecycle by scheduling snapshots for volumes within the SVM, ensuring that recovery points are consistently maintained.
+#### Key Concepts
+- **Snapshot Automation:** Defines intervals and schedules for snapshot creation.
+- **Retention Management:** Specifies the number of snapshot copies to maintain.
+- **SVM Scoping:** Allows for isolated snapshot policies per storage virtual machine.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

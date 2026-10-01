@@ -3,12 +3,22 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_gpu_descriptor"
 description: |-
-        Descriptor to uniquely identify a GPU component.
+        The GpuDescriptors object provides internal metadata to uniquely identify Graphics Processing Unit (GPU) components.
+        #### Purpose
+        It supports the identification and management of GPU hardware, ensuring compatibility and proper configuration for high-performance workloads.
+        #### Key Concepts
+        - **Component Identification:** Uniquely identifies GPU hardware using vendor, model, and revision details.
+        - **Hardware Integration:** Facilitates the mapping of GPU hardware to system-level policies.
 
 ---
 
 # Data Source: intersight_firmware_gpu_descriptor
-Descriptor to uniquely identify a GPU component.
+The GpuDescriptors object provides internal metadata to uniquely identify Graphics Processing Unit (GPU) components.
+#### Purpose
+It supports the identification and management of GPU hardware, ensuring compatibility and proper configuration for high-performance workloads.
+#### Key Concepts
+- **Component Identification:** Uniquely identifies GPU hardware using vendor, model, and revision details.
+- **Hardware Integration:** Facilitates the mapping of GPU hardware to system-level policies.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

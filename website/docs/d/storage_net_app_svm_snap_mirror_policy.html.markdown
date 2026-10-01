@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_svm_snap_mirror_policy"
 description: |-
-        NetApp SnapMirror policy owned by a storage virtual machine. NetApp SnapMirror policy when applied to a SnapMirror relationship, controls the behavior of the relationship and specifies the configuration attributes for that relationship.
+        The NetAppSvmSnapMirrorPolicies object represents a SnapMirror policy scoped to a specific Storage Virtual Machine (SVM).
+        #### Purpose
+        It defines the behavior, schedule, and configuration attributes for SnapMirror data replication relationships, ensuring consistent data protection policies across the SVM.
+        #### Key Concepts
+        - **Replication Control:** Manages asynchronous, synchronous, or continuous replication behaviors.
+        - **Policy Scope:** Restricted to the SVM level, allowing for tenant-specific data protection strategies.
+        - **Configuration Attributes:** Specifies transfer schedules and snapshot retention rules.
 
 ---
 
 # Data Source: intersight_storage_net_app_svm_snap_mirror_policy
-NetApp SnapMirror policy owned by a storage virtual machine. NetApp SnapMirror policy when applied to a SnapMirror relationship, controls the behavior of the relationship and specifies the configuration attributes for that relationship.
+The NetAppSvmSnapMirrorPolicies object represents a SnapMirror policy scoped to a specific Storage Virtual Machine (SVM).
+#### Purpose
+It defines the behavior, schedule, and configuration attributes for SnapMirror data replication relationships, ensuring consistent data protection policies across the SVM.
+#### Key Concepts
+- **Replication Control:** Manages asynchronous, synchronous, or continuous replication behaviors.
+- **Policy Scope:** Restricted to the SVM level, allowing for tenant-specific data protection strategies.
+- **Configuration Attributes:** Specifies transfer schedules and snapshot retention rules.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

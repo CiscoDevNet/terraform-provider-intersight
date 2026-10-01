@@ -3,12 +3,30 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_vpc_domain"
 description: |-
-        Concrete class for VPC domain configured on a network device. VPC (Virtual Port Channel) domain is used to connect two different switches logically to a single switch.
+        VpcDomains represent Virtual Port Channel (vPC) domains configured on a network device. A vPC domain logically pairs two switches so they can behave like a single logical switch for downstream connectivity and port-channeling use cases.
+        #### Purpose
+        Provide visibility into the overall vPC domain configuration and health—peer relationship status, role, keepalive state, and consistency—supporting audits and troubleshooting of vPC behavior.
+        #### Key Concepts
+        - **Domain identity**: `vpcDomainId` uniquely identifies the vPC domain on the device.
+        - **Peer relationship health**: `peerStatus` and `keepAliveStatus` describe whether the two peers are communicating correctly.
+        - **Split-brain mitigation**: `autoRecoveryStatus` and `dualActiveExcludedVlans` relate to recovery behavior and VLAN handling during dual-active scenarios.
+        - **Role and consistency**: `role` and `consistencyStatus` describe domain role and configuration consistency across peers.
+        - **Scale indicator**: `vpcsConfiguredCount` shows how many vPCs are configured within the domain.
+        - **Device association**: `registeredDevice` links the vPC domain to its device.
 
 ---
 
 # Data Source: intersight_network_vpc_domain
-Concrete class for VPC domain configured on a network device. VPC (Virtual Port Channel) domain is used to connect two different switches logically to a single switch.
+VpcDomains represent Virtual Port Channel (vPC) domains configured on a network device. A vPC domain logically pairs two switches so they can behave like a single logical switch for downstream connectivity and port-channeling use cases.
+#### Purpose
+Provide visibility into the overall vPC domain configuration and health—peer relationship status, role, keepalive state, and consistency—supporting audits and troubleshooting of vPC behavior.
+#### Key Concepts
+- **Domain identity**: `vpcDomainId` uniquely identifies the vPC domain on the device.
+- **Peer relationship health**: `peerStatus` and `keepAliveStatus` describe whether the two peers are communicating correctly.
+- **Split-brain mitigation**: `autoRecoveryStatus` and `dualActiveExcludedVlans` relate to recovery behavior and VLAN handling during dual-active scenarios.
+- **Role and consistency**: `role` and `consistencyStatus` describe domain role and configuration consistency across peers.
+- **Scale indicator**: `vpcsConfiguredCount` shows how many vPCs are configured within the domain.
+- **Device association**: `registeredDevice` links the vPC domain to its device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

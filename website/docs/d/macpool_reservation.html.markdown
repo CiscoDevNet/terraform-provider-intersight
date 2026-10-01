@@ -3,12 +3,34 @@ subcategory: "macpool"
 layout: "intersight"
 page_title: "Intersight: intersight_macpool_reservation"
 description: |-
-        The MAC reservation object, used to hold reserved addresses.
+        Reservations hold MAC addresses that are set aside (reserved) so they won’t be allocated to other consumers. They can be created before a pool exists or before a particular identity is available, and later reconciled to the pool/block they belong to once that pool is created or discovered.
+        #### Purpose
+        Guarantee that specific MAC identities are preserved for intended consumers, supporting deterministic addressing, pre-provisioning workflows, and collision avoidance.
+        #### Key Concepts
+        - **Reserved identity**: `identity` is the MAC being reserved and is create-only to prevent “moving” a reservation to a different MAC.
+        - **Deferred pool association**: `memberOf` (read-only) can be populated at reservation creation (if the pool exists) or later during pool creation, linking to the pool and block Moids.
+        - **Pool/block/member relationships**:
+        - `pool` links the reservation to a Pool (read-write reference).
+        - `blockHead` links to the IdBlock containing the reserved MAC (unset on peer delete).
+        - `poolMember` links to the corresponding PoolMember (unset on peer delete).
+        - **Universe context**: `universe` references the MAC universe bookkeeping container.
+        - **Access governance**: Supports create/delete privileges explicitly for MAC reservation operations, aligning with reservation-specific administrative controls.
 
 ---
 
 # Data Source: intersight_macpool_reservation
-The MAC reservation object, used to hold reserved addresses.
+Reservations hold MAC addresses that are set aside (reserved) so they won’t be allocated to other consumers. They can be created before a pool exists or before a particular identity is available, and later reconciled to the pool/block they belong to once that pool is created or discovered.
+#### Purpose
+Guarantee that specific MAC identities are preserved for intended consumers, supporting deterministic addressing, pre-provisioning workflows, and collision avoidance.
+#### Key Concepts
+- **Reserved identity**: `identity` is the MAC being reserved and is create-only to prevent “moving” a reservation to a different MAC.
+- **Deferred pool association**: `memberOf` (read-only) can be populated at reservation creation (if the pool exists) or later during pool creation, linking to the pool and block Moids.
+- **Pool/block/member relationships**:
+  - `pool` links the reservation to a Pool (read-write reference).
+  - `blockHead` links to the IdBlock containing the reserved MAC (unset on peer delete).
+  - `poolMember` links to the corresponding PoolMember (unset on peer delete).
+- **Universe context**: `universe` references the MAC universe bookkeeping container.
+- **Access governance**: Supports create/delete privileges explicitly for MAC reservation operations, aligning with reservation-specific administrative controls.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

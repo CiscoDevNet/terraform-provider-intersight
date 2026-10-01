@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **HealthCheckScriptInfos** | Pointer to [**[]HyperflexHealthCheckScriptInfo**](HyperflexHealthCheckScriptInfo.md) |  | [optional] 
 **HealthImpact** | Pointer to **string** | Static information detailing the health impact of the health check failure. | [optional] 
 **InternalName** | Pointer to **string** | Internal name of the health check definition. | [optional] 
-**MinimumHyperFlexVersion** | Pointer to **string** | Minimum HyperFlex version that the check is supported on. Defaults to version 3.0.1. | [optional] [default to "3"]
+**MinimumHyperFlexVersion** | Pointer to **string** | Minimum HyperFlex version that the check is supported on. Defaults to version 3.0.1. | [optional] [default to "3.0"]
 **Name** | Pointer to **string** | Name of the health check definition. | [optional] 
 **Reference** | Pointer to **string** | Static information containing additional reference for the health check. | [optional] 
 **Resolution** | Pointer to **string** | Static information detailing the possible remediation actions that can be taken to remedy the health check failure. | [optional] 

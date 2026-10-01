@@ -3,12 +3,28 @@ subcategory: "port"
 layout: "intersight"
 page_title: "Intersight: intersight_port_mac_binding"
 description: |-
-        Establishes relationship between the ports and connected end points based on LLDP TLVs.
+        MacBindings establish a discovered relationship between local switch ports and connected endpoints using LLDP TLVs. They record both the local port identity (slot/port/aggregate/switch) and the remote device identity (device MAC and module/chassis descriptors) to enable topology correlation.
+        #### Purpose
+        Provide a topology-mapping mechanism that ties a switch/FEX interface to the connected endpoint based on LLDP-advertised identifiers, supporting inventory correlation and troubleshooting of cabling/connectivity.
+        #### Key Concepts
+        - **LLDP-based correlation:** Uses LLDP TLVs to bind a local port to a remote endpoint identity.
+        - **Local port addressing:** Captures slotId/portId/aggregatePortId and switchId to identify the local interface.
+        - **Remote endpoint identity:** Captures `deviceMac` and additional module/chassis metadata (serial/model/vendor/slot/side) to identify what is connected.
+        - **Chassis/module context:** Includes chassis identifiers/serial/model and module identifiers/serial/model to support mapping through intermediate components (IOM/SIOC/Adapter).
+        - **Stable identity per switch context:** Identified by ` (portMac, networkElement)`, ensuring uniqueness within the owning network element domain.
 
 ---
 
 # Data Source: intersight_port_mac_binding
-Establishes relationship between the ports and connected end points based on LLDP TLVs.
+MacBindings establish a discovered relationship between local switch ports and connected endpoints using LLDP TLVs. They record both the local port identity (slot/port/aggregate/switch) and the remote device identity (device MAC and module/chassis descriptors) to enable topology correlation.
+#### Purpose
+Provide a topology-mapping mechanism that ties a switch/FEX interface to the connected endpoint based on LLDP-advertised identifiers, supporting inventory correlation and troubleshooting of cabling/connectivity.
+#### Key Concepts
+- **LLDP-based correlation:** Uses LLDP TLVs to bind a local port to a remote endpoint identity.
+- **Local port addressing:** Captures slotId/portId/aggregatePortId and switchId to identify the local interface.
+- **Remote endpoint identity:** Captures `deviceMac` and additional module/chassis metadata (serial/model/vendor/slot/side) to identify what is connected.
+- **Chassis/module context:** Includes chassis identifiers/serial/model and module identifiers/serial/model to support mapping through intermediate components (IOM/SIOC/Adapter).
+- **Stable identity per switch context:** Identified by ` (portMac, networkElement)`, ensuring uniqueness within the owning network element domain.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

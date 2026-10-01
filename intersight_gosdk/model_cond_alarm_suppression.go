@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -28,8 +28,8 @@ type CondAlarmSuppression struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string                    `json:"ObjectType"`
-	AlarmRules []CondAlarmRuleExpression `json:"AlarmRules,omitempty"`
+	ObjectType string                  `json:"ObjectType"`
+	AlarmRules []CondAbstractAlarmRule `json:"AlarmRules,omitempty"`
 	// User given description on why the suppression is enabled at this entity.
 	Description *string `json:"Description,omitempty"`
 	// Indicates whether the suppression is enabled by the user or not. The user should be able to toggle this between true and false. The property is set to true when the suppression is created. The user can set this to false to disable the suppression. The suppression rule should be active only if both systemEnabled and enabled are true.
@@ -46,8 +46,13 @@ type CondAlarmSuppression struct {
 	StartDate *time.Time                     `json:"StartDate,omitempty"`
 	Account   NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to condAlarmClassification resources.
-	Classifications      []CondAlarmClassificationRelationship `json:"Classifications,omitempty"`
-	Entity               NullableMoBaseMoRelationship          `json:"Entity,omitempty"`
+	Classifications []CondAlarmClassificationRelationship     `json:"Classifications,omitempty"`
+	EndTask         NullableSchedulerTaskScheduleRelationship `json:"EndTask,omitempty"`
+	Entity          NullableMoBaseMoRelationship              `json:"Entity,omitempty"`
+	// An array of relationships to moBaseMo resources.
+	FilterRefs           []MoBaseMoRelationship                       `json:"FilterRefs,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	StartTask            NullableSchedulerTaskScheduleRelationship    `json:"StartTask,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -143,9 +148,9 @@ func (o *CondAlarmSuppression) GetDefaultObjectType() interface{} {
 }
 
 // GetAlarmRules returns the AlarmRules field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CondAlarmSuppression) GetAlarmRules() []CondAlarmRuleExpression {
+func (o *CondAlarmSuppression) GetAlarmRules() []CondAbstractAlarmRule {
 	if o == nil {
-		var ret []CondAlarmRuleExpression
+		var ret []CondAbstractAlarmRule
 		return ret
 	}
 	return o.AlarmRules
@@ -154,7 +159,7 @@ func (o *CondAlarmSuppression) GetAlarmRules() []CondAlarmRuleExpression {
 // GetAlarmRulesOk returns a tuple with the AlarmRules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CondAlarmSuppression) GetAlarmRulesOk() ([]CondAlarmRuleExpression, bool) {
+func (o *CondAlarmSuppression) GetAlarmRulesOk() ([]CondAbstractAlarmRule, bool) {
 	if o == nil || IsNil(o.AlarmRules) {
 		return nil, false
 	}
@@ -170,8 +175,8 @@ func (o *CondAlarmSuppression) HasAlarmRules() bool {
 	return false
 }
 
-// SetAlarmRules gets a reference to the given []CondAlarmRuleExpression and assigns it to the AlarmRules field.
-func (o *CondAlarmSuppression) SetAlarmRules(v []CondAlarmRuleExpression) {
+// SetAlarmRules gets a reference to the given []CondAbstractAlarmRule and assigns it to the AlarmRules field.
+func (o *CondAlarmSuppression) SetAlarmRules(v []CondAbstractAlarmRule) {
 	o.AlarmRules = v
 }
 
@@ -475,6 +480,49 @@ func (o *CondAlarmSuppression) SetClassifications(v []CondAlarmClassificationRel
 	o.Classifications = v
 }
 
+// GetEndTask returns the EndTask field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarmSuppression) GetEndTask() SchedulerTaskScheduleRelationship {
+	if o == nil || IsNil(o.EndTask.Get()) {
+		var ret SchedulerTaskScheduleRelationship
+		return ret
+	}
+	return *o.EndTask.Get()
+}
+
+// GetEndTaskOk returns a tuple with the EndTask field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarmSuppression) GetEndTaskOk() (*SchedulerTaskScheduleRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EndTask.Get(), o.EndTask.IsSet()
+}
+
+// HasEndTask returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasEndTask() bool {
+	if o != nil && o.EndTask.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEndTask gets a reference to the given NullableSchedulerTaskScheduleRelationship and assigns it to the EndTask field.
+func (o *CondAlarmSuppression) SetEndTask(v SchedulerTaskScheduleRelationship) {
+	o.EndTask.Set(&v)
+}
+
+// SetEndTaskNil sets the value for EndTask to be an explicit nil
+func (o *CondAlarmSuppression) SetEndTaskNil() {
+	o.EndTask.Set(nil)
+}
+
+// UnsetEndTask ensures that no value is present for EndTask, not even an explicit nil
+func (o *CondAlarmSuppression) UnsetEndTask() {
+	o.EndTask.Unset()
+}
+
 // GetEntity returns the Entity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondAlarmSuppression) GetEntity() MoBaseMoRelationship {
 	if o == nil || IsNil(o.Entity.Get()) {
@@ -516,6 +564,125 @@ func (o *CondAlarmSuppression) SetEntityNil() {
 // UnsetEntity ensures that no value is present for Entity, not even an explicit nil
 func (o *CondAlarmSuppression) UnsetEntity() {
 	o.Entity.Unset()
+}
+
+// GetFilterRefs returns the FilterRefs field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarmSuppression) GetFilterRefs() []MoBaseMoRelationship {
+	if o == nil {
+		var ret []MoBaseMoRelationship
+		return ret
+	}
+	return o.FilterRefs
+}
+
+// GetFilterRefsOk returns a tuple with the FilterRefs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarmSuppression) GetFilterRefsOk() ([]MoBaseMoRelationship, bool) {
+	if o == nil || IsNil(o.FilterRefs) {
+		return nil, false
+	}
+	return o.FilterRefs, true
+}
+
+// HasFilterRefs returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasFilterRefs() bool {
+	if o != nil && !IsNil(o.FilterRefs) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterRefs gets a reference to the given []MoBaseMoRelationship and assigns it to the FilterRefs field.
+func (o *CondAlarmSuppression) SetFilterRefs(v []MoBaseMoRelationship) {
+	o.FilterRefs = v
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarmSuppression) GetOrganization() OrganizationOrganizationRelationship {
+	if o == nil || IsNil(o.Organization.Get()) {
+		var ret OrganizationOrganizationRelationship
+		return ret
+	}
+	return *o.Organization.Get()
+}
+
+// GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarmSuppression) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Organization.Get(), o.Organization.IsSet()
+}
+
+// HasOrganization returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasOrganization() bool {
+	if o != nil && o.Organization.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
+func (o *CondAlarmSuppression) SetOrganization(v OrganizationOrganizationRelationship) {
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *CondAlarmSuppression) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *CondAlarmSuppression) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetStartTask returns the StartTask field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarmSuppression) GetStartTask() SchedulerTaskScheduleRelationship {
+	if o == nil || IsNil(o.StartTask.Get()) {
+		var ret SchedulerTaskScheduleRelationship
+		return ret
+	}
+	return *o.StartTask.Get()
+}
+
+// GetStartTaskOk returns a tuple with the StartTask field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarmSuppression) GetStartTaskOk() (*SchedulerTaskScheduleRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StartTask.Get(), o.StartTask.IsSet()
+}
+
+// HasStartTask returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasStartTask() bool {
+	if o != nil && o.StartTask.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTask gets a reference to the given NullableSchedulerTaskScheduleRelationship and assigns it to the StartTask field.
+func (o *CondAlarmSuppression) SetStartTask(v SchedulerTaskScheduleRelationship) {
+	o.StartTask.Set(&v)
+}
+
+// SetStartTaskNil sets the value for StartTask to be an explicit nil
+func (o *CondAlarmSuppression) SetStartTaskNil() {
+	o.StartTask.Set(nil)
+}
+
+// UnsetStartTask ensures that no value is present for StartTask, not even an explicit nil
+func (o *CondAlarmSuppression) UnsetStartTask() {
+	o.StartTask.Unset()
 }
 
 func (o CondAlarmSuppression) MarshalJSON() ([]byte, error) {
@@ -574,8 +741,20 @@ func (o CondAlarmSuppression) ToMap() (map[string]interface{}, error) {
 	if o.Classifications != nil {
 		toSerialize["Classifications"] = o.Classifications
 	}
+	if o.EndTask.IsSet() {
+		toSerialize["EndTask"] = o.EndTask.Get()
+	}
 	if o.Entity.IsSet() {
 		toSerialize["Entity"] = o.Entity.Get()
+	}
+	if o.FilterRefs != nil {
+		toSerialize["FilterRefs"] = o.FilterRefs
+	}
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
+	}
+	if o.StartTask.IsSet() {
+		toSerialize["StartTask"] = o.StartTask.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -631,8 +810,8 @@ func (o *CondAlarmSuppression) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string                    `json:"ObjectType"`
-		AlarmRules []CondAlarmRuleExpression `json:"AlarmRules,omitempty"`
+		ObjectType string                  `json:"ObjectType"`
+		AlarmRules []CondAbstractAlarmRule `json:"AlarmRules,omitempty"`
 		// User given description on why the suppression is enabled at this entity.
 		Description *string `json:"Description,omitempty"`
 		// Indicates whether the suppression is enabled by the user or not. The user should be able to toggle this between true and false. The property is set to true when the suppression is created. The user can set this to false to disable the suppression. The suppression rule should be active only if both systemEnabled and enabled are true.
@@ -649,8 +828,13 @@ func (o *CondAlarmSuppression) UnmarshalJSON(data []byte) (err error) {
 		StartDate *time.Time                     `json:"StartDate,omitempty"`
 		Account   NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to condAlarmClassification resources.
-		Classifications []CondAlarmClassificationRelationship `json:"Classifications,omitempty"`
-		Entity          NullableMoBaseMoRelationship          `json:"Entity,omitempty"`
+		Classifications []CondAlarmClassificationRelationship     `json:"Classifications,omitempty"`
+		EndTask         NullableSchedulerTaskScheduleRelationship `json:"EndTask,omitempty"`
+		Entity          NullableMoBaseMoRelationship              `json:"Entity,omitempty"`
+		// An array of relationships to moBaseMo resources.
+		FilterRefs   []MoBaseMoRelationship                       `json:"FilterRefs,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		StartTask    NullableSchedulerTaskScheduleRelationship    `json:"StartTask,omitempty"`
 	}
 
 	varCondAlarmSuppressionWithoutEmbeddedStruct := CondAlarmSuppressionWithoutEmbeddedStruct{}
@@ -670,7 +854,11 @@ func (o *CondAlarmSuppression) UnmarshalJSON(data []byte) (err error) {
 		varCondAlarmSuppression.StartDate = varCondAlarmSuppressionWithoutEmbeddedStruct.StartDate
 		varCondAlarmSuppression.Account = varCondAlarmSuppressionWithoutEmbeddedStruct.Account
 		varCondAlarmSuppression.Classifications = varCondAlarmSuppressionWithoutEmbeddedStruct.Classifications
+		varCondAlarmSuppression.EndTask = varCondAlarmSuppressionWithoutEmbeddedStruct.EndTask
 		varCondAlarmSuppression.Entity = varCondAlarmSuppressionWithoutEmbeddedStruct.Entity
+		varCondAlarmSuppression.FilterRefs = varCondAlarmSuppressionWithoutEmbeddedStruct.FilterRefs
+		varCondAlarmSuppression.Organization = varCondAlarmSuppressionWithoutEmbeddedStruct.Organization
+		varCondAlarmSuppression.StartTask = varCondAlarmSuppressionWithoutEmbeddedStruct.StartTask
 		*o = CondAlarmSuppression(varCondAlarmSuppression)
 	} else {
 		return err
@@ -700,7 +888,11 @@ func (o *CondAlarmSuppression) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "StartDate")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "Classifications")
+		delete(additionalProperties, "EndTask")
 		delete(additionalProperties, "Entity")
+		delete(additionalProperties, "FilterRefs")
+		delete(additionalProperties, "Organization")
+		delete(additionalProperties, "StartTask")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

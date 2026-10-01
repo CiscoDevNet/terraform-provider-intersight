@@ -295,7 +295,7 @@ func getTamAdvisoryInstanceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"state": {
-			Description: "Current state of the advisory instance (Active/Cleared/Unknown etc.).\n* `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object.\n* `active` - Advisory instance is currently active and applicable for the affected managed object.\n* `cleared` - Advisory instance is no longer applicable for the affected managed object.",
+			Description: "Deprecated and retained only for backward compatibility. This field is effectively always 'unknown' and does not reflect whether the advisory currently applies to the affected object. The existence of an AdvisoryInstance record is itself what denotes an applicable, current advisory impact, independent of this value.\n* `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object.\n* `active` - Advisory instance is currently active and applicable for the affected managed object.\n* `cleared` - Advisory instance is no longer applicable for the affected managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

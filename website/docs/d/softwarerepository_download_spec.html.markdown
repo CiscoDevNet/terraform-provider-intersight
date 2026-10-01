@@ -3,12 +3,24 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_download_spec"
 description: |-
-        The URL, certificate and other associated information required to download an image listed in an Intersight catalog.
+        The DownloadSpecs object  provides the URL, certificate, and authentication information required to download an image from a catalog.
+        #### Purpose
+        It dynamically generates the necessary parameters for an endpoint to securely download a firmware or software image.
+        #### Key Concepts
+        - **Secure Download:** Provides pre-signed URLs and authentication tokens for secure image retrieval.
+        - **Integrity Verification:** Includes checksums (MD5) to validate image integrity post-download.
+        - **Dynamic Generation:** Populated during the request process to ensure secure, time-limited access.
 
 ---
 
 # Data Source: intersight_softwarerepository_download_spec
-The URL, certificate and other associated information required to download an image listed in an Intersight catalog.
+The DownloadSpecs object  provides the URL, certificate, and authentication information required to download an image from a catalog.
+#### Purpose
+It dynamically generates the necessary parameters for an endpoint to securely download a firmware or software image.
+#### Key Concepts
+- **Secure Download:** Provides pre-signed URLs and authentication tokens for secure image retrieval.
+- **Integrity Verification:** Includes checksums (MD5) to validate image integrity post-download.
+- **Dynamic Generation:** Populated during the request process to ensure secure, time-limited access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

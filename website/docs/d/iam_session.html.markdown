@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `end_time`:(string) The time at which the session ended. 
 * `expiration`:(string) Expiration time for the session. 
+* `external_identifier`:(string) External identifier for the session, used for integration with external identity systems. 
 * `failed_logins`:(int) Failed logins since last login for admin user. 
 * `idle_time_expiration`:(string) Idle time expiration for the session. 
 * `last_login_client`:(string) The client address from which last login is initiated. 

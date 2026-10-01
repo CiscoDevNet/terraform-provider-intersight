@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_util_controller"
 description: |-
-        Storage Flex Util Adapter.
+        FlexUtilControllers represent storage Flex Util adapters, providing controller status/internal state and relationships to virtual and physical drives managed by the adapter.
+        #### Purpose
+        Provide inventory and state visibility for Flex Util controllers and their managed storage entities.
+        #### Key Concepts
+        - **Controller identity:** Exposes controller id and name.
+        - **Operational telemetry:** Includes controller status and internal state.
+        - **Drive hierarchy:** Links to FlexUtil virtual drives and physical drives.
 
 ---
 
 # Data Source: intersight_storage_flex_util_controller
-Storage Flex Util Adapter.
+FlexUtilControllers represent storage Flex Util adapters, providing controller status/internal state and relationships to virtual and physical drives managed by the adapter.
+#### Purpose
+Provide inventory and state visibility for Flex Util controllers and their managed storage entities.
+#### Key Concepts
+- **Controller identity:** Exposes controller id and name.
+- **Operational telemetry:** Includes controller status and internal state.
+- **Drive hierarchy:** Links to FlexUtil virtual drives and physical drives.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

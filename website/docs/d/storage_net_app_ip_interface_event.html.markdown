@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_ip_interface_event"
 description: |-
-        An event where the impacted resource type is an ip interface.
+        The NetAppIpInterfaceEvents object captures alerts related to logical IP interfaces.
+        ####  Purpose
+        It alerts administrators to connectivity issues or configuration errors affecting IP interfaces.
+        ####  Key Concepts
+        - **Connectivity Alerts:** Notifies on interface state changes.
+        - **Configuration Monitoring:** Alerts on routing or service policy issues.
 
 ---
 
 # Data Source: intersight_storage_net_app_ip_interface_event
-An event where the impacted resource type is an ip interface.
+The NetAppIpInterfaceEvents object captures alerts related to logical IP interfaces.
+####  Purpose
+It alerts administrators to connectivity issues or configuration errors affecting IP interfaces.
+####  Key Concepts
+- **Connectivity Alerts:** Notifies on interface state changes.
+- **Configuration Monitoring:** Alerts on routing or service policy issues.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

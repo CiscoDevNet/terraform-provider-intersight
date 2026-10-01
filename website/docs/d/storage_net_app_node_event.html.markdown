@@ -3,12 +3,22 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_node_event"
 description: |-
-        An event where the impacted resource type is a node.
+        The NetAppNodeEvents object captures alerts related to the storage node (controller).
+        ####  Purpose
+        It notifies administrators of node health issues, such as failover problems or hardware errors.
+        ####  Key Concepts
+        - **Node Health:** Alerts on node state changes or failover capability issues.
+        - **Performance Alerts:** Monitors node-level performance metrics.
 
 ---
 
 # Data Source: intersight_storage_net_app_node_event
-An event where the impacted resource type is a node.
+The NetAppNodeEvents object captures alerts related to the storage node (controller).
+####  Purpose
+It notifies administrators of node health issues, such as failover problems or hardware errors.
+####  Key Concepts
+- **Node Health:** Alerts on node state changes or failover capability issues.
+- **Performance Alerts:** Monitors node-level performance metrics.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

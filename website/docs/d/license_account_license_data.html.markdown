@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_account_license_data"
 description: |-
-        License information for an account.
+        AccountLicenseData represents the central, account-scoped record for licensing state and synchronization metadata. It anchors most other licensing objects via relationships (operations, views, counts, tokens), making it the primary “hub” for licensing within an account.
+        #### Purpose
+        Provides a single authoritative container for an account’s licensing configuration, compliance tier defaults, and the latest sync/registration telemetry with external smart licensing systems.
+        #### Key Concepts
+        - **Account-scoped hub:** Other licensing objects commonly relate back to AccountLicenseData for ownership and permissions.
+        - **Sync and registration telemetry:** Tracks timestamps and status strings for sync, registration, and authorization lifecycles.
+        - **Default tier configuration:** Stores default license tier selections used to categorize/assign devices.
+        - **Relationship anchor:** Serves as the parent for operational objects (CustomerOps) and computed aggregates (LicenseCounts) as well as UI views.
 
 ---
 
 # Data Source: intersight_license_account_license_data
-License information for an account.
+AccountLicenseData represents the central, account-scoped record for licensing state and synchronization metadata. It anchors most other licensing objects via relationships (operations, views, counts, tokens), making it the primary “hub” for licensing within an account.
+#### Purpose
+Provides a single authoritative container for an account’s licensing configuration, compliance tier defaults, and the latest sync/registration telemetry with external smart licensing systems.
+#### Key Concepts
+- **Account-scoped hub:** Other licensing objects commonly relate back to AccountLicenseData for ownership and permissions.
+- **Sync and registration telemetry:** Tracks timestamps and status strings for sync, registration, and authorization lifecycles.
+- **Default tier configuration:** Stores default license tier selections used to categorize/assign devices.
+- **Relationship anchor:** Serves as the parent for operational objects (CustomerOps) and computed aggregates (LicenseCounts) as well as UI views.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

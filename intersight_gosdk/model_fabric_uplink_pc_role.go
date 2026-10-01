@@ -1,9 +1,9 @@
 /*
-Cisco Intersight
+Cisco Intersight Sdk
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026072720
+API version: 1.1.8-0-20260828115928667
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the FabricUplinkPcRole type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FabricUplinkPcRole{}
 
-// FabricUplinkPcRole Object sent by user to configure a ethernet uplink port-channel on the collection of ports.
+// FabricUplinkPcRole The UplinkPcRole object represents configuration intent for an Ethernet uplink port-channel in a port policy. #### Purpose UplinkPcRole models an uplink built from multiple member ports. This provides the structure for defining port-channel intent, applying uplink-related policy attachments, and enabling consistent deployment and validation of aggregated uplinks. #### Key Concepts - **Aggregated uplink intent:** Represents an uplink composed of multiple physical ports. - **Policy attachment for port-channels:** Provides an anchor for link aggregation, flow control, link control, VLAN allow-lists, and MACsec associations. - **Scale and resiliency modeling:** Enables consistent modeling of redundant/high-bandwidth uplinks. - **Policy-scoped identity:** Identifies the port-channel within a port policy context.
 type FabricUplinkPcRole struct {
 	FabricPortChannelRole
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

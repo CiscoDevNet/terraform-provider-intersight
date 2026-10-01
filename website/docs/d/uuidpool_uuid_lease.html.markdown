@@ -3,12 +3,24 @@ subcategory: "uuidpool"
 layout: "intersight"
 page_title: "Intersight: intersight_uuidpool_uuid_lease"
 description: |-
-        UuidLease represents a single UUID that is part of the universe, allocated either from a pool or through static assignment.
+        The UuidLeases object represents a single UUID that is part of the universe, allocated either from a pool or through static assignment.
+        #### Purpose
+        It maintains the association between an allocated UUID and its consumer, tracking ownership and the lifecycle of the UUID within the system.
+        #### Key Concepts
+        - **Lease Management:** Tracks the allocation of UUIDs.
+        - **Entity Association:** Links the UUID to the entity that owns the lease.
+        - **Migration Support:** Supports migration of leases when preferred IDs are specified.
 
 ---
 
 # Data Source: intersight_uuidpool_uuid_lease
-UuidLease represents a single UUID that is part of the universe, allocated either from a pool or through static assignment.
+The UuidLeases object represents a single UUID that is part of the universe, allocated either from a pool or through static assignment.
+#### Purpose
+It maintains the association between an allocated UUID and its consumer, tracking ownership and the lifecycle of the UUID within the system.
+#### Key Concepts
+- **Lease Management:** Tracks the allocation of UUIDs.
+- **Entity Association:** Links the UUID to the entity that owns the lease.
+- **Migration Support:** Supports migration of leases when preferred IDs are specified.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

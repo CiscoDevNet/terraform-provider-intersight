@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fc_uplink_pc_role"
 description: |-
-        Object sent by user to configure a fc uplink port-channel on the collection of ports.
+        The FcUplinkPcRole object represents configuration intent for a Fibre Channel uplink port-channel.
+        #### Purpose
+        FcUplinkPcRole models an FC uplink built from multiple ports, enabling consistent SAN uplink configuration using port-channels and supporting predictable deployment and validation.
+        #### Key Concepts
+        - **Aggregated FC uplink intent:** Represents SAN uplink connectivity via port-channel.
+        - **VSAN alignment:** Supports consistent segmentation behavior across member ports.
+        - **Policy-scoped aggregation:** Defines FC port-channel intent in a reusable port policy context.
+        - **Operational resiliency:** Enables redundant SAN uplink design with policy-managed consistency.
 
 ---
 
 # Data Source: intersight_fabric_fc_uplink_pc_role
-Object sent by user to configure a fc uplink port-channel on the collection of ports.
+The FcUplinkPcRole object represents configuration intent for a Fibre Channel uplink port-channel.
+#### Purpose
+FcUplinkPcRole models an FC uplink built from multiple ports, enabling consistent SAN uplink configuration using port-channels and supporting predictable deployment and validation.
+#### Key Concepts
+- **Aggregated FC uplink intent:** Represents SAN uplink connectivity via port-channel.
+- **VSAN alignment:** Supports consistent segmentation behavior across member ports.
+- **Policy-scoped aggregation:** Defines FC port-channel intent in a reusable port policy context.
+- **Operational resiliency:** Enables redundant SAN uplink design with policy-managed consistency.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
