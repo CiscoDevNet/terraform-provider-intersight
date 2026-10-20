@@ -1,9 +1,9 @@
 /*
-Cisco Intersight Sdk
+Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.1.8-0-20260828115928667
+API version: 1.0.11-2026100617
 Contact: intersight@cisco.com
 */
 
@@ -36,10 +36,12 @@ type FabricAbstractSpanSession struct {
 	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_.:-]{1,64}$"`
 	// Operational state of the SPAN session. * `Unknown` - SPAN session operational state is Unknown. * `Up` - SPAN session operational state is Up. * `Down` - SPAN session operational state is Down. * `Error` - SPAN session operational state is Error.
 	OperState *string `json:"OperState,omitempty"`
-	// Operational state reason of the SPAN session. * `Unknown` - Unknown operational state. * `Active` - Active and operational SPAN session. * `NoHardwareResource` - No hardware resources available. * `NoOperationalSrcDst` - No operational SPAN source or destination. * `GenericError` - Generic operational error. * `NoSourcesConfigured` - No source interfaces configured. * `NoDestinationConfigured` - No destination port configured. * `NoSourceDestinationConfigured` - No source or destination interface configured. * `SessionAdminShut` - Session is administratively disabled. * `WrongDestinationMode` - Wrong Destination mode configured. * `WrongSourceMode` - Wrong Source mode configured. * `TunnelMisconfDown` - Tunnel Misconfigured or Down. * `NoFlowIdSpecified` - No Flow ID specified for ERSPAN.
+	// Operational state reason of the SPAN session. * `Unknown` - Unknown operational state. * `Active` - Active and operational SPAN session. * `NoHardwareResource` - No hardware resources available. * `NoOperationalSrcDst` - No operational SPAN source or destination. * `GenericError` - Generic operational error. * `NoSourcesConfigured` - No source interfaces configured. * `NoDestinationConfigured` - No destination port configured. * `NoSourceDestinationConfigured` - No source or destination interface configured. * `SessionAdminShut` - Session is administratively disabled. * `WrongDestinationMode` - Wrong Destination mode configured. * `WrongSourceMode` - Wrong Source mode configured. * `TunnelMisconfDown` - Tunnel Misconfigured or Down. * `NoFlowIdSpecified` - No Flow ID specified for ERSPAN. * `NoErspanIdSpecified` - No ERSPAN ID is configured. * `MultiDestinationDenied` - Multiple destination is not allowed. * `VrfInvalid` - No valid VRF is configured. * `IpInvalid` - No valid destination IP address configured. * `GlobalIpInvalid` - No valid global origin IP address configured. * `NoRoute` - No route to destination IP address. * `ArpNotResolved` - ARP entry for destination is not resolved. * `NoEgressInterface` - Egress interface is not resolved. * `NoSviMember` - SVI member was not retrieved.
 	OperStateReason *string `json:"OperStateReason,omitempty"`
 	// Session ID identifies the SPAN session on the Fabric Interconnect.
 	SessionId *int64 `json:"SessionId,omitempty"`
+	// Session Type identifies whether the traffic mirroring session is SPAN or ERSPAN. * `SPAN` - SPAN traffic mirroring session. * `ERSPAN` - Encapsulated Remote SPAN (ERSPAN) traffic mirroring session.
+	SessionType *string `json:"SessionType,omitempty"`
 	// Count of total number of sources in the SPAN session.
 	SourceCount *int64 `json:"SourceCount,omitempty"`
 	// Admin state to enable or disable spanning control packets. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
@@ -62,6 +64,8 @@ func NewFabricAbstractSpanSession(classId string, objectType string) *FabricAbst
 	this.ObjectType = objectType
 	var adminState string = "Disabled"
 	this.AdminState = &adminState
+	var sessionType string = "SPAN"
+	this.SessionType = &sessionType
 	var spanControlPackets string = "Disabled"
 	this.SpanControlPackets = &spanControlPackets
 	return &this
@@ -78,6 +82,8 @@ func NewFabricAbstractSpanSessionWithDefaults() *FabricAbstractSpanSession {
 	this.ObjectType = objectType
 	var adminState string = "Disabled"
 	this.AdminState = &adminState
+	var sessionType string = "SPAN"
+	this.SessionType = &sessionType
 	var spanControlPackets string = "Disabled"
 	this.SpanControlPackets = &spanControlPackets
 	return &this
@@ -333,6 +339,38 @@ func (o *FabricAbstractSpanSession) SetSessionId(v int64) {
 	o.SessionId = &v
 }
 
+// GetSessionType returns the SessionType field value if set, zero value otherwise.
+func (o *FabricAbstractSpanSession) GetSessionType() string {
+	if o == nil || IsNil(o.SessionType) {
+		var ret string
+		return ret
+	}
+	return *o.SessionType
+}
+
+// GetSessionTypeOk returns a tuple with the SessionType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricAbstractSpanSession) GetSessionTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.SessionType) {
+		return nil, false
+	}
+	return o.SessionType, true
+}
+
+// HasSessionType returns a boolean if a field has been set.
+func (o *FabricAbstractSpanSession) HasSessionType() bool {
+	if o != nil && !IsNil(o.SessionType) {
+		return true
+	}
+
+	return false
+}
+
+// SetSessionType gets a reference to the given string and assigns it to the SessionType field.
+func (o *FabricAbstractSpanSession) SetSessionType(v string) {
+	o.SessionType = &v
+}
+
 // GetSourceCount returns the SourceCount field value if set, zero value otherwise.
 func (o *FabricAbstractSpanSession) GetSourceCount() int64 {
 	if o == nil || IsNil(o.SourceCount) {
@@ -516,6 +554,9 @@ func (o FabricAbstractSpanSession) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SessionId) {
 		toSerialize["SessionId"] = o.SessionId
 	}
+	if !IsNil(o.SessionType) {
+		toSerialize["SessionType"] = o.SessionType
+	}
 	if !IsNil(o.SourceCount) {
 		toSerialize["SourceCount"] = o.SourceCount
 	}
@@ -591,10 +632,12 @@ func (o *FabricAbstractSpanSession) UnmarshalJSON(data []byte) (err error) {
 		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_.:-]{1,64}$"`
 		// Operational state of the SPAN session. * `Unknown` - SPAN session operational state is Unknown. * `Up` - SPAN session operational state is Up. * `Down` - SPAN session operational state is Down. * `Error` - SPAN session operational state is Error.
 		OperState *string `json:"OperState,omitempty"`
-		// Operational state reason of the SPAN session. * `Unknown` - Unknown operational state. * `Active` - Active and operational SPAN session. * `NoHardwareResource` - No hardware resources available. * `NoOperationalSrcDst` - No operational SPAN source or destination. * `GenericError` - Generic operational error. * `NoSourcesConfigured` - No source interfaces configured. * `NoDestinationConfigured` - No destination port configured. * `NoSourceDestinationConfigured` - No source or destination interface configured. * `SessionAdminShut` - Session is administratively disabled. * `WrongDestinationMode` - Wrong Destination mode configured. * `WrongSourceMode` - Wrong Source mode configured. * `TunnelMisconfDown` - Tunnel Misconfigured or Down. * `NoFlowIdSpecified` - No Flow ID specified for ERSPAN.
+		// Operational state reason of the SPAN session. * `Unknown` - Unknown operational state. * `Active` - Active and operational SPAN session. * `NoHardwareResource` - No hardware resources available. * `NoOperationalSrcDst` - No operational SPAN source or destination. * `GenericError` - Generic operational error. * `NoSourcesConfigured` - No source interfaces configured. * `NoDestinationConfigured` - No destination port configured. * `NoSourceDestinationConfigured` - No source or destination interface configured. * `SessionAdminShut` - Session is administratively disabled. * `WrongDestinationMode` - Wrong Destination mode configured. * `WrongSourceMode` - Wrong Source mode configured. * `TunnelMisconfDown` - Tunnel Misconfigured or Down. * `NoFlowIdSpecified` - No Flow ID specified for ERSPAN. * `NoErspanIdSpecified` - No ERSPAN ID is configured. * `MultiDestinationDenied` - Multiple destination is not allowed. * `VrfInvalid` - No valid VRF is configured. * `IpInvalid` - No valid destination IP address configured. * `GlobalIpInvalid` - No valid global origin IP address configured. * `NoRoute` - No route to destination IP address. * `ArpNotResolved` - ARP entry for destination is not resolved. * `NoEgressInterface` - Egress interface is not resolved. * `NoSviMember` - SVI member was not retrieved.
 		OperStateReason *string `json:"OperStateReason,omitempty"`
 		// Session ID identifies the SPAN session on the Fabric Interconnect.
 		SessionId *int64 `json:"SessionId,omitempty"`
+		// Session Type identifies whether the traffic mirroring session is SPAN or ERSPAN. * `SPAN` - SPAN traffic mirroring session. * `ERSPAN` - Encapsulated Remote SPAN (ERSPAN) traffic mirroring session.
+		SessionType *string `json:"SessionType,omitempty"`
 		// Count of total number of sources in the SPAN session.
 		SourceCount *int64 `json:"SourceCount,omitempty"`
 		// Admin state to enable or disable spanning control packets. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
@@ -617,6 +660,7 @@ func (o *FabricAbstractSpanSession) UnmarshalJSON(data []byte) (err error) {
 		varFabricAbstractSpanSession.OperState = varFabricAbstractSpanSessionWithoutEmbeddedStruct.OperState
 		varFabricAbstractSpanSession.OperStateReason = varFabricAbstractSpanSessionWithoutEmbeddedStruct.OperStateReason
 		varFabricAbstractSpanSession.SessionId = varFabricAbstractSpanSessionWithoutEmbeddedStruct.SessionId
+		varFabricAbstractSpanSession.SessionType = varFabricAbstractSpanSessionWithoutEmbeddedStruct.SessionType
 		varFabricAbstractSpanSession.SourceCount = varFabricAbstractSpanSessionWithoutEmbeddedStruct.SourceCount
 		varFabricAbstractSpanSession.SpanControlPackets = varFabricAbstractSpanSessionWithoutEmbeddedStruct.SpanControlPackets
 		varFabricAbstractSpanSession.SwitchId = varFabricAbstractSpanSessionWithoutEmbeddedStruct.SwitchId
@@ -646,6 +690,7 @@ func (o *FabricAbstractSpanSession) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OperState")
 		delete(additionalProperties, "OperStateReason")
 		delete(additionalProperties, "SessionId")
+		delete(additionalProperties, "SessionType")
 		delete(additionalProperties, "SourceCount")
 		delete(additionalProperties, "SpanControlPackets")
 		delete(additionalProperties, "SwitchId")

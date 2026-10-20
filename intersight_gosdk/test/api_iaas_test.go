@@ -1,5 +1,5 @@
 /*
-Cisco Intersight Sdk
+Cisco Intersight
 
 Testing IaasApiService
 

@@ -3,12 +3,26 @@ subcategory: "metrics"
 layout: "intersight"
 page_title: "Intersight: intersight_metrics_resource_configuration"
 description: |-
-        The configuration of metric collection for a given resource within an account. Each resource that is capable of collecting metrics into the Intersight system may be configured with options to control the metric collection behavior.
+        ResourceConfigurations define metric collection settings for a specific managed resource within an account (for example, a server). They enable or disable metrics at the individual resource level and are always tied to the resource they control.
+        #### Purpose
+        Allow per-resource enablement of metric collection so administrators can selectively collect metrics from specific endpoints while respecting account limits and policies.
+        #### Key Concepts
+        - **Resource-scoped toggle:** The `enabled` flag governs whether metrics are collected for that particular resource.
+        - **Inheritance from the resource:** Permissions inherit from the referenced resource to ensure only authorized users can change settings.
+        - **Domain context:** Tracks the owning domain/target for the resource to support grouping and operational context.
+        - **Identity by relationship:** Each ResourceConfiguration is uniquely identified by the resource it applies to.
 
 ---
 
 # Resource: intersight_metrics_resource_configuration
-The configuration of metric collection for a given resource within an account. Each resource that is capable of collecting metrics into the Intersight system may be configured with options to control the metric collection behavior.
+ResourceConfigurations define metric collection settings for a specific managed resource within an account (for example, a server). They enable or disable metrics at the individual resource level and are always tied to the resource they control.
+#### Purpose
+Allow per-resource enablement of metric collection so administrators can selectively collect metrics from specific endpoints while respecting account limits and policies.
+#### Key Concepts
+- **Resource-scoped toggle:** The `enabled` flag governs whether metrics are collected for that particular resource.
+- **Inheritance from the resource:** Permissions inherit from the referenced resource to ensure only authorized users can change settings.
+- **Domain context:** Tracks the owning domain/target for the resource to support grouping and operational context.
+- **Identity by relationship:** Each ResourceConfiguration is uniquely identified by the resource it applies to.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

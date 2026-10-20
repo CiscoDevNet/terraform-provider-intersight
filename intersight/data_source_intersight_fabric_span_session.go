@@ -114,6 +114,40 @@ func getFabricSpanSessionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"dest_remotes": {
+			Description: "An array of relationships to fabricAbstractSpanDestRemote resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -180,7 +214,7 @@ func getFabricSpanSessionSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"oper_state_reason": {
-			Description: "Operational state reason of the SPAN session.\n* `Unknown` - Unknown operational state.\n* `Active` - Active and operational SPAN session.\n* `NoHardwareResource` - No hardware resources available.\n* `NoOperationalSrcDst` - No operational SPAN source or destination.\n* `GenericError` - Generic operational error.\n* `NoSourcesConfigured` - No source interfaces configured.\n* `NoDestinationConfigured` - No destination port configured.\n* `NoSourceDestinationConfigured` - No source or destination interface configured.\n* `SessionAdminShut` - Session is administratively disabled.\n* `WrongDestinationMode` - Wrong Destination mode configured.\n* `WrongSourceMode` - Wrong Source mode configured.\n* `TunnelMisconfDown` - Tunnel Misconfigured or Down.\n* `NoFlowIdSpecified` - No Flow ID specified for ERSPAN.",
+			Description: "Operational state reason of the SPAN session.\n* `Unknown` - Unknown operational state.\n* `Active` - Active and operational SPAN session.\n* `NoHardwareResource` - No hardware resources available.\n* `NoOperationalSrcDst` - No operational SPAN source or destination.\n* `GenericError` - Generic operational error.\n* `NoSourcesConfigured` - No source interfaces configured.\n* `NoDestinationConfigured` - No destination port configured.\n* `NoSourceDestinationConfigured` - No source or destination interface configured.\n* `SessionAdminShut` - Session is administratively disabled.\n* `WrongDestinationMode` - Wrong Destination mode configured.\n* `WrongSourceMode` - Wrong Source mode configured.\n* `TunnelMisconfDown` - Tunnel Misconfigured or Down.\n* `NoFlowIdSpecified` - No Flow ID specified for ERSPAN.\n* `NoErspanIdSpecified` - No ERSPAN ID is configured.\n* `MultiDestinationDenied` - Multiple destination is not allowed.\n* `VrfInvalid` - No valid VRF is configured.\n* `IpInvalid` - No valid destination IP address configured.\n* `GlobalIpInvalid` - No valid global origin IP address configured.\n* `NoRoute` - No route to destination IP address.\n* `ArpNotResolved` - ARP entry for destination is not resolved.\n* `NoEgressInterface` - Egress interface is not resolved.\n* `NoSviMember` - SVI member was not retrieved.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -261,6 +295,11 @@ func getFabricSpanSessionSchema() map[string]*schema.Schema {
 		"session_id": {
 			Description: "Session ID identifies the SPAN session on the Fabric Interconnect.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"session_type": {
+			Description: "Session Type identifies whether the traffic mirroring session is SPAN or ERSPAN.\n* `SPAN` - SPAN traffic mirroring session.\n* `ERSPAN` - Encapsulated Remote SPAN (ERSPAN) traffic mirroring session.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"shared_scope": {
@@ -775,6 +814,46 @@ func dataSourceFabricSpanSessionRead(c context.Context, d *schema.ResourceData, 
 		o.SetDestPorts(x)
 	}
 
+	if v, ok := d.GetOk("dest_remotes"); ok {
+		x := make([]models.FabricAbstractSpanDestRemoteRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsFabricAbstractSpanDestRemoteRelationship(o))
+		}
+		o.SetDestRemotes(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -951,6 +1030,11 @@ func dataSourceFabricSpanSessionRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOkExists("session_id"); ok {
 		x := int64(v.(int))
 		o.SetSessionId(x)
+	}
+
+	if v, ok := d.GetOk("session_type"); ok {
+		x := (v.(string))
+		o.SetSessionType(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -1329,6 +1413,8 @@ func dataSourceFabricSpanSessionRead(c context.Context, d *schema.ResourceData, 
 				temp["create_time"] = (s.GetCreateTime()).String()
 
 				temp["dest_ports"] = flattenListFabricAbstractSpanDestPortRelationship(s.GetDestPorts(), d)
+
+				temp["dest_remotes"] = flattenListFabricAbstractSpanDestRemoteRelationship(s.GetDestRemotes(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1345,6 +1431,7 @@ func dataSourceFabricSpanSessionRead(c context.Context, d *schema.ResourceData, 
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["session_id"] = (s.GetSessionId())
+				temp["session_type"] = (s.GetSessionType())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["source_count"] = (s.GetSourceCount())
 

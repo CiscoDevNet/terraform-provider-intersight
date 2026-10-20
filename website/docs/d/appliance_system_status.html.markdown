@@ -3,12 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_system_status"
 description: |-
-        Status of the Intersight Appliance.
+        The SystemStatus object provides the overall health and operational status of an Intersight Appliance. It aggregates the results of multiple system-level status checks into a single high-level operational state, offering an at-a-glance indicator of whether the appliance is operating normally or requires attention.
+        #### Purpose
+        SystemStatus enables administrators to monitor the appliance's overall condition through a single, read-only status object that summarizes health checks into an operational status.
+        #### Key Concepts
+        - **Aggregated Health State:** `operationalStatus` summarizes underlying checks into a high-level operational condition, such as Operational, AttentionNeeded, or Impaired, depending on the model's OperationalStatus semantics.
+        - **Read-Only Monitoring Surface:** The appliance platform exposes this value through READ for operational visibility, and it produces and updates the value automatically.
+        - **Permission Inheritance:** Permissions inherited from `systemInfo` and `registeredDevice` govern access, aligning visibility with the appliance identity and its registration context.
+        - **Privileged Access:** READ access is limited to the System Administrator and Account Administrator roles.
 
 ---
 
 # Data Source: intersight_appliance_system_status
-Status of the Intersight Appliance.
+The SystemStatus object provides the overall health and operational status of an Intersight Appliance. It aggregates the results of multiple system-level status checks into a single high-level operational state, offering an at-a-glance indicator of whether the appliance is operating normally or requires attention.
+#### Purpose
+SystemStatus enables administrators to monitor the appliance's overall condition through a single, read-only status object that summarizes health checks into an operational status.
+#### Key Concepts
+- **Aggregated Health State:** `operationalStatus` summarizes underlying checks into a high-level operational condition, such as Operational, AttentionNeeded, or Impaired, depending on the model's OperationalStatus semantics.
+- **Read-Only Monitoring Surface:** The appliance platform exposes this value through READ for operational visibility, and it produces and updates the value automatically.
+- **Permission Inheritance:** Permissions inherited from `systemInfo` and `registeredDevice` govern access, aligning visibility with the appliance identity and its registration context.
+- **Privileged Access:** READ access is limited to the System Administrator and Account Administrator roles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

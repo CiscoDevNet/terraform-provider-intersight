@@ -1,9 +1,9 @@
 /*
-Cisco Intersight Sdk
+Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.1.8-0-20260828115928667
+API version: 1.0.11-2026100617
 Contact: intersight@cisco.com
 */
 
@@ -37,6 +37,8 @@ type NotificationTriggerWebhook struct {
 	FirstFailedRequest *time.Time `json:"FirstFailedRequest,omitempty"`
 	// Indicates whether the value of the 'secret' property has been set.
 	IsSecretSet *bool `json:"IsSecretSet,omitempty"`
+	// Diagnostic from the last webhook delivery or validation attempt. HTTP failures include the status and reason, a truncated extract of the endpoint error text, and the destination hostname. Network failures include a short error description and the destination hostname. Setup failures use a short first-party sentence. Complements lastNetworkError.
+	LastDiagnosticError *string `json:"LastDiagnosticError,omitempty"`
 	// Holds the error message for the user of the last response.
 	LastNetworkError *string `json:"LastNetworkError,omitempty"`
 	// Holds the code of the last response, which helps to debug the issue in case if webhook server is not reachable.
@@ -309,6 +311,38 @@ func (o *NotificationTriggerWebhook) SetIsSecretSet(v bool) {
 	o.IsSecretSet = &v
 }
 
+// GetLastDiagnosticError returns the LastDiagnosticError field value if set, zero value otherwise.
+func (o *NotificationTriggerWebhook) GetLastDiagnosticError() string {
+	if o == nil || IsNil(o.LastDiagnosticError) {
+		var ret string
+		return ret
+	}
+	return *o.LastDiagnosticError
+}
+
+// GetLastDiagnosticErrorOk returns a tuple with the LastDiagnosticError field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationTriggerWebhook) GetLastDiagnosticErrorOk() (*string, bool) {
+	if o == nil || IsNil(o.LastDiagnosticError) {
+		return nil, false
+	}
+	return o.LastDiagnosticError, true
+}
+
+// HasLastDiagnosticError returns a boolean if a field has been set.
+func (o *NotificationTriggerWebhook) HasLastDiagnosticError() bool {
+	if o != nil && !IsNil(o.LastDiagnosticError) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastDiagnosticError gets a reference to the given string and assigns it to the LastDiagnosticError field.
+func (o *NotificationTriggerWebhook) SetLastDiagnosticError(v string) {
+	o.LastDiagnosticError = &v
+}
+
 // GetLastNetworkError returns the LastNetworkError field value if set, zero value otherwise.
 func (o *NotificationTriggerWebhook) GetLastNetworkError() string {
 	if o == nil || IsNil(o.LastNetworkError) {
@@ -510,6 +544,9 @@ func (o NotificationTriggerWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsSecretSet) {
 		toSerialize["IsSecretSet"] = o.IsSecretSet
 	}
+	if !IsNil(o.LastDiagnosticError) {
+		toSerialize["LastDiagnosticError"] = o.LastDiagnosticError
+	}
 	if !IsNil(o.LastNetworkError) {
 		toSerialize["LastNetworkError"] = o.LastNetworkError
 	}
@@ -588,6 +625,8 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 		FirstFailedRequest *time.Time `json:"FirstFailedRequest,omitempty"`
 		// Indicates whether the value of the 'secret' property has been set.
 		IsSecretSet *bool `json:"IsSecretSet,omitempty"`
+		// Diagnostic from the last webhook delivery or validation attempt. HTTP failures include the status and reason, a truncated extract of the endpoint error text, and the destination hostname. Network failures include a short error description and the destination hostname. Setup failures use a short first-party sentence. Complements lastNetworkError.
+		LastDiagnosticError *string `json:"LastDiagnosticError,omitempty"`
 		// Holds the error message for the user of the last response.
 		LastNetworkError *string `json:"LastNetworkError,omitempty"`
 		// Holds the code of the last response, which helps to debug the issue in case if webhook server is not reachable.
@@ -612,6 +651,7 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 		varNotificationTriggerWebhook.CustomHeaders = varNotificationTriggerWebhookWithoutEmbeddedStruct.CustomHeaders
 		varNotificationTriggerWebhook.FirstFailedRequest = varNotificationTriggerWebhookWithoutEmbeddedStruct.FirstFailedRequest
 		varNotificationTriggerWebhook.IsSecretSet = varNotificationTriggerWebhookWithoutEmbeddedStruct.IsSecretSet
+		varNotificationTriggerWebhook.LastDiagnosticError = varNotificationTriggerWebhookWithoutEmbeddedStruct.LastDiagnosticError
 		varNotificationTriggerWebhook.LastNetworkError = varNotificationTriggerWebhookWithoutEmbeddedStruct.LastNetworkError
 		varNotificationTriggerWebhook.LastResponseCode = varNotificationTriggerWebhookWithoutEmbeddedStruct.LastResponseCode
 		varNotificationTriggerWebhook.Secret = varNotificationTriggerWebhookWithoutEmbeddedStruct.Secret
@@ -641,6 +681,7 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "CustomHeaders")
 		delete(additionalProperties, "FirstFailedRequest")
 		delete(additionalProperties, "IsSecretSet")
+		delete(additionalProperties, "LastDiagnosticError")
 		delete(additionalProperties, "LastNetworkError")
 		delete(additionalProperties, "LastResponseCode")
 		delete(additionalProperties, "Secret")

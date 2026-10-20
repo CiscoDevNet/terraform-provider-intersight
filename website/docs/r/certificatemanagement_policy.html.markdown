@@ -67,6 +67,7 @@ This complex property has following sub-properties:
 * `certificates`:(Array)
 This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [certificatemanagement.Imc](#certificatemanagementImc)
+[certificatemanagement.KmipClientConfigurationBundle](#certificatemanagementKmipClientConfigurationBundle)
 [certificatemanagement.RootCaCertificate](#certificatemanagementRootCaCertificate)
   + `certificate`:(HashMap) - Certificate that is used for verifying the authorization. 
 This complex property has following sub-properties:
@@ -181,6 +182,15 @@ $ terraform import intersight_certificatemanagement_policy.example 1234567890987
 ### [certificatemanagement.Imc](#argument-reference)
 IMC certificate has both Certificate and private key that will be used for IMC.
 * `cert_type`:(string) Certificate Type for the certificate management.* `None` - Set certificate on the selected end point .* `KMIPClient` - Set KMIP certificate on the selected end point. 
+* `is_privatekey_set`:(bool)(ReadOnly) Indicates whether the value of the 'privatekey' property has been set. 
+* `privatekey`:(string) Private Key which is used to validate the certificate. 
+
+### [certificatemanagement.KmipClientConfigurationBundle](#argument-reference)
+Certificate and Private Key Bundle for KMIP client configuration. Different field will be required based on the bundle type.
+* `bundle_password`:(string) Password for the certificate bundle/Private Key. It's required when the bundle type is PKCS#8/PKCS#12. 
+* `bundle_type`:(string) Type of the KMIP client certificate bundle.* `PKCS1` - The private key is in PKCS#1 format and does not contain certificate chain.* `PKCS8` - The private key here is in PKCS#8 format and may be password protected.* `PKCS12` - The bundle is in PKCS#12 format that contains client certificate, private key. This Bundle is password protected. 
+* `certificate_bundle`:(string) Certificate Bundle that contains client certificate and Private Key. This Bundle is password protected. 
+* `is_bundle_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'bundlePassword' property has been set. 
 * `is_privatekey_set`:(bool)(ReadOnly) Indicates whether the value of the 'privatekey' property has been set. 
 * `privatekey`:(string) Private Key which is used to validate the certificate. 
 

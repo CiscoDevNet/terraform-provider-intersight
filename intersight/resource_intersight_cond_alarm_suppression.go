@@ -316,8 +316,8 @@ func resourceCondAlarmSuppression() *schema.Resource {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
-				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -1066,48 +1066,6 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("filter_refs"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetFilterRefs(x)
-		}
-	}
-
 	if v, ok := d.GetOkExists("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -1659,47 +1617,6 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetEntity(x)
 		}
-	}
-
-	if d.HasChange("filter_refs") {
-		v := d.Get("filter_refs")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetFilterRefs(x)
 	}
 
 	if d.HasChange("moid") {

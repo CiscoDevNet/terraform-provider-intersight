@@ -1,9 +1,9 @@
 /*
-Cisco Intersight Sdk
+Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.1.8-0-20260828115928667
+API version: 1.0.11-2026100617
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the ApplianceAppStatus type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApplianceAppStatus{}
 
-// ApplianceAppStatus Status of an application.
+// ApplianceAppStatus The AppStatus object represents the operational status of individual applications running on an Intersight Appliance. It aggregates application-level health checks into a single operational status and exposes replica and availability signals so operators can quickly assess whether an application is functioning and stable. #### Purpose AppStatus provides read-only visibility into per-application health and readiness on the appliance, enabling troubleshooting and operational monitoring of the appliance software stack. #### Key Concepts - **Application-Level Health Aggregation:** `operationalStatus` summarizes status checks into high-level states, such as Operational, AttentionNeeded, or Impaired, based on underlying check results. - **Status Check Details:** `statusChecks` provides the set of checks performed from the application's perspective, primarily readiness and function checks. - **Availability and Scale Signals:** `replicaCount`, `runningCount`, and `readyCount` expose deployment and readiness posture for the application. - **Stability Indicators:** Restart counters, including `restartCountTotal`, `restartCount5Mins`, `restartCount1Hour`, and `restartCount24Hours`, help detect crash loops and instability trends. - **API Health Visibility:** `apiStatuses` records the status of specific GET APIs, including name, response code, elapsed time, and failure reason, to aid diagnosis of control-plane and API issues. - **System-Scoped Governance:** Permissions inherited through `inheritpermissions: [systemStatus]` govern access, aligning visibility to the owning appliance system status context.
 type ApplianceAppStatus struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

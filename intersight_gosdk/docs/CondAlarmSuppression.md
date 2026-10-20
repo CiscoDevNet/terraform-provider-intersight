@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **Classifications** | Pointer to [**[]CondAlarmClassificationRelationship**](CondAlarmClassificationRelationship.md) | An array of relationships to condAlarmClassification resources. | [optional] 
 **EndTask** | Pointer to [**NullableSchedulerTaskScheduleRelationship**](SchedulerTaskScheduleRelationship.md) |  | [optional] 
 **Entity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**FilterRefs** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] 
+**FilterRefs** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **StartTask** | Pointer to [**NullableSchedulerTaskScheduleRelationship**](SchedulerTaskScheduleRelationship.md) |  | [optional] 
 

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SpanSession"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SpanSession"]
 **DestPorts** | Pointer to [**[]FabricAbstractSpanDestPortRelationship**](FabricAbstractSpanDestPortRelationship.md) | An array of relationships to fabricAbstractSpanDestPort resources. | [optional] 
+**DestRemotes** | Pointer to [**[]FabricAbstractSpanDestRemoteRelationship**](FabricAbstractSpanDestRemoteRelationship.md) | An array of relationships to fabricAbstractSpanDestRemote resources. | [optional] 
 **SourcePortChannels** | Pointer to [**[]FabricAbstractSpanSourcePortChannelRelationship**](FabricAbstractSpanSourcePortChannelRelationship.md) | An array of relationships to fabricAbstractSpanSourcePortChannel resources. | [optional] 
 **SourcePorts** | Pointer to [**[]FabricAbstractSpanSourcePortRelationship**](FabricAbstractSpanSourcePortRelationship.md) | An array of relationships to fabricAbstractSpanSourcePort resources. | [optional] 
 **SourceVirtualIfs** | Pointer to [**[]FabricAbstractSpanSourceVirtualIfRelationship**](FabricAbstractSpanSourceVirtualIfRelationship.md) | An array of relationships to fabricAbstractSpanSourceVirtualIf resources. | [optional] 
@@ -106,6 +107,41 @@ HasDestPorts returns a boolean if a field has been set.
 `func (o *FabricSpanSession) UnsetDestPorts()`
 
 UnsetDestPorts ensures that no value is present for DestPorts, not even an explicit nil
+### GetDestRemotes
+
+`func (o *FabricSpanSession) GetDestRemotes() []FabricAbstractSpanDestRemoteRelationship`
+
+GetDestRemotes returns the DestRemotes field if non-nil, zero value otherwise.
+
+### GetDestRemotesOk
+
+`func (o *FabricSpanSession) GetDestRemotesOk() (*[]FabricAbstractSpanDestRemoteRelationship, bool)`
+
+GetDestRemotesOk returns a tuple with the DestRemotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDestRemotes
+
+`func (o *FabricSpanSession) SetDestRemotes(v []FabricAbstractSpanDestRemoteRelationship)`
+
+SetDestRemotes sets DestRemotes field to given value.
+
+### HasDestRemotes
+
+`func (o *FabricSpanSession) HasDestRemotes() bool`
+
+HasDestRemotes returns a boolean if a field has been set.
+
+### SetDestRemotesNil
+
+`func (o *FabricSpanSession) SetDestRemotesNil(b bool)`
+
+ SetDestRemotesNil sets the value for DestRemotes to be an explicit nil
+
+### UnsetDestRemotes
+`func (o *FabricSpanSession) UnsetDestRemotes()`
+
+UnsetDestRemotes ensures that no value is present for DestRemotes, not even an explicit nil
 ### GetSourcePortChannels
 
 `func (o *FabricSpanSession) GetSourcePortChannels() []FabricAbstractSpanSourcePortChannelRelationship`

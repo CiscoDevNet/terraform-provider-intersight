@@ -3,12 +3,26 @@ subcategory: "meta"
 layout: "intersight"
 page_title: "Intersight: intersight_meta_definition"
 description: |-
-        The meta-data of managed objects and complex types.
+        Definitions represent the system-owned metadata catalog for managed objects and complex types. They provide a centralized record of type definitions (including versioning and REST-path association) that can be queried for discovery, introspection, and tooling that needs to understand the platform’s data model.
+        #### Purpose
+        Expose a read-only (for most consumers) registry of managed-object and complex-type metadata so internal services and authorized global users can discover model definitions, track versions, and map types to their REST paths.
+        #### Key Concepts
+        - **Model metadata registry**: Acts as a catalog of definitions for managed objects and complex types, rather than representing an operational/inventory entity.
+        - **Controlled access**:
+        - **READ** is available under global privilege sets.
+        - **DELETE** is restricted to System Administrator.
 
 ---
 
 # Data Source: intersight_meta_definition
-The meta-data of managed objects and complex types.
+Definitions represent the system-owned metadata catalog for managed objects and complex types. They provide a centralized record of type definitions (including versioning and REST-path association) that can be queried for discovery, introspection, and tooling that needs to understand the platform’s data model.
+#### Purpose
+Expose a read-only (for most consumers) registry of managed-object and complex-type metadata so internal services and authorized global users can discover model definitions, track versions, and map types to their REST paths.
+#### Key Concepts
+- **Model metadata registry**: Acts as a catalog of definitions for managed objects and complex types, rather than representing an operational/inventory entity.         
+- **Controlled access**:
+  - **READ** is available under global privilege sets.
+  - **DELETE** is restricted to System Administrator.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

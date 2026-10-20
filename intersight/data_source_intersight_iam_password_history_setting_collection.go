@@ -200,11 +200,6 @@ func getIamPasswordHistorySettingCollectionSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"password_history": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Schema{
-							Type: schema.TypeString}},
 					"username": {
 						Description: "User for which this password history is applicable.",
 						Type:        schema.TypeString,
@@ -812,20 +807,6 @@ func dataSourceIamPasswordHistorySettingCollectionRead(c context.Context, d *sch
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["password_history"]; ok {
-				{
-					x := make([]string, 0)
-					y := reflect.ValueOf(v)
-					for i := 0; i < y.Len(); i++ {
-						if y.Index(i).Interface() != nil {
-							x = append(x, y.Index(i).Interface().(string))
-						}
-					}
-					if len(x) > 0 {
-						o.SetPasswordHistory(x)
-					}
 				}
 			}
 			x = append(x, *o)

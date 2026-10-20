@@ -1,9 +1,9 @@
 /*
-Cisco Intersight Sdk
+Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.1.8-0-20260828115928667
+API version: 1.0.11-2026100617
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the IamSharingRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IamSharingRule{}
 
-// IamSharingRule SharingRule is a rule which signifies a Source Resource is shared with a Destination Resource. Source, Destination can be resources like Organization which are supported in role configuration. The objects created in Source can be referenced by the objects of Destination.
+// IamSharingRule SharingRules define cross-resource sharing relationships where objects created under a source permission resource (such as an Organization) can be referenced by a destination permission resource. In effect, a SharingRule enables controlled “object re-use” across organizational boundaries by establishing a sanctioned share from source to destination. #### Purpose Enable governed sharing of resources across supported permission resources (for example, between organizations) so teams can reference and reuse objects created in a shared source context from another destination context. #### Key Concepts - **Reference-based sharing outcome**: Sharing allows objects created in the source context to be referenced by objects in the destination context, without duplicating those objects. - **Account-scoped governance**: The rule is tied to an `account`, ensuring sharing is managed within an account boundary. - **Controlled administration**: CREATE/UPDATE/DELETE require organization-management privileges; READ is available to org view/manage and common admin/support roles.
 type IamSharingRule struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

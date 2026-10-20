@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.PasswordHistorySetting"]
 **HistoryIndex** | Pointer to **int64** | Index of the next passwordHistory collection. | [optional] [readonly] [default to 0]
 **LastModificationTime** | Pointer to **time.Time** | Time when the password was last modified. | [optional] [readonly] 
-**PasswordHistory** | Pointer to **[]string** |  | [optional] 
 **Username** | Pointer to **string** | User for which this password history is applicable. | [optional] [readonly] 
 
 ## Methods
@@ -120,41 +119,6 @@ SetLastModificationTime sets LastModificationTime field to given value.
 
 HasLastModificationTime returns a boolean if a field has been set.
 
-### GetPasswordHistory
-
-`func (o *IamPasswordHistorySetting) GetPasswordHistory() []string`
-
-GetPasswordHistory returns the PasswordHistory field if non-nil, zero value otherwise.
-
-### GetPasswordHistoryOk
-
-`func (o *IamPasswordHistorySetting) GetPasswordHistoryOk() (*[]string, bool)`
-
-GetPasswordHistoryOk returns a tuple with the PasswordHistory field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPasswordHistory
-
-`func (o *IamPasswordHistorySetting) SetPasswordHistory(v []string)`
-
-SetPasswordHistory sets PasswordHistory field to given value.
-
-### HasPasswordHistory
-
-`func (o *IamPasswordHistorySetting) HasPasswordHistory() bool`
-
-HasPasswordHistory returns a boolean if a field has been set.
-
-### SetPasswordHistoryNil
-
-`func (o *IamPasswordHistorySetting) SetPasswordHistoryNil(b bool)`
-
- SetPasswordHistoryNil sets the value for PasswordHistory to be an explicit nil
-
-### UnsetPasswordHistory
-`func (o *IamPasswordHistorySetting) UnsetPasswordHistory()`
-
-UnsetPasswordHistory ensures that no value is present for PasswordHistory, not even an explicit nil
 ### GetUsername
 
 `func (o *IamPasswordHistorySetting) GetUsername() string`

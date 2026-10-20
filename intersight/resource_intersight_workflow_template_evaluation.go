@@ -473,10 +473,11 @@ func resourceWorkflowTemplateEvaluation() *schema.Resource {
 							ForceNew:    true,
 						},
 						"function": {
-							Description: "The function to be executed.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The function to be executed.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z][a-zA-Z0-9]{0,63}$"), ""),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"function_arguments": {
 							Description: "A collection of arguments for the function being executed.",
@@ -485,9 +486,9 @@ func resourceWorkflowTemplateEvaluation() *schema.Resource {
 							ForceNew:    true,
 						},
 						"name": {
-							Description:  "The unique name by which the output of this transformation stage can be accessed in further stages. Only alphanumeric characters are allowed.",
+							Description:  "The unique name by which the output of this transformation stage can be accessed in further stages. Letters, numbers, and underscores are allowed.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]{1,64}$"), ""),
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_]{1,64}$"), ""),
 							Optional:     true,
 							ForceNew:     true,
 						},
