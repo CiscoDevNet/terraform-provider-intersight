@@ -3,12 +3,24 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_sharing_rule"
 description: |-
-        SharingRule is a rule which signifies a Source Resource is shared with a Destination Resource. Source, Destination can be resources like Organization which are supported in role configuration. The objects created in Source can be referenced by the objects of Destination.
+        SharingRules define cross-resource sharing relationships where objects created under a source permission resource (such as an Organization) can be referenced by a destination permission resource. In effect, a SharingRule enables controlled “object re-use” across organizational boundaries by establishing a sanctioned share from source to destination.
+        #### Purpose
+        Enable governed sharing of resources across supported permission resources (for example, between organizations) so teams can reference and reuse objects created in a shared source context from another destination context.
+        #### Key Concepts
+        - **Reference-based sharing outcome**: Sharing allows objects created in the source context to be referenced by objects in the destination context, without duplicating those objects.
+        - **Account-scoped governance**: The rule is tied to an `account`, ensuring sharing is managed within an account boundary.
+        - **Controlled administration**: CREATE/UPDATE/DELETE require organization-management privileges; READ is available to org view/manage and common admin/support roles.
 
 ---
 
 # Data Source: intersight_iam_sharing_rule
-SharingRule is a rule which signifies a Source Resource is shared with a Destination Resource. Source, Destination can be resources like Organization which are supported in role configuration. The objects created in Source can be referenced by the objects of Destination.
+SharingRules define cross-resource sharing relationships where objects created under a source permission resource (such as an Organization) can be referenced by a destination permission resource. In effect, a SharingRule enables controlled “object re-use” across organizational boundaries by establishing a sanctioned share from source to destination.
+#### Purpose
+Enable governed sharing of resources across supported permission resources (for example, between organizations) so teams can reference and reuse objects created in a shared source context from another destination context.
+#### Key Concepts
+- **Reference-based sharing outcome**: Sharing allows objects created in the source context to be referenced by objects in the destination context, without duplicating those objects.
+- **Account-scoped governance**: The rule is tied to an `account`, ensuring sharing is managed within an account boundary.
+- **Controlled administration**: CREATE/UPDATE/DELETE require organization-management privileges; READ is available to org view/manage and common admin/support roles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

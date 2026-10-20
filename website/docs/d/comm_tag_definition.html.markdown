@@ -3,14 +3,26 @@ subcategory: "comm"
 layout: "intersight"
 page_title: "Intersight: intersight_comm_tag_definition"
 description: |-
-        An arbitrary string. Tag can be assigned to any managed object. The key will be copied to the managed object.
-        The tag key is a string representation of the tag. The tag key can be hierarchical or key-value pair.
+        TagDefinitions define reusable tag keys that can be assigned to managed objects. A tag key is represented as an arbitrary string and may be structured either as a simple hierarchical key or as part of a key-value style tagging convention. When applied, the key is copied onto the target managed object.
+        #### Purpose
+        Provide a governed, reusable definition layer for tags so administrators can standardize tagging across resources for organization, filtering, automation, and policy-driven workflows.
+        #### Key Concepts
+        - **Reusable tag key catalog**: Defines the tag key independently of any one managed object, enabling consistent reuse across the environment.
+        - **Flexible tag format**: The key can represent either a hierarchical tag or a key-value style tag convention.
+        - **Stable identity by key and type**: Uniquely identified by the combination of `key` and `type`, and indexed accordingly for efficient lookup.
+        - **Controlled administration with broad read visibility**: CREATE/UPDATE/DELETE require tag-management privileges, while READ is exposed through global privilege sets.
 
 ---
 
 # Data Source: intersight_comm_tag_definition
-An arbitrary string. Tag can be assigned to any managed object. The key will be copied to the managed object.
-The tag key is a string representation of the tag. The tag key can be hierarchical or key-value pair.
+TagDefinitions define reusable tag keys that can be assigned to managed objects. A tag key is represented as an arbitrary string and may be structured either as a simple hierarchical key or as part of a key-value style tagging convention. When applied, the key is copied onto the target managed object.
+#### Purpose
+Provide a governed, reusable definition layer for tags so administrators can standardize tagging across resources for organization, filtering, automation, and policy-driven workflows.
+#### Key Concepts
+- **Reusable tag key catalog**: Defines the tag key independently of any one managed object, enabling consistent reuse across the environment.
+- **Flexible tag format**: The key can represent either a hierarchical tag or a key-value style tag convention.
+- **Stable identity by key and type**: Uniquely identified by the combination of `key` and `type`, and indexed accordingly for efficient lookup.
+- **Controlled administration with broad read visibility**: CREATE/UPDATE/DELETE require tag-management privileges, while READ is exposed through global privilege sets.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

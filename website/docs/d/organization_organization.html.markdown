@@ -3,12 +3,30 @@ subcategory: "organization"
 layout: "intersight"
 page_title: "Intersight: intersight_organization_organization"
 description: |-
-        Organization provides multi-tenancy within an account. Multiple organizations can be present under an account. Resources are associated to organization using resource groups. Organization can have heterogeneous resources. Resources can be shared among multiple organizations. Organizations are associated to user permissions and privileges can be specified to provide access control. User can have access to multiple organizations in same permission and with different privileges on each organization.
+        Organizations provide multi-tenancy within a single Intersight account. An account can contain multiple organizations, and resources are associated to organizations using resource groups. Organizations can contain heterogeneous resources, support controlled sharing of resources across organizations, and integrate with the IAM permission/privilege model so users can have different access levels per organization.
+        #### Purpose
+        Partition resources within an account into separate administrative and access-control domains, enabling delegation, separation of duties, and controlled sharing across teams or business units.
+        #### Key Concepts
+        - **Account-level multi-tenancy**: Multiple organizations can exist under one account, acting as logical tenants within that account.
+        - **Resource association via resource groups**: Resources are linked to an organization through resource groups rather than being inherently single-tenant.
+        - **Heterogeneous resource containment**: An organization can include different kinds of resources (compute, network, storage, policies, etc.).
+        - **Cross-organization sharing**: Resources can be shared among multiple organizations while preserving governance (often via explicit sharing constructs/rules).
+        - **RBAC integration**: Organizations are tied to permissions and privilege sets; a user can access multiple organizations within the same permission, potentially with different privileges per organization.
+        - **Admin-governed lifecycle**: CREATE/UPDATE/DELETE require organization management privileges; READ is broadly available to admin, view, and several functional roles.
 
 ---
 
 # Data Source: intersight_organization_organization
-Organization provides multi-tenancy within an account. Multiple organizations can be present under an account. Resources are associated to organization using resource groups. Organization can have heterogeneous resources. Resources can be shared among multiple organizations. Organizations are associated to user permissions and privileges can be specified to provide access control. User can have access to multiple organizations in same permission and with different privileges on each organization.
+Organizations provide multi-tenancy within a single Intersight account. An account can contain multiple organizations, and resources are associated to organizations using resource groups. Organizations can contain heterogeneous resources, support controlled sharing of resources across organizations, and integrate with the IAM permission/privilege model so users can have different access levels per organization.
+#### Purpose
+Partition resources within an account into separate administrative and access-control domains, enabling delegation, separation of duties, and controlled sharing across teams or business units.
+#### Key Concepts
+- **Account-level multi-tenancy**: Multiple organizations can exist under one account, acting as logical tenants within that account.
+- **Resource association via resource groups**: Resources are linked to an organization through resource groups rather than being inherently single-tenant.
+- **Heterogeneous resource containment**: An organization can include different kinds of resources (compute, network, storage, policies, etc.).
+- **Cross-organization sharing**: Resources can be shared among multiple organizations while preserving governance (often via explicit sharing constructs/rules).
+- **RBAC integration**: Organizations are tied to permissions and privilege sets; a user can access multiple organizations within the same permission, potentially with different privileges per organization.
+- **Admin-governed lifecycle**: CREATE/UPDATE/DELETE require organization management privileges; READ is broadly available to admin, view, and several functional roles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

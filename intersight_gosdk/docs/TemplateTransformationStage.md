@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "template.TransformationStage"]
 **Function** | Pointer to **string** | The function to be executed. | [optional] 
 **FunctionArguments** | Pointer to **interface{}** | A collection of arguments for the function being executed. | [optional] 
-**Name** | Pointer to **string** | The unique name by which the output of this transformation stage can be accessed in further stages. Only alphanumeric characters are allowed. | [optional] 
+**Name** | Pointer to **string** | The unique name by which the output of this transformation stage can be accessed in further stages. Letters, numbers, and underscores are allowed. | [optional] 
 
 ## Methods
 

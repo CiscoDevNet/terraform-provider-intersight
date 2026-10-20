@@ -78,7 +78,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `function`:(string) The function to be executed. 
   + `function_arguments`:(JSON as string) A collection of arguments for the function being executed. 
-  + `name`:(string) The unique name by which the output of this transformation stage can be accessed in further stages. Only alphanumeric characters are allowed. 
+  + `name`:(string) The unique name by which the output of this transformation stage can be accessed in further stages. Letters, numbers, and underscores are allowed. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `tags`:(Array)
 This complex property has following sub-properties:

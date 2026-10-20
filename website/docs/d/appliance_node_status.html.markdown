@@ -3,12 +3,30 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_node_status"
 description: |-
-        Status of an Intersight Appliance node.
+        The NodeStatus object represents the health and readiness status of each node in an Intersight Appliance cluster. It aggregates node-level checks, such as readiness, CPU and memory usage, and file system checks, into a high-level operational status, and reports key utilization and node-state signals.
+        #### Purpose
+        NodeStatus enables operators to monitor and troubleshoot appliance cluster nodes by exposing per-node operational status, Kubernetes readiness state, and core utilization indicators.
+        #### Key Concepts
+        - **Node Identity Within the Cluster:** `nodeId` is a system-assigned unique identifier for the appliance node, incrementing from 1.
+        - **Operational Health Aggregation:** `statusChecks` results determine `operationalStatus`, mapping Critical to Impaired, Warning to AttentionNeeded, and all-OK to Operational.
+        - **Kubernetes Readiness State:** `nodeState` indicates whether the node is Down, Preparing, or Ready to host Kubernetes pods.
+        - **Resource Utilization Signals:** `cpuUsage` and `memUsage` provide percent utilization for quick capacity and pressure assessment.
+        - **File System Health Correlation:** `fileSystemStatuses` links to per-filesystem status objects for deeper storage and file system troubleshooting.
+        - **Context Relationships:** `nodeInfo` ties to node identity and configuration information, and `systemStatus` ties the node to the overall appliance system status.
 
 ---
 
 # Data Source: intersight_appliance_node_status
-Status of an Intersight Appliance node.
+The NodeStatus object represents the health and readiness status of each node in an Intersight Appliance cluster. It aggregates node-level checks, such as readiness, CPU and memory usage, and file system checks, into a high-level operational status, and reports key utilization and node-state signals.
+#### Purpose
+NodeStatus enables operators to monitor and troubleshoot appliance cluster nodes by exposing per-node operational status, Kubernetes readiness state, and core utilization indicators.
+#### Key Concepts
+- **Node Identity Within the Cluster:** `nodeId` is a system-assigned unique identifier for the appliance node, incrementing from 1.
+- **Operational Health Aggregation:** `statusChecks` results determine `operationalStatus`, mapping Critical to Impaired, Warning to AttentionNeeded, and all-OK to Operational.
+- **Kubernetes Readiness State:** `nodeState` indicates whether the node is Down, Preparing, or Ready to host Kubernetes pods.
+- **Resource Utilization Signals:** `cpuUsage` and `memUsage` provide percent utilization for quick capacity and pressure assessment.
+- **File System Health Correlation:** `fileSystemStatuses` links to per-filesystem status objects for deeper storage and file system troubleshooting.
+- **Context Relationships:** `nodeInfo` ties to node identity and configuration information, and `systemStatus` ties the node to the overall appliance system status.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

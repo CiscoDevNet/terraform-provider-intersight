@@ -3,12 +3,28 @@ subcategory: "metrics"
 layout: "intersight"
 page_title: "Intersight: intersight_metrics_configuration"
 description: |-
-        Controls the behavior of metric collection for an account, configuration includes options to enable or disable collection as well how new devices claimed to the account are handled.
+        Configurations control account-wide metric collection behavior. It defines whether metric collection is enabled for the account (system-controlled), how newly added resources should be treated, and what platform limits/granularity apply.
+        #### Purpose
+        Provide a single, account-scoped control point for how metrics are collected across all eligible resources in the account, including default behavior for newly claimed devices.
+        #### Key Concepts
+        - **Account-wide governance:** Applies settings consistently across all metric-capable resources in the account.
+        - **New resource policy:** Controls whether new resources are auto-enabled for metrics collection or require explicit enablement.
+        - **Platform-enforced limits:** Exposes system-defined limits such as maximum enabled resources and minimum supported collection granularity.
+        - **Advanced ingestion tuning:** Supports an optional user override for max ingestion rate (intended for use with TAC guidance).
+        - **Account binding and permissions:** Identity is the account; access is controlled via account-level privileges.
 
 ---
 
 # Data Source: intersight_metrics_configuration
-Controls the behavior of metric collection for an account, configuration includes options to enable or disable collection as well how new devices claimed to the account are handled.
+Configurations control account-wide metric collection behavior. It defines whether metric collection is enabled for the account (system-controlled), how newly added resources should be treated, and what platform limits/granularity apply.
+#### Purpose
+Provide a single, account-scoped control point for how metrics are collected across all eligible resources in the account, including default behavior for newly claimed devices.
+#### Key Concepts
+- **Account-wide governance:** Applies settings consistently across all metric-capable resources in the account.
+- **New resource policy:** Controls whether new resources are auto-enabled for metrics collection or require explicit enablement.
+- **Platform-enforced limits:** Exposes system-defined limits such as maximum enabled resources and minimum supported collection granularity.
+- **Advanced ingestion tuning:** Supports an optional user override for max ingestion rate (intended for use with TAC guidance).
+- **Account binding and permissions:** Identity is the account; access is controlled via account-level privileges.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

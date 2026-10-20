@@ -10,8 +10,9 @@ Name | Type | Description | Notes
 **ConfigState** | Pointer to **string** | The configured state of SPAN configuration. If the configuration fails to deploy to the Fabric Interconnect, it can be redeployed by toggling the admin state. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. | [optional] [readonly] [default to "None"]
 **Name** | Pointer to **string** | Name of the SPAN session. The name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). | [optional] 
 **OperState** | Pointer to **string** | Operational state of the SPAN session. * &#x60;Unknown&#x60; - SPAN session operational state is Unknown. * &#x60;Up&#x60; - SPAN session operational state is Up. * &#x60;Down&#x60; - SPAN session operational state is Down. * &#x60;Error&#x60; - SPAN session operational state is Error. | [optional] [readonly] [default to "Unknown"]
-**OperStateReason** | Pointer to **string** | Operational state reason of the SPAN session. * &#x60;Unknown&#x60; - Unknown operational state. * &#x60;Active&#x60; - Active and operational SPAN session. * &#x60;NoHardwareResource&#x60; - No hardware resources available. * &#x60;NoOperationalSrcDst&#x60; - No operational SPAN source or destination. * &#x60;GenericError&#x60; - Generic operational error. * &#x60;NoSourcesConfigured&#x60; - No source interfaces configured. * &#x60;NoDestinationConfigured&#x60; - No destination port configured. * &#x60;NoSourceDestinationConfigured&#x60; - No source or destination interface configured. * &#x60;SessionAdminShut&#x60; - Session is administratively disabled. * &#x60;WrongDestinationMode&#x60; - Wrong Destination mode configured. * &#x60;WrongSourceMode&#x60; - Wrong Source mode configured. * &#x60;TunnelMisconfDown&#x60; - Tunnel Misconfigured or Down. * &#x60;NoFlowIdSpecified&#x60; - No Flow ID specified for ERSPAN. | [optional] [readonly] [default to "Unknown"]
+**OperStateReason** | Pointer to **string** | Operational state reason of the SPAN session. * &#x60;Unknown&#x60; - Unknown operational state. * &#x60;Active&#x60; - Active and operational SPAN session. * &#x60;NoHardwareResource&#x60; - No hardware resources available. * &#x60;NoOperationalSrcDst&#x60; - No operational SPAN source or destination. * &#x60;GenericError&#x60; - Generic operational error. * &#x60;NoSourcesConfigured&#x60; - No source interfaces configured. * &#x60;NoDestinationConfigured&#x60; - No destination port configured. * &#x60;NoSourceDestinationConfigured&#x60; - No source or destination interface configured. * &#x60;SessionAdminShut&#x60; - Session is administratively disabled. * &#x60;WrongDestinationMode&#x60; - Wrong Destination mode configured. * &#x60;WrongSourceMode&#x60; - Wrong Source mode configured. * &#x60;TunnelMisconfDown&#x60; - Tunnel Misconfigured or Down. * &#x60;NoFlowIdSpecified&#x60; - No Flow ID specified for ERSPAN. * &#x60;NoErspanIdSpecified&#x60; - No ERSPAN ID is configured. * &#x60;MultiDestinationDenied&#x60; - Multiple destination is not allowed. * &#x60;VrfInvalid&#x60; - No valid VRF is configured. * &#x60;IpInvalid&#x60; - No valid destination IP address configured. * &#x60;GlobalIpInvalid&#x60; - No valid global origin IP address configured. * &#x60;NoRoute&#x60; - No route to destination IP address. * &#x60;ArpNotResolved&#x60; - ARP entry for destination is not resolved. * &#x60;NoEgressInterface&#x60; - Egress interface is not resolved. * &#x60;NoSviMember&#x60; - SVI member was not retrieved. | [optional] [readonly] [default to "Unknown"]
 **SessionId** | Pointer to **int64** | Session ID identifies the SPAN session on the Fabric Interconnect. | [optional] [readonly] 
+**SessionType** | Pointer to **string** | Session Type identifies whether the traffic mirroring session is SPAN or ERSPAN. * &#x60;SPAN&#x60; - SPAN traffic mirroring session. * &#x60;ERSPAN&#x60; - Encapsulated Remote SPAN (ERSPAN) traffic mirroring session. | [optional] [default to "SPAN"]
 **SourceCount** | Pointer to **int64** | Count of total number of sources in the SPAN session. | [optional] [readonly] 
 **SpanControlPackets** | Pointer to **string** | Admin state to enable or disable spanning control packets. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
 **SwitchId** | Pointer to **string** | Switch ID (A or B) corresponding to network element. * &#x60;A&#x60; - Switch Identifier of Fabric Interconnect A. * &#x60;B&#x60; - Switch Identifier of Fabric Interconnect B. | [optional] [readonly] [default to "A"]
@@ -225,6 +226,31 @@ SetSessionId sets SessionId field to given value.
 `func (o *FabricAbstractSpanSession) HasSessionId() bool`
 
 HasSessionId returns a boolean if a field has been set.
+
+### GetSessionType
+
+`func (o *FabricAbstractSpanSession) GetSessionType() string`
+
+GetSessionType returns the SessionType field if non-nil, zero value otherwise.
+
+### GetSessionTypeOk
+
+`func (o *FabricAbstractSpanSession) GetSessionTypeOk() (*string, bool)`
+
+GetSessionTypeOk returns a tuple with the SessionType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSessionType
+
+`func (o *FabricAbstractSpanSession) SetSessionType(v string)`
+
+SetSessionType sets SessionType field to given value.
+
+### HasSessionType
+
+`func (o *FabricAbstractSpanSession) HasSessionType() bool`
+
+HasSessionType returns a boolean if a field has been set.
 
 ### GetSourceCount
 

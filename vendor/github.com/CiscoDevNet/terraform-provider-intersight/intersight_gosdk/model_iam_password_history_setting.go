@@ -1,9 +1,9 @@
 /*
-Cisco Intersight Sdk
+Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.1.8-0-20260828115928667
+API version: 1.0.11-2026100617
 Contact: intersight@cisco.com
 */
 
@@ -33,7 +33,6 @@ type IamPasswordHistorySetting struct {
 	HistoryIndex *int64 `json:"HistoryIndex,omitempty"`
 	// Time when the password was last modified.
 	LastModificationTime *time.Time `json:"LastModificationTime,omitempty"`
-	PasswordHistory      []string   `json:"PasswordHistory,omitempty"`
 	// User for which this password history is applicable.
 	Username             *string `json:"Username,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -186,39 +185,6 @@ func (o *IamPasswordHistorySetting) SetLastModificationTime(v time.Time) {
 	o.LastModificationTime = &v
 }
 
-// GetPasswordHistory returns the PasswordHistory field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IamPasswordHistorySetting) GetPasswordHistory() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-	return o.PasswordHistory
-}
-
-// GetPasswordHistoryOk returns a tuple with the PasswordHistory field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamPasswordHistorySetting) GetPasswordHistoryOk() ([]string, bool) {
-	if o == nil || IsNil(o.PasswordHistory) {
-		return nil, false
-	}
-	return o.PasswordHistory, true
-}
-
-// HasPasswordHistory returns a boolean if a field has been set.
-func (o *IamPasswordHistorySetting) HasPasswordHistory() bool {
-	if o != nil && !IsNil(o.PasswordHistory) {
-		return true
-	}
-
-	return false
-}
-
-// SetPasswordHistory gets a reference to the given []string and assigns it to the PasswordHistory field.
-func (o *IamPasswordHistorySetting) SetPasswordHistory(v []string) {
-	o.PasswordHistory = v
-}
-
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *IamPasswordHistorySetting) GetUsername() string {
 	if o == nil || IsNil(o.Username) {
@@ -283,9 +249,6 @@ func (o IamPasswordHistorySetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastModificationTime) {
 		toSerialize["LastModificationTime"] = o.LastModificationTime
 	}
-	if o.PasswordHistory != nil {
-		toSerialize["PasswordHistory"] = o.PasswordHistory
-	}
 	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
@@ -348,7 +311,6 @@ func (o *IamPasswordHistorySetting) UnmarshalJSON(data []byte) (err error) {
 		HistoryIndex *int64 `json:"HistoryIndex,omitempty"`
 		// Time when the password was last modified.
 		LastModificationTime *time.Time `json:"LastModificationTime,omitempty"`
-		PasswordHistory      []string   `json:"PasswordHistory,omitempty"`
 		// User for which this password history is applicable.
 		Username *string `json:"Username,omitempty"`
 	}
@@ -362,7 +324,6 @@ func (o *IamPasswordHistorySetting) UnmarshalJSON(data []byte) (err error) {
 		varIamPasswordHistorySetting.ObjectType = varIamPasswordHistorySettingWithoutEmbeddedStruct.ObjectType
 		varIamPasswordHistorySetting.HistoryIndex = varIamPasswordHistorySettingWithoutEmbeddedStruct.HistoryIndex
 		varIamPasswordHistorySetting.LastModificationTime = varIamPasswordHistorySettingWithoutEmbeddedStruct.LastModificationTime
-		varIamPasswordHistorySetting.PasswordHistory = varIamPasswordHistorySettingWithoutEmbeddedStruct.PasswordHistory
 		varIamPasswordHistorySetting.Username = varIamPasswordHistorySettingWithoutEmbeddedStruct.Username
 		*o = IamPasswordHistorySetting(varIamPasswordHistorySetting)
 	} else {
@@ -385,7 +346,6 @@ func (o *IamPasswordHistorySetting) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "HistoryIndex")
 		delete(additionalProperties, "LastModificationTime")
-		delete(additionalProperties, "PasswordHistory")
 		delete(additionalProperties, "Username")
 
 		// remove fields from embedded structs

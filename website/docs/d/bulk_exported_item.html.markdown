@@ -3,12 +3,20 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_exported_item"
 description: |-
-        A single managed object that is being exported.
+        ExportedItems represent individual managed objects (MOs) that are part of an export operation. Each ExportedItem corresponds to one MO being exported and serves as the per-item tracking record for export progress and status updates.
+        #### Purpose
+        Provide item-level visibility and status tracking for export workflows, enabling users and workflow administrators to view what is being exported and the status of the individual objects export.
+        #### Key Concepts
+        - **Per-MO export tracking**: Each ExportedItem represents a single managed object included in an export, enabling granular progress/status handling.
 
 ---
 
 # Data Source: intersight_bulk_exported_item
-A single managed object that is being exported.
+ExportedItems represent individual managed objects (MOs) that are part of an export operation. Each ExportedItem corresponds to one MO being exported and serves as the per-item tracking record for export progress and status updates.
+#### Purpose
+Provide item-level visibility and status tracking for export workflows, enabling users and workflow administrators to view what is being exported and the status of the individual objects export.
+#### Key Concepts
+- **Per-MO export tracking**: Each ExportedItem represents a single managed object included in an export, enabling granular progress/status handling.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

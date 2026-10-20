@@ -3,12 +3,30 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_app_status"
 description: |-
-        Status of an application.
+        The AppStatus object represents the operational status of individual applications running on an Intersight Appliance. It aggregates application-level health checks into a single operational status and exposes replica and availability signals so operators can quickly assess whether an application is functioning and stable.
+        #### Purpose
+        AppStatus provides read-only visibility into per-application health and readiness on the appliance, enabling troubleshooting and operational monitoring of the appliance software stack.
+        #### Key Concepts
+        - **Application-Level Health Aggregation:** `operationalStatus` summarizes status checks into high-level states, such as Operational, AttentionNeeded, or Impaired, based on underlying check results.
+        - **Status Check Details:** `statusChecks` provides the set of checks performed from the application's perspective, primarily readiness and function checks.
+        - **Availability and Scale Signals:** `replicaCount`, `runningCount`, and `readyCount` expose deployment and readiness posture for the application.
+        - **Stability Indicators:** Restart counters, including `restartCountTotal`, `restartCount5Mins`, `restartCount1Hour`, and `restartCount24Hours`, help detect crash loops and instability trends.
+        - **API Health Visibility:** `apiStatuses` records the status of specific GET APIs, including name, response code, elapsed time, and failure reason, to aid diagnosis of control-plane and API issues.
+        - **System-Scoped Governance:** Permissions inherited through `inheritpermissions: [systemStatus]` govern access, aligning visibility to the owning appliance system status context.
 
 ---
 
 # Data Source: intersight_appliance_app_status
-Status of an application.
+The AppStatus object represents the operational status of individual applications running on an Intersight Appliance. It aggregates application-level health checks into a single operational status and exposes replica and availability signals so operators can quickly assess whether an application is functioning and stable.
+#### Purpose
+AppStatus provides read-only visibility into per-application health and readiness on the appliance, enabling troubleshooting and operational monitoring of the appliance software stack.
+#### Key Concepts
+- **Application-Level Health Aggregation:** `operationalStatus` summarizes status checks into high-level states, such as Operational, AttentionNeeded, or Impaired, based on underlying check results.
+- **Status Check Details:** `statusChecks` provides the set of checks performed from the application's perspective, primarily readiness and function checks.
+- **Availability and Scale Signals:** `replicaCount`, `runningCount`, and `readyCount` expose deployment and readiness posture for the application.
+- **Stability Indicators:** Restart counters, including `restartCountTotal`, `restartCount5Mins`, `restartCount1Hour`, and `restartCount24Hours`, help detect crash loops and instability trends.
+- **API Health Visibility:** `apiStatuses` records the status of specific GET APIs, including name, response code, elapsed time, and failure reason, to aid diagnosis of control-plane and API issues.
+- **System-Scoped Governance:** Permissions inherited through `inheritpermissions: [systemStatus]` govern access, aligning visibility to the owning appliance system status context.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **CustomHeaders** | Pointer to [**[]NotificationHttpHeader**](NotificationHttpHeader.md) |  | [optional] 
 **FirstFailedRequest** | Pointer to **time.Time** | Holds the timestamp of the first failed request. The first time the notification is not delivered to the webhook server, the user will have the Warning alarm in the system. Next 48 hours the system still will try to notify the webhook server. If after 48 hours the server is not recovered, the system will mark this webhook as Inactive, and the user will have a critical alarm in the system. | [optional] [readonly] 
 **IsSecretSet** | Pointer to **bool** | Indicates whether the value of the &#39;secret&#39; property has been set. | [optional] [readonly] [default to false]
+**LastDiagnosticError** | Pointer to **string** | Diagnostic from the last webhook delivery or validation attempt. HTTP failures include the status and reason, a truncated extract of the endpoint error text, and the destination hostname. Network failures include a short error description and the destination hostname. Setup failures use a short first-party sentence. Complements lastNetworkError. | [optional] [readonly] 
 **LastNetworkError** | Pointer to **string** | Holds the error message for the user of the last response. | [optional] [readonly] 
 **LastResponseCode** | Pointer to **int64** | Holds the code of the last response, which helps to debug the issue in case if webhook server is not reachable. | [optional] [readonly] 
 **Secret** | Pointer to **string** | Prefer the Authentication property to configure how webhook deliveries are authenticated, including the Authorization header. This field holds the shared secret used for HMAC-SHA256 signing when no credential is configured, and remains supported for existing integrations. By this header developers of the webhooks servers can make sure that events are received from the trusted source - Intersight. | [optional] 
@@ -220,6 +221,31 @@ SetIsSecretSet sets IsSecretSet field to given value.
 `func (o *NotificationTriggerWebhook) HasIsSecretSet() bool`
 
 HasIsSecretSet returns a boolean if a field has been set.
+
+### GetLastDiagnosticError
+
+`func (o *NotificationTriggerWebhook) GetLastDiagnosticError() string`
+
+GetLastDiagnosticError returns the LastDiagnosticError field if non-nil, zero value otherwise.
+
+### GetLastDiagnosticErrorOk
+
+`func (o *NotificationTriggerWebhook) GetLastDiagnosticErrorOk() (*string, bool)`
+
+GetLastDiagnosticErrorOk returns a tuple with the LastDiagnosticError field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastDiagnosticError
+
+`func (o *NotificationTriggerWebhook) SetLastDiagnosticError(v string)`
+
+SetLastDiagnosticError sets LastDiagnosticError field to given value.
+
+### HasLastDiagnosticError
+
+`func (o *NotificationTriggerWebhook) HasLastDiagnosticError() bool`
+
+HasLastDiagnosticError returns a boolean if a field has been set.
 
 ### GetLastNetworkError
 
