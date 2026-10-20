@@ -14,10 +14,10 @@ The Intersight Terraform provider can be downloaded from the
 The providers are available for Darwin, FreeBSD(386, amd64, arm, arm64), 
 Linux(386, amd64, arm, arm64) and Windows(386 and amd64) systems.
 Documentation of the provider resources, data sources and configuration options can be found
-[here](https://github.com/CiscoDevNet/terraform-provider-intersight/tree/master/website/docs).
+[here](https://github.com/CiscoDevNet/terraform-provider-intersight/tree/main/website/docs).
 For a detailed explanation on usage of Intersight Terraform Provider, please read the
-[user guide](https://github.com/CiscoDevNet/terraform-provider-intersight/blob/master/USERGUIDE.md).
-Refer to [examples](https://github.com/CiscoDevNet/terraform-provider-intersight/tree/master/examples)
+[user guide](https://github.com/CiscoDevNet/terraform-provider-intersight/blob/main/USERGUIDE.md).
+Refer to [examples](https://github.com/CiscoDevNet/terraform-provider-intersight/tree/main/examples)
 for terraform configuration files of server configuration, deployment and OS installation.
 
 ## Developing the Provider
