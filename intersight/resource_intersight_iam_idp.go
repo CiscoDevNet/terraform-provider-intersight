@@ -121,6 +121,17 @@ func resourceIamIdp() *schema.Resource {
 					},
 				},
 			},
+			"certificate_expiry_time": {
+				Description: "Expiration time of the certificate in the SP metadata for the IdP.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -173,6 +184,17 @@ func resourceIamIdp() *schema.Resource {
 			},
 			"idp_entity_id": {
 				Description: "The Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP or Service Provider.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"idp_metadata_expiry_state": {
+				Description: "The expiration state of the certificates in the IdP metadata.\n* `expiration-beyond-warning-period` - The expiry date is not within the warning period.\n* `expiration-within-info-period` - The expiry date is within the info period.\n* `expiration-within-warning-period` - The expiry date is within the warning period.\n* `expiration-within-critical-period` - The expiry date is within the critical period.\n* `expired` - The expiry date has passed.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -399,6 +421,35 @@ func resourceIamIdp() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
+			"sp_cert_rotated": {
+				Description: "Status of the SP certificate rotation for the IdP.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"sp_metadata_expiry_state": {
+				Description: "The expiration state of the certificate in the SP metadata used by this IdP. The state is not-applicable when SAML assertion encryption and AuthNRequest signing are both disabled.\n* `expiration-within-info-period` - The expiry date is beyond 270 days.\n* `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days.\n* `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days.\n* `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days.\n* `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days.\n* `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days.\n* `expiration-within-critical-period` - The expiry date is within 7 days.\n* `expired` - The expiry date has passed.\n* `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"sp_metadata_hash_method": {
+				Description:  "Determines if the AuthNRequest sent to the Idp should be signed by the new (SHA-2) or the old (SHA-1) SP metadata during the grace period of SP SAML metadata rotation.\n* `Sha2` - The SAML SP metadata hash is generated using SHA-256 algorithm.\n* `Sha1` - The SAML SP metadata hash is generated using SHA-1 algorithm.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Sha2", "Sha1"}, false),
+				Optional:     true,
+				Default:      "Sha2",
+			},
 			"system": {
 				Description: "A reference to a iamSystem resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -558,16 +609,12 @@ func resourceIamIdp() *schema.Resource {
 								return
 							}},
 						"type": {
-							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}},
+							Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+							Optional:     true,
+							Default:      "KeyValue",
+						},
 						"value": {
 							Description:  "The string representation of a tag value.",
 							Type:         schema.TypeString,
@@ -1040,6 +1087,11 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 		o.SetSkipWarning(x)
 	}
 
+	if v, ok := d.GetOk("sp_metadata_hash_method"); ok {
+		x := (v.(string))
+		o.SetSpMetadataHashMethod(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1103,6 +1155,12 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {
@@ -1269,6 +1327,10 @@ func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interfac
 		return diag.Errorf("error occurred while setting property Ancestors in IamIdp object: %s", err.Error())
 	}
 
+	if err := d.Set("certificate_expiry_time", (s.GetCertificateExpiryTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property CertificateExpiryTime in IamIdp object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in IamIdp object: %s", err.Error())
 	}
@@ -1295,6 +1357,10 @@ func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interfac
 
 	if err := d.Set("idp_entity_id", (s.GetIdpEntityId())); err != nil {
 		return diag.Errorf("error occurred while setting property IdpEntityId in IamIdp object: %s", err.Error())
+	}
+
+	if err := d.Set("idp_metadata_expiry_state", (s.GetIdpMetadataExpiryState())); err != nil {
+		return diag.Errorf("error occurred while setting property IdpMetadataExpiryState in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("ldap_meta", flattenMapIamLdapMetaRelationship(s.GetLdapMeta(), d)); err != nil {
@@ -1343,6 +1409,18 @@ func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interfac
 
 	if err := d.Set("skip_warning", (s.GetSkipWarning())); err != nil {
 		return diag.Errorf("error occurred while setting property SkipWarning in IamIdp object: %s", err.Error())
+	}
+
+	if err := d.Set("sp_cert_rotated", (s.GetSpCertRotated())); err != nil {
+		return diag.Errorf("error occurred while setting property SpCertRotated in IamIdp object: %s", err.Error())
+	}
+
+	if err := d.Set("sp_metadata_expiry_state", (s.GetSpMetadataExpiryState())); err != nil {
+		return diag.Errorf("error occurred while setting property SpMetadataExpiryState in IamIdp object: %s", err.Error())
+	}
+
+	if err := d.Set("sp_metadata_hash_method", (s.GetSpMetadataHashMethod())); err != nil {
+		return diag.Errorf("error occurred while setting property SpMetadataHashMethod in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("system", flattenMapIamSystemRelationship(s.GetSystem(), d)); err != nil {
@@ -1498,6 +1576,12 @@ func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interf
 		o.SetSkipWarning(x)
 	}
 
+	if d.HasChange("sp_metadata_hash_method") {
+		v := d.Get("sp_metadata_hash_method")
+		x := (v.(string))
+		o.SetSpMetadataHashMethod(x)
+	}
+
 	if d.HasChange("tags") {
 		v := d.Get("tags")
 		x := make([]models.MoTag, 0)
@@ -1562,6 +1646,12 @@ func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interf
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {

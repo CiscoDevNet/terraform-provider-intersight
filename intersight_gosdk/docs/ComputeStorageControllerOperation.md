@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AdminAction** | Pointer to **string** | Administrative actions that can be performed on the Storage Controller. * &#x60;None&#x60; - No action on the selected Storage Controller. * &#x60;Import&#x60; - Import Foreign config action on the selected Storage Controller. * &#x60;Clear&#x60; - Clear Foreign config action on the selected Storage Controller. * &#x60;ClearConfig&#x60; - Clear Config action on the selected Storage Controller. * &#x60;ModifySecurity&#x60; - Modify Security on the selected Storage Controller. * &#x60;DisableSecurity&#x60; - Disable Security on the selected Storage Controller. * &#x60;UnlockDrives&#x60; - Set Unlock action state on the selected Storage Controller. | [optional] [default to "None"]
 **ControllerId** | Pointer to **string** | Storage Controller Id of the server. | [optional] 
 **EncryptionKey** | Pointer to **string** | EncryptionKey of the Storage Controller. | [optional] 
+**IsEncryptionKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;encryptionKey&#39; property has been set. | [optional] [readonly] [default to false]
 **RemoteMode** | Pointer to **bool** | RemoteMode on the Storage Controller. | [optional] 
 
 ## Methods
@@ -144,6 +145,31 @@ SetEncryptionKey sets EncryptionKey field to given value.
 `func (o *ComputeStorageControllerOperation) HasEncryptionKey() bool`
 
 HasEncryptionKey returns a boolean if a field has been set.
+
+### GetIsEncryptionKeySet
+
+`func (o *ComputeStorageControllerOperation) GetIsEncryptionKeySet() bool`
+
+GetIsEncryptionKeySet returns the IsEncryptionKeySet field if non-nil, zero value otherwise.
+
+### GetIsEncryptionKeySetOk
+
+`func (o *ComputeStorageControllerOperation) GetIsEncryptionKeySetOk() (*bool, bool)`
+
+GetIsEncryptionKeySetOk returns a tuple with the IsEncryptionKeySet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsEncryptionKeySet
+
+`func (o *ComputeStorageControllerOperation) SetIsEncryptionKeySet(v bool)`
+
+SetIsEncryptionKeySet sets IsEncryptionKeySet field to given value.
+
+### HasIsEncryptionKeySet
+
+`func (o *ComputeStorageControllerOperation) HasIsEncryptionKeySet() bool`
+
+HasIsEncryptionKeySet returns a boolean if a field has been set.
 
 ### GetRemoteMode
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,14 @@ var _ MappedNullable = &PolicyQualifier{}
 // PolicyQualifier Qualifiers to control the action being triggered.
 type PolicyQualifier struct {
 	MoBaseComplexType
+	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+	ClassId string `json:"ClassId"`
+	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+	ObjectType string `json:"ObjectType"`
+	// Possible disruption the configuration change might cause.
+	Disruption *string `json:"Disruption,omitempty"`
+	// The name of the policy for which, the deployment is performed.
+	Policy               *string `json:"Policy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,7 +53,133 @@ func NewPolicyQualifier(classId string, objectType string) *PolicyQualifier {
 // but it doesn't guarantee that properties required by API are set
 func NewPolicyQualifierWithDefaults() *PolicyQualifier {
 	this := PolicyQualifier{}
+	var classId string = "policy.Qualifier"
+	this.ClassId = classId
+	var objectType string = "policy.Qualifier"
+	this.ObjectType = objectType
 	return &this
+}
+
+// GetClassId returns the ClassId field value
+func (o *PolicyQualifier) GetClassId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ClassId
+}
+
+// GetClassIdOk returns a tuple with the ClassId field value
+// and a boolean to check if the value has been set.
+func (o *PolicyQualifier) GetClassIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ClassId, true
+}
+
+// SetClassId sets field value
+func (o *PolicyQualifier) SetClassId(v string) {
+	o.ClassId = v
+}
+
+// GetDefaultClassId returns the default value "policy.Qualifier" of the ClassId field.
+func (o *PolicyQualifier) GetDefaultClassId() interface{} {
+	return "policy.Qualifier"
+}
+
+// GetObjectType returns the ObjectType field value
+func (o *PolicyQualifier) GetObjectType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ObjectType
+}
+
+// GetObjectTypeOk returns a tuple with the ObjectType field value
+// and a boolean to check if the value has been set.
+func (o *PolicyQualifier) GetObjectTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ObjectType, true
+}
+
+// SetObjectType sets field value
+func (o *PolicyQualifier) SetObjectType(v string) {
+	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "policy.Qualifier" of the ObjectType field.
+func (o *PolicyQualifier) GetDefaultObjectType() interface{} {
+	return "policy.Qualifier"
+}
+
+// GetDisruption returns the Disruption field value if set, zero value otherwise.
+func (o *PolicyQualifier) GetDisruption() string {
+	if o == nil || IsNil(o.Disruption) {
+		var ret string
+		return ret
+	}
+	return *o.Disruption
+}
+
+// GetDisruptionOk returns a tuple with the Disruption field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicyQualifier) GetDisruptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Disruption) {
+		return nil, false
+	}
+	return o.Disruption, true
+}
+
+// HasDisruption returns a boolean if a field has been set.
+func (o *PolicyQualifier) HasDisruption() bool {
+	if o != nil && !IsNil(o.Disruption) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisruption gets a reference to the given string and assigns it to the Disruption field.
+func (o *PolicyQualifier) SetDisruption(v string) {
+	o.Disruption = &v
+}
+
+// GetPolicy returns the Policy field value if set, zero value otherwise.
+func (o *PolicyQualifier) GetPolicy() string {
+	if o == nil || IsNil(o.Policy) {
+		var ret string
+		return ret
+	}
+	return *o.Policy
+}
+
+// GetPolicyOk returns a tuple with the Policy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicyQualifier) GetPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.Policy) {
+		return nil, false
+	}
+	return o.Policy, true
+}
+
+// HasPolicy returns a boolean if a field has been set.
+func (o *PolicyQualifier) HasPolicy() bool {
+	if o != nil && !IsNil(o.Policy) {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicy gets a reference to the given string and assigns it to the Policy field.
+func (o *PolicyQualifier) SetPolicy(v string) {
+	o.Policy = &v
 }
 
 func (o PolicyQualifier) MarshalJSON() ([]byte, error) {
@@ -66,6 +200,20 @@ func (o PolicyQualifier) ToMap() (map[string]interface{}, error) {
 	if errMoBaseComplexType != nil {
 		return map[string]interface{}{}, errMoBaseComplexType
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
+	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Disruption) {
+		toSerialize["Disruption"] = o.Disruption
+	}
+	if !IsNil(o.Policy) {
+		toSerialize["Policy"] = o.Policy
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -85,7 +233,10 @@ func (o *PolicyQualifier) UnmarshalJSON(data []byte) (err error) {
 
 	// defaultValueFuncMap captures the default values for required properties.
 	// These values are used when required properties are missing from the payload.
-	defaultValueFuncMap := map[string]func() interface{}{}
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
 	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
@@ -114,6 +265,14 @@ func (o *PolicyQualifier) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 	type PolicyQualifierWithoutEmbeddedStruct struct {
+		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+		ClassId string `json:"ClassId"`
+		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+		ObjectType string `json:"ObjectType"`
+		// Possible disruption the configuration change might cause.
+		Disruption *string `json:"Disruption,omitempty"`
+		// The name of the policy for which, the deployment is performed.
+		Policy *string `json:"Policy,omitempty"`
 	}
 
 	varPolicyQualifierWithoutEmbeddedStruct := PolicyQualifierWithoutEmbeddedStruct{}
@@ -121,6 +280,10 @@ func (o *PolicyQualifier) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &varPolicyQualifierWithoutEmbeddedStruct)
 	if err == nil {
 		varPolicyQualifier := _PolicyQualifier{}
+		varPolicyQualifier.ClassId = varPolicyQualifierWithoutEmbeddedStruct.ClassId
+		varPolicyQualifier.ObjectType = varPolicyQualifierWithoutEmbeddedStruct.ObjectType
+		varPolicyQualifier.Disruption = varPolicyQualifierWithoutEmbeddedStruct.Disruption
+		varPolicyQualifier.Policy = varPolicyQualifierWithoutEmbeddedStruct.Policy
 		*o = PolicyQualifier(varPolicyQualifier)
 	} else {
 		return err
@@ -138,6 +301,10 @@ func (o *PolicyQualifier) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ClassId")
+		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Disruption")
+		delete(additionalProperties, "Policy")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

@@ -33,6 +33,8 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `expiry`:(string) Access token expiration date and time. 
+* `is_encrypted_refresh_token_set`:(bool) Indicates whether the value of the 'encryptedRefreshToken' property has been set. 
+* `is_encrypted_token_set`:(bool) Indicates whether the value of the 'encryptedToken' property has been set. 
 * `issuer`:(string) OAuth access token issuer. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

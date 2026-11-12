@@ -30,7 +30,6 @@ To access the ith object of the results obtained, use `data.intersight_license_a
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_id`:(string) Root user's ID of the account. 
 * `account_moid`:(string) The Account ID for this managed object. 
-* `agent_data`:(string) Agent trusted store data. 
 * `auth_expire_time`:(string) Authorization expiration time. 
 * `auth_initial_time`:(string) Intial authorization time. 
 * `auth_next_time`:(string) Next time for the authorization. 

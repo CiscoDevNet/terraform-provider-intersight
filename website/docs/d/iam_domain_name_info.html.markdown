@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_domain_name_info"
 description: |-
-        The organisation's domain name such as cisco.com that has been used to log in to Intersight.
+        DomainNameInfos represent verified (or pending verification) email domain ownership records within an account. They support DNS TXT-record validation and maintain verification lifecycle state.
+        #### Purpose
+        Establish and track domain ownership so login routing and IdP association based on email domain can be trusted and governed.
+        #### Key Concepts
+        - **DNS-based verification:** Uses TXT records to prove control of the domain.
+        - **Lifecycle status:** Tracks Pending/Verified/Failed/Expired verification states and expiry timestamps.
+        - **Action-driven updates:** Supports regenerate vs verify flows via an action field with conditional privileges.
+        - **Account-scoped trust signal:** Anchored to the account and used to strengthen identity-routing integrity.
 
 ---
 
 # Data Source: intersight_iam_domain_name_info
-The organisation's domain name such as cisco.com that has been used to log in to Intersight.
+DomainNameInfos represent verified (or pending verification) email domain ownership records within an account. They support DNS TXT-record validation and maintain verification lifecycle state.
+#### Purpose
+Establish and track domain ownership so login routing and IdP association based on email domain can be trusted and governed.
+#### Key Concepts
+- **DNS-based verification:** Uses TXT records to prove control of the domain.
+- **Lifecycle status:** Tracks Pending/Verified/Failed/Expired verification states and expiry timestamps.
+- **Action-driven updates:** Supports regenerate vs verify flows via an action field with conditional privileges.
+- **Account-scoped trust signal:** Anchored to the account and used to strengthen identity-routing integrity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

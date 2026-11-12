@@ -48,6 +48,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_state`:(string) This field identifies the Chassis Operational State. 
 * `package_version`:(string) Bundle version which the XFM and PSU firmware belongs to. 
 * `part_number`:(string) Part Number identifier for the chassis enclosure. 
+* `peer_interface_compatibility_issue_count`:(int) The count of incompatible peer ports connected to the switch card. 
 * `pid`:(string) This field identifies the Product ID for the chassis enclosure. 
 * `platform_type`:(string) The platform type that the chassis is a part of. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 

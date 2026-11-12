@@ -140,6 +140,41 @@ func getWorkflowCustomDataTypeDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"constraints": {
+			Description: "Constraints that must be applied to values supplied for this custom data type definition.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"data_validation": {
+						Description: "JavaScript expression used to ensure the supplied parameter value is valid.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"validation_error": {
+						Description: "Error message to return when a validation for the JavaScript based dataValidation constraint fails.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -441,7 +476,7 @@ func getWorkflowCustomDataTypeDefinitionSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -861,6 +896,49 @@ func dataSourceWorkflowCustomDataTypeDefinitionRead(c context.Context, d *schema
 		o.SetCompositeType(x)
 	}
 
+	if v, ok := d.GetOk("constraints"); ok {
+		p := make([]models.WorkflowCdtConstraints, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.WorkflowCdtConstraints{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.CdtConstraints")
+			if v, ok := l["data_validation"]; ok {
+				{
+					x := (v.(string))
+					o.SetDataValidation(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["validation_error"]; ok {
+				{
+					x := (v.(string))
+					o.SetValidationError(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetConstraints(x)
+		}
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
 		x, _ := time.Parse(time.RFC3339, v.(string))
@@ -1170,6 +1248,12 @@ func dataSourceWorkflowCustomDataTypeDefinitionRead(c context.Context, d *schema
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -1456,6 +1540,8 @@ func dataSourceWorkflowCustomDataTypeDefinitionRead(c context.Context, d *schema
 
 				temp["cloned_from"] = flattenMapWorkflowCustomDataTypeDefinitionRelationship(s.GetClonedFrom(), d)
 				temp["composite_type"] = (s.GetCompositeType())
+
+				temp["constraints"] = flattenMapWorkflowCdtConstraints(s.GetConstraints(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())

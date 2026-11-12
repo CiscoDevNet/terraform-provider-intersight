@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "feedback.FeedbackData"]
 **AccountName** | Pointer to **string** | Account name of the feedback sender, copied for persistence in case of account removal. | [optional] 
 **AlternativeFollowUpEmails** | Pointer to **[]string** |  | [optional] 
+**ApplianceName** | Pointer to **string** | Hostname of the Intersight Appliance that submitted the feedback. Empty string when the feedback was submitted directly from Intersight SaaS. | [optional] [readonly] 
 **Comment** | Pointer to **string** | User feedback text (a bug or a suggestion). | [optional] 
 **Email** | Pointer to **string** | User&#39;s email address details. | [optional] 
 **Evaluation** | Pointer to **string** | Evaluation rating provided by the user to capture user sentiment regarding the issue. * &#x60;Excellent&#x60; - Option indicating user&#39;s excellent evaluation. * &#x60;Poor&#x60; - Option indicating user&#39;s poor evaluation. * &#x60;Fair&#x60; - Option indicating user&#39;s fair evaluation. * &#x60;Good&#x60; - Option indicating user&#39;s good evaluation. | [optional] [default to "Excellent"]
@@ -137,6 +138,31 @@ HasAlternativeFollowUpEmails returns a boolean if a field has been set.
 `func (o *FeedbackFeedbackData) UnsetAlternativeFollowUpEmails()`
 
 UnsetAlternativeFollowUpEmails ensures that no value is present for AlternativeFollowUpEmails, not even an explicit nil
+### GetApplianceName
+
+`func (o *FeedbackFeedbackData) GetApplianceName() string`
+
+GetApplianceName returns the ApplianceName field if non-nil, zero value otherwise.
+
+### GetApplianceNameOk
+
+`func (o *FeedbackFeedbackData) GetApplianceNameOk() (*string, bool)`
+
+GetApplianceNameOk returns a tuple with the ApplianceName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplianceName
+
+`func (o *FeedbackFeedbackData) SetApplianceName(v string)`
+
+SetApplianceName sets ApplianceName field to given value.
+
+### HasApplianceName
+
+`func (o *FeedbackFeedbackData) HasApplianceName() bool`
+
+HasApplianceName returns a boolean if a field has been set.
+
 ### GetComment
 
 `func (o *FeedbackFeedbackData) GetComment() string`

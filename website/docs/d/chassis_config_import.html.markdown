@@ -3,12 +3,26 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_config_import"
 description: |-
-        Configuration import action will import the existing configuration from chassis and generate Intersight policies profile from it. At end of successful import, chassis will be assigned to the generated profile which has policies associated with it. No chassis profile or policies will be generated if configuration import fails.
+        The ConfigImport object enables the import of configuration from existing hardware (such as servers or chassis) to automatically generate corresponding profiles and policies within the management system.
+        #### Purpose
+        ConfigImport automates the onboarding process by translating the current hardware state into managed objects, ensuring consistency and rapid integration into centralized workflows. If the import is successful, hardware is assigned to the generated profile and associated policies.
+        #### Key Concepts
+        - **Automated Profile and Policy Generation:** Converts existing configurations into managed profiles and policies.
+        - **Seamless Hardware Onboarding:** Assigns hardware to newly created profiles for immediate management.
+        - **Operational Safeguards:** Ensures that profiles and policies are not generated if the import fails.
+        - **Controlled Access:** Access to import actions is governed by privilege sets for security.
 
 ---
 
 # Data Source: intersight_chassis_config_import
-Configuration import action will import the existing configuration from chassis and generate Intersight policies profile from it. At end of successful import, chassis will be assigned to the generated profile which has policies associated with it. No chassis profile or policies will be generated if configuration import fails.
+The ConfigImport object enables the import of configuration from existing hardware (such as servers or chassis) to automatically generate corresponding profiles and policies within the management system.
+#### Purpose
+ConfigImport automates the onboarding process by translating the current hardware state into managed objects, ensuring consistency and rapid integration into centralized workflows. If the import is successful, hardware is assigned to the generated profile and associated policies.
+#### Key Concepts
+- **Automated Profile and Policy Generation:** Converts existing configurations into managed profiles and policies.
+- **Seamless Hardware Onboarding:** Assigns hardware to newly created profiles for immediate management.
+- **Operational Safeguards:** Ensures that profiles and policies are not generated if the import fails.
+- **Controlled Access:** Access to import actions is governed by privilege sets for security.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

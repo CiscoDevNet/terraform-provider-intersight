@@ -205,6 +205,32 @@ func Test_intersight_NetworkApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test NetworkApiService GetNetworkIpAddressInfoByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NetworkApi.GetNetworkIpAddressInfoByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NetworkApiService GetNetworkIpAddressInfoList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.NetworkApi.GetNetworkIpAddressInfoList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test NetworkApiService GetNetworkLicenseFileByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

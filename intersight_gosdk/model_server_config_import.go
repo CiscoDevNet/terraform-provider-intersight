@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the ServerConfigImport type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ServerConfigImport{}
 
-// ServerConfigImport Configuration import action will import the existing configuration from physical server and generate Intersight policies and server profile from it. At end of successful import, server will be assigned to the generated profile which has policies associated with it. No server profile or policies will be generated if configuration import fails.
+// ServerConfigImport The ConfigImport object automates the translation of existing hardware configurations into managed system profiles and policies, streamlining the integration of hardware into centralized control. #### Purpose ConfigImport is designed to facilitate the rapid adoption of hardware by importing its configuration and generating the necessary management objects. Successful imports result in the hardware being assigned to the generated profile, establishing immediate operational control. #### Key Concepts - **Efficient Onboarding:** Translates hardware configurations into managed objects. - **Integrated Assignment:** Assigns imported hardware to new profiles and policies. - **Integrity and Reliability:** Ensures objects are only created on successful import. - **Privilege Governance:** Secure import actions managed through access controls.
 type ServerConfigImport struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

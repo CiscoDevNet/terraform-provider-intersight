@@ -68,6 +68,11 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `composite_type`:(bool) When true this data type definition is a collection of type definitions to represent composite data like JSON. 
+* `constraints`:(HashMap) - Constraints that must be applied to values supplied for this custom data type definition. 
+This complex property has following sub-properties:
+  + `data_validation`:(string) JavaScript expression used to ensure the supplied parameter value is valid. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `validation_error`:(string) Error message to return when a validation for the JavaScript based dataValidation constraint fails. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) A human-friendly description of this custom data type indicating it's domain and usage. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
@@ -118,7 +123,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `type_definition`:(Array)
 This complex property has following sub-properties:
@@ -256,6 +261,7 @@ This data type is used to represent primitives like string, floats and integers.
 This complex property has following sub-properties:
   + `constraints`:(HashMap) - Constraints that must be applied to the parameter value supplied for this data type. 
 This complex property has following sub-properties:
+    + `data_validation`:(string) JavaScript expression used to ensure the supplied parameter value is valid. 
     + `enum_list`:(Array)
 This complex property has following sub-properties:
     + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), round parenthesis ( () ), or an underscore (_) and must have an alphanumeric character. 
@@ -265,6 +271,7 @@ This complex property has following sub-properties:
   + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
+  + `validation_error`:(string) Provide a custom error message to return when a validation for the constraint fails. When there are multiple constraints, any constraint failure will return this message. 
   + `data_source_selector`:(Array)
 This complex property has following sub-properties:
     + `display_attributes`:

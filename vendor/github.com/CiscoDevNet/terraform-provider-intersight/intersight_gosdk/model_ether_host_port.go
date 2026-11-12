@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -33,7 +33,8 @@ type EtherHostPort struct {
 	// Breakout port member in the fabric extender.
 	AggregatePortId *int64 `json:"AggregatePortId,omitempty"`
 	// Fabric extender identifier for this port.
-	ModuleId *int64 `json:"ModuleId,omitempty"`
+	ModuleId                         *int64                                        `json:"ModuleId,omitempty"`
+	PeerInterfaceCompatibilityIssues NullableEtherPeerInterfaceCompatibilityIssues `json:"PeerInterfaceCompatibilityIssues,omitempty"`
 	// Host Port Speed of IO card or fabric extender.
 	Speed                *string                                     `json:"Speed,omitempty"`
 	EquipmentIoCardBase  NullableEquipmentIoCardBaseRelationship     `json:"EquipmentIoCardBase,omitempty"`
@@ -219,6 +220,49 @@ func (o *EtherHostPort) HasModuleId() bool {
 // SetModuleId gets a reference to the given int64 and assigns it to the ModuleId field.
 func (o *EtherHostPort) SetModuleId(v int64) {
 	o.ModuleId = &v
+}
+
+// GetPeerInterfaceCompatibilityIssues returns the PeerInterfaceCompatibilityIssues field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EtherHostPort) GetPeerInterfaceCompatibilityIssues() EtherPeerInterfaceCompatibilityIssues {
+	if o == nil || IsNil(o.PeerInterfaceCompatibilityIssues.Get()) {
+		var ret EtherPeerInterfaceCompatibilityIssues
+		return ret
+	}
+	return *o.PeerInterfaceCompatibilityIssues.Get()
+}
+
+// GetPeerInterfaceCompatibilityIssuesOk returns a tuple with the PeerInterfaceCompatibilityIssues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EtherHostPort) GetPeerInterfaceCompatibilityIssuesOk() (*EtherPeerInterfaceCompatibilityIssues, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PeerInterfaceCompatibilityIssues.Get(), o.PeerInterfaceCompatibilityIssues.IsSet()
+}
+
+// HasPeerInterfaceCompatibilityIssues returns a boolean if a field has been set.
+func (o *EtherHostPort) HasPeerInterfaceCompatibilityIssues() bool {
+	if o != nil && o.PeerInterfaceCompatibilityIssues.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPeerInterfaceCompatibilityIssues gets a reference to the given NullableEtherPeerInterfaceCompatibilityIssues and assigns it to the PeerInterfaceCompatibilityIssues field.
+func (o *EtherHostPort) SetPeerInterfaceCompatibilityIssues(v EtherPeerInterfaceCompatibilityIssues) {
+	o.PeerInterfaceCompatibilityIssues.Set(&v)
+}
+
+// SetPeerInterfaceCompatibilityIssuesNil sets the value for PeerInterfaceCompatibilityIssues to be an explicit nil
+func (o *EtherHostPort) SetPeerInterfaceCompatibilityIssuesNil() {
+	o.PeerInterfaceCompatibilityIssues.Set(nil)
+}
+
+// UnsetPeerInterfaceCompatibilityIssues ensures that no value is present for PeerInterfaceCompatibilityIssues, not even an explicit nil
+func (o *EtherHostPort) UnsetPeerInterfaceCompatibilityIssues() {
+	o.PeerInterfaceCompatibilityIssues.Unset()
 }
 
 // GetSpeed returns the Speed field value if set, zero value otherwise.
@@ -417,6 +461,9 @@ func (o EtherHostPort) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ModuleId) {
 		toSerialize["ModuleId"] = o.ModuleId
 	}
+	if o.PeerInterfaceCompatibilityIssues.IsSet() {
+		toSerialize["PeerInterfaceCompatibilityIssues"] = o.PeerInterfaceCompatibilityIssues.Get()
+	}
 	if !IsNil(o.Speed) {
 		toSerialize["Speed"] = o.Speed
 	}
@@ -489,7 +536,8 @@ func (o *EtherHostPort) UnmarshalJSON(data []byte) (err error) {
 		// Breakout port member in the fabric extender.
 		AggregatePortId *int64 `json:"AggregatePortId,omitempty"`
 		// Fabric extender identifier for this port.
-		ModuleId *int64 `json:"ModuleId,omitempty"`
+		ModuleId                         *int64                                        `json:"ModuleId,omitempty"`
+		PeerInterfaceCompatibilityIssues NullableEtherPeerInterfaceCompatibilityIssues `json:"PeerInterfaceCompatibilityIssues,omitempty"`
 		// Host Port Speed of IO card or fabric extender.
 		Speed               *string                                     `json:"Speed,omitempty"`
 		EquipmentIoCardBase NullableEquipmentIoCardBaseRelationship     `json:"EquipmentIoCardBase,omitempty"`
@@ -507,6 +555,7 @@ func (o *EtherHostPort) UnmarshalJSON(data []byte) (err error) {
 		varEtherHostPort.AdminState = varEtherHostPortWithoutEmbeddedStruct.AdminState
 		varEtherHostPort.AggregatePortId = varEtherHostPortWithoutEmbeddedStruct.AggregatePortId
 		varEtherHostPort.ModuleId = varEtherHostPortWithoutEmbeddedStruct.ModuleId
+		varEtherHostPort.PeerInterfaceCompatibilityIssues = varEtherHostPortWithoutEmbeddedStruct.PeerInterfaceCompatibilityIssues
 		varEtherHostPort.Speed = varEtherHostPortWithoutEmbeddedStruct.Speed
 		varEtherHostPort.EquipmentIoCardBase = varEtherHostPortWithoutEmbeddedStruct.EquipmentIoCardBase
 		varEtherHostPort.EquipmentSwitchCard = varEtherHostPortWithoutEmbeddedStruct.EquipmentSwitchCard
@@ -533,6 +582,7 @@ func (o *EtherHostPort) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "AdminState")
 		delete(additionalProperties, "AggregatePortId")
 		delete(additionalProperties, "ModuleId")
+		delete(additionalProperties, "PeerInterfaceCompatibilityIssues")
 		delete(additionalProperties, "Speed")
 		delete(additionalProperties, "EquipmentIoCardBase")
 		delete(additionalProperties, "EquipmentSwitchCard")

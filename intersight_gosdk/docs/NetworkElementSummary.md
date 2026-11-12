@@ -62,13 +62,14 @@ Name | Type | Description | Notes
 **OutOfBandIpv6Address** | Pointer to **string** | The IPv6 address of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpv6Error** | Pointer to **string** | The IPv6 error message if any issue occurred during address configuration. | [optional] [readonly] 
 **OutOfBandIpv6Gateway** | Pointer to **string** | The default IPv6 gateway of the network Element out-of-band management interface. | [optional] [readonly] 
-**OutOfBandIpv6Mode** | Pointer to **string** | The IPv6 address configuration mode of the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 address mode is not available or not applicable. * &#x60;slaac&#x60; - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC). * &#x60;static&#x60; - IPv6 address is statically configured. * &#x60;disabled&#x60; - IPv6 is disabled on the out-of-band management interface. | [optional] [readonly] [default to ""]
+**OutOfBandIpv6Mode** | Pointer to **string** | The IPv6 address configuration mode of the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 address mode is not available or not applicable. * &#x60;slaac&#x60; - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC). * &#x60;static&#x60; - IPv6 address is statically configured. * &#x60;disabled&#x60; - IPv6 is disabled on the out-of-band management interface. * &#x60;dhcpv6&#x60; - IPv6 address is configured via DHCPv6. * &#x60;dhcpv6Slaac&#x60; - IPv6 address is configured via DHCPv6 and SLAAC. | [optional] [readonly] [default to ""]
 **OutOfBandIpv6Prefix** | Pointer to **string** | The network mask of the network Element out-of-band management interface. | [optional] 
 **OutOfBandIpv6Redirects** | Pointer to **string** | The IPv6 ICMPv6 redirects configuration on the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 redirects configuration is not available or not applicable. * &#x60;enabled&#x60; - IPv6 ICMPv6 redirects are enabled on the management interface. * &#x60;disabled&#x60; - IPv6 ICMPv6 redirects are disabled on the management interface. | [optional] [readonly] [default to ""]
 **OutOfBandIpv6SlaacIidMode** | Pointer to **string** | The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address. * &#x60;&#x60; - The SLAAC IID mode is not available or not applicable. * &#x60;eui64&#x60; - The SLAAC IID is derived from the MAC address using the EUI-64 method. * &#x60;opaque&#x60; - The SLAAC IID is generated using an opaque identifier for privacy. | [optional] [readonly] [default to ""]
 **OutOfBandIpv6Status** | Pointer to **string** | The status of the IPv6 configuration on the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 address status is not available or not applicable. * &#x60;active&#x60; - The IPv6 address is active and in use. * &#x60;tentative&#x60; - The IPv6 address is in tentative state (Duplicate Address Detection in progress). * &#x60;duplicate&#x60; - The IPv6 address is a duplicate (DAD failed). * &#x60;deprecated&#x60; - The IPv6 address is deprecated (preferred lifetime expired). * &#x60;disabled&#x60; - The IPv6 address is disabled. * &#x60;waiting&#x60; - SLAAC is configured but waiting for a Router Advertisement to assign an address. * &#x60;error&#x60; - An error occurred during IPv6 address configuration. * &#x60;unknown&#x60; - The IPv6 address status is unknown. | [optional] [readonly] [default to ""]
 **OutOfBandMac** | Pointer to **string** | The MAC address of the network Element out-of-band management interface. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part number of the switch. | [optional] 
+**PeerFirmwareOutOfSync** | Pointer to **bool** | TThe flag to indicate the firmware of peer Fabric Interconnect is out of sync. | [optional] [readonly] 
 **Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
 **ReservedVlanStartId** | Pointer to **int64** | The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic. | [optional] [readonly] 
 **Revision** | Pointer to **string** | The product revision of the switch. | [optional] [readonly] 
@@ -1747,6 +1748,31 @@ SetPartNumber sets PartNumber field to given value.
 `func (o *NetworkElementSummary) HasPartNumber() bool`
 
 HasPartNumber returns a boolean if a field has been set.
+
+### GetPeerFirmwareOutOfSync
+
+`func (o *NetworkElementSummary) GetPeerFirmwareOutOfSync() bool`
+
+GetPeerFirmwareOutOfSync returns the PeerFirmwareOutOfSync field if non-nil, zero value otherwise.
+
+### GetPeerFirmwareOutOfSyncOk
+
+`func (o *NetworkElementSummary) GetPeerFirmwareOutOfSyncOk() (*bool, bool)`
+
+GetPeerFirmwareOutOfSyncOk returns a tuple with the PeerFirmwareOutOfSync field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeerFirmwareOutOfSync
+
+`func (o *NetworkElementSummary) SetPeerFirmwareOutOfSync(v bool)`
+
+SetPeerFirmwareOutOfSync sets PeerFirmwareOutOfSync field to given value.
+
+### HasPeerFirmwareOutOfSync
+
+`func (o *NetworkElementSummary) HasPeerFirmwareOutOfSync() bool`
+
+HasPeerFirmwareOutOfSync returns a boolean if a field has been set.
 
 ### GetPresence
 

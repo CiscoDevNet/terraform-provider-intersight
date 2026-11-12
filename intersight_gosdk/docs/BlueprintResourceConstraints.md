@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "blueprint.ResourceConstraints"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "blueprint.ResourceConstraints"]
 **InputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
+**ResourceTypeQualifiers** | Pointer to [**[]BlueprintResourceTypeQualifier**](BlueprintResourceTypeQualifier.md) |  | [optional] 
 
 ## Methods
 
@@ -102,6 +103,41 @@ HasInputDefinition returns a boolean if a field has been set.
 `func (o *BlueprintResourceConstraints) UnsetInputDefinition()`
 
 UnsetInputDefinition ensures that no value is present for InputDefinition, not even an explicit nil
+### GetResourceTypeQualifiers
+
+`func (o *BlueprintResourceConstraints) GetResourceTypeQualifiers() []BlueprintResourceTypeQualifier`
+
+GetResourceTypeQualifiers returns the ResourceTypeQualifiers field if non-nil, zero value otherwise.
+
+### GetResourceTypeQualifiersOk
+
+`func (o *BlueprintResourceConstraints) GetResourceTypeQualifiersOk() (*[]BlueprintResourceTypeQualifier, bool)`
+
+GetResourceTypeQualifiersOk returns a tuple with the ResourceTypeQualifiers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceTypeQualifiers
+
+`func (o *BlueprintResourceConstraints) SetResourceTypeQualifiers(v []BlueprintResourceTypeQualifier)`
+
+SetResourceTypeQualifiers sets ResourceTypeQualifiers field to given value.
+
+### HasResourceTypeQualifiers
+
+`func (o *BlueprintResourceConstraints) HasResourceTypeQualifiers() bool`
+
+HasResourceTypeQualifiers returns a boolean if a field has been set.
+
+### SetResourceTypeQualifiersNil
+
+`func (o *BlueprintResourceConstraints) SetResourceTypeQualifiersNil(b bool)`
+
+ SetResourceTypeQualifiersNil sets the value for ResourceTypeQualifiers to be an explicit nil
+
+### UnsetResourceTypeQualifiers
+`func (o *BlueprintResourceConstraints) UnsetResourceTypeQualifiers()`
+
+UnsetResourceTypeQualifiers ensures that no value is present for ResourceTypeQualifiers, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

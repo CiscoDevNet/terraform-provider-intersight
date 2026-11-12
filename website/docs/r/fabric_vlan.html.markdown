@@ -60,8 +60,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `auto_allow_on_cluster_links`:(bool) Enable this option to automatically allow the VLAN on inter-cluster links. To configure disjoint Layer 2 VLANs, 'Disable' must be specified together with 'AutoAllowOnUplinks.' Note that 'AutoAllowOnClusterLinks' cannot be enabled for the default VLAN 1 or the native VLAN. 
-* `auto_allow_on_uplinks`:(bool) Enable to automatically allow this VLAN on all uplinks. Disable must be specified alongside AutoAllowOnClusterLinks for disjoint layer 2 VLAN configuration. Default VLAN 1 cannot be configured as disjoint layer 2 VLAN. 
+* `auto_allow_on_cluster_links`:(bool) Enable this option to automatically allow the VLAN on intra-chassis links. The traffic is not carried outside the chassis. 
+* `auto_allow_on_inter_switch_ports`:(bool) Restricts this VLAN to intra-chassis traffic only. It does not carry traffic outside the chassis. 
+* `auto_allow_on_secure_router_roles`:(bool) Automatically applies VLANs to backplane ports connected to slots configured with secure router roles. 
+* `auto_allow_on_uplinks`:(bool) Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `eth_network_policy`:(HashMap) - A reference to a fabricEthNetworkPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -69,7 +71,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `is_native`:(bool) Used to define whether this VLAN is to be classified as 'native' for traffic in this FI. 
+* `is_native`:(bool) Used to define whether this VLAN is to be classified as 'native' for traffic in this switch. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `multicast_policy`:(HashMap) - A reference to a fabricMulticastPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -108,7 +110,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

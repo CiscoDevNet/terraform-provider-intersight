@@ -140,6 +140,11 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"hs_integrations_count": {
+			Description: "The number of Hypershield integrations on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"image_file_staging_count": {
 			Description: "Count of number of image operations of type stage.",
 			Type:        schema.TypeInt,
@@ -447,6 +452,11 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"smart_switch_count": {
+			Description: "The number of smart switches configured with a valid Hypershield connectivity status, excluding those whose status is 'Not Applicable'.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"sustainability_report_status": {
 			Description: "Status of sustainability report on fabric.",
 			Type:        schema.TypeString,
@@ -546,7 +556,7 @@ func getNiatelemetryNexusDashboardsSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -857,6 +867,11 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOkExists("feature_oper_status"); ok {
 		x := (v.(bool))
 		o.SetFeatureOperStatus(x)
+	}
+
+	if v, ok := d.GetOkExists("hs_integrations_count"); ok {
+		x := int64(v.(int))
+		o.SetHsIntegrationsCount(x)
 	}
 
 	if v, ok := d.GetOkExists("image_file_staging_count"); ok {
@@ -1227,6 +1242,11 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("smart_switch_count"); ok {
+		x := int64(v.(int))
+		o.SetSmartSwitchCount(x)
+	}
+
 	if v, ok := d.GetOk("sustainability_report_status"); ok {
 		x := (v.(string))
 		o.SetSustainabilityReportStatus(x)
@@ -1295,6 +1315,12 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {
@@ -1469,6 +1495,7 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				temp["endpoint_count"] = (s.GetEndpointCount())
 				temp["fabric_image_policies_count"] = (s.GetFabricImagePoliciesCount())
 				temp["feature_oper_status"] = (s.GetFeatureOperStatus())
+				temp["hs_integrations_count"] = (s.GetHsIntegrationsCount())
 				temp["image_file_staging_count"] = (s.GetImageFileStagingCount())
 				temp["ipam_oper_state"] = (s.GetIpamOperState())
 				temp["is_cluster_healthy"] = (s.GetIsClusterHealthy())
@@ -1511,6 +1538,7 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["release_version"] = (s.GetReleaseVersion())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["smart_switch_count"] = (s.GetSmartSwitchCount())
 				temp["sustainability_report_status"] = (s.GetSustainabilityReportStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

@@ -594,9 +594,13 @@ docs/BiosVfSelectMemoryRasConfiguration.md
 docs/BiosVfSelectMemoryRasConfigurationList.md
 docs/BiosVfSelectMemoryRasConfigurationRelationship.md
 docs/BiosVfSelectMemoryRasConfigurationResponse.md
+docs/BlueprintBaseBlueprintVersionReference.md
 docs/BlueprintBaseGeneratedObjectSourceFromSelector.md
 docs/BlueprintBaseGeneratedObjectSourceMetadata.md
+docs/BlueprintBaseOdataQualifier.md
 docs/BlueprintBlueprintDefinitionDependency.md
+docs/BlueprintBlueprintInheritanceReference.md
+docs/BlueprintCleanupOperation.md
 docs/BlueprintGeneratedObjectMetadata.md
 docs/BlueprintGeneratedObjectNew.md
 docs/BlueprintGeneratedObjectOperationTarget.md
@@ -606,10 +610,16 @@ docs/BlueprintGeneratedObjectSourceMerge.md
 docs/BlueprintGeneratedObjectSourceReference.md
 docs/BlueprintGeneratedObjectSourceSelector.md
 docs/BlueprintInputOperationType.md
+docs/BlueprintOdataDependencyQualifier.md
+docs/BlueprintOdataResourceQualifier.md
 docs/BlueprintPreGenerateOperation.md
 docs/BlueprintPropertyIteration.md
 docs/BlueprintResourceConstraints.md
+docs/BlueprintResourceTypeQualifier.md
 docs/BlueprintServiceItemDefinition.md
+docs/BlueprintValidatedConfigReference.md
+docs/BlueprintVersionCompatibilityInfo.md
+docs/BlueprintVersionReference.md
 docs/BootApi.md
 docs/BootBootloader.md
 docs/BootCddDevice.md
@@ -1028,6 +1038,7 @@ docs/CloudTfcWorkspaceVariables.md
 docs/CmrfCmRf.md
 docs/CommAbstractHttpProxyPolicy.md
 docs/CommApi.md
+docs/CommBaseTagUsage.md
 docs/CommGeoLocationDetails.md
 docs/CommGeoPoint.md
 docs/CommHttpProxyPolicy.md
@@ -1043,6 +1054,7 @@ docs/CommTagDefinitionList.md
 docs/CommTagDefinitionRelationship.md
 docs/CommTagDefinitionResponse.md
 docs/CommTagUsage.md
+docs/CommTagValueUsage.md
 docs/ComputeAdapterUnitConfig.md
 docs/ComputeAdapterUnitPropFilter.md
 docs/ComputeAlarmSummary.md
@@ -1510,6 +1522,8 @@ docs/EtherNetworkPort.md
 docs/EtherNetworkPortList.md
 docs/EtherNetworkPortRelationship.md
 docs/EtherNetworkPortResponse.md
+docs/EtherPeerInterfaceCompatibilityIssues.md
+docs/EtherPeerPortCompatibilityDetail.md
 docs/EtherPhysicalPort.md
 docs/EtherPhysicalPortBase.md
 docs/EtherPhysicalPortBaseRelationship.md
@@ -1666,6 +1680,8 @@ docs/FabricPcMemberResponse.md
 docs/FabricPcOperation.md
 docs/FabricPcOperationList.md
 docs/FabricPcOperationResponse.md
+docs/FabricPeerInterfaceCompatibilityIssue.md
+docs/FabricPeerInterfaceCompatibilityIssues.md
 docs/FabricPfcWatchDog.md
 docs/FabricPinGroup.md
 docs/FabricPortBase.md
@@ -2507,8 +2523,6 @@ docs/IaasUcsdMessages.md
 docs/IaasUcsdMessagesList.md
 docs/IaasUcsdMessagesResponse.md
 docs/IaasWorkflowSteps.md
-docs/IamAbstractClientApplication.md
-docs/IamAbstractClientApplicationRelationship.md
 docs/IamAbstractQualifier.md
 docs/IamAbstractQualifierRelationship.md
 docs/IamAccount.md
@@ -2528,7 +2542,6 @@ docs/IamApiKey.md
 docs/IamApiKeyList.md
 docs/IamApiKeyRelationship.md
 docs/IamApiKeyResponse.md
-docs/IamAppCredentials.md
 docs/IamAppRegistration.md
 docs/IamAppRegistrationList.md
 docs/IamAppRegistrationRelationship.md
@@ -2536,7 +2549,6 @@ docs/IamAppRegistrationResponse.md
 docs/IamBannerMessage.md
 docs/IamBannerMessageList.md
 docs/IamBannerMessageResponse.md
-docs/IamBasicAuthCredentials.md
 docs/IamCertificate.md
 docs/IamCertificateList.md
 docs/IamCertificateRelationship.md
@@ -3205,6 +3217,10 @@ docs/NetworkInterfaceList.md
 docs/NetworkInterfaceListList.md
 docs/NetworkInterfaceListRelationship.md
 docs/NetworkInterfaceListResponse.md
+docs/NetworkIpAddressInfo.md
+docs/NetworkIpAddressInfoList.md
+docs/NetworkIpAddressInfoRelationship.md
+docs/NetworkIpAddressInfoResponse.md
 docs/NetworkLicenseFile.md
 docs/NetworkLicenseFileList.md
 docs/NetworkLicenseFileRelationship.md
@@ -3356,6 +3372,10 @@ docs/NiatelemetryAaaTacacsProviderDetails.md
 docs/NiatelemetryAaaTacacsProviderDetailsList.md
 docs/NiatelemetryAaaTacacsProviderDetailsResponse.md
 docs/NiatelemetryAdvisories.md
+docs/NiatelemetryAdvisory.md
+docs/NiatelemetryAdvisoryList.md
+docs/NiatelemetryAdvisoryRecommendation.md
+docs/NiatelemetryAdvisoryResponse.md
 docs/NiatelemetryAnomaly.md
 docs/NiatelemetryAnomalyList.md
 docs/NiatelemetryAnomalyResponse.md
@@ -3449,6 +3469,8 @@ docs/NiatelemetryClusterResponse.md
 docs/NiatelemetryCommonPolicies.md
 docs/NiatelemetryCommonPoliciesList.md
 docs/NiatelemetryCommonPoliciesResponse.md
+docs/NiatelemetryCompensatingControlCounts.md
+docs/NiatelemetryCompensatingControlDetails.md
 docs/NiatelemetryController.md
 docs/NiatelemetryControllerList.md
 docs/NiatelemetryControllerResponse.md
@@ -3527,6 +3549,7 @@ docs/NiatelemetryHttpsAclFilterDetails.md
 docs/NiatelemetryHttpsAclFilterDetailsList.md
 docs/NiatelemetryHttpsAclFilterDetailsResponse.md
 docs/NiatelemetryImageDetail.md
+docs/NiatelemetryImpactedNodes.md
 docs/NiatelemetryInsightGroupDetails.md
 docs/NiatelemetryInsightGroupDetailsList.md
 docs/NiatelemetryInsightGroupDetailsResponse.md
@@ -3678,6 +3701,7 @@ docs/NiatelemetryTenant.md
 docs/NiatelemetryTenantList.md
 docs/NiatelemetryTenantResponse.md
 docs/NiatelemetryVniStatus.md
+docs/NiatelemetryVpcData.md
 docs/NiatelemetryVpcDetails.md
 docs/NotificationAbstractAdvisoryFilter.md
 docs/NotificationAbstractCondition.md
@@ -4077,6 +4101,7 @@ docs/ResourceAdaptorsRangeFilter.md
 docs/ResourceAdvancedFilter.md
 docs/ResourceApi.md
 docs/ResourceBladeQualifier.md
+docs/ResourceBlueprintResourceQualifier.md
 docs/ResourceChassisAndSlotQualification.md
 docs/ResourceChassisIdRangeFilter.md
 docs/ResourceChassisServersQualifier.md
@@ -5057,6 +5082,7 @@ docs/TamTextFsmTemplateDataSource.md
 docs/TaskApi.md
 docs/TaskCatalystSdwanScopedInventory.md
 docs/TaskFabricMosScopedInventory.md
+docs/TaskFileDownloadInfo.md
 docs/TaskHciScopedInventory.md
 docs/TaskHitachiScopedInventory.md
 docs/TaskHyperFlexManagementScopedInventory.md
@@ -5071,6 +5097,9 @@ docs/TaskNexusVlanScopedInventory.md
 docs/TaskPureFlashBladeScopedInventory.md
 docs/TaskPureScopedInventory.md
 docs/TaskServerScopedInventory.md
+docs/TaskWorkflowAction.md
+docs/TaskWorkflowActionList.md
+docs/TaskWorkflowActionResponse.md
 docs/TechsupportmanagementApi.md
 docs/TechsupportmanagementApplianceParam.md
 docs/TechsupportmanagementCollectionControlPolicy.md
@@ -5672,6 +5701,7 @@ docs/WorkflowCatalogServiceRequest.md
 docs/WorkflowCatalogServiceRequestList.md
 docs/WorkflowCatalogServiceRequestRelationship.md
 docs/WorkflowCatalogServiceRequestResponse.md
+docs/WorkflowCdtConstraints.md
 docs/WorkflowCliCommand.md
 docs/WorkflowComments.md
 docs/WorkflowConstraints.md
@@ -5688,6 +5718,7 @@ docs/WorkflowDataSourceSelector.md
 docs/WorkflowDecisionCase.md
 docs/WorkflowDecisionTask.md
 docs/WorkflowDefaultValue.md
+docs/WorkflowDeprecationInfo.md
 docs/WorkflowDisplayMeta.md
 docs/WorkflowDynamicTemplateParserDataType.md
 docs/WorkflowEndTask.md
@@ -5785,6 +5816,8 @@ docs/WorkflowSshSession.md
 docs/WorkflowStartTask.md
 docs/WorkflowSubWorkflowTask.md
 docs/WorkflowSuccessEndTask.md
+docs/WorkflowSupportInfo.md
+docs/WorkflowSupportObjectReference.md
 docs/WorkflowTargetContext.md
 docs/WorkflowTargetDataType.md
 docs/WorkflowTargetProperty.md
@@ -5854,13 +5887,20 @@ docs/WorkloadBlueprint.md
 docs/WorkloadBlueprintInputReference.md
 docs/WorkloadBlueprintList.md
 docs/WorkloadBlueprintReference.md
+docs/WorkloadBlueprintRelationship.md
 docs/WorkloadBlueprintResponse.md
+docs/WorkloadBlueprintVersionUpdateState.md
 docs/WorkloadCanaryDeployment.md
+docs/WorkloadCleanupOperationInput.md
 docs/WorkloadClearWorkloadTag.md
 docs/WorkloadClearWorkloadTagList.md
 docs/WorkloadClearWorkloadTagResponse.md
 docs/WorkloadCloneStatus.md
 docs/WorkloadCloneStatusEntry.md
+docs/WorkloadDeferredCleanupInput.md
+docs/WorkloadDeferredCleanupInputList.md
+docs/WorkloadDeferredCleanupInputRelationship.md
+docs/WorkloadDeferredCleanupInputResponse.md
 docs/WorkloadDefinitionMapper.md
 docs/WorkloadDeploymentBlueprintInputType.md
 docs/WorkloadDeploymentChangeDetail.md
@@ -5869,6 +5909,11 @@ docs/WorkloadDeploymentInputList.md
 docs/WorkloadDeploymentInputRelationship.md
 docs/WorkloadDeploymentInputResponse.md
 docs/WorkloadGeneratedObject.md
+docs/WorkloadInputSourceReference.md
+docs/WorkloadManifest.md
+docs/WorkloadManifestItem.md
+docs/WorkloadManifestList.md
+docs/WorkloadManifestResponse.md
 docs/WorkloadRenameRequest.md
 docs/WorkloadResourceConstraint.md
 docs/WorkloadRolloutStrategy.md
@@ -6355,9 +6400,13 @@ model_bios_vf_select_memory_ras_configuration.go
 model_bios_vf_select_memory_ras_configuration_list.go
 model_bios_vf_select_memory_ras_configuration_relationship.go
 model_bios_vf_select_memory_ras_configuration_response.go
+model_blueprint_base_blueprint_version_reference.go
 model_blueprint_base_generated_object_source_from_selector.go
 model_blueprint_base_generated_object_source_metadata.go
+model_blueprint_base_odata_qualifier.go
 model_blueprint_blueprint_definition_dependency.go
+model_blueprint_blueprint_inheritance_reference.go
+model_blueprint_cleanup_operation.go
 model_blueprint_generated_object_metadata.go
 model_blueprint_generated_object_new.go
 model_blueprint_generated_object_operation_target.go
@@ -6367,10 +6416,16 @@ model_blueprint_generated_object_source_merge.go
 model_blueprint_generated_object_source_reference.go
 model_blueprint_generated_object_source_selector.go
 model_blueprint_input_operation_type.go
+model_blueprint_odata_dependency_qualifier.go
+model_blueprint_odata_resource_qualifier.go
 model_blueprint_pre_generate_operation.go
 model_blueprint_property_iteration.go
 model_blueprint_resource_constraints.go
+model_blueprint_resource_type_qualifier.go
 model_blueprint_service_item_definition.go
+model_blueprint_validated_config_reference.go
+model_blueprint_version_compatibility_info.go
+model_blueprint_version_reference.go
 model_boot_bootloader.go
 model_boot_cdd_device.go
 model_boot_cdd_device_list.go
@@ -6780,6 +6835,7 @@ model_cloud_tfc_workspace_response.go
 model_cloud_tfc_workspace_variables.go
 model_cmrf_cm_rf.go
 model_comm_abstract_http_proxy_policy.go
+model_comm_base_tag_usage.go
 model_comm_geo_location_details.go
 model_comm_geo_point.go
 model_comm_http_proxy_policy.go
@@ -6795,6 +6851,7 @@ model_comm_tag_definition_list.go
 model_comm_tag_definition_relationship.go
 model_comm_tag_definition_response.go
 model_comm_tag_usage.go
+model_comm_tag_value_usage.go
 model_compute_adapter_unit_config.go
 model_compute_adapter_unit_prop_filter.go
 model_compute_alarm_summary.go
@@ -7250,6 +7307,8 @@ model_ether_network_port.go
 model_ether_network_port_list.go
 model_ether_network_port_relationship.go
 model_ether_network_port_response.go
+model_ether_peer_interface_compatibility_issues.go
+model_ether_peer_port_compatibility_detail.go
 model_ether_physical_port.go
 model_ether_physical_port_base.go
 model_ether_physical_port_base_relationship.go
@@ -7404,6 +7463,8 @@ model_fabric_pc_member_response.go
 model_fabric_pc_operation.go
 model_fabric_pc_operation_list.go
 model_fabric_pc_operation_response.go
+model_fabric_peer_interface_compatibility_issue.go
+model_fabric_peer_interface_compatibility_issues.go
 model_fabric_pfc_watch_dog.go
 model_fabric_pin_group.go
 model_fabric_port_base.go
@@ -8233,8 +8294,6 @@ model_iaas_ucsd_messages.go
 model_iaas_ucsd_messages_list.go
 model_iaas_ucsd_messages_response.go
 model_iaas_workflow_steps.go
-model_iam_abstract_client_application.go
-model_iam_abstract_client_application_relationship.go
 model_iam_abstract_qualifier.go
 model_iam_abstract_qualifier_relationship.go
 model_iam_account.go
@@ -8253,7 +8312,6 @@ model_iam_api_key.go
 model_iam_api_key_list.go
 model_iam_api_key_relationship.go
 model_iam_api_key_response.go
-model_iam_app_credentials.go
 model_iam_app_registration.go
 model_iam_app_registration_list.go
 model_iam_app_registration_relationship.go
@@ -8261,7 +8319,6 @@ model_iam_app_registration_response.go
 model_iam_banner_message.go
 model_iam_banner_message_list.go
 model_iam_banner_message_response.go
-model_iam_basic_auth_credentials.go
 model_iam_certificate.go
 model_iam_certificate_list.go
 model_iam_certificate_relationship.go
@@ -8913,6 +8970,10 @@ model_network_interface_list.go
 model_network_interface_list_list.go
 model_network_interface_list_relationship.go
 model_network_interface_list_response.go
+model_network_ip_address_info.go
+model_network_ip_address_info_list.go
+model_network_ip_address_info_relationship.go
+model_network_ip_address_info_response.go
 model_network_license_file.go
 model_network_license_file_list.go
 model_network_license_file_relationship.go
@@ -9062,6 +9123,10 @@ model_niatelemetry_aaa_tacacs_provider_details.go
 model_niatelemetry_aaa_tacacs_provider_details_list.go
 model_niatelemetry_aaa_tacacs_provider_details_response.go
 model_niatelemetry_advisories.go
+model_niatelemetry_advisory.go
+model_niatelemetry_advisory_list.go
+model_niatelemetry_advisory_recommendation.go
+model_niatelemetry_advisory_response.go
 model_niatelemetry_anomaly.go
 model_niatelemetry_anomaly_list.go
 model_niatelemetry_anomaly_response.go
@@ -9154,6 +9219,8 @@ model_niatelemetry_cluster_response.go
 model_niatelemetry_common_policies.go
 model_niatelemetry_common_policies_list.go
 model_niatelemetry_common_policies_response.go
+model_niatelemetry_compensating_control_counts.go
+model_niatelemetry_compensating_control_details.go
 model_niatelemetry_controller.go
 model_niatelemetry_controller_list.go
 model_niatelemetry_controller_response.go
@@ -9232,6 +9299,7 @@ model_niatelemetry_https_acl_filter_details.go
 model_niatelemetry_https_acl_filter_details_list.go
 model_niatelemetry_https_acl_filter_details_response.go
 model_niatelemetry_image_detail.go
+model_niatelemetry_impacted_nodes.go
 model_niatelemetry_insight_group_details.go
 model_niatelemetry_insight_group_details_list.go
 model_niatelemetry_insight_group_details_response.go
@@ -9383,6 +9451,7 @@ model_niatelemetry_tenant.go
 model_niatelemetry_tenant_list.go
 model_niatelemetry_tenant_response.go
 model_niatelemetry_vni_status.go
+model_niatelemetry_vpc_data.go
 model_niatelemetry_vpc_details.go
 model_notification_abstract_advisory_filter.go
 model_notification_abstract_condition.go
@@ -9764,6 +9833,7 @@ model_resource_abstract_resource_qualification_policy_relationship.go
 model_resource_adaptors_range_filter.go
 model_resource_advanced_filter.go
 model_resource_blade_qualifier.go
+model_resource_blueprint_resource_qualifier.go
 model_resource_chassis_and_slot_qualification.go
 model_resource_chassis_id_range_filter.go
 model_resource_chassis_servers_qualifier.go
@@ -10725,6 +10795,7 @@ model_tam_severity.go
 model_tam_text_fsm_template_data_source.go
 model_task_catalyst_sdwan_scoped_inventory.go
 model_task_fabric_mos_scoped_inventory.go
+model_task_file_download_info.go
 model_task_hci_scoped_inventory.go
 model_task_hitachi_scoped_inventory.go
 model_task_hyper_flex_management_scoped_inventory.go
@@ -10739,6 +10810,9 @@ model_task_nexus_vlan_scoped_inventory.go
 model_task_pure_flash_blade_scoped_inventory.go
 model_task_pure_scoped_inventory.go
 model_task_server_scoped_inventory.go
+model_task_workflow_action.go
+model_task_workflow_action_list.go
+model_task_workflow_action_response.go
 model_techsupportmanagement_appliance_param.go
 model_techsupportmanagement_collection_control_policy.go
 model_techsupportmanagement_collection_control_policy_list.go
@@ -11324,6 +11398,7 @@ model_workflow_catalog_service_request.go
 model_workflow_catalog_service_request_list.go
 model_workflow_catalog_service_request_relationship.go
 model_workflow_catalog_service_request_response.go
+model_workflow_cdt_constraints.go
 model_workflow_cli_command.go
 model_workflow_comments.go
 model_workflow_constraints.go
@@ -11340,6 +11415,7 @@ model_workflow_data_source_selector.go
 model_workflow_decision_case.go
 model_workflow_decision_task.go
 model_workflow_default_value.go
+model_workflow_deprecation_info.go
 model_workflow_display_meta.go
 model_workflow_dynamic_template_parser_data_type.go
 model_workflow_end_task.go
@@ -11437,6 +11513,8 @@ model_workflow_ssh_session.go
 model_workflow_start_task.go
 model_workflow_sub_workflow_task.go
 model_workflow_success_end_task.go
+model_workflow_support_info.go
+model_workflow_support_object_reference.go
 model_workflow_target_context.go
 model_workflow_target_data_type.go
 model_workflow_target_property.go
@@ -11505,13 +11583,20 @@ model_workload_blueprint.go
 model_workload_blueprint_input_reference.go
 model_workload_blueprint_list.go
 model_workload_blueprint_reference.go
+model_workload_blueprint_relationship.go
 model_workload_blueprint_response.go
+model_workload_blueprint_version_update_state.go
 model_workload_canary_deployment.go
+model_workload_cleanup_operation_input.go
 model_workload_clear_workload_tag.go
 model_workload_clear_workload_tag_list.go
 model_workload_clear_workload_tag_response.go
 model_workload_clone_status.go
 model_workload_clone_status_entry.go
+model_workload_deferred_cleanup_input.go
+model_workload_deferred_cleanup_input_list.go
+model_workload_deferred_cleanup_input_relationship.go
+model_workload_deferred_cleanup_input_response.go
 model_workload_definition_mapper.go
 model_workload_deployment_blueprint_input_type.go
 model_workload_deployment_change_detail.go
@@ -11520,6 +11605,11 @@ model_workload_deployment_input_list.go
 model_workload_deployment_input_relationship.go
 model_workload_deployment_input_response.go
 model_workload_generated_object.go
+model_workload_input_source_reference.go
+model_workload_manifest.go
+model_workload_manifest_item.go
+model_workload_manifest_list.go
+model_workload_manifest_response.go
 model_workload_rename_request.go
 model_workload_resource_constraint.go
 model_workload_rollout_strategy.go

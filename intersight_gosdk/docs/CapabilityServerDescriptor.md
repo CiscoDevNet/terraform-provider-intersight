@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.ServerDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.ServerDescriptor"]
+**FullWidth** | Pointer to **bool** | Indicates whether the server model is a full-width blade/sled. | [optional] [readonly] [default to false]
 **IsNcsiEnabled** | Pointer to **bool** | Indicates whether the CIMC to VIC side-band interface is enabled on the server. | [optional] 
 **IsPplEnabled** | Pointer to **bool** | Indicates Processor Package Power Limit for the server. | [optional] [default to false]
 **MlomAdapterPcieSlotNumber** | Pointer to **int64** | Indicates PCIe Slot numerical value for each Server model MLOM slot. | [optional] 
@@ -71,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetFullWidth
+
+`func (o *CapabilityServerDescriptor) GetFullWidth() bool`
+
+GetFullWidth returns the FullWidth field if non-nil, zero value otherwise.
+
+### GetFullWidthOk
+
+`func (o *CapabilityServerDescriptor) GetFullWidthOk() (*bool, bool)`
+
+GetFullWidthOk returns a tuple with the FullWidth field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFullWidth
+
+`func (o *CapabilityServerDescriptor) SetFullWidth(v bool)`
+
+SetFullWidth sets FullWidth field to given value.
+
+### HasFullWidth
+
+`func (o *CapabilityServerDescriptor) HasFullWidth() bool`
+
+HasFullWidth returns a boolean if a field has been set.
 
 ### GetIsNcsiEnabled
 

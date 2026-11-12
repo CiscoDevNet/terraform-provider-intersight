@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Authentication** | Pointer to [**NullableAssetCredential**](AssetCredential.md) |  | [optional] 
 **ClearSecret** | Pointer to **bool** | When set to true on update, the HMAC shared secret is not carried over from the previous stored action when the request omits the write-only &#x60;&#x60;secret&#x60;&#x60; field. Use this to clear the signing key without re-sending a secret value. When false or not set, the prior behavior applies: the previous secret is preserved on PATCH if &#x60;&#x60;secret&#x60;&#x60; is omitted. | [optional] [default to false]
 **CustomHeaders** | Pointer to [**[]NotificationHttpHeader**](NotificationHttpHeader.md) |  | [optional] 
+**EnableProxy** | Pointer to **bool** | When true, routes outbound webhook traffic through the appliance&#39;s configured data center proxy (via Equinox). Only applicable for on-prem appliance deployments; ignored on SaaS. | [optional] [default to false]
 **FirstFailedRequest** | Pointer to **time.Time** | Holds the timestamp of the first failed request. The first time the notification is not delivered to the webhook server, the user will have the Warning alarm in the system. Next 48 hours the system still will try to notify the webhook server. If after 48 hours the server is not recovered, the system will mark this webhook as Inactive, and the user will have a critical alarm in the system. | [optional] [readonly] 
 **IsSecretSet** | Pointer to **bool** | Indicates whether the value of the &#39;secret&#39; property has been set. | [optional] [readonly] [default to false]
 **LastDiagnosticError** | Pointer to **string** | Diagnostic from the last webhook delivery or validation attempt. HTTP failures include the status and reason, a truncated extract of the endpoint error text, and the destination hostname. Network failures include a short error description and the destination hostname. Setup failures use a short first-party sentence. Complements lastNetworkError. | [optional] [readonly] 
@@ -172,6 +173,31 @@ HasCustomHeaders returns a boolean if a field has been set.
 `func (o *NotificationTriggerWebhook) UnsetCustomHeaders()`
 
 UnsetCustomHeaders ensures that no value is present for CustomHeaders, not even an explicit nil
+### GetEnableProxy
+
+`func (o *NotificationTriggerWebhook) GetEnableProxy() bool`
+
+GetEnableProxy returns the EnableProxy field if non-nil, zero value otherwise.
+
+### GetEnableProxyOk
+
+`func (o *NotificationTriggerWebhook) GetEnableProxyOk() (*bool, bool)`
+
+GetEnableProxyOk returns a tuple with the EnableProxy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableProxy
+
+`func (o *NotificationTriggerWebhook) SetEnableProxy(v bool)`
+
+SetEnableProxy sets EnableProxy field to given value.
+
+### HasEnableProxy
+
+`func (o *NotificationTriggerWebhook) HasEnableProxy() bool`
+
+HasEnableProxy returns a boolean if a field has been set.
+
 ### GetFirstFailedRequest
 
 `func (o *NotificationTriggerWebhook) GetFirstFailedRequest() time.Time`

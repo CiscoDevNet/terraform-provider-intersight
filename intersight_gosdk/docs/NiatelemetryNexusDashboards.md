@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **EndpointCount** | Pointer to **int64** | Total number of endpoints on fabric. | [optional] [readonly] 
 **FabricImagePoliciesCount** | Pointer to **int64** | Count of number of devices with attached image policies. | [optional] [readonly] 
 **FeatureOperStatus** | Pointer to **bool** | Feature Operation status of change management. | [optional] 
+**HsIntegrationsCount** | Pointer to **int64** | The number of Hypershield integrations on the fabric. | [optional] 
 **ImageFileStagingCount** | Pointer to **int64** | Count of number of image operations of type stage. | [optional] [readonly] 
 **IpamOperState** | Pointer to **string** | Feature Operation status of Integration with IPAM. | [optional] [readonly] 
 **IsClusterHealthy** | Pointer to **string** | Health of Nexus Dashboard cluster. | [optional] 
@@ -48,6 +49,7 @@ Name | Type | Description | Notes
 **RecVersionList** | Pointer to **[]string** |  | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **ReleaseVersion** | Pointer to **[]string** |  | [optional] 
+**SmartSwitchCount** | Pointer to **int64** | The number of smart switches configured with a valid Hypershield connectivity status, excluding those whose status is &#39;Not Applicable&#39;. | [optional] 
 **SustainabilityReportStatus** | Pointer to **string** | Status of sustainability report on fabric. | [optional] [readonly] 
 **TypeOfSiteInMso** | Pointer to **string** | Type of site added to Multi-Site Orchestrator. | [optional] 
 **VcenterCount** | Pointer to **int64** | Number of vCenters integrated into the fabric. | [optional] [readonly] 
@@ -449,6 +451,31 @@ SetFeatureOperStatus sets FeatureOperStatus field to given value.
 `func (o *NiatelemetryNexusDashboards) HasFeatureOperStatus() bool`
 
 HasFeatureOperStatus returns a boolean if a field has been set.
+
+### GetHsIntegrationsCount
+
+`func (o *NiatelemetryNexusDashboards) GetHsIntegrationsCount() int64`
+
+GetHsIntegrationsCount returns the HsIntegrationsCount field if non-nil, zero value otherwise.
+
+### GetHsIntegrationsCountOk
+
+`func (o *NiatelemetryNexusDashboards) GetHsIntegrationsCountOk() (*int64, bool)`
+
+GetHsIntegrationsCountOk returns a tuple with the HsIntegrationsCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHsIntegrationsCount
+
+`func (o *NiatelemetryNexusDashboards) SetHsIntegrationsCount(v int64)`
+
+SetHsIntegrationsCount sets HsIntegrationsCount field to given value.
+
+### HasHsIntegrationsCount
+
+`func (o *NiatelemetryNexusDashboards) HasHsIntegrationsCount() bool`
+
+HasHsIntegrationsCount returns a boolean if a field has been set.
 
 ### GetImageFileStagingCount
 
@@ -1225,6 +1252,31 @@ HasReleaseVersion returns a boolean if a field has been set.
 `func (o *NiatelemetryNexusDashboards) UnsetReleaseVersion()`
 
 UnsetReleaseVersion ensures that no value is present for ReleaseVersion, not even an explicit nil
+### GetSmartSwitchCount
+
+`func (o *NiatelemetryNexusDashboards) GetSmartSwitchCount() int64`
+
+GetSmartSwitchCount returns the SmartSwitchCount field if non-nil, zero value otherwise.
+
+### GetSmartSwitchCountOk
+
+`func (o *NiatelemetryNexusDashboards) GetSmartSwitchCountOk() (*int64, bool)`
+
+GetSmartSwitchCountOk returns a tuple with the SmartSwitchCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSmartSwitchCount
+
+`func (o *NiatelemetryNexusDashboards) SetSmartSwitchCount(v int64)`
+
+SetSmartSwitchCount sets SmartSwitchCount field to given value.
+
+### HasSmartSwitchCount
+
+`func (o *NiatelemetryNexusDashboards) HasSmartSwitchCount() bool`
+
+HasSmartSwitchCount returns a boolean if a field has been set.
+
 ### GetSustainabilityReportStatus
 
 `func (o *NiatelemetryNexusDashboards) GetSustainabilityReportStatus() string`

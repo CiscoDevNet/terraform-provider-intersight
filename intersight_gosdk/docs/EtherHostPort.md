@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AdminState** | Pointer to **string** | Administratively configured state (enabled/disabled) for this port. | [optional] [readonly] 
 **AggregatePortId** | Pointer to **int64** | Breakout port member in the fabric extender. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | Fabric extender identifier for this port. | [optional] [readonly] 
+**PeerInterfaceCompatibilityIssues** | Pointer to [**NullableEtherPeerInterfaceCompatibilityIssues**](EtherPeerInterfaceCompatibilityIssues.md) |  | [optional] 
 **Speed** | Pointer to **string** | Host Port Speed of IO card or fabric extender. | [optional] [readonly] 
 **EquipmentIoCardBase** | Pointer to [**NullableEquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
 **EquipmentSwitchCard** | Pointer to [**NullableEquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
@@ -148,6 +149,41 @@ SetModuleId sets ModuleId field to given value.
 
 HasModuleId returns a boolean if a field has been set.
 
+### GetPeerInterfaceCompatibilityIssues
+
+`func (o *EtherHostPort) GetPeerInterfaceCompatibilityIssues() EtherPeerInterfaceCompatibilityIssues`
+
+GetPeerInterfaceCompatibilityIssues returns the PeerInterfaceCompatibilityIssues field if non-nil, zero value otherwise.
+
+### GetPeerInterfaceCompatibilityIssuesOk
+
+`func (o *EtherHostPort) GetPeerInterfaceCompatibilityIssuesOk() (*EtherPeerInterfaceCompatibilityIssues, bool)`
+
+GetPeerInterfaceCompatibilityIssuesOk returns a tuple with the PeerInterfaceCompatibilityIssues field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeerInterfaceCompatibilityIssues
+
+`func (o *EtherHostPort) SetPeerInterfaceCompatibilityIssues(v EtherPeerInterfaceCompatibilityIssues)`
+
+SetPeerInterfaceCompatibilityIssues sets PeerInterfaceCompatibilityIssues field to given value.
+
+### HasPeerInterfaceCompatibilityIssues
+
+`func (o *EtherHostPort) HasPeerInterfaceCompatibilityIssues() bool`
+
+HasPeerInterfaceCompatibilityIssues returns a boolean if a field has been set.
+
+### SetPeerInterfaceCompatibilityIssuesNil
+
+`func (o *EtherHostPort) SetPeerInterfaceCompatibilityIssuesNil(b bool)`
+
+ SetPeerInterfaceCompatibilityIssuesNil sets the value for PeerInterfaceCompatibilityIssues to be an explicit nil
+
+### UnsetPeerInterfaceCompatibilityIssues
+`func (o *EtherHostPort) UnsetPeerInterfaceCompatibilityIssues()`
+
+UnsetPeerInterfaceCompatibilityIssues ensures that no value is present for PeerInterfaceCompatibilityIssues, not even an explicit nil
 ### GetSpeed
 
 `func (o *EtherHostPort) GetSpeed() string`

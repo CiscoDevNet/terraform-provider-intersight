@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -21,26 +21,22 @@ import (
 // checks if the BlueprintBlueprintDefinitionDependency type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BlueprintBlueprintDefinitionDependency{}
 
-// BlueprintBlueprintDefinitionDependency Definition to capture a dependency on another blueprint that is referred in this blueprint.
+// BlueprintBlueprintDefinitionDependency Defines a required blueprint referenced by another blueprint.
 type BlueprintBlueprintDefinitionDependency struct {
-	MoBaseComplexType
+	BlueprintBaseBlueprintVersionReference
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType          string   `json:"ObjectType"`
-	BlueprintDefinition *MoMoRef `json:"BlueprintDefinition,omitempty"`
-	// The qualified name of blueprint.
-	BlueprintName *string `json:"BlueprintName,omitempty"`
-	// Specify the catalog moid that this blueprint belongs too. When catalog moid is not specified then the catalog of the parent blueprint is used first and if no blueprint can be found in that catalog, then the system catalog is used.
-	CatalogMoid *string `json:"CatalogMoid,omitempty"`
-	// The description of that describes the purpose of including this dependent blueprint.
+	ObjectType string `json:"ObjectType"`
+	// The qualified name of the required blueprint.
+	BlueprintName       *string                            `json:"BlueprintName,omitempty"`
+	DependencyQualifier *BlueprintOdataDependencyQualifier `json:"DependencyQualifier,omitempty"`
+	// Specifies why the required blueprint is included.
 	Description *string `json:"Description,omitempty"`
-	// If any input of the nested blueprint needs to be modified in some form to include data from the parent blueprint, then the input parameters can be specified here.
+	// Specifies input mappings for the required blueprint, including values derived from the referencing blueprint.
 	InputParameters interface{} `json:"InputParameters,omitempty"`
 	// A user defined label identifier for this blueprint.
-	Label *string `json:"Label,omitempty"`
-	// The blueprint version. If not specified, the default version is used.
-	Version              *int64 `json:"Version,omitempty"`
+	Label                *string `json:"Label,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -127,38 +123,6 @@ func (o *BlueprintBlueprintDefinitionDependency) GetDefaultObjectType() interfac
 	return "blueprint.BlueprintDefinitionDependency"
 }
 
-// GetBlueprintDefinition returns the BlueprintDefinition field value if set, zero value otherwise.
-func (o *BlueprintBlueprintDefinitionDependency) GetBlueprintDefinition() MoMoRef {
-	if o == nil || IsNil(o.BlueprintDefinition) {
-		var ret MoMoRef
-		return ret
-	}
-	return *o.BlueprintDefinition
-}
-
-// GetBlueprintDefinitionOk returns a tuple with the BlueprintDefinition field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BlueprintBlueprintDefinitionDependency) GetBlueprintDefinitionOk() (*MoMoRef, bool) {
-	if o == nil || IsNil(o.BlueprintDefinition) {
-		return nil, false
-	}
-	return o.BlueprintDefinition, true
-}
-
-// HasBlueprintDefinition returns a boolean if a field has been set.
-func (o *BlueprintBlueprintDefinitionDependency) HasBlueprintDefinition() bool {
-	if o != nil && !IsNil(o.BlueprintDefinition) {
-		return true
-	}
-
-	return false
-}
-
-// SetBlueprintDefinition gets a reference to the given MoMoRef and assigns it to the BlueprintDefinition field.
-func (o *BlueprintBlueprintDefinitionDependency) SetBlueprintDefinition(v MoMoRef) {
-	o.BlueprintDefinition = &v
-}
-
 // GetBlueprintName returns the BlueprintName field value if set, zero value otherwise.
 func (o *BlueprintBlueprintDefinitionDependency) GetBlueprintName() string {
 	if o == nil || IsNil(o.BlueprintName) {
@@ -191,36 +155,36 @@ func (o *BlueprintBlueprintDefinitionDependency) SetBlueprintName(v string) {
 	o.BlueprintName = &v
 }
 
-// GetCatalogMoid returns the CatalogMoid field value if set, zero value otherwise.
-func (o *BlueprintBlueprintDefinitionDependency) GetCatalogMoid() string {
-	if o == nil || IsNil(o.CatalogMoid) {
-		var ret string
+// GetDependencyQualifier returns the DependencyQualifier field value if set, zero value otherwise.
+func (o *BlueprintBlueprintDefinitionDependency) GetDependencyQualifier() BlueprintOdataDependencyQualifier {
+	if o == nil || IsNil(o.DependencyQualifier) {
+		var ret BlueprintOdataDependencyQualifier
 		return ret
 	}
-	return *o.CatalogMoid
+	return *o.DependencyQualifier
 }
 
-// GetCatalogMoidOk returns a tuple with the CatalogMoid field value if set, nil otherwise
+// GetDependencyQualifierOk returns a tuple with the DependencyQualifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BlueprintBlueprintDefinitionDependency) GetCatalogMoidOk() (*string, bool) {
-	if o == nil || IsNil(o.CatalogMoid) {
+func (o *BlueprintBlueprintDefinitionDependency) GetDependencyQualifierOk() (*BlueprintOdataDependencyQualifier, bool) {
+	if o == nil || IsNil(o.DependencyQualifier) {
 		return nil, false
 	}
-	return o.CatalogMoid, true
+	return o.DependencyQualifier, true
 }
 
-// HasCatalogMoid returns a boolean if a field has been set.
-func (o *BlueprintBlueprintDefinitionDependency) HasCatalogMoid() bool {
-	if o != nil && !IsNil(o.CatalogMoid) {
+// HasDependencyQualifier returns a boolean if a field has been set.
+func (o *BlueprintBlueprintDefinitionDependency) HasDependencyQualifier() bool {
+	if o != nil && !IsNil(o.DependencyQualifier) {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalogMoid gets a reference to the given string and assigns it to the CatalogMoid field.
-func (o *BlueprintBlueprintDefinitionDependency) SetCatalogMoid(v string) {
-	o.CatalogMoid = &v
+// SetDependencyQualifier gets a reference to the given BlueprintOdataDependencyQualifier and assigns it to the DependencyQualifier field.
+func (o *BlueprintBlueprintDefinitionDependency) SetDependencyQualifier(v BlueprintOdataDependencyQualifier) {
+	o.DependencyQualifier = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -320,38 +284,6 @@ func (o *BlueprintBlueprintDefinitionDependency) SetLabel(v string) {
 	o.Label = &v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
-func (o *BlueprintBlueprintDefinitionDependency) GetVersion() int64 {
-	if o == nil || IsNil(o.Version) {
-		var ret int64
-		return ret
-	}
-	return *o.Version
-}
-
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BlueprintBlueprintDefinitionDependency) GetVersionOk() (*int64, bool) {
-	if o == nil || IsNil(o.Version) {
-		return nil, false
-	}
-	return o.Version, true
-}
-
-// HasVersion returns a boolean if a field has been set.
-func (o *BlueprintBlueprintDefinitionDependency) HasVersion() bool {
-	if o != nil && !IsNil(o.Version) {
-		return true
-	}
-
-	return false
-}
-
-// SetVersion gets a reference to the given int64 and assigns it to the Version field.
-func (o *BlueprintBlueprintDefinitionDependency) SetVersion(v int64) {
-	o.Version = &v
-}
-
 func (o BlueprintBlueprintDefinitionDependency) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -362,13 +294,13 @@ func (o BlueprintBlueprintDefinitionDependency) MarshalJSON() ([]byte, error) {
 
 func (o BlueprintBlueprintDefinitionDependency) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
-	if errMoBaseComplexType != nil {
-		return map[string]interface{}{}, errMoBaseComplexType
+	serializedBlueprintBaseBlueprintVersionReference, errBlueprintBaseBlueprintVersionReference := json.Marshal(o.BlueprintBaseBlueprintVersionReference)
+	if errBlueprintBaseBlueprintVersionReference != nil {
+		return map[string]interface{}{}, errBlueprintBaseBlueprintVersionReference
 	}
-	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
-	if errMoBaseComplexType != nil {
-		return map[string]interface{}{}, errMoBaseComplexType
+	errBlueprintBaseBlueprintVersionReference = json.Unmarshal([]byte(serializedBlueprintBaseBlueprintVersionReference), &toSerialize)
+	if errBlueprintBaseBlueprintVersionReference != nil {
+		return map[string]interface{}{}, errBlueprintBaseBlueprintVersionReference
 	}
 	if _, exists := toSerialize["ClassId"]; !exists {
 		toSerialize["ClassId"] = o.GetDefaultClassId()
@@ -378,14 +310,11 @@ func (o BlueprintBlueprintDefinitionDependency) ToMap() (map[string]interface{},
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
-	if !IsNil(o.BlueprintDefinition) {
-		toSerialize["BlueprintDefinition"] = o.BlueprintDefinition
-	}
 	if !IsNil(o.BlueprintName) {
 		toSerialize["BlueprintName"] = o.BlueprintName
 	}
-	if !IsNil(o.CatalogMoid) {
-		toSerialize["CatalogMoid"] = o.CatalogMoid
+	if !IsNil(o.DependencyQualifier) {
+		toSerialize["DependencyQualifier"] = o.DependencyQualifier
 	}
 	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
@@ -395,9 +324,6 @@ func (o BlueprintBlueprintDefinitionDependency) ToMap() (map[string]interface{},
 	}
 	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
-	}
-	if !IsNil(o.Version) {
-		toSerialize["Version"] = o.Version
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -453,20 +379,16 @@ func (o *BlueprintBlueprintDefinitionDependency) UnmarshalJSON(data []byte) (err
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType          string   `json:"ObjectType"`
-		BlueprintDefinition *MoMoRef `json:"BlueprintDefinition,omitempty"`
-		// The qualified name of blueprint.
-		BlueprintName *string `json:"BlueprintName,omitempty"`
-		// Specify the catalog moid that this blueprint belongs too. When catalog moid is not specified then the catalog of the parent blueprint is used first and if no blueprint can be found in that catalog, then the system catalog is used.
-		CatalogMoid *string `json:"CatalogMoid,omitempty"`
-		// The description of that describes the purpose of including this dependent blueprint.
+		ObjectType string `json:"ObjectType"`
+		// The qualified name of the required blueprint.
+		BlueprintName       *string                            `json:"BlueprintName,omitempty"`
+		DependencyQualifier *BlueprintOdataDependencyQualifier `json:"DependencyQualifier,omitempty"`
+		// Specifies why the required blueprint is included.
 		Description *string `json:"Description,omitempty"`
-		// If any input of the nested blueprint needs to be modified in some form to include data from the parent blueprint, then the input parameters can be specified here.
+		// Specifies input mappings for the required blueprint, including values derived from the referencing blueprint.
 		InputParameters interface{} `json:"InputParameters,omitempty"`
 		// A user defined label identifier for this blueprint.
 		Label *string `json:"Label,omitempty"`
-		// The blueprint version. If not specified, the default version is used.
-		Version *int64 `json:"Version,omitempty"`
 	}
 
 	varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct := BlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct{}
@@ -476,13 +398,11 @@ func (o *BlueprintBlueprintDefinitionDependency) UnmarshalJSON(data []byte) (err
 		varBlueprintBlueprintDefinitionDependency := _BlueprintBlueprintDefinitionDependency{}
 		varBlueprintBlueprintDefinitionDependency.ClassId = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.ClassId
 		varBlueprintBlueprintDefinitionDependency.ObjectType = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.ObjectType
-		varBlueprintBlueprintDefinitionDependency.BlueprintDefinition = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.BlueprintDefinition
 		varBlueprintBlueprintDefinitionDependency.BlueprintName = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.BlueprintName
-		varBlueprintBlueprintDefinitionDependency.CatalogMoid = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.CatalogMoid
+		varBlueprintBlueprintDefinitionDependency.DependencyQualifier = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.DependencyQualifier
 		varBlueprintBlueprintDefinitionDependency.Description = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.Description
 		varBlueprintBlueprintDefinitionDependency.InputParameters = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.InputParameters
 		varBlueprintBlueprintDefinitionDependency.Label = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.Label
-		varBlueprintBlueprintDefinitionDependency.Version = varBlueprintBlueprintDefinitionDependencyWithoutEmbeddedStruct.Version
 		*o = BlueprintBlueprintDefinitionDependency(varBlueprintBlueprintDefinitionDependency)
 	} else {
 		return err
@@ -492,7 +412,7 @@ func (o *BlueprintBlueprintDefinitionDependency) UnmarshalJSON(data []byte) (err
 
 	err = json.Unmarshal(data, &varBlueprintBlueprintDefinitionDependency)
 	if err == nil {
-		o.MoBaseComplexType = varBlueprintBlueprintDefinitionDependency.MoBaseComplexType
+		o.BlueprintBaseBlueprintVersionReference = varBlueprintBlueprintDefinitionDependency.BlueprintBaseBlueprintVersionReference
 	} else {
 		return err
 	}
@@ -502,18 +422,16 @@ func (o *BlueprintBlueprintDefinitionDependency) UnmarshalJSON(data []byte) (err
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "BlueprintDefinition")
 		delete(additionalProperties, "BlueprintName")
-		delete(additionalProperties, "CatalogMoid")
+		delete(additionalProperties, "DependencyQualifier")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "InputParameters")
 		delete(additionalProperties, "Label")
-		delete(additionalProperties, "Version")
 
 		// remove fields from embedded structs
-		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)
-		for i := 0; i < reflectMoBaseComplexType.Type().NumField(); i++ {
-			t := reflectMoBaseComplexType.Type().Field(i)
+		reflectBlueprintBaseBlueprintVersionReference := reflect.ValueOf(o.BlueprintBaseBlueprintVersionReference)
+		for i := 0; i < reflectBlueprintBaseBlueprintVersionReference.Type().NumField(); i++ {
+			t := reflectBlueprintBaseBlueprintVersionReference.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

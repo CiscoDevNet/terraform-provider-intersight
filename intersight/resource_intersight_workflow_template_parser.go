@@ -447,6 +447,12 @@ func resourceWorkflowTemplateParser() *schema.Resource {
 													Default:     "workflow.Constraints",
 													ForceNew:    true,
 												},
+												"data_validation": {
+													Description: "JavaScript expression used to ensure the supplied parameter value is valid.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													ForceNew:    true,
+												},
 												"enum_list": {
 													Type:       schema.TypeList,
 													Optional:   true,
@@ -513,6 +519,12 @@ func resourceWorkflowTemplateParser() *schema.Resource {
 												},
 												"regex": {
 													Description: "When the parameter is a string this regular expression is used to ensure the value is valid.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													ForceNew:    true,
+												},
+												"validation_error": {
+													Description: "Provide a custom error message to return when a validation for the constraint fails. When there are multiple constraints, any constraint failure will return this message.",
 													Type:        schema.TypeString,
 													Optional:    true,
 													ForceNew:    true,
@@ -857,16 +869,12 @@ func resourceWorkflowTemplateParser() *schema.Resource {
 							}, ForceNew: true,
 						},
 						"type": {
-							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}, ForceNew: true,
+							Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+							Optional:     true,
+							Default:      "KeyValue",
+							ForceNew:     true,
 						},
 						"value": {
 							Description:  "The string representation of a tag value.",
@@ -1265,6 +1273,12 @@ func resourceWorkflowTemplateParserCreate(c context.Context, d *schema.ResourceD
 										}
 									}
 									o.SetClassId("workflow.Constraints")
+									if v, ok := l["data_validation"]; ok {
+										{
+											x := (v.(string))
+											o.SetDataValidation(x)
+										}
+									}
 									if v, ok := l["enum_list"]; ok {
 										{
 											x := make([]models.WorkflowEnumEntry, 0)
@@ -1330,6 +1344,12 @@ func resourceWorkflowTemplateParserCreate(c context.Context, d *schema.ResourceD
 										{
 											x := (v.(string))
 											o.SetRegex(x)
+										}
+									}
+									if v, ok := l["validation_error"]; ok {
+										{
+											x := (v.(string))
+											o.SetValidationError(x)
 										}
 									}
 									p = append(p, *o)
@@ -1605,6 +1625,12 @@ func resourceWorkflowTemplateParserCreate(c context.Context, d *schema.ResourceD
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {

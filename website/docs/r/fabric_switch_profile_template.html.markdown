@@ -39,11 +39,20 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `config_context`:(HashMap) - The configuration state and results of the last configuration operation. 
 This complex property has following sub-properties:
+  + `action_qualifier`:(HashMap) - Qualifiers to control the action being triggered. Action qualifiers are to be specified based on the type of disruptions that an action is to be restricted to. For example, trigger the 'Deploy' action to only perform network and management plane configurations. 
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `qualifiers`:(Array)
+This complex property has following sub-properties:
+    + `disruption`:(string) Possible disruption the configuration change might cause. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `policy`:(string) The name of the policy for which, the deployment is performed. 
+  + `scope`:(string) Specify if profile action is targeted for a specific scope.* `selective` - Profile deploy action to be limited to modified policies or to the policy list passed.* `all` - Profile deploy action to perform deploy of all policies associated with profile. 
   + `config_state`:(string)(ReadOnly) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. 
   + `config_state_summary`:(string)(ReadOnly) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.* `None` - The default state is none.* `Not-assigned` - Server is not assigned to the profile.* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.* `Preparing` - Preparing to deploy the configuration.* `Validating` - Profile validation in progress.* `Evaluating` - Policy edit configuration change evaluation in progress.* `Configuring` - Profile deploy operation is in progress.* `UnConfiguring` - Server is unassigned and config cleanup is in progress.* `Analyzing` - Profile changes are being analyzed.* `Activating` - Configuration is being activated at the endpoint.* `Inconsistent` - Profile is inconsistent with the endpoint configuration.* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.* `Failed` - The last action on the profile has failed.* `Not-complete` - Config import operation on the profile is not complete.* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.* `Partially-deployed` - The profile configuration has been applied on a subset of endpoints. 
   + `config_type`:(string)(ReadOnly) The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress. 
   + `control_action`:(string) System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. 
-  + `error_state`:(string) Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). 
+  + `error_state`:(string)(ReadOnly) Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). 
   + `inconsistency_reason`:
                 (Array of schema.TypeString) -
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
@@ -124,7 +133,13 @@ This complex property has following sub-properties:
   + `action`:(string) Name of the action to be performed on the profile. 
   + `action_qualifier`:(HashMap) - Qualifiers to control the action being triggered. Action qualifiers are to be specified based on the type of disruptions that an action is to be restricted to. For example, trigger the 'Deploy' action to only perform network and management plane configurations. 
 This complex property has following sub-properties:
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `qualifiers`:(Array)
+This complex property has following sub-properties:
+    + `disruption`:(string) Possible disruption the configuration change might cause. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `policy`:(string) The name of the policy for which, the deployment is performed. 
+  + `scope`:(string) Specify if profile action is targeted for a specific scope.* `selective` - Profile deploy action to be limited to modified policies or to the policy list passed.* `all` - Profile deploy action to perform deploy of all policies associated with profile. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `proceed_on_reboot`:(bool) ProceedOnReboot can be used to acknowledge server reboot while triggering deploy/activate. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
@@ -154,7 +169,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `target_platform`:(string) Type of the profile. 'UcsDomain' profile for network and management configuration on UCS Fabric Interconnect. 'UnifiedEdge' profile for network, management and chassis configuration on Unified Edge.* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge. 
 * `template_actions`:(Array)

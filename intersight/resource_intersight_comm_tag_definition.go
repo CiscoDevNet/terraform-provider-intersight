@@ -163,7 +163,7 @@ func resourceCommTagDefinition() *schema.Resource {
 				ForceNew:    true,
 			},
 			"key": {
-				Description: "The string representation of the tag key. If the tag is of path type, then \"/\" will be interpreted as path delimiters.\nThe tag key must be unique within the account. The tag key is case sensitive and must not be empty.",
+				Description: "The string representation of the tag key. For PathTag definitions, \"/\" is interpreted as a path delimiter.\nThe combination of key and tag type must be unique within an account. The key is case sensitive and cannot be empty.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -318,8 +318,8 @@ func resourceCommTagDefinition() *schema.Resource {
 					},
 				},
 			},
-			"restrict_values": {
-				Description: "If this flag is enabled, then values of the KeyValue tag is restricted to values present in the allowedValues list. RestrictValues is not applicable to path tags.",
+			"restrict_allowed_values": {
+				Description: "If this flag is enabled, then values of the KeyValue tag can only be values present in the allowedValues list. RestrictAllowedValues is not applicable to path tags.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
@@ -464,16 +464,12 @@ func resourceCommTagDefinition() *schema.Resource {
 								return
 							}},
 						"type": {
-							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}},
+							Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+							Optional:     true,
+							Default:      "KeyValue",
+						},
 						"value": {
 							Description:  "The string representation of a tag value.",
 							Type:         schema.TypeString,
@@ -484,7 +480,7 @@ func resourceCommTagDefinition() *schema.Resource {
 				},
 			},
 			"type": {
-				Description:  "An enum type that defines the type of tag. Only path tags are supported for now, and the type is set to path by default.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+				Description:  "An enum that defines the type of tag definition. KeyValue tags use a key with an optional value.\nPathTag tags use a hierarchical key with '/' as the delimiter and no value. Defaults to KeyValue.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
 				Optional:     true,
@@ -512,7 +508,7 @@ func resourceCommTagDefinition() *schema.Resource {
 							Default:     "comm.TagUsage",
 						},
 						"nr_count": {
-							Description: "Total count of managed objects that are tagged with this tag. For path tags, this will be a cumulative count. By default, this property is not returned.",
+							Description: "Total count of managed objects associated with this tag usage.",
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
@@ -536,6 +532,63 @@ func resourceCommTagDefinition() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							}},
+						"value_usages": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "comm.TagValueUsage",
+									},
+									"nr_count": {
+										Description: "Total count of managed objects associated with this tag usage.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "comm.TagValueUsage",
+									},
+									"tagged_object_types": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										}},
+									"value": {
+										Description: "The specific value for which usage statistics are being reported.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+								},
+							},
+						},
 					},
 				},
 			},
@@ -741,9 +794,9 @@ func resourceCommTagDefinitionCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetObjectType("comm.TagDefinition")
 
-	if v, ok := d.GetOkExists("restrict_values"); ok {
+	if v, ok := d.GetOkExists("restrict_allowed_values"); ok {
 		x := (v.(bool))
-		o.SetRestrictValues(x)
+		o.SetRestrictAllowedValues(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -809,6 +862,12 @@ func resourceCommTagDefinitionCreate(c context.Context, d *schema.ResourceData, 
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {
@@ -943,8 +1002,8 @@ func resourceCommTagDefinitionRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property PermissionResources in CommTagDefinition object: %s", err.Error())
 	}
 
-	if err := d.Set("restrict_values", (s.GetRestrictValues())); err != nil {
-		return diag.Errorf("error occurred while setting property RestrictValues in CommTagDefinition object: %s", err.Error())
+	if err := d.Set("restrict_allowed_values", (s.GetRestrictAllowedValues())); err != nil {
+		return diag.Errorf("error occurred while setting property RestrictAllowedValues in CommTagDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -1026,10 +1085,10 @@ func resourceCommTagDefinitionUpdate(c context.Context, d *schema.ResourceData, 
 
 	o.SetObjectType("comm.TagDefinition")
 
-	if d.HasChange("restrict_values") {
-		v := d.Get("restrict_values")
+	if d.HasChange("restrict_allowed_values") {
+		v := d.Get("restrict_allowed_values")
 		x := (v.(bool))
-		o.SetRestrictValues(x)
+		o.SetRestrictAllowedValues(x)
 	}
 
 	if d.HasChange("tags") {
@@ -1096,6 +1155,12 @@ func resourceCommTagDefinitionUpdate(c context.Context, d *schema.ResourceData, 
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {

@@ -35,6 +35,8 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `blueprint_update_by_date`:(string)(ReadOnly) The date by which the blueprints in the workload definition should be updated to non-deprecated versions. This field is populated only if the workload definition uses deprecated blueprints. If the definition still uses deprecated blueprints past this date, the definition will be locked and can only be used to create a new version using active blueprints. 
+* `blueprint_version_update_status`:(string)(ReadOnly) The aggregate blueprint version update status across all blueprints included in the definition.* `Updated` - The blueprint reference is at the latest available version.* `AutoUpdate` - The blueprint reference can be updated to the latest version automatically.* `NeedsNewVersion` - The blueprint reference cannot be updated without a new version of the definition.* `Deprecated` - The referred blueprint is deprecated.* `UpdateInProgress` - The blueprint reference update is in progress. The update is in an intermediate state between AutoUpdate and Updated. 
 * `blueprints`:(Array)
 This complex property has following sub-properties:
   + `blueprint`:(HashMap) - The referred blueprint details. 
@@ -42,9 +44,27 @@ This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `blueprint_version_update_state`:(HashMap) -(ReadOnly) The blueprint version update state for the blueprint reference. This captures the update requirements for the blueprint, including the update status and target blueprint version. 
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `status`:(string)(ReadOnly) The status of the blueprint currently referred to in the workload definition.* `Updated` - The blueprint reference is at the latest available version.* `AutoUpdate` - The blueprint reference can be updated to the latest version automatically.* `NeedsNewVersion` - The blueprint reference cannot be updated without a new version of the definition.* `Deprecated` - The referred blueprint is deprecated.* `UpdateInProgress` - The blueprint reference update is in progress. The update is in an intermediate state between AutoUpdate and Updated. 
+    + `target_version`:(HashMap) -(ReadOnly) The target blueprint version reference for the blueprint version update. 
+This complex property has following sub-properties:
+    + `blueprint_definition`:(HashMap) -(ReadOnly) The system-resolved reference to the blueprint. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `catalog_moid`:(string) The catalog MOID that this blueprint belongs to. When the catalog MOID is not specified, the catalog of the parent blueprint is used first. If no blueprint can be found in that catalog, the system catalog is used. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `nr_version`:(int) The version number of the blueprint. 
   + `input`:(JSON as string) The input data for the referred blueprint. All required inputs of the blueprint must have a value provided. 
   + `input_override`:
                 (Array of schema.TypeString) -
+  + `input_source_references`:(Array)
+This complex property has following sub-properties:
+    + `blueprint_name`:(string) The name of the source blueprint from which inputs are copied. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `name`:(string) The name for the referred blueprint. This name must be unique within the workload definition. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ref_name`:(string)(ReadOnly) The reference name for the blueprint which is derived by the system. 
@@ -107,7 +127,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `validation_information`:(HashMap) -(ReadOnly) The current validation state and associated validation errors when state is invalid. When state is valid, it means all the required inputs for the blueprint are provided. 
 This complex property has following sub-properties:

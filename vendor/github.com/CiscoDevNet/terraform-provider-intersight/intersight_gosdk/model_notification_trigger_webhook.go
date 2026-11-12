@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -33,6 +33,8 @@ type NotificationTriggerWebhook struct {
 	// When set to true on update, the HMAC shared secret is not carried over from the previous stored action when the request omits the write-only ``secret`` field. Use this to clear the signing key without re-sending a secret value. When false or not set, the prior behavior applies: the previous secret is preserved on PATCH if ``secret`` is omitted.
 	ClearSecret   *bool                    `json:"ClearSecret,omitempty"`
 	CustomHeaders []NotificationHttpHeader `json:"CustomHeaders,omitempty"`
+	// When true, routes outbound webhook traffic through the appliance's configured data center proxy (via Equinox). Only applicable for on-prem appliance deployments; ignored on SaaS.
+	EnableProxy *bool `json:"EnableProxy,omitempty"`
 	// Holds the timestamp of the first failed request. The first time the notification is not delivered to the webhook server, the user will have the Warning alarm in the system. Next 48 hours the system still will try to notify the webhook server. If after 48 hours the server is not recovered, the system will mark this webhook as Inactive, and the user will have a critical alarm in the system.
 	FirstFailedRequest *time.Time `json:"FirstFailedRequest,omitempty"`
 	// Indicates whether the value of the 'secret' property has been set.
@@ -64,6 +66,8 @@ func NewNotificationTriggerWebhook(classId string, objectType string) *Notificat
 	this.ObjectType = objectType
 	var clearSecret bool = false
 	this.ClearSecret = &clearSecret
+	var enableProxy bool = false
+	this.EnableProxy = &enableProxy
 	return &this
 }
 
@@ -78,6 +82,8 @@ func NewNotificationTriggerWebhookWithDefaults() *NotificationTriggerWebhook {
 	this.ObjectType = objectType
 	var clearSecret bool = false
 	this.ClearSecret = &clearSecret
+	var enableProxy bool = false
+	this.EnableProxy = &enableProxy
 	return &this
 }
 
@@ -245,6 +251,38 @@ func (o *NotificationTriggerWebhook) HasCustomHeaders() bool {
 // SetCustomHeaders gets a reference to the given []NotificationHttpHeader and assigns it to the CustomHeaders field.
 func (o *NotificationTriggerWebhook) SetCustomHeaders(v []NotificationHttpHeader) {
 	o.CustomHeaders = v
+}
+
+// GetEnableProxy returns the EnableProxy field value if set, zero value otherwise.
+func (o *NotificationTriggerWebhook) GetEnableProxy() bool {
+	if o == nil || IsNil(o.EnableProxy) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableProxy
+}
+
+// GetEnableProxyOk returns a tuple with the EnableProxy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationTriggerWebhook) GetEnableProxyOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnableProxy) {
+		return nil, false
+	}
+	return o.EnableProxy, true
+}
+
+// HasEnableProxy returns a boolean if a field has been set.
+func (o *NotificationTriggerWebhook) HasEnableProxy() bool {
+	if o != nil && !IsNil(o.EnableProxy) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableProxy gets a reference to the given bool and assigns it to the EnableProxy field.
+func (o *NotificationTriggerWebhook) SetEnableProxy(v bool) {
+	o.EnableProxy = &v
 }
 
 // GetFirstFailedRequest returns the FirstFailedRequest field value if set, zero value otherwise.
@@ -538,6 +576,9 @@ func (o NotificationTriggerWebhook) ToMap() (map[string]interface{}, error) {
 	if o.CustomHeaders != nil {
 		toSerialize["CustomHeaders"] = o.CustomHeaders
 	}
+	if !IsNil(o.EnableProxy) {
+		toSerialize["EnableProxy"] = o.EnableProxy
+	}
 	if !IsNil(o.FirstFailedRequest) {
 		toSerialize["FirstFailedRequest"] = o.FirstFailedRequest
 	}
@@ -621,6 +662,8 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 		// When set to true on update, the HMAC shared secret is not carried over from the previous stored action when the request omits the write-only ``secret`` field. Use this to clear the signing key without re-sending a secret value. When false or not set, the prior behavior applies: the previous secret is preserved on PATCH if ``secret`` is omitted.
 		ClearSecret   *bool                    `json:"ClearSecret,omitempty"`
 		CustomHeaders []NotificationHttpHeader `json:"CustomHeaders,omitempty"`
+		// When true, routes outbound webhook traffic through the appliance's configured data center proxy (via Equinox). Only applicable for on-prem appliance deployments; ignored on SaaS.
+		EnableProxy *bool `json:"EnableProxy,omitempty"`
 		// Holds the timestamp of the first failed request. The first time the notification is not delivered to the webhook server, the user will have the Warning alarm in the system. Next 48 hours the system still will try to notify the webhook server. If after 48 hours the server is not recovered, the system will mark this webhook as Inactive, and the user will have a critical alarm in the system.
 		FirstFailedRequest *time.Time `json:"FirstFailedRequest,omitempty"`
 		// Indicates whether the value of the 'secret' property has been set.
@@ -649,6 +692,7 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 		varNotificationTriggerWebhook.Authentication = varNotificationTriggerWebhookWithoutEmbeddedStruct.Authentication
 		varNotificationTriggerWebhook.ClearSecret = varNotificationTriggerWebhookWithoutEmbeddedStruct.ClearSecret
 		varNotificationTriggerWebhook.CustomHeaders = varNotificationTriggerWebhookWithoutEmbeddedStruct.CustomHeaders
+		varNotificationTriggerWebhook.EnableProxy = varNotificationTriggerWebhookWithoutEmbeddedStruct.EnableProxy
 		varNotificationTriggerWebhook.FirstFailedRequest = varNotificationTriggerWebhookWithoutEmbeddedStruct.FirstFailedRequest
 		varNotificationTriggerWebhook.IsSecretSet = varNotificationTriggerWebhookWithoutEmbeddedStruct.IsSecretSet
 		varNotificationTriggerWebhook.LastDiagnosticError = varNotificationTriggerWebhookWithoutEmbeddedStruct.LastDiagnosticError
@@ -679,6 +723,7 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Authentication")
 		delete(additionalProperties, "ClearSecret")
 		delete(additionalProperties, "CustomHeaders")
+		delete(additionalProperties, "EnableProxy")
 		delete(additionalProperties, "FirstFailedRequest")
 		delete(additionalProperties, "IsSecretSet")
 		delete(additionalProperties, "LastDiagnosticError")

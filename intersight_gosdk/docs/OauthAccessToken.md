@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "oauth.AccessToken"]
 **ApiType** | Pointer to **string** | OAuth API type (e.g., Smart licensing API). * &#x60;Unknown&#x60; - Unknown serves as the default API type. * &#x60;SmartLicensing-API&#x60; - Smart licensing API type. * &#x60;CommerceEstimate-API&#x60; - Commerce Estimate API type. | [optional] [default to "Unknown"]
 **Expiry** | Pointer to **time.Time** | Access token expiration date and time. | [optional] [readonly] 
+**IsEncryptedRefreshTokenSet** | Pointer to **bool** | Indicates whether the value of the &#39;encryptedRefreshToken&#39; property has been set. | [optional] [readonly] [default to false]
+**IsEncryptedTokenSet** | Pointer to **bool** | Indicates whether the value of the &#39;encryptedToken&#39; property has been set. | [optional] [readonly] [default to false]
 **Issuer** | Pointer to **string** | OAuth access token issuer. | [optional] [readonly] 
 **RefreshExpiry** | Pointer to **time.Time** | Refresh token expiration date and time. | [optional] [readonly] 
 **TokenOwner** | Pointer to **string** | MOID of the access token owner. | [optional] [readonly] 
@@ -121,6 +123,56 @@ SetExpiry sets Expiry field to given value.
 `func (o *OauthAccessToken) HasExpiry() bool`
 
 HasExpiry returns a boolean if a field has been set.
+
+### GetIsEncryptedRefreshTokenSet
+
+`func (o *OauthAccessToken) GetIsEncryptedRefreshTokenSet() bool`
+
+GetIsEncryptedRefreshTokenSet returns the IsEncryptedRefreshTokenSet field if non-nil, zero value otherwise.
+
+### GetIsEncryptedRefreshTokenSetOk
+
+`func (o *OauthAccessToken) GetIsEncryptedRefreshTokenSetOk() (*bool, bool)`
+
+GetIsEncryptedRefreshTokenSetOk returns a tuple with the IsEncryptedRefreshTokenSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsEncryptedRefreshTokenSet
+
+`func (o *OauthAccessToken) SetIsEncryptedRefreshTokenSet(v bool)`
+
+SetIsEncryptedRefreshTokenSet sets IsEncryptedRefreshTokenSet field to given value.
+
+### HasIsEncryptedRefreshTokenSet
+
+`func (o *OauthAccessToken) HasIsEncryptedRefreshTokenSet() bool`
+
+HasIsEncryptedRefreshTokenSet returns a boolean if a field has been set.
+
+### GetIsEncryptedTokenSet
+
+`func (o *OauthAccessToken) GetIsEncryptedTokenSet() bool`
+
+GetIsEncryptedTokenSet returns the IsEncryptedTokenSet field if non-nil, zero value otherwise.
+
+### GetIsEncryptedTokenSetOk
+
+`func (o *OauthAccessToken) GetIsEncryptedTokenSetOk() (*bool, bool)`
+
+GetIsEncryptedTokenSetOk returns a tuple with the IsEncryptedTokenSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsEncryptedTokenSet
+
+`func (o *OauthAccessToken) SetIsEncryptedTokenSet(v bool)`
+
+SetIsEncryptedTokenSet sets IsEncryptedTokenSet field to given value.
+
+### HasIsEncryptedTokenSet
+
+`func (o *OauthAccessToken) HasIsEncryptedTokenSet() bool`
+
+HasIsEncryptedTokenSet returns a boolean if a field has been set.
 
 ### GetIssuer
 

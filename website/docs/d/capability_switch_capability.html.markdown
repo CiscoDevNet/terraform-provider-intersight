@@ -36,7 +36,7 @@ The following arguments can be used to get data of already created objects in In
 * `fan_modules_supported`:(bool) Fan Modules support on this switch. 
 * `fc_uplink_ports_auto_negotiation_supported`:(bool) Fc Uplink ports auto negotiation speed support on this switch. 
 * `imm_controls_vpcompression`:(bool) VlanPort Compression is controlled by IMM. 
-* `inter_cluster_link_vlan_supported`:(bool) Inter cluster link vlan support on this switch. 
+* `intra_chassis_vlan_supported`:(bool) Intra chassis VLAN support on this switch. 
 * `locator_beacon_supported`:(bool) Locator Beacon LED support on this switch. 
 * `max_ports`:(int) Maximum allowed physical ports on this switch. 
 * `max_slots`:(int) Maximum allowed physical slots on this switch. 

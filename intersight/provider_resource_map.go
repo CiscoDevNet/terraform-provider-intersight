@@ -301,6 +301,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_task_pure_flash_blade_scoped_inventory":                  resourceTaskPureFlashBladeScopedInventory(),
 		"intersight_task_pure_scoped_inventory":                              resourceTaskPureScopedInventory(),
 		"intersight_task_server_scoped_inventory":                            resourceTaskServerScopedInventory(),
+		"intersight_task_workflow_action":                                    resourceTaskWorkflowAction(),
 		"intersight_techsupportmanagement_collection_control_policy":         resourceTechsupportmanagementCollectionControlPolicy(),
 		"intersight_techsupportmanagement_tech_support_bundle":               resourceTechsupportmanagementTechSupportBundle(),
 		"intersight_thermal_policy":                                          resourceThermalPolicy(),

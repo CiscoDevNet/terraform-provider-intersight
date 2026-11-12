@@ -552,6 +552,259 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 					}
 					return
 				}},
+			"support_info": {
+				Description: "The support information for this service item version. When the service item version is deprecated, this field includes the support end date and can include a replacement target version.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "workflow.SupportInfo",
+						},
+						"deprecation_info": {
+							Description: "The deprecation information for the versioned object.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "workflow.DeprecationInfo",
+									},
+									"deprecated_by": {
+										Description: "The user or system email address that marked the versioned object as deprecated. The system populates this property only when the support status is Deprecated.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"deprecated_dependencies": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"catalog_moid": {
+													Description: "The catalog MOID of the referenced object. If this field is not specified, the resolver uses the catalog of the versioned object first, followed by the default catalog for the referenced object type.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.SupportObjectReference",
+												},
+												"name": {
+													Description: "The qualified name of the referenced object.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"object": {
+													Description: "The system-resolved reference to the referenced object.",
+													Type:        schema.TypeList,
+													MaxItems:    1,
+													Optional:    true,
+													Computed:    true,
+													ConfigMode:  schema.SchemaConfigModeAttr,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"additional_properties": {
+																Type:             schema.TypeString,
+																Optional:         true,
+																DiffSuppressFunc: SuppressDiffAdditionProps,
+															},
+															"class_id": {
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Default:     "mo.MoRef",
+															},
+															"moid": {
+																Description: "The Moid of the referenced REST resource.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Computed:    true,
+															},
+															"object_type": {
+																Description: "The fully-qualified name of the remote type referred by this relationship.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Computed:    true,
+															},
+															"selector": {
+																Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+																Type:        schema.TypeString,
+																Optional:    true,
+															},
+														},
+													},
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.SupportObjectReference",
+												},
+												"nr_version": {
+													Description: "The version of the referenced object. If not specified, the default version is used.",
+													Type:        schema.TypeInt,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"description": {
+										Description:  "The detailed description explaining why the versioned object is deprecated. Deprecated objects can use this field to provide additional support or migration information.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+										Optional:     true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "workflow.DeprecationInfo",
+									},
+									"replacement_definition": {
+										Description: "The replacement object to use when the versioned object is deprecated.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Computed:    true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"catalog_moid": {
+													Description: "The catalog MOID of the referenced object. If this field is not specified, the resolver uses the catalog of the versioned object first, followed by the default catalog for the referenced object type.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.SupportObjectReference",
+												},
+												"name": {
+													Description: "The qualified name of the referenced object.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"object": {
+													Description: "The system-resolved reference to the referenced object.",
+													Type:        schema.TypeList,
+													MaxItems:    1,
+													Optional:    true,
+													Computed:    true,
+													ConfigMode:  schema.SchemaConfigModeAttr,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"additional_properties": {
+																Type:             schema.TypeString,
+																Optional:         true,
+																DiffSuppressFunc: SuppressDiffAdditionProps,
+															},
+															"class_id": {
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Default:     "mo.MoRef",
+															},
+															"moid": {
+																Description: "The Moid of the referenced REST resource.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Computed:    true,
+															},
+															"object_type": {
+																Description: "The fully-qualified name of the remote type referred by this relationship.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Computed:    true,
+															},
+															"selector": {
+																Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+																Type:        schema.TypeString,
+																Optional:    true,
+															},
+														},
+													},
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.SupportObjectReference",
+												},
+												"nr_version": {
+													Description: "The version of the referenced object. If not specified, the default version is used.",
+													Type:        schema.TypeInt,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"support_end_date": {
+										Description: "The date after which the deprecated object is no longer supported.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "workflow.SupportInfo",
+						},
+						"support_status": {
+							Description:  "The support status of the versioned object.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Supported", "Beta", "Deprecated"}, false),
+							Optional:     true,
+							Default:      "Supported",
+						},
+					},
+				},
+			},
 			"support_status": {
 				Description:  "The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
 				Type:         schema.TypeString,
@@ -678,16 +931,12 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 								return
 							}},
 						"type": {
-							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}},
+							Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+							Optional:     true,
+							Default:      "KeyValue",
+						},
 						"value": {
 							Description:  "The string representation of a tag value.",
 							Type:         schema.TypeString,
@@ -1300,6 +1549,187 @@ func resourceWorkflowServiceItemDefinitionCreate(c context.Context, d *schema.Re
 		o.SetPublishStatus(x)
 	}
 
+	if v, ok := d.GetOk("support_info"); ok {
+		p := make([]models.WorkflowSupportInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewWorkflowSupportInfoWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.SupportInfo")
+			if v, ok := l["deprecation_info"]; ok {
+				{
+					p := make([]models.WorkflowDeprecationInfo, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowDeprecationInfoWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("workflow.DeprecationInfo")
+						if v, ok := l["deprecated_dependencies"]; ok {
+							{
+								x := make([]models.WorkflowSupportObjectReference, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewWorkflowSupportObjectReferenceWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									if v, ok := l["catalog_moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetCatalogMoid(x)
+										}
+									}
+									o.SetClassId("workflow.SupportObjectReference")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["nr_version"]; ok {
+										{
+											x := int64(v.(int))
+											o.SetVersion(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetDeprecatedDependencies(x)
+								}
+							}
+						}
+						if v, ok := l["description"]; ok {
+							{
+								x := (v.(string))
+								o.SetDescription(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["replacement_definition"]; ok {
+							{
+								p := make([]models.WorkflowSupportObjectReference, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewWorkflowSupportObjectReferenceWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									if v, ok := l["catalog_moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetCatalogMoid(x)
+										}
+									}
+									o.SetClassId("workflow.SupportObjectReference")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["nr_version"]; ok {
+										{
+											x := int64(v.(int))
+											o.SetVersion(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetReplacementDefinition(x)
+								}
+							}
+						}
+						if v, ok := l["support_end_date"]; ok {
+							{
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
+								o.SetSupportEndDate(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDeprecationInfo(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["support_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetSupportStatus(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSupportInfo(x)
+		}
+	}
+
 	if v, ok := d.GetOk("support_status"); ok {
 		x := (v.(string))
 		o.SetSupportStatus(x)
@@ -1368,6 +1798,12 @@ func resourceWorkflowServiceItemDefinitionCreate(c context.Context, d *schema.Re
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {
@@ -1544,6 +1980,10 @@ func resourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Reso
 
 	if err := d.Set("status", (s.GetStatus())); err != nil {
 		return diag.Errorf("error occurred while setting property Status in WorkflowServiceItemDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("support_info", flattenMapWorkflowSupportInfo(s.GetSupportInfo(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property SupportInfo in WorkflowServiceItemDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("support_status", (s.GetSupportStatus())); err != nil {
@@ -1891,6 +2331,188 @@ func resourceWorkflowServiceItemDefinitionUpdate(c context.Context, d *schema.Re
 		o.SetPublishStatus(x)
 	}
 
+	if d.HasChange("support_info") {
+		v := d.Get("support_info")
+		p := make([]models.WorkflowSupportInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.WorkflowSupportInfo{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.SupportInfo")
+			if v, ok := l["deprecation_info"]; ok {
+				{
+					p := make([]models.WorkflowDeprecationInfo, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowDeprecationInfoWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("workflow.DeprecationInfo")
+						if v, ok := l["deprecated_dependencies"]; ok {
+							{
+								x := make([]models.WorkflowSupportObjectReference, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewWorkflowSupportObjectReferenceWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									if v, ok := l["catalog_moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetCatalogMoid(x)
+										}
+									}
+									o.SetClassId("workflow.SupportObjectReference")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["nr_version"]; ok {
+										{
+											x := int64(v.(int))
+											o.SetVersion(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetDeprecatedDependencies(x)
+								}
+							}
+						}
+						if v, ok := l["description"]; ok {
+							{
+								x := (v.(string))
+								o.SetDescription(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["replacement_definition"]; ok {
+							{
+								p := make([]models.WorkflowSupportObjectReference, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewWorkflowSupportObjectReferenceWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									if v, ok := l["catalog_moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetCatalogMoid(x)
+										}
+									}
+									o.SetClassId("workflow.SupportObjectReference")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["nr_version"]; ok {
+										{
+											x := int64(v.(int))
+											o.SetVersion(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetReplacementDefinition(x)
+								}
+							}
+						}
+						if v, ok := l["support_end_date"]; ok {
+							{
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
+								o.SetSupportEndDate(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDeprecationInfo(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["support_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetSupportStatus(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSupportInfo(x)
+		}
+	}
+
 	if d.HasChange("support_status") {
 		v := d.Get("support_status")
 		x := (v.(string))
@@ -1961,6 +2583,12 @@ func resourceWorkflowServiceItemDefinitionUpdate(c context.Context, d *schema.Re
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {

@@ -7,10 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "webhook.Endpoint"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "webhook.Endpoint"]
 **Name** | Pointer to **string** | The name of the Endpoint. | [optional] 
-**Url** | Pointer to **string** | The endpoint URL. The CREATE and UPDATE APIs can cause the change to the value. | [optional] [readonly] 
+**Url** | Pointer to **string** | The endpoint url. The CREATE and UPDATE APIs can cause the change to the value. | [optional] [readonly] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Schemas** | Pointer to [**[]WebhookSchemaRelationship**](WebhookSchemaRelationship.md) | An array of relationships to webhookSchema resources. | [optional] 
+**Target** | Pointer to [**NullableAssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -226,6 +227,41 @@ HasSchemas returns a boolean if a field has been set.
 `func (o *WebhookEndpoint) UnsetSchemas()`
 
 UnsetSchemas ensures that no value is present for Schemas, not even an explicit nil
+### GetTarget
+
+`func (o *WebhookEndpoint) GetTarget() AssetTargetRelationship`
+
+GetTarget returns the Target field if non-nil, zero value otherwise.
+
+### GetTargetOk
+
+`func (o *WebhookEndpoint) GetTargetOk() (*AssetTargetRelationship, bool)`
+
+GetTargetOk returns a tuple with the Target field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTarget
+
+`func (o *WebhookEndpoint) SetTarget(v AssetTargetRelationship)`
+
+SetTarget sets Target field to given value.
+
+### HasTarget
+
+`func (o *WebhookEndpoint) HasTarget() bool`
+
+HasTarget returns a boolean if a field has been set.
+
+### SetTargetNil
+
+`func (o *WebhookEndpoint) SetTargetNil(b bool)`
+
+ SetTargetNil sets the value for Target to be an explicit nil
+
+### UnsetTarget
+`func (o *WebhookEndpoint) UnsetTarget()`
+
+UnsetTarget ensures that no value is present for Target, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

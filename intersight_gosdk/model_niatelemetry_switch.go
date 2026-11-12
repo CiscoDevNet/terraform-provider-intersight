@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,9 @@ type NiatelemetrySwitch struct {
 	ObjectType string `json:"ObjectType"`
 	// The anomaly status of the managed switch.
 	AnomalyStatus *string `json:"AnomalyStatus,omitempty"`
+	// Compensating control status reported for the switch.
+	CompensatingControlStatus   *string                                        `json:"CompensatingControlStatus,omitempty"`
+	CompensatingControlsDetails NullableNiatelemetryCompensatingControlDetails `json:"CompensatingControlsDetails,omitempty"`
 	// The compliance status of the managed switch.
 	ComplianceStatus *string `json:"ComplianceStatus,omitempty"`
 	// The type of fabric the managed switch belongs to.
@@ -46,6 +49,10 @@ type NiatelemetrySwitch struct {
 	InBandIp *string `json:"InBandIp,omitempty"`
 	// The IP address of the managed switch.
 	IpAddress *string `json:"IpAddress,omitempty"`
+	// Live Protect agent status reported for the switch.
+	LiveProtectAgentStatus *string `json:"LiveProtectAgentStatus,omitempty"`
+	// Live Protect enablement status reported for the switch.
+	LiveProtectStatus *string `json:"LiveProtectStatus,omitempty"`
 	// The model of the managed switch.
 	Model *string `json:"Model,omitempty"`
 	// The OS version of the managed switch.
@@ -54,6 +61,8 @@ type NiatelemetrySwitch struct {
 	OutOfBandIp *string `json:"OutOfBandIp,omitempty"`
 	// The role of the managed switch.
 	Role *string `json:"Role,omitempty"`
+	// Number of security advisories associated with the switch.
+	SecurityAdvisoriesCount *int64 `json:"SecurityAdvisoriesCount,omitempty"`
 	// The serial number of the managed switch.
 	Serial *string `json:"Serial,omitempty"`
 	// The name of the managed fabric.
@@ -71,8 +80,13 @@ type NiatelemetrySwitch struct {
 	// The system uptime of the managed switch.
 	SystemUpTime *string `json:"SystemUpTime,omitempty"`
 	// Indicates whether telemetry is enabled for the fabric.
-	TelemetryEnabled *bool                                  `json:"TelemetryEnabled,omitempty"`
-	Fabric           NullableNiatelemetryFabricRelationship `json:"Fabric,omitempty"`
+	TelemetryEnabled *bool `json:"TelemetryEnabled,omitempty"`
+	// Total Live Protect hit count reported for the switch.
+	TotalHitCount *int64 `json:"TotalHitCount,omitempty"`
+	// Indicates whether virtual port channel is configured on the switch.
+	VpcConfigured *bool                                  `json:"VpcConfigured,omitempty"`
+	VpcData       NullableNiatelemetryVpcData            `json:"VpcData,omitempty"`
+	Fabric        NullableNiatelemetryFabricRelationship `json:"Fabric,omitempty"`
 	// An array of relationships to niatelemetrySwitchInterface resources.
 	SwitchInterfaces     []NiatelemetrySwitchInterfaceRelationship `json:"SwitchInterfaces,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -191,6 +205,81 @@ func (o *NiatelemetrySwitch) HasAnomalyStatus() bool {
 // SetAnomalyStatus gets a reference to the given string and assigns it to the AnomalyStatus field.
 func (o *NiatelemetrySwitch) SetAnomalyStatus(v string) {
 	o.AnomalyStatus = &v
+}
+
+// GetCompensatingControlStatus returns the CompensatingControlStatus field value if set, zero value otherwise.
+func (o *NiatelemetrySwitch) GetCompensatingControlStatus() string {
+	if o == nil || IsNil(o.CompensatingControlStatus) {
+		var ret string
+		return ret
+	}
+	return *o.CompensatingControlStatus
+}
+
+// GetCompensatingControlStatusOk returns a tuple with the CompensatingControlStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySwitch) GetCompensatingControlStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.CompensatingControlStatus) {
+		return nil, false
+	}
+	return o.CompensatingControlStatus, true
+}
+
+// HasCompensatingControlStatus returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasCompensatingControlStatus() bool {
+	if o != nil && !IsNil(o.CompensatingControlStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompensatingControlStatus gets a reference to the given string and assigns it to the CompensatingControlStatus field.
+func (o *NiatelemetrySwitch) SetCompensatingControlStatus(v string) {
+	o.CompensatingControlStatus = &v
+}
+
+// GetCompensatingControlsDetails returns the CompensatingControlsDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetrySwitch) GetCompensatingControlsDetails() NiatelemetryCompensatingControlDetails {
+	if o == nil || IsNil(o.CompensatingControlsDetails.Get()) {
+		var ret NiatelemetryCompensatingControlDetails
+		return ret
+	}
+	return *o.CompensatingControlsDetails.Get()
+}
+
+// GetCompensatingControlsDetailsOk returns a tuple with the CompensatingControlsDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetrySwitch) GetCompensatingControlsDetailsOk() (*NiatelemetryCompensatingControlDetails, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CompensatingControlsDetails.Get(), o.CompensatingControlsDetails.IsSet()
+}
+
+// HasCompensatingControlsDetails returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasCompensatingControlsDetails() bool {
+	if o != nil && o.CompensatingControlsDetails.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCompensatingControlsDetails gets a reference to the given NullableNiatelemetryCompensatingControlDetails and assigns it to the CompensatingControlsDetails field.
+func (o *NiatelemetrySwitch) SetCompensatingControlsDetails(v NiatelemetryCompensatingControlDetails) {
+	o.CompensatingControlsDetails.Set(&v)
+}
+
+// SetCompensatingControlsDetailsNil sets the value for CompensatingControlsDetails to be an explicit nil
+func (o *NiatelemetrySwitch) SetCompensatingControlsDetailsNil() {
+	o.CompensatingControlsDetails.Set(nil)
+}
+
+// UnsetCompensatingControlsDetails ensures that no value is present for CompensatingControlsDetails, not even an explicit nil
+func (o *NiatelemetrySwitch) UnsetCompensatingControlsDetails() {
+	o.CompensatingControlsDetails.Unset()
 }
 
 // GetComplianceStatus returns the ComplianceStatus field value if set, zero value otherwise.
@@ -449,6 +538,70 @@ func (o *NiatelemetrySwitch) SetIpAddress(v string) {
 	o.IpAddress = &v
 }
 
+// GetLiveProtectAgentStatus returns the LiveProtectAgentStatus field value if set, zero value otherwise.
+func (o *NiatelemetrySwitch) GetLiveProtectAgentStatus() string {
+	if o == nil || IsNil(o.LiveProtectAgentStatus) {
+		var ret string
+		return ret
+	}
+	return *o.LiveProtectAgentStatus
+}
+
+// GetLiveProtectAgentStatusOk returns a tuple with the LiveProtectAgentStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySwitch) GetLiveProtectAgentStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.LiveProtectAgentStatus) {
+		return nil, false
+	}
+	return o.LiveProtectAgentStatus, true
+}
+
+// HasLiveProtectAgentStatus returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasLiveProtectAgentStatus() bool {
+	if o != nil && !IsNil(o.LiveProtectAgentStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetLiveProtectAgentStatus gets a reference to the given string and assigns it to the LiveProtectAgentStatus field.
+func (o *NiatelemetrySwitch) SetLiveProtectAgentStatus(v string) {
+	o.LiveProtectAgentStatus = &v
+}
+
+// GetLiveProtectStatus returns the LiveProtectStatus field value if set, zero value otherwise.
+func (o *NiatelemetrySwitch) GetLiveProtectStatus() string {
+	if o == nil || IsNil(o.LiveProtectStatus) {
+		var ret string
+		return ret
+	}
+	return *o.LiveProtectStatus
+}
+
+// GetLiveProtectStatusOk returns a tuple with the LiveProtectStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySwitch) GetLiveProtectStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.LiveProtectStatus) {
+		return nil, false
+	}
+	return o.LiveProtectStatus, true
+}
+
+// HasLiveProtectStatus returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasLiveProtectStatus() bool {
+	if o != nil && !IsNil(o.LiveProtectStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetLiveProtectStatus gets a reference to the given string and assigns it to the LiveProtectStatus field.
+func (o *NiatelemetrySwitch) SetLiveProtectStatus(v string) {
+	o.LiveProtectStatus = &v
+}
+
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *NiatelemetrySwitch) GetModel() string {
 	if o == nil || IsNil(o.Model) {
@@ -575,6 +728,38 @@ func (o *NiatelemetrySwitch) HasRole() bool {
 // SetRole gets a reference to the given string and assigns it to the Role field.
 func (o *NiatelemetrySwitch) SetRole(v string) {
 	o.Role = &v
+}
+
+// GetSecurityAdvisoriesCount returns the SecurityAdvisoriesCount field value if set, zero value otherwise.
+func (o *NiatelemetrySwitch) GetSecurityAdvisoriesCount() int64 {
+	if o == nil || IsNil(o.SecurityAdvisoriesCount) {
+		var ret int64
+		return ret
+	}
+	return *o.SecurityAdvisoriesCount
+}
+
+// GetSecurityAdvisoriesCountOk returns a tuple with the SecurityAdvisoriesCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySwitch) GetSecurityAdvisoriesCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.SecurityAdvisoriesCount) {
+		return nil, false
+	}
+	return o.SecurityAdvisoriesCount, true
+}
+
+// HasSecurityAdvisoriesCount returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasSecurityAdvisoriesCount() bool {
+	if o != nil && !IsNil(o.SecurityAdvisoriesCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityAdvisoriesCount gets a reference to the given int64 and assigns it to the SecurityAdvisoriesCount field.
+func (o *NiatelemetrySwitch) SetSecurityAdvisoriesCount(v int64) {
+	o.SecurityAdvisoriesCount = &v
 }
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
@@ -865,6 +1050,113 @@ func (o *NiatelemetrySwitch) SetTelemetryEnabled(v bool) {
 	o.TelemetryEnabled = &v
 }
 
+// GetTotalHitCount returns the TotalHitCount field value if set, zero value otherwise.
+func (o *NiatelemetrySwitch) GetTotalHitCount() int64 {
+	if o == nil || IsNil(o.TotalHitCount) {
+		var ret int64
+		return ret
+	}
+	return *o.TotalHitCount
+}
+
+// GetTotalHitCountOk returns a tuple with the TotalHitCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySwitch) GetTotalHitCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.TotalHitCount) {
+		return nil, false
+	}
+	return o.TotalHitCount, true
+}
+
+// HasTotalHitCount returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasTotalHitCount() bool {
+	if o != nil && !IsNil(o.TotalHitCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalHitCount gets a reference to the given int64 and assigns it to the TotalHitCount field.
+func (o *NiatelemetrySwitch) SetTotalHitCount(v int64) {
+	o.TotalHitCount = &v
+}
+
+// GetVpcConfigured returns the VpcConfigured field value if set, zero value otherwise.
+func (o *NiatelemetrySwitch) GetVpcConfigured() bool {
+	if o == nil || IsNil(o.VpcConfigured) {
+		var ret bool
+		return ret
+	}
+	return *o.VpcConfigured
+}
+
+// GetVpcConfiguredOk returns a tuple with the VpcConfigured field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySwitch) GetVpcConfiguredOk() (*bool, bool) {
+	if o == nil || IsNil(o.VpcConfigured) {
+		return nil, false
+	}
+	return o.VpcConfigured, true
+}
+
+// HasVpcConfigured returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasVpcConfigured() bool {
+	if o != nil && !IsNil(o.VpcConfigured) {
+		return true
+	}
+
+	return false
+}
+
+// SetVpcConfigured gets a reference to the given bool and assigns it to the VpcConfigured field.
+func (o *NiatelemetrySwitch) SetVpcConfigured(v bool) {
+	o.VpcConfigured = &v
+}
+
+// GetVpcData returns the VpcData field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetrySwitch) GetVpcData() NiatelemetryVpcData {
+	if o == nil || IsNil(o.VpcData.Get()) {
+		var ret NiatelemetryVpcData
+		return ret
+	}
+	return *o.VpcData.Get()
+}
+
+// GetVpcDataOk returns a tuple with the VpcData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetrySwitch) GetVpcDataOk() (*NiatelemetryVpcData, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VpcData.Get(), o.VpcData.IsSet()
+}
+
+// HasVpcData returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasVpcData() bool {
+	if o != nil && o.VpcData.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVpcData gets a reference to the given NullableNiatelemetryVpcData and assigns it to the VpcData field.
+func (o *NiatelemetrySwitch) SetVpcData(v NiatelemetryVpcData) {
+	o.VpcData.Set(&v)
+}
+
+// SetVpcDataNil sets the value for VpcData to be an explicit nil
+func (o *NiatelemetrySwitch) SetVpcDataNil() {
+	o.VpcData.Set(nil)
+}
+
+// UnsetVpcData ensures that no value is present for VpcData, not even an explicit nil
+func (o *NiatelemetrySwitch) UnsetVpcData() {
+	o.VpcData.Unset()
+}
+
 // GetFabric returns the Fabric field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetrySwitch) GetFabric() NiatelemetryFabricRelationship {
 	if o == nil || IsNil(o.Fabric.Get()) {
@@ -970,6 +1262,12 @@ func (o NiatelemetrySwitch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AnomalyStatus) {
 		toSerialize["AnomalyStatus"] = o.AnomalyStatus
 	}
+	if !IsNil(o.CompensatingControlStatus) {
+		toSerialize["CompensatingControlStatus"] = o.CompensatingControlStatus
+	}
+	if o.CompensatingControlsDetails.IsSet() {
+		toSerialize["CompensatingControlsDetails"] = o.CompensatingControlsDetails.Get()
+	}
 	if !IsNil(o.ComplianceStatus) {
 		toSerialize["ComplianceStatus"] = o.ComplianceStatus
 	}
@@ -994,6 +1292,12 @@ func (o NiatelemetrySwitch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpAddress) {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
+	if !IsNil(o.LiveProtectAgentStatus) {
+		toSerialize["LiveProtectAgentStatus"] = o.LiveProtectAgentStatus
+	}
+	if !IsNil(o.LiveProtectStatus) {
+		toSerialize["LiveProtectStatus"] = o.LiveProtectStatus
+	}
 	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
@@ -1005,6 +1309,9 @@ func (o NiatelemetrySwitch) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Role) {
 		toSerialize["Role"] = o.Role
+	}
+	if !IsNil(o.SecurityAdvisoriesCount) {
+		toSerialize["SecurityAdvisoriesCount"] = o.SecurityAdvisoriesCount
 	}
 	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
@@ -1032,6 +1339,15 @@ func (o NiatelemetrySwitch) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TelemetryEnabled) {
 		toSerialize["TelemetryEnabled"] = o.TelemetryEnabled
+	}
+	if !IsNil(o.TotalHitCount) {
+		toSerialize["TotalHitCount"] = o.TotalHitCount
+	}
+	if !IsNil(o.VpcConfigured) {
+		toSerialize["VpcConfigured"] = o.VpcConfigured
+	}
+	if o.VpcData.IsSet() {
+		toSerialize["VpcData"] = o.VpcData.Get()
 	}
 	if o.Fabric.IsSet() {
 		toSerialize["Fabric"] = o.Fabric.Get()
@@ -1096,6 +1412,9 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The anomaly status of the managed switch.
 		AnomalyStatus *string `json:"AnomalyStatus,omitempty"`
+		// Compensating control status reported for the switch.
+		CompensatingControlStatus   *string                                        `json:"CompensatingControlStatus,omitempty"`
+		CompensatingControlsDetails NullableNiatelemetryCompensatingControlDetails `json:"CompensatingControlsDetails,omitempty"`
 		// The compliance status of the managed switch.
 		ComplianceStatus *string `json:"ComplianceStatus,omitempty"`
 		// The type of fabric the managed switch belongs to.
@@ -1112,6 +1431,10 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		InBandIp *string `json:"InBandIp,omitempty"`
 		// The IP address of the managed switch.
 		IpAddress *string `json:"IpAddress,omitempty"`
+		// Live Protect agent status reported for the switch.
+		LiveProtectAgentStatus *string `json:"LiveProtectAgentStatus,omitempty"`
+		// Live Protect enablement status reported for the switch.
+		LiveProtectStatus *string `json:"LiveProtectStatus,omitempty"`
 		// The model of the managed switch.
 		Model *string `json:"Model,omitempty"`
 		// The OS version of the managed switch.
@@ -1120,6 +1443,8 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		OutOfBandIp *string `json:"OutOfBandIp,omitempty"`
 		// The role of the managed switch.
 		Role *string `json:"Role,omitempty"`
+		// Number of security advisories associated with the switch.
+		SecurityAdvisoriesCount *int64 `json:"SecurityAdvisoriesCount,omitempty"`
 		// The serial number of the managed switch.
 		Serial *string `json:"Serial,omitempty"`
 		// The name of the managed fabric.
@@ -1137,8 +1462,13 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		// The system uptime of the managed switch.
 		SystemUpTime *string `json:"SystemUpTime,omitempty"`
 		// Indicates whether telemetry is enabled for the fabric.
-		TelemetryEnabled *bool                                  `json:"TelemetryEnabled,omitempty"`
-		Fabric           NullableNiatelemetryFabricRelationship `json:"Fabric,omitempty"`
+		TelemetryEnabled *bool `json:"TelemetryEnabled,omitempty"`
+		// Total Live Protect hit count reported for the switch.
+		TotalHitCount *int64 `json:"TotalHitCount,omitempty"`
+		// Indicates whether virtual port channel is configured on the switch.
+		VpcConfigured *bool                                  `json:"VpcConfigured,omitempty"`
+		VpcData       NullableNiatelemetryVpcData            `json:"VpcData,omitempty"`
+		Fabric        NullableNiatelemetryFabricRelationship `json:"Fabric,omitempty"`
 		// An array of relationships to niatelemetrySwitchInterface resources.
 		SwitchInterfaces []NiatelemetrySwitchInterfaceRelationship `json:"SwitchInterfaces,omitempty"`
 	}
@@ -1151,6 +1481,8 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetrySwitch.ClassId = varNiatelemetrySwitchWithoutEmbeddedStruct.ClassId
 		varNiatelemetrySwitch.ObjectType = varNiatelemetrySwitchWithoutEmbeddedStruct.ObjectType
 		varNiatelemetrySwitch.AnomalyStatus = varNiatelemetrySwitchWithoutEmbeddedStruct.AnomalyStatus
+		varNiatelemetrySwitch.CompensatingControlStatus = varNiatelemetrySwitchWithoutEmbeddedStruct.CompensatingControlStatus
+		varNiatelemetrySwitch.CompensatingControlsDetails = varNiatelemetrySwitchWithoutEmbeddedStruct.CompensatingControlsDetails
 		varNiatelemetrySwitch.ComplianceStatus = varNiatelemetrySwitchWithoutEmbeddedStruct.ComplianceStatus
 		varNiatelemetrySwitch.FabricType = varNiatelemetrySwitchWithoutEmbeddedStruct.FabricType
 		varNiatelemetrySwitch.HardwareConformance = varNiatelemetrySwitchWithoutEmbeddedStruct.HardwareConformance
@@ -1159,10 +1491,13 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetrySwitch.Hostname = varNiatelemetrySwitchWithoutEmbeddedStruct.Hostname
 		varNiatelemetrySwitch.InBandIp = varNiatelemetrySwitchWithoutEmbeddedStruct.InBandIp
 		varNiatelemetrySwitch.IpAddress = varNiatelemetrySwitchWithoutEmbeddedStruct.IpAddress
+		varNiatelemetrySwitch.LiveProtectAgentStatus = varNiatelemetrySwitchWithoutEmbeddedStruct.LiveProtectAgentStatus
+		varNiatelemetrySwitch.LiveProtectStatus = varNiatelemetrySwitchWithoutEmbeddedStruct.LiveProtectStatus
 		varNiatelemetrySwitch.Model = varNiatelemetrySwitchWithoutEmbeddedStruct.Model
 		varNiatelemetrySwitch.OperatingSystemVersion = varNiatelemetrySwitchWithoutEmbeddedStruct.OperatingSystemVersion
 		varNiatelemetrySwitch.OutOfBandIp = varNiatelemetrySwitchWithoutEmbeddedStruct.OutOfBandIp
 		varNiatelemetrySwitch.Role = varNiatelemetrySwitchWithoutEmbeddedStruct.Role
+		varNiatelemetrySwitch.SecurityAdvisoriesCount = varNiatelemetrySwitchWithoutEmbeddedStruct.SecurityAdvisoriesCount
 		varNiatelemetrySwitch.Serial = varNiatelemetrySwitchWithoutEmbeddedStruct.Serial
 		varNiatelemetrySwitch.Site = varNiatelemetrySwitchWithoutEmbeddedStruct.Site
 		varNiatelemetrySwitch.SoftwareConformance = varNiatelemetrySwitchWithoutEmbeddedStruct.SoftwareConformance
@@ -1172,6 +1507,9 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetrySwitch.StrongAssetId = varNiatelemetrySwitchWithoutEmbeddedStruct.StrongAssetId
 		varNiatelemetrySwitch.SystemUpTime = varNiatelemetrySwitchWithoutEmbeddedStruct.SystemUpTime
 		varNiatelemetrySwitch.TelemetryEnabled = varNiatelemetrySwitchWithoutEmbeddedStruct.TelemetryEnabled
+		varNiatelemetrySwitch.TotalHitCount = varNiatelemetrySwitchWithoutEmbeddedStruct.TotalHitCount
+		varNiatelemetrySwitch.VpcConfigured = varNiatelemetrySwitchWithoutEmbeddedStruct.VpcConfigured
+		varNiatelemetrySwitch.VpcData = varNiatelemetrySwitchWithoutEmbeddedStruct.VpcData
 		varNiatelemetrySwitch.Fabric = varNiatelemetrySwitchWithoutEmbeddedStruct.Fabric
 		varNiatelemetrySwitch.SwitchInterfaces = varNiatelemetrySwitchWithoutEmbeddedStruct.SwitchInterfaces
 		*o = NiatelemetrySwitch(varNiatelemetrySwitch)
@@ -1194,6 +1532,8 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AnomalyStatus")
+		delete(additionalProperties, "CompensatingControlStatus")
+		delete(additionalProperties, "CompensatingControlsDetails")
 		delete(additionalProperties, "ComplianceStatus")
 		delete(additionalProperties, "FabricType")
 		delete(additionalProperties, "HardwareConformance")
@@ -1202,10 +1542,13 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Hostname")
 		delete(additionalProperties, "InBandIp")
 		delete(additionalProperties, "IpAddress")
+		delete(additionalProperties, "LiveProtectAgentStatus")
+		delete(additionalProperties, "LiveProtectStatus")
 		delete(additionalProperties, "Model")
 		delete(additionalProperties, "OperatingSystemVersion")
 		delete(additionalProperties, "OutOfBandIp")
 		delete(additionalProperties, "Role")
+		delete(additionalProperties, "SecurityAdvisoriesCount")
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "Site")
 		delete(additionalProperties, "SoftwareConformance")
@@ -1215,6 +1558,9 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "StrongAssetId")
 		delete(additionalProperties, "SystemUpTime")
 		delete(additionalProperties, "TelemetryEnabled")
+		delete(additionalProperties, "TotalHitCount")
+		delete(additionalProperties, "VpcConfigured")
+		delete(additionalProperties, "VpcData")
 		delete(additionalProperties, "Fabric")
 		delete(additionalProperties, "SwitchInterfaces")
 

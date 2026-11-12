@@ -16,6 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_niateleme
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `alert_type_id`:(string) Identifier of the alert type that triggered this notification. 
+* `anomaly_id`:(string) Globally unique identifier for the anomaly notification. 
 * `category`:(string) Classification of the anomaly. 
 * `create_time`:(string) The time when this managed object was created. 
 * `deep_link`:(string) Deep link to investigate the anomaly in the source system. 

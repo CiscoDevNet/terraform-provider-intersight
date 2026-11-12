@@ -6,8 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "comm.TagUsage"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "comm.TagUsage"]
-**Count** | Pointer to **int64** | Total count of managed objects that are tagged with this tag. For path tags, this will be a cumulative count. By default, this property is not returned. | [optional] [readonly] 
-**TaggedObjectTypes** | Pointer to **[]string** |  | [optional] 
+**ValueUsages** | Pointer to [**[]CommTagValueUsage**](CommTagValueUsage.md) |  | [optional] 
 
 ## Methods
 
@@ -68,66 +67,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetCount
+### GetValueUsages
 
-`func (o *CommTagUsage) GetCount() int64`
+`func (o *CommTagUsage) GetValueUsages() []CommTagValueUsage`
 
-GetCount returns the Count field if non-nil, zero value otherwise.
+GetValueUsages returns the ValueUsages field if non-nil, zero value otherwise.
 
-### GetCountOk
+### GetValueUsagesOk
 
-`func (o *CommTagUsage) GetCountOk() (*int64, bool)`
+`func (o *CommTagUsage) GetValueUsagesOk() (*[]CommTagValueUsage, bool)`
 
-GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
+GetValueUsagesOk returns a tuple with the ValueUsages field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCount
+### SetValueUsages
 
-`func (o *CommTagUsage) SetCount(v int64)`
+`func (o *CommTagUsage) SetValueUsages(v []CommTagValueUsage)`
 
-SetCount sets Count field to given value.
+SetValueUsages sets ValueUsages field to given value.
 
-### HasCount
+### HasValueUsages
 
-`func (o *CommTagUsage) HasCount() bool`
+`func (o *CommTagUsage) HasValueUsages() bool`
 
-HasCount returns a boolean if a field has been set.
+HasValueUsages returns a boolean if a field has been set.
 
-### GetTaggedObjectTypes
+### SetValueUsagesNil
 
-`func (o *CommTagUsage) GetTaggedObjectTypes() []string`
+`func (o *CommTagUsage) SetValueUsagesNil(b bool)`
 
-GetTaggedObjectTypes returns the TaggedObjectTypes field if non-nil, zero value otherwise.
+ SetValueUsagesNil sets the value for ValueUsages to be an explicit nil
 
-### GetTaggedObjectTypesOk
+### UnsetValueUsages
+`func (o *CommTagUsage) UnsetValueUsages()`
 
-`func (o *CommTagUsage) GetTaggedObjectTypesOk() (*[]string, bool)`
-
-GetTaggedObjectTypesOk returns a tuple with the TaggedObjectTypes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTaggedObjectTypes
-
-`func (o *CommTagUsage) SetTaggedObjectTypes(v []string)`
-
-SetTaggedObjectTypes sets TaggedObjectTypes field to given value.
-
-### HasTaggedObjectTypes
-
-`func (o *CommTagUsage) HasTaggedObjectTypes() bool`
-
-HasTaggedObjectTypes returns a boolean if a field has been set.
-
-### SetTaggedObjectTypesNil
-
-`func (o *CommTagUsage) SetTaggedObjectTypesNil(b bool)`
-
- SetTaggedObjectTypesNil sets the value for TaggedObjectTypes to be an explicit nil
-
-### UnsetTaggedObjectTypes
-`func (o *CommTagUsage) UnsetTaggedObjectTypes()`
-
-UnsetTaggedObjectTypes ensures that no value is present for TaggedObjectTypes, not even an explicit nil
+UnsetValueUsages ensures that no value is present for ValueUsages, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

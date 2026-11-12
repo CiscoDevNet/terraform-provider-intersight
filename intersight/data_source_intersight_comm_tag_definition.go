@@ -121,7 +121,7 @@ func getCommTagDefinitionSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"key": {
-			Description: "The string representation of the tag key. If the tag is of path type, then \"/\" will be interpreted as path delimiters.\nThe tag key must be unique within the account. The tag key is case sensitive and must not be empty.",
+			Description: "The string representation of the tag key. For PathTag definitions, \"/\" is interpreted as a path delimiter.\nThe combination of key and tag type must be unique within an account. The key is case sensitive and cannot be empty.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -249,8 +249,8 @@ func getCommTagDefinitionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"restrict_values": {
-			Description: "If this flag is enabled, then values of the KeyValue tag is restricted to values present in the allowedValues list. RestrictValues is not applicable to path tags.",
+		"restrict_allowed_values": {
+			Description: "If this flag is enabled, then values of the KeyValue tag can only be values present in the allowedValues list. RestrictAllowedValues is not applicable to path tags.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -358,7 +358,7 @@ func getCommTagDefinitionSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -371,7 +371,7 @@ func getCommTagDefinitionSchema() map[string]*schema.Schema {
 			},
 		},
 		"type": {
-			Description: "An enum type that defines the type of tag. Only path tags are supported for now, and the type is set to path by default.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+			Description: "An enum that defines the type of tag definition. KeyValue tags use a key with an optional value.\nPathTag tags use a hierarchical key with '/' as the delimiter and no value. Defaults to KeyValue.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -393,7 +393,7 @@ func getCommTagDefinitionSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"nr_count": {
-						Description: "Total count of managed objects that are tagged with this tag. For path tags, this will be a cumulative count. By default, this property is not returned.",
+						Description: "Total count of managed objects associated with this tag usage.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -407,6 +407,44 @@ func getCommTagDefinitionSchema() map[string]*schema.Schema {
 						Optional: true,
 						Elem: &schema.Schema{
 							Type: schema.TypeString}},
+					"value_usages": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"nr_count": {
+									Description: "Total count of managed objects associated with this tag usage.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"tagged_object_types": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Schema{
+										Type: schema.TypeString}},
+								"value": {
+									Description: "The specific value for which usage statistics are being reported.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 				},
 			},
 		},
@@ -832,9 +870,9 @@ func dataSourceCommTagDefinitionRead(c context.Context, d *schema.ResourceData, 
 		o.SetPermissionResources(x)
 	}
 
-	if v, ok := d.GetOkExists("restrict_values"); ok {
+	if v, ok := d.GetOkExists("restrict_allowed_values"); ok {
 		x := (v.(bool))
-		o.SetRestrictValues(x)
+		o.SetRestrictAllowedValues(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -912,6 +950,12 @@ func dataSourceCommTagDefinitionRead(c context.Context, d *schema.ResourceData, 
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -962,6 +1006,51 @@ func dataSourceCommTagDefinitionRead(c context.Context, d *schema.ResourceData, 
 					}
 					if len(x) > 0 {
 						o.SetTaggedObjectTypes(x)
+					}
+				}
+			}
+			if v, ok := l["value_usages"]; ok {
+				{
+					x := make([]models.CommTagValueUsage, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewCommTagValueUsageWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("comm.TagValueUsage")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["tagged_object_types"]; ok {
+							{
+								x := make([]string, 0)
+								y := reflect.ValueOf(v)
+								for i := 0; i < y.Len(); i++ {
+									if y.Index(i).Interface() != nil {
+										x = append(x, y.Index(i).Interface().(string))
+									}
+								}
+								if len(x) > 0 {
+									o.SetTaggedObjectTypes(x)
+								}
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetValueUsages(x)
 					}
 				}
 			}
@@ -1106,7 +1195,7 @@ func dataSourceCommTagDefinitionRead(c context.Context, d *schema.ResourceData, 
 				temp["parent_tag"] = flattenMapCommTagDefinitionRelationship(s.GetParentTag(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
-				temp["restrict_values"] = (s.GetRestrictValues())
+				temp["restrict_allowed_values"] = (s.GetRestrictAllowedValues())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["sys_tag"] = (s.GetSysTag())
 

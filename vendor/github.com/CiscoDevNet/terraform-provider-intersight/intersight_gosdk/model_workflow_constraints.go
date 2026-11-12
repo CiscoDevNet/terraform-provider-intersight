@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -27,14 +27,18 @@ type WorkflowConstraints struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string              `json:"ObjectType"`
-	EnumList   []WorkflowEnumEntry `json:"EnumList,omitempty"`
+	ObjectType string `json:"ObjectType"`
+	// JavaScript expression used to ensure the supplied parameter value is valid.
+	DataValidation *string             `json:"DataValidation,omitempty"`
+	EnumList       []WorkflowEnumEntry `json:"EnumList,omitempty"`
 	// Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced.
 	Max *float64 `json:"Max,omitempty"`
 	// Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced.
 	Min *float64 `json:"Min,omitempty"`
 	// When the parameter is a string this regular expression is used to ensure the value is valid.
-	Regex                *string `json:"Regex,omitempty"`
+	Regex *string `json:"Regex,omitempty"`
+	// Provide a custom error message to return when a validation for the constraint fails. When there are multiple constraints, any constraint failure will return this message.
+	ValidationError      *string `json:"ValidationError,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,6 +123,38 @@ func (o *WorkflowConstraints) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "workflow.Constraints" of the ObjectType field.
 func (o *WorkflowConstraints) GetDefaultObjectType() interface{} {
 	return "workflow.Constraints"
+}
+
+// GetDataValidation returns the DataValidation field value if set, zero value otherwise.
+func (o *WorkflowConstraints) GetDataValidation() string {
+	if o == nil || IsNil(o.DataValidation) {
+		var ret string
+		return ret
+	}
+	return *o.DataValidation
+}
+
+// GetDataValidationOk returns a tuple with the DataValidation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowConstraints) GetDataValidationOk() (*string, bool) {
+	if o == nil || IsNil(o.DataValidation) {
+		return nil, false
+	}
+	return o.DataValidation, true
+}
+
+// HasDataValidation returns a boolean if a field has been set.
+func (o *WorkflowConstraints) HasDataValidation() bool {
+	if o != nil && !IsNil(o.DataValidation) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataValidation gets a reference to the given string and assigns it to the DataValidation field.
+func (o *WorkflowConstraints) SetDataValidation(v string) {
+	o.DataValidation = &v
 }
 
 // GetEnumList returns the EnumList field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -250,6 +286,38 @@ func (o *WorkflowConstraints) SetRegex(v string) {
 	o.Regex = &v
 }
 
+// GetValidationError returns the ValidationError field value if set, zero value otherwise.
+func (o *WorkflowConstraints) GetValidationError() string {
+	if o == nil || IsNil(o.ValidationError) {
+		var ret string
+		return ret
+	}
+	return *o.ValidationError
+}
+
+// GetValidationErrorOk returns a tuple with the ValidationError field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowConstraints) GetValidationErrorOk() (*string, bool) {
+	if o == nil || IsNil(o.ValidationError) {
+		return nil, false
+	}
+	return o.ValidationError, true
+}
+
+// HasValidationError returns a boolean if a field has been set.
+func (o *WorkflowConstraints) HasValidationError() bool {
+	if o != nil && !IsNil(o.ValidationError) {
+		return true
+	}
+
+	return false
+}
+
+// SetValidationError gets a reference to the given string and assigns it to the ValidationError field.
+func (o *WorkflowConstraints) SetValidationError(v string) {
+	o.ValidationError = &v
+}
+
 func (o WorkflowConstraints) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -276,6 +344,9 @@ func (o WorkflowConstraints) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DataValidation) {
+		toSerialize["DataValidation"] = o.DataValidation
+	}
 	if o.EnumList != nil {
 		toSerialize["EnumList"] = o.EnumList
 	}
@@ -287,6 +358,9 @@ func (o WorkflowConstraints) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Regex) {
 		toSerialize["Regex"] = o.Regex
+	}
+	if !IsNil(o.ValidationError) {
+		toSerialize["ValidationError"] = o.ValidationError
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -342,14 +416,18 @@ func (o *WorkflowConstraints) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string              `json:"ObjectType"`
-		EnumList   []WorkflowEnumEntry `json:"EnumList,omitempty"`
+		ObjectType string `json:"ObjectType"`
+		// JavaScript expression used to ensure the supplied parameter value is valid.
+		DataValidation *string             `json:"DataValidation,omitempty"`
+		EnumList       []WorkflowEnumEntry `json:"EnumList,omitempty"`
 		// Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced.
 		Max *float64 `json:"Max,omitempty"`
 		// Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced.
 		Min *float64 `json:"Min,omitempty"`
 		// When the parameter is a string this regular expression is used to ensure the value is valid.
 		Regex *string `json:"Regex,omitempty"`
+		// Provide a custom error message to return when a validation for the constraint fails. When there are multiple constraints, any constraint failure will return this message.
+		ValidationError *string `json:"ValidationError,omitempty"`
 	}
 
 	varWorkflowConstraintsWithoutEmbeddedStruct := WorkflowConstraintsWithoutEmbeddedStruct{}
@@ -359,10 +437,12 @@ func (o *WorkflowConstraints) UnmarshalJSON(data []byte) (err error) {
 		varWorkflowConstraints := _WorkflowConstraints{}
 		varWorkflowConstraints.ClassId = varWorkflowConstraintsWithoutEmbeddedStruct.ClassId
 		varWorkflowConstraints.ObjectType = varWorkflowConstraintsWithoutEmbeddedStruct.ObjectType
+		varWorkflowConstraints.DataValidation = varWorkflowConstraintsWithoutEmbeddedStruct.DataValidation
 		varWorkflowConstraints.EnumList = varWorkflowConstraintsWithoutEmbeddedStruct.EnumList
 		varWorkflowConstraints.Max = varWorkflowConstraintsWithoutEmbeddedStruct.Max
 		varWorkflowConstraints.Min = varWorkflowConstraintsWithoutEmbeddedStruct.Min
 		varWorkflowConstraints.Regex = varWorkflowConstraintsWithoutEmbeddedStruct.Regex
+		varWorkflowConstraints.ValidationError = varWorkflowConstraintsWithoutEmbeddedStruct.ValidationError
 		*o = WorkflowConstraints(varWorkflowConstraints)
 	} else {
 		return err
@@ -382,10 +462,12 @@ func (o *WorkflowConstraints) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "DataValidation")
 		delete(additionalProperties, "EnumList")
 		delete(additionalProperties, "Max")
 		delete(additionalProperties, "Min")
 		delete(additionalProperties, "Regex")
+		delete(additionalProperties, "ValidationError")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

@@ -31,7 +31,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_bulk_sub_request_obj.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `body_string`:(string) The body of the sub-request in string format. 
+* `body_string`:(string) Deprecated - The request body of the sub requests are with client and the response can be read from this MO. The identity information is populated in this property. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `execution_completion_time`:(string) The time at which processing of this request completed. 

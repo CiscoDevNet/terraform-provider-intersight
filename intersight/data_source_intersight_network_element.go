@@ -721,6 +721,40 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"ip_address_infos": {
+			Description: "An array of relationships to networkIpAddressInfo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"is_upgraded": {
 			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
 			Type:        schema.TypeBool,
@@ -1198,6 +1232,11 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"out_of_band_ipv4_mode": {
+			Description: "The IPv4 address configuration mode of the network Element out-of-band management interface.\n* `` - The IPv4 address mode is not available or not applicable.\n* `static` - IPv4 address is statically configured.\n* `dhcpv4` - IPv4 address is configured via DHCP.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"out_of_band_ipv6_address": {
 			Description: "The IPv6 address of the network Element out-of-band management interface.",
 			Type:        schema.TypeString,
@@ -1214,7 +1253,7 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"out_of_band_ipv6_mode": {
-			Description: "The IPv6 address configuration mode of the network Element out-of-band management interface.\n* `` - The IPv6 address mode is not available or not applicable.\n* `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC).\n* `static` - IPv6 address is statically configured.\n* `disabled` - IPv6 is disabled on the out-of-band management interface.",
+			Description: "The IPv6 address configuration mode of the network Element out-of-band management interface.\n* `` - The IPv6 address mode is not available or not applicable.\n* `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC).\n* `static` - IPv6 address is statically configured.\n* `disabled` - IPv6 is disabled on the out-of-band management interface.\n* `dhcpv6` - IPv6 address is configured via DHCPv6.\n* `dhcpv6Slaac` - IPv6 address is configured via DHCPv6 and SLAAC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1291,6 +1330,11 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 		"peer_firmware_out_of_sync": {
 			Description: "The flag to indicate the firmware of peer Fabric Interconnect is out of sync.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"peer_interface_compatibility_issue_count": {
+			Description: "The count of port compatibility issues with the connected peer device port.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"permission_resources": {
@@ -1815,7 +1859,7 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -3030,6 +3074,46 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOk("ip_address_infos"); ok {
+		x := make([]models.NetworkIpAddressInfoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsNetworkIpAddressInfoRelationship(o))
+		}
+		o.SetIpAddressInfos(x)
+	}
+
 	if v, ok := d.GetOkExists("is_upgraded"); ok {
 		x := (v.(bool))
 		o.SetIsUpgraded(x)
@@ -3477,6 +3561,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		o.SetOutOfBandIpv4Mask(x)
 	}
 
+	if v, ok := d.GetOk("out_of_band_ipv4_mode"); ok {
+		x := (v.(string))
+		o.SetOutOfBandIpv4Mode(x)
+	}
+
 	if v, ok := d.GetOk("out_of_band_ipv6_address"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv6Address(x)
@@ -3584,6 +3673,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 	if v, ok := d.GetOkExists("peer_firmware_out_of_sync"); ok {
 		x := (v.(bool))
 		o.SetPeerFirmwareOutOfSync(x)
+	}
+
+	if v, ok := d.GetOkExists("peer_interface_compatibility_issue_count"); ok {
+		x := int64(v.(int))
+		o.SetPeerInterfaceCompatibilityIssueCount(x)
 	}
 
 	if v, ok := d.GetOk("permission_resources"); ok {
@@ -4123,6 +4217,12 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -4660,6 +4760,8 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["interface_list"] = flattenListNetworkInterfaceListRelationship(s.GetInterfaceList(), d)
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
+
+				temp["ip_address_infos"] = flattenListNetworkIpAddressInfoRelationship(s.GetIpAddressInfos(), d)
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 				temp["jumbo_frame_enabled"] = (s.GetJumboFrameEnabled())
 
@@ -4695,6 +4797,7 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["out_of_band_ipv4_address"] = (s.GetOutOfBandIpv4Address())
 				temp["out_of_band_ipv4_gateway"] = (s.GetOutOfBandIpv4Gateway())
 				temp["out_of_band_ipv4_mask"] = (s.GetOutOfBandIpv4Mask())
+				temp["out_of_band_ipv4_mode"] = (s.GetOutOfBandIpv4Mode())
 				temp["out_of_band_ipv6_address"] = (s.GetOutOfBandIpv6Address())
 				temp["out_of_band_ipv6_error"] = (s.GetOutOfBandIpv6Error())
 				temp["out_of_band_ipv6_gateway"] = (s.GetOutOfBandIpv6Gateway())
@@ -4709,6 +4812,7 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 				temp["part_number"] = (s.GetPartNumber())
 				temp["peer_firmware_out_of_sync"] = (s.GetPeerFirmwareOutOfSync())
+				temp["peer_interface_compatibility_issue_count"] = (s.GetPeerInterfaceCompatibilityIssueCount())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 

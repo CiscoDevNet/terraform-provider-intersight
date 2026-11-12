@@ -29,6 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `endpoint_count`:(int) Total number of endpoints on fabric. 
 * `fabric_image_policies_count`:(int) Count of number of devices with attached image policies. 
 * `feature_oper_status`:(bool) Feature Operation status of change management. 
+* `hs_integrations_count`:(int) The number of Hypershield integrations on the fabric. 
 * `image_file_staging_count`:(int) Count of number of image operations of type stage. 
 * `ipam_oper_state`:(string) Feature Operation status of Integration with IPAM. 
 * `is_cluster_healthy`:(string) Health of Nexus Dashboard cluster. 
@@ -56,6 +57,7 @@ The following arguments can be used to get data of already created objects in In
 * `ptp_admin_state`:(string) Feature Operation status of Precision Time Protocol Monitoring. 
 * `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `smart_switch_count`:(int) The number of smart switches configured with a valid Hypershield connectivity status, excluding those whose status is 'Not Applicable'. 
 * `sustainability_report_status`:(string) Status of sustainability report on fabric. 
 * `type_of_site_in_mso`:(string) Type of site added to Multi-Site Orchestrator. 
 * `vcenter_count`:(int) Number of vCenters integrated into the fabric. 

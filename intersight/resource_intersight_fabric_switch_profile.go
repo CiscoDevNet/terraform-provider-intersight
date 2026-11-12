@@ -261,6 +261,79 @@ func resourceFabricSwitchProfile() *schema.Resource {
 							ConfigMode:  schema.SchemaConfigModeAttr,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+									"action_qualifier": {
+										Description: "Qualifiers to control the action being triggered. Action qualifiers are to be specified based on the type of disruptions that an action is to be restricted to. For example, trigger the 'Deploy' action to only perform network and management plane configurations.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Computed:    true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "policy.ActionQualifier",
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "policy.ActionQualifier",
+												},
+												"qualifiers": {
+													Type:       schema.TypeList,
+													Optional:   true,
+													ConfigMode: schema.SchemaConfigModeAttr,
+													Computed:   true,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"additional_properties": {
+																Type:             schema.TypeString,
+																Optional:         true,
+																DiffSuppressFunc: SuppressDiffAdditionProps,
+															},
+															"class_id": {
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Default:     "policy.Qualifier",
+															},
+															"disruption": {
+																Description: "Possible disruption the configuration change might cause.",
+																Type:        schema.TypeString,
+																Optional:    true,
+															},
+															"object_type": {
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Default:     "policy.Qualifier",
+															},
+															"policy": {
+																Description: "The name of the policy for which, the deployment is performed.",
+																Type:        schema.TypeString,
+																Optional:    true,
+															},
+														},
+													},
+												},
+												"scope": {
+													Description:  "Specify if profile action is targeted for a specific scope.\n* `selective` - Profile deploy action to be limited to modified policies or to the policy list passed.\n* `all` - Profile deploy action to perform deploy of all policies associated with profile.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringInSlice([]string{"selective", "all"}, false),
+													Optional:     true,
+													Default:      "selective",
+												},
+											},
+										},
+									},
 									"additional_properties": {
 										Type:             schema.TypeString,
 										Optional:         true,
@@ -314,7 +387,13 @@ func resourceFabricSwitchProfile() *schema.Resource {
 										Description: "Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error).",
 										Type:        schema.TypeString,
 										Optional:    true,
-									},
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
 									"inconsistency_reason": {
 										Type:       schema.TypeList,
 										Optional:   true,
@@ -503,6 +582,79 @@ func resourceFabricSwitchProfile() *schema.Resource {
 				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+						"action_qualifier": {
+							Description: "Qualifiers to control the action being triggered. Action qualifiers are to be specified based on the type of disruptions that an action is to be restricted to. For example, trigger the 'Deploy' action to only perform network and management plane configurations.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "policy.ActionQualifier",
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "policy.ActionQualifier",
+									},
+									"qualifiers": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "policy.Qualifier",
+												},
+												"disruption": {
+													Description: "Possible disruption the configuration change might cause.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "policy.Qualifier",
+												},
+												"policy": {
+													Description: "The name of the policy for which, the deployment is performed.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"scope": {
+										Description:  "Specify if profile action is targeted for a specific scope.\n* `selective` - Profile deploy action to be limited to modified policies or to the policy list passed.\n* `all` - Profile deploy action to perform deploy of all policies associated with profile.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"selective", "all"}, false),
+										Optional:     true,
+										Default:      "selective",
+									},
+								},
+							},
+						},
 						"additional_properties": {
 							Type:             schema.TypeString,
 							Optional:         true,
@@ -556,7 +708,13 @@ func resourceFabricSwitchProfile() *schema.Resource {
 							Description: "Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error).",
 							Type:        schema.TypeString,
 							Optional:    true,
-						},
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"inconsistency_reason": {
 							Type:       schema.TypeList,
 							Optional:   true,
@@ -838,6 +996,310 @@ func resourceFabricSwitchProfile() *schema.Resource {
 								}
 								return
 							}},
+					},
+				},
+			},
+			"peer_interface_compatibility_issues": {
+				Description: "Peer interface compatibility evaluation summary including issues detected between Secure Router backplane intent and Catalyst SD-WAN Manager peer interface values.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "fabric.PeerInterfaceCompatibilityIssues",
+						},
+						"eval_state": {
+							Description: "Freshness state for the latest peer interface compatibility evaluation.\n* `None` - No peer interface compatibility evaluation has been requested for this profile.\n* `InProgress` - A peer interface compatibility evaluation has been requested and the latest result has not been applied yet.\n* `Completed` - The stored peer interface compatibility issues were produced by the latest evaluation.\n* `Failed` - The latest peer interface compatibility evaluation did not produce a report.\n* `NoChange` - The latest evaluation determined there were no configuration changes affecting peer interface compatibility, so the previously stored issues remain valid.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"failure_reason": {
+							Description: "Human-readable reason describing why the latest peer interface compatibility evaluation failed. Only populated when evalState is Failed.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"issues": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "fabric.PeerInterfaceCompatibilityIssue",
+									},
+									"desired_value": {
+										Description: "Value configured in Intersight intent.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"issue_type": {
+										Description: "Type of compatibility issue detected.\n* `None` - No peer port compatibility issue was detected.\n* `Mode Mismatch` - The port mode on the Secure Router backplane in Intersight differs from the mode set in Catalyst SD-WAN Manager.\n* `Allowed VLANs Mismatch` - The allowed VLANs on the Secure Router backplane in Intersight differ from those in Catalyst SD-WAN Manager. VLAN 4047 is automatically added on the Secure Router and is included in the comparison.\n* `Native VLAN Mismatch` - The native VLAN on the Secure Router backplane in Intersight differs from the native VLAN in Catalyst SD-WAN Manager.\n* `Access VLAN Mismatch` - The access VLAN on the Secure Router backplane in Intersight differs from the access VLAN in Catalyst SD-WAN Manager.\n* `MTU Mismatch` - The MTU on the switch in Intersight differs from the MTU on the Secure Router in Catalyst SD-WAN Manager.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"local_interface": {
+										Description: "The local interface where the mismatch was detected. For Secure Router backplane checks this is an ether.HostPort.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										Computed:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "mo.MoRef",
+												},
+												"moid": {
+													Description: "The Moid of the referenced REST resource.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the remote type referred by this relationship.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"selector": {
+													Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "fabric.PeerInterfaceCompatibilityIssue",
+									},
+									"peer_device": {
+										Description: "The peer Catalyst SD-WAN device connected to the local interface where the mismatch was detected.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										Computed:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "mo.MoRef",
+												},
+												"moid": {
+													Description: "The Moid of the referenced REST resource.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the remote type referred by this relationship.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"selector": {
+													Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"peer_interface": {
+										Description: "The peer interface corresponding to the mismatch. This may be a physical port or port-channel.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										Computed:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "mo.MoRef",
+												},
+												"moid": {
+													Description: "The Moid of the referenced REST resource.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the remote type referred by this relationship.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"selector": {
+													Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"peer_interface_name": {
+										Description: "User-friendly name of the peer interface corresponding to the mismatch.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"peer_value": {
+										Description: "Value reported by Catalyst SD-WAN Manager.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"peer_value_mod_time": {
+										Description: "Time when the peer value used for this compatibility check was captured.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"nr_source": {
+										Description: "Source of the local endpoint where the mismatch was detected, including the slot identifier when applicable.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"source_policy": {
+										Description: "Source policy reference whose desired configuration contributed to this compatibility issue.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										Computed:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "mo.MoRef",
+												},
+												"moid": {
+													Description: "The Moid of the referenced REST resource.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the remote type referred by this relationship.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"selector": {
+													Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "fabric.PeerInterfaceCompatibilityIssues",
+						},
 					},
 				},
 			},
@@ -1193,16 +1655,60 @@ func resourceFabricSwitchProfile() *schema.Resource {
 										DiffSuppressFunc: SuppressDiffAdditionProps,
 									},
 									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "policy.ActionQualifier",
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "policy.ActionQualifier",
+									},
+									"qualifiers": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "policy.Qualifier",
+												},
+												"disruption": {
+													Description: "Possible disruption the configuration change might cause.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "policy.Qualifier",
+												},
+												"policy": {
+													Description: "The name of the policy for which, the deployment is performed.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"scope": {
+										Description:  "Specify if profile action is targeted for a specific scope.\n* `selective` - Profile deploy action to be limited to modified policies or to the policy list passed.\n* `all` - Profile deploy action to perform deploy of all policies associated with profile.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"selective", "all"}, false),
+										Optional:     true,
+										Default:      "selective",
 									},
 								},
 							},
@@ -1495,16 +2001,12 @@ func resourceFabricSwitchProfile() *schema.Resource {
 								return
 							}},
 						"type": {
-							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}},
+							Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+							Optional:     true,
+							Default:      "KeyValue",
+						},
 						"value": {
 							Description:  "The string representation of a tag value.",
 							Type:         schema.TypeString,
@@ -1935,6 +2437,87 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
 			o := models.NewPolicyConfigContextWithDefaults()
+			if v, ok := l["action_qualifier"]; ok {
+				{
+					p := make([]models.PolicyActionQualifier, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewPolicyActionQualifierWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("policy.ActionQualifier")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["qualifiers"]; ok {
+							{
+								x := make([]models.PolicyQualifier, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewPolicyQualifierWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("policy.Qualifier")
+									if v, ok := l["disruption"]; ok {
+										{
+											x := (v.(string))
+											o.SetDisruption(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["policy"]; ok {
+										{
+											x := (v.(string))
+											o.SetPolicy(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetQualifiers(x)
+								}
+							}
+						}
+						if v, ok := l["scope"]; ok {
+							{
+								x := (v.(string))
+								o.SetScope(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetActionQualifier(x)
+					}
+				}
+			}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1950,12 +2533,6 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 				{
 					x := (v.(string))
 					o.SetControlAction(x)
-				}
-			}
-			if v, ok := l["error_state"]; ok {
-				{
-					x := (v.(string))
-					o.SetErrorState(x)
 				}
 			}
 			if v, ok := l["inconsistency_reason"]; ok {
@@ -2343,6 +2920,55 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 								o.SetObjectType(x)
 							}
 						}
+						if v, ok := l["qualifiers"]; ok {
+							{
+								x := make([]models.PolicyQualifier, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewPolicyQualifierWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("policy.Qualifier")
+									if v, ok := l["disruption"]; ok {
+										{
+											x := (v.(string))
+											o.SetDisruption(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["policy"]; ok {
+										{
+											x := (v.(string))
+											o.SetPolicy(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetQualifiers(x)
+								}
+							}
+						}
+						if v, ok := l["scope"]; ok {
+							{
+								x := (v.(string))
+								o.SetScope(x)
+							}
+						}
 						p = append(p, *o)
 					}
 					if len(p) > 0 {
@@ -2583,6 +3209,12 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {
@@ -2920,6 +3552,10 @@ func resourceFabricSwitchProfileRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property PartiallyDeployedPolicies in FabricSwitchProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("peer_interface_compatibility_issues", flattenMapFabricPeerInterfaceCompatibilityIssues(s.GetPeerInterfaceCompatibilityIssues(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property PeerInterfaceCompatibilityIssues in FabricSwitchProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PermissionResources in FabricSwitchProfile object: %s", err.Error())
 	}
@@ -3121,6 +3757,87 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
 			o := &models.PolicyConfigContext{}
+			if v, ok := l["action_qualifier"]; ok {
+				{
+					p := make([]models.PolicyActionQualifier, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewPolicyActionQualifierWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("policy.ActionQualifier")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["qualifiers"]; ok {
+							{
+								x := make([]models.PolicyQualifier, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewPolicyQualifierWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("policy.Qualifier")
+									if v, ok := l["disruption"]; ok {
+										{
+											x := (v.(string))
+											o.SetDisruption(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["policy"]; ok {
+										{
+											x := (v.(string))
+											o.SetPolicy(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetQualifiers(x)
+								}
+							}
+						}
+						if v, ok := l["scope"]; ok {
+							{
+								x := (v.(string))
+								o.SetScope(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetActionQualifier(x)
+					}
+				}
+			}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -3136,12 +3853,6 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 				{
 					x := (v.(string))
 					o.SetControlAction(x)
-				}
-			}
-			if v, ok := l["error_state"]; ok {
-				{
-					x := (v.(string))
-					o.SetErrorState(x)
 				}
 			}
 			if v, ok := l["inconsistency_reason"]; ok {
@@ -3527,6 +4238,55 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 								o.SetObjectType(x)
 							}
 						}
+						if v, ok := l["qualifiers"]; ok {
+							{
+								x := make([]models.PolicyQualifier, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewPolicyQualifierWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("policy.Qualifier")
+									if v, ok := l["disruption"]; ok {
+										{
+											x := (v.(string))
+											o.SetDisruption(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["policy"]; ok {
+										{
+											x := (v.(string))
+											o.SetPolicy(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetQualifiers(x)
+								}
+							}
+						}
+						if v, ok := l["scope"]; ok {
+							{
+								x := (v.(string))
+								o.SetScope(x)
+							}
+						}
 						p = append(p, *o)
 					}
 					if len(p) > 0 {
@@ -3771,6 +4531,12 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {

@@ -1,6 +1,6 @@
 # \FeedbackApi
 
-All URIs are relative to *https://intersight.com*
+All URIs are relative to *https://stage.starshipcloud.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

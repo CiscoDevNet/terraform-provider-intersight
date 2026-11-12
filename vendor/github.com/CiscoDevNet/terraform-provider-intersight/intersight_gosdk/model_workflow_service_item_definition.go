@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -52,7 +52,8 @@ type WorkflowServiceItemDefinition struct {
 	// The publish status of service item (Draft, Published, Archived). * `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested. * `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption. * `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.
 	PublishStatus *string `json:"PublishStatus,omitempty"`
 	// State of service item considering the state of underlying service item actions definitions. * `Okay` - Deployment and other post-deployment actions are in valid state. * `Critical` - Deployment action is not in valid state. * `Warning` - Deployment action is in valid state, and one or more post-deployment actions are not in valid state.
-	Status *string `json:"Status,omitempty"`
+	Status      *string                     `json:"Status,omitempty"`
+	SupportInfo NullableWorkflowSupportInfo `json:"SupportInfo,omitempty"`
 	// The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design. * `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported. * `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.
 	SupportStatus *string `json:"SupportStatus,omitempty"`
 	// This attribute is deprecated and replaced by createUser and modUser.
@@ -591,6 +592,49 @@ func (o *WorkflowServiceItemDefinition) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetSupportInfo returns the SupportInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowServiceItemDefinition) GetSupportInfo() WorkflowSupportInfo {
+	if o == nil || IsNil(o.SupportInfo.Get()) {
+		var ret WorkflowSupportInfo
+		return ret
+	}
+	return *o.SupportInfo.Get()
+}
+
+// GetSupportInfoOk returns a tuple with the SupportInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowServiceItemDefinition) GetSupportInfoOk() (*WorkflowSupportInfo, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SupportInfo.Get(), o.SupportInfo.IsSet()
+}
+
+// HasSupportInfo returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinition) HasSupportInfo() bool {
+	if o != nil && o.SupportInfo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportInfo gets a reference to the given NullableWorkflowSupportInfo and assigns it to the SupportInfo field.
+func (o *WorkflowServiceItemDefinition) SetSupportInfo(v WorkflowSupportInfo) {
+	o.SupportInfo.Set(&v)
+}
+
+// SetSupportInfoNil sets the value for SupportInfo to be an explicit nil
+func (o *WorkflowServiceItemDefinition) SetSupportInfoNil() {
+	o.SupportInfo.Set(nil)
+}
+
+// UnsetSupportInfo ensures that no value is present for SupportInfo, not even an explicit nil
+func (o *WorkflowServiceItemDefinition) UnsetSupportInfo() {
+	o.SupportInfo.Unset()
+}
+
 // GetSupportStatus returns the SupportStatus field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetSupportStatus() string {
 	if o == nil || IsNil(o.SupportStatus) {
@@ -874,6 +918,9 @@ func (o WorkflowServiceItemDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
+	if o.SupportInfo.IsSet() {
+		toSerialize["SupportInfo"] = o.SupportInfo.Get()
+	}
 	if !IsNil(o.SupportStatus) {
 		toSerialize["SupportStatus"] = o.SupportStatus
 	}
@@ -971,7 +1018,8 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		// The publish status of service item (Draft, Published, Archived). * `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested. * `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption. * `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.
 		PublishStatus *string `json:"PublishStatus,omitempty"`
 		// State of service item considering the state of underlying service item actions definitions. * `Okay` - Deployment and other post-deployment actions are in valid state. * `Critical` - Deployment action is not in valid state. * `Warning` - Deployment action is in valid state, and one or more post-deployment actions are not in valid state.
-		Status *string `json:"Status,omitempty"`
+		Status      *string                     `json:"Status,omitempty"`
+		SupportInfo NullableWorkflowSupportInfo `json:"SupportInfo,omitempty"`
 		// The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design. * `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported. * `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.
 		SupportStatus *string `json:"SupportStatus,omitempty"`
 		// This attribute is deprecated and replaced by createUser and modUser.
@@ -1005,6 +1053,7 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		varWorkflowServiceItemDefinition.Name = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.Name
 		varWorkflowServiceItemDefinition.PublishStatus = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.PublishStatus
 		varWorkflowServiceItemDefinition.Status = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.Status
+		varWorkflowServiceItemDefinition.SupportInfo = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.SupportInfo
 		varWorkflowServiceItemDefinition.SupportStatus = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.SupportStatus
 		varWorkflowServiceItemDefinition.UserIdOrEmail = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.UserIdOrEmail
 		varWorkflowServiceItemDefinition.ValidationInformation = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.ValidationInformation
@@ -1043,6 +1092,7 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "PublishStatus")
 		delete(additionalProperties, "Status")
+		delete(additionalProperties, "SupportInfo")
 		delete(additionalProperties, "SupportStatus")
 		delete(additionalProperties, "UserIdOrEmail")
 		delete(additionalProperties, "ValidationInformation")

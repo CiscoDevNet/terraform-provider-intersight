@@ -3,14 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_certificate_request"
 description: |-
-        The information required to generate a certificate signing request (CSR),
-        which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
+        CertificateRequests model certificate signing request (CSR) workflows within an account. A CertificateRequest captures the subject identity and SANs needed to generate a PEM-formatted CSR, optionally supporting a self-signed path.
+        #### Purpose
+        Enable account-scoped certificate lifecycle operations by generating CSRs that can be submitted to a certificate authority (or self-signed by the appliance where supported).
+        #### Key Concepts
+        - **CSR generation:** Produces a PEM CSR from provided subject and SAN inputs.
+        - **Self-signed option:** Supports conditional behavior for self-signed vs CA-signed flows.
+        - **Account-scoped security artifact:** Inherits permissions from the owning account and is managed under account governance.
+        - **Certificate pairing:** Typically links forward to a Certificate object that represents the signed certificate returned from a CA.
 
 ---
 
 # Data Source: intersight_iam_certificate_request
-The information required to generate a certificate signing request (CSR),
-which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
+CertificateRequests model certificate signing request (CSR) workflows within an account. A CertificateRequest captures the subject identity and SANs needed to generate a PEM-formatted CSR, optionally supporting a self-signed path.
+#### Purpose
+Enable account-scoped certificate lifecycle operations by generating CSRs that can be submitted to a certificate authority (or self-signed by the appliance where supported).
+#### Key Concepts
+- **CSR generation:** Produces a PEM CSR from provided subject and SAN inputs.
+- **Self-signed option:** Supports conditional behavior for self-signed vs CA-signed flows.
+- **Account-scoped security artifact:** Inherits permissions from the owning account and is managed under account governance.
+- **Certificate pairing:** Typically links forward to a Certificate object that represents the signed certificate returned from a CA.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_cui_integration"
 description: |-
-        Stores CUI and CCC integration details and synchronization status for an account.
+        CuiIntegrations store Cisco Unified Identity (CUI) and Cisco Cloud Control (CCC) integration details for an account, including synchronization status and tenant linkage metadata.
+        #### Purpose
+        Provide account-level visibility and configuration state for CUI/CCC integration so the platform can manage identity and inventory synchronization behaviors.
+        #### Key Concepts
+        - **Sync status tracking:** Captures whether integration data needs sync, is in progress, or is complete.
+        - **Tenant linkage:** Associates the account to one or more external tenant identifiers for linked products.
+        - **Inventory sync control:** Stores CCC inventory sync enablement state as an account setting.
+        - **Account binding:** Owned by and scoped to the account via relationship and identity.
 
 ---
 
 # Resource: intersight_iam_cui_integration
-Stores CUI and CCC integration details and synchronization status for an account.
+CuiIntegrations store Cisco Unified Identity (CUI) and Cisco Cloud Control (CCC) integration details for an account, including synchronization status and tenant linkage metadata.
+#### Purpose
+Provide account-level visibility and configuration state for CUI/CCC integration so the platform can manage identity and inventory synchronization behaviors.
+#### Key Concepts
+- **Sync status tracking:** Captures whether integration data needs sync, is in progress, or is complete.
+- **Tenant linkage:** Associates the account to one or more external tenant identifiers for linked products.
+- **Inventory sync control:** Stores CCC inventory sync enablement state as an account setting.
+- **Account binding:** Owned by and scoped to the account via relationship and identity.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -66,7 +80,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `tenant_id`:(string)(ReadOnly) Primary tenant ID for CUI integration. 
 * `user`:(HashMap) -(ReadOnly) A reference to a iamUser resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -21,21 +21,22 @@ import (
 // checks if the WebhookEndpoint type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookEndpoint{}
 
-// WebhookEndpoint The Endpoint object is a crucial component for managing webhook communications within the system. Endpoint provides a structured approach for controllers to forward events, enabling seamless integration with external systems. #### Purpose An Endpoint serves as the conduit for event-driven interactions, allowing applications to communicate through predefined webhook routes. It ensures that events can be reliably received and processed by external systems. #### Key Concepts - **Webhook Integration:** Designed to facilitate the forwarding of events to external systems using webhooks, ensuring real-time communication and data exchange. - **Access Control:** Incorporates privilege sets to manage who can create, read, update, and delete endpoints, safeguarding against unauthorized access. - **Relationship Management:** Establishes connections with accounts and organizations, ensuring that each endpoint is associated with the relevant entities for efficient management and tracking.
+// WebhookEndpoint The webhook endpoint which an controller can use to forward events.
 type WebhookEndpoint struct {
-	IamAbstractClientApplication
+	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The name of the Endpoint.
 	Name *string `json:"Name,omitempty"`
-	// The endpoint URL. The CREATE and UPDATE APIs can cause the change to the value.
+	// The endpoint url. The CREATE and UPDATE APIs can cause the change to the value.
 	Url          *string                                      `json:"Url,omitempty"`
 	Account      NullableIamAccountRelationship               `json:"Account,omitempty"`
 	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to webhookSchema resources.
-	Schemas              []WebhookSchemaRelationship `json:"Schemas,omitempty"`
+	Schemas              []WebhookSchemaRelationship     `json:"Schemas,omitempty"`
+	Target               NullableAssetTargetRelationship `json:"Target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,10 +50,6 @@ func NewWebhookEndpoint(classId string, objectType string) *WebhookEndpoint {
 	this := WebhookEndpoint{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var authType string = "basic"
-	this.AuthType = &authType
-	var credentialsAction string = "none"
-	this.CredentialsAction = &credentialsAction
 	return &this
 }
 
@@ -309,6 +306,49 @@ func (o *WebhookEndpoint) SetSchemas(v []WebhookSchemaRelationship) {
 	o.Schemas = v
 }
 
+// GetTarget returns the Target field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WebhookEndpoint) GetTarget() AssetTargetRelationship {
+	if o == nil || IsNil(o.Target.Get()) {
+		var ret AssetTargetRelationship
+		return ret
+	}
+	return *o.Target.Get()
+}
+
+// GetTargetOk returns a tuple with the Target field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WebhookEndpoint) GetTargetOk() (*AssetTargetRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Target.Get(), o.Target.IsSet()
+}
+
+// HasTarget returns a boolean if a field has been set.
+func (o *WebhookEndpoint) HasTarget() bool {
+	if o != nil && o.Target.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTarget gets a reference to the given NullableAssetTargetRelationship and assigns it to the Target field.
+func (o *WebhookEndpoint) SetTarget(v AssetTargetRelationship) {
+	o.Target.Set(&v)
+}
+
+// SetTargetNil sets the value for Target to be an explicit nil
+func (o *WebhookEndpoint) SetTargetNil() {
+	o.Target.Set(nil)
+}
+
+// UnsetTarget ensures that no value is present for Target, not even an explicit nil
+func (o *WebhookEndpoint) UnsetTarget() {
+	o.Target.Unset()
+}
+
 func (o WebhookEndpoint) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -319,13 +359,13 @@ func (o WebhookEndpoint) MarshalJSON() ([]byte, error) {
 
 func (o WebhookEndpoint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedIamAbstractClientApplication, errIamAbstractClientApplication := json.Marshal(o.IamAbstractClientApplication)
-	if errIamAbstractClientApplication != nil {
-		return map[string]interface{}{}, errIamAbstractClientApplication
+	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
+	if errMoBaseMo != nil {
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	errIamAbstractClientApplication = json.Unmarshal([]byte(serializedIamAbstractClientApplication), &toSerialize)
-	if errIamAbstractClientApplication != nil {
-		return map[string]interface{}{}, errIamAbstractClientApplication
+	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
+	if errMoBaseMo != nil {
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	if _, exists := toSerialize["ClassId"]; !exists {
 		toSerialize["ClassId"] = o.GetDefaultClassId()
@@ -349,6 +389,9 @@ func (o WebhookEndpoint) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Schemas != nil {
 		toSerialize["Schemas"] = o.Schemas
+	}
+	if o.Target.IsSet() {
+		toSerialize["Target"] = o.Target.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -407,12 +450,13 @@ func (o *WebhookEndpoint) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The name of the Endpoint.
 		Name *string `json:"Name,omitempty"`
-		// The endpoint URL. The CREATE and UPDATE APIs can cause the change to the value.
+		// The endpoint url. The CREATE and UPDATE APIs can cause the change to the value.
 		Url          *string                                      `json:"Url,omitempty"`
 		Account      NullableIamAccountRelationship               `json:"Account,omitempty"`
 		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to webhookSchema resources.
-		Schemas []WebhookSchemaRelationship `json:"Schemas,omitempty"`
+		Schemas []WebhookSchemaRelationship     `json:"Schemas,omitempty"`
+		Target  NullableAssetTargetRelationship `json:"Target,omitempty"`
 	}
 
 	varWebhookEndpointWithoutEmbeddedStruct := WebhookEndpointWithoutEmbeddedStruct{}
@@ -427,6 +471,7 @@ func (o *WebhookEndpoint) UnmarshalJSON(data []byte) (err error) {
 		varWebhookEndpoint.Account = varWebhookEndpointWithoutEmbeddedStruct.Account
 		varWebhookEndpoint.Organization = varWebhookEndpointWithoutEmbeddedStruct.Organization
 		varWebhookEndpoint.Schemas = varWebhookEndpointWithoutEmbeddedStruct.Schemas
+		varWebhookEndpoint.Target = varWebhookEndpointWithoutEmbeddedStruct.Target
 		*o = WebhookEndpoint(varWebhookEndpoint)
 	} else {
 		return err
@@ -436,7 +481,7 @@ func (o *WebhookEndpoint) UnmarshalJSON(data []byte) (err error) {
 
 	err = json.Unmarshal(data, &varWebhookEndpoint)
 	if err == nil {
-		o.IamAbstractClientApplication = varWebhookEndpoint.IamAbstractClientApplication
+		o.MoBaseMo = varWebhookEndpoint.MoBaseMo
 	} else {
 		return err
 	}
@@ -451,11 +496,12 @@ func (o *WebhookEndpoint) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Schemas")
+		delete(additionalProperties, "Target")
 
 		// remove fields from embedded structs
-		reflectIamAbstractClientApplication := reflect.ValueOf(o.IamAbstractClientApplication)
-		for i := 0; i < reflectIamAbstractClientApplication.Type().NumField(); i++ {
-			t := reflectIamAbstractClientApplication.Type().Field(i)
+		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
+		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
+			t := reflectMoBaseMo.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

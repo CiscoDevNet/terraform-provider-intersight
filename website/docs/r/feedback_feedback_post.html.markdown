@@ -39,6 +39,7 @@ This complex property has following sub-properties:
   + `account_name`:(string) Account name of the feedback sender, copied for persistence in case of account removal. 
   + `alternative_follow_up_emails`:
                 (Array of schema.TypeString) -
+  + `appliance_name`:(string)(ReadOnly) Hostname of the Intersight Appliance that submitted the feedback. Empty string whenthe feedback was submitted directly from Intersight SaaS. 
   + `comment`:(string) User feedback text (a bug or a suggestion). 
   + `email`:(string) User's email address details. 
   + `evaluation`:(string) Evaluation rating provided by the user to capture user sentiment regarding the issue.* `Excellent` - Option indicating user's excellent evaluation.* `Poor` - Option indicating user's poor evaluation.* `Fair` - Option indicating user's fair evaluation.* `Good` - Option indicating user's good evaluation. 
@@ -79,7 +80,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

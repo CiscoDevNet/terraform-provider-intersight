@@ -29,11 +29,12 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_fabric_vlan_set.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `auto_allow_on_cluster_links`:(bool) This setting determines whether the VLAN is automatically allowed on inter-cluster links within this domain. 
-* `auto_allow_on_uplinks`:(bool) Used to determine whether this VLAN will be allowed on all uplink ports and PCs in this FI. 
+* `auto_allow_on_inter_switch_ports`:(bool) Restricts this VLAN to intra-chassis traffic only. It does not carry traffic outside the chassis. 
+* `auto_allow_on_secure_router_roles`:(bool) This setting determines whether the VLAN is automatically allowed on backplane ports connected to slots configured with Secure Router Role. 
+* `auto_allow_on_uplinks`:(bool) Used to determine whether this VLAN will be allowed on all uplink ports and PCs in this switch. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `is_native`:(bool) Used to define whether this VLAN is to be classified as 'native' for traffic in this FI. 
+* `is_native`:(bool) Used to define whether this VLAN is to be classified as 'native' for traffic in this switch. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The 'name' used to identify this VLAN. 

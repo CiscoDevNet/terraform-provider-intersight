@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.Switch"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.Switch"]
 **AnomalyStatus** | Pointer to **string** | The anomaly status of the managed switch. | [optional] [readonly] 
+**CompensatingControlStatus** | Pointer to **string** | Compensating control status reported for the switch. | [optional] [readonly] 
+**CompensatingControlsDetails** | Pointer to [**NullableNiatelemetryCompensatingControlDetails**](NiatelemetryCompensatingControlDetails.md) |  | [optional] 
 **ComplianceStatus** | Pointer to **string** | The compliance status of the managed switch. | [optional] [readonly] 
 **FabricType** | Pointer to **string** | The type of fabric the managed switch belongs to. | [optional] [readonly] 
 **HardwareConformance** | Pointer to **string** | The hardware conformance status of the managed switch. | [optional] [readonly] 
@@ -15,10 +17,13 @@ Name | Type | Description | Notes
 **Hostname** | Pointer to **string** | The hostname of the managed switch. | [optional] [readonly] 
 **InBandIp** | Pointer to **string** | The inband IPv4 address of the managed switch. | [optional] [readonly] 
 **IpAddress** | Pointer to **string** | The IP address of the managed switch. | [optional] [readonly] 
+**LiveProtectAgentStatus** | Pointer to **string** | Live Protect agent status reported for the switch. | [optional] [readonly] 
+**LiveProtectStatus** | Pointer to **string** | Live Protect enablement status reported for the switch. | [optional] [readonly] 
 **Model** | Pointer to **string** | The model of the managed switch. | [optional] [readonly] 
 **OperatingSystemVersion** | Pointer to **string** | The OS version of the managed switch. | [optional] [readonly] 
 **OutOfBandIp** | Pointer to **string** | The out-of-band IPv4 address of the managed switch. | [optional] [readonly] 
 **Role** | Pointer to **string** | The role of the managed switch. | [optional] [readonly] 
+**SecurityAdvisoriesCount** | Pointer to **int64** | Number of security advisories associated with the switch. | [optional] [readonly] 
 **Serial** | Pointer to **string** | The serial number of the managed switch. | [optional] [readonly] 
 **Site** | Pointer to **string** | The name of the managed fabric. | [optional] [readonly] 
 **SoftwareConformance** | Pointer to **string** | The software conformance status of the managed switch. | [optional] [readonly] 
@@ -28,6 +33,9 @@ Name | Type | Description | Notes
 **StrongAssetId** | Pointer to **string** | The DBID of the managed switch. | [optional] [readonly] 
 **SystemUpTime** | Pointer to **string** | The system uptime of the managed switch. | [optional] [readonly] 
 **TelemetryEnabled** | Pointer to **bool** | Indicates whether telemetry is enabled for the fabric. | [optional] [readonly] 
+**TotalHitCount** | Pointer to **int64** | Total Live Protect hit count reported for the switch. | [optional] [readonly] 
+**VpcConfigured** | Pointer to **bool** | Indicates whether virtual port channel is configured on the switch. | [optional] [readonly] 
+**VpcData** | Pointer to [**NullableNiatelemetryVpcData**](NiatelemetryVpcData.md) |  | [optional] 
 **Fabric** | Pointer to [**NullableNiatelemetryFabricRelationship**](NiatelemetryFabricRelationship.md) |  | [optional] 
 **SwitchInterfaces** | Pointer to [**[]NiatelemetrySwitchInterfaceRelationship**](NiatelemetrySwitchInterfaceRelationship.md) | An array of relationships to niatelemetrySwitchInterface resources. | [optional] [readonly] 
 
@@ -115,6 +123,66 @@ SetAnomalyStatus sets AnomalyStatus field to given value.
 
 HasAnomalyStatus returns a boolean if a field has been set.
 
+### GetCompensatingControlStatus
+
+`func (o *NiatelemetrySwitch) GetCompensatingControlStatus() string`
+
+GetCompensatingControlStatus returns the CompensatingControlStatus field if non-nil, zero value otherwise.
+
+### GetCompensatingControlStatusOk
+
+`func (o *NiatelemetrySwitch) GetCompensatingControlStatusOk() (*string, bool)`
+
+GetCompensatingControlStatusOk returns a tuple with the CompensatingControlStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompensatingControlStatus
+
+`func (o *NiatelemetrySwitch) SetCompensatingControlStatus(v string)`
+
+SetCompensatingControlStatus sets CompensatingControlStatus field to given value.
+
+### HasCompensatingControlStatus
+
+`func (o *NiatelemetrySwitch) HasCompensatingControlStatus() bool`
+
+HasCompensatingControlStatus returns a boolean if a field has been set.
+
+### GetCompensatingControlsDetails
+
+`func (o *NiatelemetrySwitch) GetCompensatingControlsDetails() NiatelemetryCompensatingControlDetails`
+
+GetCompensatingControlsDetails returns the CompensatingControlsDetails field if non-nil, zero value otherwise.
+
+### GetCompensatingControlsDetailsOk
+
+`func (o *NiatelemetrySwitch) GetCompensatingControlsDetailsOk() (*NiatelemetryCompensatingControlDetails, bool)`
+
+GetCompensatingControlsDetailsOk returns a tuple with the CompensatingControlsDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompensatingControlsDetails
+
+`func (o *NiatelemetrySwitch) SetCompensatingControlsDetails(v NiatelemetryCompensatingControlDetails)`
+
+SetCompensatingControlsDetails sets CompensatingControlsDetails field to given value.
+
+### HasCompensatingControlsDetails
+
+`func (o *NiatelemetrySwitch) HasCompensatingControlsDetails() bool`
+
+HasCompensatingControlsDetails returns a boolean if a field has been set.
+
+### SetCompensatingControlsDetailsNil
+
+`func (o *NiatelemetrySwitch) SetCompensatingControlsDetailsNil(b bool)`
+
+ SetCompensatingControlsDetailsNil sets the value for CompensatingControlsDetails to be an explicit nil
+
+### UnsetCompensatingControlsDetails
+`func (o *NiatelemetrySwitch) UnsetCompensatingControlsDetails()`
+
+UnsetCompensatingControlsDetails ensures that no value is present for CompensatingControlsDetails, not even an explicit nil
 ### GetComplianceStatus
 
 `func (o *NiatelemetrySwitch) GetComplianceStatus() string`
@@ -315,6 +383,56 @@ SetIpAddress sets IpAddress field to given value.
 
 HasIpAddress returns a boolean if a field has been set.
 
+### GetLiveProtectAgentStatus
+
+`func (o *NiatelemetrySwitch) GetLiveProtectAgentStatus() string`
+
+GetLiveProtectAgentStatus returns the LiveProtectAgentStatus field if non-nil, zero value otherwise.
+
+### GetLiveProtectAgentStatusOk
+
+`func (o *NiatelemetrySwitch) GetLiveProtectAgentStatusOk() (*string, bool)`
+
+GetLiveProtectAgentStatusOk returns a tuple with the LiveProtectAgentStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLiveProtectAgentStatus
+
+`func (o *NiatelemetrySwitch) SetLiveProtectAgentStatus(v string)`
+
+SetLiveProtectAgentStatus sets LiveProtectAgentStatus field to given value.
+
+### HasLiveProtectAgentStatus
+
+`func (o *NiatelemetrySwitch) HasLiveProtectAgentStatus() bool`
+
+HasLiveProtectAgentStatus returns a boolean if a field has been set.
+
+### GetLiveProtectStatus
+
+`func (o *NiatelemetrySwitch) GetLiveProtectStatus() string`
+
+GetLiveProtectStatus returns the LiveProtectStatus field if non-nil, zero value otherwise.
+
+### GetLiveProtectStatusOk
+
+`func (o *NiatelemetrySwitch) GetLiveProtectStatusOk() (*string, bool)`
+
+GetLiveProtectStatusOk returns a tuple with the LiveProtectStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLiveProtectStatus
+
+`func (o *NiatelemetrySwitch) SetLiveProtectStatus(v string)`
+
+SetLiveProtectStatus sets LiveProtectStatus field to given value.
+
+### HasLiveProtectStatus
+
+`func (o *NiatelemetrySwitch) HasLiveProtectStatus() bool`
+
+HasLiveProtectStatus returns a boolean if a field has been set.
+
 ### GetModel
 
 `func (o *NiatelemetrySwitch) GetModel() string`
@@ -414,6 +532,31 @@ SetRole sets Role field to given value.
 `func (o *NiatelemetrySwitch) HasRole() bool`
 
 HasRole returns a boolean if a field has been set.
+
+### GetSecurityAdvisoriesCount
+
+`func (o *NiatelemetrySwitch) GetSecurityAdvisoriesCount() int64`
+
+GetSecurityAdvisoriesCount returns the SecurityAdvisoriesCount field if non-nil, zero value otherwise.
+
+### GetSecurityAdvisoriesCountOk
+
+`func (o *NiatelemetrySwitch) GetSecurityAdvisoriesCountOk() (*int64, bool)`
+
+GetSecurityAdvisoriesCountOk returns a tuple with the SecurityAdvisoriesCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurityAdvisoriesCount
+
+`func (o *NiatelemetrySwitch) SetSecurityAdvisoriesCount(v int64)`
+
+SetSecurityAdvisoriesCount sets SecurityAdvisoriesCount field to given value.
+
+### HasSecurityAdvisoriesCount
+
+`func (o *NiatelemetrySwitch) HasSecurityAdvisoriesCount() bool`
+
+HasSecurityAdvisoriesCount returns a boolean if a field has been set.
 
 ### GetSerial
 
@@ -640,6 +783,91 @@ SetTelemetryEnabled sets TelemetryEnabled field to given value.
 
 HasTelemetryEnabled returns a boolean if a field has been set.
 
+### GetTotalHitCount
+
+`func (o *NiatelemetrySwitch) GetTotalHitCount() int64`
+
+GetTotalHitCount returns the TotalHitCount field if non-nil, zero value otherwise.
+
+### GetTotalHitCountOk
+
+`func (o *NiatelemetrySwitch) GetTotalHitCountOk() (*int64, bool)`
+
+GetTotalHitCountOk returns a tuple with the TotalHitCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalHitCount
+
+`func (o *NiatelemetrySwitch) SetTotalHitCount(v int64)`
+
+SetTotalHitCount sets TotalHitCount field to given value.
+
+### HasTotalHitCount
+
+`func (o *NiatelemetrySwitch) HasTotalHitCount() bool`
+
+HasTotalHitCount returns a boolean if a field has been set.
+
+### GetVpcConfigured
+
+`func (o *NiatelemetrySwitch) GetVpcConfigured() bool`
+
+GetVpcConfigured returns the VpcConfigured field if non-nil, zero value otherwise.
+
+### GetVpcConfiguredOk
+
+`func (o *NiatelemetrySwitch) GetVpcConfiguredOk() (*bool, bool)`
+
+GetVpcConfiguredOk returns a tuple with the VpcConfigured field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcConfigured
+
+`func (o *NiatelemetrySwitch) SetVpcConfigured(v bool)`
+
+SetVpcConfigured sets VpcConfigured field to given value.
+
+### HasVpcConfigured
+
+`func (o *NiatelemetrySwitch) HasVpcConfigured() bool`
+
+HasVpcConfigured returns a boolean if a field has been set.
+
+### GetVpcData
+
+`func (o *NiatelemetrySwitch) GetVpcData() NiatelemetryVpcData`
+
+GetVpcData returns the VpcData field if non-nil, zero value otherwise.
+
+### GetVpcDataOk
+
+`func (o *NiatelemetrySwitch) GetVpcDataOk() (*NiatelemetryVpcData, bool)`
+
+GetVpcDataOk returns a tuple with the VpcData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcData
+
+`func (o *NiatelemetrySwitch) SetVpcData(v NiatelemetryVpcData)`
+
+SetVpcData sets VpcData field to given value.
+
+### HasVpcData
+
+`func (o *NiatelemetrySwitch) HasVpcData() bool`
+
+HasVpcData returns a boolean if a field has been set.
+
+### SetVpcDataNil
+
+`func (o *NiatelemetrySwitch) SetVpcDataNil(b bool)`
+
+ SetVpcDataNil sets the value for VpcData to be an explicit nil
+
+### UnsetVpcData
+`func (o *NiatelemetrySwitch) UnsetVpcData()`
+
+UnsetVpcData ensures that no value is present for VpcData, not even an explicit nil
 ### GetFabric
 
 `func (o *NiatelemetrySwitch) GetFabric() NiatelemetryFabricRelationship`

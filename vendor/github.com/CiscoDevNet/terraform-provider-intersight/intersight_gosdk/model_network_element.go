@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -105,13 +105,15 @@ type NetworkElement struct {
 	OutOfBandIpv4Gateway *string `json:"OutOfBandIpv4Gateway,omitempty"`
 	// The network mask of the network Element out-of-band management interface.
 	OutOfBandIpv4Mask *string `json:"OutOfBandIpv4Mask,omitempty"`
+	// The IPv4 address configuration mode of the network Element out-of-band management interface. * `` - The IPv4 address mode is not available or not applicable. * `static` - IPv4 address is statically configured. * `dhcpv4` - IPv4 address is configured via DHCP.
+	OutOfBandIpv4Mode *string `json:"OutOfBandIpv4Mode,omitempty"`
 	// The IPv6 address of the network Element out-of-band management interface.
 	OutOfBandIpv6Address *string `json:"OutOfBandIpv6Address,omitempty"`
 	// Any error message related to IPv6 configuration on the network Element out-of-band management interface.
 	OutOfBandIpv6Error *string `json:"OutOfBandIpv6Error,omitempty"`
 	// The default IPv6 gateway of the network Element out-of-band management interface.
 	OutOfBandIpv6Gateway *string `json:"OutOfBandIpv6Gateway,omitempty"`
-	// The IPv6 address configuration mode of the network Element out-of-band management interface. * `` - The IPv6 address mode is not available or not applicable. * `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC). * `static` - IPv6 address is statically configured. * `disabled` - IPv6 is disabled on the out-of-band management interface.
+	// The IPv6 address configuration mode of the network Element out-of-band management interface. * `` - The IPv6 address mode is not available or not applicable. * `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC). * `static` - IPv6 address is statically configured. * `disabled` - IPv6 is disabled on the out-of-band management interface. * `dhcpv6` - IPv6 address is configured via DHCPv6. * `dhcpv6Slaac` - IPv6 address is configured via DHCPv6 and SLAAC.
 	OutOfBandIpv6Mode *string `json:"OutOfBandIpv6Mode,omitempty"`
 	// The network mask of the network Element out-of-band management interface.
 	OutOfBandIpv6Prefix *string `json:"OutOfBandIpv6Prefix,omitempty"`
@@ -127,6 +129,8 @@ type NetworkElement struct {
 	PartNumber *string `json:"PartNumber,omitempty"`
 	// The flag to indicate the firmware of peer Fabric Interconnect is out of sync.
 	PeerFirmwareOutOfSync *bool `json:"PeerFirmwareOutOfSync,omitempty"`
+	// The count of port compatibility issues with the connected peer device port.
+	PeerInterfaceCompatibilityIssueCount *int64 `json:"PeerInterfaceCompatibilityIssueCount,omitempty"`
 	// The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.
 	ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
 	// This MAC address will be the source MAC address for NetFlow packets.
@@ -178,6 +182,8 @@ type NetworkElement struct {
 	// An array of relationships to networkInterfaceList resources.
 	InterfaceList       []NetworkInterfaceListRelationship      `json:"InterfaceList,omitempty"`
 	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+	// An array of relationships to networkIpAddressInfo resources.
+	IpAddressInfos []NetworkIpAddressInfoRelationship `json:"IpAddressInfos,omitempty"`
 	// An array of relationships to networkLicenseFile resources.
 	LicenseFile []NetworkLicenseFileRelationship `json:"LicenseFile,omitempty"`
 	// An array of relationships to networkDiscoveredNeighbor resources.
@@ -1556,6 +1562,38 @@ func (o *NetworkElement) SetOutOfBandIpv4Mask(v string) {
 	o.OutOfBandIpv4Mask = &v
 }
 
+// GetOutOfBandIpv4Mode returns the OutOfBandIpv4Mode field value if set, zero value otherwise.
+func (o *NetworkElement) GetOutOfBandIpv4Mode() string {
+	if o == nil || IsNil(o.OutOfBandIpv4Mode) {
+		var ret string
+		return ret
+	}
+	return *o.OutOfBandIpv4Mode
+}
+
+// GetOutOfBandIpv4ModeOk returns a tuple with the OutOfBandIpv4Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetOutOfBandIpv4ModeOk() (*string, bool) {
+	if o == nil || IsNil(o.OutOfBandIpv4Mode) {
+		return nil, false
+	}
+	return o.OutOfBandIpv4Mode, true
+}
+
+// HasOutOfBandIpv4Mode returns a boolean if a field has been set.
+func (o *NetworkElement) HasOutOfBandIpv4Mode() bool {
+	if o != nil && !IsNil(o.OutOfBandIpv4Mode) {
+		return true
+	}
+
+	return false
+}
+
+// SetOutOfBandIpv4Mode gets a reference to the given string and assigns it to the OutOfBandIpv4Mode field.
+func (o *NetworkElement) SetOutOfBandIpv4Mode(v string) {
+	o.OutOfBandIpv4Mode = &v
+}
+
 // GetOutOfBandIpv6Address returns the OutOfBandIpv6Address field value if set, zero value otherwise.
 func (o *NetworkElement) GetOutOfBandIpv6Address() string {
 	if o == nil || IsNil(o.OutOfBandIpv6Address) {
@@ -1906,6 +1944,38 @@ func (o *NetworkElement) HasPeerFirmwareOutOfSync() bool {
 // SetPeerFirmwareOutOfSync gets a reference to the given bool and assigns it to the PeerFirmwareOutOfSync field.
 func (o *NetworkElement) SetPeerFirmwareOutOfSync(v bool) {
 	o.PeerFirmwareOutOfSync = &v
+}
+
+// GetPeerInterfaceCompatibilityIssueCount returns the PeerInterfaceCompatibilityIssueCount field value if set, zero value otherwise.
+func (o *NetworkElement) GetPeerInterfaceCompatibilityIssueCount() int64 {
+	if o == nil || IsNil(o.PeerInterfaceCompatibilityIssueCount) {
+		var ret int64
+		return ret
+	}
+	return *o.PeerInterfaceCompatibilityIssueCount
+}
+
+// GetPeerInterfaceCompatibilityIssueCountOk returns a tuple with the PeerInterfaceCompatibilityIssueCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetPeerInterfaceCompatibilityIssueCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.PeerInterfaceCompatibilityIssueCount) {
+		return nil, false
+	}
+	return o.PeerInterfaceCompatibilityIssueCount, true
+}
+
+// HasPeerInterfaceCompatibilityIssueCount returns a boolean if a field has been set.
+func (o *NetworkElement) HasPeerInterfaceCompatibilityIssueCount() bool {
+	if o != nil && !IsNil(o.PeerInterfaceCompatibilityIssueCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetPeerInterfaceCompatibilityIssueCount gets a reference to the given int64 and assigns it to the PeerInterfaceCompatibilityIssueCount field.
+func (o *NetworkElement) SetPeerInterfaceCompatibilityIssueCount(v int64) {
+	o.PeerInterfaceCompatibilityIssueCount = &v
 }
 
 // GetReservedVlanStartId returns the ReservedVlanStartId field value if set, zero value otherwise.
@@ -2866,6 +2936,39 @@ func (o *NetworkElement) SetInventoryDeviceInfoNil() {
 // UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 func (o *NetworkElement) UnsetInventoryDeviceInfo() {
 	o.InventoryDeviceInfo.Unset()
+}
+
+// GetIpAddressInfos returns the IpAddressInfos field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkElement) GetIpAddressInfos() []NetworkIpAddressInfoRelationship {
+	if o == nil {
+		var ret []NetworkIpAddressInfoRelationship
+		return ret
+	}
+	return o.IpAddressInfos
+}
+
+// GetIpAddressInfosOk returns a tuple with the IpAddressInfos field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkElement) GetIpAddressInfosOk() ([]NetworkIpAddressInfoRelationship, bool) {
+	if o == nil || IsNil(o.IpAddressInfos) {
+		return nil, false
+	}
+	return o.IpAddressInfos, true
+}
+
+// HasIpAddressInfos returns a boolean if a field has been set.
+func (o *NetworkElement) HasIpAddressInfos() bool {
+	if o != nil && !IsNil(o.IpAddressInfos) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpAddressInfos gets a reference to the given []NetworkIpAddressInfoRelationship and assigns it to the IpAddressInfos field.
+func (o *NetworkElement) SetIpAddressInfos(v []NetworkIpAddressInfoRelationship) {
+	o.IpAddressInfos = v
 }
 
 // GetLicenseFile returns the LicenseFile field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -3857,6 +3960,9 @@ func (o NetworkElement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OutOfBandIpv4Mask) {
 		toSerialize["OutOfBandIpv4Mask"] = o.OutOfBandIpv4Mask
 	}
+	if !IsNil(o.OutOfBandIpv4Mode) {
+		toSerialize["OutOfBandIpv4Mode"] = o.OutOfBandIpv4Mode
+	}
 	if !IsNil(o.OutOfBandIpv6Address) {
 		toSerialize["OutOfBandIpv6Address"] = o.OutOfBandIpv6Address
 	}
@@ -3889,6 +3995,9 @@ func (o NetworkElement) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PeerFirmwareOutOfSync) {
 		toSerialize["PeerFirmwareOutOfSync"] = o.PeerFirmwareOutOfSync
+	}
+	if !IsNil(o.PeerInterfaceCompatibilityIssueCount) {
+		toSerialize["PeerInterfaceCompatibilityIssueCount"] = o.PeerInterfaceCompatibilityIssueCount
 	}
 	if !IsNil(o.ReservedVlanStartId) {
 		toSerialize["ReservedVlanStartId"] = o.ReservedVlanStartId
@@ -3973,6 +4082,9 @@ func (o NetworkElement) ToMap() (map[string]interface{}, error) {
 	}
 	if o.InventoryDeviceInfo.IsSet() {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
+	}
+	if o.IpAddressInfos != nil {
+		toSerialize["IpAddressInfos"] = o.IpAddressInfos
 	}
 	if o.LicenseFile != nil {
 		toSerialize["LicenseFile"] = o.LicenseFile
@@ -4175,13 +4287,15 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		OutOfBandIpv4Gateway *string `json:"OutOfBandIpv4Gateway,omitempty"`
 		// The network mask of the network Element out-of-band management interface.
 		OutOfBandIpv4Mask *string `json:"OutOfBandIpv4Mask,omitempty"`
+		// The IPv4 address configuration mode of the network Element out-of-band management interface. * `` - The IPv4 address mode is not available or not applicable. * `static` - IPv4 address is statically configured. * `dhcpv4` - IPv4 address is configured via DHCP.
+		OutOfBandIpv4Mode *string `json:"OutOfBandIpv4Mode,omitempty"`
 		// The IPv6 address of the network Element out-of-band management interface.
 		OutOfBandIpv6Address *string `json:"OutOfBandIpv6Address,omitempty"`
 		// Any error message related to IPv6 configuration on the network Element out-of-band management interface.
 		OutOfBandIpv6Error *string `json:"OutOfBandIpv6Error,omitempty"`
 		// The default IPv6 gateway of the network Element out-of-band management interface.
 		OutOfBandIpv6Gateway *string `json:"OutOfBandIpv6Gateway,omitempty"`
-		// The IPv6 address configuration mode of the network Element out-of-band management interface. * `` - The IPv6 address mode is not available or not applicable. * `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC). * `static` - IPv6 address is statically configured. * `disabled` - IPv6 is disabled on the out-of-band management interface.
+		// The IPv6 address configuration mode of the network Element out-of-band management interface. * `` - The IPv6 address mode is not available or not applicable. * `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC). * `static` - IPv6 address is statically configured. * `disabled` - IPv6 is disabled on the out-of-band management interface. * `dhcpv6` - IPv6 address is configured via DHCPv6. * `dhcpv6Slaac` - IPv6 address is configured via DHCPv6 and SLAAC.
 		OutOfBandIpv6Mode *string `json:"OutOfBandIpv6Mode,omitempty"`
 		// The network mask of the network Element out-of-band management interface.
 		OutOfBandIpv6Prefix *string `json:"OutOfBandIpv6Prefix,omitempty"`
@@ -4197,6 +4311,8 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		PartNumber *string `json:"PartNumber,omitempty"`
 		// The flag to indicate the firmware of peer Fabric Interconnect is out of sync.
 		PeerFirmwareOutOfSync *bool `json:"PeerFirmwareOutOfSync,omitempty"`
+		// The count of port compatibility issues with the connected peer device port.
+		PeerInterfaceCompatibilityIssueCount *int64 `json:"PeerInterfaceCompatibilityIssueCount,omitempty"`
 		// The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.
 		ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
 		// This MAC address will be the source MAC address for NetFlow packets.
@@ -4248,6 +4364,8 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		// An array of relationships to networkInterfaceList resources.
 		InterfaceList       []NetworkInterfaceListRelationship      `json:"InterfaceList,omitempty"`
 		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+		// An array of relationships to networkIpAddressInfo resources.
+		IpAddressInfos []NetworkIpAddressInfoRelationship `json:"IpAddressInfos,omitempty"`
 		// An array of relationships to networkLicenseFile resources.
 		LicenseFile []NetworkLicenseFileRelationship `json:"LicenseFile,omitempty"`
 		// An array of relationships to networkDiscoveredNeighbor resources.
@@ -4332,6 +4450,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElement.OutOfBandIpv4Address = varNetworkElementWithoutEmbeddedStruct.OutOfBandIpv4Address
 		varNetworkElement.OutOfBandIpv4Gateway = varNetworkElementWithoutEmbeddedStruct.OutOfBandIpv4Gateway
 		varNetworkElement.OutOfBandIpv4Mask = varNetworkElementWithoutEmbeddedStruct.OutOfBandIpv4Mask
+		varNetworkElement.OutOfBandIpv4Mode = varNetworkElementWithoutEmbeddedStruct.OutOfBandIpv4Mode
 		varNetworkElement.OutOfBandIpv6Address = varNetworkElementWithoutEmbeddedStruct.OutOfBandIpv6Address
 		varNetworkElement.OutOfBandIpv6Error = varNetworkElementWithoutEmbeddedStruct.OutOfBandIpv6Error
 		varNetworkElement.OutOfBandIpv6Gateway = varNetworkElementWithoutEmbeddedStruct.OutOfBandIpv6Gateway
@@ -4343,6 +4462,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElement.OutOfBandMac = varNetworkElementWithoutEmbeddedStruct.OutOfBandMac
 		varNetworkElement.PartNumber = varNetworkElementWithoutEmbeddedStruct.PartNumber
 		varNetworkElement.PeerFirmwareOutOfSync = varNetworkElementWithoutEmbeddedStruct.PeerFirmwareOutOfSync
+		varNetworkElement.PeerInterfaceCompatibilityIssueCount = varNetworkElementWithoutEmbeddedStruct.PeerInterfaceCompatibilityIssueCount
 		varNetworkElement.ReservedVlanStartId = varNetworkElementWithoutEmbeddedStruct.ReservedVlanStartId
 		varNetworkElement.RouterMac = varNetworkElementWithoutEmbeddedStruct.RouterMac
 		varNetworkElement.SecureRouterInfo = varNetworkElementWithoutEmbeddedStruct.SecureRouterInfo
@@ -4371,6 +4491,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElement.FeatureControl = varNetworkElementWithoutEmbeddedStruct.FeatureControl
 		varNetworkElement.InterfaceList = varNetworkElementWithoutEmbeddedStruct.InterfaceList
 		varNetworkElement.InventoryDeviceInfo = varNetworkElementWithoutEmbeddedStruct.InventoryDeviceInfo
+		varNetworkElement.IpAddressInfos = varNetworkElementWithoutEmbeddedStruct.IpAddressInfos
 		varNetworkElement.LicenseFile = varNetworkElementWithoutEmbeddedStruct.LicenseFile
 		varNetworkElement.LldpNeighbor = varNetworkElementWithoutEmbeddedStruct.LldpNeighbor
 		varNetworkElement.LocatorLed = varNetworkElementWithoutEmbeddedStruct.LocatorLed
@@ -4451,6 +4572,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OutOfBandIpv4Address")
 		delete(additionalProperties, "OutOfBandIpv4Gateway")
 		delete(additionalProperties, "OutOfBandIpv4Mask")
+		delete(additionalProperties, "OutOfBandIpv4Mode")
 		delete(additionalProperties, "OutOfBandIpv6Address")
 		delete(additionalProperties, "OutOfBandIpv6Error")
 		delete(additionalProperties, "OutOfBandIpv6Gateway")
@@ -4462,6 +4584,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OutOfBandMac")
 		delete(additionalProperties, "PartNumber")
 		delete(additionalProperties, "PeerFirmwareOutOfSync")
+		delete(additionalProperties, "PeerInterfaceCompatibilityIssueCount")
 		delete(additionalProperties, "ReservedVlanStartId")
 		delete(additionalProperties, "RouterMac")
 		delete(additionalProperties, "SecureRouterInfo")
@@ -4490,6 +4613,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "FeatureControl")
 		delete(additionalProperties, "InterfaceList")
 		delete(additionalProperties, "InventoryDeviceInfo")
+		delete(additionalProperties, "IpAddressInfos")
 		delete(additionalProperties, "LicenseFile")
 		delete(additionalProperties, "LldpNeighbor")
 		delete(additionalProperties, "LocatorLed")

@@ -165,6 +165,11 @@ func getIamLocalUserPasswordSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"password": {
+			Description: "User's current valid password.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"password_expires_in_days": {
 			Description: "The passwordExpiresInDays attribute indicates the number of days remaining until a user's password expires,\nwith negative values meaning the password has already expired and zero indicating expiration today.\nThis value is dynamically calculated based on the time since the last password change and the maximum\nallowed password age defined by the password policy. No migration code or default value is required\nduring system upgrades because the value is computed in real-time, and initially, the password age\nproperty defaults to zero, ensuring no passwords are mistakenly marked as expired.",
 			Type:        schema.TypeInt,
@@ -303,7 +308,7 @@ func getIamLocalUserPasswordSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -660,6 +665,11 @@ func dataSourceIamLocalUserPasswordRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("password"); ok {
+		x := (v.(string))
+		o.SetPassword(x)
+	}
+
 	if v, ok := d.GetOkExists("password_expires_in_days"); ok {
 		x := int64(v.(int))
 		o.SetPasswordExpiresInDays(x)
@@ -773,6 +783,12 @@ func dataSourceIamLocalUserPasswordRead(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {
@@ -957,6 +973,7 @@ func dataSourceIamLocalUserPasswordRead(c context.Context, d *schema.ResourceDat
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["password"] = (s.GetPassword())
 				temp["password_expires_in_days"] = (s.GetPasswordExpiresInDays())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)

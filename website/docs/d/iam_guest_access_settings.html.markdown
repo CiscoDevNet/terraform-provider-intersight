@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_guest_access_settings"
 description: |-
-        Stores account level settings for guest user access.
+        GuestAccessSettings store account-level settings governing guest user access behavior, including allowed email domains, maximum guest-link lifetime, and whether guest access can bypass IP access restrictions.
+        #### Purpose
+        Control and constrain guest-user onboarding and access behavior for an account to balance usability with security.
+        #### Key Concepts
+        - **Domain allowlisting for guests:** Restricts which email domains can be used for guest access.
+        - **Link lifetime governance:** Caps how long guest access links may remain valid.
+        - **IP restriction override option:** Allows guest access to bypass account IP allowlists when configured.
+        - **Limit linkage:** Relates to ResourceLimits to align guest behavior with account-level constraints.
 
 ---
 
 # Data Source: intersight_iam_guest_access_settings
-Stores account level settings for guest user access.
+GuestAccessSettings store account-level settings governing guest user access behavior, including allowed email domains, maximum guest-link lifetime, and whether guest access can bypass IP access restrictions.
+#### Purpose
+Control and constrain guest-user onboarding and access behavior for an account to balance usability with security.
+#### Key Concepts
+- **Domain allowlisting for guests:** Restricts which email domains can be used for guest access.
+- **Link lifetime governance:** Caps how long guest access links may remain valid.
+- **IP restriction override option:** Allows guest access to bypass account IP allowlists when configured.
+- **Limit linkage:** Relates to ResourceLimits to align guest behavior with account-level constraints.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

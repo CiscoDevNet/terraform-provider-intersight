@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -34,7 +34,7 @@ type VnicPlacementSettings struct {
 	AutoSlotId *bool `json:"AutoSlotId,omitempty"`
 	// PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.
 	Id *string `json:"Id,omitempty" validate:"regexp=^$|^([1-9]|1[0-5]|MLOM)$"`
-	// The PCI Link used as transport for the virtual interface. PCI Link is only applicable for select Cisco UCS VIC 1300 models (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) that support two PCI links. The value, if specified, for any other VIC model will be ignored.
+	// The PCI Link used as transport for the virtual interface. Select Cisco UCS VIC 1300 models with two PCI links (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) support choosing between link 0 and link 1. For other adapters, the applicable PCI Link is determined by the adapter model. VIC 1400 series uses link 0, VIC 1500 series uses link 1, and VIC 1600 series uses link 2.
 	PciLink *int64 `json:"PciLink,omitempty"`
 	// If the autoPciLink is disabled, the user can either choose to place the vNICs manually or based on a policy.If the autoPciLink is enabled, it will be set to None. * `Custom` - The user needs to specify the PCI Link manually. * `Load-Balanced` - The system will uniformly distribute the interfaces across the PCI Links. * `None` - Assignment is not applicable and will be set when the AutoPciLink is set to true.
 	PciLinkAssignmentMode *string `json:"PciLinkAssignmentMode,omitempty"`
@@ -480,7 +480,7 @@ func (o *VnicPlacementSettings) UnmarshalJSON(data []byte) (err error) {
 		AutoSlotId *bool `json:"AutoSlotId,omitempty"`
 		// PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.
 		Id *string `json:"Id,omitempty" validate:"regexp=^$|^([1-9]|1[0-5]|MLOM)$"`
-		// The PCI Link used as transport for the virtual interface. PCI Link is only applicable for select Cisco UCS VIC 1300 models (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) that support two PCI links. The value, if specified, for any other VIC model will be ignored.
+		// The PCI Link used as transport for the virtual interface. Select Cisco UCS VIC 1300 models with two PCI links (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) support choosing between link 0 and link 1. For other adapters, the applicable PCI Link is determined by the adapter model. VIC 1400 series uses link 0, VIC 1500 series uses link 1, and VIC 1600 series uses link 2.
 		PciLink *int64 `json:"PciLink,omitempty"`
 		// If the autoPciLink is disabled, the user can either choose to place the vNICs manually or based on a policy.If the autoPciLink is enabled, it will be set to None. * `Custom` - The user needs to specify the PCI Link manually. * `Load-Balanced` - The system will uniformly distribute the interfaces across the PCI Links. * `None` - Assignment is not applicable and will be set when the AutoPciLink is set to true.
 		PciLinkAssignmentMode *string `json:"PciLinkAssignmentMode,omitempty"`
