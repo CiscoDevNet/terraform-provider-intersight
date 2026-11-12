@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "bulk.SubRequestObj"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "bulk.SubRequestObj"]
 **Body** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
-**BodyString** | Pointer to **string** | The body of the sub-request in string format. | [optional] [readonly] 
+**BodyString** | Pointer to **string** | Deprecated - The request body of the sub requests are with client and the response can be read from this MO. The identity information  is populated in this property. | [optional] [readonly] 
 **ExecutionCompletionTime** | Pointer to **string** | The time at which processing of this request completed. | [optional] [readonly] 
 **ExecutionStartTime** | Pointer to **string** | The time at which processing of this request started. | [optional] [readonly] 
 **IsBulkMoOp** | Pointer to **bool** | For Async Bulk Mo Operations this flag will be set to true. | [optional] 

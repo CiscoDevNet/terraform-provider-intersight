@@ -90,6 +90,11 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"dpu_count": {
+			Description: "The total number of DPUs within the fabric currently reporting an operational status of 'OK'.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"endpoint_locator_count": {
 			Description: "Count of total Endpoint Locators.",
 			Type:        schema.TypeInt,
@@ -418,7 +423,7 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -669,6 +674,11 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("dpu_count"); ok {
+		x := int64(v.(int))
+		o.SetDpuCount(x)
 	}
 
 	if v, ok := d.GetOkExists("endpoint_locator_count"); ok {
@@ -1005,6 +1015,12 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -1151,6 +1167,7 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["dpu_count"] = (s.GetDpuCount())
 				temp["endpoint_locator_count"] = (s.GetEndpointLocatorCount())
 				temp["fabric_technology"] = (s.GetFabricTechnology())
 				temp["fabric_update_status"] = (s.GetFabricUpdateStatus())

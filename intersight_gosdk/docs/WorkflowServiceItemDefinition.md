@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name for this service item definition. You can have multiple versions of the service item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). | [optional] 
 **PublishStatus** | Pointer to **string** | The publish status of service item (Draft, Published, Archived). * &#x60;Draft&#x60; - The enum specifies the option as Draft which means the meta definition is being designed and tested. * &#x60;Published&#x60; - The enum specifies the option as Published which means the meta definition is ready for consumption. * &#x60;Archived&#x60; - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed. | [optional] [default to "Draft"]
 **Status** | Pointer to **string** | State of service item considering the state of underlying service item actions definitions. * &#x60;Okay&#x60; - Deployment and other post-deployment actions are in valid state. * &#x60;Critical&#x60; - Deployment action is not in valid state. * &#x60;Warning&#x60; - Deployment action is in valid state, and one or more post-deployment actions are not in valid state. | [optional] [readonly] [default to "Okay"]
+**SupportInfo** | Pointer to [**NullableWorkflowSupportInfo**](WorkflowSupportInfo.md) |  | [optional] 
 **SupportStatus** | Pointer to **string** | The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design. * &#x60;Supported&#x60; - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * &#x60;Beta&#x60; - The definition is a Beta version and this version can under go changes until the version is marked supported. * &#x60;Deprecated&#x60; - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. | [optional] [default to "Supported"]
 **UserIdOrEmail** | Pointer to **string** | This attribute is deprecated and replaced by createUser and modUser. | [optional] [readonly] 
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
@@ -420,6 +421,41 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
+### GetSupportInfo
+
+`func (o *WorkflowServiceItemDefinition) GetSupportInfo() WorkflowSupportInfo`
+
+GetSupportInfo returns the SupportInfo field if non-nil, zero value otherwise.
+
+### GetSupportInfoOk
+
+`func (o *WorkflowServiceItemDefinition) GetSupportInfoOk() (*WorkflowSupportInfo, bool)`
+
+GetSupportInfoOk returns a tuple with the SupportInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportInfo
+
+`func (o *WorkflowServiceItemDefinition) SetSupportInfo(v WorkflowSupportInfo)`
+
+SetSupportInfo sets SupportInfo field to given value.
+
+### HasSupportInfo
+
+`func (o *WorkflowServiceItemDefinition) HasSupportInfo() bool`
+
+HasSupportInfo returns a boolean if a field has been set.
+
+### SetSupportInfoNil
+
+`func (o *WorkflowServiceItemDefinition) SetSupportInfoNil(b bool)`
+
+ SetSupportInfoNil sets the value for SupportInfo to be an explicit nil
+
+### UnsetSupportInfo
+`func (o *WorkflowServiceItemDefinition) UnsetSupportInfo()`
+
+UnsetSupportInfo ensures that no value is present for SupportInfo, not even an explicit nil
 ### GetSupportStatus
 
 `func (o *WorkflowServiceItemDefinition) GetSupportStatus() string`

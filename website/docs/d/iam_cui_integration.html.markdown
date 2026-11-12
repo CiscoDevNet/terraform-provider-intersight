@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_cui_integration"
 description: |-
-        Stores CUI and CCC integration details and synchronization status for an account.
+        CuiIntegrations store Cisco Unified Identity (CUI) and Cisco Cloud Control (CCC) integration details for an account, including synchronization status and tenant linkage metadata.
+        #### Purpose
+        Provide account-level visibility and configuration state for CUI/CCC integration so the platform can manage identity and inventory synchronization behaviors.
+        #### Key Concepts
+        - **Sync status tracking:** Captures whether integration data needs sync, is in progress, or is complete.
+        - **Tenant linkage:** Associates the account to one or more external tenant identifiers for linked products.
+        - **Inventory sync control:** Stores CCC inventory sync enablement state as an account setting.
+        - **Account binding:** Owned by and scoped to the account via relationship and identity.
 
 ---
 
 # Data Source: intersight_iam_cui_integration
-Stores CUI and CCC integration details and synchronization status for an account.
+CuiIntegrations store Cisco Unified Identity (CUI) and Cisco Cloud Control (CCC) integration details for an account, including synchronization status and tenant linkage metadata.
+#### Purpose
+Provide account-level visibility and configuration state for CUI/CCC integration so the platform can manage identity and inventory synchronization behaviors.
+#### Key Concepts
+- **Sync status tracking:** Captures whether integration data needs sync, is in progress, or is complete.
+- **Tenant linkage:** Associates the account to one or more external tenant identifiers for linked products.
+- **Inventory sync control:** Stores CCC inventory sync enablement state as an account setting.
+- **Account binding:** Owned by and scoped to the account via relationship and identity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -39,6 +39,7 @@ The following arguments can be used to get data of already created objects in In
 * `neighbor_description`:(string) The software description of the neighboring device. 
 * `neighbor_device_id`:(string) Device identifier of the neighboring device. 
 * `neighbor_interface`:(string) Neighboring device interface. 
+* `neighbor_mac_address`:(string) MAC address of the neighbor device. 
 * `neighbor_model`:(string) Model of the neighbor device. 
 * `neighbor_native_vlan`:(string) Native VLAN of the neighbor device. 
 * `neighbor_port_id`:(string) PortID of the neighbor device configured. 

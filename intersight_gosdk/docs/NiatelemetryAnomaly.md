@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.Anomaly"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.Anomaly"]
 **AlertTypeId** | Pointer to **string** | Identifier of the alert type that triggered this notification. | [optional] [readonly] 
+**AnomalyId** | Pointer to **string** | Globally unique identifier for the anomaly notification. | [optional] [readonly] 
 **Category** | Pointer to **string** | Classification of the anomaly. | [optional] [readonly] 
 **DeepLink** | Pointer to **string** | Deep link to investigate the anomaly in the source system. | [optional] [readonly] 
 **Description** | Pointer to **string** | Concise explanation of the anomaly. | [optional] [readonly] 
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 **EventTime** | Pointer to **string** | Time when the event occurred in the source system. | [optional] [readonly] 
 **FabricName** | Pointer to **string** | The name of the fabric that generated the anomaly. | [optional] [readonly] 
 **FirstRaisedTime** | Pointer to **string** | First time the anomaly was raised. | [optional] [readonly] 
-**ExtId** | Pointer to **string** | Globally unique identifier for the anomaly notification. | [optional] [readonly] 
+**ExtId** | Pointer to **string** | Legacy placeholder identifier retained for compatibility. | [optional] [readonly] 
 **LastRaisedTime** | Pointer to **string** | Most recent transition to open or reopened state. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **string** | Most recent lifecycle change time. | [optional] [readonly] 
 **NotificationType** | Pointer to **string** | Type of notification, such as anomaly or advisory. | [optional] [readonly] 
@@ -109,6 +110,31 @@ SetAlertTypeId sets AlertTypeId field to given value.
 `func (o *NiatelemetryAnomaly) HasAlertTypeId() bool`
 
 HasAlertTypeId returns a boolean if a field has been set.
+
+### GetAnomalyId
+
+`func (o *NiatelemetryAnomaly) GetAnomalyId() string`
+
+GetAnomalyId returns the AnomalyId field if non-nil, zero value otherwise.
+
+### GetAnomalyIdOk
+
+`func (o *NiatelemetryAnomaly) GetAnomalyIdOk() (*string, bool)`
+
+GetAnomalyIdOk returns a tuple with the AnomalyId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnomalyId
+
+`func (o *NiatelemetryAnomaly) SetAnomalyId(v string)`
+
+SetAnomalyId sets AnomalyId field to given value.
+
+### HasAnomalyId
+
+`func (o *NiatelemetryAnomaly) HasAnomalyId() bool`
+
+HasAnomalyId returns a boolean if a field has been set.
 
 ### GetCategory
 

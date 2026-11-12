@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workload.WorkloadDefinition"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workload.WorkloadDefinition"]
+**BlueprintUpdateByDate** | Pointer to **time.Time** | The date by which the blueprints in the workload definition should be updated to non-deprecated versions. This field is populated only if the workload definition uses deprecated blueprints. If the definition still uses deprecated blueprints past this date, the definition will be locked and can only be used to create a new version using active blueprints. | [optional] [readonly] 
+**BlueprintVersionUpdateStatus** | Pointer to **string** | The aggregate blueprint version update status across all blueprints included in the definition. * &#x60;Updated&#x60; - The blueprint reference is at the latest available version. * &#x60;AutoUpdate&#x60; - The blueprint reference can be updated to the latest version automatically. * &#x60;NeedsNewVersion&#x60; - The blueprint reference cannot be updated without a new version of the definition. * &#x60;Deprecated&#x60; - The referred blueprint is deprecated. * &#x60;UpdateInProgress&#x60; - The blueprint reference update is in progress. The update is in an intermediate state between AutoUpdate and Updated. | [optional] [readonly] [default to "Updated"]
 **Blueprints** | Pointer to [**[]WorkloadBlueprintReference**](WorkloadBlueprintReference.md) |  | [optional] 
 **DeploymentSummary** | Pointer to [**[]WorkloadStateAggregation**](WorkloadStateAggregation.md) |  | [optional] 
 **Description** | Pointer to **string** | The description for this workload definition. | [optional] 
@@ -78,6 +80,56 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetBlueprintUpdateByDate
+
+`func (o *WorkloadWorkloadDefinition) GetBlueprintUpdateByDate() time.Time`
+
+GetBlueprintUpdateByDate returns the BlueprintUpdateByDate field if non-nil, zero value otherwise.
+
+### GetBlueprintUpdateByDateOk
+
+`func (o *WorkloadWorkloadDefinition) GetBlueprintUpdateByDateOk() (*time.Time, bool)`
+
+GetBlueprintUpdateByDateOk returns a tuple with the BlueprintUpdateByDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBlueprintUpdateByDate
+
+`func (o *WorkloadWorkloadDefinition) SetBlueprintUpdateByDate(v time.Time)`
+
+SetBlueprintUpdateByDate sets BlueprintUpdateByDate field to given value.
+
+### HasBlueprintUpdateByDate
+
+`func (o *WorkloadWorkloadDefinition) HasBlueprintUpdateByDate() bool`
+
+HasBlueprintUpdateByDate returns a boolean if a field has been set.
+
+### GetBlueprintVersionUpdateStatus
+
+`func (o *WorkloadWorkloadDefinition) GetBlueprintVersionUpdateStatus() string`
+
+GetBlueprintVersionUpdateStatus returns the BlueprintVersionUpdateStatus field if non-nil, zero value otherwise.
+
+### GetBlueprintVersionUpdateStatusOk
+
+`func (o *WorkloadWorkloadDefinition) GetBlueprintVersionUpdateStatusOk() (*string, bool)`
+
+GetBlueprintVersionUpdateStatusOk returns a tuple with the BlueprintVersionUpdateStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBlueprintVersionUpdateStatus
+
+`func (o *WorkloadWorkloadDefinition) SetBlueprintVersionUpdateStatus(v string)`
+
+SetBlueprintVersionUpdateStatus sets BlueprintVersionUpdateStatus field to given value.
+
+### HasBlueprintVersionUpdateStatus
+
+`func (o *WorkloadWorkloadDefinition) HasBlueprintVersionUpdateStatus() bool`
+
+HasBlueprintVersionUpdateStatus returns a boolean if a field has been set.
 
 ### GetBlueprints
 

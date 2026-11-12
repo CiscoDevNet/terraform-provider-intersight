@@ -3,14 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_certificate_request"
 description: |-
-        The information required to generate a certificate signing request (CSR),
-        which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
+        CertificateRequests model certificate signing request (CSR) workflows within an account. A CertificateRequest captures the subject identity and SANs needed to generate a PEM-formatted CSR, optionally supporting a self-signed path.
+        #### Purpose
+        Enable account-scoped certificate lifecycle operations by generating CSRs that can be submitted to a certificate authority (or self-signed by the appliance where supported).
+        #### Key Concepts
+        - **CSR generation:** Produces a PEM CSR from provided subject and SAN inputs.
+        - **Self-signed option:** Supports conditional behavior for self-signed vs CA-signed flows.
+        - **Account-scoped security artifact:** Inherits permissions from the owning account and is managed under account governance.
+        - **Certificate pairing:** Typically links forward to a Certificate object that represents the signed certificate returned from a CA.
 
 ---
 
 # Resource: intersight_iam_certificate_request
-The information required to generate a certificate signing request (CSR),
-which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
+CertificateRequests model certificate signing request (CSR) workflows within an account. A CertificateRequest captures the subject identity and SANs needed to generate a PEM-formatted CSR, optionally supporting a self-signed path.
+#### Purpose
+Enable account-scoped certificate lifecycle operations by generating CSRs that can be submitted to a certificate authority (or self-signed by the appliance where supported).
+#### Key Concepts
+- **CSR generation:** Produces a PEM CSR from provided subject and SAN inputs.
+- **Self-signed option:** Supports conditional behavior for self-signed vs CA-signed flows.
+- **Account-scoped security artifact:** Inherits permissions from the owning account and is managed under account governance.
+- **Certificate pairing:** Typically links forward to a Certificate object that represents the signed certificate returned from a CA.
 ## Usage Example
 ### Resource Creation
 
@@ -123,7 +135,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

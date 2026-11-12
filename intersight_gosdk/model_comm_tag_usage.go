@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -21,16 +21,14 @@ import (
 // checks if the CommTagUsage type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CommTagUsage{}
 
-// CommTagUsage Indicates whether the tag is used in the system or not.
+// CommTagUsage Aggregate usage statistics for a single tag definition. For path tags, the count is cumulative across the tag and its descendants in the path hierarchy. For key-value tags, the count is aggregated across all values of the key.
 type CommTagUsage struct {
-	MoBaseComplexType
+	CommBaseTagUsage
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
-	// Total count of managed objects that are tagged with this tag. For path tags, this will be a cumulative count. By default, this property is not returned.
-	Count                *int64   `json:"Count,omitempty"`
-	TaggedObjectTypes    []string `json:"TaggedObjectTypes,omitempty"`
+	ObjectType           string              `json:"ObjectType"`
+	ValueUsages          []CommTagValueUsage `json:"ValueUsages,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,69 +115,37 @@ func (o *CommTagUsage) GetDefaultObjectType() interface{} {
 	return "comm.TagUsage"
 }
 
-// GetCount returns the Count field value if set, zero value otherwise.
-func (o *CommTagUsage) GetCount() int64 {
-	if o == nil || IsNil(o.Count) {
-		var ret int64
-		return ret
-	}
-	return *o.Count
-}
-
-// GetCountOk returns a tuple with the Count field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CommTagUsage) GetCountOk() (*int64, bool) {
-	if o == nil || IsNil(o.Count) {
-		return nil, false
-	}
-	return o.Count, true
-}
-
-// HasCount returns a boolean if a field has been set.
-func (o *CommTagUsage) HasCount() bool {
-	if o != nil && !IsNil(o.Count) {
-		return true
-	}
-
-	return false
-}
-
-// SetCount gets a reference to the given int64 and assigns it to the Count field.
-func (o *CommTagUsage) SetCount(v int64) {
-	o.Count = &v
-}
-
-// GetTaggedObjectTypes returns the TaggedObjectTypes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CommTagUsage) GetTaggedObjectTypes() []string {
+// GetValueUsages returns the ValueUsages field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CommTagUsage) GetValueUsages() []CommTagValueUsage {
 	if o == nil {
-		var ret []string
+		var ret []CommTagValueUsage
 		return ret
 	}
-	return o.TaggedObjectTypes
+	return o.ValueUsages
 }
 
-// GetTaggedObjectTypesOk returns a tuple with the TaggedObjectTypes field value if set, nil otherwise
+// GetValueUsagesOk returns a tuple with the ValueUsages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CommTagUsage) GetTaggedObjectTypesOk() ([]string, bool) {
-	if o == nil || IsNil(o.TaggedObjectTypes) {
+func (o *CommTagUsage) GetValueUsagesOk() ([]CommTagValueUsage, bool) {
+	if o == nil || IsNil(o.ValueUsages) {
 		return nil, false
 	}
-	return o.TaggedObjectTypes, true
+	return o.ValueUsages, true
 }
 
-// HasTaggedObjectTypes returns a boolean if a field has been set.
-func (o *CommTagUsage) HasTaggedObjectTypes() bool {
-	if o != nil && !IsNil(o.TaggedObjectTypes) {
+// HasValueUsages returns a boolean if a field has been set.
+func (o *CommTagUsage) HasValueUsages() bool {
+	if o != nil && !IsNil(o.ValueUsages) {
 		return true
 	}
 
 	return false
 }
 
-// SetTaggedObjectTypes gets a reference to the given []string and assigns it to the TaggedObjectTypes field.
-func (o *CommTagUsage) SetTaggedObjectTypes(v []string) {
-	o.TaggedObjectTypes = v
+// SetValueUsages gets a reference to the given []CommTagValueUsage and assigns it to the ValueUsages field.
+func (o *CommTagUsage) SetValueUsages(v []CommTagValueUsage) {
+	o.ValueUsages = v
 }
 
 func (o CommTagUsage) MarshalJSON() ([]byte, error) {
@@ -192,13 +158,13 @@ func (o CommTagUsage) MarshalJSON() ([]byte, error) {
 
 func (o CommTagUsage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
-	if errMoBaseComplexType != nil {
-		return map[string]interface{}{}, errMoBaseComplexType
+	serializedCommBaseTagUsage, errCommBaseTagUsage := json.Marshal(o.CommBaseTagUsage)
+	if errCommBaseTagUsage != nil {
+		return map[string]interface{}{}, errCommBaseTagUsage
 	}
-	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
-	if errMoBaseComplexType != nil {
-		return map[string]interface{}{}, errMoBaseComplexType
+	errCommBaseTagUsage = json.Unmarshal([]byte(serializedCommBaseTagUsage), &toSerialize)
+	if errCommBaseTagUsage != nil {
+		return map[string]interface{}{}, errCommBaseTagUsage
 	}
 	if _, exists := toSerialize["ClassId"]; !exists {
 		toSerialize["ClassId"] = o.GetDefaultClassId()
@@ -208,11 +174,8 @@ func (o CommTagUsage) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
-	if !IsNil(o.Count) {
-		toSerialize["Count"] = o.Count
-	}
-	if o.TaggedObjectTypes != nil {
-		toSerialize["TaggedObjectTypes"] = o.TaggedObjectTypes
+	if o.ValueUsages != nil {
+		toSerialize["ValueUsages"] = o.ValueUsages
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -268,10 +231,8 @@ func (o *CommTagUsage) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
-		// Total count of managed objects that are tagged with this tag. For path tags, this will be a cumulative count. By default, this property is not returned.
-		Count             *int64   `json:"Count,omitempty"`
-		TaggedObjectTypes []string `json:"TaggedObjectTypes,omitempty"`
+		ObjectType  string              `json:"ObjectType"`
+		ValueUsages []CommTagValueUsage `json:"ValueUsages,omitempty"`
 	}
 
 	varCommTagUsageWithoutEmbeddedStruct := CommTagUsageWithoutEmbeddedStruct{}
@@ -281,8 +242,7 @@ func (o *CommTagUsage) UnmarshalJSON(data []byte) (err error) {
 		varCommTagUsage := _CommTagUsage{}
 		varCommTagUsage.ClassId = varCommTagUsageWithoutEmbeddedStruct.ClassId
 		varCommTagUsage.ObjectType = varCommTagUsageWithoutEmbeddedStruct.ObjectType
-		varCommTagUsage.Count = varCommTagUsageWithoutEmbeddedStruct.Count
-		varCommTagUsage.TaggedObjectTypes = varCommTagUsageWithoutEmbeddedStruct.TaggedObjectTypes
+		varCommTagUsage.ValueUsages = varCommTagUsageWithoutEmbeddedStruct.ValueUsages
 		*o = CommTagUsage(varCommTagUsage)
 	} else {
 		return err
@@ -292,7 +252,7 @@ func (o *CommTagUsage) UnmarshalJSON(data []byte) (err error) {
 
 	err = json.Unmarshal(data, &varCommTagUsage)
 	if err == nil {
-		o.MoBaseComplexType = varCommTagUsage.MoBaseComplexType
+		o.CommBaseTagUsage = varCommTagUsage.CommBaseTagUsage
 	} else {
 		return err
 	}
@@ -302,13 +262,12 @@ func (o *CommTagUsage) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "Count")
-		delete(additionalProperties, "TaggedObjectTypes")
+		delete(additionalProperties, "ValueUsages")
 
 		// remove fields from embedded structs
-		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)
-		for i := 0; i < reflectMoBaseComplexType.Type().NumField(); i++ {
-			t := reflectMoBaseComplexType.Type().Field(i)
+		reflectCommBaseTagUsage := reflect.ValueOf(o.CommBaseTagUsage)
+		for i := 0; i < reflectCommBaseTagUsage.Type().NumField(); i++ {
+			t := reflectCommBaseTagUsage.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

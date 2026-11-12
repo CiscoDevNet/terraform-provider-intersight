@@ -6,11 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "policy.ConfigContext"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.ConfigContext"]
+**ActionQualifier** | Pointer to [**NullablePolicyActionQualifier**](PolicyActionQualifier.md) |  | [optional] 
 **ConfigState** | Pointer to **string** | Indicates a profile&#39;s configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. | [optional] [readonly] 
 **ConfigStateSummary** | Pointer to **string** | Indicates a profile&#39;s configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring. * &#x60;None&#x60; - The default state is none. * &#x60;Not-assigned&#x60; - Server is not assigned to the profile. * &#x60;Assigned&#x60; - Server is assigned to the profile and the configurations are not yet deployed. * &#x60;Preparing&#x60; - Preparing to deploy the configuration. * &#x60;Validating&#x60; - Profile validation in progress. * &#x60;Evaluating&#x60; - Policy edit configuration change evaluation in progress. * &#x60;Configuring&#x60; - Profile deploy operation is in progress. * &#x60;UnConfiguring&#x60; - Server is unassigned and config cleanup is in progress. * &#x60;Analyzing&#x60; - Profile changes are being analyzed. * &#x60;Activating&#x60; - Configuration is being activated at the endpoint. * &#x60;Inconsistent&#x60; - Profile is inconsistent with the endpoint configuration. * &#x60;Associated&#x60; - The profile configuration has been applied to the endpoint and no inconsistencies have been detected. * &#x60;Failed&#x60; - The last action on the profile has failed. * &#x60;Not-complete&#x60; - Config import operation on the profile is not complete. * &#x60;Waiting-for-resource&#x60; - Waiting for the resource to be allocated for the profile. * &#x60;Partially-deployed&#x60; - The profile configuration has been applied on a subset of endpoints. | [optional] [readonly] [default to "None"]
 **ConfigType** | Pointer to **string** | The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress. | [optional] [readonly] 
 **ControlAction** | Pointer to **string** | System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. | [optional] 
-**ErrorState** | Pointer to **string** | Indicates a profile&#39;s error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). | [optional] 
+**ErrorState** | Pointer to **string** | Indicates a profile&#39;s error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). | [optional] [readonly] 
 **InconsistencyReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed. | [optional] [readonly] 
 
@@ -73,6 +74,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetActionQualifier
+
+`func (o *PolicyConfigContext) GetActionQualifier() PolicyActionQualifier`
+
+GetActionQualifier returns the ActionQualifier field if non-nil, zero value otherwise.
+
+### GetActionQualifierOk
+
+`func (o *PolicyConfigContext) GetActionQualifierOk() (*PolicyActionQualifier, bool)`
+
+GetActionQualifierOk returns a tuple with the ActionQualifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActionQualifier
+
+`func (o *PolicyConfigContext) SetActionQualifier(v PolicyActionQualifier)`
+
+SetActionQualifier sets ActionQualifier field to given value.
+
+### HasActionQualifier
+
+`func (o *PolicyConfigContext) HasActionQualifier() bool`
+
+HasActionQualifier returns a boolean if a field has been set.
+
+### SetActionQualifierNil
+
+`func (o *PolicyConfigContext) SetActionQualifierNil(b bool)`
+
+ SetActionQualifierNil sets the value for ActionQualifier to be an explicit nil
+
+### UnsetActionQualifier
+`func (o *PolicyConfigContext) UnsetActionQualifier()`
+
+UnsetActionQualifier ensures that no value is present for ActionQualifier, not even an explicit nil
 ### GetConfigState
 
 `func (o *PolicyConfigContext) GetConfigState() string`

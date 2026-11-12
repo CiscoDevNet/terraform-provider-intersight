@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -32,8 +32,9 @@ type WorkloadDeploymentInput struct {
 	GenNumber *int64                                 `json:"GenNumber,omitempty"`
 	Input     []WorkloadDeploymentBlueprintInputType `json:"Input,omitempty"`
 	// The state of the object generation performed using this input. If object generation fails, then this is set to true when the generated objects are restored to their prior state.
-	ObjectGenerationFailed *bool                                          `json:"ObjectGenerationFailed,omitempty"`
-	WorkloadDeployment     NullableWorkloadWorkloadDeploymentRelationship `json:"WorkloadDeployment,omitempty"`
+	ObjectGenerationFailed *bool                                            `json:"ObjectGenerationFailed,omitempty"`
+	DeferredCleanupInput   NullableWorkloadDeferredCleanupInputRelationship `json:"DeferredCleanupInput,omitempty"`
+	WorkloadDeployment     NullableWorkloadWorkloadDeploymentRelationship   `json:"WorkloadDeployment,omitempty"`
 	AdditionalProperties   map[string]interface{}
 }
 
@@ -217,6 +218,49 @@ func (o *WorkloadDeploymentInput) SetObjectGenerationFailed(v bool) {
 	o.ObjectGenerationFailed = &v
 }
 
+// GetDeferredCleanupInput returns the DeferredCleanupInput field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkloadDeploymentInput) GetDeferredCleanupInput() WorkloadDeferredCleanupInputRelationship {
+	if o == nil || IsNil(o.DeferredCleanupInput.Get()) {
+		var ret WorkloadDeferredCleanupInputRelationship
+		return ret
+	}
+	return *o.DeferredCleanupInput.Get()
+}
+
+// GetDeferredCleanupInputOk returns a tuple with the DeferredCleanupInput field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkloadDeploymentInput) GetDeferredCleanupInputOk() (*WorkloadDeferredCleanupInputRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DeferredCleanupInput.Get(), o.DeferredCleanupInput.IsSet()
+}
+
+// HasDeferredCleanupInput returns a boolean if a field has been set.
+func (o *WorkloadDeploymentInput) HasDeferredCleanupInput() bool {
+	if o != nil && o.DeferredCleanupInput.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDeferredCleanupInput gets a reference to the given NullableWorkloadDeferredCleanupInputRelationship and assigns it to the DeferredCleanupInput field.
+func (o *WorkloadDeploymentInput) SetDeferredCleanupInput(v WorkloadDeferredCleanupInputRelationship) {
+	o.DeferredCleanupInput.Set(&v)
+}
+
+// SetDeferredCleanupInputNil sets the value for DeferredCleanupInput to be an explicit nil
+func (o *WorkloadDeploymentInput) SetDeferredCleanupInputNil() {
+	o.DeferredCleanupInput.Set(nil)
+}
+
+// UnsetDeferredCleanupInput ensures that no value is present for DeferredCleanupInput, not even an explicit nil
+func (o *WorkloadDeploymentInput) UnsetDeferredCleanupInput() {
+	o.DeferredCleanupInput.Unset()
+}
+
 // GetWorkloadDeployment returns the WorkloadDeployment field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkloadDeploymentInput) GetWorkloadDeployment() WorkloadWorkloadDeploymentRelationship {
 	if o == nil || IsNil(o.WorkloadDeployment.Get()) {
@@ -295,6 +339,9 @@ func (o WorkloadDeploymentInput) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ObjectGenerationFailed) {
 		toSerialize["ObjectGenerationFailed"] = o.ObjectGenerationFailed
 	}
+	if o.DeferredCleanupInput.IsSet() {
+		toSerialize["DeferredCleanupInput"] = o.DeferredCleanupInput.Get()
+	}
 	if o.WorkloadDeployment.IsSet() {
 		toSerialize["WorkloadDeployment"] = o.WorkloadDeployment.Get()
 	}
@@ -357,8 +404,9 @@ func (o *WorkloadDeploymentInput) UnmarshalJSON(data []byte) (err error) {
 		GenNumber *int64                                 `json:"GenNumber,omitempty"`
 		Input     []WorkloadDeploymentBlueprintInputType `json:"Input,omitempty"`
 		// The state of the object generation performed using this input. If object generation fails, then this is set to true when the generated objects are restored to their prior state.
-		ObjectGenerationFailed *bool                                          `json:"ObjectGenerationFailed,omitempty"`
-		WorkloadDeployment     NullableWorkloadWorkloadDeploymentRelationship `json:"WorkloadDeployment,omitempty"`
+		ObjectGenerationFailed *bool                                            `json:"ObjectGenerationFailed,omitempty"`
+		DeferredCleanupInput   NullableWorkloadDeferredCleanupInputRelationship `json:"DeferredCleanupInput,omitempty"`
+		WorkloadDeployment     NullableWorkloadWorkloadDeploymentRelationship   `json:"WorkloadDeployment,omitempty"`
 	}
 
 	varWorkloadDeploymentInputWithoutEmbeddedStruct := WorkloadDeploymentInputWithoutEmbeddedStruct{}
@@ -371,6 +419,7 @@ func (o *WorkloadDeploymentInput) UnmarshalJSON(data []byte) (err error) {
 		varWorkloadDeploymentInput.GenNumber = varWorkloadDeploymentInputWithoutEmbeddedStruct.GenNumber
 		varWorkloadDeploymentInput.Input = varWorkloadDeploymentInputWithoutEmbeddedStruct.Input
 		varWorkloadDeploymentInput.ObjectGenerationFailed = varWorkloadDeploymentInputWithoutEmbeddedStruct.ObjectGenerationFailed
+		varWorkloadDeploymentInput.DeferredCleanupInput = varWorkloadDeploymentInputWithoutEmbeddedStruct.DeferredCleanupInput
 		varWorkloadDeploymentInput.WorkloadDeployment = varWorkloadDeploymentInputWithoutEmbeddedStruct.WorkloadDeployment
 		*o = WorkloadDeploymentInput(varWorkloadDeploymentInput)
 	} else {
@@ -394,6 +443,7 @@ func (o *WorkloadDeploymentInput) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "GenNumber")
 		delete(additionalProperties, "Input")
 		delete(additionalProperties, "ObjectGenerationFailed")
+		delete(additionalProperties, "DeferredCleanupInput")
 		delete(additionalProperties, "WorkloadDeployment")
 
 		// remove fields from embedded structs

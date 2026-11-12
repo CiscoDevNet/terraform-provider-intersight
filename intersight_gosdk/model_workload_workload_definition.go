@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // checks if the WorkloadWorkloadDefinition type satisfies the MappedNullable interface at compile time
@@ -27,9 +28,13 @@ type WorkloadWorkloadDefinition struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType        string                       `json:"ObjectType"`
-	Blueprints        []WorkloadBlueprintReference `json:"Blueprints,omitempty"`
-	DeploymentSummary []WorkloadStateAggregation   `json:"DeploymentSummary,omitempty"`
+	ObjectType string `json:"ObjectType"`
+	// The date by which the blueprints in the workload definition should be updated to non-deprecated versions. This field is populated only if the workload definition uses deprecated blueprints. If the definition still uses deprecated blueprints past this date, the definition will be locked and can only be used to create a new version using active blueprints.
+	BlueprintUpdateByDate *time.Time `json:"BlueprintUpdateByDate,omitempty"`
+	// The aggregate blueprint version update status across all blueprints included in the definition. * `Updated` - The blueprint reference is at the latest available version. * `AutoUpdate` - The blueprint reference can be updated to the latest version automatically. * `NeedsNewVersion` - The blueprint reference cannot be updated without a new version of the definition. * `Deprecated` - The referred blueprint is deprecated. * `UpdateInProgress` - The blueprint reference update is in progress. The update is in an intermediate state between AutoUpdate and Updated.
+	BlueprintVersionUpdateStatus *string                      `json:"BlueprintVersionUpdateStatus,omitempty"`
+	Blueprints                   []WorkloadBlueprintReference `json:"Blueprints,omitempty"`
+	DeploymentSummary            []WorkloadStateAggregation   `json:"DeploymentSummary,omitempty"`
 	// The description for this workload definition.
 	Description *string `json:"Description,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+[\\\\x00-\\\\xFF]*$"`
 	// The name for this Workload. You can have multiple versions of the Workload with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), space, hyphen (-), or an underscore (_). A refName is generated from the given name, and that along with the version must be unique within an Organization.
@@ -143,6 +148,70 @@ func (o *WorkloadWorkloadDefinition) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "workload.WorkloadDefinition" of the ObjectType field.
 func (o *WorkloadWorkloadDefinition) GetDefaultObjectType() interface{} {
 	return "workload.WorkloadDefinition"
+}
+
+// GetBlueprintUpdateByDate returns the BlueprintUpdateByDate field value if set, zero value otherwise.
+func (o *WorkloadWorkloadDefinition) GetBlueprintUpdateByDate() time.Time {
+	if o == nil || IsNil(o.BlueprintUpdateByDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.BlueprintUpdateByDate
+}
+
+// GetBlueprintUpdateByDateOk returns a tuple with the BlueprintUpdateByDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkloadWorkloadDefinition) GetBlueprintUpdateByDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.BlueprintUpdateByDate) {
+		return nil, false
+	}
+	return o.BlueprintUpdateByDate, true
+}
+
+// HasBlueprintUpdateByDate returns a boolean if a field has been set.
+func (o *WorkloadWorkloadDefinition) HasBlueprintUpdateByDate() bool {
+	if o != nil && !IsNil(o.BlueprintUpdateByDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlueprintUpdateByDate gets a reference to the given time.Time and assigns it to the BlueprintUpdateByDate field.
+func (o *WorkloadWorkloadDefinition) SetBlueprintUpdateByDate(v time.Time) {
+	o.BlueprintUpdateByDate = &v
+}
+
+// GetBlueprintVersionUpdateStatus returns the BlueprintVersionUpdateStatus field value if set, zero value otherwise.
+func (o *WorkloadWorkloadDefinition) GetBlueprintVersionUpdateStatus() string {
+	if o == nil || IsNil(o.BlueprintVersionUpdateStatus) {
+		var ret string
+		return ret
+	}
+	return *o.BlueprintVersionUpdateStatus
+}
+
+// GetBlueprintVersionUpdateStatusOk returns a tuple with the BlueprintVersionUpdateStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkloadWorkloadDefinition) GetBlueprintVersionUpdateStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.BlueprintVersionUpdateStatus) {
+		return nil, false
+	}
+	return o.BlueprintVersionUpdateStatus, true
+}
+
+// HasBlueprintVersionUpdateStatus returns a boolean if a field has been set.
+func (o *WorkloadWorkloadDefinition) HasBlueprintVersionUpdateStatus() bool {
+	if o != nil && !IsNil(o.BlueprintVersionUpdateStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlueprintVersionUpdateStatus gets a reference to the given string and assigns it to the BlueprintVersionUpdateStatus field.
+func (o *WorkloadWorkloadDefinition) SetBlueprintVersionUpdateStatus(v string) {
+	o.BlueprintVersionUpdateStatus = &v
 }
 
 // GetBlueprints returns the Blueprints field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -634,6 +703,12 @@ func (o WorkloadWorkloadDefinition) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BlueprintUpdateByDate) {
+		toSerialize["BlueprintUpdateByDate"] = o.BlueprintUpdateByDate
+	}
+	if !IsNil(o.BlueprintVersionUpdateStatus) {
+		toSerialize["BlueprintVersionUpdateStatus"] = o.BlueprintVersionUpdateStatus
+	}
 	if o.Blueprints != nil {
 		toSerialize["Blueprints"] = o.Blueprints
 	}
@@ -727,9 +802,13 @@ func (o *WorkloadWorkloadDefinition) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType        string                       `json:"ObjectType"`
-		Blueprints        []WorkloadBlueprintReference `json:"Blueprints,omitempty"`
-		DeploymentSummary []WorkloadStateAggregation   `json:"DeploymentSummary,omitempty"`
+		ObjectType string `json:"ObjectType"`
+		// The date by which the blueprints in the workload definition should be updated to non-deprecated versions. This field is populated only if the workload definition uses deprecated blueprints. If the definition still uses deprecated blueprints past this date, the definition will be locked and can only be used to create a new version using active blueprints.
+		BlueprintUpdateByDate *time.Time `json:"BlueprintUpdateByDate,omitempty"`
+		// The aggregate blueprint version update status across all blueprints included in the definition. * `Updated` - The blueprint reference is at the latest available version. * `AutoUpdate` - The blueprint reference can be updated to the latest version automatically. * `NeedsNewVersion` - The blueprint reference cannot be updated without a new version of the definition. * `Deprecated` - The referred blueprint is deprecated. * `UpdateInProgress` - The blueprint reference update is in progress. The update is in an intermediate state between AutoUpdate and Updated.
+		BlueprintVersionUpdateStatus *string                      `json:"BlueprintVersionUpdateStatus,omitempty"`
+		Blueprints                   []WorkloadBlueprintReference `json:"Blueprints,omitempty"`
+		DeploymentSummary            []WorkloadStateAggregation   `json:"DeploymentSummary,omitempty"`
 		// The description for this workload definition.
 		Description *string `json:"Description,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+[\\\\x00-\\\\xFF]*$"`
 		// The name for this Workload. You can have multiple versions of the Workload with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), space, hyphen (-), or an underscore (_). A refName is generated from the given name, and that along with the version must be unique within an Organization.
@@ -756,6 +835,8 @@ func (o *WorkloadWorkloadDefinition) UnmarshalJSON(data []byte) (err error) {
 		varWorkloadWorkloadDefinition := _WorkloadWorkloadDefinition{}
 		varWorkloadWorkloadDefinition.ClassId = varWorkloadWorkloadDefinitionWithoutEmbeddedStruct.ClassId
 		varWorkloadWorkloadDefinition.ObjectType = varWorkloadWorkloadDefinitionWithoutEmbeddedStruct.ObjectType
+		varWorkloadWorkloadDefinition.BlueprintUpdateByDate = varWorkloadWorkloadDefinitionWithoutEmbeddedStruct.BlueprintUpdateByDate
+		varWorkloadWorkloadDefinition.BlueprintVersionUpdateStatus = varWorkloadWorkloadDefinitionWithoutEmbeddedStruct.BlueprintVersionUpdateStatus
 		varWorkloadWorkloadDefinition.Blueprints = varWorkloadWorkloadDefinitionWithoutEmbeddedStruct.Blueprints
 		varWorkloadWorkloadDefinition.DeploymentSummary = varWorkloadWorkloadDefinitionWithoutEmbeddedStruct.DeploymentSummary
 		varWorkloadWorkloadDefinition.Description = varWorkloadWorkloadDefinitionWithoutEmbeddedStruct.Description
@@ -788,6 +869,8 @@ func (o *WorkloadWorkloadDefinition) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BlueprintUpdateByDate")
+		delete(additionalProperties, "BlueprintVersionUpdateStatus")
 		delete(additionalProperties, "Blueprints")
 		delete(additionalProperties, "DeploymentSummary")
 		delete(additionalProperties, "Description")

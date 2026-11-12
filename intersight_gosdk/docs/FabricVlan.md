@@ -6,9 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.Vlan"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.Vlan"]
-**AutoAllowOnClusterLinks** | Pointer to **bool** | Enable this option to automatically allow the VLAN on inter-cluster links. To configure disjoint Layer 2 VLANs, &#39;Disable&#39; must be specified together with &#39;AutoAllowOnUplinks.&#39; Note that &#39;AutoAllowOnClusterLinks&#39; cannot be enabled for the default VLAN 1 or the native VLAN. | [optional] [default to false]
-**AutoAllowOnUplinks** | Pointer to **bool** | Enable to automatically allow this VLAN on all uplinks. Disable must be specified alongside AutoAllowOnClusterLinks for disjoint layer 2 VLAN configuration. Default VLAN 1 cannot be configured as disjoint layer 2 VLAN. | [optional] [default to true]
-**IsNative** | Pointer to **bool** | Used to define whether this VLAN is to be classified as &#39;native&#39; for traffic in this FI. | [optional] 
+**AutoAllowOnClusterLinks** | Pointer to **bool** | Enable this option to automatically allow the VLAN on intra-chassis links. The traffic is not carried outside the chassis. | [optional] [default to false]
+**AutoAllowOnInterSwitchPorts** | Pointer to **bool** | Restricts this VLAN to intra-chassis traffic only. It does not carry traffic outside the chassis. | [optional] [default to false]
+**AutoAllowOnSecureRouterRoles** | Pointer to **bool** | Automatically applies VLANs to backplane ports connected to slots configured with secure router roles. | [optional] [default to false]
+**AutoAllowOnUplinks** | Pointer to **bool** | Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN. | [optional] [default to true]
+**IsNative** | Pointer to **bool** | Used to define whether this VLAN is to be classified as &#39;native&#39; for traffic in this switch. | [optional] 
 **Name** | Pointer to **string** | The &#39;name&#39; used to identify this VLAN. | [optional] 
 **PrimaryVlanId** | Pointer to **int64** | The Primary VLAN ID of the VLAN, if the sharing type of the VLAN is Isolated or Community. | [optional] [default to 0]
 **SharingType** | Pointer to **string** | The sharing type of this VLAN. * &#x60;None&#x60; - This represents a regular VLAN. * &#x60;Primary&#x60; - This represents a primary VLAN. * &#x60;Isolated&#x60; - This represents an isolated VLAN. * &#x60;Community&#x60; - This represents a community VLAN. | [optional] [default to "None"]
@@ -100,6 +102,56 @@ SetAutoAllowOnClusterLinks sets AutoAllowOnClusterLinks field to given value.
 `func (o *FabricVlan) HasAutoAllowOnClusterLinks() bool`
 
 HasAutoAllowOnClusterLinks returns a boolean if a field has been set.
+
+### GetAutoAllowOnInterSwitchPorts
+
+`func (o *FabricVlan) GetAutoAllowOnInterSwitchPorts() bool`
+
+GetAutoAllowOnInterSwitchPorts returns the AutoAllowOnInterSwitchPorts field if non-nil, zero value otherwise.
+
+### GetAutoAllowOnInterSwitchPortsOk
+
+`func (o *FabricVlan) GetAutoAllowOnInterSwitchPortsOk() (*bool, bool)`
+
+GetAutoAllowOnInterSwitchPortsOk returns a tuple with the AutoAllowOnInterSwitchPorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoAllowOnInterSwitchPorts
+
+`func (o *FabricVlan) SetAutoAllowOnInterSwitchPorts(v bool)`
+
+SetAutoAllowOnInterSwitchPorts sets AutoAllowOnInterSwitchPorts field to given value.
+
+### HasAutoAllowOnInterSwitchPorts
+
+`func (o *FabricVlan) HasAutoAllowOnInterSwitchPorts() bool`
+
+HasAutoAllowOnInterSwitchPorts returns a boolean if a field has been set.
+
+### GetAutoAllowOnSecureRouterRoles
+
+`func (o *FabricVlan) GetAutoAllowOnSecureRouterRoles() bool`
+
+GetAutoAllowOnSecureRouterRoles returns the AutoAllowOnSecureRouterRoles field if non-nil, zero value otherwise.
+
+### GetAutoAllowOnSecureRouterRolesOk
+
+`func (o *FabricVlan) GetAutoAllowOnSecureRouterRolesOk() (*bool, bool)`
+
+GetAutoAllowOnSecureRouterRolesOk returns a tuple with the AutoAllowOnSecureRouterRoles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoAllowOnSecureRouterRoles
+
+`func (o *FabricVlan) SetAutoAllowOnSecureRouterRoles(v bool)`
+
+SetAutoAllowOnSecureRouterRoles sets AutoAllowOnSecureRouterRoles field to given value.
+
+### HasAutoAllowOnSecureRouterRoles
+
+`func (o *FabricVlan) HasAutoAllowOnSecureRouterRoles() bool`
+
+HasAutoAllowOnSecureRouterRoles returns a boolean if a field has been set.
 
 ### GetAutoAllowOnUplinks
 

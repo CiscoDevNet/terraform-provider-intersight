@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workload.BlueprintReference"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workload.BlueprintReference"]
+**BlueprintVersionUpdateState** | Pointer to [**NullableWorkloadBlueprintVersionUpdateState**](WorkloadBlueprintVersionUpdateState.md) |  | [optional] 
 **InputOverride** | Pointer to **[]string** |  | [optional] 
+**InputSourceReferences** | Pointer to [**[]WorkloadInputSourceReference**](WorkloadInputSourceReference.md) |  | [optional] 
 
 ## Methods
 
@@ -67,6 +69,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetBlueprintVersionUpdateState
+
+`func (o *WorkloadBlueprintReference) GetBlueprintVersionUpdateState() WorkloadBlueprintVersionUpdateState`
+
+GetBlueprintVersionUpdateState returns the BlueprintVersionUpdateState field if non-nil, zero value otherwise.
+
+### GetBlueprintVersionUpdateStateOk
+
+`func (o *WorkloadBlueprintReference) GetBlueprintVersionUpdateStateOk() (*WorkloadBlueprintVersionUpdateState, bool)`
+
+GetBlueprintVersionUpdateStateOk returns a tuple with the BlueprintVersionUpdateState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBlueprintVersionUpdateState
+
+`func (o *WorkloadBlueprintReference) SetBlueprintVersionUpdateState(v WorkloadBlueprintVersionUpdateState)`
+
+SetBlueprintVersionUpdateState sets BlueprintVersionUpdateState field to given value.
+
+### HasBlueprintVersionUpdateState
+
+`func (o *WorkloadBlueprintReference) HasBlueprintVersionUpdateState() bool`
+
+HasBlueprintVersionUpdateState returns a boolean if a field has been set.
+
+### SetBlueprintVersionUpdateStateNil
+
+`func (o *WorkloadBlueprintReference) SetBlueprintVersionUpdateStateNil(b bool)`
+
+ SetBlueprintVersionUpdateStateNil sets the value for BlueprintVersionUpdateState to be an explicit nil
+
+### UnsetBlueprintVersionUpdateState
+`func (o *WorkloadBlueprintReference) UnsetBlueprintVersionUpdateState()`
+
+UnsetBlueprintVersionUpdateState ensures that no value is present for BlueprintVersionUpdateState, not even an explicit nil
 ### GetInputOverride
 
 `func (o *WorkloadBlueprintReference) GetInputOverride() []string`
@@ -102,6 +139,41 @@ HasInputOverride returns a boolean if a field has been set.
 `func (o *WorkloadBlueprintReference) UnsetInputOverride()`
 
 UnsetInputOverride ensures that no value is present for InputOverride, not even an explicit nil
+### GetInputSourceReferences
+
+`func (o *WorkloadBlueprintReference) GetInputSourceReferences() []WorkloadInputSourceReference`
+
+GetInputSourceReferences returns the InputSourceReferences field if non-nil, zero value otherwise.
+
+### GetInputSourceReferencesOk
+
+`func (o *WorkloadBlueprintReference) GetInputSourceReferencesOk() (*[]WorkloadInputSourceReference, bool)`
+
+GetInputSourceReferencesOk returns a tuple with the InputSourceReferences field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInputSourceReferences
+
+`func (o *WorkloadBlueprintReference) SetInputSourceReferences(v []WorkloadInputSourceReference)`
+
+SetInputSourceReferences sets InputSourceReferences field to given value.
+
+### HasInputSourceReferences
+
+`func (o *WorkloadBlueprintReference) HasInputSourceReferences() bool`
+
+HasInputSourceReferences returns a boolean if a field has been set.
+
+### SetInputSourceReferencesNil
+
+`func (o *WorkloadBlueprintReference) SetInputSourceReferencesNil(b bool)`
+
+ SetInputSourceReferencesNil sets the value for InputSourceReferences to be an explicit nil
+
+### UnsetInputSourceReferences
+`func (o *WorkloadBlueprintReference) UnsetInputSourceReferences()`
+
+UnsetInputSourceReferences ensures that no value is present for InputSourceReferences, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

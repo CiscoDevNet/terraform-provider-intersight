@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **GenNumber** | Pointer to **int64** | A sequential number that increments whenever the input changes. | [optional] [readonly] 
 **Input** | Pointer to [**[]WorkloadDeploymentBlueprintInputType**](WorkloadDeploymentBlueprintInputType.md) |  | [optional] 
 **ObjectGenerationFailed** | Pointer to **bool** | The state of the object generation performed using this input. If object generation fails, then this is set to true when the generated objects are restored to their prior state. | [optional] [readonly] 
+**DeferredCleanupInput** | Pointer to [**NullableWorkloadDeferredCleanupInputRelationship**](WorkloadDeferredCleanupInputRelationship.md) |  | [optional] 
 **WorkloadDeployment** | Pointer to [**NullableWorkloadWorkloadDeploymentRelationship**](WorkloadWorkloadDeploymentRelationship.md) |  | [optional] 
 
 ## Methods
@@ -155,6 +156,41 @@ SetObjectGenerationFailed sets ObjectGenerationFailed field to given value.
 
 HasObjectGenerationFailed returns a boolean if a field has been set.
 
+### GetDeferredCleanupInput
+
+`func (o *WorkloadDeploymentInput) GetDeferredCleanupInput() WorkloadDeferredCleanupInputRelationship`
+
+GetDeferredCleanupInput returns the DeferredCleanupInput field if non-nil, zero value otherwise.
+
+### GetDeferredCleanupInputOk
+
+`func (o *WorkloadDeploymentInput) GetDeferredCleanupInputOk() (*WorkloadDeferredCleanupInputRelationship, bool)`
+
+GetDeferredCleanupInputOk returns a tuple with the DeferredCleanupInput field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeferredCleanupInput
+
+`func (o *WorkloadDeploymentInput) SetDeferredCleanupInput(v WorkloadDeferredCleanupInputRelationship)`
+
+SetDeferredCleanupInput sets DeferredCleanupInput field to given value.
+
+### HasDeferredCleanupInput
+
+`func (o *WorkloadDeploymentInput) HasDeferredCleanupInput() bool`
+
+HasDeferredCleanupInput returns a boolean if a field has been set.
+
+### SetDeferredCleanupInputNil
+
+`func (o *WorkloadDeploymentInput) SetDeferredCleanupInputNil(b bool)`
+
+ SetDeferredCleanupInputNil sets the value for DeferredCleanupInput to be an explicit nil
+
+### UnsetDeferredCleanupInput
+`func (o *WorkloadDeploymentInput) UnsetDeferredCleanupInput()`
+
+UnsetDeferredCleanupInput ensures that no value is present for DeferredCleanupInput, not even an explicit nil
 ### GetWorkloadDeployment
 
 `func (o *WorkloadDeploymentInput) GetWorkloadDeployment() WorkloadWorkloadDeploymentRelationship`

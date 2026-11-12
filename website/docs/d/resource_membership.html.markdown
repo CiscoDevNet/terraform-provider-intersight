@@ -3,7 +3,8 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_membership"
 description: |-
-        Memberships (ResourceMembership) represent the membership context of a resource—specifically which groups and organizations the resource is associated with, and how permissions and roles map to that resource through those organizations. This object is used to understand and (in controlled scenarios) refresh how access control applies to a resource.
+        Memberships (ResourceMembership) represent the membership context of a resource—specifically which groups and organizations the resource is associated with, and how permissions and roles map to that resource through those organizations.
+        The Membership object is used to understand and (in controlled scenarios) refresh how access control applies to a resource.
         #### Purpose
         Provide a consolidated, queryable view of a resource’s organizational/group membership and the resulting permission-to-role mappings, enabling administrators and support personnel to audit and troubleshoot access to that resource.
         #### Key Concepts
@@ -14,7 +15,8 @@ description: |-
 ---
 
 # Data Source: intersight_resource_membership
-Memberships (ResourceMembership) represent the membership context of a resource—specifically which groups and organizations the resource is associated with, and how permissions and roles map to that resource through those organizations. This object is used to understand and (in controlled scenarios) refresh how access control applies to a resource.
+Memberships (ResourceMembership) represent the membership context of a resource—specifically which groups and organizations the resource is associated with, and how permissions and roles map to that resource through those organizations. 
+The Membership object is used to understand and (in controlled scenarios) refresh how access control applies to a resource.
 #### Purpose
 Provide a consolidated, queryable view of a resource’s organizational/group membership and the resulting permission-to-role mappings, enabling administrators and support personnel to audit and troubleshoot access to that resource.
 #### Key Concepts

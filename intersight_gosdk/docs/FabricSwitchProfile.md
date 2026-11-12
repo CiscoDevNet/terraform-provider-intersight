@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
 **FabricPreAssignBySerial** | Pointer to **string** | Serial number of the fabric that would be assigned to this pre-assigned fabric switch Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters. | [optional] 
 **OverriddenList** | Pointer to **[]string** |  | [optional] 
+**PeerInterfaceCompatibilityIssues** | Pointer to [**NullableFabricPeerInterfaceCompatibilityIssues**](FabricPeerInterfaceCompatibilityIssues.md) |  | [optional] 
 **ScheduledSwitchAssignment** | Pointer to [**NullableFabricSwitchAssignment**](FabricSwitchAssignment.md) |  | [optional] 
 **SwitchAssignmentMode** | Pointer to **string** | Source of the switch assigned to the Domain Profile. Values can be Static or None. Static is used if a switch is attached directly to a Domain Profile. None is used if no switch is attached to a Domain Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * &#x60;Static&#x60; - Fabric is directly assigned to domain profile using assign chassis. * &#x60;None&#x60; - No fabric is assigned to the domain profile. | [optional] [default to "Static"]
 **TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
@@ -210,6 +211,41 @@ HasOverriddenList returns a boolean if a field has been set.
 `func (o *FabricSwitchProfile) UnsetOverriddenList()`
 
 UnsetOverriddenList ensures that no value is present for OverriddenList, not even an explicit nil
+### GetPeerInterfaceCompatibilityIssues
+
+`func (o *FabricSwitchProfile) GetPeerInterfaceCompatibilityIssues() FabricPeerInterfaceCompatibilityIssues`
+
+GetPeerInterfaceCompatibilityIssues returns the PeerInterfaceCompatibilityIssues field if non-nil, zero value otherwise.
+
+### GetPeerInterfaceCompatibilityIssuesOk
+
+`func (o *FabricSwitchProfile) GetPeerInterfaceCompatibilityIssuesOk() (*FabricPeerInterfaceCompatibilityIssues, bool)`
+
+GetPeerInterfaceCompatibilityIssuesOk returns a tuple with the PeerInterfaceCompatibilityIssues field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeerInterfaceCompatibilityIssues
+
+`func (o *FabricSwitchProfile) SetPeerInterfaceCompatibilityIssues(v FabricPeerInterfaceCompatibilityIssues)`
+
+SetPeerInterfaceCompatibilityIssues sets PeerInterfaceCompatibilityIssues field to given value.
+
+### HasPeerInterfaceCompatibilityIssues
+
+`func (o *FabricSwitchProfile) HasPeerInterfaceCompatibilityIssues() bool`
+
+HasPeerInterfaceCompatibilityIssues returns a boolean if a field has been set.
+
+### SetPeerInterfaceCompatibilityIssuesNil
+
+`func (o *FabricSwitchProfile) SetPeerInterfaceCompatibilityIssuesNil(b bool)`
+
+ SetPeerInterfaceCompatibilityIssuesNil sets the value for PeerInterfaceCompatibilityIssues to be an explicit nil
+
+### UnsetPeerInterfaceCompatibilityIssues
+`func (o *FabricSwitchProfile) UnsetPeerInterfaceCompatibilityIssues()`
+
+UnsetPeerInterfaceCompatibilityIssues ensures that no value is present for PeerInterfaceCompatibilityIssues, not even an explicit nil
 ### GetScheduledSwitchAssignment
 
 `func (o *FabricSwitchProfile) GetScheduledSwitchAssignment() FabricSwitchAssignment`

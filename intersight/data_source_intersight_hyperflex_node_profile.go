@@ -180,6 +180,69 @@ func getHyperflexNodeProfileSchema() map[string]*schema.Schema {
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
+					"action_qualifier": {
+						Description: "Qualifiers to control the action being triggered. Action qualifiers are to be specified based on the type of disruptions that an action is to be restricted to. For example, trigger the 'Deploy' action to only perform network and management plane configurations.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"qualifiers": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"disruption": {
+												Description: "Possible disruption the configuration change might cause.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"policy": {
+												Description: "The name of the policy for which, the deployment is performed.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+								},
+								"scope": {
+									Description: "Specify if profile action is targeted for a specific scope.\n* `selective` - Profile deploy action to be limited to modified policies or to the policy list passed.\n* `all` - Profile deploy action to perform deploy of all policies associated with profile.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"additional_properties": {
 						Type:             schema.TypeString,
 						Optional:         true,
@@ -697,12 +760,50 @@ func getHyperflexNodeProfileSchema() map[string]*schema.Schema {
 									DiffSuppressFunc: SuppressDiffAdditionProps,
 								},
 								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
 								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"qualifiers": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"disruption": {
+												Description: "Possible disruption the configuration change might cause.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"policy": {
+												Description: "The name of the policy for which, the deployment is performed.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+								},
+								"scope": {
+									Description: "Specify if profile action is targeted for a specific scope.\n* `selective` - Profile deploy action to be limited to modified policies or to the policy list passed.\n* `all` - Profile deploy action to perform deploy of all policies associated with profile.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -866,7 +967,7 @@ func getHyperflexNodeProfileSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1214,6 +1315,87 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
 			o := &models.PolicyConfigContext{}
+			if v, ok := l["action_qualifier"]; ok {
+				{
+					p := make([]models.PolicyActionQualifier, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewPolicyActionQualifierWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("policy.ActionQualifier")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["qualifiers"]; ok {
+							{
+								x := make([]models.PolicyQualifier, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewPolicyQualifierWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("policy.Qualifier")
+									if v, ok := l["disruption"]; ok {
+										{
+											x := (v.(string))
+											o.SetDisruption(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["policy"]; ok {
+										{
+											x := (v.(string))
+											o.SetPolicy(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetQualifiers(x)
+								}
+							}
+						}
+						if v, ok := l["scope"]; ok {
+							{
+								x := (v.(string))
+								o.SetScope(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetActionQualifier(x)
+					}
+				}
+			}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1229,12 +1411,6 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(string))
 					o.SetControlAction(x)
-				}
-			}
-			if v, ok := l["error_state"]; ok {
-				{
-					x := (v.(string))
-					o.SetErrorState(x)
 				}
 			}
 			if v, ok := l["inconsistency_reason"]; ok {
@@ -1824,6 +2000,55 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 								o.SetObjectType(x)
 							}
 						}
+						if v, ok := l["qualifiers"]; ok {
+							{
+								x := make([]models.PolicyQualifier, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewPolicyQualifierWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("policy.Qualifier")
+									if v, ok := l["disruption"]; ok {
+										{
+											x := (v.(string))
+											o.SetDisruption(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["policy"]; ok {
+										{
+											x := (v.(string))
+											o.SetPolicy(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetQualifiers(x)
+								}
+							}
+						}
+						if v, ok := l["scope"]; ok {
+							{
+								x := (v.(string))
+								o.SetScope(x)
+							}
+						}
 						p = append(p, *o)
 					}
 					if len(p) > 0 {
@@ -1971,6 +2196,12 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {

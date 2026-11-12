@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,13 @@ var _ MappedNullable = &PolicyActionQualifier{}
 // PolicyActionQualifier Action qualifiers can be used to control actions that are performed on a profile object. For example - perform a 'Deploy' action only for specific policies.
 type PolicyActionQualifier struct {
 	MoBaseComplexType
+	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+	ClassId string `json:"ClassId"`
+	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+	ObjectType string            `json:"ObjectType"`
+	Qualifiers []PolicyQualifier `json:"Qualifiers,omitempty"`
+	// Specify if profile action is targeted for a specific scope. * `selective` - Profile deploy action to be limited to modified policies or to the policy list passed. * `all` - Profile deploy action to perform deploy of all policies associated with profile.
+	Scope                *string `json:"Scope,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,6 +44,8 @@ func NewPolicyActionQualifier(classId string, objectType string) *PolicyActionQu
 	this := PolicyActionQualifier{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var scope string = "selective"
+	this.Scope = &scope
 	return &this
 }
 
@@ -45,7 +54,136 @@ func NewPolicyActionQualifier(classId string, objectType string) *PolicyActionQu
 // but it doesn't guarantee that properties required by API are set
 func NewPolicyActionQualifierWithDefaults() *PolicyActionQualifier {
 	this := PolicyActionQualifier{}
+	var classId string = "policy.ActionQualifier"
+	this.ClassId = classId
+	var objectType string = "policy.ActionQualifier"
+	this.ObjectType = objectType
+	var scope string = "selective"
+	this.Scope = &scope
 	return &this
+}
+
+// GetClassId returns the ClassId field value
+func (o *PolicyActionQualifier) GetClassId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ClassId
+}
+
+// GetClassIdOk returns a tuple with the ClassId field value
+// and a boolean to check if the value has been set.
+func (o *PolicyActionQualifier) GetClassIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ClassId, true
+}
+
+// SetClassId sets field value
+func (o *PolicyActionQualifier) SetClassId(v string) {
+	o.ClassId = v
+}
+
+// GetDefaultClassId returns the default value "policy.ActionQualifier" of the ClassId field.
+func (o *PolicyActionQualifier) GetDefaultClassId() interface{} {
+	return "policy.ActionQualifier"
+}
+
+// GetObjectType returns the ObjectType field value
+func (o *PolicyActionQualifier) GetObjectType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ObjectType
+}
+
+// GetObjectTypeOk returns a tuple with the ObjectType field value
+// and a boolean to check if the value has been set.
+func (o *PolicyActionQualifier) GetObjectTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ObjectType, true
+}
+
+// SetObjectType sets field value
+func (o *PolicyActionQualifier) SetObjectType(v string) {
+	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "policy.ActionQualifier" of the ObjectType field.
+func (o *PolicyActionQualifier) GetDefaultObjectType() interface{} {
+	return "policy.ActionQualifier"
+}
+
+// GetQualifiers returns the Qualifiers field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PolicyActionQualifier) GetQualifiers() []PolicyQualifier {
+	if o == nil {
+		var ret []PolicyQualifier
+		return ret
+	}
+	return o.Qualifiers
+}
+
+// GetQualifiersOk returns a tuple with the Qualifiers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PolicyActionQualifier) GetQualifiersOk() ([]PolicyQualifier, bool) {
+	if o == nil || IsNil(o.Qualifiers) {
+		return nil, false
+	}
+	return o.Qualifiers, true
+}
+
+// HasQualifiers returns a boolean if a field has been set.
+func (o *PolicyActionQualifier) HasQualifiers() bool {
+	if o != nil && !IsNil(o.Qualifiers) {
+		return true
+	}
+
+	return false
+}
+
+// SetQualifiers gets a reference to the given []PolicyQualifier and assigns it to the Qualifiers field.
+func (o *PolicyActionQualifier) SetQualifiers(v []PolicyQualifier) {
+	o.Qualifiers = v
+}
+
+// GetScope returns the Scope field value if set, zero value otherwise.
+func (o *PolicyActionQualifier) GetScope() string {
+	if o == nil || IsNil(o.Scope) {
+		var ret string
+		return ret
+	}
+	return *o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicyActionQualifier) GetScopeOk() (*string, bool) {
+	if o == nil || IsNil(o.Scope) {
+		return nil, false
+	}
+	return o.Scope, true
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *PolicyActionQualifier) HasScope() bool {
+	if o != nil && !IsNil(o.Scope) {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given string and assigns it to the Scope field.
+func (o *PolicyActionQualifier) SetScope(v string) {
+	o.Scope = &v
 }
 
 func (o PolicyActionQualifier) MarshalJSON() ([]byte, error) {
@@ -66,6 +204,20 @@ func (o PolicyActionQualifier) ToMap() (map[string]interface{}, error) {
 	if errMoBaseComplexType != nil {
 		return map[string]interface{}{}, errMoBaseComplexType
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
+	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.Qualifiers != nil {
+		toSerialize["Qualifiers"] = o.Qualifiers
+	}
+	if !IsNil(o.Scope) {
+		toSerialize["Scope"] = o.Scope
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -85,7 +237,10 @@ func (o *PolicyActionQualifier) UnmarshalJSON(data []byte) (err error) {
 
 	// defaultValueFuncMap captures the default values for required properties.
 	// These values are used when required properties are missing from the payload.
-	defaultValueFuncMap := map[string]func() interface{}{}
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
 	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
@@ -114,6 +269,13 @@ func (o *PolicyActionQualifier) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 	type PolicyActionQualifierWithoutEmbeddedStruct struct {
+		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+		ClassId string `json:"ClassId"`
+		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+		ObjectType string            `json:"ObjectType"`
+		Qualifiers []PolicyQualifier `json:"Qualifiers,omitempty"`
+		// Specify if profile action is targeted for a specific scope. * `selective` - Profile deploy action to be limited to modified policies or to the policy list passed. * `all` - Profile deploy action to perform deploy of all policies associated with profile.
+		Scope *string `json:"Scope,omitempty"`
 	}
 
 	varPolicyActionQualifierWithoutEmbeddedStruct := PolicyActionQualifierWithoutEmbeddedStruct{}
@@ -121,6 +283,10 @@ func (o *PolicyActionQualifier) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &varPolicyActionQualifierWithoutEmbeddedStruct)
 	if err == nil {
 		varPolicyActionQualifier := _PolicyActionQualifier{}
+		varPolicyActionQualifier.ClassId = varPolicyActionQualifierWithoutEmbeddedStruct.ClassId
+		varPolicyActionQualifier.ObjectType = varPolicyActionQualifierWithoutEmbeddedStruct.ObjectType
+		varPolicyActionQualifier.Qualifiers = varPolicyActionQualifierWithoutEmbeddedStruct.Qualifiers
+		varPolicyActionQualifier.Scope = varPolicyActionQualifierWithoutEmbeddedStruct.Scope
 		*o = PolicyActionQualifier(varPolicyActionQualifier)
 	} else {
 		return err
@@ -138,6 +304,10 @@ func (o *PolicyActionQualifier) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ClassId")
+		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Qualifiers")
+		delete(additionalProperties, "Scope")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

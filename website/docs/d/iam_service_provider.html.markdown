@@ -29,6 +29,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_iam_service_provider.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `cert_expiry_time`:(string) Expiry time of the certificate used in SP metadata. Tracks SP certificate expiries and rotates the certificate before it expires to avoid any authentication failure. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `entity_id`:(string) Entity ID of the Intersight Service Provider. In SAML, the entity ID uniquely identifies the IdP/Service Provider. 
@@ -37,4 +38,6 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the Intersight Service Provider. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `sp_metadata_expiry_state`:(string) The expiration state of the certificates in the SP metadata rotation during the grace period of SP SAML metadata rotation.* `expiration-within-info-period` - The expiry date is beyond 270 days.* `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days.* `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days.* `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days.* `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days.* `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days.* `expiration-within-critical-period` - The expiry date is within 7 days.* `expired` - The expiry date has passed.* `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled. 
+* `sp_metadata_type`:(string) Defines which SP metadata is defined in Intersight. The SP metadata could be legacy metadata or new metadata.* `Sha2` - The new SAML SP metadata with SHA-2 hashed certificates.* `Legacy` - The legacy SAML SP metadata (expiring certificates). 
  

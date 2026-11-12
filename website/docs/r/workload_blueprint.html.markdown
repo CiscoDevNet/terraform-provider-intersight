@@ -6,9 +6,10 @@ description: |-
         ### Overview
         The Blueprint object defines a reusable, versioned template for deploying infrastructure configurations and services. It encapsulates input schemas, managed object generation rules, service item associations, and resource constraints into a cohesive deployment unit that can be referenced by workload definitions.
         #### Purpose
-        A Blueprint serves as a modular building block for constructing complex workload definitions. Blueprints provides a standardized way to define infrastructure patterns, application configurations, and service deployments that can be reused across multiple workloads. Blueprints support versioning, platform targeting, and dependency management to ensure reliable and consistent deployments.
+        A Blueprint serves as a modular building block for constructing complex workload definitions. Blueprints provide a standardized way to define infrastructure patterns, application configurations, and service deployments that can be reused across multiple workloads. Blueprints support versioning, support information, compatibility tracking, platform targeting, and dependency management to ensure reliable and consistent deployments.
         #### Key Concepts
-        - **Versioning and Default Versions:** - Each blueprint supports multiple versions with the ability to designate a default version, enabling safe evolution of blueprint specifications while maintaining compatibility with existing workloads.
+        - **Authoring and Resolved Blueprints:** - Every externally supplied blueprint is stored as an authoring object with `Resolved=false`. Each concrete authoring blueprint produces a separate deployable companion with `Resolved=true`, regardless of whether it inherits from a base blueprint.
+        - **Versioning and Default Versions:** - Each blueprint supports multiple versions with the ability to designate a default version, publish support information, and declare compatibility with previously published versions.
         - **Input Definition Schema:** - Defines the schema for all inputs required by the blueprint, supporting complex data types including primitives, collections, and managed object references.
         - **Generated Object Management:** - Specifies which Intersight managed objects (policies, profiles, etc.) should be automatically generated from blueprint inputs and how those objects should be configured.
         - **Service Item Integration:** - Associates service items with the blueprint, defining which service workflows are executed during deployment and lifecycle operations.
@@ -22,9 +23,10 @@ description: |-
 ### Overview
 The Blueprint object defines a reusable, versioned template for deploying infrastructure configurations and services. It encapsulates input schemas, managed object generation rules, service item associations, and resource constraints into a cohesive deployment unit that can be referenced by workload definitions.
 #### Purpose
-A Blueprint serves as a modular building block for constructing complex workload definitions. Blueprints provides a standardized way to define infrastructure patterns, application configurations, and service deployments that can be reused across multiple workloads. Blueprints support versioning, platform targeting, and dependency management to ensure reliable and consistent deployments.
+A Blueprint serves as a modular building block for constructing complex workload definitions. Blueprints provide a standardized way to define infrastructure patterns, application configurations, and service deployments that can be reused across multiple workloads. Blueprints support versioning, support information, compatibility tracking, platform targeting, and dependency management to ensure reliable and consistent deployments.
 #### Key Concepts
-- **Versioning and Default Versions:** - Each blueprint supports multiple versions with the ability to designate a default version, enabling safe evolution of blueprint specifications while maintaining compatibility with existing workloads.
+- **Authoring and Resolved Blueprints:** - Every externally supplied blueprint is stored as an authoring object with `Resolved=false`. Each concrete authoring blueprint produces a separate deployable companion with `Resolved=true`, regardless of whether it inherits from a base blueprint.
+- **Versioning and Default Versions:** - Each blueprint supports multiple versions with the ability to designate a default version, publish support information, and declare compatibility with previously published versions.
 - **Input Definition Schema:** - Defines the schema for all inputs required by the blueprint, supporting complex data types including primitives, collections, and managed object references.
 - **Generated Object Management:** - Specifies which Intersight managed objects (policies, profiles, etc.) should be automatically generated from blueprint inputs and how those objects should be configured.
 - **Service Item Integration:** - Associates service items with the blueprint, defining which service workflows are executed during deployment and lifecycle operations.
@@ -44,21 +46,43 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `blueprint_dependencies`:(Array)
+* `base_blueprint`:(HashMap) - The abstract base blueprint inherited by this authoring blueprint. Is optional. 
 This complex property has following sub-properties:
-  + `blueprint_definition`:(HashMap) -(ReadOnly) The system resolved reference to the blueprint. 
+  + `blueprint_definition`:(HashMap) -(ReadOnly) The system-resolved reference to the blueprint. 
 This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-  + `blueprint_name`:(string) The qualified name of blueprint. 
-  + `catalog_moid`:(string) Specify the catalog moid that this blueprint belongs too. When catalog moid is not specified then the catalog of the parent blueprint is used first and if no blueprint can be found in that catalog, then the system catalog is used. 
-  + `description`:(string) The description of that describes the purpose of including this dependent blueprint. 
-  + `input_parameters`:(JSON as string) If any input of the nested blueprint needs to be modified in some form to include data from the parent blueprint, then the input parameters can be specified here. 
+  + `catalog_moid`:(string) The catalog MOID that this blueprint belongs to. When the catalog MOID is not specified, the catalog of the parent blueprint is used first. If no blueprint can be found in that catalog, the system catalog is used. 
+  + `name`:(string) The name of the referenced abstract blueprint. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `nr_version`:(int) The version number of the blueprint. 
+* `blueprint_dependencies`:(Array)
+This complex property has following sub-properties:
+  + `blueprint_definition`:(HashMap) -(ReadOnly) The system-resolved reference to the blueprint. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `blueprint_name`:(string) The qualified name of the required blueprint. 
+  + `catalog_moid`:(string) The catalog MOID that this blueprint belongs to. When the catalog MOID is not specified, the catalog of the parent blueprint is used first. If no blueprint can be found in that catalog, the system catalog is used. 
+  + `dependency_qualifier`:(HashMap) - The OData rules that identify the blueprint versions that can satisfy this dependency. 
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+    + `rules`:
+                (Array of schema.TypeString) -
+  + `description`:(string) Specifies why the required blueprint is included. 
+  + `input_parameters`:(JSON as string) Specifies input mappings for the required blueprint, including values derived from the referencing blueprint. 
   + `label`:(string) A user defined label identifier for this blueprint. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `nr_version`:(int) The blueprint version. If not specified, the default version is used. 
+  + `nr_version`:(int) The version number of the blueprint. 
+* `blueprint_kind`:(string) Identifies whether the authoring blueprint is an abstract inheritance source or a concrete definition. Concrete definitions are deployed through separate resolved version of the blueprint..* `Concrete` - The blueprint can be materialized as a separate resolved blueprint for deployment.* `Abstract` - The blueprint is an abstract inheritance source and is not directly deployable. 
 * `catalog`:(HashMap) - A reference to a workflowCatalog resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `concrete_blueprint`:(HashMap) -(ReadOnly) A reference to a workloadBlueprint resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
@@ -70,6 +94,15 @@ This complex property has following sub-properties:
 * `external_meta`:(bool) When set to false the blueprint is created for use within internal services. 
 * `generated_object_definition`:(Array)
 This complex property has following sub-properties:
+  + `cleanup_operations`:(Array)
+This complex property has following sub-properties:
+    + `generated_objects`:(Array)
+This complex property has following sub-properties:
+    + `name`:(string) The name of the generated object metadata. The objects produced from this metadata are the target of the operation. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `property_parameters`:(JSON as string) A list of key value pairs where key is the property path and value is the template to derive the value. The target of the pre-generation operation is updated with the resolved values of these parameters. This operation is only applicable if the operation is of type \ Update\ . 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `operation`:(string) The operation to be performed after the service item deployment completes. Currently, only the 'Delete' operation is supported.* `Update` - The operation is to update the object via an HTTP PATCH operation.* `Delete` - The operation is to immediately delete the object via an HTTP DELETE operation.* `MarkDeleted` - The object is marked as deleted. This adds a tag to the object indicating that it should be deleted as part of the object cleanup task during workload deployment. 
   + `conditions`:
                 (Array of schema.TypeString) -
   + `name`:(string) Name for the generated object. The name given for reference in later parts of the blueprint definition. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
@@ -130,6 +163,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `operation_modes`:
                 (Array of schema.TypeString) -
+* `input_sync_enabled`:(bool) The input for a blueprint referenced in a workload can be synced from another blueprint of the same type. 
 * `label`:(string) A user friendly short name to identify the blueprint. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -147,6 +181,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `platform_type`:(string) The Intersight platforms supported by this blueprint.* `None` - Default value is none, platform is not mentioned.* `UnifiedEdge` - The blueprint is created for Unified Edge platform. 
+* `resolved`:(bool)(ReadOnly) Indicates whether this blueprint is a generated, deployable definition. All authoring blueprints have this value set to false. 
 * `resource_definition`:(HashMap) - The resource constraint definition for the blueprint. 
 This complex property has following sub-properties:
   + `input_definition`:(Array)
@@ -178,6 +213,16 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `required`:(bool) Specifies whether this parameter is required. The field is applicable for task and workflow. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `resource_type_qualifiers`:(Array)
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `odata_resource_qualifier`:(HashMap) - Optional OData filter rules that further constrain which instances of resourceType are eligible. Rule expressions may reference values from ResourceConstraints.InputDefinition. 
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+    + `rules`:
+                (Array of schema.TypeString) -
+  + `resource_type`:(string) The Intersight managed object type (for example, compute.Blade or equipment.Chassis) that this blueprint may bind to. 
+* `revision`:(int) The revision of the blueprint to support compatible updates within the same version. 
 * `service_items`:(Array)
 This complex property has following sub-properties:
   + `catalog_moid`:(string) Specify the catalog moid that this service item belongs. When catalog moid is not specified then the catalog of the service item is used first and if no service item can be found in that catalog, then the system catalog is used. 
@@ -188,6 +233,38 @@ This complex property has following sub-properties:
   + `service_item_definition_name`:(string) The qualified name of service item that should be executed. 
   + `nr_version`:(int) The service item definition version. If not specified, the default version of the service item is used. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `support_info`:(HashMap) - The support information for this blueprint version. When the blueprint version is deprecated, this field includes the support end date and can include a replacement target version. 
+This complex property has following sub-properties:
+  + `deprecation_info`:(HashMap) - The deprecation information for the versioned object. 
+This complex property has following sub-properties:
+    + `deprecated_by`:(string)(ReadOnly) The user or system email address that marked the versioned object as deprecated. The system populates this property only when the support status is Deprecated. 
+    + `deprecated_dependencies`:(Array)
+This complex property has following sub-properties:
+    + `catalog_moid`:(string) The catalog MOID of the referenced object. If this field is not specified, the resolver uses the catalog of the versioned object first, followed by the default catalog for the referenced object type. 
+    + `name`:(string) The qualified name of the referenced object. 
+    + `object`:(HashMap) -(ReadOnly) The system-resolved reference to the referenced object. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `nr_version`:(int) The version of the referenced object. If not specified, the default version is used. 
+  + `description`:(string) The detailed description explaining why the versioned object is deprecated. Deprecated objects can use this field to provide additional support or migration information. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `replacement_definition`:(HashMap) - The replacement object to use when the versioned object is deprecated. 
+This complex property has following sub-properties:
+    + `catalog_moid`:(string) The catalog MOID of the referenced object. If this field is not specified, the resolver uses the catalog of the versioned object first, followed by the default catalog for the referenced object type. 
+    + `name`:(string) The qualified name of the referenced object. 
+    + `object`:(HashMap) -(ReadOnly) The system-resolved reference to the referenced object. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `nr_version`:(int) The version of the referenced object. If not specified, the default version is used. 
+  + `support_end_date`:(string) The date after which the deprecated object is no longer supported. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `support_status`:(string) The support status of the versioned object.* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `ancestor_definitions`:(Array)
@@ -203,9 +280,19 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
-* `validation_information`:(HashMap) -(ReadOnly) The current validation state and associated validation errors when state is invalid. When state is valid, it means all referred dependent blueprints and service items are valid. All referred objects are present in the system and available for cloning. 
+* `validated_objects`:(Array)
+This complex property has following sub-properties:
+  + `name`:(string) The name for the object in the blueprint definition. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `selector`:(string) The selector to identify the object in the shared catalog. 
+  + `validated_object`:(HashMap) -(ReadOnly) The system-resolved reference to the validated system-defined configuration object. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `validation_information`:(HashMap) -(ReadOnly) The current validation state and associated validation errors when state is invalid. When state is valid, it means all referenced required blueprints and service items are valid. All referenced objects are present in the system and available for cloning. 
 This complex property has following sub-properties:
   + `engine_state`:(string)(ReadOnly) The state of workflow definition metadata in the workflow engine. The workflow definition must be successfully updated in the engine before workflows can be executed.* `NotUpdated` - The workflow and task definition metadata is not yet updated in the workflow engine.* `Updating` - The workflow and task definition metadata is in the processing of being updated in the workflow engine.* `UpdateFailed` - The workflow and task definition metadata failed to be updated in the workflow engine.* `Updated` - The workflow and task definition metadata was updated successfully in the workflow engine. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
@@ -218,6 +305,20 @@ This complex property has following sub-properties:
     + `task_name`:(string)(ReadOnly) The task name on which the error is found, when empty the error applies to the top level workflow. 
     + `transition_name`:(string)(ReadOnly) When populated this refers to the transition connection that has a problem. When this field has value OnSuccess it means the transition connection OnSuccess for the task has an issue. 
 * `nr_version`:(int) The version of the blueprint to support multiple versions. 
+* `version_compatibility_info`:(Array)
+This complex property has following sub-properties:
+  + `blueprints`:(Array)
+This complex property has following sub-properties:
+    + `blueprint_definition`:(HashMap) -(ReadOnly) The system-resolved reference to the blueprint. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `catalog_moid`:(string) The catalog MOID that this blueprint belongs to. When the catalog MOID is not specified, the catalog of the parent blueprint is used first. If no blueprint can be found in that catalog, the system catalog is used. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `nr_version`:(int) The version number of the blueprint. 
+  + `compatibility_type`:(string) The update compatibility type for the listed blueprint versions relative to the current blueprint version.* `NotCompatible` - The previously published blueprint version cannot be updated to the current blueprint version.* `AutoUpdate` - The previously published blueprint version can be updated to the current blueprint version automatically.* `NeedsNewVersion` - The previously published blueprint version can move to the current blueprint version only by creating a new version of the dependent definition. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)
@@ -235,6 +336,7 @@ This complex property has following sub-properties:
   + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
   + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
+* `version_description`:(string) The detailed change description for this blueprint version. For new blueprint versions, this field captures a verbose description of the delta of changes in this version compared to earlier versions. 
 
 
 ## Import
@@ -326,6 +428,7 @@ This data type is used to represent primitives like string, floats and integers.
 This complex property has following sub-properties:
   + `constraints`:(HashMap) - Constraints that must be applied to the parameter value supplied for this data type. 
 This complex property has following sub-properties:
+    + `data_validation`:(string) JavaScript expression used to ensure the supplied parameter value is valid. 
     + `enum_list`:(Array)
 This complex property has following sub-properties:
     + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), round parenthesis ( () ), or an underscore (_) and must have an alphanumeric character. 
@@ -335,6 +438,7 @@ This complex property has following sub-properties:
   + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
+  + `validation_error`:(string) Provide a custom error message to return when a validation for the constraint fails. When there are multiple constraints, any constraint failure will return this message. 
   + `data_source_selector`:(Array)
 This complex property has following sub-properties:
     + `display_attributes`:

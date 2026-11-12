@@ -16,6 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_niateleme
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `anomaly_status`:(string) The anomaly status of the managed switch. 
+* `compensating_control_status`:(string) Compensating control status reported for the switch. 
 * `compliance_status`:(string) The compliance status of the managed switch. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
@@ -26,12 +27,15 @@ The following arguments can be used to get data of already created objects in In
 * `hostname`:(string) The hostname of the managed switch. 
 * `in_band_ip`:(string) The inband IPv4 address of the managed switch. 
 * `ip_address`:(string) The IP address of the managed switch. 
+* `live_protect_agent_status`:(string) Live Protect agent status reported for the switch. 
+* `live_protect_status`:(string) Live Protect enablement status reported for the switch. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) The model of the managed switch. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `operating_system_version`:(string) The OS version of the managed switch. 
 * `out_of_band_ip`:(string) The out-of-band IPv4 address of the managed switch. 
 * `role`:(string) The role of the managed switch. 
+* `security_advisories_count`:(int) Number of security advisories associated with the switch. 
 * `serial`:(string) The serial number of the managed switch. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `site`:(string) The name of the managed fabric. 
@@ -42,4 +46,6 @@ The following arguments can be used to get data of already created objects in In
 * `strong_asset_id`:(string) The DBID of the managed switch. 
 * `system_up_time`:(string) The system uptime of the managed switch. 
 * `telemetry_enabled`:(bool) Indicates whether telemetry is enabled for the fabric. 
+* `total_hit_count`:(int) Total Live Protect hit count reported for the switch. 
+* `vpc_configured`:(bool) Indicates whether virtual port channel is configured on the switch. 
  

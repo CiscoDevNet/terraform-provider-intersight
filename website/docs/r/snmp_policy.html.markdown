@@ -149,7 +149,7 @@ This complex property has following sub-properties:
   + `name`:(string) SNMP username. Must have a minimum of 1 and and a maximum of 31 characters. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `privacy_password`:(string) Privacy password for the user. 
-  + `privacy_type`:(string) Privacy protocol for the user.* `NA` - Privacy protocol is not applicable.* `DES` - DES privacy protocol is used for SNMP user.* `AES` - AES privacy protocol is used for SNMP user. 
+  + `privacy_type`:(string) Privacy protocol for the user.* `NA` - Privacy protocol is not applicable.* `DES` - DES privacy protocol is used for SNMP user.* `AES` - AES privacy protocol is used for SNMP user.* `AES-192` - AES-192 privacy protocol is used for SNMP user.* `AES-256` - AES-256 privacy protocol is used for SNMP user. 
   + `security_level`:(string) Security mechanism used for communication between agent and manager.* `AuthPriv` - The user requires both an authorization password and a privacy password.* `NoAuthNoPriv` - The user does not require an authorization or privacy password.* `AuthNoPriv` - The user requires an authorization password but not a privacy password. 
 * `sys_contact`:(string) Contact person responsible for the SNMP implementation. Enter a string up to 64 characters, such as an email address or a name and telephone number. 
 * `sys_location`:(string) Location of host on which the SNMP agent (server) runs. 
@@ -168,7 +168,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `trap_community`:(string) SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users. 
 * `v2_enabled`:(bool) State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host. 

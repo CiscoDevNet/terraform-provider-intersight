@@ -29,7 +29,6 @@ Name | Type | Description | Notes
 **StartTime** | Pointer to **time.Time** | The timestamp at which an expiry date was first set on this app registration.  For expiring App Registrations, this field is same as the create time of the App Registration. For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field. | [optional] [readonly] 
 **TokenExpiry** | Pointer to **string** | Defines the expiry time of the token generated via the AppRegistration. * &#x60;generic&#x60; - This sets the expiryTime to ten minutes from the token issuing time. * &#x60;longLived&#x60; - This sets the expiryTime to an year from the token issuing time. * &#x60;infinite&#x60; - This allows for a never-expiring token. Use with caution. | [optional] [readonly] [default to "generic"]
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**ClientApplication** | Pointer to [**NullableIamAbstractClientApplicationRelationship**](IamAbstractClientApplicationRelationship.md) |  | [optional] 
 **OauthTokens** | Pointer to [**[]IamOAuthTokenRelationship**](IamOAuthTokenRelationship.md) | An array of relationships to iamOAuthToken resources. | [optional] [readonly] 
 **Permission** | Pointer to [**NullableIamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
 **Roles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
@@ -720,41 +719,6 @@ HasAccount returns a boolean if a field has been set.
 `func (o *IamAppRegistration) UnsetAccount()`
 
 UnsetAccount ensures that no value is present for Account, not even an explicit nil
-### GetClientApplication
-
-`func (o *IamAppRegistration) GetClientApplication() IamAbstractClientApplicationRelationship`
-
-GetClientApplication returns the ClientApplication field if non-nil, zero value otherwise.
-
-### GetClientApplicationOk
-
-`func (o *IamAppRegistration) GetClientApplicationOk() (*IamAbstractClientApplicationRelationship, bool)`
-
-GetClientApplicationOk returns a tuple with the ClientApplication field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetClientApplication
-
-`func (o *IamAppRegistration) SetClientApplication(v IamAbstractClientApplicationRelationship)`
-
-SetClientApplication sets ClientApplication field to given value.
-
-### HasClientApplication
-
-`func (o *IamAppRegistration) HasClientApplication() bool`
-
-HasClientApplication returns a boolean if a field has been set.
-
-### SetClientApplicationNil
-
-`func (o *IamAppRegistration) SetClientApplicationNil(b bool)`
-
- SetClientApplicationNil sets the value for ClientApplication to be an explicit nil
-
-### UnsetClientApplication
-`func (o *IamAppRegistration) UnsetClientApplication()`
-
-UnsetClientApplication ensures that no value is present for ClientApplication, not even an explicit nil
 ### GetOauthTokens
 
 `func (o *IamAppRegistration) GetOauthTokens() []IamOAuthTokenRelationship`

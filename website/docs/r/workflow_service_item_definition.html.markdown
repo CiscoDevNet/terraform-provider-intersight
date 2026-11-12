@@ -84,6 +84,38 @@ This complex property has following sub-properties:
 * `publish_status`:(string) The publish status of service item (Draft, Published, Archived).* `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested.* `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption.* `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `status`:(string)(ReadOnly) State of service item considering the state of underlying service item actions definitions.* `Okay` - Deployment and other post-deployment actions are in valid state.* `Critical` - Deployment action is not in valid state.* `Warning` - Deployment action is in valid state, and one or more post-deployment actions are not in valid state. 
+* `support_info`:(HashMap) - The support information for this service item version. When the service item version is deprecated, this field includes the support end date and can include a replacement target version. 
+This complex property has following sub-properties:
+  + `deprecation_info`:(HashMap) - The deprecation information for the versioned object. 
+This complex property has following sub-properties:
+    + `deprecated_by`:(string)(ReadOnly) The user or system email address that marked the versioned object as deprecated. The system populates this property only when the support status is Deprecated. 
+    + `deprecated_dependencies`:(Array)
+This complex property has following sub-properties:
+    + `catalog_moid`:(string) The catalog MOID of the referenced object. If this field is not specified, the resolver uses the catalog of the versioned object first, followed by the default catalog for the referenced object type. 
+    + `name`:(string) The qualified name of the referenced object. 
+    + `object`:(HashMap) -(ReadOnly) The system-resolved reference to the referenced object. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `nr_version`:(int) The version of the referenced object. If not specified, the default version is used. 
+  + `description`:(string) The detailed description explaining why the versioned object is deprecated. Deprecated objects can use this field to provide additional support or migration information. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `replacement_definition`:(HashMap) - The replacement object to use when the versioned object is deprecated. 
+This complex property has following sub-properties:
+    + `catalog_moid`:(string) The catalog MOID of the referenced object. If this field is not specified, the resolver uses the catalog of the versioned object first, followed by the default catalog for the referenced object type. 
+    + `name`:(string) The qualified name of the referenced object. 
+    + `object`:(HashMap) -(ReadOnly) The system-resolved reference to the referenced object. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `nr_version`:(int) The version of the referenced object. If not specified, the default version is used. 
+  + `support_end_date`:(string) The date after which the deprecated object is no longer supported. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `support_status`:(string) The support status of the versioned object.* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. 
 * `support_status`:(string) The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design.* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. 
 * `tags`:(Array)
 This complex property has following sub-properties:
@@ -100,7 +132,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `user_id_or_email`:(string)(ReadOnly) This attribute is deprecated and replaced by createUser and modUser. 
 * `validation_information`:(HashMap) -(ReadOnly) The current validation state and associated validation errors when state is invalid. 
@@ -224,6 +256,7 @@ This data type is used to represent primitives like string, floats and integers.
 This complex property has following sub-properties:
   + `constraints`:(HashMap) - Constraints that must be applied to the parameter value supplied for this data type. 
 This complex property has following sub-properties:
+    + `data_validation`:(string) JavaScript expression used to ensure the supplied parameter value is valid. 
     + `enum_list`:(Array)
 This complex property has following sub-properties:
     + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), round parenthesis ( () ), or an underscore (_) and must have an alphanumeric character. 
@@ -233,6 +266,7 @@ This complex property has following sub-properties:
   + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
+  + `validation_error`:(string) Provide a custom error message to return when a validation for the constraint fails. When there are multiple constraints, any constraint failure will return this message. 
   + `data_source_selector`:(Array)
 This complex property has following sub-properties:
     + `display_attributes`:

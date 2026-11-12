@@ -6,13 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Idp"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Idp"]
+**CertificateExpiryTime** | Pointer to **time.Time** | Expiration time of the certificate in the SP metadata for the IdP. | [optional] [readonly] 
 **DomainName** | Pointer to **string** | Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication. | [optional] 
 **DomainNames** | Pointer to **[]string** |  | [optional] 
 **EnableSingleLogout** | Pointer to **bool** | Setting that indicates whether &#39;Single Logout (SLO)&#39; has been enabled for this IdP. | [optional] 
 **IdpEntityId** | Pointer to **string** | The Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP or Service Provider. | [optional] [readonly] 
+**IdpMetadataExpiryState** | Pointer to **string** | The expiration state of the certificates in the IdP metadata. * &#x60;expiration-beyond-warning-period&#x60; - The expiry date is not within the warning period. * &#x60;expiration-within-info-period&#x60; - The expiry date is within the info period. * &#x60;expiration-within-warning-period&#x60; - The expiry date is within the warning period. * &#x60;expiration-within-critical-period&#x60; - The expiry date is within the critical period. * &#x60;expired&#x60; - The expiry date has passed. | [optional] [readonly] [default to "expiration-beyond-warning-period"]
 **Metadata** | Pointer to **string** | SAML metadata of the IdP. | [optional] 
 **Name** | Pointer to **string** | The name of the Identity Provider, for example Cisco, Okta, or OneID. | [optional] 
 **SkipWarning** | Pointer to **bool** | When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message. | [optional] 
+**SpCertRotated** | Pointer to **bool** | Status of the SP certificate rotation for the IdP. | [optional] [readonly] [default to true]
+**SpMetadataExpiryState** | Pointer to **string** | The expiration state of the certificate in the SP metadata used by this IdP. The state is not-applicable when SAML assertion encryption and AuthNRequest signing are both disabled. * &#x60;expiration-within-info-period&#x60; - The expiry date is beyond 270 days. * &#x60;expiration-within-270-day-info-period&#x60; - The expiry date is within 270 days but beyond 180 days. * &#x60;expiration-within-180-day-info-period&#x60; - The expiry date is within 180 days but beyond 90 days. * &#x60;expiration-within-90-day-warning-period&#x60; - The expiry date is within 90 days but beyond 60 days. * &#x60;expiration-within-60-day-warning-period&#x60; - The expiry date is within 60 days but beyond 30 days. * &#x60;expiration-within-30-day-critical-period&#x60; - The expiry date is within 30 days but beyond 7 days. * &#x60;expiration-within-critical-period&#x60; - The expiry date is within 7 days. * &#x60;expired&#x60; - The expiry date has passed. * &#x60;not-applicable&#x60; - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled. | [optional] [readonly] [default to "expiration-within-info-period"]
+**SpMetadataHashMethod** | Pointer to **string** | Determines if the AuthNRequest sent to the Idp should be signed by the new (SHA-2) or the old (SHA-1) SP metadata during the grace period of SP SAML metadata rotation. * &#x60;Sha2&#x60; - The SAML SP metadata hash is generated using SHA-256 algorithm. * &#x60;Sha1&#x60; - The SAML SP metadata hash is generated using SHA-1 algorithm. | [optional] [default to "Sha2"]
 **Type** | Pointer to **string** | Authentication protocol used by the IdP. * &#x60;saml&#x60; - Use SAML as the authentication protocol for sign-on. * &#x60;oidc&#x60; - Open ID connect to be used as an authentication protocol for sign-on. * &#x60;local&#x60; - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. * &#x60;guest&#x60; - Guest users accessing Intersight are assigned to a guest Identity Provider (IdP). They do not have single sign-on options available and must log in  using their email address and a one-time password (OTP). Upon successful authentication, all guest users associated with the account are grouped under  the guest IdP. Guest IdP is primarily used in cloud environment. | [optional] [default to "saml"]
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **LdapMeta** | Pointer to [**NullableIamLdapMetaRelationship**](IamLdapMetaRelationship.md) |  | [optional] 
@@ -82,6 +87,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCertificateExpiryTime
+
+`func (o *IamIdp) GetCertificateExpiryTime() time.Time`
+
+GetCertificateExpiryTime returns the CertificateExpiryTime field if non-nil, zero value otherwise.
+
+### GetCertificateExpiryTimeOk
+
+`func (o *IamIdp) GetCertificateExpiryTimeOk() (*time.Time, bool)`
+
+GetCertificateExpiryTimeOk returns a tuple with the CertificateExpiryTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificateExpiryTime
+
+`func (o *IamIdp) SetCertificateExpiryTime(v time.Time)`
+
+SetCertificateExpiryTime sets CertificateExpiryTime field to given value.
+
+### HasCertificateExpiryTime
+
+`func (o *IamIdp) HasCertificateExpiryTime() bool`
+
+HasCertificateExpiryTime returns a boolean if a field has been set.
 
 ### GetDomainName
 
@@ -193,6 +223,31 @@ SetIdpEntityId sets IdpEntityId field to given value.
 
 HasIdpEntityId returns a boolean if a field has been set.
 
+### GetIdpMetadataExpiryState
+
+`func (o *IamIdp) GetIdpMetadataExpiryState() string`
+
+GetIdpMetadataExpiryState returns the IdpMetadataExpiryState field if non-nil, zero value otherwise.
+
+### GetIdpMetadataExpiryStateOk
+
+`func (o *IamIdp) GetIdpMetadataExpiryStateOk() (*string, bool)`
+
+GetIdpMetadataExpiryStateOk returns a tuple with the IdpMetadataExpiryState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdpMetadataExpiryState
+
+`func (o *IamIdp) SetIdpMetadataExpiryState(v string)`
+
+SetIdpMetadataExpiryState sets IdpMetadataExpiryState field to given value.
+
+### HasIdpMetadataExpiryState
+
+`func (o *IamIdp) HasIdpMetadataExpiryState() bool`
+
+HasIdpMetadataExpiryState returns a boolean if a field has been set.
+
 ### GetMetadata
 
 `func (o *IamIdp) GetMetadata() string`
@@ -267,6 +322,81 @@ SetSkipWarning sets SkipWarning field to given value.
 `func (o *IamIdp) HasSkipWarning() bool`
 
 HasSkipWarning returns a boolean if a field has been set.
+
+### GetSpCertRotated
+
+`func (o *IamIdp) GetSpCertRotated() bool`
+
+GetSpCertRotated returns the SpCertRotated field if non-nil, zero value otherwise.
+
+### GetSpCertRotatedOk
+
+`func (o *IamIdp) GetSpCertRotatedOk() (*bool, bool)`
+
+GetSpCertRotatedOk returns a tuple with the SpCertRotated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpCertRotated
+
+`func (o *IamIdp) SetSpCertRotated(v bool)`
+
+SetSpCertRotated sets SpCertRotated field to given value.
+
+### HasSpCertRotated
+
+`func (o *IamIdp) HasSpCertRotated() bool`
+
+HasSpCertRotated returns a boolean if a field has been set.
+
+### GetSpMetadataExpiryState
+
+`func (o *IamIdp) GetSpMetadataExpiryState() string`
+
+GetSpMetadataExpiryState returns the SpMetadataExpiryState field if non-nil, zero value otherwise.
+
+### GetSpMetadataExpiryStateOk
+
+`func (o *IamIdp) GetSpMetadataExpiryStateOk() (*string, bool)`
+
+GetSpMetadataExpiryStateOk returns a tuple with the SpMetadataExpiryState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpMetadataExpiryState
+
+`func (o *IamIdp) SetSpMetadataExpiryState(v string)`
+
+SetSpMetadataExpiryState sets SpMetadataExpiryState field to given value.
+
+### HasSpMetadataExpiryState
+
+`func (o *IamIdp) HasSpMetadataExpiryState() bool`
+
+HasSpMetadataExpiryState returns a boolean if a field has been set.
+
+### GetSpMetadataHashMethod
+
+`func (o *IamIdp) GetSpMetadataHashMethod() string`
+
+GetSpMetadataHashMethod returns the SpMetadataHashMethod field if non-nil, zero value otherwise.
+
+### GetSpMetadataHashMethodOk
+
+`func (o *IamIdp) GetSpMetadataHashMethodOk() (*string, bool)`
+
+GetSpMetadataHashMethodOk returns a tuple with the SpMetadataHashMethod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpMetadataHashMethod
+
+`func (o *IamIdp) SetSpMetadataHashMethod(v string)`
+
+SetSpMetadataHashMethod sets SpMetadataHashMethod field to given value.
+
+### HasSpMetadataHashMethod
+
+`func (o *IamIdp) HasSpMetadataHashMethod() bool`
+
+HasSpMetadataHashMethod returns a boolean if a field has been set.
 
 ### GetType
 

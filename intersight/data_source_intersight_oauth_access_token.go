@@ -120,6 +120,16 @@ func getOauthAccessTokenSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_encrypted_refresh_token_set": {
+			Description: "Indicates whether the value of the 'encryptedRefreshToken' property has been set.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_encrypted_token_set": {
+			Description: "Indicates whether the value of the 'encryptedToken' property has been set.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"issuer": {
 			Description: "OAuth access token issuer.",
 			Type:        schema.TypeString,
@@ -318,7 +328,7 @@ func getOauthAccessTokenSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -594,6 +604,16 @@ func dataSourceOauthAccessTokenRead(c context.Context, d *schema.ResourceData, m
 		o.SetExpiry(x)
 	}
 
+	if v, ok := d.GetOkExists("is_encrypted_refresh_token_set"); ok {
+		x := (v.(bool))
+		o.SetIsEncryptedRefreshTokenSet(x)
+	}
+
+	if v, ok := d.GetOkExists("is_encrypted_token_set"); ok {
+		x := (v.(bool))
+		o.SetIsEncryptedTokenSet(x)
+	}
+
 	if v, ok := d.GetOk("issuer"); ok {
 		x := (v.(string))
 		o.SetIssuer(x)
@@ -785,6 +805,12 @@ func dataSourceOauthAccessTokenRead(c context.Context, d *schema.ResourceData, m
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -923,6 +949,8 @@ func dataSourceOauthAccessTokenRead(c context.Context, d *schema.ResourceData, m
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["expiry"] = (s.GetExpiry()).String()
+				temp["is_encrypted_refresh_token_set"] = (s.GetIsEncryptedRefreshTokenSet())
+				temp["is_encrypted_token_set"] = (s.GetIsEncryptedTokenSet())
 				temp["issuer"] = (s.GetIssuer())
 
 				temp["mod_time"] = (s.GetModTime()).String()

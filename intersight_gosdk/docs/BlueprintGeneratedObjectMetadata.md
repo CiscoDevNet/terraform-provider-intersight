@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "blueprint.GeneratedObjectMetadata"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "blueprint.GeneratedObjectMetadata"]
+**CleanupOperations** | Pointer to [**[]BlueprintCleanupOperation**](BlueprintCleanupOperation.md) |  | [optional] 
 **Conditions** | Pointer to **[]string** |  | [optional] 
 **Name** | Pointer to **string** | Name for the generated object. The name given for reference in later parts of the blueprint definition. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. | [optional] 
 **ObjectIteration** | Pointer to **string** | A template for controlling loop behavior when generating multiple instances of the generated object. The resolved value of the template is expected to be an integer which is used to determine the number of iterations in the loop. Each iteration creates a new instance of the generated object. | [optional] 
@@ -74,6 +75,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetCleanupOperations
+
+`func (o *BlueprintGeneratedObjectMetadata) GetCleanupOperations() []BlueprintCleanupOperation`
+
+GetCleanupOperations returns the CleanupOperations field if non-nil, zero value otherwise.
+
+### GetCleanupOperationsOk
+
+`func (o *BlueprintGeneratedObjectMetadata) GetCleanupOperationsOk() (*[]BlueprintCleanupOperation, bool)`
+
+GetCleanupOperationsOk returns a tuple with the CleanupOperations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCleanupOperations
+
+`func (o *BlueprintGeneratedObjectMetadata) SetCleanupOperations(v []BlueprintCleanupOperation)`
+
+SetCleanupOperations sets CleanupOperations field to given value.
+
+### HasCleanupOperations
+
+`func (o *BlueprintGeneratedObjectMetadata) HasCleanupOperations() bool`
+
+HasCleanupOperations returns a boolean if a field has been set.
+
+### SetCleanupOperationsNil
+
+`func (o *BlueprintGeneratedObjectMetadata) SetCleanupOperationsNil(b bool)`
+
+ SetCleanupOperationsNil sets the value for CleanupOperations to be an explicit nil
+
+### UnsetCleanupOperations
+`func (o *BlueprintGeneratedObjectMetadata) UnsetCleanupOperations()`
+
+UnsetCleanupOperations ensures that no value is present for CleanupOperations, not even an explicit nil
 ### GetConditions
 
 `func (o *BlueprintGeneratedObjectMetadata) GetConditions() []string`

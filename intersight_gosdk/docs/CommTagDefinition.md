@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "comm.TagDefinition"]
 **AllowedValues** | Pointer to **[]string** |  | [optional] 
 **EnablePropagation** | Pointer to **bool** | If this flag is enabled, the tag will be propagated to related managed objects. Propagation is supported in a limited manner for path tags and it is not supported for key value. Rules for propagation are configured by Intersight and cannot be configured by user. | [optional] 
-**Key** | Pointer to **string** | The string representation of the tag key. If the tag is of path type, then \&quot;/\&quot; will be interpreted as path delimiters. The tag key must be unique within the account. The tag key is case sensitive and must not be empty. | [optional] 
-**RestrictValues** | Pointer to **bool** | If this flag is enabled, then values of the KeyValue tag is restricted to values present in the allowedValues list. RestrictValues is not applicable to path tags. | [optional] 
+**Key** | Pointer to **string** | The string representation of the tag key. For PathTag definitions, \&quot;/\&quot; is interpreted as a path delimiter. The combination of key and tag type must be unique within an account. The key is case sensitive and cannot be empty. | [optional] 
+**RestrictAllowedValues** | Pointer to **bool** | If this flag is enabled, then values of the KeyValue tag can only be values present in the allowedValues list. RestrictAllowedValues is not applicable to path tags. | [optional] 
 **SysTag** | Pointer to **bool** | Specifies whether the tag is user-defined or owned by the system. | [optional] [readonly] 
-**Type** | Pointer to **string** | An enum type that defines the type of tag. Only path tags are supported for now, and the type is set to path by default. * &#x60;KeyValue&#x60; - KeyValue type of tag. Key is required for these tags. Value is optional. * &#x60;PathTag&#x60; - Key contain path information. Value is not present for these tags. The path is created by using the &#39;/&#39; character as a delimiter.For example, if the tag is \&quot;A/B/C\&quot;, then \&quot;A\&quot; is the parent tag, \&quot;B\&quot; is the child tag of \&quot;A\&quot; and \&quot;C\&quot; is the child tag of \&quot;B\&quot;. | [optional] [default to "KeyValue"]
-**Usage** | Pointer to [**NullableCommTagUsage**](CommTagUsage.md) |  | [optional] 
+**Type** | Pointer to **string** | An enum that defines the type of tag definition. KeyValue tags use a key with an optional value. PathTag tags use a hierarchical key with &#39;/&#39; as the delimiter and no value. Defaults to KeyValue. * &#x60;KeyValue&#x60; - KeyValue type of tag. Key is required for these tags. Value is optional. * &#x60;PathTag&#x60; - Key contain path information. Value is not present for these tags. The path is created by using the &#39;/&#39; character as a delimiter.For example, if the tag is \&quot;A/B/C\&quot;, then \&quot;A\&quot; is the parent tag, \&quot;B\&quot; is the child tag of \&quot;A\&quot; and \&quot;C\&quot; is the child tag of \&quot;B\&quot;. | [optional] [default to "KeyValue"]
+**Usage** | Pointer to [**CommTagUsage**](CommTagUsage.md) |  | [optional] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **ParentTag** | Pointer to [**NullableCommTagDefinitionRelationship**](CommTagDefinitionRelationship.md) |  | [optional] 
 
@@ -160,30 +160,30 @@ SetKey sets Key field to given value.
 
 HasKey returns a boolean if a field has been set.
 
-### GetRestrictValues
+### GetRestrictAllowedValues
 
-`func (o *CommTagDefinition) GetRestrictValues() bool`
+`func (o *CommTagDefinition) GetRestrictAllowedValues() bool`
 
-GetRestrictValues returns the RestrictValues field if non-nil, zero value otherwise.
+GetRestrictAllowedValues returns the RestrictAllowedValues field if non-nil, zero value otherwise.
 
-### GetRestrictValuesOk
+### GetRestrictAllowedValuesOk
 
-`func (o *CommTagDefinition) GetRestrictValuesOk() (*bool, bool)`
+`func (o *CommTagDefinition) GetRestrictAllowedValuesOk() (*bool, bool)`
 
-GetRestrictValuesOk returns a tuple with the RestrictValues field if it's non-nil, zero value otherwise
+GetRestrictAllowedValuesOk returns a tuple with the RestrictAllowedValues field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRestrictValues
+### SetRestrictAllowedValues
 
-`func (o *CommTagDefinition) SetRestrictValues(v bool)`
+`func (o *CommTagDefinition) SetRestrictAllowedValues(v bool)`
 
-SetRestrictValues sets RestrictValues field to given value.
+SetRestrictAllowedValues sets RestrictAllowedValues field to given value.
 
-### HasRestrictValues
+### HasRestrictAllowedValues
 
-`func (o *CommTagDefinition) HasRestrictValues() bool`
+`func (o *CommTagDefinition) HasRestrictAllowedValues() bool`
 
-HasRestrictValues returns a boolean if a field has been set.
+HasRestrictAllowedValues returns a boolean if a field has been set.
 
 ### GetSysTag
 
@@ -260,16 +260,6 @@ SetUsage sets Usage field to given value.
 
 HasUsage returns a boolean if a field has been set.
 
-### SetUsageNil
-
-`func (o *CommTagDefinition) SetUsageNil(b bool)`
-
- SetUsageNil sets the value for Usage to be an explicit nil
-
-### UnsetUsage
-`func (o *CommTagDefinition) UnsetUsage()`
-
-UnsetUsage ensures that no value is present for Usage, not even an explicit nil
 ### GetAccount
 
 `func (o *CommTagDefinition) GetAccount() IamAccountRelationship`

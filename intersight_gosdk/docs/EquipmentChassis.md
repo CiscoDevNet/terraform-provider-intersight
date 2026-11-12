@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **Operations** | Pointer to [**[]EquipmentChassisOperationsDetails**](EquipmentChassisOperationsDetails.md) |  | [optional] 
 **PackageVersion** | Pointer to **string** | Bundle version which the XFM and PSU firmware belongs to. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part Number identifier for the chassis enclosure. | [optional] [readonly] 
+**PeerInterfaceCompatibilityIssueCount** | Pointer to **int64** | The count of incompatible peer ports connected to the switch card. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the chassis enclosure. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type that the chassis is a part of. | [optional] [readonly] 
 **ProductName** | Pointer to **string** | This field identifies the Product Name for the chassis enclosure. | [optional] [readonly] 
@@ -521,6 +522,31 @@ SetPartNumber sets PartNumber field to given value.
 `func (o *EquipmentChassis) HasPartNumber() bool`
 
 HasPartNumber returns a boolean if a field has been set.
+
+### GetPeerInterfaceCompatibilityIssueCount
+
+`func (o *EquipmentChassis) GetPeerInterfaceCompatibilityIssueCount() int64`
+
+GetPeerInterfaceCompatibilityIssueCount returns the PeerInterfaceCompatibilityIssueCount field if non-nil, zero value otherwise.
+
+### GetPeerInterfaceCompatibilityIssueCountOk
+
+`func (o *EquipmentChassis) GetPeerInterfaceCompatibilityIssueCountOk() (*int64, bool)`
+
+GetPeerInterfaceCompatibilityIssueCountOk returns a tuple with the PeerInterfaceCompatibilityIssueCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeerInterfaceCompatibilityIssueCount
+
+`func (o *EquipmentChassis) SetPeerInterfaceCompatibilityIssueCount(v int64)`
+
+SetPeerInterfaceCompatibilityIssueCount sets PeerInterfaceCompatibilityIssueCount field to given value.
+
+### HasPeerInterfaceCompatibilityIssueCount
+
+`func (o *EquipmentChassis) HasPeerInterfaceCompatibilityIssueCount() bool`
+
+HasPeerInterfaceCompatibilityIssueCount returns a boolean if a field has been set.
 
 ### GetPid
 

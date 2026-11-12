@@ -44,10 +44,11 @@ Name | Type | Description | Notes
 **OutOfBandIpv4Address** | Pointer to **string** | The IPv4 address of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpv4Gateway** | Pointer to **string** | The default IPv4 gateway of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpv4Mask** | Pointer to **string** | The network mask of the network Element out-of-band management interface. | [optional] [readonly] 
+**OutOfBandIpv4Mode** | Pointer to **string** | The IPv4 address configuration mode of the network Element out-of-band management interface. * &#x60;&#x60; - The IPv4 address mode is not available or not applicable. * &#x60;static&#x60; - IPv4 address is statically configured. * &#x60;dhcpv4&#x60; - IPv4 address is configured via DHCP. | [optional] [readonly] [default to ""]
 **OutOfBandIpv6Address** | Pointer to **string** | The IPv6 address of the network Element out-of-band management interface. | [optional] 
 **OutOfBandIpv6Error** | Pointer to **string** | Any error message related to IPv6 configuration on the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpv6Gateway** | Pointer to **string** | The default IPv6 gateway of the network Element out-of-band management interface. | [optional] 
-**OutOfBandIpv6Mode** | Pointer to **string** | The IPv6 address configuration mode of the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 address mode is not available or not applicable. * &#x60;slaac&#x60; - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC). * &#x60;static&#x60; - IPv6 address is statically configured. * &#x60;disabled&#x60; - IPv6 is disabled on the out-of-band management interface. | [optional] [readonly] [default to ""]
+**OutOfBandIpv6Mode** | Pointer to **string** | The IPv6 address configuration mode of the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 address mode is not available or not applicable. * &#x60;slaac&#x60; - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC). * &#x60;static&#x60; - IPv6 address is statically configured. * &#x60;disabled&#x60; - IPv6 is disabled on the out-of-band management interface. * &#x60;dhcpv6&#x60; - IPv6 address is configured via DHCPv6. * &#x60;dhcpv6Slaac&#x60; - IPv6 address is configured via DHCPv6 and SLAAC. | [optional] [readonly] [default to ""]
 **OutOfBandIpv6Prefix** | Pointer to **string** | The network mask of the network Element out-of-band management interface. | [optional] 
 **OutOfBandIpv6Redirects** | Pointer to **string** | The IPv6 ICMPv6 redirects configuration on the network Element out-of-band management interface. * &#x60;&#x60; - The IPv6 redirects configuration is not available or not applicable. * &#x60;enabled&#x60; - IPv6 ICMPv6 redirects are enabled on the management interface. * &#x60;disabled&#x60; - IPv6 ICMPv6 redirects are disabled on the management interface. | [optional] [readonly] [default to ""]
 **OutOfBandIpv6SlaacIidMode** | Pointer to **string** | The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address. * &#x60;&#x60; - The SLAAC IID mode is not available or not applicable. * &#x60;eui64&#x60; - The SLAAC IID is derived from the MAC address using the EUI-64 method. * &#x60;opaque&#x60; - The SLAAC IID is generated using an opaque identifier for privacy. | [optional] [readonly] [default to ""]
@@ -55,6 +56,7 @@ Name | Type | Description | Notes
 **OutOfBandMac** | Pointer to **string** | The MAC address of the network Element out-of-band management interface. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part number of the switch. | [optional] 
 **PeerFirmwareOutOfSync** | Pointer to **bool** | The flag to indicate the firmware of peer Fabric Interconnect is out of sync. | [optional] [readonly] 
+**PeerInterfaceCompatibilityIssueCount** | Pointer to **int64** | The count of port compatibility issues with the connected peer device port. | [optional] [readonly] 
 **ReservedVlanStartId** | Pointer to **int64** | The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic. | [optional] [readonly] 
 **RouterMac** | Pointer to **string** | This MAC address will be the source MAC address for NetFlow packets. | [optional] [readonly] 
 **SecureRouterInfo** | Pointer to [**NullableNetworkSecureRouterInfo**](NetworkSecureRouterInfo.md) |  | [optional] 
@@ -83,6 +85,7 @@ Name | Type | Description | Notes
 **FeatureControl** | Pointer to [**[]NetworkFeatureControlRelationship**](NetworkFeatureControlRelationship.md) | An array of relationships to networkFeatureControl resources. | [optional] [readonly] 
 **InterfaceList** | Pointer to [**[]NetworkInterfaceListRelationship**](NetworkInterfaceListRelationship.md) | An array of relationships to networkInterfaceList resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**IpAddressInfos** | Pointer to [**[]NetworkIpAddressInfoRelationship**](NetworkIpAddressInfoRelationship.md) | An array of relationships to networkIpAddressInfo resources. | [optional] [readonly] 
 **LicenseFile** | Pointer to [**[]NetworkLicenseFileRelationship**](NetworkLicenseFileRelationship.md) | An array of relationships to networkLicenseFile resources. | [optional] [readonly] 
 **LldpNeighbor** | Pointer to [**[]NetworkDiscoveredNeighborRelationship**](NetworkDiscoveredNeighborRelationship.md) | An array of relationships to networkDiscoveredNeighbor resources. | [optional] [readonly] 
 **LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
@@ -1136,6 +1139,31 @@ SetOutOfBandIpv4Mask sets OutOfBandIpv4Mask field to given value.
 
 HasOutOfBandIpv4Mask returns a boolean if a field has been set.
 
+### GetOutOfBandIpv4Mode
+
+`func (o *NetworkElement) GetOutOfBandIpv4Mode() string`
+
+GetOutOfBandIpv4Mode returns the OutOfBandIpv4Mode field if non-nil, zero value otherwise.
+
+### GetOutOfBandIpv4ModeOk
+
+`func (o *NetworkElement) GetOutOfBandIpv4ModeOk() (*string, bool)`
+
+GetOutOfBandIpv4ModeOk returns a tuple with the OutOfBandIpv4Mode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutOfBandIpv4Mode
+
+`func (o *NetworkElement) SetOutOfBandIpv4Mode(v string)`
+
+SetOutOfBandIpv4Mode sets OutOfBandIpv4Mode field to given value.
+
+### HasOutOfBandIpv4Mode
+
+`func (o *NetworkElement) HasOutOfBandIpv4Mode() bool`
+
+HasOutOfBandIpv4Mode returns a boolean if a field has been set.
+
 ### GetOutOfBandIpv6Address
 
 `func (o *NetworkElement) GetOutOfBandIpv6Address() string`
@@ -1410,6 +1438,31 @@ SetPeerFirmwareOutOfSync sets PeerFirmwareOutOfSync field to given value.
 `func (o *NetworkElement) HasPeerFirmwareOutOfSync() bool`
 
 HasPeerFirmwareOutOfSync returns a boolean if a field has been set.
+
+### GetPeerInterfaceCompatibilityIssueCount
+
+`func (o *NetworkElement) GetPeerInterfaceCompatibilityIssueCount() int64`
+
+GetPeerInterfaceCompatibilityIssueCount returns the PeerInterfaceCompatibilityIssueCount field if non-nil, zero value otherwise.
+
+### GetPeerInterfaceCompatibilityIssueCountOk
+
+`func (o *NetworkElement) GetPeerInterfaceCompatibilityIssueCountOk() (*int64, bool)`
+
+GetPeerInterfaceCompatibilityIssueCountOk returns a tuple with the PeerInterfaceCompatibilityIssueCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeerInterfaceCompatibilityIssueCount
+
+`func (o *NetworkElement) SetPeerInterfaceCompatibilityIssueCount(v int64)`
+
+SetPeerInterfaceCompatibilityIssueCount sets PeerInterfaceCompatibilityIssueCount field to given value.
+
+### HasPeerInterfaceCompatibilityIssueCount
+
+`func (o *NetworkElement) HasPeerInterfaceCompatibilityIssueCount() bool`
+
+HasPeerInterfaceCompatibilityIssueCount returns a boolean if a field has been set.
 
 ### GetReservedVlanStartId
 
@@ -2251,6 +2304,41 @@ HasInventoryDeviceInfo returns a boolean if a field has been set.
 `func (o *NetworkElement) UnsetInventoryDeviceInfo()`
 
 UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+### GetIpAddressInfos
+
+`func (o *NetworkElement) GetIpAddressInfos() []NetworkIpAddressInfoRelationship`
+
+GetIpAddressInfos returns the IpAddressInfos field if non-nil, zero value otherwise.
+
+### GetIpAddressInfosOk
+
+`func (o *NetworkElement) GetIpAddressInfosOk() (*[]NetworkIpAddressInfoRelationship, bool)`
+
+GetIpAddressInfosOk returns a tuple with the IpAddressInfos field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpAddressInfos
+
+`func (o *NetworkElement) SetIpAddressInfos(v []NetworkIpAddressInfoRelationship)`
+
+SetIpAddressInfos sets IpAddressInfos field to given value.
+
+### HasIpAddressInfos
+
+`func (o *NetworkElement) HasIpAddressInfos() bool`
+
+HasIpAddressInfos returns a boolean if a field has been set.
+
+### SetIpAddressInfosNil
+
+`func (o *NetworkElement) SetIpAddressInfosNil(b bool)`
+
+ SetIpAddressInfosNil sets the value for IpAddressInfos to be an explicit nil
+
+### UnsetIpAddressInfos
+`func (o *NetworkElement) UnsetIpAddressInfos()`
+
+UnsetIpAddressInfos ensures that no value is present for IpAddressInfos, not even an explicit nil
 ### GetLicenseFile
 
 `func (o *NetworkElement) GetLicenseFile() []NetworkLicenseFileRelationship`

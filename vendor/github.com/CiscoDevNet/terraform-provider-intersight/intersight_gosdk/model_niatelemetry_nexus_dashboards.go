@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -53,6 +53,8 @@ type NiatelemetryNexusDashboards struct {
 	FabricImagePoliciesCount *int64 `json:"FabricImagePoliciesCount,omitempty"`
 	// Feature Operation status of change management.
 	FeatureOperStatus *bool `json:"FeatureOperStatus,omitempty"`
+	// The number of Hypershield integrations on the fabric.
+	HsIntegrationsCount *int64 `json:"HsIntegrationsCount,omitempty"`
 	// Count of number of image operations of type stage.
 	ImageFileStagingCount *int64 `json:"ImageFileStagingCount,omitempty"`
 	// Feature Operation status of Integration with IPAM.
@@ -106,6 +108,8 @@ type NiatelemetryNexusDashboards struct {
 	// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
 	RecordType     *string  `json:"RecordType,omitempty"`
 	ReleaseVersion []string `json:"ReleaseVersion,omitempty"`
+	// The number of smart switches configured with a valid Hypershield connectivity status, excluding those whose status is 'Not Applicable'.
+	SmartSwitchCount *int64 `json:"SmartSwitchCount,omitempty"`
 	// Status of sustainability report on fabric.
 	SustainabilityReportStatus *string `json:"SustainabilityReportStatus,omitempty"`
 	// Type of site added to Multi-Site Orchestrator.
@@ -619,6 +623,38 @@ func (o *NiatelemetryNexusDashboards) HasFeatureOperStatus() bool {
 // SetFeatureOperStatus gets a reference to the given bool and assigns it to the FeatureOperStatus field.
 func (o *NiatelemetryNexusDashboards) SetFeatureOperStatus(v bool) {
 	o.FeatureOperStatus = &v
+}
+
+// GetHsIntegrationsCount returns the HsIntegrationsCount field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetHsIntegrationsCount() int64 {
+	if o == nil || IsNil(o.HsIntegrationsCount) {
+		var ret int64
+		return ret
+	}
+	return *o.HsIntegrationsCount
+}
+
+// GetHsIntegrationsCountOk returns a tuple with the HsIntegrationsCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetHsIntegrationsCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.HsIntegrationsCount) {
+		return nil, false
+	}
+	return o.HsIntegrationsCount, true
+}
+
+// HasHsIntegrationsCount returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasHsIntegrationsCount() bool {
+	if o != nil && !IsNil(o.HsIntegrationsCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetHsIntegrationsCount gets a reference to the given int64 and assigns it to the HsIntegrationsCount field.
+func (o *NiatelemetryNexusDashboards) SetHsIntegrationsCount(v int64) {
+	o.HsIntegrationsCount = &v
 }
 
 // GetImageFileStagingCount returns the ImageFileStagingCount field value if set, zero value otherwise.
@@ -1554,6 +1590,38 @@ func (o *NiatelemetryNexusDashboards) SetReleaseVersion(v []string) {
 	o.ReleaseVersion = v
 }
 
+// GetSmartSwitchCount returns the SmartSwitchCount field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetSmartSwitchCount() int64 {
+	if o == nil || IsNil(o.SmartSwitchCount) {
+		var ret int64
+		return ret
+	}
+	return *o.SmartSwitchCount
+}
+
+// GetSmartSwitchCountOk returns a tuple with the SmartSwitchCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetSmartSwitchCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.SmartSwitchCount) {
+		return nil, false
+	}
+	return o.SmartSwitchCount, true
+}
+
+// HasSmartSwitchCount returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasSmartSwitchCount() bool {
+	if o != nil && !IsNil(o.SmartSwitchCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetSmartSwitchCount gets a reference to the given int64 and assigns it to the SmartSwitchCount field.
+func (o *NiatelemetryNexusDashboards) SetSmartSwitchCount(v int64) {
+	o.SmartSwitchCount = &v
+}
+
 // GetSustainabilityReportStatus returns the SustainabilityReportStatus field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetSustainabilityReportStatus() string {
 	if o == nil || IsNil(o.SustainabilityReportStatus) {
@@ -1855,6 +1923,9 @@ func (o NiatelemetryNexusDashboards) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FeatureOperStatus) {
 		toSerialize["FeatureOperStatus"] = o.FeatureOperStatus
 	}
+	if !IsNil(o.HsIntegrationsCount) {
+		toSerialize["HsIntegrationsCount"] = o.HsIntegrationsCount
+	}
 	if !IsNil(o.ImageFileStagingCount) {
 		toSerialize["ImageFileStagingCount"] = o.ImageFileStagingCount
 	}
@@ -1941,6 +2012,9 @@ func (o NiatelemetryNexusDashboards) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ReleaseVersion != nil {
 		toSerialize["ReleaseVersion"] = o.ReleaseVersion
+	}
+	if !IsNil(o.SmartSwitchCount) {
+		toSerialize["SmartSwitchCount"] = o.SmartSwitchCount
 	}
 	if !IsNil(o.SustainabilityReportStatus) {
 		toSerialize["SustainabilityReportStatus"] = o.SustainabilityReportStatus
@@ -2043,6 +2117,8 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		FabricImagePoliciesCount *int64 `json:"FabricImagePoliciesCount,omitempty"`
 		// Feature Operation status of change management.
 		FeatureOperStatus *bool `json:"FeatureOperStatus,omitempty"`
+		// The number of Hypershield integrations on the fabric.
+		HsIntegrationsCount *int64 `json:"HsIntegrationsCount,omitempty"`
 		// Count of number of image operations of type stage.
 		ImageFileStagingCount *int64 `json:"ImageFileStagingCount,omitempty"`
 		// Feature Operation status of Integration with IPAM.
@@ -2096,6 +2172,8 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
 		RecordType     *string  `json:"RecordType,omitempty"`
 		ReleaseVersion []string `json:"ReleaseVersion,omitempty"`
+		// The number of smart switches configured with a valid Hypershield connectivity status, excluding those whose status is 'Not Applicable'.
+		SmartSwitchCount *int64 `json:"SmartSwitchCount,omitempty"`
 		// Status of sustainability report on fabric.
 		SustainabilityReportStatus *string `json:"SustainabilityReportStatus,omitempty"`
 		// Type of site added to Multi-Site Orchestrator.
@@ -2130,6 +2208,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetryNexusDashboards.EndpointCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.EndpointCount
 		varNiatelemetryNexusDashboards.FabricImagePoliciesCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.FabricImagePoliciesCount
 		varNiatelemetryNexusDashboards.FeatureOperStatus = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.FeatureOperStatus
+		varNiatelemetryNexusDashboards.HsIntegrationsCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.HsIntegrationsCount
 		varNiatelemetryNexusDashboards.ImageFileStagingCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ImageFileStagingCount
 		varNiatelemetryNexusDashboards.IpamOperState = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.IpamOperState
 		varNiatelemetryNexusDashboards.IsClusterHealthy = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.IsClusterHealthy
@@ -2159,6 +2238,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetryNexusDashboards.RecVersionList = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.RecVersionList
 		varNiatelemetryNexusDashboards.RecordType = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.RecordType
 		varNiatelemetryNexusDashboards.ReleaseVersion = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ReleaseVersion
+		varNiatelemetryNexusDashboards.SmartSwitchCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.SmartSwitchCount
 		varNiatelemetryNexusDashboards.SustainabilityReportStatus = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.SustainabilityReportStatus
 		varNiatelemetryNexusDashboards.TypeOfSiteInMso = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.TypeOfSiteInMso
 		varNiatelemetryNexusDashboards.VcenterCount = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.VcenterCount
@@ -2198,6 +2278,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "EndpointCount")
 		delete(additionalProperties, "FabricImagePoliciesCount")
 		delete(additionalProperties, "FeatureOperStatus")
+		delete(additionalProperties, "HsIntegrationsCount")
 		delete(additionalProperties, "ImageFileStagingCount")
 		delete(additionalProperties, "IpamOperState")
 		delete(additionalProperties, "IsClusterHealthy")
@@ -2227,6 +2308,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "RecVersionList")
 		delete(additionalProperties, "RecordType")
 		delete(additionalProperties, "ReleaseVersion")
+		delete(additionalProperties, "SmartSwitchCount")
 		delete(additionalProperties, "SustainabilityReportStatus")
 		delete(additionalProperties, "TypeOfSiteInMso")
 		delete(additionalProperties, "VcenterCount")

@@ -70,6 +70,171 @@ func getNiatelemetrySwitchSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"compensating_control_status": {
+			Description: "Compensating control status reported for the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"compensating_controls_details": {
+			Description: "Compensating control counts grouped by control state and severity.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"available_controls_count": {
+						Description: "Available compensating control counts grouped by severity.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"critical": {
+									Description: "Count of critical severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"major": {
+									Description: "Count of major severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"minor": {
+									Description: "Count of minor severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"warning": {
+									Description: "Count of warning severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"monitoring_controls_count": {
+						Description: "Monitoring compensating control counts grouped by severity.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"critical": {
+									Description: "Count of critical severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"major": {
+									Description: "Count of major severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"minor": {
+									Description: "Count of minor severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"warning": {
+									Description: "Count of warning severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"protected_controls_count": {
+						Description: "Protected compensating control counts grouped by severity.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"critical": {
+									Description: "Count of critical severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"major": {
+									Description: "Count of major severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"minor": {
+									Description: "Count of minor severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"warning": {
+									Description: "Count of warning severity compensating controls.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 		"compliance_status": {
 			Description: "The compliance status of the managed switch.",
 			Type:        schema.TypeString,
@@ -152,6 +317,16 @@ func getNiatelemetrySwitchSchema() map[string]*schema.Schema {
 		},
 		"ip_address": {
 			Description: "The IP address of the managed switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"live_protect_agent_status": {
+			Description: "Live Protect agent status reported for the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"live_protect_status": {
+			Description: "Live Protect enablement status reported for the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -262,6 +437,11 @@ func getNiatelemetrySwitchSchema() map[string]*schema.Schema {
 		"role": {
 			Description: "The role of the managed switch.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"security_advisories_count": {
+			Description: "Number of security advisories associated with the switch.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"serial": {
@@ -437,7 +617,7 @@ func getNiatelemetrySwitchSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -452,6 +632,11 @@ func getNiatelemetrySwitchSchema() map[string]*schema.Schema {
 		"telemetry_enabled": {
 			Description: "Indicates whether telemetry is enabled for the fabric.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"total_hit_count": {
+			Description: "Total Live Protect hit count reported for the switch.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"version_context": {
@@ -567,6 +752,76 @@ func getNiatelemetrySwitchSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"vpc_configured": {
+			Description: "Indicates whether virtual port channel is configured on the switch.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"vpc_data": {
+			Description: "Virtual port channel status and peer details for the switch.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"consistent_status": {
+						Description: "Indicates whether the vPC configuration is consistent between peers.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"intended_peer_name": {
+						Description: "Name of the switch intended to be the vPC peer.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"keep_alive_status": {
+						Description: "Operational status of the vPC keepalive connection.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"peer_link_status": {
+						Description: "Operational status of the link between vPC peer switches.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"peer_name": {
+						Description: "Name of the switch operating as the vPC peer.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"peer_switch_id": {
+						Description: "Identifier (strongAssetId) of the switch operating as the vPC peer.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vpc_domain": {
+						Description: "Identifier of the vPC domain configured on the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vpc_role": {
+						Description: "Role assigned to the switch within the vPC domain.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 	}
 	return schemaMap
 }
@@ -651,6 +906,42 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("compensating_control_status"); ok {
+		x := (v.(string))
+		o.SetCompensatingControlStatus(x)
+	}
+
+	if v, ok := d.GetOk("compensating_controls_details"); ok {
+		p := make([]models.NiatelemetryCompensatingControlDetails, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.NiatelemetryCompensatingControlDetails{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.CompensatingControlDetails")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCompensatingControlsDetails(x)
+		}
 	}
 
 	if v, ok := d.GetOk("compliance_status"); ok {
@@ -745,6 +1036,16 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOk("ip_address"); ok {
 		x := (v.(string))
 		o.SetIpAddress(x)
+	}
+
+	if v, ok := d.GetOk("live_protect_agent_status"); ok {
+		x := (v.(string))
+		o.SetLiveProtectAgentStatus(x)
+	}
+
+	if v, ok := d.GetOk("live_protect_status"); ok {
+		x := (v.(string))
+		o.SetLiveProtectStatus(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -875,6 +1176,11 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOk("role"); ok {
 		x := (v.(string))
 		o.SetRole(x)
+	}
+
+	if v, ok := d.GetOkExists("security_advisories_count"); ok {
+		x := int64(v.(int))
+		o.SetSecurityAdvisoriesCount(x)
 	}
 
 	if v, ok := d.GetOk("serial"); ok {
@@ -1027,6 +1333,12 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -1041,6 +1353,11 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOkExists("telemetry_enabled"); ok {
 		x := (v.(bool))
 		o.SetTelemetryEnabled(x)
+	}
+
+	if v, ok := d.GetOkExists("total_hit_count"); ok {
+		x := int64(v.(int))
+		o.SetTotalHitCount(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -1117,6 +1434,42 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
+	if v, ok := d.GetOkExists("vpc_configured"); ok {
+		x := (v.(bool))
+		o.SetVpcConfigured(x)
+	}
+
+	if v, ok := d.GetOk("vpc_data"); ok {
+		p := make([]models.NiatelemetryVpcData, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.NiatelemetryVpcData{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.VpcData")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVpcData(x)
+		}
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of NiatelemetrySwitch object failed with error : %s", err.Error())
@@ -1158,6 +1511,9 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["anomaly_status"] = (s.GetAnomalyStatus())
 				temp["class_id"] = (s.GetClassId())
+				temp["compensating_control_status"] = (s.GetCompensatingControlStatus())
+
+				temp["compensating_controls_details"] = flattenMapNiatelemetryCompensatingControlDetails(s.GetCompensatingControlsDetails(), d)
 				temp["compliance_status"] = (s.GetComplianceStatus())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -1171,6 +1527,8 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 				temp["hostname"] = (s.GetHostname())
 				temp["in_band_ip"] = (s.GetInBandIp())
 				temp["ip_address"] = (s.GetIpAddress())
+				temp["live_protect_agent_status"] = (s.GetLiveProtectAgentStatus())
+				temp["live_protect_status"] = (s.GetLiveProtectStatus())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
@@ -1184,6 +1542,7 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["role"] = (s.GetRole())
+				temp["security_advisories_count"] = (s.GetSecurityAdvisoriesCount())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["site"] = (s.GetSite())
@@ -1198,8 +1557,12 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["telemetry_enabled"] = (s.GetTelemetryEnabled())
+				temp["total_hit_count"] = (s.GetTotalHitCount())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["vpc_configured"] = (s.GetVpcConfigured())
+
+				temp["vpc_data"] = flattenMapNiatelemetryVpcData(s.GetVpcData(), d)
 				niatelemetrySwitchResults = append(niatelemetrySwitchResults, temp)
 			}
 		}

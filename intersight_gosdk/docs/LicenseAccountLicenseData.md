@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "license.AccountLicenseData"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "license.AccountLicenseData"]
 **AccountId** | Pointer to **string** | Root user&#39;s ID of the account. | [optional] [readonly] 
-**AgentData** | Pointer to **string** | Agent trusted store data. | [optional] [readonly] 
 **AuthExpireTime** | Pointer to **string** | Authorization expiration time. | [optional] [readonly] 
 **AuthInitialTime** | Pointer to **string** | Intial authorization time. | [optional] [readonly] 
 **AuthNextTime** | Pointer to **string** | Next time for the authorization. | [optional] [readonly] 
@@ -132,31 +131,6 @@ SetAccountId sets AccountId field to given value.
 `func (o *LicenseAccountLicenseData) HasAccountId() bool`
 
 HasAccountId returns a boolean if a field has been set.
-
-### GetAgentData
-
-`func (o *LicenseAccountLicenseData) GetAgentData() string`
-
-GetAgentData returns the AgentData field if non-nil, zero value otherwise.
-
-### GetAgentDataOk
-
-`func (o *LicenseAccountLicenseData) GetAgentDataOk() (*string, bool)`
-
-GetAgentDataOk returns a tuple with the AgentData field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAgentData
-
-`func (o *LicenseAccountLicenseData) SetAgentData(v string)`
-
-SetAgentData sets AgentData field to given value.
-
-### HasAgentData
-
-`func (o *LicenseAccountLicenseData) HasAgentData() bool`
-
-HasAgentData returns a boolean if a field has been set.
 
 ### GetAuthExpireTime
 

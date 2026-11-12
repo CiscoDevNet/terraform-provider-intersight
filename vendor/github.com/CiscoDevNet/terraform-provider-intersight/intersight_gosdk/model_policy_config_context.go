@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -27,7 +27,8 @@ type PolicyConfigContext struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType      string                        `json:"ObjectType"`
+	ActionQualifier NullablePolicyActionQualifier `json:"ActionQualifier,omitempty"`
 	// Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.
 	ConfigState *string `json:"ConfigState,omitempty"`
 	// Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring. * `None` - The default state is none. * `Not-assigned` - Server is not assigned to the profile. * `Assigned` - Server is assigned to the profile and the configurations are not yet deployed. * `Preparing` - Preparing to deploy the configuration. * `Validating` - Profile validation in progress. * `Evaluating` - Policy edit configuration change evaluation in progress. * `Configuring` - Profile deploy operation is in progress. * `UnConfiguring` - Server is unassigned and config cleanup is in progress. * `Analyzing` - Profile changes are being analyzed. * `Activating` - Configuration is being activated at the endpoint. * `Inconsistent` - Profile is inconsistent with the endpoint configuration. * `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected. * `Failed` - The last action on the profile has failed. * `Not-complete` - Config import operation on the profile is not complete. * `Waiting-for-resource` - Waiting for the resource to be allocated for the profile. * `Partially-deployed` - The profile configuration has been applied on a subset of endpoints.
@@ -125,6 +126,49 @@ func (o *PolicyConfigContext) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "policy.ConfigContext" of the ObjectType field.
 func (o *PolicyConfigContext) GetDefaultObjectType() interface{} {
 	return "policy.ConfigContext"
+}
+
+// GetActionQualifier returns the ActionQualifier field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PolicyConfigContext) GetActionQualifier() PolicyActionQualifier {
+	if o == nil || IsNil(o.ActionQualifier.Get()) {
+		var ret PolicyActionQualifier
+		return ret
+	}
+	return *o.ActionQualifier.Get()
+}
+
+// GetActionQualifierOk returns a tuple with the ActionQualifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PolicyConfigContext) GetActionQualifierOk() (*PolicyActionQualifier, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ActionQualifier.Get(), o.ActionQualifier.IsSet()
+}
+
+// HasActionQualifier returns a boolean if a field has been set.
+func (o *PolicyConfigContext) HasActionQualifier() bool {
+	if o != nil && o.ActionQualifier.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetActionQualifier gets a reference to the given NullablePolicyActionQualifier and assigns it to the ActionQualifier field.
+func (o *PolicyConfigContext) SetActionQualifier(v PolicyActionQualifier) {
+	o.ActionQualifier.Set(&v)
+}
+
+// SetActionQualifierNil sets the value for ActionQualifier to be an explicit nil
+func (o *PolicyConfigContext) SetActionQualifierNil() {
+	o.ActionQualifier.Set(nil)
+}
+
+// UnsetActionQualifier ensures that no value is present for ActionQualifier, not even an explicit nil
+func (o *PolicyConfigContext) UnsetActionQualifier() {
+	o.ActionQualifier.Unset()
 }
 
 // GetConfigState returns the ConfigState field value if set, zero value otherwise.
@@ -378,6 +422,9 @@ func (o PolicyConfigContext) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if o.ActionQualifier.IsSet() {
+		toSerialize["ActionQualifier"] = o.ActionQualifier.Get()
+	}
 	if !IsNil(o.ConfigState) {
 		toSerialize["ConfigState"] = o.ConfigState
 	}
@@ -453,7 +500,8 @@ func (o *PolicyConfigContext) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType      string                        `json:"ObjectType"`
+		ActionQualifier NullablePolicyActionQualifier `json:"ActionQualifier,omitempty"`
 		// Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.
 		ConfigState *string `json:"ConfigState,omitempty"`
 		// Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring. * `None` - The default state is none. * `Not-assigned` - Server is not assigned to the profile. * `Assigned` - Server is assigned to the profile and the configurations are not yet deployed. * `Preparing` - Preparing to deploy the configuration. * `Validating` - Profile validation in progress. * `Evaluating` - Policy edit configuration change evaluation in progress. * `Configuring` - Profile deploy operation is in progress. * `UnConfiguring` - Server is unassigned and config cleanup is in progress. * `Analyzing` - Profile changes are being analyzed. * `Activating` - Configuration is being activated at the endpoint. * `Inconsistent` - Profile is inconsistent with the endpoint configuration. * `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected. * `Failed` - The last action on the profile has failed. * `Not-complete` - Config import operation on the profile is not complete. * `Waiting-for-resource` - Waiting for the resource to be allocated for the profile. * `Partially-deployed` - The profile configuration has been applied on a subset of endpoints.
@@ -476,6 +524,7 @@ func (o *PolicyConfigContext) UnmarshalJSON(data []byte) (err error) {
 		varPolicyConfigContext := _PolicyConfigContext{}
 		varPolicyConfigContext.ClassId = varPolicyConfigContextWithoutEmbeddedStruct.ClassId
 		varPolicyConfigContext.ObjectType = varPolicyConfigContextWithoutEmbeddedStruct.ObjectType
+		varPolicyConfigContext.ActionQualifier = varPolicyConfigContextWithoutEmbeddedStruct.ActionQualifier
 		varPolicyConfigContext.ConfigState = varPolicyConfigContextWithoutEmbeddedStruct.ConfigState
 		varPolicyConfigContext.ConfigStateSummary = varPolicyConfigContextWithoutEmbeddedStruct.ConfigStateSummary
 		varPolicyConfigContext.ConfigType = varPolicyConfigContextWithoutEmbeddedStruct.ConfigType
@@ -502,6 +551,7 @@ func (o *PolicyConfigContext) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ActionQualifier")
 		delete(additionalProperties, "ConfigState")
 		delete(additionalProperties, "ConfigStateSummary")
 		delete(additionalProperties, "ConfigType")

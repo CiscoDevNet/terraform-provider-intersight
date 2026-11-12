@@ -75,10 +75,11 @@ The following arguments can be used to get data of already created objects in In
 * `out_of_band_ipv4_address`:(string) The IPv4 address of the network Element out-of-band management interface. 
 * `out_of_band_ipv4_gateway`:(string) The default IPv4 gateway of the network Element out-of-band management interface. 
 * `out_of_band_ipv4_mask`:(string) The network mask of the network Element out-of-band management interface. 
+* `out_of_band_ipv4_mode`:(string) The IPv4 address configuration mode of the network Element out-of-band management interface.* `` - The IPv4 address mode is not available or not applicable.* `static` - IPv4 address is statically configured.* `dhcpv4` - IPv4 address is configured via DHCP. 
 * `out_of_band_ipv6_address`:(string) The IPv6 address of the network Element out-of-band management interface. 
 * `out_of_band_ipv6_error`:(string) Any error message related to IPv6 configuration on the network Element out-of-band management interface. 
 * `out_of_band_ipv6_gateway`:(string) The default IPv6 gateway of the network Element out-of-band management interface. 
-* `out_of_band_ipv6_mode`:(string) The IPv6 address configuration mode of the network Element out-of-band management interface.* `` - The IPv6 address mode is not available or not applicable.* `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC).* `static` - IPv6 address is statically configured.* `disabled` - IPv6 is disabled on the out-of-band management interface. 
+* `out_of_band_ipv6_mode`:(string) The IPv6 address configuration mode of the network Element out-of-band management interface.* `` - The IPv6 address mode is not available or not applicable.* `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC).* `static` - IPv6 address is statically configured.* `disabled` - IPv6 is disabled on the out-of-band management interface.* `dhcpv6` - IPv6 address is configured via DHCPv6.* `dhcpv6Slaac` - IPv6 address is configured via DHCPv6 and SLAAC. 
 * `out_of_band_ipv6_prefix`:(string) The network mask of the network Element out-of-band management interface. 
 * `out_of_band_ipv6_redirects`:(string) The IPv6 ICMPv6 redirects configuration on the network Element out-of-band management interface.* `` - The IPv6 redirects configuration is not available or not applicable.* `enabled` - IPv6 ICMPv6 redirects are enabled on the management interface.* `disabled` - IPv6 ICMPv6 redirects are disabled on the management interface. 
 * `out_of_band_ipv6_slaac_iid_mode`:(string) The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address.* `` - The SLAAC IID mode is not available or not applicable.* `eui64` - The SLAAC IID is derived from the MAC address using the EUI-64 method.* `opaque` - The SLAAC IID is generated using an opaque identifier for privacy. 
@@ -86,6 +87,7 @@ The following arguments can be used to get data of already created objects in In
 * `out_of_band_mac`:(string) The MAC address of the network Element out-of-band management interface. 
 * `part_number`:(string) Part number of the switch. 
 * `peer_firmware_out_of_sync`:(bool) The flag to indicate the firmware of peer Fabric Interconnect is out of sync. 
+* `peer_interface_compatibility_issue_count`:(int) The count of port compatibility issues with the connected peer device port. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `reserved_vlan_start_id`:(int) The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic. 
 * `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 

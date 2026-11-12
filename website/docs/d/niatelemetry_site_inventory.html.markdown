@@ -33,6 +33,7 @@ The following arguments can be used to get data of already created objects in In
 * `connectivity_analysis_count`:(int) Returns the total number of connectivity Analysis run for EPs in NDFC Fabrics. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `dpu_count`:(int) The total number of DPUs within the fabric currently reporting an operational status of 'OK'. 
 * `endpoint_locator_count`:(int) Count of total Endpoint Locators. 
 * `fabric_technology`:(string) Fabric technology reported by the onboarded DCNM site. 
 * `fabric_update_status`:(string) Status of the fabric update. 

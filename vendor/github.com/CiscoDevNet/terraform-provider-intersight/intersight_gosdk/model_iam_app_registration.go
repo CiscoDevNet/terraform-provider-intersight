@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -68,9 +68,8 @@ type IamAppRegistration struct {
 	// The timestamp at which an expiry date was first set on this app registration.  For expiring App Registrations, this field is same as the create time of the App Registration. For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
 	StartTime *time.Time `json:"StartTime,omitempty"`
 	// Defines the expiry time of the token generated via the AppRegistration. * `generic` - This sets the expiryTime to ten minutes from the token issuing time. * `longLived` - This sets the expiryTime to an year from the token issuing time. * `infinite` - This allows for a never-expiring token. Use with caution.
-	TokenExpiry       *string                                          `json:"TokenExpiry,omitempty"`
-	Account           NullableIamAccountRelationship                   `json:"Account,omitempty"`
-	ClientApplication NullableIamAbstractClientApplicationRelationship `json:"ClientApplication,omitempty"`
+	TokenExpiry *string                        `json:"TokenExpiry,omitempty"`
+	Account     NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to iamOAuthToken resources.
 	OauthTokens []IamOAuthTokenRelationship       `json:"OauthTokens,omitempty"`
 	Permission  NullableIamPermissionRelationship `json:"Permission,omitempty"`
@@ -950,49 +949,6 @@ func (o *IamAppRegistration) UnsetAccount() {
 	o.Account.Unset()
 }
 
-// GetClientApplication returns the ClientApplication field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IamAppRegistration) GetClientApplication() IamAbstractClientApplicationRelationship {
-	if o == nil || IsNil(o.ClientApplication.Get()) {
-		var ret IamAbstractClientApplicationRelationship
-		return ret
-	}
-	return *o.ClientApplication.Get()
-}
-
-// GetClientApplicationOk returns a tuple with the ClientApplication field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAppRegistration) GetClientApplicationOk() (*IamAbstractClientApplicationRelationship, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ClientApplication.Get(), o.ClientApplication.IsSet()
-}
-
-// HasClientApplication returns a boolean if a field has been set.
-func (o *IamAppRegistration) HasClientApplication() bool {
-	if o != nil && o.ClientApplication.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetClientApplication gets a reference to the given NullableIamAbstractClientApplicationRelationship and assigns it to the ClientApplication field.
-func (o *IamAppRegistration) SetClientApplication(v IamAbstractClientApplicationRelationship) {
-	o.ClientApplication.Set(&v)
-}
-
-// SetClientApplicationNil sets the value for ClientApplication to be an explicit nil
-func (o *IamAppRegistration) SetClientApplicationNil() {
-	o.ClientApplication.Set(nil)
-}
-
-// UnsetClientApplication ensures that no value is present for ClientApplication, not even an explicit nil
-func (o *IamAppRegistration) UnsetClientApplication() {
-	o.ClientApplication.Unset()
-}
-
 // GetOauthTokens returns the OauthTokens field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamAppRegistration) GetOauthTokens() []IamOAuthTokenRelationship {
 	if o == nil {
@@ -1286,9 +1242,6 @@ func (o IamAppRegistration) ToMap() (map[string]interface{}, error) {
 	if o.Account.IsSet() {
 		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.ClientApplication.IsSet() {
-		toSerialize["ClientApplication"] = o.ClientApplication.Get()
-	}
 	if o.OauthTokens != nil {
 		toSerialize["OauthTokens"] = o.OauthTokens
 	}
@@ -1398,9 +1351,8 @@ func (o *IamAppRegistration) UnmarshalJSON(data []byte) (err error) {
 		// The timestamp at which an expiry date was first set on this app registration.  For expiring App Registrations, this field is same as the create time of the App Registration. For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
 		StartTime *time.Time `json:"StartTime,omitempty"`
 		// Defines the expiry time of the token generated via the AppRegistration. * `generic` - This sets the expiryTime to ten minutes from the token issuing time. * `longLived` - This sets the expiryTime to an year from the token issuing time. * `infinite` - This allows for a never-expiring token. Use with caution.
-		TokenExpiry       *string                                          `json:"TokenExpiry,omitempty"`
-		Account           NullableIamAccountRelationship                   `json:"Account,omitempty"`
-		ClientApplication NullableIamAbstractClientApplicationRelationship `json:"ClientApplication,omitempty"`
+		TokenExpiry *string                        `json:"TokenExpiry,omitempty"`
+		Account     NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to iamOAuthToken resources.
 		OauthTokens []IamOAuthTokenRelationship       `json:"OauthTokens,omitempty"`
 		Permission  NullableIamPermissionRelationship `json:"Permission,omitempty"`
@@ -1441,7 +1393,6 @@ func (o *IamAppRegistration) UnmarshalJSON(data []byte) (err error) {
 		varIamAppRegistration.StartTime = varIamAppRegistrationWithoutEmbeddedStruct.StartTime
 		varIamAppRegistration.TokenExpiry = varIamAppRegistrationWithoutEmbeddedStruct.TokenExpiry
 		varIamAppRegistration.Account = varIamAppRegistrationWithoutEmbeddedStruct.Account
-		varIamAppRegistration.ClientApplication = varIamAppRegistrationWithoutEmbeddedStruct.ClientApplication
 		varIamAppRegistration.OauthTokens = varIamAppRegistrationWithoutEmbeddedStruct.OauthTokens
 		varIamAppRegistration.Permission = varIamAppRegistrationWithoutEmbeddedStruct.Permission
 		varIamAppRegistration.Roles = varIamAppRegistrationWithoutEmbeddedStruct.Roles
@@ -1489,7 +1440,6 @@ func (o *IamAppRegistration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "TokenExpiry")
 		delete(additionalProperties, "Account")
-		delete(additionalProperties, "ClientApplication")
 		delete(additionalProperties, "OauthTokens")
 		delete(additionalProperties, "Permission")
 		delete(additionalProperties, "Roles")

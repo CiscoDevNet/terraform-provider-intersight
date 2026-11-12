@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // checks if the IamIdp type satisfies the MappedNullable interface at compile time
@@ -28,6 +29,8 @@ type IamIdp struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Expiration time of the certificate in the SP metadata for the IdP.
+	CertificateExpiryTime *time.Time `json:"CertificateExpiryTime,omitempty"`
 	// Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication.
 	// Deprecated
 	DomainName  *string  `json:"DomainName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"`
@@ -36,12 +39,20 @@ type IamIdp struct {
 	EnableSingleLogout *bool `json:"EnableSingleLogout,omitempty"`
 	// The Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP or Service Provider.
 	IdpEntityId *string `json:"IdpEntityId,omitempty"`
+	// The expiration state of the certificates in the IdP metadata. * `expiration-beyond-warning-period` - The expiry date is not within the warning period. * `expiration-within-info-period` - The expiry date is within the info period. * `expiration-within-warning-period` - The expiry date is within the warning period. * `expiration-within-critical-period` - The expiry date is within the critical period. * `expired` - The expiry date has passed.
+	IdpMetadataExpiryState *string `json:"IdpMetadataExpiryState,omitempty"`
 	// SAML metadata of the IdP.
 	Metadata *string `json:"Metadata,omitempty"`
 	// The name of the Identity Provider, for example Cisco, Okta, or OneID.
 	Name *string `json:"Name,omitempty"`
 	// When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message.
 	SkipWarning *bool `json:"SkipWarning,omitempty"`
+	// Status of the SP certificate rotation for the IdP.
+	SpCertRotated *bool `json:"SpCertRotated,omitempty"`
+	// The expiration state of the certificate in the SP metadata used by this IdP. The state is not-applicable when SAML assertion encryption and AuthNRequest signing are both disabled. * `expiration-within-info-period` - The expiry date is beyond 270 days. * `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days. * `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days. * `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days. * `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days. * `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days. * `expiration-within-critical-period` - The expiry date is within 7 days. * `expired` - The expiry date has passed. * `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.
+	SpMetadataExpiryState *string `json:"SpMetadataExpiryState,omitempty"`
+	// Determines if the AuthNRequest sent to the Idp should be signed by the new (SHA-2) or the old (SHA-1) SP metadata during the grace period of SP SAML metadata rotation. * `Sha2` - The SAML SP metadata hash is generated using SHA-256 algorithm. * `Sha1` - The SAML SP metadata hash is generated using SHA-1 algorithm.
+	SpMetadataHashMethod *string `json:"SpMetadataHashMethod,omitempty"`
 	// Authentication protocol used by the IdP. * `saml` - Use SAML as the authentication protocol for sign-on. * `oidc` - Open ID connect to be used as an authentication protocol for sign-on. * `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. * `guest` - Guest users accessing Intersight are assigned to a guest Identity Provider (IdP). They do not have single sign-on options available and must log in  using their email address and a one-time password (OTP). Upon successful authentication, all guest users associated with the account are grouped under  the guest IdP. Guest IdP is primarily used in cloud environment.
 	Type       *string                                     `json:"Type,omitempty"`
 	Account    NullableIamAccountRelationship              `json:"Account,omitempty"`
@@ -70,6 +81,8 @@ func NewIamIdp(classId string, objectType string) *IamIdp {
 	this := IamIdp{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var spMetadataHashMethod string = "Sha2"
+	this.SpMetadataHashMethod = &spMetadataHashMethod
 	var type_ string = "saml"
 	this.Type = &type_
 	return &this
@@ -84,6 +97,8 @@ func NewIamIdpWithDefaults() *IamIdp {
 	this.ClassId = classId
 	var objectType string = "iam.Idp"
 	this.ObjectType = objectType
+	var spMetadataHashMethod string = "Sha2"
+	this.SpMetadataHashMethod = &spMetadataHashMethod
 	var type_ string = "saml"
 	this.Type = &type_
 	return &this
@@ -145,6 +160,38 @@ func (o *IamIdp) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "iam.Idp" of the ObjectType field.
 func (o *IamIdp) GetDefaultObjectType() interface{} {
 	return "iam.Idp"
+}
+
+// GetCertificateExpiryTime returns the CertificateExpiryTime field value if set, zero value otherwise.
+func (o *IamIdp) GetCertificateExpiryTime() time.Time {
+	if o == nil || IsNil(o.CertificateExpiryTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CertificateExpiryTime
+}
+
+// GetCertificateExpiryTimeOk returns a tuple with the CertificateExpiryTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamIdp) GetCertificateExpiryTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CertificateExpiryTime) {
+		return nil, false
+	}
+	return o.CertificateExpiryTime, true
+}
+
+// HasCertificateExpiryTime returns a boolean if a field has been set.
+func (o *IamIdp) HasCertificateExpiryTime() bool {
+	if o != nil && !IsNil(o.CertificateExpiryTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetCertificateExpiryTime gets a reference to the given time.Time and assigns it to the CertificateExpiryTime field.
+func (o *IamIdp) SetCertificateExpiryTime(v time.Time) {
+	o.CertificateExpiryTime = &v
 }
 
 // GetDomainName returns the DomainName field value if set, zero value otherwise.
@@ -279,6 +326,38 @@ func (o *IamIdp) SetIdpEntityId(v string) {
 	o.IdpEntityId = &v
 }
 
+// GetIdpMetadataExpiryState returns the IdpMetadataExpiryState field value if set, zero value otherwise.
+func (o *IamIdp) GetIdpMetadataExpiryState() string {
+	if o == nil || IsNil(o.IdpMetadataExpiryState) {
+		var ret string
+		return ret
+	}
+	return *o.IdpMetadataExpiryState
+}
+
+// GetIdpMetadataExpiryStateOk returns a tuple with the IdpMetadataExpiryState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamIdp) GetIdpMetadataExpiryStateOk() (*string, bool) {
+	if o == nil || IsNil(o.IdpMetadataExpiryState) {
+		return nil, false
+	}
+	return o.IdpMetadataExpiryState, true
+}
+
+// HasIdpMetadataExpiryState returns a boolean if a field has been set.
+func (o *IamIdp) HasIdpMetadataExpiryState() bool {
+	if o != nil && !IsNil(o.IdpMetadataExpiryState) {
+		return true
+	}
+
+	return false
+}
+
+// SetIdpMetadataExpiryState gets a reference to the given string and assigns it to the IdpMetadataExpiryState field.
+func (o *IamIdp) SetIdpMetadataExpiryState(v string) {
+	o.IdpMetadataExpiryState = &v
+}
+
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *IamIdp) GetMetadata() string {
 	if o == nil || IsNil(o.Metadata) {
@@ -373,6 +452,102 @@ func (o *IamIdp) HasSkipWarning() bool {
 // SetSkipWarning gets a reference to the given bool and assigns it to the SkipWarning field.
 func (o *IamIdp) SetSkipWarning(v bool) {
 	o.SkipWarning = &v
+}
+
+// GetSpCertRotated returns the SpCertRotated field value if set, zero value otherwise.
+func (o *IamIdp) GetSpCertRotated() bool {
+	if o == nil || IsNil(o.SpCertRotated) {
+		var ret bool
+		return ret
+	}
+	return *o.SpCertRotated
+}
+
+// GetSpCertRotatedOk returns a tuple with the SpCertRotated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamIdp) GetSpCertRotatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.SpCertRotated) {
+		return nil, false
+	}
+	return o.SpCertRotated, true
+}
+
+// HasSpCertRotated returns a boolean if a field has been set.
+func (o *IamIdp) HasSpCertRotated() bool {
+	if o != nil && !IsNil(o.SpCertRotated) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpCertRotated gets a reference to the given bool and assigns it to the SpCertRotated field.
+func (o *IamIdp) SetSpCertRotated(v bool) {
+	o.SpCertRotated = &v
+}
+
+// GetSpMetadataExpiryState returns the SpMetadataExpiryState field value if set, zero value otherwise.
+func (o *IamIdp) GetSpMetadataExpiryState() string {
+	if o == nil || IsNil(o.SpMetadataExpiryState) {
+		var ret string
+		return ret
+	}
+	return *o.SpMetadataExpiryState
+}
+
+// GetSpMetadataExpiryStateOk returns a tuple with the SpMetadataExpiryState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamIdp) GetSpMetadataExpiryStateOk() (*string, bool) {
+	if o == nil || IsNil(o.SpMetadataExpiryState) {
+		return nil, false
+	}
+	return o.SpMetadataExpiryState, true
+}
+
+// HasSpMetadataExpiryState returns a boolean if a field has been set.
+func (o *IamIdp) HasSpMetadataExpiryState() bool {
+	if o != nil && !IsNil(o.SpMetadataExpiryState) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpMetadataExpiryState gets a reference to the given string and assigns it to the SpMetadataExpiryState field.
+func (o *IamIdp) SetSpMetadataExpiryState(v string) {
+	o.SpMetadataExpiryState = &v
+}
+
+// GetSpMetadataHashMethod returns the SpMetadataHashMethod field value if set, zero value otherwise.
+func (o *IamIdp) GetSpMetadataHashMethod() string {
+	if o == nil || IsNil(o.SpMetadataHashMethod) {
+		var ret string
+		return ret
+	}
+	return *o.SpMetadataHashMethod
+}
+
+// GetSpMetadataHashMethodOk returns a tuple with the SpMetadataHashMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamIdp) GetSpMetadataHashMethodOk() (*string, bool) {
+	if o == nil || IsNil(o.SpMetadataHashMethod) {
+		return nil, false
+	}
+	return o.SpMetadataHashMethod, true
+}
+
+// HasSpMetadataHashMethod returns a boolean if a field has been set.
+func (o *IamIdp) HasSpMetadataHashMethod() bool {
+	if o != nil && !IsNil(o.SpMetadataHashMethod) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpMetadataHashMethod gets a reference to the given string and assigns it to the SpMetadataHashMethod field.
+func (o *IamIdp) SetSpMetadataHashMethod(v string) {
+	o.SpMetadataHashMethod = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -780,6 +955,9 @@ func (o IamIdp) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CertificateExpiryTime) {
+		toSerialize["CertificateExpiryTime"] = o.CertificateExpiryTime
+	}
 	if !IsNil(o.DomainName) {
 		toSerialize["DomainName"] = o.DomainName
 	}
@@ -792,6 +970,9 @@ func (o IamIdp) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IdpEntityId) {
 		toSerialize["IdpEntityId"] = o.IdpEntityId
 	}
+	if !IsNil(o.IdpMetadataExpiryState) {
+		toSerialize["IdpMetadataExpiryState"] = o.IdpMetadataExpiryState
+	}
 	if !IsNil(o.Metadata) {
 		toSerialize["Metadata"] = o.Metadata
 	}
@@ -800,6 +981,15 @@ func (o IamIdp) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SkipWarning) {
 		toSerialize["SkipWarning"] = o.SkipWarning
+	}
+	if !IsNil(o.SpCertRotated) {
+		toSerialize["SpCertRotated"] = o.SpCertRotated
+	}
+	if !IsNil(o.SpMetadataExpiryState) {
+		toSerialize["SpMetadataExpiryState"] = o.SpMetadataExpiryState
+	}
+	if !IsNil(o.SpMetadataHashMethod) {
+		toSerialize["SpMetadataHashMethod"] = o.SpMetadataHashMethod
 	}
 	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
@@ -886,6 +1076,8 @@ func (o *IamIdp) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Expiration time of the certificate in the SP metadata for the IdP.
+		CertificateExpiryTime *time.Time `json:"CertificateExpiryTime,omitempty"`
 		// Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication.
 		// Deprecated
 		DomainName  *string  `json:"DomainName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"`
@@ -894,12 +1086,20 @@ func (o *IamIdp) UnmarshalJSON(data []byte) (err error) {
 		EnableSingleLogout *bool `json:"EnableSingleLogout,omitempty"`
 		// The Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP or Service Provider.
 		IdpEntityId *string `json:"IdpEntityId,omitempty"`
+		// The expiration state of the certificates in the IdP metadata. * `expiration-beyond-warning-period` - The expiry date is not within the warning period. * `expiration-within-info-period` - The expiry date is within the info period. * `expiration-within-warning-period` - The expiry date is within the warning period. * `expiration-within-critical-period` - The expiry date is within the critical period. * `expired` - The expiry date has passed.
+		IdpMetadataExpiryState *string `json:"IdpMetadataExpiryState,omitempty"`
 		// SAML metadata of the IdP.
 		Metadata *string `json:"Metadata,omitempty"`
 		// The name of the Identity Provider, for example Cisco, Okta, or OneID.
 		Name *string `json:"Name,omitempty"`
 		// When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message.
 		SkipWarning *bool `json:"SkipWarning,omitempty"`
+		// Status of the SP certificate rotation for the IdP.
+		SpCertRotated *bool `json:"SpCertRotated,omitempty"`
+		// The expiration state of the certificate in the SP metadata used by this IdP. The state is not-applicable when SAML assertion encryption and AuthNRequest signing are both disabled. * `expiration-within-info-period` - The expiry date is beyond 270 days. * `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days. * `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days. * `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days. * `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days. * `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days. * `expiration-within-critical-period` - The expiry date is within 7 days. * `expired` - The expiry date has passed. * `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.
+		SpMetadataExpiryState *string `json:"SpMetadataExpiryState,omitempty"`
+		// Determines if the AuthNRequest sent to the Idp should be signed by the new (SHA-2) or the old (SHA-1) SP metadata during the grace period of SP SAML metadata rotation. * `Sha2` - The SAML SP metadata hash is generated using SHA-256 algorithm. * `Sha1` - The SAML SP metadata hash is generated using SHA-1 algorithm.
+		SpMetadataHashMethod *string `json:"SpMetadataHashMethod,omitempty"`
 		// Authentication protocol used by the IdP. * `saml` - Use SAML as the authentication protocol for sign-on. * `oidc` - Open ID connect to be used as an authentication protocol for sign-on. * `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. * `guest` - Guest users accessing Intersight are assigned to a guest Identity Provider (IdP). They do not have single sign-on options available and must log in  using their email address and a one-time password (OTP). Upon successful authentication, all guest users associated with the account are grouped under  the guest IdP. Guest IdP is primarily used in cloud environment.
 		Type       *string                                     `json:"Type,omitempty"`
 		Account    NullableIamAccountRelationship              `json:"Account,omitempty"`
@@ -924,13 +1124,18 @@ func (o *IamIdp) UnmarshalJSON(data []byte) (err error) {
 		varIamIdp := _IamIdp{}
 		varIamIdp.ClassId = varIamIdpWithoutEmbeddedStruct.ClassId
 		varIamIdp.ObjectType = varIamIdpWithoutEmbeddedStruct.ObjectType
+		varIamIdp.CertificateExpiryTime = varIamIdpWithoutEmbeddedStruct.CertificateExpiryTime
 		varIamIdp.DomainName = varIamIdpWithoutEmbeddedStruct.DomainName
 		varIamIdp.DomainNames = varIamIdpWithoutEmbeddedStruct.DomainNames
 		varIamIdp.EnableSingleLogout = varIamIdpWithoutEmbeddedStruct.EnableSingleLogout
 		varIamIdp.IdpEntityId = varIamIdpWithoutEmbeddedStruct.IdpEntityId
+		varIamIdp.IdpMetadataExpiryState = varIamIdpWithoutEmbeddedStruct.IdpMetadataExpiryState
 		varIamIdp.Metadata = varIamIdpWithoutEmbeddedStruct.Metadata
 		varIamIdp.Name = varIamIdpWithoutEmbeddedStruct.Name
 		varIamIdp.SkipWarning = varIamIdpWithoutEmbeddedStruct.SkipWarning
+		varIamIdp.SpCertRotated = varIamIdpWithoutEmbeddedStruct.SpCertRotated
+		varIamIdp.SpMetadataExpiryState = varIamIdpWithoutEmbeddedStruct.SpMetadataExpiryState
+		varIamIdp.SpMetadataHashMethod = varIamIdpWithoutEmbeddedStruct.SpMetadataHashMethod
 		varIamIdp.Type = varIamIdpWithoutEmbeddedStruct.Type
 		varIamIdp.Account = varIamIdpWithoutEmbeddedStruct.Account
 		varIamIdp.LdapMeta = varIamIdpWithoutEmbeddedStruct.LdapMeta
@@ -960,13 +1165,18 @@ func (o *IamIdp) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CertificateExpiryTime")
 		delete(additionalProperties, "DomainName")
 		delete(additionalProperties, "DomainNames")
 		delete(additionalProperties, "EnableSingleLogout")
 		delete(additionalProperties, "IdpEntityId")
+		delete(additionalProperties, "IdpMetadataExpiryState")
 		delete(additionalProperties, "Metadata")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "SkipWarning")
+		delete(additionalProperties, "SpCertRotated")
+		delete(additionalProperties, "SpMetadataExpiryState")
+		delete(additionalProperties, "SpMetadataHashMethod")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "LdapMeta")

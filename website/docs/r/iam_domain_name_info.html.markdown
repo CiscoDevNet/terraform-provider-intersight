@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_domain_name_info"
 description: |-
-        The organisation's domain name such as cisco.com that has been used to log in to Intersight.
+        DomainNameInfos represent verified (or pending verification) email domain ownership records within an account. They support DNS TXT-record validation and maintain verification lifecycle state.
+        #### Purpose
+        Establish and track domain ownership so login routing and IdP association based on email domain can be trusted and governed.
+        #### Key Concepts
+        - **DNS-based verification:** Uses TXT records to prove control of the domain.
+        - **Lifecycle status:** Tracks Pending/Verified/Failed/Expired verification states and expiry timestamps.
+        - **Action-driven updates:** Supports regenerate vs verify flows via an action field with conditional privileges.
+        - **Account-scoped trust signal:** Anchored to the account and used to strengthen identity-routing integrity.
 
 ---
 
 # Resource: intersight_iam_domain_name_info
-The organisation's domain name such as cisco.com that has been used to log in to Intersight.
+DomainNameInfos represent verified (or pending verification) email domain ownership records within an account. They support DNS TXT-record validation and maintain verification lifecycle state.
+#### Purpose
+Establish and track domain ownership so login routing and IdP association based on email domain can be trusted and governed.
+#### Key Concepts
+- **DNS-based verification:** Uses TXT records to prove control of the domain.
+- **Lifecycle status:** Tracks Pending/Verified/Failed/Expired verification states and expiry timestamps.
+- **Action-driven updates:** Supports regenerate vs verify flows via an action field with conditional privileges.
+- **Account-scoped trust signal:** Anchored to the account and used to strengthen identity-routing integrity.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -63,7 +77,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `txt_record`:(string)(ReadOnly) Resource record used to verify Domain Ownership. Users need to verify the domain by adding the TXT Record in their DNS Host. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

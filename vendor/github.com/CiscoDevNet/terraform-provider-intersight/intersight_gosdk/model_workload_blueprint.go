@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -21,14 +21,17 @@ import (
 // checks if the WorkloadBlueprint type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WorkloadBlueprint{}
 
-// WorkloadBlueprint ### Overview The Blueprint object defines a reusable, versioned template for deploying infrastructure configurations and services. It encapsulates input schemas, managed object generation rules, service item associations, and resource constraints into a cohesive deployment unit that can be referenced by workload definitions. #### Purpose A Blueprint serves as a modular building block for constructing complex workload definitions. Blueprints provides a standardized way to define infrastructure patterns, application configurations, and service deployments that can be reused across multiple workloads. Blueprints support versioning, platform targeting, and dependency management to ensure reliable and consistent deployments. #### Key Concepts - **Versioning and Default Versions:** - Each blueprint supports multiple versions with the ability to designate a default version, enabling safe evolution of blueprint specifications while maintaining compatibility with existing workloads. - **Input Definition Schema:** - Defines the schema for all inputs required by the blueprint, supporting complex data types including primitives, collections, and managed object references. - **Generated Object Management:** - Specifies which Intersight managed objects (policies, profiles, etc.) should be automatically generated from blueprint inputs and how those objects should be configured. - **Service Item Integration:** - Associates service items with the blueprint, defining which service workflows are executed during deployment and lifecycle operations. - **Resource Constraints:** - Defines infrastructure resource requirements and constraints that must be satisfied for successful blueprint deployment. - **Blueprint Dependencies:** - Supports declaring dependencies on other blueprints, enabling compositional patterns and ensuring all required components are available during deployment. - **Platform Targeting:** - Specifies which Intersight platform types the blueprint supports, ensuring deployments only target compatible infrastructure.
+// WorkloadBlueprint ### Overview The Blueprint object defines a reusable, versioned template for deploying infrastructure configurations and services. It encapsulates input schemas, managed object generation rules, service item associations, and resource constraints into a cohesive deployment unit that can be referenced by workload definitions. #### Purpose A Blueprint serves as a modular building block for constructing complex workload definitions. Blueprints provide a standardized way to define infrastructure patterns, application configurations, and service deployments that can be reused across multiple workloads. Blueprints support versioning, support information, compatibility tracking, platform targeting, and dependency management to ensure reliable and consistent deployments. #### Key Concepts - **Authoring and Resolved Blueprints:** - Every externally supplied blueprint is stored as an authoring object with `Resolved=false`. Each concrete authoring blueprint produces a separate deployable companion with `Resolved=true`, regardless of whether it inherits from a base blueprint. - **Versioning and Default Versions:** - Each blueprint supports multiple versions with the ability to designate a default version, publish support information, and declare compatibility with previously published versions. - **Input Definition Schema:** - Defines the schema for all inputs required by the blueprint, supporting complex data types including primitives, collections, and managed object references. - **Generated Object Management:** - Specifies which Intersight managed objects (policies, profiles, etc.) should be automatically generated from blueprint inputs and how those objects should be configured. - **Service Item Integration:** - Associates service items with the blueprint, defining which service workflows are executed during deployment and lifecycle operations. - **Resource Constraints:** - Defines infrastructure resource requirements and constraints that must be satisfied for successful blueprint deployment. - **Blueprint Dependencies:** - Supports declaring dependencies on other blueprints, enabling compositional patterns and ensuring all required components are available during deployment. - **Platform Targeting:** - Specifies which Intersight platform types the blueprint supports, ensuring deployments only target compatible infrastructure.
 type WorkloadBlueprint struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType            string                                   `json:"ObjectType"`
+	BaseBlueprint         *BlueprintBlueprintInheritanceReference  `json:"BaseBlueprint,omitempty"`
 	BlueprintDependencies []BlueprintBlueprintDefinitionDependency `json:"BlueprintDependencies,omitempty"`
+	// Identifies whether the authoring blueprint is an abstract inheritance source or a concrete definition. Concrete definitions are deployed through separate resolved version of the blueprint.. * `Concrete` - The blueprint can be materialized as a separate resolved blueprint for deployment. * `Abstract` - The blueprint is an abstract inheritance source and is not directly deployable.
+	BlueprintKind *string `json:"BlueprintKind,omitempty"`
 	// The flag to indicate that this is the default version of the blueprint.
 	DefaultVersion *bool `json:"DefaultVersion,omitempty"`
 	// The description for this blueprint which provides information on what are the pre-requisites to deploy the blueprint and what features are supported on the blueprint.
@@ -38,20 +41,32 @@ type WorkloadBlueprint struct {
 	GeneratedObjectDefinition []BlueprintGeneratedObjectMetadata `json:"GeneratedObjectDefinition,omitempty"`
 	InputDefinition           []WorkflowBaseDataType             `json:"InputDefinition,omitempty"`
 	InputOperationMetadata    []BlueprintInputOperationType      `json:"InputOperationMetadata,omitempty"`
+	// The input for a blueprint referenced in a workload can be synced from another blueprint of the same type.
+	InputSyncEnabled *bool `json:"InputSyncEnabled,omitempty"`
 	// A user friendly short name to identify the blueprint. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
 	Label *string `json:"Label,omitempty" validate:"regexp=^[a-zA-Z0-9]+[\\\\sa-zA-Z0-9_.:-]{1,31}$"`
 	// The name for this blueprint. You can have multiple versions of the blueprint with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), or an underscore (_).
 	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_]{0,31}$"`
 	// The Intersight platforms supported by this blueprint. * `None` - Default value is none, platform is not mentioned. * `UnifiedEdge` - The blueprint is created for Unified Edge platform.
-	PlatformType          *string                               `json:"PlatformType,omitempty"`
-	ResourceDefinition    NullableBlueprintResourceConstraints  `json:"ResourceDefinition,omitempty"`
+	PlatformType *string `json:"PlatformType,omitempty"`
+	// Indicates whether this blueprint is a generated, deployable definition. All authoring blueprints have this value set to false.
+	Resolved           *bool                                `json:"Resolved,omitempty"`
+	ResourceDefinition NullableBlueprintResourceConstraints `json:"ResourceDefinition,omitempty"`
+	// The revision of the blueprint to support compatible updates within the same version.
+	Revision              *int64                                `json:"Revision,omitempty"`
 	ServiceItems          []BlueprintServiceItemDefinition      `json:"ServiceItems,omitempty"`
+	SupportInfo           NullableWorkflowSupportInfo           `json:"SupportInfo,omitempty"`
+	ValidatedObjects      []BlueprintValidatedConfigReference   `json:"ValidatedObjects,omitempty"`
 	ValidationInformation NullableWorkflowValidationInformation `json:"ValidationInformation,omitempty"`
 	// The version of the blueprint to support multiple versions.
-	Version *int64 `json:"Version,omitempty"`
+	Version                  *int64                              `json:"Version,omitempty"`
+	VersionCompatibilityInfo []BlueprintVersionCompatibilityInfo `json:"VersionCompatibilityInfo,omitempty"`
+	// The detailed change description for this blueprint version. For new blueprint versions, this field captures a verbose description of the delta of changes in this version compared to earlier versions.
+	VersionDescription *string `json:"VersionDescription,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+[\\\\x00-\\\\xFF]*$"`
 	// An array of relationships to iamRole resources.
-	AssociatedRoles      []IamRoleRelationship               `json:"AssociatedRoles,omitempty"`
-	Catalog              NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
+	AssociatedRoles      []IamRoleRelationship                 `json:"AssociatedRoles,omitempty"`
+	Catalog              NullableWorkflowCatalogRelationship   `json:"Catalog,omitempty"`
+	ConcreteBlueprint    NullableWorkloadBlueprintRelationship `json:"ConcreteBlueprint,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -65,12 +80,18 @@ func NewWorkloadBlueprint(classId string, objectType string) *WorkloadBlueprint 
 	this := WorkloadBlueprint{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var blueprintKind string = "Concrete"
+	this.BlueprintKind = &blueprintKind
 	var defaultVersion bool = false
 	this.DefaultVersion = &defaultVersion
 	var externalMeta bool = false
 	this.ExternalMeta = &externalMeta
+	var inputSyncEnabled bool = false
+	this.InputSyncEnabled = &inputSyncEnabled
 	var platformType string = "None"
 	this.PlatformType = &platformType
+	var revision int64 = 0
+	this.Revision = &revision
 	var version int64 = 1
 	this.Version = &version
 	return &this
@@ -85,12 +106,18 @@ func NewWorkloadBlueprintWithDefaults() *WorkloadBlueprint {
 	this.ClassId = classId
 	var objectType string = "workload.Blueprint"
 	this.ObjectType = objectType
+	var blueprintKind string = "Concrete"
+	this.BlueprintKind = &blueprintKind
 	var defaultVersion bool = false
 	this.DefaultVersion = &defaultVersion
 	var externalMeta bool = false
 	this.ExternalMeta = &externalMeta
+	var inputSyncEnabled bool = false
+	this.InputSyncEnabled = &inputSyncEnabled
 	var platformType string = "None"
 	this.PlatformType = &platformType
+	var revision int64 = 0
+	this.Revision = &revision
 	var version int64 = 1
 	this.Version = &version
 	return &this
@@ -154,6 +181,38 @@ func (o *WorkloadBlueprint) GetDefaultObjectType() interface{} {
 	return "workload.Blueprint"
 }
 
+// GetBaseBlueprint returns the BaseBlueprint field value if set, zero value otherwise.
+func (o *WorkloadBlueprint) GetBaseBlueprint() BlueprintBlueprintInheritanceReference {
+	if o == nil || IsNil(o.BaseBlueprint) {
+		var ret BlueprintBlueprintInheritanceReference
+		return ret
+	}
+	return *o.BaseBlueprint
+}
+
+// GetBaseBlueprintOk returns a tuple with the BaseBlueprint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkloadBlueprint) GetBaseBlueprintOk() (*BlueprintBlueprintInheritanceReference, bool) {
+	if o == nil || IsNil(o.BaseBlueprint) {
+		return nil, false
+	}
+	return o.BaseBlueprint, true
+}
+
+// HasBaseBlueprint returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasBaseBlueprint() bool {
+	if o != nil && !IsNil(o.BaseBlueprint) {
+		return true
+	}
+
+	return false
+}
+
+// SetBaseBlueprint gets a reference to the given BlueprintBlueprintInheritanceReference and assigns it to the BaseBlueprint field.
+func (o *WorkloadBlueprint) SetBaseBlueprint(v BlueprintBlueprintInheritanceReference) {
+	o.BaseBlueprint = &v
+}
+
 // GetBlueprintDependencies returns the BlueprintDependencies field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkloadBlueprint) GetBlueprintDependencies() []BlueprintBlueprintDefinitionDependency {
 	if o == nil {
@@ -185,6 +244,38 @@ func (o *WorkloadBlueprint) HasBlueprintDependencies() bool {
 // SetBlueprintDependencies gets a reference to the given []BlueprintBlueprintDefinitionDependency and assigns it to the BlueprintDependencies field.
 func (o *WorkloadBlueprint) SetBlueprintDependencies(v []BlueprintBlueprintDefinitionDependency) {
 	o.BlueprintDependencies = v
+}
+
+// GetBlueprintKind returns the BlueprintKind field value if set, zero value otherwise.
+func (o *WorkloadBlueprint) GetBlueprintKind() string {
+	if o == nil || IsNil(o.BlueprintKind) {
+		var ret string
+		return ret
+	}
+	return *o.BlueprintKind
+}
+
+// GetBlueprintKindOk returns a tuple with the BlueprintKind field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkloadBlueprint) GetBlueprintKindOk() (*string, bool) {
+	if o == nil || IsNil(o.BlueprintKind) {
+		return nil, false
+	}
+	return o.BlueprintKind, true
+}
+
+// HasBlueprintKind returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasBlueprintKind() bool {
+	if o != nil && !IsNil(o.BlueprintKind) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlueprintKind gets a reference to the given string and assigns it to the BlueprintKind field.
+func (o *WorkloadBlueprint) SetBlueprintKind(v string) {
+	o.BlueprintKind = &v
 }
 
 // GetDefaultVersion returns the DefaultVersion field value if set, zero value otherwise.
@@ -382,6 +473,38 @@ func (o *WorkloadBlueprint) SetInputOperationMetadata(v []BlueprintInputOperatio
 	o.InputOperationMetadata = v
 }
 
+// GetInputSyncEnabled returns the InputSyncEnabled field value if set, zero value otherwise.
+func (o *WorkloadBlueprint) GetInputSyncEnabled() bool {
+	if o == nil || IsNil(o.InputSyncEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.InputSyncEnabled
+}
+
+// GetInputSyncEnabledOk returns a tuple with the InputSyncEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkloadBlueprint) GetInputSyncEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.InputSyncEnabled) {
+		return nil, false
+	}
+	return o.InputSyncEnabled, true
+}
+
+// HasInputSyncEnabled returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasInputSyncEnabled() bool {
+	if o != nil && !IsNil(o.InputSyncEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetInputSyncEnabled gets a reference to the given bool and assigns it to the InputSyncEnabled field.
+func (o *WorkloadBlueprint) SetInputSyncEnabled(v bool) {
+	o.InputSyncEnabled = &v
+}
+
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *WorkloadBlueprint) GetLabel() string {
 	if o == nil || IsNil(o.Label) {
@@ -478,6 +601,38 @@ func (o *WorkloadBlueprint) SetPlatformType(v string) {
 	o.PlatformType = &v
 }
 
+// GetResolved returns the Resolved field value if set, zero value otherwise.
+func (o *WorkloadBlueprint) GetResolved() bool {
+	if o == nil || IsNil(o.Resolved) {
+		var ret bool
+		return ret
+	}
+	return *o.Resolved
+}
+
+// GetResolvedOk returns a tuple with the Resolved field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkloadBlueprint) GetResolvedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Resolved) {
+		return nil, false
+	}
+	return o.Resolved, true
+}
+
+// HasResolved returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasResolved() bool {
+	if o != nil && !IsNil(o.Resolved) {
+		return true
+	}
+
+	return false
+}
+
+// SetResolved gets a reference to the given bool and assigns it to the Resolved field.
+func (o *WorkloadBlueprint) SetResolved(v bool) {
+	o.Resolved = &v
+}
+
 // GetResourceDefinition returns the ResourceDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkloadBlueprint) GetResourceDefinition() BlueprintResourceConstraints {
 	if o == nil || IsNil(o.ResourceDefinition.Get()) {
@@ -521,6 +676,38 @@ func (o *WorkloadBlueprint) UnsetResourceDefinition() {
 	o.ResourceDefinition.Unset()
 }
 
+// GetRevision returns the Revision field value if set, zero value otherwise.
+func (o *WorkloadBlueprint) GetRevision() int64 {
+	if o == nil || IsNil(o.Revision) {
+		var ret int64
+		return ret
+	}
+	return *o.Revision
+}
+
+// GetRevisionOk returns a tuple with the Revision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkloadBlueprint) GetRevisionOk() (*int64, bool) {
+	if o == nil || IsNil(o.Revision) {
+		return nil, false
+	}
+	return o.Revision, true
+}
+
+// HasRevision returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasRevision() bool {
+	if o != nil && !IsNil(o.Revision) {
+		return true
+	}
+
+	return false
+}
+
+// SetRevision gets a reference to the given int64 and assigns it to the Revision field.
+func (o *WorkloadBlueprint) SetRevision(v int64) {
+	o.Revision = &v
+}
+
 // GetServiceItems returns the ServiceItems field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkloadBlueprint) GetServiceItems() []BlueprintServiceItemDefinition {
 	if o == nil {
@@ -552,6 +739,82 @@ func (o *WorkloadBlueprint) HasServiceItems() bool {
 // SetServiceItems gets a reference to the given []BlueprintServiceItemDefinition and assigns it to the ServiceItems field.
 func (o *WorkloadBlueprint) SetServiceItems(v []BlueprintServiceItemDefinition) {
 	o.ServiceItems = v
+}
+
+// GetSupportInfo returns the SupportInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkloadBlueprint) GetSupportInfo() WorkflowSupportInfo {
+	if o == nil || IsNil(o.SupportInfo.Get()) {
+		var ret WorkflowSupportInfo
+		return ret
+	}
+	return *o.SupportInfo.Get()
+}
+
+// GetSupportInfoOk returns a tuple with the SupportInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkloadBlueprint) GetSupportInfoOk() (*WorkflowSupportInfo, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SupportInfo.Get(), o.SupportInfo.IsSet()
+}
+
+// HasSupportInfo returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasSupportInfo() bool {
+	if o != nil && o.SupportInfo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportInfo gets a reference to the given NullableWorkflowSupportInfo and assigns it to the SupportInfo field.
+func (o *WorkloadBlueprint) SetSupportInfo(v WorkflowSupportInfo) {
+	o.SupportInfo.Set(&v)
+}
+
+// SetSupportInfoNil sets the value for SupportInfo to be an explicit nil
+func (o *WorkloadBlueprint) SetSupportInfoNil() {
+	o.SupportInfo.Set(nil)
+}
+
+// UnsetSupportInfo ensures that no value is present for SupportInfo, not even an explicit nil
+func (o *WorkloadBlueprint) UnsetSupportInfo() {
+	o.SupportInfo.Unset()
+}
+
+// GetValidatedObjects returns the ValidatedObjects field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkloadBlueprint) GetValidatedObjects() []BlueprintValidatedConfigReference {
+	if o == nil {
+		var ret []BlueprintValidatedConfigReference
+		return ret
+	}
+	return o.ValidatedObjects
+}
+
+// GetValidatedObjectsOk returns a tuple with the ValidatedObjects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkloadBlueprint) GetValidatedObjectsOk() ([]BlueprintValidatedConfigReference, bool) {
+	if o == nil || IsNil(o.ValidatedObjects) {
+		return nil, false
+	}
+	return o.ValidatedObjects, true
+}
+
+// HasValidatedObjects returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasValidatedObjects() bool {
+	if o != nil && !IsNil(o.ValidatedObjects) {
+		return true
+	}
+
+	return false
+}
+
+// SetValidatedObjects gets a reference to the given []BlueprintValidatedConfigReference and assigns it to the ValidatedObjects field.
+func (o *WorkloadBlueprint) SetValidatedObjects(v []BlueprintValidatedConfigReference) {
+	o.ValidatedObjects = v
 }
 
 // GetValidationInformation returns the ValidationInformation field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -627,6 +890,71 @@ func (o *WorkloadBlueprint) HasVersion() bool {
 // SetVersion gets a reference to the given int64 and assigns it to the Version field.
 func (o *WorkloadBlueprint) SetVersion(v int64) {
 	o.Version = &v
+}
+
+// GetVersionCompatibilityInfo returns the VersionCompatibilityInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkloadBlueprint) GetVersionCompatibilityInfo() []BlueprintVersionCompatibilityInfo {
+	if o == nil {
+		var ret []BlueprintVersionCompatibilityInfo
+		return ret
+	}
+	return o.VersionCompatibilityInfo
+}
+
+// GetVersionCompatibilityInfoOk returns a tuple with the VersionCompatibilityInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkloadBlueprint) GetVersionCompatibilityInfoOk() ([]BlueprintVersionCompatibilityInfo, bool) {
+	if o == nil || IsNil(o.VersionCompatibilityInfo) {
+		return nil, false
+	}
+	return o.VersionCompatibilityInfo, true
+}
+
+// HasVersionCompatibilityInfo returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasVersionCompatibilityInfo() bool {
+	if o != nil && !IsNil(o.VersionCompatibilityInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersionCompatibilityInfo gets a reference to the given []BlueprintVersionCompatibilityInfo and assigns it to the VersionCompatibilityInfo field.
+func (o *WorkloadBlueprint) SetVersionCompatibilityInfo(v []BlueprintVersionCompatibilityInfo) {
+	o.VersionCompatibilityInfo = v
+}
+
+// GetVersionDescription returns the VersionDescription field value if set, zero value otherwise.
+func (o *WorkloadBlueprint) GetVersionDescription() string {
+	if o == nil || IsNil(o.VersionDescription) {
+		var ret string
+		return ret
+	}
+	return *o.VersionDescription
+}
+
+// GetVersionDescriptionOk returns a tuple with the VersionDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkloadBlueprint) GetVersionDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.VersionDescription) {
+		return nil, false
+	}
+	return o.VersionDescription, true
+}
+
+// HasVersionDescription returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasVersionDescription() bool {
+	if o != nil && !IsNil(o.VersionDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersionDescription gets a reference to the given string and assigns it to the VersionDescription field.
+func (o *WorkloadBlueprint) SetVersionDescription(v string) {
+	o.VersionDescription = &v
 }
 
 // GetAssociatedRoles returns the AssociatedRoles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -705,6 +1033,49 @@ func (o *WorkloadBlueprint) UnsetCatalog() {
 	o.Catalog.Unset()
 }
 
+// GetConcreteBlueprint returns the ConcreteBlueprint field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkloadBlueprint) GetConcreteBlueprint() WorkloadBlueprintRelationship {
+	if o == nil || IsNil(o.ConcreteBlueprint.Get()) {
+		var ret WorkloadBlueprintRelationship
+		return ret
+	}
+	return *o.ConcreteBlueprint.Get()
+}
+
+// GetConcreteBlueprintOk returns a tuple with the ConcreteBlueprint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkloadBlueprint) GetConcreteBlueprintOk() (*WorkloadBlueprintRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ConcreteBlueprint.Get(), o.ConcreteBlueprint.IsSet()
+}
+
+// HasConcreteBlueprint returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasConcreteBlueprint() bool {
+	if o != nil && o.ConcreteBlueprint.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetConcreteBlueprint gets a reference to the given NullableWorkloadBlueprintRelationship and assigns it to the ConcreteBlueprint field.
+func (o *WorkloadBlueprint) SetConcreteBlueprint(v WorkloadBlueprintRelationship) {
+	o.ConcreteBlueprint.Set(&v)
+}
+
+// SetConcreteBlueprintNil sets the value for ConcreteBlueprint to be an explicit nil
+func (o *WorkloadBlueprint) SetConcreteBlueprintNil() {
+	o.ConcreteBlueprint.Set(nil)
+}
+
+// UnsetConcreteBlueprint ensures that no value is present for ConcreteBlueprint, not even an explicit nil
+func (o *WorkloadBlueprint) UnsetConcreteBlueprint() {
+	o.ConcreteBlueprint.Unset()
+}
+
 func (o WorkloadBlueprint) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -731,8 +1102,14 @@ func (o WorkloadBlueprint) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BaseBlueprint) {
+		toSerialize["BaseBlueprint"] = o.BaseBlueprint
+	}
 	if o.BlueprintDependencies != nil {
 		toSerialize["BlueprintDependencies"] = o.BlueprintDependencies
+	}
+	if !IsNil(o.BlueprintKind) {
+		toSerialize["BlueprintKind"] = o.BlueprintKind
 	}
 	if !IsNil(o.DefaultVersion) {
 		toSerialize["DefaultVersion"] = o.DefaultVersion
@@ -752,6 +1129,9 @@ func (o WorkloadBlueprint) ToMap() (map[string]interface{}, error) {
 	if o.InputOperationMetadata != nil {
 		toSerialize["InputOperationMetadata"] = o.InputOperationMetadata
 	}
+	if !IsNil(o.InputSyncEnabled) {
+		toSerialize["InputSyncEnabled"] = o.InputSyncEnabled
+	}
 	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
@@ -761,11 +1141,23 @@ func (o WorkloadBlueprint) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PlatformType) {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
+	if !IsNil(o.Resolved) {
+		toSerialize["Resolved"] = o.Resolved
+	}
 	if o.ResourceDefinition.IsSet() {
 		toSerialize["ResourceDefinition"] = o.ResourceDefinition.Get()
 	}
+	if !IsNil(o.Revision) {
+		toSerialize["Revision"] = o.Revision
+	}
 	if o.ServiceItems != nil {
 		toSerialize["ServiceItems"] = o.ServiceItems
+	}
+	if o.SupportInfo.IsSet() {
+		toSerialize["SupportInfo"] = o.SupportInfo.Get()
+	}
+	if o.ValidatedObjects != nil {
+		toSerialize["ValidatedObjects"] = o.ValidatedObjects
 	}
 	if o.ValidationInformation.IsSet() {
 		toSerialize["ValidationInformation"] = o.ValidationInformation.Get()
@@ -773,11 +1165,20 @@ func (o WorkloadBlueprint) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
+	if o.VersionCompatibilityInfo != nil {
+		toSerialize["VersionCompatibilityInfo"] = o.VersionCompatibilityInfo
+	}
+	if !IsNil(o.VersionDescription) {
+		toSerialize["VersionDescription"] = o.VersionDescription
+	}
 	if o.AssociatedRoles != nil {
 		toSerialize["AssociatedRoles"] = o.AssociatedRoles
 	}
 	if o.Catalog.IsSet() {
 		toSerialize["Catalog"] = o.Catalog.Get()
+	}
+	if o.ConcreteBlueprint.IsSet() {
+		toSerialize["ConcreteBlueprint"] = o.ConcreteBlueprint.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -834,7 +1235,10 @@ func (o *WorkloadBlueprint) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType            string                                   `json:"ObjectType"`
+		BaseBlueprint         *BlueprintBlueprintInheritanceReference  `json:"BaseBlueprint,omitempty"`
 		BlueprintDependencies []BlueprintBlueprintDefinitionDependency `json:"BlueprintDependencies,omitempty"`
+		// Identifies whether the authoring blueprint is an abstract inheritance source or a concrete definition. Concrete definitions are deployed through separate resolved version of the blueprint.. * `Concrete` - The blueprint can be materialized as a separate resolved blueprint for deployment. * `Abstract` - The blueprint is an abstract inheritance source and is not directly deployable.
+		BlueprintKind *string `json:"BlueprintKind,omitempty"`
 		// The flag to indicate that this is the default version of the blueprint.
 		DefaultVersion *bool `json:"DefaultVersion,omitempty"`
 		// The description for this blueprint which provides information on what are the pre-requisites to deploy the blueprint and what features are supported on the blueprint.
@@ -844,20 +1248,32 @@ func (o *WorkloadBlueprint) UnmarshalJSON(data []byte) (err error) {
 		GeneratedObjectDefinition []BlueprintGeneratedObjectMetadata `json:"GeneratedObjectDefinition,omitempty"`
 		InputDefinition           []WorkflowBaseDataType             `json:"InputDefinition,omitempty"`
 		InputOperationMetadata    []BlueprintInputOperationType      `json:"InputOperationMetadata,omitempty"`
+		// The input for a blueprint referenced in a workload can be synced from another blueprint of the same type.
+		InputSyncEnabled *bool `json:"InputSyncEnabled,omitempty"`
 		// A user friendly short name to identify the blueprint. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
 		Label *string `json:"Label,omitempty" validate:"regexp=^[a-zA-Z0-9]+[\\\\sa-zA-Z0-9_.:-]{1,31}$"`
 		// The name for this blueprint. You can have multiple versions of the blueprint with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), or an underscore (_).
 		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_]{0,31}$"`
 		// The Intersight platforms supported by this blueprint. * `None` - Default value is none, platform is not mentioned. * `UnifiedEdge` - The blueprint is created for Unified Edge platform.
-		PlatformType          *string                               `json:"PlatformType,omitempty"`
-		ResourceDefinition    NullableBlueprintResourceConstraints  `json:"ResourceDefinition,omitempty"`
+		PlatformType *string `json:"PlatformType,omitempty"`
+		// Indicates whether this blueprint is a generated, deployable definition. All authoring blueprints have this value set to false.
+		Resolved           *bool                                `json:"Resolved,omitempty"`
+		ResourceDefinition NullableBlueprintResourceConstraints `json:"ResourceDefinition,omitempty"`
+		// The revision of the blueprint to support compatible updates within the same version.
+		Revision              *int64                                `json:"Revision,omitempty"`
 		ServiceItems          []BlueprintServiceItemDefinition      `json:"ServiceItems,omitempty"`
+		SupportInfo           NullableWorkflowSupportInfo           `json:"SupportInfo,omitempty"`
+		ValidatedObjects      []BlueprintValidatedConfigReference   `json:"ValidatedObjects,omitempty"`
 		ValidationInformation NullableWorkflowValidationInformation `json:"ValidationInformation,omitempty"`
 		// The version of the blueprint to support multiple versions.
-		Version *int64 `json:"Version,omitempty"`
+		Version                  *int64                              `json:"Version,omitempty"`
+		VersionCompatibilityInfo []BlueprintVersionCompatibilityInfo `json:"VersionCompatibilityInfo,omitempty"`
+		// The detailed change description for this blueprint version. For new blueprint versions, this field captures a verbose description of the delta of changes in this version compared to earlier versions.
+		VersionDescription *string `json:"VersionDescription,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+[\\\\x00-\\\\xFF]*$"`
 		// An array of relationships to iamRole resources.
-		AssociatedRoles []IamRoleRelationship               `json:"AssociatedRoles,omitempty"`
-		Catalog         NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
+		AssociatedRoles   []IamRoleRelationship                 `json:"AssociatedRoles,omitempty"`
+		Catalog           NullableWorkflowCatalogRelationship   `json:"Catalog,omitempty"`
+		ConcreteBlueprint NullableWorkloadBlueprintRelationship `json:"ConcreteBlueprint,omitempty"`
 	}
 
 	varWorkloadBlueprintWithoutEmbeddedStruct := WorkloadBlueprintWithoutEmbeddedStruct{}
@@ -867,22 +1283,32 @@ func (o *WorkloadBlueprint) UnmarshalJSON(data []byte) (err error) {
 		varWorkloadBlueprint := _WorkloadBlueprint{}
 		varWorkloadBlueprint.ClassId = varWorkloadBlueprintWithoutEmbeddedStruct.ClassId
 		varWorkloadBlueprint.ObjectType = varWorkloadBlueprintWithoutEmbeddedStruct.ObjectType
+		varWorkloadBlueprint.BaseBlueprint = varWorkloadBlueprintWithoutEmbeddedStruct.BaseBlueprint
 		varWorkloadBlueprint.BlueprintDependencies = varWorkloadBlueprintWithoutEmbeddedStruct.BlueprintDependencies
+		varWorkloadBlueprint.BlueprintKind = varWorkloadBlueprintWithoutEmbeddedStruct.BlueprintKind
 		varWorkloadBlueprint.DefaultVersion = varWorkloadBlueprintWithoutEmbeddedStruct.DefaultVersion
 		varWorkloadBlueprint.Description = varWorkloadBlueprintWithoutEmbeddedStruct.Description
 		varWorkloadBlueprint.ExternalMeta = varWorkloadBlueprintWithoutEmbeddedStruct.ExternalMeta
 		varWorkloadBlueprint.GeneratedObjectDefinition = varWorkloadBlueprintWithoutEmbeddedStruct.GeneratedObjectDefinition
 		varWorkloadBlueprint.InputDefinition = varWorkloadBlueprintWithoutEmbeddedStruct.InputDefinition
 		varWorkloadBlueprint.InputOperationMetadata = varWorkloadBlueprintWithoutEmbeddedStruct.InputOperationMetadata
+		varWorkloadBlueprint.InputSyncEnabled = varWorkloadBlueprintWithoutEmbeddedStruct.InputSyncEnabled
 		varWorkloadBlueprint.Label = varWorkloadBlueprintWithoutEmbeddedStruct.Label
 		varWorkloadBlueprint.Name = varWorkloadBlueprintWithoutEmbeddedStruct.Name
 		varWorkloadBlueprint.PlatformType = varWorkloadBlueprintWithoutEmbeddedStruct.PlatformType
+		varWorkloadBlueprint.Resolved = varWorkloadBlueprintWithoutEmbeddedStruct.Resolved
 		varWorkloadBlueprint.ResourceDefinition = varWorkloadBlueprintWithoutEmbeddedStruct.ResourceDefinition
+		varWorkloadBlueprint.Revision = varWorkloadBlueprintWithoutEmbeddedStruct.Revision
 		varWorkloadBlueprint.ServiceItems = varWorkloadBlueprintWithoutEmbeddedStruct.ServiceItems
+		varWorkloadBlueprint.SupportInfo = varWorkloadBlueprintWithoutEmbeddedStruct.SupportInfo
+		varWorkloadBlueprint.ValidatedObjects = varWorkloadBlueprintWithoutEmbeddedStruct.ValidatedObjects
 		varWorkloadBlueprint.ValidationInformation = varWorkloadBlueprintWithoutEmbeddedStruct.ValidationInformation
 		varWorkloadBlueprint.Version = varWorkloadBlueprintWithoutEmbeddedStruct.Version
+		varWorkloadBlueprint.VersionCompatibilityInfo = varWorkloadBlueprintWithoutEmbeddedStruct.VersionCompatibilityInfo
+		varWorkloadBlueprint.VersionDescription = varWorkloadBlueprintWithoutEmbeddedStruct.VersionDescription
 		varWorkloadBlueprint.AssociatedRoles = varWorkloadBlueprintWithoutEmbeddedStruct.AssociatedRoles
 		varWorkloadBlueprint.Catalog = varWorkloadBlueprintWithoutEmbeddedStruct.Catalog
+		varWorkloadBlueprint.ConcreteBlueprint = varWorkloadBlueprintWithoutEmbeddedStruct.ConcreteBlueprint
 		*o = WorkloadBlueprint(varWorkloadBlueprint)
 	} else {
 		return err
@@ -902,22 +1328,32 @@ func (o *WorkloadBlueprint) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BaseBlueprint")
 		delete(additionalProperties, "BlueprintDependencies")
+		delete(additionalProperties, "BlueprintKind")
 		delete(additionalProperties, "DefaultVersion")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "ExternalMeta")
 		delete(additionalProperties, "GeneratedObjectDefinition")
 		delete(additionalProperties, "InputDefinition")
 		delete(additionalProperties, "InputOperationMetadata")
+		delete(additionalProperties, "InputSyncEnabled")
 		delete(additionalProperties, "Label")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "PlatformType")
+		delete(additionalProperties, "Resolved")
 		delete(additionalProperties, "ResourceDefinition")
+		delete(additionalProperties, "Revision")
 		delete(additionalProperties, "ServiceItems")
+		delete(additionalProperties, "SupportInfo")
+		delete(additionalProperties, "ValidatedObjects")
 		delete(additionalProperties, "ValidationInformation")
 		delete(additionalProperties, "Version")
+		delete(additionalProperties, "VersionCompatibilityInfo")
+		delete(additionalProperties, "VersionDescription")
 		delete(additionalProperties, "AssociatedRoles")
 		delete(additionalProperties, "Catalog")
+		delete(additionalProperties, "ConcreteBlueprint")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

@@ -3,12 +3,26 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_config_import"
 description: |-
-        Configuration import action will import the existing configuration from chassis and generate Intersight policies profile from it. At end of successful import, chassis will be assigned to the generated profile which has policies associated with it. No chassis profile or policies will be generated if configuration import fails.
+        The ConfigImport object enables the import of configuration from existing hardware (such as servers or chassis) to automatically generate corresponding profiles and policies within the management system.
+        #### Purpose
+        ConfigImport automates the onboarding process by translating the current hardware state into managed objects, ensuring consistency and rapid integration into centralized workflows. If the import is successful, hardware is assigned to the generated profile and associated policies.
+        #### Key Concepts
+        - **Automated Profile and Policy Generation:** Converts existing configurations into managed profiles and policies.
+        - **Seamless Hardware Onboarding:** Assigns hardware to newly created profiles for immediate management.
+        - **Operational Safeguards:** Ensures that profiles and policies are not generated if the import fails.
+        - **Controlled Access:** Access to import actions is governed by privilege sets for security.
 
 ---
 
 # Resource: intersight_chassis_config_import
-Configuration import action will import the existing configuration from chassis and generate Intersight policies profile from it. At end of successful import, chassis will be assigned to the generated profile which has policies associated with it. No chassis profile or policies will be generated if configuration import fails.
+The ConfigImport object enables the import of configuration from existing hardware (such as servers or chassis) to automatically generate corresponding profiles and policies within the management system.
+#### Purpose
+ConfigImport automates the onboarding process by translating the current hardware state into managed objects, ensuring consistency and rapid integration into centralized workflows. If the import is successful, hardware is assigned to the generated profile and associated policies.
+#### Key Concepts
+- **Automated Profile and Policy Generation:** Converts existing configurations into managed profiles and policies.
+- **Seamless Hardware Onboarding:** Assigns hardware to newly created profiles for immediate management.
+- **Operational Safeguards:** Ensures that profiles and policies are not generated if the import fails.
+- **Controlled Access:** Access to import actions is governed by privilege sets for security.
 ## Usage Example
 ### Resource Creation
 
@@ -83,7 +97,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

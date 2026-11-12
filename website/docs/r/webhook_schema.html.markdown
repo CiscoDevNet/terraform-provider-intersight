@@ -3,24 +3,12 @@ subcategory: "webhook"
 layout: "intersight"
 page_title: "Intersight: intersight_webhook_schema"
 description: |-
-        The Schema object is integral to event management, providing the framework that defines the structure of events. It ensures consistency and validity in the way events are described and handled across the system.
-        #### Purpose
-        A Schema outlines the format and content of events, acting as a template for event generation. It is essential for maintaining uniformity and accuracy in event data processing and interpretation.
-        #### Key Concepts
-        - **Event Definition:** Specifies the event type and source, ensuring each schema represents a unique event scenario within the system.
-        - **Data Integrity:** Enforces constraints on event data, guaranteeing that events adhere to predefined standards and formats.
-        - **Access Control:** Utilizes privilege sets to regulate schema creation, updates, and deletion, protecting the integrity of event definitions.
+        The schema which a generated event follows.
 
 ---
 
 # Resource: intersight_webhook_schema
-The Schema object is integral to event management, providing the framework that defines the structure of events. It ensures consistency and validity in the way events are described and handled across the system.
-#### Purpose
-A Schema outlines the format and content of events, acting as a template for event generation. It is essential for maintaining uniformity and accuracy in event data processing and interpretation.
-#### Key Concepts
-- **Event Definition:** Specifies the event type and source, ensuring each schema represents a unique event scenario within the system.
-- **Data Integrity:** Enforces constraints on event data, guaranteeing that events adhere to predefined standards and formats.
-- **Access Control:** Utilizes privilege sets to regulate schema creation, updates, and deletion, protecting the integrity of event definitions.
+The schema which a generated event follows.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -70,7 +58,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

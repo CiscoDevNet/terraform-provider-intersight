@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.Advisories"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.Advisories"]
 **NodeNames** | Pointer to **[]string** |  | [optional] 
-**Severity** | Pointer to **string** | Severity level of the advisory. | [optional] [readonly] 
+**Severity** | Pointer to **string** | Severity level of the advisory. * &#x60;critical&#x60; - The advisory has a critical severity level. * &#x60;major&#x60; - The advisory has a major severity level. * &#x60;minor&#x60; - The advisory has a minor severity level. * &#x60;warning&#x60; - The advisory has a warning severity level. | [optional] [readonly] [default to "critical"]
 
 ## Methods
 

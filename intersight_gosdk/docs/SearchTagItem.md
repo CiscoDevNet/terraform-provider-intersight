@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "search.TagItem"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "search.TagItem"]
+**AccountMoids** | Pointer to **[]string** |  | [optional] 
 **Count** | Pointer to **int64** | The number of times this tag key has been set across all resources. | [optional] [readonly] 
 **Key** | Pointer to **string** | Key of the tag from all the resources in Intersight. | [optional] [readonly] 
 **ExtMoid** | Pointer to **string** | The unique identifier of the tag definition managed object. Refer to the comm.TagDefinition API. | [optional] [readonly] 
@@ -72,6 +73,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAccountMoids
+
+`func (o *SearchTagItem) GetAccountMoids() []string`
+
+GetAccountMoids returns the AccountMoids field if non-nil, zero value otherwise.
+
+### GetAccountMoidsOk
+
+`func (o *SearchTagItem) GetAccountMoidsOk() (*[]string, bool)`
+
+GetAccountMoidsOk returns a tuple with the AccountMoids field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountMoids
+
+`func (o *SearchTagItem) SetAccountMoids(v []string)`
+
+SetAccountMoids sets AccountMoids field to given value.
+
+### HasAccountMoids
+
+`func (o *SearchTagItem) HasAccountMoids() bool`
+
+HasAccountMoids returns a boolean if a field has been set.
+
+### SetAccountMoidsNil
+
+`func (o *SearchTagItem) SetAccountMoidsNil(b bool)`
+
+ SetAccountMoidsNil sets the value for AccountMoids to be an explicit nil
+
+### UnsetAccountMoids
+`func (o *SearchTagItem) UnsetAccountMoids()`
+
+UnsetAccountMoids ensures that no value is present for AccountMoids, not even an explicit nil
 ### GetCount
 
 `func (o *SearchTagItem) GetCount() int64`

@@ -29,7 +29,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_capability_adapter_unit_descriptor.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `adapter_generation`:(int) Generation of the adapter.* `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04.* `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02.* `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03.* `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string. 
+* `adapter_generation`:(int) Generation of the adapter.* `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04.* `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02.* `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03.* `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string.* `6` - Sixth generation adapters (16xx). The PIDs of these adapters contain the V6 string. 
 * `connectivity_order`:(string) Order in which the ports are connected; sequential or cyclic. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Detailed information about the endpoint. 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,8 @@ type NiatelemetryAnomaly struct {
 	ObjectType string `json:"ObjectType"`
 	// Identifier of the alert type that triggered this notification.
 	AlertTypeId *string `json:"AlertTypeId,omitempty"`
+	// Globally unique identifier for the anomaly notification.
+	AnomalyId *string `json:"AnomalyId,omitempty"`
 	// Classification of the anomaly.
 	Category *string `json:"Category,omitempty"`
 	// Deep link to investigate the anomaly in the source system.
@@ -48,7 +50,7 @@ type NiatelemetryAnomaly struct {
 	FabricName *string `json:"FabricName,omitempty"`
 	// First time the anomaly was raised.
 	FirstRaisedTime *string `json:"FirstRaisedTime,omitempty"`
-	// Globally unique identifier for the anomaly notification.
+	// Legacy placeholder identifier retained for compatibility.
 	ExtId *string `json:"Ext_Id,omitempty"`
 	// Most recent transition to open or reopened state.
 	LastRaisedTime *string `json:"LastRaisedTime,omitempty"`
@@ -181,6 +183,38 @@ func (o *NiatelemetryAnomaly) HasAlertTypeId() bool {
 // SetAlertTypeId gets a reference to the given string and assigns it to the AlertTypeId field.
 func (o *NiatelemetryAnomaly) SetAlertTypeId(v string) {
 	o.AlertTypeId = &v
+}
+
+// GetAnomalyId returns the AnomalyId field value if set, zero value otherwise.
+func (o *NiatelemetryAnomaly) GetAnomalyId() string {
+	if o == nil || IsNil(o.AnomalyId) {
+		var ret string
+		return ret
+	}
+	return *o.AnomalyId
+}
+
+// GetAnomalyIdOk returns a tuple with the AnomalyId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryAnomaly) GetAnomalyIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AnomalyId) {
+		return nil, false
+	}
+	return o.AnomalyId, true
+}
+
+// HasAnomalyId returns a boolean if a field has been set.
+func (o *NiatelemetryAnomaly) HasAnomalyId() bool {
+	if o != nil && !IsNil(o.AnomalyId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAnomalyId gets a reference to the given string and assigns it to the AnomalyId field.
+func (o *NiatelemetryAnomaly) SetAnomalyId(v string) {
+	o.AnomalyId = &v
 }
 
 // GetCategory returns the Category field value if set, zero value otherwise.
@@ -799,6 +833,9 @@ func (o NiatelemetryAnomaly) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AlertTypeId) {
 		toSerialize["AlertTypeId"] = o.AlertTypeId
 	}
+	if !IsNil(o.AnomalyId) {
+		toSerialize["AnomalyId"] = o.AnomalyId
+	}
 	if !IsNil(o.Category) {
 		toSerialize["Category"] = o.Category
 	}
@@ -910,6 +947,8 @@ func (o *NiatelemetryAnomaly) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Identifier of the alert type that triggered this notification.
 		AlertTypeId *string `json:"AlertTypeId,omitempty"`
+		// Globally unique identifier for the anomaly notification.
+		AnomalyId *string `json:"AnomalyId,omitempty"`
 		// Classification of the anomaly.
 		Category *string `json:"Category,omitempty"`
 		// Deep link to investigate the anomaly in the source system.
@@ -928,7 +967,7 @@ func (o *NiatelemetryAnomaly) UnmarshalJSON(data []byte) (err error) {
 		FabricName *string `json:"FabricName,omitempty"`
 		// First time the anomaly was raised.
 		FirstRaisedTime *string `json:"FirstRaisedTime,omitempty"`
-		// Globally unique identifier for the anomaly notification.
+		// Legacy placeholder identifier retained for compatibility.
 		ExtId *string `json:"Ext_Id,omitempty"`
 		// Most recent transition to open or reopened state.
 		LastRaisedTime *string `json:"LastRaisedTime,omitempty"`
@@ -955,6 +994,7 @@ func (o *NiatelemetryAnomaly) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetryAnomaly.ClassId = varNiatelemetryAnomalyWithoutEmbeddedStruct.ClassId
 		varNiatelemetryAnomaly.ObjectType = varNiatelemetryAnomalyWithoutEmbeddedStruct.ObjectType
 		varNiatelemetryAnomaly.AlertTypeId = varNiatelemetryAnomalyWithoutEmbeddedStruct.AlertTypeId
+		varNiatelemetryAnomaly.AnomalyId = varNiatelemetryAnomalyWithoutEmbeddedStruct.AnomalyId
 		varNiatelemetryAnomaly.Category = varNiatelemetryAnomalyWithoutEmbeddedStruct.Category
 		varNiatelemetryAnomaly.DeepLink = varNiatelemetryAnomalyWithoutEmbeddedStruct.DeepLink
 		varNiatelemetryAnomaly.Description = varNiatelemetryAnomalyWithoutEmbeddedStruct.Description
@@ -993,6 +1033,7 @@ func (o *NiatelemetryAnomaly) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlertTypeId")
+		delete(additionalProperties, "AnomalyId")
 		delete(additionalProperties, "Category")
 		delete(additionalProperties, "DeepLink")
 		delete(additionalProperties, "Description")

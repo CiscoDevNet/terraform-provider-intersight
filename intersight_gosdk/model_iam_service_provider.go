@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // checks if the IamServiceProvider type satisfies the MappedNullable interface at compile time
@@ -28,12 +29,18 @@ type IamServiceProvider struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Expiry time of the certificate used in SP metadata. Tracks SP certificate expiries and rotates the certificate before it expires to avoid any authentication failure.
+	CertExpiryTime *time.Time `json:"CertExpiryTime,omitempty"`
 	// Entity ID of the Intersight Service Provider. In SAML, the entity ID uniquely identifies the IdP/Service Provider.
 	EntityId *string `json:"EntityId,omitempty"`
 	// Metadata of the Intersight Service Provider. User downloads the Intersight Service Provider metadata and integrates it with their IdP for authentication.
 	Metadata *string `json:"Metadata,omitempty"`
 	// Name of the Intersight Service Provider.
-	Name                 *string                       `json:"Name,omitempty"`
+	Name *string `json:"Name,omitempty"`
+	// The expiration state of the certificates in the SP metadata rotation during the grace period of SP SAML metadata rotation. * `expiration-within-info-period` - The expiry date is beyond 270 days. * `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days. * `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days. * `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days. * `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days. * `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days. * `expiration-within-critical-period` - The expiry date is within 7 days. * `expired` - The expiry date has passed. * `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.
+	SpMetadataExpiryState *string `json:"SpMetadataExpiryState,omitempty"`
+	// Defines which SP metadata is defined in Intersight. The SP metadata could be legacy metadata or new metadata. * `Sha2` - The new SAML SP metadata with SHA-2 hashed certificates. * `Legacy` - The legacy SAML SP metadata (expiring certificates).
+	SpMetadataType       *string                       `json:"SpMetadataType,omitempty"`
 	System               NullableIamSystemRelationship `json:"System,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -119,6 +126,38 @@ func (o *IamServiceProvider) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "iam.ServiceProvider" of the ObjectType field.
 func (o *IamServiceProvider) GetDefaultObjectType() interface{} {
 	return "iam.ServiceProvider"
+}
+
+// GetCertExpiryTime returns the CertExpiryTime field value if set, zero value otherwise.
+func (o *IamServiceProvider) GetCertExpiryTime() time.Time {
+	if o == nil || IsNil(o.CertExpiryTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CertExpiryTime
+}
+
+// GetCertExpiryTimeOk returns a tuple with the CertExpiryTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamServiceProvider) GetCertExpiryTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CertExpiryTime) {
+		return nil, false
+	}
+	return o.CertExpiryTime, true
+}
+
+// HasCertExpiryTime returns a boolean if a field has been set.
+func (o *IamServiceProvider) HasCertExpiryTime() bool {
+	if o != nil && !IsNil(o.CertExpiryTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetCertExpiryTime gets a reference to the given time.Time and assigns it to the CertExpiryTime field.
+func (o *IamServiceProvider) SetCertExpiryTime(v time.Time) {
+	o.CertExpiryTime = &v
 }
 
 // GetEntityId returns the EntityId field value if set, zero value otherwise.
@@ -217,6 +256,70 @@ func (o *IamServiceProvider) SetName(v string) {
 	o.Name = &v
 }
 
+// GetSpMetadataExpiryState returns the SpMetadataExpiryState field value if set, zero value otherwise.
+func (o *IamServiceProvider) GetSpMetadataExpiryState() string {
+	if o == nil || IsNil(o.SpMetadataExpiryState) {
+		var ret string
+		return ret
+	}
+	return *o.SpMetadataExpiryState
+}
+
+// GetSpMetadataExpiryStateOk returns a tuple with the SpMetadataExpiryState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamServiceProvider) GetSpMetadataExpiryStateOk() (*string, bool) {
+	if o == nil || IsNil(o.SpMetadataExpiryState) {
+		return nil, false
+	}
+	return o.SpMetadataExpiryState, true
+}
+
+// HasSpMetadataExpiryState returns a boolean if a field has been set.
+func (o *IamServiceProvider) HasSpMetadataExpiryState() bool {
+	if o != nil && !IsNil(o.SpMetadataExpiryState) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpMetadataExpiryState gets a reference to the given string and assigns it to the SpMetadataExpiryState field.
+func (o *IamServiceProvider) SetSpMetadataExpiryState(v string) {
+	o.SpMetadataExpiryState = &v
+}
+
+// GetSpMetadataType returns the SpMetadataType field value if set, zero value otherwise.
+func (o *IamServiceProvider) GetSpMetadataType() string {
+	if o == nil || IsNil(o.SpMetadataType) {
+		var ret string
+		return ret
+	}
+	return *o.SpMetadataType
+}
+
+// GetSpMetadataTypeOk returns a tuple with the SpMetadataType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamServiceProvider) GetSpMetadataTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.SpMetadataType) {
+		return nil, false
+	}
+	return o.SpMetadataType, true
+}
+
+// HasSpMetadataType returns a boolean if a field has been set.
+func (o *IamServiceProvider) HasSpMetadataType() bool {
+	if o != nil && !IsNil(o.SpMetadataType) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpMetadataType gets a reference to the given string and assigns it to the SpMetadataType field.
+func (o *IamServiceProvider) SetSpMetadataType(v string) {
+	o.SpMetadataType = &v
+}
+
 // GetSystem returns the System field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamServiceProvider) GetSystem() IamSystemRelationship {
 	if o == nil || IsNil(o.System.Get()) {
@@ -286,6 +389,9 @@ func (o IamServiceProvider) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CertExpiryTime) {
+		toSerialize["CertExpiryTime"] = o.CertExpiryTime
+	}
 	if !IsNil(o.EntityId) {
 		toSerialize["EntityId"] = o.EntityId
 	}
@@ -294,6 +400,12 @@ func (o IamServiceProvider) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
+	}
+	if !IsNil(o.SpMetadataExpiryState) {
+		toSerialize["SpMetadataExpiryState"] = o.SpMetadataExpiryState
+	}
+	if !IsNil(o.SpMetadataType) {
+		toSerialize["SpMetadataType"] = o.SpMetadataType
 	}
 	if o.System.IsSet() {
 		toSerialize["System"] = o.System.Get()
@@ -353,13 +465,19 @@ func (o *IamServiceProvider) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Expiry time of the certificate used in SP metadata. Tracks SP certificate expiries and rotates the certificate before it expires to avoid any authentication failure.
+		CertExpiryTime *time.Time `json:"CertExpiryTime,omitempty"`
 		// Entity ID of the Intersight Service Provider. In SAML, the entity ID uniquely identifies the IdP/Service Provider.
 		EntityId *string `json:"EntityId,omitempty"`
 		// Metadata of the Intersight Service Provider. User downloads the Intersight Service Provider metadata and integrates it with their IdP for authentication.
 		Metadata *string `json:"Metadata,omitempty"`
 		// Name of the Intersight Service Provider.
-		Name   *string                       `json:"Name,omitempty"`
-		System NullableIamSystemRelationship `json:"System,omitempty"`
+		Name *string `json:"Name,omitempty"`
+		// The expiration state of the certificates in the SP metadata rotation during the grace period of SP SAML metadata rotation. * `expiration-within-info-period` - The expiry date is beyond 270 days. * `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days. * `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days. * `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days. * `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days. * `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days. * `expiration-within-critical-period` - The expiry date is within 7 days. * `expired` - The expiry date has passed. * `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.
+		SpMetadataExpiryState *string `json:"SpMetadataExpiryState,omitempty"`
+		// Defines which SP metadata is defined in Intersight. The SP metadata could be legacy metadata or new metadata. * `Sha2` - The new SAML SP metadata with SHA-2 hashed certificates. * `Legacy` - The legacy SAML SP metadata (expiring certificates).
+		SpMetadataType *string                       `json:"SpMetadataType,omitempty"`
+		System         NullableIamSystemRelationship `json:"System,omitempty"`
 	}
 
 	varIamServiceProviderWithoutEmbeddedStruct := IamServiceProviderWithoutEmbeddedStruct{}
@@ -369,9 +487,12 @@ func (o *IamServiceProvider) UnmarshalJSON(data []byte) (err error) {
 		varIamServiceProvider := _IamServiceProvider{}
 		varIamServiceProvider.ClassId = varIamServiceProviderWithoutEmbeddedStruct.ClassId
 		varIamServiceProvider.ObjectType = varIamServiceProviderWithoutEmbeddedStruct.ObjectType
+		varIamServiceProvider.CertExpiryTime = varIamServiceProviderWithoutEmbeddedStruct.CertExpiryTime
 		varIamServiceProvider.EntityId = varIamServiceProviderWithoutEmbeddedStruct.EntityId
 		varIamServiceProvider.Metadata = varIamServiceProviderWithoutEmbeddedStruct.Metadata
 		varIamServiceProvider.Name = varIamServiceProviderWithoutEmbeddedStruct.Name
+		varIamServiceProvider.SpMetadataExpiryState = varIamServiceProviderWithoutEmbeddedStruct.SpMetadataExpiryState
+		varIamServiceProvider.SpMetadataType = varIamServiceProviderWithoutEmbeddedStruct.SpMetadataType
 		varIamServiceProvider.System = varIamServiceProviderWithoutEmbeddedStruct.System
 		*o = IamServiceProvider(varIamServiceProvider)
 	} else {
@@ -392,9 +513,12 @@ func (o *IamServiceProvider) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CertExpiryTime")
 		delete(additionalProperties, "EntityId")
 		delete(additionalProperties, "Metadata")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "SpMetadataExpiryState")
+		delete(additionalProperties, "SpMetadataType")
 		delete(additionalProperties, "System")
 
 		// remove fields from embedded structs

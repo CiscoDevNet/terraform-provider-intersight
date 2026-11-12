@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -31,9 +31,10 @@ type FabricSwitchProfile struct {
 	ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
 	ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
 	// Serial number of the fabric that would be assigned to this pre-assigned fabric switch Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
-	FabricPreAssignBySerial   *string                        `json:"FabricPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
-	OverriddenList            []string                       `json:"OverriddenList,omitempty"`
-	ScheduledSwitchAssignment NullableFabricSwitchAssignment `json:"ScheduledSwitchAssignment,omitempty"`
+	FabricPreAssignBySerial          *string                                        `json:"FabricPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
+	OverriddenList                   []string                                       `json:"OverriddenList,omitempty"`
+	PeerInterfaceCompatibilityIssues NullableFabricPeerInterfaceCompatibilityIssues `json:"PeerInterfaceCompatibilityIssues,omitempty"`
+	ScheduledSwitchAssignment        NullableFabricSwitchAssignment                 `json:"ScheduledSwitchAssignment,omitempty"`
 	// Source of the switch assigned to the Domain Profile. Values can be Static or None. Static is used if a switch is attached directly to a Domain Profile. None is used if no switch is attached to a Domain Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `Static` - Fabric is directly assigned to domain profile using assign chassis. * `None` - No fabric is assigned to the domain profile.
 	SwitchAssignmentMode *string                 `json:"SwitchAssignmentMode,omitempty"`
 	TemplateActions      []MotemplateActionEntry `json:"TemplateActions,omitempty"`
@@ -294,6 +295,49 @@ func (o *FabricSwitchProfile) HasOverriddenList() bool {
 // SetOverriddenList gets a reference to the given []string and assigns it to the OverriddenList field.
 func (o *FabricSwitchProfile) SetOverriddenList(v []string) {
 	o.OverriddenList = v
+}
+
+// GetPeerInterfaceCompatibilityIssues returns the PeerInterfaceCompatibilityIssues field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchProfile) GetPeerInterfaceCompatibilityIssues() FabricPeerInterfaceCompatibilityIssues {
+	if o == nil || IsNil(o.PeerInterfaceCompatibilityIssues.Get()) {
+		var ret FabricPeerInterfaceCompatibilityIssues
+		return ret
+	}
+	return *o.PeerInterfaceCompatibilityIssues.Get()
+}
+
+// GetPeerInterfaceCompatibilityIssuesOk returns a tuple with the PeerInterfaceCompatibilityIssues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchProfile) GetPeerInterfaceCompatibilityIssuesOk() (*FabricPeerInterfaceCompatibilityIssues, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PeerInterfaceCompatibilityIssues.Get(), o.PeerInterfaceCompatibilityIssues.IsSet()
+}
+
+// HasPeerInterfaceCompatibilityIssues returns a boolean if a field has been set.
+func (o *FabricSwitchProfile) HasPeerInterfaceCompatibilityIssues() bool {
+	if o != nil && o.PeerInterfaceCompatibilityIssues.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPeerInterfaceCompatibilityIssues gets a reference to the given NullableFabricPeerInterfaceCompatibilityIssues and assigns it to the PeerInterfaceCompatibilityIssues field.
+func (o *FabricSwitchProfile) SetPeerInterfaceCompatibilityIssues(v FabricPeerInterfaceCompatibilityIssues) {
+	o.PeerInterfaceCompatibilityIssues.Set(&v)
+}
+
+// SetPeerInterfaceCompatibilityIssuesNil sets the value for PeerInterfaceCompatibilityIssues to be an explicit nil
+func (o *FabricSwitchProfile) SetPeerInterfaceCompatibilityIssuesNil() {
+	o.PeerInterfaceCompatibilityIssues.Set(nil)
+}
+
+// UnsetPeerInterfaceCompatibilityIssues ensures that no value is present for PeerInterfaceCompatibilityIssues, not even an explicit nil
+func (o *FabricSwitchProfile) UnsetPeerInterfaceCompatibilityIssues() {
+	o.PeerInterfaceCompatibilityIssues.Unset()
 }
 
 // GetScheduledSwitchAssignment returns the ScheduledSwitchAssignment field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -702,6 +746,9 @@ func (o FabricSwitchProfile) ToMap() (map[string]interface{}, error) {
 	if o.OverriddenList != nil {
 		toSerialize["OverriddenList"] = o.OverriddenList
 	}
+	if o.PeerInterfaceCompatibilityIssues.IsSet() {
+		toSerialize["PeerInterfaceCompatibilityIssues"] = o.PeerInterfaceCompatibilityIssues.Get()
+	}
 	if o.ScheduledSwitchAssignment.IsSet() {
 		toSerialize["ScheduledSwitchAssignment"] = o.ScheduledSwitchAssignment.Get()
 	}
@@ -790,9 +837,10 @@ func (o *FabricSwitchProfile) UnmarshalJSON(data []byte) (err error) {
 		ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
 		ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
 		// Serial number of the fabric that would be assigned to this pre-assigned fabric switch Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters.
-		FabricPreAssignBySerial   *string                        `json:"FabricPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
-		OverriddenList            []string                       `json:"OverriddenList,omitempty"`
-		ScheduledSwitchAssignment NullableFabricSwitchAssignment `json:"ScheduledSwitchAssignment,omitempty"`
+		FabricPreAssignBySerial          *string                                        `json:"FabricPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
+		OverriddenList                   []string                                       `json:"OverriddenList,omitempty"`
+		PeerInterfaceCompatibilityIssues NullableFabricPeerInterfaceCompatibilityIssues `json:"PeerInterfaceCompatibilityIssues,omitempty"`
+		ScheduledSwitchAssignment        NullableFabricSwitchAssignment                 `json:"ScheduledSwitchAssignment,omitempty"`
 		// Source of the switch assigned to the Domain Profile. Values can be Static or None. Static is used if a switch is attached directly to a Domain Profile. None is used if no switch is attached to a Domain Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `Static` - Fabric is directly assigned to domain profile using assign chassis. * `None` - No fabric is assigned to the domain profile.
 		SwitchAssignmentMode *string                 `json:"SwitchAssignmentMode,omitempty"`
 		TemplateActions      []MotemplateActionEntry `json:"TemplateActions,omitempty"`
@@ -819,6 +867,7 @@ func (o *FabricSwitchProfile) UnmarshalJSON(data []byte) (err error) {
 		varFabricSwitchProfile.ConfigChanges = varFabricSwitchProfileWithoutEmbeddedStruct.ConfigChanges
 		varFabricSwitchProfile.FabricPreAssignBySerial = varFabricSwitchProfileWithoutEmbeddedStruct.FabricPreAssignBySerial
 		varFabricSwitchProfile.OverriddenList = varFabricSwitchProfileWithoutEmbeddedStruct.OverriddenList
+		varFabricSwitchProfile.PeerInterfaceCompatibilityIssues = varFabricSwitchProfileWithoutEmbeddedStruct.PeerInterfaceCompatibilityIssues
 		varFabricSwitchProfile.ScheduledSwitchAssignment = varFabricSwitchProfileWithoutEmbeddedStruct.ScheduledSwitchAssignment
 		varFabricSwitchProfile.SwitchAssignmentMode = varFabricSwitchProfileWithoutEmbeddedStruct.SwitchAssignmentMode
 		varFabricSwitchProfile.TemplateActions = varFabricSwitchProfileWithoutEmbeddedStruct.TemplateActions
@@ -852,6 +901,7 @@ func (o *FabricSwitchProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ConfigChanges")
 		delete(additionalProperties, "FabricPreAssignBySerial")
 		delete(additionalProperties, "OverriddenList")
+		delete(additionalProperties, "PeerInterfaceCompatibilityIssues")
 		delete(additionalProperties, "ScheduledSwitchAssignment")
 		delete(additionalProperties, "SwitchAssignmentMode")
 		delete(additionalProperties, "TemplateActions")

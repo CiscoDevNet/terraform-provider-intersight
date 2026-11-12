@@ -60,6 +60,16 @@ func getWorkloadWorkloadDefinitionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"blueprint_update_by_date": {
+			Description: "The date by which the blueprints in the workload definition should be updated to non-deprecated versions. This field is populated only if the workload definition uses deprecated blueprints. If the definition still uses deprecated blueprints past this date, the definition will be locked and can only be used to create a new version using active blueprints.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"blueprint_version_update_status": {
+			Description: "The aggregate blueprint version update status across all blueprints included in the definition.\n* `Updated` - The blueprint reference is at the latest available version.\n* `AutoUpdate` - The blueprint reference can be updated to the latest version automatically.\n* `NeedsNewVersion` - The blueprint reference cannot be updated without a new version of the definition.\n* `Deprecated` - The referred blueprint is deprecated.\n* `UpdateInProgress` - The blueprint reference update is in progress. The update is in an intermediate state between AutoUpdate and Updated.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"blueprints": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -105,6 +115,106 @@ func getWorkloadWorkloadDefinitionSchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"blueprint_version_update_state": {
+						Description: "The blueprint version update state for the blueprint reference. This captures the update requirements for the blueprint, including the update status and target blueprint version.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"status": {
+									Description: "The status of the blueprint currently referred to in the workload definition.\n* `Updated` - The blueprint reference is at the latest available version.\n* `AutoUpdate` - The blueprint reference can be updated to the latest version automatically.\n* `NeedsNewVersion` - The blueprint reference cannot be updated without a new version of the definition.\n* `Deprecated` - The referred blueprint is deprecated.\n* `UpdateInProgress` - The blueprint reference update is in progress. The update is in an intermediate state between AutoUpdate and Updated.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"target_version": {
+									Description: "The target blueprint version reference for the blueprint version update.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"blueprint_definition": {
+												Description: "The system-resolved reference to the blueprint.",
+												Type:        schema.TypeList,
+												MaxItems:    1,
+												Optional:    true,
+												Elem: &schema.Resource{
+													Schema: map[string]*schema.Schema{
+														"additional_properties": {
+															Type:             schema.TypeString,
+															Optional:         true,
+															DiffSuppressFunc: SuppressDiffAdditionProps,
+														},
+														"class_id": {
+															Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"moid": {
+															Description: "The Moid of the referenced REST resource.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"object_type": {
+															Description: "The fully-qualified name of the remote type referred by this relationship.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"selector": {
+															Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+													},
+												},
+											},
+											"catalog_moid": {
+												Description: "The catalog MOID that this blueprint belongs to. When the catalog MOID is not specified, the catalog of the parent blueprint is used first. If no blueprint can be found in that catalog, the system catalog is used.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"nr_version": {
+												Description: "The version number of the blueprint.",
+												Type:        schema.TypeInt,
+												Optional:    true,
+											},
+										},
+									},
+								},
+							},
+						},
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
@@ -120,6 +230,34 @@ func getWorkloadWorkloadDefinitionSchema() map[string]*schema.Schema {
 						Optional: true,
 						Elem: &schema.Schema{
 							Type: schema.TypeString}},
+					"input_source_references": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"blueprint_name": {
+									Description: "The name of the source blueprint from which inputs are copied.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"name": {
 						Description: "The name for the referred blueprint. This name must be unique within the workload definition.",
 						Type:        schema.TypeString,
@@ -499,7 +637,7 @@ func getWorkloadWorkloadDefinitionSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -818,6 +956,17 @@ func dataSourceWorkloadWorkloadDefinitionRead(c context.Context, d *schema.Resou
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("blueprint_update_by_date"); ok {
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
+		o.SetBlueprintUpdateByDate(x)
+	}
+
+	if v, ok := d.GetOk("blueprint_version_update_status"); ok {
+		x := (v.(string))
+		o.SetBlueprintVersionUpdateStatus(x)
+	}
+
 	if v, ok := d.GetOk("blueprints"); ok {
 		x := make([]models.WorkloadBlueprintReference, 0)
 		s := v.([]interface{})
@@ -901,6 +1050,43 @@ func dataSourceWorkloadWorkloadDefinitionRead(c context.Context, d *schema.Resou
 					}
 					if len(x) > 0 {
 						o.SetInputOverride(x)
+					}
+				}
+			}
+			if v, ok := l["input_source_references"]; ok {
+				{
+					x := make([]models.WorkloadInputSourceReference, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewWorkloadInputSourceReferenceWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						if v, ok := l["blueprint_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetBlueprintName(x)
+							}
+						}
+						o.SetClassId("workload.InputSourceReference")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetInputSourceReferences(x)
 					}
 				}
 			}
@@ -1298,6 +1484,12 @@ func dataSourceWorkloadWorkloadDefinitionRead(c context.Context, d *schema.Resou
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -1532,6 +1724,9 @@ func dataSourceWorkloadWorkloadDefinitionRead(c context.Context, d *schema.Resou
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["blueprint_update_by_date"] = (s.GetBlueprintUpdateByDate()).String()
+				temp["blueprint_version_update_status"] = (s.GetBlueprintVersionUpdateStatus())
 
 				temp["blueprints"] = flattenListWorkloadBlueprintReference(s.GetBlueprints(), d)
 				temp["class_id"] = (s.GetClassId())

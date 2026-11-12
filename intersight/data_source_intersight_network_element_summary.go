@@ -616,7 +616,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"out_of_band_ipv6_mode": {
-			Description: "The IPv6 address configuration mode of the network Element out-of-band management interface.\n* `` - The IPv6 address mode is not available or not applicable.\n* `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC).\n* `static` - IPv6 address is statically configured.\n* `disabled` - IPv6 is disabled on the out-of-band management interface.",
+			Description: "The IPv6 address configuration mode of the network Element out-of-band management interface.\n* `` - The IPv6 address mode is not available or not applicable.\n* `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC).\n* `static` - IPv6 address is statically configured.\n* `disabled` - IPv6 is disabled on the out-of-band management interface.\n* `dhcpv6` - IPv6 address is configured via DHCPv6.\n* `dhcpv6Slaac` - IPv6 address is configured via DHCPv6 and SLAAC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -688,6 +688,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 		"part_number": {
 			Description: "Part number of the switch.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"peer_firmware_out_of_sync": {
+			Description: "TThe flag to indicate the firmware of peer Fabric Interconnect is out of sync.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"permission_resources": {
@@ -978,7 +983,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1743,6 +1748,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetPartNumber(x)
 	}
 
+	if v, ok := d.GetOkExists("peer_firmware_out_of_sync"); ok {
+		x := (v.(bool))
+		o.SetPeerFirmwareOutOfSync(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -2002,6 +2012,12 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -2231,6 +2247,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 				temp["part_number"] = (s.GetPartNumber())
+				temp["peer_firmware_out_of_sync"] = (s.GetPeerFirmwareOutOfSync())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["presence"] = (s.GetPresence())

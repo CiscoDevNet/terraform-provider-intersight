@@ -223,7 +223,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
-  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
+  + `type`:(string) An enum that defines the type of tag. Supported values are PathTag and KeyValue.When omitted on create, the server infers the type from the tag shape or an existing TagDefinition.On update, Type distinguishes PathTag and KeyValue tags that share the same key. If anempty tag could refer to either type based on stored tags or TagDefinitions, the requestmust supply enough Type information to make the intended sibling unambiguous.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `tasks`:(Array)
 This complex property has following sub-properties:
@@ -308,7 +308,7 @@ This complex property has following sub-properties:
   + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
   + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
-* `workflow_metadata`:(HashMap) - A reference to a workflowWorkflowMetadata resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `workflow_metadata`:(HashMap) -(ReadOnly) A reference to a workflowWorkflowMetadata resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
@@ -404,6 +404,7 @@ This data type is used to represent primitives like string, floats and integers.
 This complex property has following sub-properties:
   + `constraints`:(HashMap) - Constraints that must be applied to the parameter value supplied for this data type. 
 This complex property has following sub-properties:
+    + `data_validation`:(string) JavaScript expression used to ensure the supplied parameter value is valid. 
     + `enum_list`:(Array)
 This complex property has following sub-properties:
     + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), round parenthesis ( () ), or an underscore (_) and must have an alphanumeric character. 
@@ -413,6 +414,7 @@ This complex property has following sub-properties:
   + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
+  + `validation_error`:(string) Provide a custom error message to return when a validation for the constraint fails. When there are multiple constraints, any constraint failure will return this message. 
   + `data_source_selector`:(Array)
 This complex property has following sub-properties:
     + `display_attributes`:
@@ -548,6 +550,7 @@ This data type is used to represent primitives like string, floats and integers.
 This complex property has following sub-properties:
   + `constraints`:(HashMap) - Constraints that must be applied to the parameter value supplied for this data type. 
 This complex property has following sub-properties:
+    + `data_validation`:(string) JavaScript expression used to ensure the supplied parameter value is valid. 
     + `enum_list`:(Array)
 This complex property has following sub-properties:
     + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), round parenthesis ( () ), or an underscore (_) and must have an alphanumeric character. 
@@ -557,6 +560,7 @@ This complex property has following sub-properties:
   + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
+  + `validation_error`:(string) Provide a custom error message to return when a validation for the constraint fails. When there are multiple constraints, any constraint failure will return this message. 
   + `data_source_selector`:(Array)
 This complex property has following sub-properties:
     + `display_attributes`:
@@ -692,6 +696,7 @@ This data type is used to represent primitives like string, floats and integers.
 This complex property has following sub-properties:
   + `constraints`:(HashMap) - Constraints that must be applied to the parameter value supplied for this data type. 
 This complex property has following sub-properties:
+    + `data_validation`:(string) JavaScript expression used to ensure the supplied parameter value is valid. 
     + `enum_list`:(Array)
 This complex property has following sub-properties:
     + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), round parenthesis ( () ), or an underscore (_) and must have an alphanumeric character. 
@@ -701,6 +706,7 @@ This complex property has following sub-properties:
   + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
+  + `validation_error`:(string) Provide a custom error message to return when a validation for the constraint fails. When there are multiple constraints, any constraint failure will return this message. 
   + `data_source_selector`:(Array)
 This complex property has following sub-properties:
     + `display_attributes`:

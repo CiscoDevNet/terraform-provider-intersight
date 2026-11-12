@@ -3,12 +3,26 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_config_import"
 description: |-
-        Configuration import action will import the existing configuration from physical server and generate Intersight policies and server profile from it. At end of successful import, server will be assigned to the generated profile which has policies associated with it. No server profile or policies will be generated if configuration import fails.
+        The ConfigImport object automates the translation of existing hardware configurations into managed system profiles and policies, streamlining the integration of hardware into centralized control.
+        #### Purpose
+        ConfigImport is designed to facilitate the rapid adoption of hardware by importing its configuration and generating the necessary management objects. Successful imports result in the hardware being assigned to the generated profile, establishing immediate operational control.
+        #### Key Concepts
+        - **Efficient Onboarding:** Translates hardware configurations into managed objects.
+        - **Integrated Assignment:** Assigns imported hardware to new profiles and policies.
+        - **Integrity and Reliability:** Ensures objects are only created on successful import.
+        - **Privilege Governance:** Secure import actions managed through access controls.
 
 ---
 
 # Data Source: intersight_server_config_import
-Configuration import action will import the existing configuration from physical server and generate Intersight policies and server profile from it. At end of successful import, server will be assigned to the generated profile which has policies associated with it. No server profile or policies will be generated if configuration import fails.
+The ConfigImport object automates the translation of existing hardware configurations into managed system profiles and policies, streamlining the integration of hardware into centralized control.
+#### Purpose
+ConfigImport is designed to facilitate the rapid adoption of hardware by importing its configuration and generating the necessary management objects. Successful imports result in the hardware being assigned to the generated profile, establishing immediate operational control.
+#### Key Concepts
+- **Efficient Onboarding:** Translates hardware configurations into managed objects.
+- **Integrated Assignment:** Assigns imported hardware to new profiles and policies.
+- **Integrity and Reliability:** Ensures objects are only created on successful import.
+- **Privilege Governance:** Secure import actions managed through access controls.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

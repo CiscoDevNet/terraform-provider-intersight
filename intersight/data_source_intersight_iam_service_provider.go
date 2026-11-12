@@ -60,6 +60,11 @@ func getIamServiceProviderSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"cert_expiry_time": {
+			Description: "Expiry time of the certificate used in SP metadata. Tracks SP certificate expiries and rotates the certificate before it expires to avoid any authentication failure.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -181,6 +186,16 @@ func getIamServiceProviderSchema() map[string]*schema.Schema {
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sp_metadata_expiry_state": {
+			Description: "The expiration state of the certificates in the SP metadata rotation during the grace period of SP SAML metadata rotation.\n* `expiration-within-info-period` - The expiry date is beyond 270 days.\n* `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days.\n* `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days.\n* `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days.\n* `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days.\n* `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days.\n* `expiration-within-critical-period` - The expiry date is within 7 days.\n* `expired` - The expiry date has passed.\n* `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sp_metadata_type": {
+			Description: "Defines which SP metadata is defined in Intersight. The SP metadata could be legacy metadata or new metadata.\n* `Sha2` - The new SAML SP metadata with SHA-2 hashed certificates.\n* `Legacy` - The legacy SAML SP metadata (expiring certificates).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -313,7 +328,7 @@ func getIamServiceProviderSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"type": {
-						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+						Description: "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -514,6 +529,12 @@ func dataSourceIamServiceProviderRead(c context.Context, d *schema.ResourceData,
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("cert_expiry_time"); ok {
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
+		o.SetCertExpiryTime(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -660,6 +681,16 @@ func dataSourceIamServiceProviderRead(c context.Context, d *schema.ResourceData,
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("sp_metadata_expiry_state"); ok {
+		x := (v.(string))
+		o.SetSpMetadataExpiryState(x)
+	}
+
+	if v, ok := d.GetOk("sp_metadata_type"); ok {
+		x := (v.(string))
+		o.SetSpMetadataType(x)
+	}
+
 	if v, ok := d.GetOk("system"); ok {
 		p := make([]models.IamSystemRelationship, 0, 1)
 		s := v.([]interface{})
@@ -766,6 +797,12 @@ func dataSourceIamServiceProviderRead(c context.Context, d *schema.ResourceData,
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {
@@ -892,6 +929,8 @@ func dataSourceIamServiceProviderRead(c context.Context, d *schema.ResourceData,
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["cert_expiry_time"] = (s.GetCertExpiryTime()).String()
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -909,6 +948,8 @@ func dataSourceIamServiceProviderRead(c context.Context, d *schema.ResourceData,
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["sp_metadata_expiry_state"] = (s.GetSpMetadataExpiryState())
+				temp["sp_metadata_type"] = (s.GetSpMetadataType())
 
 				temp["system"] = flattenMapIamSystemRelationship(s.GetSystem(), d)
 

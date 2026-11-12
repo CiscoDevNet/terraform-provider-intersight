@@ -735,16 +735,12 @@ func resourceBulkMoCloner() *schema.Resource {
 													}, ForceNew: true,
 												},
 												"type": {
-													Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-													Type:        schema.TypeString,
-													Optional:    true,
-													Computed:    true,
-													ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-														if val != nil {
-															warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-														}
-														return
-													}, ForceNew: true,
+													Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+													Optional:     true,
+													Default:      "KeyValue",
+													ForceNew:     true,
 												},
 												"value": {
 													Description:  "The string representation of a tag value.",
@@ -1360,16 +1356,12 @@ func resourceBulkMoCloner() *schema.Resource {
 										}, ForceNew: true,
 									},
 									"type": {
-										Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-											if val != nil {
-												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-											}
-											return
-										}, ForceNew: true,
+										Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+										Optional:     true,
+										Default:      "KeyValue",
+										ForceNew:     true,
 									},
 									"value": {
 										Description:  "The string representation of a tag value.",
@@ -1692,16 +1684,12 @@ func resourceBulkMoCloner() *schema.Resource {
 							}, ForceNew: true,
 						},
 						"type": {
-							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}, ForceNew: true,
+							Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+							Optional:     true,
+							Default:      "KeyValue",
+							ForceNew:     true,
 						},
 						"value": {
 							Description:  "The string representation of a tag value.",
@@ -2088,16 +2076,12 @@ func resourceBulkMoCloner() *schema.Resource {
 										}, ForceNew: true,
 									},
 									"type": {
-										Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-											if val != nil {
-												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-											}
-											return
-										}, ForceNew: true,
+										Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+										Optional:     true,
+										Default:      "KeyValue",
+										ForceNew:     true,
 									},
 									"value": {
 										Description:  "The string representation of a tag value.",
@@ -2677,6 +2661,12 @@ func resourceBulkMoClonerCreate(c context.Context, d *schema.ResourceData, meta 
 								o.SetKey(x)
 							}
 						}
+						if v, ok := l["type"]; ok {
+							{
+								x := (v.(string))
+								o.SetType(x)
+							}
+						}
 						if v, ok := l["value"]; ok {
 							{
 								x := (v.(string))
@@ -2760,6 +2750,12 @@ func resourceBulkMoClonerCreate(c context.Context, d *schema.ResourceData, meta 
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {
@@ -2873,6 +2869,12 @@ func resourceBulkMoClonerCreate(c context.Context, d *schema.ResourceData, meta 
 							{
 								x := (v.(string))
 								o.SetKey(x)
+							}
+						}
+						if v, ok := l["type"]; ok {
+							{
+								x := (v.(string))
+								o.SetType(x)
 							}
 						}
 						if v, ok := l["value"]; ok {

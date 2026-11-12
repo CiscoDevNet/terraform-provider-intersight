@@ -33,6 +33,8 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_workload_workload_definition.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `blueprint_update_by_date`:(string) The date by which the blueprints in the workload definition should be updated to non-deprecated versions. This field is populated only if the workload definition uses deprecated blueprints. If the definition still uses deprecated blueprints past this date, the definition will be locked and can only be used to create a new version using active blueprints. 
+* `blueprint_version_update_status`:(string) The aggregate blueprint version update status across all blueprints included in the definition.* `Updated` - The blueprint reference is at the latest available version.* `AutoUpdate` - The blueprint reference can be updated to the latest version automatically.* `NeedsNewVersion` - The blueprint reference cannot be updated without a new version of the definition.* `Deprecated` - The referred blueprint is deprecated.* `UpdateInProgress` - The blueprint reference update is in progress. The update is in an intermediate state between AutoUpdate and Updated. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) The description for this workload definition. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

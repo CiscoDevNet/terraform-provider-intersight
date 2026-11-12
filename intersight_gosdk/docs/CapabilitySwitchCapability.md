@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **FcEndHostModeReservedVsans** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **FcUplinkPortsAutoNegotiationSupported** | Pointer to **bool** | Fc Uplink ports auto negotiation speed support on this switch. | [optional] [readonly] 
 **ImmControlsVpcompression** | Pointer to **bool** | VlanPort Compression is controlled by IMM. | [optional] [readonly] 
-**InterClusterLinkVlanSupported** | Pointer to **bool** | Inter cluster link vlan support on this switch. | [optional] [readonly] 
+**IntraChassisVlanSupported** | Pointer to **bool** | Intra chassis VLAN support on this switch. | [optional] [readonly] 
 **LocatorBeaconSupported** | Pointer to **bool** | Locator Beacon LED support on this switch. | [optional] [readonly] 
 **MacsecSupportedPorts** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **MaxPorts** | Pointer to **int64** | Maximum allowed physical ports on this switch. | [optional] [readonly] 
@@ -33,7 +33,7 @@ Name | Type | Description | Notes
 **PortsSupportingApplianceRole** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingBreakout** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingFcoe** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
-**PortsSupportingInterClusterLink** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
+**PortsSupportingIntraChassisVlans** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingServerRole** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **ReservedVsans** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **SerenoNetflowSupported** | Pointer to **bool** | Sereno Adaptor with Netflow support on this switch. | [optional] [readonly] 
@@ -300,30 +300,30 @@ SetImmControlsVpcompression sets ImmControlsVpcompression field to given value.
 
 HasImmControlsVpcompression returns a boolean if a field has been set.
 
-### GetInterClusterLinkVlanSupported
+### GetIntraChassisVlanSupported
 
-`func (o *CapabilitySwitchCapability) GetInterClusterLinkVlanSupported() bool`
+`func (o *CapabilitySwitchCapability) GetIntraChassisVlanSupported() bool`
 
-GetInterClusterLinkVlanSupported returns the InterClusterLinkVlanSupported field if non-nil, zero value otherwise.
+GetIntraChassisVlanSupported returns the IntraChassisVlanSupported field if non-nil, zero value otherwise.
 
-### GetInterClusterLinkVlanSupportedOk
+### GetIntraChassisVlanSupportedOk
 
-`func (o *CapabilitySwitchCapability) GetInterClusterLinkVlanSupportedOk() (*bool, bool)`
+`func (o *CapabilitySwitchCapability) GetIntraChassisVlanSupportedOk() (*bool, bool)`
 
-GetInterClusterLinkVlanSupportedOk returns a tuple with the InterClusterLinkVlanSupported field if it's non-nil, zero value otherwise
+GetIntraChassisVlanSupportedOk returns a tuple with the IntraChassisVlanSupported field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetInterClusterLinkVlanSupported
+### SetIntraChassisVlanSupported
 
-`func (o *CapabilitySwitchCapability) SetInterClusterLinkVlanSupported(v bool)`
+`func (o *CapabilitySwitchCapability) SetIntraChassisVlanSupported(v bool)`
 
-SetInterClusterLinkVlanSupported sets InterClusterLinkVlanSupported field to given value.
+SetIntraChassisVlanSupported sets IntraChassisVlanSupported field to given value.
 
-### HasInterClusterLinkVlanSupported
+### HasIntraChassisVlanSupported
 
-`func (o *CapabilitySwitchCapability) HasInterClusterLinkVlanSupported() bool`
+`func (o *CapabilitySwitchCapability) HasIntraChassisVlanSupported() bool`
 
-HasInterClusterLinkVlanSupported returns a boolean if a field has been set.
+HasIntraChassisVlanSupported returns a boolean if a field has been set.
 
 ### GetLocatorBeaconSupported
 
@@ -960,41 +960,41 @@ HasPortsSupportingFcoe returns a boolean if a field has been set.
 `func (o *CapabilitySwitchCapability) UnsetPortsSupportingFcoe()`
 
 UnsetPortsSupportingFcoe ensures that no value is present for PortsSupportingFcoe, not even an explicit nil
-### GetPortsSupportingInterClusterLink
+### GetPortsSupportingIntraChassisVlans
 
-`func (o *CapabilitySwitchCapability) GetPortsSupportingInterClusterLink() []CapabilityPortRange`
+`func (o *CapabilitySwitchCapability) GetPortsSupportingIntraChassisVlans() []CapabilityPortRange`
 
-GetPortsSupportingInterClusterLink returns the PortsSupportingInterClusterLink field if non-nil, zero value otherwise.
+GetPortsSupportingIntraChassisVlans returns the PortsSupportingIntraChassisVlans field if non-nil, zero value otherwise.
 
-### GetPortsSupportingInterClusterLinkOk
+### GetPortsSupportingIntraChassisVlansOk
 
-`func (o *CapabilitySwitchCapability) GetPortsSupportingInterClusterLinkOk() (*[]CapabilityPortRange, bool)`
+`func (o *CapabilitySwitchCapability) GetPortsSupportingIntraChassisVlansOk() (*[]CapabilityPortRange, bool)`
 
-GetPortsSupportingInterClusterLinkOk returns a tuple with the PortsSupportingInterClusterLink field if it's non-nil, zero value otherwise
+GetPortsSupportingIntraChassisVlansOk returns a tuple with the PortsSupportingIntraChassisVlans field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPortsSupportingInterClusterLink
+### SetPortsSupportingIntraChassisVlans
 
-`func (o *CapabilitySwitchCapability) SetPortsSupportingInterClusterLink(v []CapabilityPortRange)`
+`func (o *CapabilitySwitchCapability) SetPortsSupportingIntraChassisVlans(v []CapabilityPortRange)`
 
-SetPortsSupportingInterClusterLink sets PortsSupportingInterClusterLink field to given value.
+SetPortsSupportingIntraChassisVlans sets PortsSupportingIntraChassisVlans field to given value.
 
-### HasPortsSupportingInterClusterLink
+### HasPortsSupportingIntraChassisVlans
 
-`func (o *CapabilitySwitchCapability) HasPortsSupportingInterClusterLink() bool`
+`func (o *CapabilitySwitchCapability) HasPortsSupportingIntraChassisVlans() bool`
 
-HasPortsSupportingInterClusterLink returns a boolean if a field has been set.
+HasPortsSupportingIntraChassisVlans returns a boolean if a field has been set.
 
-### SetPortsSupportingInterClusterLinkNil
+### SetPortsSupportingIntraChassisVlansNil
 
-`func (o *CapabilitySwitchCapability) SetPortsSupportingInterClusterLinkNil(b bool)`
+`func (o *CapabilitySwitchCapability) SetPortsSupportingIntraChassisVlansNil(b bool)`
 
- SetPortsSupportingInterClusterLinkNil sets the value for PortsSupportingInterClusterLink to be an explicit nil
+ SetPortsSupportingIntraChassisVlansNil sets the value for PortsSupportingIntraChassisVlans to be an explicit nil
 
-### UnsetPortsSupportingInterClusterLink
-`func (o *CapabilitySwitchCapability) UnsetPortsSupportingInterClusterLink()`
+### UnsetPortsSupportingIntraChassisVlans
+`func (o *CapabilitySwitchCapability) UnsetPortsSupportingIntraChassisVlans()`
 
-UnsetPortsSupportingInterClusterLink ensures that no value is present for PortsSupportingInterClusterLink, not even an explicit nil
+UnsetPortsSupportingIntraChassisVlans ensures that no value is present for PortsSupportingIntraChassisVlans, not even an explicit nil
 ### GetPortsSupportingServerRole
 
 `func (o *CapabilitySwitchCapability) GetPortsSupportingServerRole() []CapabilityPortRange`

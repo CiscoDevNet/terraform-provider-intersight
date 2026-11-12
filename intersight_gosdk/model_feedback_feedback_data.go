@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026100617
+API version: 1.0.11-2026110514
 Contact: intersight@cisco.com
 */
 
@@ -31,6 +31,8 @@ type FeedbackFeedbackData struct {
 	// Account name of the feedback sender, copied for persistence in case of account removal.
 	AccountName               *string  `json:"AccountName,omitempty"`
 	AlternativeFollowUpEmails []string `json:"AlternativeFollowUpEmails,omitempty"`
+	// Hostname of the Intersight Appliance that submitted the feedback. Empty string when the feedback was submitted directly from Intersight SaaS.
+	ApplianceName *string `json:"ApplianceName,omitempty"`
 	// User feedback text (a bug or a suggestion).
 	Comment *string `json:"Comment,omitempty"`
 	// User's email address details.
@@ -207,6 +209,38 @@ func (o *FeedbackFeedbackData) HasAlternativeFollowUpEmails() bool {
 // SetAlternativeFollowUpEmails gets a reference to the given []string and assigns it to the AlternativeFollowUpEmails field.
 func (o *FeedbackFeedbackData) SetAlternativeFollowUpEmails(v []string) {
 	o.AlternativeFollowUpEmails = v
+}
+
+// GetApplianceName returns the ApplianceName field value if set, zero value otherwise.
+func (o *FeedbackFeedbackData) GetApplianceName() string {
+	if o == nil || IsNil(o.ApplianceName) {
+		var ret string
+		return ret
+	}
+	return *o.ApplianceName
+}
+
+// GetApplianceNameOk returns a tuple with the ApplianceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FeedbackFeedbackData) GetApplianceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplianceName) {
+		return nil, false
+	}
+	return o.ApplianceName, true
+}
+
+// HasApplianceName returns a boolean if a field has been set.
+func (o *FeedbackFeedbackData) HasApplianceName() bool {
+	if o != nil && !IsNil(o.ApplianceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplianceName gets a reference to the given string and assigns it to the ApplianceName field.
+func (o *FeedbackFeedbackData) SetApplianceName(v string) {
+	o.ApplianceName = &v
 }
 
 // GetComment returns the Comment field value if set, zero value otherwise.
@@ -533,6 +567,9 @@ func (o FeedbackFeedbackData) ToMap() (map[string]interface{}, error) {
 	if o.AlternativeFollowUpEmails != nil {
 		toSerialize["AlternativeFollowUpEmails"] = o.AlternativeFollowUpEmails
 	}
+	if !IsNil(o.ApplianceName) {
+		toSerialize["ApplianceName"] = o.ApplianceName
+	}
 	if !IsNil(o.Comment) {
 		toSerialize["Comment"] = o.Comment
 	}
@@ -618,6 +655,8 @@ func (o *FeedbackFeedbackData) UnmarshalJSON(data []byte) (err error) {
 		// Account name of the feedback sender, copied for persistence in case of account removal.
 		AccountName               *string  `json:"AccountName,omitempty"`
 		AlternativeFollowUpEmails []string `json:"AlternativeFollowUpEmails,omitempty"`
+		// Hostname of the Intersight Appliance that submitted the feedback. Empty string when the feedback was submitted directly from Intersight SaaS.
+		ApplianceName *string `json:"ApplianceName,omitempty"`
 		// User feedback text (a bug or a suggestion).
 		Comment *string `json:"Comment,omitempty"`
 		// User's email address details.
@@ -648,6 +687,7 @@ func (o *FeedbackFeedbackData) UnmarshalJSON(data []byte) (err error) {
 		varFeedbackFeedbackData.ObjectType = varFeedbackFeedbackDataWithoutEmbeddedStruct.ObjectType
 		varFeedbackFeedbackData.AccountName = varFeedbackFeedbackDataWithoutEmbeddedStruct.AccountName
 		varFeedbackFeedbackData.AlternativeFollowUpEmails = varFeedbackFeedbackDataWithoutEmbeddedStruct.AlternativeFollowUpEmails
+		varFeedbackFeedbackData.ApplianceName = varFeedbackFeedbackDataWithoutEmbeddedStruct.ApplianceName
 		varFeedbackFeedbackData.Comment = varFeedbackFeedbackDataWithoutEmbeddedStruct.Comment
 		varFeedbackFeedbackData.Email = varFeedbackFeedbackDataWithoutEmbeddedStruct.Email
 		varFeedbackFeedbackData.Evaluation = varFeedbackFeedbackDataWithoutEmbeddedStruct.Evaluation
@@ -678,6 +718,7 @@ func (o *FeedbackFeedbackData) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccountName")
 		delete(additionalProperties, "AlternativeFollowUpEmails")
+		delete(additionalProperties, "ApplianceName")
 		delete(additionalProperties, "Comment")
 		delete(additionalProperties, "Email")
 		delete(additionalProperties, "Evaluation")

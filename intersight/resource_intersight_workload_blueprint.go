@@ -120,6 +120,91 @@ func resourceWorkloadBlueprint() *schema.Resource {
 					},
 				},
 			},
+			"base_blueprint": {
+				Description: "The abstract base blueprint inherited by this authoring blueprint. Is optional.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"blueprint_definition": {
+							Description: "The system-resolved reference to the blueprint.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"catalog_moid": {
+							Description: "The catalog MOID that this blueprint belongs to. When the catalog MOID is not specified, the catalog of the parent blueprint is used first. If no blueprint can be found in that catalog, the system catalog is used.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "blueprint.BlueprintInheritanceReference",
+						},
+						"name": {
+							Description: "The name of the referenced abstract blueprint.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "blueprint.BlueprintInheritanceReference",
+						},
+						"nr_version": {
+							Description: "The version number of the blueprint.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+					},
+				},
+				ForceNew: true,
+			},
 			"blueprint_dependencies": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -133,7 +218,7 @@ func resourceWorkloadBlueprint() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"blueprint_definition": {
-							Description: "The system resolved reference to the blueprint.",
+							Description: "The system-resolved reference to the blueprint.",
 							Type:        schema.TypeList,
 							MaxItems:    1,
 							Optional:    true,
@@ -173,12 +258,12 @@ func resourceWorkloadBlueprint() *schema.Resource {
 							},
 						},
 						"blueprint_name": {
-							Description: "The qualified name of blueprint.",
+							Description: "The qualified name of the required blueprint.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"catalog_moid": {
-							Description: "Specify the catalog moid that this blueprint belongs too. When catalog moid is not specified then the catalog of the parent blueprint is used first and if no blueprint can be found in that catalog, then the system catalog is used.",
+							Description: "The catalog MOID that this blueprint belongs to. When the catalog MOID is not specified, the catalog of the parent blueprint is used first. If no blueprint can be found in that catalog, the system catalog is used.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -188,13 +273,51 @@ func resourceWorkloadBlueprint() *schema.Resource {
 							Optional:    true,
 							Default:     "blueprint.BlueprintDefinitionDependency",
 						},
+						"dependency_qualifier": {
+							Description: "The OData rules that identify the blueprint versions that can satisfy this dependency.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"rules": {
+										Type:       schema.TypeList,
+										MinItems:   1,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										}},
+								},
+							},
+						},
 						"description": {
-							Description: "The description of that describes the purpose of including this dependent blueprint.",
+							Description: "Specifies why the required blueprint is included.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"input_parameters": {
-							Description: "If any input of the nested blueprint needs to be modified in some form to include data from the parent blueprint, then the input parameters can be specified here.",
+							Description: "Specifies input mappings for the required blueprint, including values derived from the referencing blueprint.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -210,12 +333,20 @@ func resourceWorkloadBlueprint() *schema.Resource {
 							Default:     "blueprint.BlueprintDefinitionDependency",
 						},
 						"nr_version": {
-							Description: "The blueprint version. If not specified, the default version is used.",
+							Description: "The version number of the blueprint.",
 							Type:        schema.TypeInt,
 							Optional:    true,
 						},
 					},
 				},
+			},
+			"blueprint_kind": {
+				Description:  "Identifies whether the authoring blueprint is an abstract inheritance source or a concrete definition. Concrete definitions are deployed through separate resolved version of the blueprint..\n* `Concrete` - The blueprint can be materialized as a separate resolved blueprint for deployment.\n* `Abstract` - The blueprint is an abstract inheritance source and is not directly deployable.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Concrete", "Abstract"}, false),
+				Optional:     true,
+				Computed:     true,
+				ForceNew:     true,
 			},
 			"catalog": {
 				Description: "A reference to a workflowCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -263,6 +394,46 @@ func resourceWorkloadBlueprint() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "workload.Blueprint",
+			},
+			"concrete_blueprint": {
+				Description: "A reference to a workloadBlueprint resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -321,6 +492,77 @@ func resourceWorkloadBlueprint() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "blueprint.GeneratedObjectMetadata",
+						},
+						"cleanup_operations": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "blueprint.CleanupOperation",
+									},
+									"generated_objects": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "blueprint.GeneratedObjectOperationTarget",
+												},
+												"name": {
+													Description: "The name of the generated object metadata. The objects produced from this metadata are the target of the operation.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "blueprint.GeneratedObjectOperationTarget",
+												},
+												"property_parameters": {
+													Description: "A list of key value pairs where key is the property path and value is the template to derive the value. The target of the pre-generation operation is updated with the resolved values of these parameters. This operation is only applicable if the operation is of type \"Update\".",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "blueprint.CleanupOperation",
+									},
+									"operation": {
+										Description:  "The operation to be performed after the service item deployment completes. Currently, only the 'Delete' operation is supported.\n* `Update` - The operation is to update the object via an HTTP PATCH operation.\n* `Delete` - The operation is to immediately delete the object via an HTTP DELETE operation.\n* `MarkDeleted` - The object is marked as deleted. This adds a tag to the object indicating that it should be deleted as part of the object cleanup task during workload deployment.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Update", "Delete", "MarkDeleted"}, false),
+										Optional:     true,
+										Default:      "Update",
+									},
+								},
+							},
 						},
 						"conditions": {
 							Type:       schema.TypeList,
@@ -694,6 +936,12 @@ func resourceWorkloadBlueprint() *schema.Resource {
 					},
 				},
 			},
+			"input_sync_enabled": {
+				Description: "The input for a blueprint referenced in a workload can be synced from another blueprint of the same type.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"label": {
 				Description:  "A user friendly short name to identify the blueprint. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).",
 				Type:         schema.TypeString,
@@ -825,6 +1073,17 @@ func resourceWorkloadBlueprint() *schema.Resource {
 				Optional:     true,
 				Default:      "None",
 			},
+			"resolved": {
+				Description: "Indicates whether this blueprint is a generated, deployable definition. All authoring blueprints have this value set to false.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"resource_definition": {
 				Description: "The resource constraint definition for the blueprint.",
 				Type:        schema.TypeList,
@@ -997,8 +1256,86 @@ func resourceWorkloadBlueprint() *schema.Resource {
 							Optional:    true,
 							Default:     "blueprint.ResourceConstraints",
 						},
+						"resource_type_qualifiers": {
+							Type:       schema.TypeList,
+							MinItems:   1,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "blueprint.ResourceTypeQualifier",
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "blueprint.ResourceTypeQualifier",
+									},
+									"odata_resource_qualifier": {
+										Description: "Optional OData filter rules that further constrain which instances of resourceType are eligible. Rule expressions may reference values from ResourceConstraints.InputDefinition.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Computed:    true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"rules": {
+													Type:       schema.TypeList,
+													MinItems:   1,
+													Optional:   true,
+													ConfigMode: schema.SchemaConfigModeAttr,
+													Computed:   true,
+													Elem: &schema.Schema{
+														Type: schema.TypeString,
+													}},
+											},
+										},
+									},
+									"resource_type": {
+										Description: "The Intersight managed object type (for example, compute.Blade or equipment.Chassis) that this blueprint may bind to.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
 					},
 				},
+			},
+			"revision": {
+				Description:  "The revision of the blueprint to support compatible updates within the same version.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntAtLeast(0),
+				Optional:     true,
+				Default:      0,
 			},
 			"service_items": {
 				Type:       schema.TypeList,
@@ -1068,6 +1405,259 @@ func resourceWorkloadBlueprint() *schema.Resource {
 					}
 					return
 				}},
+			"support_info": {
+				Description: "The support information for this blueprint version. When the blueprint version is deprecated, this field includes the support end date and can include a replacement target version.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "workflow.SupportInfo",
+						},
+						"deprecation_info": {
+							Description: "The deprecation information for the versioned object.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "workflow.DeprecationInfo",
+									},
+									"deprecated_by": {
+										Description: "The user or system email address that marked the versioned object as deprecated. The system populates this property only when the support status is Deprecated.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"deprecated_dependencies": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"catalog_moid": {
+													Description: "The catalog MOID of the referenced object. If this field is not specified, the resolver uses the catalog of the versioned object first, followed by the default catalog for the referenced object type.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.SupportObjectReference",
+												},
+												"name": {
+													Description: "The qualified name of the referenced object.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"object": {
+													Description: "The system-resolved reference to the referenced object.",
+													Type:        schema.TypeList,
+													MaxItems:    1,
+													Optional:    true,
+													Computed:    true,
+													ConfigMode:  schema.SchemaConfigModeAttr,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"additional_properties": {
+																Type:             schema.TypeString,
+																Optional:         true,
+																DiffSuppressFunc: SuppressDiffAdditionProps,
+															},
+															"class_id": {
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Default:     "mo.MoRef",
+															},
+															"moid": {
+																Description: "The Moid of the referenced REST resource.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Computed:    true,
+															},
+															"object_type": {
+																Description: "The fully-qualified name of the remote type referred by this relationship.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Computed:    true,
+															},
+															"selector": {
+																Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+																Type:        schema.TypeString,
+																Optional:    true,
+															},
+														},
+													},
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.SupportObjectReference",
+												},
+												"nr_version": {
+													Description: "The version of the referenced object. If not specified, the default version is used.",
+													Type:        schema.TypeInt,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"description": {
+										Description:  "The detailed description explaining why the versioned object is deprecated. Deprecated objects can use this field to provide additional support or migration information.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+										Optional:     true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "workflow.DeprecationInfo",
+									},
+									"replacement_definition": {
+										Description: "The replacement object to use when the versioned object is deprecated.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Computed:    true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"catalog_moid": {
+													Description: "The catalog MOID of the referenced object. If this field is not specified, the resolver uses the catalog of the versioned object first, followed by the default catalog for the referenced object type.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.SupportObjectReference",
+												},
+												"name": {
+													Description: "The qualified name of the referenced object.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"object": {
+													Description: "The system-resolved reference to the referenced object.",
+													Type:        schema.TypeList,
+													MaxItems:    1,
+													Optional:    true,
+													Computed:    true,
+													ConfigMode:  schema.SchemaConfigModeAttr,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+															"additional_properties": {
+																Type:             schema.TypeString,
+																Optional:         true,
+																DiffSuppressFunc: SuppressDiffAdditionProps,
+															},
+															"class_id": {
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Default:     "mo.MoRef",
+															},
+															"moid": {
+																Description: "The Moid of the referenced REST resource.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Computed:    true,
+															},
+															"object_type": {
+																Description: "The fully-qualified name of the remote type referred by this relationship.",
+																Type:        schema.TypeString,
+																Optional:    true,
+																Computed:    true,
+															},
+															"selector": {
+																Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+																Type:        schema.TypeString,
+																Optional:    true,
+															},
+														},
+													},
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.SupportObjectReference",
+												},
+												"nr_version": {
+													Description: "The version of the referenced object. If not specified, the default version is used.",
+													Type:        schema.TypeInt,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"support_end_date": {
+										Description: "The date after which the deprecated object is no longer supported.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "workflow.SupportInfo",
+						},
+						"support_status": {
+							Description:  "The support status of the versioned object.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Supported", "Beta", "Deprecated"}, false),
+							Optional:     true,
+							Default:      "Supported",
+						},
+					},
+				},
+			},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -1187,16 +1777,12 @@ func resourceWorkloadBlueprint() *schema.Resource {
 								return
 							}},
 						"type": {
-							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}},
+							Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+							Optional:     true,
+							Default:      "KeyValue",
+						},
 						"value": {
 							Description:  "The string representation of a tag value.",
 							Type:         schema.TypeString,
@@ -1206,8 +1792,86 @@ func resourceWorkloadBlueprint() *schema.Resource {
 					},
 				},
 			},
+			"validated_objects": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "blueprint.ValidatedConfigReference",
+						},
+						"name": {
+							Description: "The name for the object in the blueprint definition.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "blueprint.ValidatedConfigReference",
+						},
+						"selector": {
+							Description:  "The selector to identify the object in the shared catalog.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|/api/v1/.*"), ""),
+							Optional:     true,
+						},
+						"validated_object": {
+							Description: "The system-resolved reference to the validated system-defined configuration object.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 			"validation_information": {
-				Description: "The current validation state and associated validation errors when state is invalid. When state is valid, it means all referred dependent blueprints and service items are valid. All referred objects are present in the system and available for cloning.",
+				Description: "The current validation state and associated validation errors when state is invalid. When state is valid, it means all referenced required blueprints and service items are valid. All referenced objects are present in the system and available for cloning.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -1335,6 +1999,117 @@ func resourceWorkloadBlueprint() *schema.Resource {
 				Optional:     true,
 				Computed:     true,
 				ForceNew:     true,
+			},
+			"version_compatibility_info": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"blueprints": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"blueprint_definition": {
+										Description: "The system-resolved reference to the blueprint.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										Computed:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "mo.MoRef",
+												},
+												"moid": {
+													Description: "The Moid of the referenced REST resource.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the remote type referred by this relationship.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"selector": {
+													Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"catalog_moid": {
+										Description: "The catalog MOID that this blueprint belongs to. When the catalog MOID is not specified, the catalog of the parent blueprint is used first. If no blueprint can be found in that catalog, the system catalog is used.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"nr_version": {
+										Description: "The version number of the blueprint.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "blueprint.VersionCompatibilityInfo",
+						},
+						"compatibility_type": {
+							Description:  "The update compatibility type for the listed blueprint versions relative to the current blueprint version.\n* `NotCompatible` - The previously published blueprint version cannot be updated to the current blueprint version.\n* `AutoUpdate` - The previously published blueprint version can be updated to the current blueprint version automatically.\n* `NeedsNewVersion` - The previously published blueprint version can move to the current blueprint version only by creating a new version of the dependent definition.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"NotCompatible", "AutoUpdate", "NeedsNewVersion"}, false),
+							Optional:     true,
+							Default:      "NotCompatible",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "blueprint.VersionCompatibilityInfo",
+						},
+					},
+				},
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -1487,6 +2262,12 @@ func resourceWorkloadBlueprint() *schema.Resource {
 					},
 				},
 			},
+			"version_description": {
+				Description:  "The detailed change description for this blueprint version. For new blueprint versions, this field captures a verbose description of the delta of changes in this version compared to earlier versions.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
+			},
 		},
 	}
 }
@@ -1548,6 +2329,55 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOkExists("base_blueprint"); ok {
+		p := make([]models.BlueprintBlueprintInheritanceReference, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewBlueprintBlueprintInheritanceReferenceWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["catalog_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetCatalogMoid(x)
+				}
+			}
+			o.SetClassId("blueprint.BlueprintInheritanceReference")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["nr_version"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVersion(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetBaseBlueprint(x)
+		}
+	}
+
 	if v, ok := d.GetOk("blueprint_dependencies"); ok {
 		x := make([]models.BlueprintBlueprintDefinitionDependency, 0)
 		s := v.([]interface{})
@@ -1577,6 +2407,52 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 				}
 			}
 			o.SetClassId("blueprint.BlueprintDefinitionDependency")
+			if v, ok := l["dependency_qualifier"]; ok {
+				{
+					p := make([]models.BlueprintOdataDependencyQualifier, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewBlueprintOdataDependencyQualifierWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("blueprint.OdataDependencyQualifier")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["rules"]; ok {
+							{
+								x := make([]string, 0)
+								y := reflect.ValueOf(v)
+								for i := 0; i < y.Len(); i++ {
+									if y.Index(i).Interface() != nil {
+										x = append(x, y.Index(i).Interface().(string))
+									}
+								}
+								if len(x) > 0 {
+									o.SetRules(x)
+								}
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDependencyQualifier(x)
+					}
+				}
+			}
 			if v, ok := l["description"]; ok {
 				{
 					x := (v.(string))
@@ -1617,6 +2493,11 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 		if len(x) > 0 {
 			o.SetBlueprintDependencies(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("blueprint_kind"); ok {
+		x := (v.(string))
+		o.SetBlueprintKind(x)
 	}
 
 	if v, ok := d.GetOkExists("catalog"); ok {
@@ -1696,6 +2577,91 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 				}
 			}
 			o.SetClassId("blueprint.GeneratedObjectMetadata")
+			if v, ok := l["cleanup_operations"]; ok {
+				{
+					x := make([]models.BlueprintCleanupOperation, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewBlueprintCleanupOperationWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("blueprint.CleanupOperation")
+						if v, ok := l["generated_objects"]; ok {
+							{
+								x := make([]models.BlueprintGeneratedObjectOperationTarget, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewBlueprintGeneratedObjectOperationTargetWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("blueprint.GeneratedObjectOperationTarget")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["property_parameters"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												x2 := x1.(map[string]interface{})
+												o.SetPropertyParameters(x2)
+											}
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetGeneratedObjects(x)
+								}
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["operation"]; ok {
+							{
+								x := (v.(string))
+								o.SetOperation(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetCleanupOperations(x)
+					}
+				}
+			}
 			if v, ok := l["conditions"]; ok {
 				{
 					x := make([]string, 0)
@@ -2134,6 +3100,11 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOkExists("input_sync_enabled"); ok {
+		x := (v.(bool))
+		o.SetInputSyncEnabled(x)
+	}
+
 	if v, ok := d.GetOk("label"); ok {
 		x := (v.(string))
 		o.SetLabel(x)
@@ -2338,12 +3309,100 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["resource_type_qualifiers"]; ok {
+				{
+					x := make([]models.BlueprintResourceTypeQualifier, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewBlueprintResourceTypeQualifierWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("blueprint.ResourceTypeQualifier")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["odata_resource_qualifier"]; ok {
+							{
+								p := make([]models.BlueprintOdataResourceQualifier, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewBlueprintOdataResourceQualifierWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("blueprint.OdataResourceQualifier")
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["rules"]; ok {
+										{
+											x := make([]string, 0)
+											y := reflect.ValueOf(v)
+											for i := 0; i < y.Len(); i++ {
+												if y.Index(i).Interface() != nil {
+													x = append(x, y.Index(i).Interface().(string))
+												}
+											}
+											if len(x) > 0 {
+												o.SetRules(x)
+											}
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetOdataResourceQualifier(x)
+								}
+							}
+						}
+						if v, ok := l["resource_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetResourceType(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetResourceTypeQualifiers(x)
+					}
+				}
+			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
 			x := p[0]
 			o.SetResourceDefinition(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("revision"); ok {
+		x := int64(v.(int))
+		o.SetRevision(x)
 	}
 
 	if v, ok := d.GetOk("service_items"); ok {
@@ -2417,6 +3476,187 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOk("support_info"); ok {
+		p := make([]models.WorkflowSupportInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewWorkflowSupportInfoWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.SupportInfo")
+			if v, ok := l["deprecation_info"]; ok {
+				{
+					p := make([]models.WorkflowDeprecationInfo, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowDeprecationInfoWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("workflow.DeprecationInfo")
+						if v, ok := l["deprecated_dependencies"]; ok {
+							{
+								x := make([]models.WorkflowSupportObjectReference, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewWorkflowSupportObjectReferenceWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									if v, ok := l["catalog_moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetCatalogMoid(x)
+										}
+									}
+									o.SetClassId("workflow.SupportObjectReference")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["nr_version"]; ok {
+										{
+											x := int64(v.(int))
+											o.SetVersion(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetDeprecatedDependencies(x)
+								}
+							}
+						}
+						if v, ok := l["description"]; ok {
+							{
+								x := (v.(string))
+								o.SetDescription(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["replacement_definition"]; ok {
+							{
+								p := make([]models.WorkflowSupportObjectReference, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewWorkflowSupportObjectReferenceWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									if v, ok := l["catalog_moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetCatalogMoid(x)
+										}
+									}
+									o.SetClassId("workflow.SupportObjectReference")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["nr_version"]; ok {
+										{
+											x := int64(v.(int))
+											o.SetVersion(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetReplacementDefinition(x)
+								}
+							}
+						}
+						if v, ok := l["support_end_date"]; ok {
+							{
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
+								o.SetSupportEndDate(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDeprecationInfo(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["support_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetSupportStatus(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSupportInfo(x)
+		}
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -2482,6 +3722,12 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -2495,9 +3741,135 @@ func resourceWorkloadBlueprintCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOk("validated_objects"); ok {
+		x := make([]models.BlueprintValidatedConfigReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewBlueprintValidatedConfigReferenceWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("blueprint.ValidatedConfigReference")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetValidatedObjects(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("nr_version"); ok {
 		x := int64(v.(int))
 		o.SetVersion(x)
+	}
+
+	if v, ok := d.GetOk("version_compatibility_info"); ok {
+		x := make([]models.BlueprintVersionCompatibilityInfo, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewBlueprintVersionCompatibilityInfoWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["blueprints"]; ok {
+				{
+					x := make([]models.BlueprintVersionReference, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewBlueprintVersionReferenceWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						if v, ok := l["catalog_moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetCatalogMoid(x)
+							}
+						}
+						o.SetClassId("blueprint.VersionReference")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["nr_version"]; ok {
+							{
+								x := int64(v.(int))
+								o.SetVersion(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetBlueprints(x)
+					}
+				}
+			}
+			o.SetClassId("blueprint.VersionCompatibilityInfo")
+			if v, ok := l["compatibility_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetCompatibilityType(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetVersionCompatibilityInfo(x)
+		}
+	}
+
+	if v, ok := d.GetOk("version_description"); ok {
+		x := (v.(string))
+		o.SetVersionDescription(x)
 	}
 
 	r := conn.ApiClient.WorkloadApi.CreateWorkloadBlueprint(conn.ctx).WorkloadBlueprint(*o)
@@ -2562,8 +3934,16 @@ func resourceWorkloadBlueprintRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property AssociatedRoles in WorkloadBlueprint object: %s", err.Error())
 	}
 
+	if err := d.Set("base_blueprint", flattenMapBlueprintBlueprintInheritanceReference(s.GetBaseBlueprint(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property BaseBlueprint in WorkloadBlueprint object: %s", err.Error())
+	}
+
 	if err := d.Set("blueprint_dependencies", flattenListBlueprintBlueprintDefinitionDependency(s.GetBlueprintDependencies(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property BlueprintDependencies in WorkloadBlueprint object: %s", err.Error())
+	}
+
+	if err := d.Set("blueprint_kind", (s.GetBlueprintKind())); err != nil {
+		return diag.Errorf("error occurred while setting property BlueprintKind in WorkloadBlueprint object: %s", err.Error())
 	}
 
 	if err := d.Set("catalog", flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)); err != nil {
@@ -2572,6 +3952,10 @@ func resourceWorkloadBlueprintRead(c context.Context, d *schema.ResourceData, me
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in WorkloadBlueprint object: %s", err.Error())
+	}
+
+	if err := d.Set("concrete_blueprint", flattenMapWorkloadBlueprintRelationship(s.GetConcreteBlueprint(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ConcreteBlueprint in WorkloadBlueprint object: %s", err.Error())
 	}
 
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
@@ -2604,6 +3988,10 @@ func resourceWorkloadBlueprintRead(c context.Context, d *schema.ResourceData, me
 
 	if err := d.Set("input_operation_metadata", flattenListBlueprintInputOperationType(s.GetInputOperationMetadata(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property InputOperationMetadata in WorkloadBlueprint object: %s", err.Error())
+	}
+
+	if err := d.Set("input_sync_enabled", (s.GetInputSyncEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property InputSyncEnabled in WorkloadBlueprint object: %s", err.Error())
 	}
 
 	if err := d.Set("label", (s.GetLabel())); err != nil {
@@ -2642,8 +4030,16 @@ func resourceWorkloadBlueprintRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property PlatformType in WorkloadBlueprint object: %s", err.Error())
 	}
 
+	if err := d.Set("resolved", (s.GetResolved())); err != nil {
+		return diag.Errorf("error occurred while setting property Resolved in WorkloadBlueprint object: %s", err.Error())
+	}
+
 	if err := d.Set("resource_definition", flattenMapBlueprintResourceConstraints(s.GetResourceDefinition(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ResourceDefinition in WorkloadBlueprint object: %s", err.Error())
+	}
+
+	if err := d.Set("revision", (s.GetRevision())); err != nil {
+		return diag.Errorf("error occurred while setting property Revision in WorkloadBlueprint object: %s", err.Error())
 	}
 
 	if err := d.Set("service_items", flattenListBlueprintServiceItemDefinition(s.GetServiceItems(), d)); err != nil {
@@ -2654,8 +4050,16 @@ func resourceWorkloadBlueprintRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property SharedScope in WorkloadBlueprint object: %s", err.Error())
 	}
 
+	if err := d.Set("support_info", flattenMapWorkflowSupportInfo(s.GetSupportInfo(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property SupportInfo in WorkloadBlueprint object: %s", err.Error())
+	}
+
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in WorkloadBlueprint object: %s", err.Error())
+	}
+
+	if err := d.Set("validated_objects", flattenListBlueprintValidatedConfigReference(s.GetValidatedObjects(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ValidatedObjects in WorkloadBlueprint object: %s", err.Error())
 	}
 
 	if err := d.Set("validation_information", flattenMapWorkflowValidationInformation(s.GetValidationInformation(), d)); err != nil {
@@ -2666,8 +4070,16 @@ func resourceWorkloadBlueprintRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property Version in WorkloadBlueprint object: %s", err.Error())
 	}
 
+	if err := d.Set("version_compatibility_info", flattenListBlueprintVersionCompatibilityInfo(s.GetVersionCompatibilityInfo(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property VersionCompatibilityInfo in WorkloadBlueprint object: %s", err.Error())
+	}
+
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property VersionContext in WorkloadBlueprint object: %s", err.Error())
+	}
+
+	if err := d.Set("version_description", (s.GetVersionDescription())); err != nil {
+		return diag.Errorf("error occurred while setting property VersionDescription in WorkloadBlueprint object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
@@ -2732,6 +4144,56 @@ func resourceWorkloadBlueprintUpdate(c context.Context, d *schema.ResourceData, 
 		o.SetAssociatedRoles(x)
 	}
 
+	if d.HasChange("base_blueprint") {
+		v := d.Get("base_blueprint")
+		p := make([]models.BlueprintBlueprintInheritanceReference, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.BlueprintBlueprintInheritanceReference{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["catalog_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetCatalogMoid(x)
+				}
+			}
+			o.SetClassId("blueprint.BlueprintInheritanceReference")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["nr_version"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVersion(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetBaseBlueprint(x)
+		}
+	}
+
 	if d.HasChange("blueprint_dependencies") {
 		v := d.Get("blueprint_dependencies")
 		x := make([]models.BlueprintBlueprintDefinitionDependency, 0)
@@ -2762,6 +4224,52 @@ func resourceWorkloadBlueprintUpdate(c context.Context, d *schema.ResourceData, 
 				}
 			}
 			o.SetClassId("blueprint.BlueprintDefinitionDependency")
+			if v, ok := l["dependency_qualifier"]; ok {
+				{
+					p := make([]models.BlueprintOdataDependencyQualifier, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewBlueprintOdataDependencyQualifierWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("blueprint.OdataDependencyQualifier")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["rules"]; ok {
+							{
+								x := make([]string, 0)
+								y := reflect.ValueOf(v)
+								for i := 0; i < y.Len(); i++ {
+									if y.Index(i).Interface() != nil {
+										x = append(x, y.Index(i).Interface().(string))
+									}
+								}
+								if len(x) > 0 {
+									o.SetRules(x)
+								}
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDependencyQualifier(x)
+					}
+				}
+			}
 			if v, ok := l["description"]; ok {
 				{
 					x := (v.(string))
@@ -2800,6 +4308,12 @@ func resourceWorkloadBlueprintUpdate(c context.Context, d *schema.ResourceData, 
 			x = append(x, *o)
 		}
 		o.SetBlueprintDependencies(x)
+	}
+
+	if d.HasChange("blueprint_kind") {
+		v := d.Get("blueprint_kind")
+		x := (v.(string))
+		o.SetBlueprintKind(x)
 	}
 
 	if d.HasChange("catalog") {
@@ -2884,6 +4398,91 @@ func resourceWorkloadBlueprintUpdate(c context.Context, d *schema.ResourceData, 
 				}
 			}
 			o.SetClassId("blueprint.GeneratedObjectMetadata")
+			if v, ok := l["cleanup_operations"]; ok {
+				{
+					x := make([]models.BlueprintCleanupOperation, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewBlueprintCleanupOperationWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("blueprint.CleanupOperation")
+						if v, ok := l["generated_objects"]; ok {
+							{
+								x := make([]models.BlueprintGeneratedObjectOperationTarget, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewBlueprintGeneratedObjectOperationTargetWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("blueprint.GeneratedObjectOperationTarget")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["property_parameters"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												x2 := x1.(map[string]interface{})
+												o.SetPropertyParameters(x2)
+											}
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetGeneratedObjects(x)
+								}
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["operation"]; ok {
+							{
+								x := (v.(string))
+								o.SetOperation(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetCleanupOperations(x)
+					}
+				}
+			}
 			if v, ok := l["conditions"]; ok {
 				{
 					x := make([]string, 0)
@@ -3318,6 +4917,12 @@ func resourceWorkloadBlueprintUpdate(c context.Context, d *schema.ResourceData, 
 		o.SetInputOperationMetadata(x)
 	}
 
+	if d.HasChange("input_sync_enabled") {
+		v := d.Get("input_sync_enabled")
+		x := (v.(bool))
+		o.SetInputSyncEnabled(x)
+	}
+
 	if d.HasChange("label") {
 		v := d.Get("label")
 		x := (v.(string))
@@ -3527,12 +5132,101 @@ func resourceWorkloadBlueprintUpdate(c context.Context, d *schema.ResourceData, 
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["resource_type_qualifiers"]; ok {
+				{
+					x := make([]models.BlueprintResourceTypeQualifier, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewBlueprintResourceTypeQualifierWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("blueprint.ResourceTypeQualifier")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["odata_resource_qualifier"]; ok {
+							{
+								p := make([]models.BlueprintOdataResourceQualifier, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewBlueprintOdataResourceQualifierWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("blueprint.OdataResourceQualifier")
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["rules"]; ok {
+										{
+											x := make([]string, 0)
+											y := reflect.ValueOf(v)
+											for i := 0; i < y.Len(); i++ {
+												if y.Index(i).Interface() != nil {
+													x = append(x, y.Index(i).Interface().(string))
+												}
+											}
+											if len(x) > 0 {
+												o.SetRules(x)
+											}
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetOdataResourceQualifier(x)
+								}
+							}
+						}
+						if v, ok := l["resource_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetResourceType(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetResourceTypeQualifiers(x)
+					}
+				}
+			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
 			x := p[0]
 			o.SetResourceDefinition(x)
 		}
+	}
+
+	if d.HasChange("revision") {
+		v := d.Get("revision")
+		x := int64(v.(int))
+		o.SetRevision(x)
 	}
 
 	if d.HasChange("service_items") {
@@ -3605,6 +5299,188 @@ func resourceWorkloadBlueprintUpdate(c context.Context, d *schema.ResourceData, 
 		o.SetServiceItems(x)
 	}
 
+	if d.HasChange("support_info") {
+		v := d.Get("support_info")
+		p := make([]models.WorkflowSupportInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.WorkflowSupportInfo{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.SupportInfo")
+			if v, ok := l["deprecation_info"]; ok {
+				{
+					p := make([]models.WorkflowDeprecationInfo, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowDeprecationInfoWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("workflow.DeprecationInfo")
+						if v, ok := l["deprecated_dependencies"]; ok {
+							{
+								x := make([]models.WorkflowSupportObjectReference, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewWorkflowSupportObjectReferenceWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									if v, ok := l["catalog_moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetCatalogMoid(x)
+										}
+									}
+									o.SetClassId("workflow.SupportObjectReference")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["nr_version"]; ok {
+										{
+											x := int64(v.(int))
+											o.SetVersion(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetDeprecatedDependencies(x)
+								}
+							}
+						}
+						if v, ok := l["description"]; ok {
+							{
+								x := (v.(string))
+								o.SetDescription(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["replacement_definition"]; ok {
+							{
+								p := make([]models.WorkflowSupportObjectReference, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewWorkflowSupportObjectReferenceWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									if v, ok := l["catalog_moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetCatalogMoid(x)
+										}
+									}
+									o.SetClassId("workflow.SupportObjectReference")
+									if v, ok := l["name"]; ok {
+										{
+											x := (v.(string))
+											o.SetName(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["nr_version"]; ok {
+										{
+											x := int64(v.(int))
+											o.SetVersion(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetReplacementDefinition(x)
+								}
+							}
+						}
+						if v, ok := l["support_end_date"]; ok {
+							{
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
+								o.SetSupportEndDate(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDeprecationInfo(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["support_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetSupportStatus(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSupportInfo(x)
+		}
+	}
+
 	if d.HasChange("tags") {
 		v := d.Get("tags")
 		x := make([]models.MoTag, 0)
@@ -3671,6 +5547,12 @@ func resourceWorkloadBlueprintUpdate(c context.Context, d *schema.ResourceData, 
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -3682,10 +5564,135 @@ func resourceWorkloadBlueprintUpdate(c context.Context, d *schema.ResourceData, 
 		o.SetTags(x)
 	}
 
+	if d.HasChange("validated_objects") {
+		v := d.Get("validated_objects")
+		x := make([]models.BlueprintValidatedConfigReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.BlueprintValidatedConfigReference{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("blueprint.ValidatedConfigReference")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetValidatedObjects(x)
+	}
+
 	if d.HasChange("nr_version") {
 		v := d.Get("nr_version")
 		x := int64(v.(int))
 		o.SetVersion(x)
+	}
+
+	if d.HasChange("version_compatibility_info") {
+		v := d.Get("version_compatibility_info")
+		x := make([]models.BlueprintVersionCompatibilityInfo, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.BlueprintVersionCompatibilityInfo{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["blueprints"]; ok {
+				{
+					x := make([]models.BlueprintVersionReference, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewBlueprintVersionReferenceWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						if v, ok := l["catalog_moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetCatalogMoid(x)
+							}
+						}
+						o.SetClassId("blueprint.VersionReference")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["nr_version"]; ok {
+							{
+								x := int64(v.(int))
+								o.SetVersion(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetBlueprints(x)
+					}
+				}
+			}
+			o.SetClassId("blueprint.VersionCompatibilityInfo")
+			if v, ok := l["compatibility_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetCompatibilityType(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetVersionCompatibilityInfo(x)
+	}
+
+	if d.HasChange("version_description") {
+		v := d.Get("version_description")
+		x := (v.(string))
+		o.SetVersionDescription(x)
 	}
 
 	r := conn.ApiClient.WorkloadApi.UpdateWorkloadBlueprint(conn.ctx, d.Id()).WorkloadBlueprint(*o)

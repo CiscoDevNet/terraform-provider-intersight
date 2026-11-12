@@ -80,13 +80,25 @@ func resourceFabricVlan() *schema.Resource {
 				},
 			},
 			"auto_allow_on_cluster_links": {
-				Description: "Enable this option to automatically allow the VLAN on inter-cluster links. To configure disjoint Layer 2 VLANs, 'Disable' must be specified together with 'AutoAllowOnUplinks.' Note that 'AutoAllowOnClusterLinks' cannot be enabled for the default VLAN 1 or the native VLAN.",
+				Description: "Enable this option to automatically allow the VLAN on intra-chassis links. The traffic is not carried outside the chassis.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
+			"auto_allow_on_inter_switch_ports": {
+				Description: "Restricts this VLAN to intra-chassis traffic only. It does not carry traffic outside the chassis.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
+			"auto_allow_on_secure_router_roles": {
+				Description: "Automatically applies VLANs to backplane ports connected to slots configured with secure router roles.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
 			},
 			"auto_allow_on_uplinks": {
-				Description: "Enable to automatically allow this VLAN on all uplinks. Disable must be specified alongside AutoAllowOnClusterLinks for disjoint layer 2 VLAN configuration. Default VLAN 1 cannot be configured as disjoint layer 2 VLAN.",
+				Description: "Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     true,
@@ -160,7 +172,7 @@ func resourceFabricVlan() *schema.Resource {
 				},
 			},
 			"is_native": {
-				Description: "Used to define whether this VLAN is to be classified as 'native' for traffic in this FI.",
+				Description: "Used to define whether this VLAN is to be classified as 'native' for traffic in this switch.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
@@ -464,16 +476,12 @@ func resourceFabricVlan() *schema.Resource {
 								return
 							}},
 						"type": {
-							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}},
+							Description:  "An enum that defines the type of tag. Supported values are PathTag and KeyValue.\nWhen omitted on create, the server infers the type from the tag shape or an existing TagDefinition.\nOn update, Type distinguishes PathTag and KeyValue tags that share the same key. If an\nempty tag could refer to either type based on stored tags or TagDefinitions, the request\nmust supply enough Type information to make the intended sibling unambiguous.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
+							Optional:     true,
+							Default:      "KeyValue",
+						},
 						"value": {
 							Description:  "The string representation of a tag value.",
 							Type:         schema.TypeString,
@@ -704,6 +712,16 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetAutoAllowOnClusterLinks(x)
 	}
 
+	if v, ok := d.GetOkExists("auto_allow_on_inter_switch_ports"); ok {
+		x := (v.(bool))
+		o.SetAutoAllowOnInterSwitchPorts(x)
+	}
+
+	if v, ok := d.GetOkExists("auto_allow_on_secure_router_roles"); ok {
+		x := (v.(bool))
+		o.SetAutoAllowOnSecureRouterRoles(x)
+	}
+
 	if v, ok := d.GetOkExists("auto_allow_on_uplinks"); ok {
 		x := (v.(bool))
 		o.SetAutoAllowOnUplinks(x)
@@ -889,6 +907,12 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 					o.SetKey(x)
 				}
 			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
 			if v, ok := l["value"]; ok {
 				{
 					x := (v.(string))
@@ -1012,6 +1036,14 @@ func resourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property AutoAllowOnClusterLinks in FabricVlan object: %s", err.Error())
 	}
 
+	if err := d.Set("auto_allow_on_inter_switch_ports", (s.GetAutoAllowOnInterSwitchPorts())); err != nil {
+		return diag.Errorf("error occurred while setting property AutoAllowOnInterSwitchPorts in FabricVlan object: %s", err.Error())
+	}
+
+	if err := d.Set("auto_allow_on_secure_router_roles", (s.GetAutoAllowOnSecureRouterRoles())); err != nil {
+		return diag.Errorf("error occurred while setting property AutoAllowOnSecureRouterRoles in FabricVlan object: %s", err.Error())
+	}
+
 	if err := d.Set("auto_allow_on_uplinks", (s.GetAutoAllowOnUplinks())); err != nil {
 		return diag.Errorf("error occurred while setting property AutoAllowOnUplinks in FabricVlan object: %s", err.Error())
 	}
@@ -1121,6 +1153,18 @@ func resourceFabricVlanUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("auto_allow_on_cluster_links")
 		x := (v.(bool))
 		o.SetAutoAllowOnClusterLinks(x)
+	}
+
+	if d.HasChange("auto_allow_on_inter_switch_ports") {
+		v := d.Get("auto_allow_on_inter_switch_ports")
+		x := (v.(bool))
+		o.SetAutoAllowOnInterSwitchPorts(x)
+	}
+
+	if d.HasChange("auto_allow_on_secure_router_roles") {
+		v := d.Get("auto_allow_on_secure_router_roles")
+		x := (v.(bool))
+		o.SetAutoAllowOnSecureRouterRoles(x)
 	}
 
 	if d.HasChange("auto_allow_on_uplinks") {
@@ -1315,6 +1359,12 @@ func resourceFabricVlanUpdate(c context.Context, d *schema.ResourceData, meta in
 				{
 					x := (v.(string))
 					o.SetKey(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
 				}
 			}
 			if v, ok := l["value"]; ok {

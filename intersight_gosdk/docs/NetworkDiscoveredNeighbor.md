@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **NeighborDeviceCapability** | Pointer to **[]string** |  | [optional] 
 **NeighborDeviceId** | Pointer to **string** | Device identifier of the neighboring device. | [optional] [readonly] 
 **NeighborInterface** | Pointer to **string** | Neighboring device interface. | [optional] [readonly] 
+**NeighborMacAddress** | Pointer to **string** | MAC address of the neighbor device. | [optional] [readonly] 
 **NeighborModel** | Pointer to **string** | Model of the neighbor device. | [optional] [readonly] 
 **NeighborNativeVlan** | Pointer to **string** | Native VLAN of the neighbor device. | [optional] [readonly] 
 **NeighborPortId** | Pointer to **string** | PortID of the neighbor device configured. | [optional] [readonly] 
@@ -268,6 +269,31 @@ SetNeighborInterface sets NeighborInterface field to given value.
 `func (o *NetworkDiscoveredNeighbor) HasNeighborInterface() bool`
 
 HasNeighborInterface returns a boolean if a field has been set.
+
+### GetNeighborMacAddress
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborMacAddress() string`
+
+GetNeighborMacAddress returns the NeighborMacAddress field if non-nil, zero value otherwise.
+
+### GetNeighborMacAddressOk
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborMacAddressOk() (*string, bool)`
+
+GetNeighborMacAddressOk returns a tuple with the NeighborMacAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeighborMacAddress
+
+`func (o *NetworkDiscoveredNeighbor) SetNeighborMacAddress(v string)`
+
+SetNeighborMacAddress sets NeighborMacAddress field to given value.
+
+### HasNeighborMacAddress
+
+`func (o *NetworkDiscoveredNeighbor) HasNeighborMacAddress() bool`
+
+HasNeighborMacAddress returns a boolean if a field has been set.
 
 ### GetNeighborModel
 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Apps** | Pointer to **[]string** |  | [optional] 
 **ConfigurationChangeTrackingCount** | Pointer to **int64** | Count of configuration change tracking. | [optional] [readonly] 
 **ConnectivityAnalysisCount** | Pointer to **int64** | Returns the total number of connectivity Analysis run for EPs in NDFC Fabrics. | [optional] 
+**DpuCount** | Pointer to **int64** | The total number of DPUs within the fabric currently reporting an operational status of &#39;OK&#39;. | [optional] [readonly] 
 **EndpointLocatorCount** | Pointer to **int64** | Count of total Endpoint Locators. | [optional] [readonly] 
 **FabricTechnology** | Pointer to **string** | Fabric technology reported by the onboarded DCNM site. | [optional] 
 **FabricUpdateStatus** | Pointer to **string** | Status of the fabric update. | [optional] [readonly] 
@@ -178,6 +179,31 @@ SetConnectivityAnalysisCount sets ConnectivityAnalysisCount field to given value
 `func (o *NiatelemetrySiteInventory) HasConnectivityAnalysisCount() bool`
 
 HasConnectivityAnalysisCount returns a boolean if a field has been set.
+
+### GetDpuCount
+
+`func (o *NiatelemetrySiteInventory) GetDpuCount() int64`
+
+GetDpuCount returns the DpuCount field if non-nil, zero value otherwise.
+
+### GetDpuCountOk
+
+`func (o *NiatelemetrySiteInventory) GetDpuCountOk() (*int64, bool)`
+
+GetDpuCountOk returns a tuple with the DpuCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDpuCount
+
+`func (o *NiatelemetrySiteInventory) SetDpuCount(v int64)`
+
+SetDpuCount sets DpuCount field to given value.
+
+### HasDpuCount
+
+`func (o *NiatelemetrySiteInventory) HasDpuCount() bool`
+
+HasDpuCount returns a boolean if a field has been set.
 
 ### GetEndpointLocatorCount
 
