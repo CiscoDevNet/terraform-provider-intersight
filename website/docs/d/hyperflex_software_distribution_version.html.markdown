@@ -3,12 +3,22 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_software_distribution_version"
 description: |-
-        A HyperFlex Software Distribution version.
+        The SoftwareDistributionVersions object  represents a specific version of a HyperFlex software distribution.
+        #### Purpose
+        It allows for the tracking of different software versions, ensuring that the correct distribution components are selected during deployment.
+        #### Key Concepts
+        - **Version Tracking:** Manages specific software distribution versions.
+        - **Component Linking:** Associates specific distribution components with a version.
 
 ---
 
 # Data Source: intersight_hyperflex_software_distribution_version
-A HyperFlex Software Distribution version.
+The SoftwareDistributionVersions object  represents a specific version of a HyperFlex software distribution.
+#### Purpose
+It allows for the tracking of different software versions, ensuring that the correct distribution components are selected during deployment.
+#### Key Concepts
+- **Version Tracking:** Manages specific software distribution versions.
+- **Component Linking:** Associates specific distribution components with a version.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

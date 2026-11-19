@@ -285,6 +285,84 @@ func getNiatelemetrySwitchSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"fabric_extenders": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"description": {
+						Description: "Descriptive text configured for the fabric extender.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"id": {
+						Description: "Numeric identifier assigned to the fabric extender.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"interface_names": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"model": {
+						Description: "Hardware model reported for the fabric extender.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Display name assigned to the fabric extender.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"pinning_max_links": {
+						Description: "Maximum number of pinning links supported by the fabric extender.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"port_channel": {
+						Description: "Port channel associated with the fabric extender.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"serial_number": {
+						Description: "Serial number reported for the fabric extender.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"software_version": {
+						Description: "Software version running on the fabric extender.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"state": {
+						Description: "Current operational state reported for the fabric extender.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vpc_id": {
+						Description: "Optional virtual port channel identifier for the fabric extender.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"fabric_type": {
 			Description: "The type of fabric the managed switch belongs to.",
 			Type:        schema.TypeString,
@@ -339,6 +417,84 @@ func getNiatelemetrySwitchSchema() map[string]*schema.Schema {
 			Description: "The model of the managed switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"modules": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"asset_id": {
+						Description: "Asset identifier of the switch hardware module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"hardware_revision": {
+						Description: "Hardware revision of the switch hardware module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"model_name": {
+						Description: "Hardware model name of the switch hardware module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"module_type": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"module_version": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"name": {
+						Description: "Display name of the switch hardware module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"oper_status": {
+						Description: "Operational state of the switch hardware module.\n* `unknown` - The switch hardware module operational state is not known.\n* `boot` - The switch hardware module is booting and is not yet operational.\n* `diagFailed` - The switch hardware module failed its diagnostic checks.\n* `disabled` - The switch hardware module is disabled and is not in service.\n* `dormant` - The switch hardware module is dormant and is not actively operating.\n* `down` - The switch hardware module is down and is not passing traffic.\n* `failed` - The switch hardware module has failed and is not operational.\n* `fwDownloadFailure` - Firmware download for the switch hardware module did not complete successfully.\n* `fwDownloadSuccess` - Firmware download for the switch hardware module completed successfully.\n* `fwMismatchFound` - The switch hardware module firmware does not match the expected version.\n* `goingDown` - The switch hardware module is transitioning to a down operational state.\n* `mdr` - The switch hardware module is performing a minimal disruptive restart.\n* `mismatchConfig` - The switch hardware module configuration does not match the expected configuration.\n* `mismatchWithParent` - The switch hardware module does not match its parent hardware configuration.\n* `missing` - The expected switch hardware module is missing from its slot.\n* `nonOperational` - The switch hardware module is present but is not operational.\n* `notApplicable` - An operational state does not apply to this switch hardware module.\n* `notOk` - The switch hardware module is not in an acceptable operational state.\n* `offAdmin` - The switch hardware module is powered off by an administrative action.\n* `offConnectorRating` - The switch hardware module is off because of a connector rating limit.\n* `offCooling` - The switch hardware module is off because of a cooling condition.\n* `offDenied` - The switch hardware module was denied power and remains off.\n* `offEnvFan` - The switch hardware module is off because of a fan environmental fault.\n* `offEnvOther` - The switch hardware module is off because of another environmental fault.\n* `offEnvPower` - The switch hardware module is off because of a power environmental fault.\n* `offEnvTemp` - The switch hardware module is off because of a temperature environmental fault.\n* `offline` - The switch hardware module is offline and is not available for service.\n* `ok` - The switch hardware module is operating in a normal state.\n* `okButAuthFailed` - The switch hardware module is up but its authentication check failed.\n* `okButDiagFailed` - The switch hardware module is up but a diagnostic check failed.\n* `okButPowerOverCritical` - The switch hardware module is up but power use is above the critical threshold.\n* `okButPowerOverWarning` - The switch hardware module is up but power use is above the warning threshold.\n* `on` - The switch hardware module is powered on.\n* `onButFanFail` - The switch hardware module is on but a fan has failed.\n* `onButInlinePowerFail` - The switch hardware module is on but inline power has failed.\n* `online` - The switch hardware module is online and available for service.\n* `outOfServiceAdmin` - The switch hardware module was taken out of service by an administrator.\n* `outOfServiceEnvTemp` - The switch hardware module is out of service because of a temperature fault.\n* `powerCycled` - The switch hardware module was power cycled and is recovering.\n* `powerDenied` - Power was denied to the switch hardware module.\n* `poweredDown` - The switch hardware module is powered down and is not operating.\n* `poweredUp` - The switch hardware module is powered up.\n* `selfTest` - The switch hardware module is running its self-test sequence.\n* `shut` - The switch hardware module has been shut down and is not in service.\n* `syncInProgress` - The switch hardware module is synchronizing and is not fully ready.\n* `unavailable` - The switch hardware module operational state is currently unavailable.\n* `up` - The switch hardware module is up and available for operation.\n* `upgrading` - The switch hardware module software or firmware upgrade is in progress.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"serial_number": {
+						Description: "Serial number of the switch hardware module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"slot": {
+						Description: "Slot identifier of the switch hardware module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"software_revision": {
+						Description: "Software revision of the switch hardware module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"type": {
+						Description: "Hardware category of the switch hardware module.\n* `module` - The switch hardware module is a generic hardware component in the switch.\n* `lineCard` - The switch hardware module is a line card installed in the switch.\n* `powerSupply` - The switch hardware module is a power supply installed in the switch.\n* `fan` - The switch hardware module is a fan or fan tray installed in the switch.\n* `chassis` - The switch hardware module represents the switch chassis hardware.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
@@ -1003,6 +1159,48 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
+	if v, ok := d.GetOk("fabric_extenders"); ok {
+		x := make([]models.NiatelemetryFabricExtender, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryFabricExtender{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.FabricExtender")
+			if v, ok := l["interface_names"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetInterfaceNames(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetFabricExtenders(x)
+	}
+
 	if v, ok := d.GetOk("fabric_type"); ok {
 		x := (v.(string))
 		o.SetFabricType(x)
@@ -1057,6 +1255,62 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
+	}
+
+	if v, ok := d.GetOk("modules"); ok {
+		x := make([]models.NiatelemetryModule, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryModule{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.Module")
+			if v, ok := l["module_type"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetModuleType(x)
+					}
+				}
+			}
+			if v, ok := l["module_version"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetModuleVersion(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetModules(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1520,6 +1774,8 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["fabric"] = flattenMapNiatelemetryFabricRelationship(s.GetFabric(), d)
+
+				temp["fabric_extenders"] = flattenListNiatelemetryFabricExtender(s.GetFabricExtenders(), d)
 				temp["fabric_type"] = (s.GetFabricType())
 				temp["hardware_conformance"] = (s.GetHardwareConformance())
 				temp["hardware_end_of_vulnerability_support_date"] = (s.GetHardwareEndOfVulnerabilitySupportDate())
@@ -1532,6 +1788,8 @@ func dataSourceNiatelemetrySwitchRead(c context.Context, d *schema.ResourceData,
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
+
+				temp["modules"] = flattenListNiatelemetryModule(s.GetModules(), d)
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
 				temp["operating_system_version"] = (s.GetOperatingSystemVersion())

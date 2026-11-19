@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "description": "Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and\n3rd party IT infrastructure. This platform offers an intelligent level of management that enables\nIT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior\ngenerations of tools. Cisco Intersight provides an integrated and intuitive management experience for\nresources in the traditional data center as well as at the edge. With flexible deployment options to address\ncomplex security needs, getting started with Intersight is quick and easy.\nCisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment,\nconfiguration, and ongoing maintenance. The model-based deployment works for a single system in a remote\nlocation or hundreds of systems in a data center and enables rapid, standardized configuration and deployment.\nIt also streamlines maintaining those systems whether you are working with small or very large configurations.\nThe Intersight OpenAPI document defines the complete set of properties that are returned in the\nHTTP response. From that perspective, a client can expect that no additional properties are returned,\nunless these properties are explicitly defined in the OpenAPI document.\nHowever, when a client uses an older version of the Intersight OpenAPI document, the server may\nsend additional properties because the software is more recent than the client. In that case, the client\nmay receive properties that it does not know about.\nSome generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.\n",
-    "version": "1.0.11-2026110514",
+    "version": "1.0.11-2026111504",
     "title": "Cisco Intersight",
     "license": {
       "name": "Apache License, Version 2.0",
@@ -10,7 +10,7 @@
     },
     "contact": {
       "name": "Intersight API support",
-      "url": "https://stage.starshipcloud.com/help",
+      "url": "https://intersight.com/help",
       "email": "intersight@cisco.com"
     }
   },
@@ -23,7 +23,7 @@
       "url": "https://{server}",
       "variables": {
         "server": {
-          "default": "stage.starshipcloud.com"
+          "default": "intersight.com"
         }
       },
       "description": "The Intersight URL for the cloud-based infrastructure management APIs."
@@ -360105,513 +360105,6 @@
         }
       }
     },
-    "/api/v1/task/WorkflowActions": {
-      "get": {
-        "tags": [
-          "task"
-        ],
-        "summary": "Read a 'task.WorkflowAction' resource.",
-        "operationId": "GetTaskWorkflowActionList",
-        "security": [
-          {
-            "cookieAuth": []
-          },
-          {
-            "http_signature": []
-          },
-          {
-            "oAuth2": [
-              "READ.task.WorkflowAction"
-            ]
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/filterParam"
-          },
-          {
-            "$ref": "#/components/parameters/orderbyParam"
-          },
-          {
-            "$ref": "#/components/parameters/topParam"
-          },
-          {
-            "$ref": "#/components/parameters/skipParam"
-          },
-          {
-            "$ref": "#/components/parameters/selectParam"
-          },
-          {
-            "$ref": "#/components/parameters/expandParam"
-          },
-          {
-            "$ref": "#/components/parameters/applyParam"
-          },
-          {
-            "$ref": "#/components/parameters/countParam"
-          },
-          {
-            "$ref": "#/components/parameters/inlinecountParam"
-          },
-          {
-            "$ref": "#/components/parameters/atParam"
-          },
-          {
-            "$ref": "#/components/parameters/tagsParam"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of 'task.WorkflowAction' resources for the given filter criteria",
-            "headers": {
-              "Set-Cookie": {
-                "$ref": "#/components/headers/Set-Cookie"
-              },
-              "x-starship-traceid": {
-                "$ref": "#/components/headers/x-starship-traceid"
-              },
-              "Content-Disposition": {
-                "$ref": "#/components/headers/Content-Disposition"
-              },
-              "Content-Length": {
-                "$ref": "#/components/headers/Content-Length"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/task.WorkflowAction.Response"
-                }
-              },
-              "text/csv": {
-                "schema": {
-                  "$ref": "#/components/schemas/CsvFile"
-                }
-              },
-              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExcelFile"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/http_status_400"
-          },
-          "401": {
-            "$ref": "#/components/responses/http_status_401"
-          },
-          "403": {
-            "$ref": "#/components/responses/http_status_403"
-          },
-          "404": {
-            "$ref": "#/components/responses/http_status_404"
-          },
-          "default": {
-            "$ref": "#/components/responses/default"
-          }
-        },
-        "x-intersight-type": "SaaS"
-      },
-      "post": {
-        "tags": [
-          "task"
-        ],
-        "summary": "Create a 'task.WorkflowAction' resource.",
-        "operationId": "CreateTaskWorkflowAction",
-        "security": [
-          {
-            "cookieAuth": []
-          },
-          {
-            "http_signature": []
-          },
-          {
-            "oAuth2": [
-              "CREATE.task.WorkflowAction",
-              "PRIVSET.Account Administrator",
-              "PRIVSET.Execute Workflows",
-              "PRIVSET.Manage Workflow Definitions",
-              "PRIVSET.View Workflow Executions",
-              "ROLE.Account Administrator"
-            ]
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/components/parameters/IfNoneMatch"
-          }
-        ],
-        "requestBody": {
-          "description": "The 'task.WorkflowAction' resource to create.",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/task.WorkflowAction"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The HTTP 200 status response code indicates that the request has succeeded and the 'task.WorkflowAction' resource was created as requested. The 'task.WorkflowAction' resource is created before this response is sent back and the resource is returned in the body of the message.",
-            "headers": {
-              "Set-Cookie": {
-                "$ref": "#/components/headers/Set-Cookie"
-              },
-              "x-starship-traceid": {
-                "$ref": "#/components/headers/x-starship-traceid"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/task.WorkflowAction"
-                }
-              }
-            },
-            "links": {
-              "GetTaskWorkflowActionByMoid": {
-                "operationId": "GetTaskWorkflowActionByMoid",
-                "parameters": {
-                  "Moid": "$response.body#/Moid"
-                },
-                "description": "The 'Moid' value returned in the response can be used as the 'Moid' parameter in 'GET /api/v1/task/WorkflowActions/{Moid}'."
-              },
-              "GetIamAccountByMoid": {
-                "$ref": "#/components/links/GetIamAccountByMoid"
-              },
-              "GetIamDomainGroupByMoid": {
-                "$ref": "#/components/links/GetIamDomainGroupByMoid"
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/http_status_400"
-          },
-          "401": {
-            "$ref": "#/components/responses/http_status_401"
-          },
-          "403": {
-            "$ref": "#/components/responses/http_status_403"
-          },
-          "404": {
-            "$ref": "#/components/responses/http_status_404"
-          },
-          "default": {
-            "$ref": "#/components/responses/default"
-          }
-        },
-        "x-intersight-type": "SaaS"
-      }
-    },
-    "/api/v1/task/WorkflowActions/{Moid}": {
-      "get": {
-        "tags": [
-          "task"
-        ],
-        "summary": "Read a 'task.WorkflowAction' resource.",
-        "operationId": "GetTaskWorkflowActionByMoid",
-        "security": [
-          {
-            "cookieAuth": []
-          },
-          {
-            "http_signature": []
-          },
-          {
-            "oAuth2": [
-              "READ.task.WorkflowAction"
-            ]
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/moidParam"
-          },
-          {
-            "$ref": "#/components/parameters/selectParam"
-          },
-          {
-            "$ref": "#/components/parameters/expandParam"
-          },
-          {
-            "$ref": "#/components/parameters/atParam"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An instance of the 'task.WorkflowAction' resource.",
-            "headers": {
-              "Set-Cookie": {
-                "$ref": "#/components/headers/Set-Cookie"
-              },
-              "x-starship-traceid": {
-                "$ref": "#/components/headers/x-starship-traceid"
-              },
-              "Content-Disposition": {
-                "$ref": "#/components/headers/Content-Disposition"
-              },
-              "Content-Length": {
-                "$ref": "#/components/headers/Content-Length"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/task.WorkflowAction"
-                }
-              },
-              "text/csv": {
-                "schema": {
-                  "$ref": "#/components/schemas/CsvFile"
-                }
-              },
-              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExcelFile"
-                }
-              }
-            },
-            "links": {
-              "GetTaskWorkflowActionByMoid": {
-                "operationId": "GetTaskWorkflowActionByMoid",
-                "parameters": {
-                  "Moid": "$response.body#/Moid"
-                },
-                "description": "The 'Moid' value returned in the response can be used as the 'Moid' parameter in 'GET /api/v1/task/WorkflowActions/{Moid}'."
-              },
-              "GetIamAccountByMoid": {
-                "$ref": "#/components/links/GetIamAccountByMoid"
-              },
-              "GetIamDomainGroupByMoid": {
-                "$ref": "#/components/links/GetIamDomainGroupByMoid"
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/http_status_400"
-          },
-          "401": {
-            "$ref": "#/components/responses/http_status_401"
-          },
-          "403": {
-            "$ref": "#/components/responses/http_status_403"
-          },
-          "404": {
-            "$ref": "#/components/responses/http_status_404"
-          },
-          "default": {
-            "$ref": "#/components/responses/default"
-          }
-        },
-        "x-intersight-type": "SaaS"
-      },
-      "post": {
-        "tags": [
-          "task"
-        ],
-        "summary": "Update a 'task.WorkflowAction' resource.",
-        "operationId": "UpdateTaskWorkflowAction",
-        "security": [
-          {
-            "cookieAuth": []
-          },
-          {
-            "http_signature": []
-          },
-          {
-            "oAuth2": [
-              "PRIVSET.Account Administrator",
-              "PRIVSET.Execute Workflows",
-              "PRIVSET.Manage Workflow Definitions",
-              "PRIVSET.View Workflow Executions",
-              "ROLE.Account Administrator",
-              "UPDATE.task.WorkflowAction"
-            ]
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/moidParam"
-          },
-          {
-            "$ref": "#/components/parameters/IfMatch"
-          }
-        ],
-        "requestBody": {
-          "description": "The 'task.WorkflowAction' resource to update.",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/task.WorkflowAction"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PatchDocument"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The HTTP 200 status response code indicates that the request has succeeded and the 'task.WorkflowAction' resource was modified as requested. The 'task.WorkflowAction' resource is modified before this response is sent back and the resource is returned in the body of the message.",
-            "headers": {
-              "Set-Cookie": {
-                "$ref": "#/components/headers/Set-Cookie"
-              },
-              "x-starship-traceid": {
-                "$ref": "#/components/headers/x-starship-traceid"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/task.WorkflowAction"
-                }
-              }
-            },
-            "links": {
-              "GetTaskWorkflowActionByMoid": {
-                "operationId": "GetTaskWorkflowActionByMoid",
-                "parameters": {
-                  "Moid": "$response.body#/Moid"
-                },
-                "description": "The 'Moid' value returned in the response can be used as the 'Moid' parameter in 'GET /api/v1/task/WorkflowActions/{Moid}'."
-              },
-              "GetIamAccountByMoid": {
-                "$ref": "#/components/links/GetIamAccountByMoid"
-              },
-              "GetIamDomainGroupByMoid": {
-                "$ref": "#/components/links/GetIamDomainGroupByMoid"
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/http_status_400"
-          },
-          "401": {
-            "$ref": "#/components/responses/http_status_401"
-          },
-          "403": {
-            "$ref": "#/components/responses/http_status_403"
-          },
-          "404": {
-            "$ref": "#/components/responses/http_status_404"
-          },
-          "default": {
-            "$ref": "#/components/responses/default"
-          }
-        },
-        "x-intersight-type": "SaaS"
-      },
-      "patch": {
-        "tags": [
-          "task"
-        ],
-        "summary": "Update a 'task.WorkflowAction' resource.",
-        "operationId": "PatchTaskWorkflowAction",
-        "security": [
-          {
-            "cookieAuth": []
-          },
-          {
-            "http_signature": []
-          },
-          {
-            "oAuth2": [
-              "PRIVSET.Account Administrator",
-              "PRIVSET.Execute Workflows",
-              "PRIVSET.Manage Workflow Definitions",
-              "PRIVSET.View Workflow Executions",
-              "ROLE.Account Administrator",
-              "UPDATE.task.WorkflowAction"
-            ]
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/moidParam"
-          },
-          {
-            "$ref": "#/components/parameters/IfMatch"
-          }
-        ],
-        "requestBody": {
-          "description": "The 'task.WorkflowAction' resource to update.",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/task.WorkflowAction"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PatchDocument"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The HTTP 200 status response code indicates that the request has succeeded and the 'task.WorkflowAction' resource was patched as requested. The 'task.WorkflowAction' resource is patched before this response is sent back and the resource is returned in the body of the message.",
-            "headers": {
-              "Set-Cookie": {
-                "$ref": "#/components/headers/Set-Cookie"
-              },
-              "x-starship-traceid": {
-                "$ref": "#/components/headers/x-starship-traceid"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/task.WorkflowAction"
-                }
-              }
-            },
-            "links": {
-              "GetTaskWorkflowActionByMoid": {
-                "operationId": "GetTaskWorkflowActionByMoid",
-                "parameters": {
-                  "Moid": "$response.body#/Moid"
-                },
-                "description": "The 'Moid' value returned in the response can be used as the 'Moid' parameter in 'GET /api/v1/task/WorkflowActions/{Moid}'."
-              },
-              "GetIamAccountByMoid": {
-                "$ref": "#/components/links/GetIamAccountByMoid"
-              },
-              "GetIamDomainGroupByMoid": {
-                "$ref": "#/components/links/GetIamDomainGroupByMoid"
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/http_status_400"
-          },
-          "401": {
-            "$ref": "#/components/responses/http_status_401"
-          },
-          "403": {
-            "$ref": "#/components/responses/http_status_403"
-          },
-          "404": {
-            "$ref": "#/components/responses/http_status_404"
-          },
-          "default": {
-            "$ref": "#/components/responses/default"
-          }
-        },
-        "x-intersight-type": "SaaS"
-      }
-    },
     "/api/v1/techsupportmanagement/CollectionControlPolicies": {
       "get": {
         "tags": [
@@ -461699,7 +461192,7 @@
       },
       "comm.HttpProxyPolicy": {
         "title": "HTTP Proxy",
-        "description": "A policy specifying the HTTP proxy settings to be used by the HyperFlex installation process and HyperFlex storage controller VMs. This policy is required when the internet access of your servers including CIMC and HyperFlex storage controller VMs is secured by a HTTP proxy.",
+        "description": "HttpProxyPolicies define the HTTP proxy configuration used by HyperFlex installation workflows and HyperFlex storage controller VMs. They provide a reusable, attachable policy that supplies proxy settings in environments where servers (including CIMC) and controller VMs must reach external services through an HTTP proxy.\n#### Purpose\nEnable consistent, profile-driven application of HTTP proxy settings for HyperFlex deployments across both FI-managed and standalone environments, supporting installation and ongoing controller-VM connectivity requirements.\n#### Key Concepts\n- **Proxy configuration intent**: Captures the desired HTTP proxy settings (via `comm.AbstractHttpProxyPolicy`) to be consumed by HyperFlex installation and controller VMs.\n- **Profile attachability and reuse**: Designed to be attached to `hyperflex.ClusterProfile`, and related via `clusterProfiles` for visibility into consumers.\n- **Multi-platform applicability**: Tagged for both FI and standalone management platforms (`managementplatform.fi`, `managementplatform.standalone`).\n- **Governed lifecycle**: Supports READ/CREATE/UPDATE/DELETE with privileges scoped to HyperFlex cluster profile management roles.\n- **Non-destructive detachment**: `clusterProfiles` uses `ondelete: unset`, allowing cluster profiles to persist even if a proxy policy is removed or replaced.",
         "x-allOf-name": "comm.HttpProxyPolicy",
         "allOf": [
           {
@@ -465453,7 +464946,7 @@
               "OperReason": {
                 "type": "array",
                 "items": {
-                  "description": "The oper reason status list of the server.\n* `Unknown` - The health message type is not known.\n* `WillBootError` - The compute object has ecountered a will boot error status.\n* `MemoryInoperable` - One or more memory units on this server are inoperable.\n* `ProcessorInoperable` - One or more processor units on this server are inoperable.\n* `DeprecatedAdapter` - One or more adapter units on this server are not supported or deprecated.\n* `PciNodeInserted` - One or more PCIe node are detected that are managed by this server.\n* `PciNodeRemoved` - One or more PCIe node got removed that were managed by this server.\n* `PowerCycleRequired` - One or more PCIe node are detected and a compute node power cycle is required to update inventory.\n* `PowerOnRequired` - One or more PCIe node are detected and a compute node power on is required to update inventory.\n* `PCIeNodeUnsupported` - Unsupported PCIe node detected.\n* `PCIeNodeUnidentified` - Unidentified PCIe node detected.\n* `BiosPostTimedOut` - BIOS POST completion timeout was detected on this server.\n* `SysThrottleCritical` - The health state of the server at the time of system throttling.\n* `SysThrottleWarning` - The health state of the server at the time of system throttling.\n* `UnauthorizedManagementVic` - The network adapter used for management traffic has been determined to be counterfeit.\n* `ZoneInactive` - The operReason of the compute blade will be set to this value if the mapped PCIe device is not available.\n* `MappedPCIeDevicesRemoved` - One or more mapped PCIe devices have been physically removed.\n* `MappedPCIeDeviceConnectionsRemoved` - One or more mapped PCIe device connectivity modules (X-Fabric module) have been physically removed.\n* `BladeReseatedWithPcieConnPolicy` - The blade was reseated and has a PCIe connectivity policy assigned. The PCIe connectivity configuration needs to be reapplied.\n* `BladeInReservedSlot` - The blade is inserted in a slot that is reserved for Secure Router.",
+                  "description": "The oper reason status list of the server.\n* `Unknown` - The health message type is not known.\n* `WillBootError` - The compute object has ecountered a will boot error status.\n* `MemoryInoperable` - One or more memory units on this server are inoperable.\n* `ProcessorInoperable` - One or more processor units on this server are inoperable.\n* `DeprecatedAdapter` - One or more adapter units on this server are not supported or deprecated.\n* `PciNodeInserted` - One or more PCIe node are detected that are managed by this server.\n* `PciNodeRemoved` - One or more PCIe node got removed that were managed by this server.\n* `PowerCycleRequired` - One or more PCIe node are detected and a compute node power cycle is required to update inventory.\n* `PowerOnRequired` - One or more PCIe node are detected and a compute node power on is required to update inventory.\n* `PCIeNodeUnsupported` - Unsupported PCIe node detected.\n* `PCIeNodeUnidentified` - Unidentified PCIe node detected.\n* `BiosPostTimedOut` - BIOS POST completion timeout was detected on this server.\n* `SecureBootHealthError` - A secure boot health error was detected on this server during BIOS POST.\n* `SysThrottleCritical` - The health state of the server at the time of system throttling.\n* `SysThrottleWarning` - The health state of the server at the time of system throttling.\n* `UnauthorizedManagementVic` - The network adapter used for management traffic has been determined to be counterfeit.\n* `ZoneInactive` - The operReason of the compute blade will be set to this value if the mapped PCIe device is not available.\n* `MappedPCIeDevicesRemoved` - One or more mapped PCIe devices have been physically removed.\n* `MappedPCIeDeviceConnectionsRemoved` - One or more mapped PCIe device connectivity modules (X-Fabric module) have been physically removed.\n* `BladeReseatedWithPcieConnPolicy` - The blade was reseated and has a PCIe connectivity policy assigned. The PCIe connectivity configuration needs to be reapplied.\n* `BladeInReservedSlot` - The blade is inserted in a slot that is reserved for Secure Router.",
                   "type": "string",
                   "enum": [
                     "Unknown",
@@ -465468,6 +464961,7 @@
                     "PCIeNodeUnsupported",
                     "PCIeNodeUnidentified",
                     "BiosPostTimedOut",
+                    "SecureBootHealthError",
                     "SysThrottleCritical",
                     "SysThrottleWarning",
                     "UnauthorizedManagementVic",
@@ -465985,7 +465479,7 @@
               "OperReason": {
                 "type": "array",
                 "items": {
-                  "description": "The oper reason status list of the server.\n* `Unknown` - The health message type is not known.\n* `WillBootError` - The compute object has ecountered a will boot error status.\n* `MemoryInoperable` - One or more memory units on this server are inoperable.\n* `ProcessorInoperable` - One or more processor units on this server are inoperable.\n* `DeprecatedAdapter` - One or more adapter units on this server are not supported or deprecated.\n* `PciNodeInserted` - One or more PCIe node are detected that are managed by this server.\n* `PciNodeRemoved` - One or more PCIe node got removed that were managed by this server.\n* `PowerCycleRequired` - One or more PCIe node are detected and a compute node power cycle is required to update inventory.\n* `PowerOnRequired` - One or more PCIe node are detected and a compute node power on is required to update inventory.\n* `PCIeNodeUnsupported` - Unsupported PCIe node detected.\n* `PCIeNodeUnidentified` - Unidentified PCIe node detected.\n* `BiosPostTimedOut` - BIOS POST completion timeout was detected on this server.\n* `SysThrottleCritical` - The health state of the server at the time of system throttling.\n* `SysThrottleWarning` - The health state of the server at the time of system throttling.\n* `UnauthorizedManagementVic` - The network adapter used for management traffic has been determined to be counterfeit.\n* `ZoneInactive` - The operReason of the compute blade will be set to this value if the mapped PCIe device is not available.\n* `MappedPCIeDevicesRemoved` - One or more mapped PCIe devices have been physically removed.\n* `MappedPCIeDeviceConnectionsRemoved` - One or more mapped PCIe device connectivity modules (X-Fabric module) have been physically removed.\n* `BladeReseatedWithPcieConnPolicy` - The blade was reseated and has a PCIe connectivity policy assigned. The PCIe connectivity configuration needs to be reapplied.\n* `BladeInReservedSlot` - The blade is inserted in a slot that is reserved for Secure Router.",
+                  "description": "The oper reason status list of the server.\n* `Unknown` - The health message type is not known.\n* `WillBootError` - The compute object has ecountered a will boot error status.\n* `MemoryInoperable` - One or more memory units on this server are inoperable.\n* `ProcessorInoperable` - One or more processor units on this server are inoperable.\n* `DeprecatedAdapter` - One or more adapter units on this server are not supported or deprecated.\n* `PciNodeInserted` - One or more PCIe node are detected that are managed by this server.\n* `PciNodeRemoved` - One or more PCIe node got removed that were managed by this server.\n* `PowerCycleRequired` - One or more PCIe node are detected and a compute node power cycle is required to update inventory.\n* `PowerOnRequired` - One or more PCIe node are detected and a compute node power on is required to update inventory.\n* `PCIeNodeUnsupported` - Unsupported PCIe node detected.\n* `PCIeNodeUnidentified` - Unidentified PCIe node detected.\n* `BiosPostTimedOut` - BIOS POST completion timeout was detected on this server.\n* `SecureBootHealthError` - A secure boot health error was detected on this server during BIOS POST.\n* `SysThrottleCritical` - The health state of the server at the time of system throttling.\n* `SysThrottleWarning` - The health state of the server at the time of system throttling.\n* `UnauthorizedManagementVic` - The network adapter used for management traffic has been determined to be counterfeit.\n* `ZoneInactive` - The operReason of the compute blade will be set to this value if the mapped PCIe device is not available.\n* `MappedPCIeDevicesRemoved` - One or more mapped PCIe devices have been physically removed.\n* `MappedPCIeDeviceConnectionsRemoved` - One or more mapped PCIe device connectivity modules (X-Fabric module) have been physically removed.\n* `BladeReseatedWithPcieConnPolicy` - The blade was reseated and has a PCIe connectivity policy assigned. The PCIe connectivity configuration needs to be reapplied.\n* `BladeInReservedSlot` - The blade is inserted in a slot that is reserved for Secure Router.",
                   "type": "string",
                   "enum": [
                     "Unknown",
@@ -466000,6 +465494,7 @@
                     "PCIeNodeUnsupported",
                     "PCIeNodeUnidentified",
                     "BiosPostTimedOut",
+                    "SecureBootHealthError",
                     "SysThrottleCritical",
                     "SysThrottleWarning",
                     "UnauthorizedManagementVic",
@@ -472659,6 +472154,16 @@
           }
         ]
       },
+      "connector.StreamInventorySupport": {
+        "title": "Connector:Stream Inventory Support",
+        "description": "Device capabilities in regard to inventory collection.",
+        "x-allOf-name": "connector.StreamInventorySupport",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/connector.StreamSupport"
+          }
+        ]
+      },
       "connector.StreamKeepalive": {
         "title": "Connector:Stream Keepalive",
         "description": "Keepalive message sent between service and device over lifetime of stream. Cloud services will configure device to emit message periodically. On receipt cloud service will send a response keepalive to the device. If no input/output or keepalive message is received on either side within a configured timeout the stream will be closed.",
@@ -472676,6 +472181,17 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/connector.BaseMessage"
+          }
+        ]
+      },
+      "connector.StreamSupport": {
+        "title": "Connector:Stream Support",
+        "description": "Device capabilities in regard to streaming.",
+        "x-allOf-name": "connector.StreamSupport",
+        "nullable": true,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/mo.BaseComplexType"
           }
         ]
       },
@@ -486309,6 +485825,12 @@
                 "description": "Switch physical port identifier.",
                 "type": "integer",
                 "format": "int64",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "SfpFirmwareInfo": {
+                "description": "Firmware version and upgrade information for DS-SFP-FC64G-SW and DS-SFP-FC64G-LW FC SFP transceivers installed in UCS-FI-6652 or UCS-FI-6664 Fabric Interconnects. The value is null for all other transceivers or when firmware inventory is unavailable.",
+                "$ref": "#/components/schemas/firmware.FirmwareInfo",
                 "readOnly": true,
                 "x-omitempty": true
               },
@@ -502153,6 +501675,49 @@
           }
         ]
       },
+      "firmware.FirmwareInfo": {
+        "title": "Firmware:Firmware Info",
+        "description": "Firmware upgrade information reported for a hardware component.",
+        "x-allOf-name": "firmware.FirmwareInfo",
+        "nullable": true,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/mo.BaseComplexType"
+          },
+          {
+            "type": "object",
+            "description": "Definition of the list of properties defined in 'firmware.FirmwareInfo', excluding properties defined in parent classes.",
+            "required": [
+              "ClassId",
+              "ObjectType"
+            ],
+            "properties": {
+              "ClassId": {
+                "description": "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+                "enum": [
+                  "firmware.FirmwareInfo"
+                ],
+                "default": "firmware.FirmwareInfo",
+                "x-enum-as-string": true
+              },
+              "ObjectType": {
+                "description": "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+                "enum": [
+                  "firmware.FirmwareInfo"
+                ],
+                "default": "firmware.FirmwareInfo",
+                "x-enum-as-string": true
+              },
+              "RunningVersion": {
+                "description": "The firmware version currently running on the component.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              }
+            }
+          }
+        ]
+      },
       "firmware.FirmwareInventory": {
         "title": "Firmware:Firmware Inventory",
         "description": "Firmware inventory for server component.",
@@ -502602,6 +502167,7 @@
               "BundleVersion": {
                 "description": "The bundle version to which the server will be upgraded.",
                 "type": "string",
+                "pattern": "^$|^[A-Za-z0-9.()_-]+$",
                 "x-omitempty": true
               },
               "ModelFamily": {
@@ -514785,7 +514351,7 @@
       },
       "hcl.HwCatalogInfo": {
         "title": "Hardware Catalog Information for HyperFlex Data Platform",
-        "description": "Hardware catalog information for HyperFlex Data Platform, required for BOM validation.",
+        "description": "The HwCatalogInfos object provides the essential hardware catalog metadata for the HyperFlex Data Platform, which is required for performing Bill of Materials (BOM) validation.\n#### Purpose\nThis serves as the foundation for hardware compatibility checks, ensuring that the server models and types used in a HyperFlex cluster are supported by the platform.\n#### Key Concepts\n- **BOM Validation:** Acts as the reference data for validating hardware configurations during cluster deployment.\n- **Hardware Identification:** Tracks specific server models and types, such as All-Flash (AF) configurations.\n- **Catalog Integration:** Maintains relationships with detailed server hardware catalog information to provide a comprehensive validation check.",
         "x-allOf-name": "hcl.HwCatalogInfo",
         "allOf": [
           {
@@ -514905,7 +514471,7 @@
       },
       "hcl.HyperflexSoftwareCompatibilityInfo": {
         "title": "Hyperflex Software Compatibility Information",
-        "description": "Lists software compatibility information between different HperFlex component versions like HyperFlex Data Platform, Hypervisor, Drive Firmware, etc.",
+        "description": "The HyperflexSoftwareCompatibilityInfos object manages the compatibility matrix between various HyperFlex component versions.\n### Purpose\nThis provides a structured way to determine if a specific combination of HyperFlex Data Platform, hypervisor, and server firmware versions are compatible, which is critical for successful cluster operations and upgrades.\n### Key Concepts\n- **Compatibility Matrix:** Defines supported version ranges (min/max) for management builds and hypervisors.\n- **Constraint-Based Matching:** Uses compatibility constraints to handle specific operational scenarios, such as ensuring versions are compatible for upgrade operations.\n- **Component Interoperability:** Tracks compatibility across different HyperFlex components, including the HyperFlex Data Platform, hypervisors (ESX, Hyper-V, KVM), and UCS server firmware.",
         "x-allOf-name": "hcl.HyperflexSoftwareCompatibilityInfo",
         "allOf": [
           {
@@ -515548,7 +515114,7 @@
       },
       "hcl.ServerHwCatalogInfo": {
         "title": "Hardware Catalog Information for HyperFlex Server",
-        "description": "Server hardware catalog information for a particular server model, used for server BOM validation.",
+        "description": "The ServerHwCatalogInfos object provides granular, server-specific hardware catalog information used for detailed BOM validation.\n#### Purpose\nThis stores the technical specifications and constraints for individual server models, allowing the system to perform deep validation of server hardware components.\n#### Key Concepts\n- **Detailed Specifications:** Contains JSON-formatted values that define the technical specifications of server components, such as processors, memory, and disks.\n- **Display Customization:** Provides user-friendly display models that map technical Cisco PIDs to readable strings for Intersight users.\n- **Constraint Enforcement:** Implements constraints to handle hardware-specific rules, such as maximum data disk counts based on the management platform.",
         "x-allOf-name": "hcl.ServerHwCatalogInfo",
         "allOf": [
           {
@@ -515796,7 +515362,7 @@
       },
       "hyperflex.Alarm": {
         "title": "Hyperflex:Alarm",
-        "description": "An alarm representing a fault in the HyperFlex cluster configuration or hardware.",
+        "description": "Alarms represent faults or notable conditions reported by a HyperFlex cluster, providing a normalized view of what happened, the affected entity, severity, and acknowledgement state to support monitoring and triage. Each alarm is associated with an entity such as a cluster, node, disk, or VM through its type, name, and UUID; includes its severity and trigger and acknowledgement timestamps; records who acknowledged it and when; and includes relationships to ancestor managed objects for context and navigation. This alarm inventory supports monitoring, filtering by severity or entity, and operational troubleshooting.",
         "x-allOf-name": "hyperflex.Alarm",
         "allOf": [
           {
@@ -516092,7 +515658,7 @@
       },
       "hyperflex.AppCatalog": {
         "title": "HyperFlex application settings",
-        "description": "A catalog for managing application settings for HyperFlex cluster configuration service.",
+        "description": "AppCatalog is a system-owned, singleton catalog used by the HyperFlex cluster configuration service to manage application settings and supported configuration data. It is created during service initialization and is maintained by the system (for example, via packaged catalog content and future external catalog sources), while being readable in account context for operational and configuration workflows.\n#### Purpose\nServe as the authoritative catalog for HyperFlex configuration-service application settings and supported software/version data, enabling cluster profile workflows and UIs to reference a consistent set of supported HyperFlex Data Platform versions and software distribution entries.\n#### Key Concepts\n- **Singleton, system-managed catalog**: `owner: system` and restricted CREATE/UPDATE/DELETE (System Administrator only) indicate the platform controls lifecycle and content updates.\n- **Account-context consumption**: Broad READ access enables users and tooling to query supported settings without being able to mutate the catalog.\n- **Catalog versioning**: `version` tracks the catalog revision used by the HyperFlex configuration service.\n- **Supported software versions**: The catalog stores supported HyperFlex Data Platform versions and enables compatibility-driven selection.\n- **Supported distribution entries**: `softwareDistributions` lists supported HyperFlex software distribution entries used by the service for validation and workflows.\n- **Hierarchical catalog structure**: Version and software distribution records establish AppCatalog as the container for these supported-data records.",
         "x-allOf-name": "hyperflex.AppCatalog",
         "allOf": [
           {
@@ -516329,7 +515895,7 @@
       },
       "hyperflex.AutoSupportPolicy": {
         "title": "Auto Support",
-        "description": "A policy specifying the configuration to automatically generate support tickets with Cisco TAC.",
+        "description": "The AutoSupportPolicy object specifies the configuration settings for automatically generating and delivering support tickets to Cisco TAC.\n#### Purpose\nIt enables proactive monitoring and automated support by defining the delivery mechanism and recipient for support information, reducing manual intervention during issue resolution.\n#### Key Concepts\n- **Automated Support:** Enables or disables the automated generation of support messages.\n- **Ticket Routing:** Configures the recipient email address for support tickets.\n- **Policy Enforcement:** Applied via cluster profiles to ensure consistent support configurations across the environment.",
         "x-allOf-name": "hyperflex.AutoSupportPolicy",
         "allOf": [
           {
@@ -516923,7 +516489,7 @@
       },
       "hyperflex.CapabilityInfo": {
         "title": "Hyperflex Capabilities and Feature limits Information",
-        "description": "A capabilityInfo is like a feature set and/or feature limit for different components of a HyperFlex Cluster. A set of constraints defines the rules, and the corresponding value either determines if the feature would work on a HyperFlex cluster with specific component set, or corresponds to a limit for a set of HyperFlex components. For example, \"minUcsVersion\" for HyperFlex version \"4.0.1a\" corresponds to \"3.2.3\" or \"minHxdpVersion\" for HyperFlex Upgrade operation is \"4.0.1a\" etc. This data can be captured as a capability and at run-time, decision can be made to proceed with the intended operation or not, or proceed with the intended operation with a value catered to specific feature sets.",
+        "description": "CapabilityInfos capture HyperFlex capability metadata\u2014feature sets and feature limits\u2014expressed as a set of constraints and an associated value. The constraints define when a capability applies (evaluated together with an AND semantics), and the resulting value indicates either whether a feature is supported for a given component/version combination or what limit/threshold should be used.\n#### Purpose\nEnable HyperFlex workflows (such as upgrades and compatibility checks) to make data-driven runtime decisions about whether an intended operation is supported and, when supported, what minimum versions or limit values should be enforced for the detected cluster/component set.\n#### Key Concepts\n- **Constraint-driven capability evaluation**: `capabilityConstraints` define the applicability rules; all constraints must match for the capability to be considered applicable.\n- **Capability value as outcome/limit**: `value` represents the effective value when constraints match\u2014commonly minimum version requirements (e.g., `minUcsVersion`, `minHxdpVersion`) or feature limits for specific component sets.\n- **Runtime decision support**: The model is intended to support \u201cgo/no-go\u201d and \u201cchoose correct limit\u201d logic during operations like upgrades, validations, or feature enablement.\n- **Catalog-governed access**: Inherits permissions from `appCatalog`, indicating capabilities are managed in the context of an application catalog and follow that catalog\u2019s access boundaries.\n- **Discoverability by name**: Indexed by `Name` (`byName`) to enable quick lookups of a capability/feature set by identifier.\n- **Controlled lifecycle**: READ is broadly available to HyperFlex operators; CREATE/UPDATE requires elevated/admin/profile-management privileges; DELETE is restricted to System Administrator.",
         "x-allOf-name": "hyperflex.CapabilityInfo",
         "allOf": [
           {
@@ -518053,7 +517619,7 @@
       },
       "hyperflex.ClusterNetworkPolicy": {
         "title": "Network Configuration",
-        "description": "A policy specifying VLANs for management, VM migration, and VM traffic.",
+        "description": "The ClusterNetworkPolicies object  defines the network infrastructure requirements for a HyperFlex cluster, including VLANs, MTU settings, and IP ranges.\n#### Purpose\nIt ensures that the cluster has the correct network connectivity for management, VM migration, and guest VM traffic, which is critical for cluster stability and performance.\n#### Key Concepts\n- **VLAN Management:** Configures specific VLANs for management, migration, and VM traffic.\n- **Network Performance:** Supports Jumbo Frame configuration for optimized throughput.\n- **Connectivity Infrastructure:** Manages KVM IP ranges and MAC prefix ranges to ensure unique network identities for servers.",
         "x-allOf-name": "hyperflex.ClusterNetworkPolicy",
         "allOf": [
           {
@@ -518826,7 +518392,7 @@
       },
       "hyperflex.ClusterStoragePolicy": {
         "title": "Storage Configuration",
-        "description": "A policy specifying HyperFlex cluster storage settings (optional).",
+        "description": "The ClusterStoragePolicies object specifies HyperFlex cluster storage settings, such as disk cleanup and VDI optimization.\n#### Purpose\nThis provides control over the storage layer, allowing administrators to enable performance-enhancing features or define cleanup behaviors during cluster deployment.\n#### Key Concepts\n- **Disk Management:** Controls whether existing disk partitions are cleaned up during deployment.\n- **Performance Optimization:** Offers toggles for VDI-specific optimizations.\n- **Logical Availability:** Configures Logical Availability Zones (LAZ) for increased fault tolerance.",
         "x-allOf-name": "hyperflex.ClusterStoragePolicy",
         "allOf": [
           {
@@ -519993,7 +519559,7 @@
       },
       "hyperflex.Encryption": {
         "title": "Hyperflex:Encryption",
-        "description": "The overview of software-encryption on the cluster",
+        "description": "Encryptions represent the software-encryption status of a HyperFlex cluster, giving administrators a concise view of whether encryption is enabled, configured, supported, failed, or in an unknown state. The status describes the cluster as a whole rather than individual disks, uses an enum to represent these conditions, and is linked to the cluster\u2019s device registration so that the status is attributed to the correct endpoint.",
         "x-allOf-name": "hyperflex.Encryption",
         "allOf": [
           {
@@ -520279,7 +519845,7 @@
       },
       "hyperflex.ExtFcStoragePolicy": {
         "title": "External FC Storage",
-        "description": "A policy specifying external storage connectivity information via Fabric attached FC storage.",
+        "description": "The ExtFcStoragePolicies object specifies connectivity settings for fabric-attached external Fibre Channel (FC) storage.\n#### Purpose\nIt enables the integration of external FC storage arrays with the HyperFlex cluster, defining the VSANs and WWxN ranges required for connectivity.\n#### Key Concepts\n- **External Storage Integration:** Enables fabric-attached FC storage connectivity.\n- **VSAN Configuration:** Defines primary and secondary VSANs for storage traffic.\n- **Identity Management:** Manages WWxN prefix ranges for FC endpoints.",
         "x-allOf-name": "hyperflex.ExtFcStoragePolicy",
         "allOf": [
           {
@@ -520414,7 +519980,7 @@
       },
       "hyperflex.ExtIscsiStoragePolicy": {
         "title": "External iSCSI Storage",
-        "description": "A policy specifying external storage connectivity information via Fabric attached iSCSI storage.",
+        "description": "The ExtIscsiStoragePolicies object specifies connectivity settings for fabric-attached external iSCSI storage.\n#### Purpose\nIt allows for the integration of external iSCSI storage arrays, ensuring the cluster can communicate with external targets via the storage network.\n#### Key Concepts\n- **External Storage Integration:** Enables fabric-attached iSCSI storage connectivity.\n- **Traffic VLANs:** Defines VLANs for primary and secondary iSCSI traffic.\n- **Operational Control:** Provides an administrative state to enable or disable the external storage integration.\nA policy specifying external storage connectivity information via Fabric attached iSCSI storage.",
         "x-allOf-name": "hyperflex.ExtIscsiStoragePolicy",
         "allOf": [
           {
@@ -520864,7 +520430,7 @@
       },
       "hyperflex.Health": {
         "title": "Hyperflex:Health",
-        "description": "The data health status and ability of the HyperFlex storage cluster to tolerate failures.",
+        "description": "Health objects capture a HyperFlex cluster\u2019s operational status and resiliency posture, including replication compliance, tolerable failures, zone resiliency, and service health indicators such as ZooKeeper and the arbitration service. They provide detailed information for proactive monitoring and operational decisions, including whether the cluster is online, offline, readonly, or enospaced; how many failures it can tolerate and whether policy compliance has degraded; the health of the ZooKeeper ensemble and arbitration service where applicable, particularly for 2-node edge clusters; and resiliency details by zone or site for stretched or LAZ configurations.",
         "x-allOf-name": "hyperflex.Health",
         "allOf": [
           {
@@ -522040,7 +521606,7 @@
       },
       "hyperflex.HwCatalog": {
         "title": "HyperFlex Hardware Catalog",
-        "description": "Hardware catalog for managing HyperFlex server BOM validation.",
+        "description": "The HwCatalogs object provides the hardware catalog used for HyperFlex server Bill of Materials (BOM) validation.\n#### Purpose\nIt ensures that the hardware components (servers, disks, etc.) being used in a cluster deployment are compatible and supported by the HyperFlex platform.\n#### Key Concepts\n- **BOM Validation:** Validates that server models and hardware types meet HyperFlex requirements.\n- **Catalog Versioning:** Tracks the version of the hardware catalog to ensure up-to-date validation logic.",
         "x-allOf-name": "hyperflex.HwCatalog",
         "allOf": [
           {
@@ -522911,7 +522477,7 @@
       },
       "hyperflex.HxdpVersion": {
         "title": "Hyperflex:Hxdp Version",
-        "description": "A HyperFlex Data Platform version.",
+        "description": "HyperFlex software version records represent the desired HyperFlex software stack versions to be applied to a HyperFlex cluster, including the HyperFlex Data Platform, server firmware, and hypervisor versions. They also capture which components are intended to be upgraded and provide linkage to bundle metadata for the selected software release.\n#### Purpose\nProvide a version intent record that HyperFlex cluster profile workflows can use to drive consistent installation and upgrade behavior across the HyperFlex Data Platform, server firmware, and hypervisor components, while enabling correlation to the underlying distributable and bundle metadata.\n#### Key Concepts\n- **Multi-component version intent**: Captures target versions across major stack layers:\n  - **HyperFlex Data Platform version**: The target platform software version.\n  - `serverFirmwareVersion` / `serverFirmwareVersions` (UCS firmware baseline and per-server-type details)\n  - `hypervisorVersion` (applies across cluster nodes)\n- **Upgrade scoping**: `upgradeTypes` indicates which components are in scope for an upgrade operation (enabling partial vs full stack upgrades).\n- **Validation for firmware strings**: `serverFirmwareVersion` includes a regex constraint supporting both release-style and internal build version formats.\n- **Profile consumption and reuse**: `clusterProfiles` relates the version intent to the set of cluster profiles that use it (with `ondelete: unset`, so profiles can outlive a particular version record).\n- **Bundle metadata correlation**: Associates the selected component versions with the corresponding distributable and bundle metadata.",
         "x-allOf-name": "hyperflex.HxdpVersion",
         "allOf": [
           {
@@ -523988,7 +523554,7 @@
       },
       "hyperflex.License": {
         "title": "Hyperflex:License",
-        "description": "Feature Identifier",
+        "description": "Licenses represent a HyperFlex cluster\u2019s feature or license identifier and current entitlement state, providing read-only visibility into the applied license type, whether Smart Licensing or license reservation is enabled, and whether the cluster complies with its entitlements, including evaluation and out-of-compliance timing details. Administrators and monitoring tools can use this information to query the cluster\u2019s license type, registration and authorization details, and compliance state, identify entitlement issues, and take corrective action outside the API as needed. The licenseType field identifies the applied license, complianceState reports entitlement compliance, getOutOfComplianceStartAt records when the cluster became or would become out of compliance for audit and escalation, inEvaluation indicates whether it is in an evaluation period, and smartLicensingEnabled and plrEnabled indicate whether Smart Licensing and license reservation (PLR) are enabled. The licenseRegistration and licenseAuthorization fields provide structured registration and authorization details. Each License is linked to a specific non-null, read-only registeredDevice; deleting that device registration cascades to the License object. Indexes on licenseType, complianceState, and cluster support efficient filtering and reporting at scale.",
         "x-allOf-name": "hyperflex.License",
         "allOf": [
           {
@@ -524146,7 +523712,7 @@
       },
       "hyperflex.LocalCredentialPolicy": {
         "title": "Security",
-        "description": "A policy specifying credentials for HyperFlex cluster such as controller VM password, hypervisor username, and password.",
+        "description": "The LocalCredentialPolicies object specifies the credentials required for HyperFlex cluster components, including controller VMs and hypervisors.\n#### Purpose\nIt centralizes the management of security credentials, ensuring that the installation and expansion workflows have the necessary access to configure cluster nodes.\n#### Key Concepts\n- **Secure Credential Storage:** Stores encrypted passwords for controller VMs, hypervisors, and deployment keys.\n- **Security Compliance:** Enforces password complexity requirements.\n- **Workflow Integration:** Used by deployment and expansion workflows to authenticate with cluster nodes.",
         "x-allOf-name": "hyperflex.LocalCredentialPolicy",
         "allOf": [
           {
@@ -524975,7 +524541,7 @@
       },
       "hyperflex.Node": {
         "title": "Hyperflex:Node",
-        "description": "A host participating in the cluster. The host consists of a hypervisor installed on a node that manages virtual machines.",
+        "description": "Nodes represent hosts in a HyperFlex cluster and expose per-node inventory and state so administrators can monitor cluster composition, node readiness, and host-level configuration and health. Each Node captures the hypervisor type, version, and build; hostname; identity fields such as serial number and node UUID; operational state and maintenance-mode status; management and data network addresses for both the hypervisor and HXDP controller interfaces; links to cluster-member registration and, when available, the underlying UCS server object; and the parent context for associated drive inventory.",
         "x-allOf-name": "hyperflex.Node",
         "allOf": [
           {
@@ -525260,7 +524826,7 @@
       },
       "hyperflex.NodeConfigPolicy": {
         "title": "Node IP Ranges",
-        "description": "A policy specifying node details such as management and storage data IP ranges. For HyperFlex Edge, storage data IP range is pre-defined.",
+        "description": "The NodeConfigPolicies object specifies IP address ranges for various node networks, including management, storage data, and controller communication.\n#### Purpose\nIt automates the IP assignment process for new nodes, ensuring that each node is correctly networked within the cluster.\n#### Key Concepts\n- **Network Partitioning:** Defines ranges for management, hypervisor control, and storage data traffic.\n- **Deployment Automation:** Provides the necessary IP parameters to configure nodes during cluster installation.",
         "x-allOf-name": "hyperflex.NodeConfigPolicy",
         "allOf": [
           {
@@ -525403,7 +524969,7 @@
       },
       "hyperflex.NodeProfile": {
         "title": "Hyperflex:Node Profile",
-        "description": "A configuration profile per node in the HyperFlex cluster.\nIt defines node settings such as IP address configuration for hypervisor management network, storage data network, HyperFlex management network, and the assigned physical server.",
+        "description": "The NodeProfiles object defines the configuration for an individual node within a HyperFlex cluster.\n#### Purpose\nIt acts as the configuration profile for a specific node, linking physical server hardware to its required network and storage IP configurations.\n#### Key Concepts\n- **Node Configuration:** Manages IP settings for hypervisors and controller VMs.\n- **Role Assignment:** Defines the role of the node (e.g., converged, compute) within the cluster.\n- **Server Mapping:** Associates the profile with a specific physical server.",
         "x-allOf-name": "hyperflex.NodeProfile",
         "allOf": [
           {
@@ -525824,7 +525390,7 @@
       },
       "hyperflex.ProxySettingPolicy": {
         "title": "HTTP Proxy",
-        "description": "A policy specifying the HTTP proxy settings to be used by the HyperFlex installation process and HyperFlex storage controller VMs. This policy is required when the internet access of your servers including CIMC and HyperFlex storage controller VMs is secured by a HTTP proxy.",
+        "description": "ProxySettingPolicies define the HTTP proxy configuration used by the HyperFlex installation workflow and by HyperFlex storage controller VMs. This policy is intended for environments where direct internet access from servers (including CIMC) and controller VMs is restricted and must traverse an HTTP proxy.\n#### Purpose\nProvide a reusable, attachable policy that supplies required proxy settings to HyperFlex cluster profile operations\u2014especially installation, expansion, and software redeploy\u2014so HyperFlex components can reach external services through an approved proxy.\n#### Key Concepts\n- **Installation and runtime consumption**: Used both during HyperFlex installation and by storage controller VMs after deployment to enable proxied connectivity.\n- **Required for proxied environments**: Specifically targets environments where server/CIMC/controller VM internet access is secured via an HTTP proxy.\n- **Multi-platform applicability**: Tagged for both FI-managed and standalone management modes (`managementplatform.fi` and `managementplatform.standalone`).\n- **Profile attachability**: Marked as attachable to a HyperFlex cluster profile, aligning it with profile-driven configuration.\n- **Lifecycle operations support**: Tags indicate it is relevant for expansion and software redeploy workflows (`config.expansion`, `config.swredeploy`).\n- **Core proxy endpoint configuration**: `hostname` is a required, read-write setting representing the proxy server FQDN or IP address.",
         "x-allOf-name": "hyperflex.ProxySettingPolicy",
         "allOf": [
           {
@@ -526711,7 +526277,7 @@
       },
       "hyperflex.ServerFirmwareVersionEntry": {
         "title": "Hyperflex:Server Firmware Version Entry",
-        "description": "An entry specifying supported server firmware version in regex format.",
+        "description": "The ServerFirmwareVersionEntries object specifies a supported server firmware version using regex patterns.\n#### Purpose\nThis provides the validation logic to ensure that the firmware applied to a UCS server is supported and compatible with the HyperFlex cluster.\n#### Key Concepts\n- **Compatibility Validation:** Matches server platform types to supported firmware versions via regex.\n- **Constraint Enforcement:** Ensures that firmware versions meet specific requirements before being applied.",
         "x-allOf-name": "hyperflex.ServerFirmwareVersionEntry",
         "allOf": [
           {
@@ -526895,7 +526461,7 @@
       },
       "hyperflex.ServerModel": {
         "title": "Hyperflex:Server Model",
-        "description": "A supported server model.",
+        "description": "ServerModels define the set of supported HyperFlex server models. Instead of listing only exact model strings, the supported models are expressed as one or more regex-based entries, allowing the platform to match and validate a broader set of model variants consistently.\n#### Purpose\nProvide an authoritative, system-managed list of supported server model patterns used by HyperFlex workflows (such as validation and compatibility checks) to determine whether a given server model is supported.\n#### Key Concepts\n- **Supported model catalog**: Represents the supported server model set for HyperFlex.\n- **Regex-based matching**: `serverModelEntries` stores supported model definitions in regex format to match families/variants of server models.",
         "x-allOf-name": "hyperflex.ServerModel",
         "allOf": [
           {
@@ -527521,7 +527087,7 @@
       },
       "hyperflex.SoftwareDistributionComponent": {
         "title": "Hyperflex:Software Distribution Component",
-        "description": "A HyperFlex Software Distribution Component.",
+        "description": "The SoftwareDistributionComponents object (``) defines individual components of a HyperFlex software distribution.\n#### Purpose\nThis provides the metadata (version, file path, download location) for specific software components needed during cluster installation or upgrades.\n#### Key Concepts\n- **Component Metadata:** Tracks ID, name, and version of software components.\n- **Download Management:** Specifies the source (e.g., cloud storage bucket) and files required for installation.",
         "x-allOf-name": "hyperflex.SoftwareDistributionComponent",
         "allOf": [
           {
@@ -527661,7 +527227,7 @@
       },
       "hyperflex.SoftwareDistributionEntry": {
         "title": "Hyperflex:Software Distribution Entry",
-        "description": "A HyperFlex Software Distribution.",
+        "description": "The SoftwareDistributionEntries object  represents a category of HyperFlex software distribution.\n#### Purpose\nIt groups software distribution versions by type, assisting in the organization and retrieval of compatible software packages.\n#### Key Concepts\n- **Categorization:** Groups software versions based on distribution type.\n- **Version Association:** Links to multiple software distribution versions.",
         "x-allOf-name": "hyperflex.SoftwareDistributionEntry",
         "allOf": [
           {
@@ -527780,7 +527346,7 @@
       },
       "hyperflex.SoftwareDistributionVersion": {
         "title": "Hyperflex:Software Distribution Version",
-        "description": "A HyperFlex Software Distribution version.",
+        "description": "The SoftwareDistributionVersions object  represents a specific version of a HyperFlex software distribution.\n#### Purpose\nIt allows for the tracking of different software versions, ensuring that the correct distribution components are selected during deployment.\n#### Key Concepts\n- **Version Tracking:** Manages specific software distribution versions.\n- **Component Linking:** Associates specific distribution components with a version.",
         "x-allOf-name": "hyperflex.SoftwareDistributionVersion",
         "allOf": [
           {
@@ -527899,7 +527465,7 @@
       },
       "hyperflex.SoftwareVersionPolicy": {
         "title": "HyperFlex Software Version Selection Policy",
-        "description": "A policy capturing software versions for different HyperFlex Cluster compatible components ( like HyperFlex Data Platform, Hypervisor, etc. ), that the user wishes to apply on the HyperFlex cluster.",
+        "description": "SoftwareVersionPolicies capture the set of software versions a user intends to run across the different components that make up a HyperFlex cluster (for example, HyperFlex Data Platform and the hypervisor). The policy acts as a single place to define version selection so cluster deployments and lifecycle operations can apply a consistent, compatible software stack.\n#### Purpose\nEnable administrators to standardize and apply component software versions to HyperFlex clusters via cluster profiles, supporting controlled upgrades, repeatable deployments, and compatibility alignment across the stack.\n#### Key Concepts\n- **Version intent for multiple components**: Encapsulates desired versions for several HyperFlex-compatible components rather than a single software artifact.\n- **Profile-driven application**: Designed to be attached/applied as part of HyperFlex cluster profile workflows.\n- **Lifecycle management**: Supports controlled create/update/delete so version baselines can evolve over time (e.g., during upgrades).\n- **Reusable policy object**: Extends `policy.AbstractPolicy`, enabling reuse across clusters and consistency across environments.\n- **Role-based access**: Read access is broadly available; create/update/delete is restricted to users who manage HyperFlex cluster profiles.",
         "x-allOf-name": "hyperflex.SoftwareVersionPolicy",
         "allOf": [
           {
@@ -528776,7 +528342,7 @@
       },
       "hyperflex.SysConfigPolicy": {
         "title": "DNS, NTP and Timezone",
-        "description": "A policy specifying system configuration such as timezone, DNS servers, and NTP Servers.",
+        "description": "SysConfigPolicies define baseline system settings\u2014DNS, NTP, and timezone\u2014that should be applied for a HyperFlex cluster deployment. The policy is reusable and attachable to HyperFlex cluster profiles, enabling consistent, profile-driven configuration of core time and name-resolution settings across clusters.\n#### Purpose\nProvide a centralized, reusable policy for configuring essential system services (timezone, DNS servers, and NTP servers) for HyperFlex clusters, supporting consistent operations, auditing, and repeatable deployments.\n#### Key Concepts\n- **System configuration intent**: Captures desired cluster-wide system settings, including `timezone`, DNS server configuration, and NTP server configuration.\n- **Profile-driven application**: Tagged as attachable to `hyperflex.ClusterProfile`, indicating it is meant to be applied through cluster profile workflows.\n- **Multi-platform applicability**: Tagged for both FI-managed and standalone HyperFlex deployments (`managementplatform.fi` and `managementplatform.standalone`).\n- **Reusable policy model**: Extends `policy.AbstractPolicy`, aligning with standard policy lifecycle and reuse patterns in Intersight.\n- **Governed lifecycle**: CREATE/UPDATE/DELETE are restricted to roles that manage HyperFlex cluster profiles; READ is available to common operational roles.\n- **Time synchronization**: `timezone` and NTP server configuration ensure that the cluster maintains accurate and consistent system time, which is important for logging, troubleshooting, certificates, and distributed services.\n- **DNS resolution**: DNS server configuration provides name resolution for the cluster.",
         "x-allOf-name": "hyperflex.SysConfigPolicy",
         "allOf": [
           {
@@ -529658,7 +529224,7 @@
       },
       "hyperflex.UcsmConfigPolicy": {
         "title": "UCSM Configuration",
-        "description": "A policy specifying UCS Manager settings such as service profile org, KVM IP addresses, and MAC prefix for server configuration in Fabric Interconnect environment.",
+        "description": "UcsmConfigPolicies define UCS Manager-related configuration settings used when configuring servers in a Fabric Interconnect environment. The policy captures key UCSM settings such as the service profile organization, KVM IP address assignments, and MAC prefix configuration, enabling consistent UCSM-integrated provisioning as part of HyperFlex cluster profile operations.\n#### Purpose\nCentralize and standardize UCS Manager configuration inputs required for FI-based server configuration, so HyperFlex cluster provisioning and ongoing operations can apply consistent UCSM settings through cluster profiles.\n#### Key Concepts\n- **UCSM configuration intent**: Specifies UCS Manager settings (service profile org, KVM IPs, MAC prefix) needed to drive consistent server configuration.\n- **FI/HyperFlex attachability**: Tagged for FI-based management (`managementplatform.fi: true`) and attachable to a HyperFlex cluster profile, indicating it is meant to be consumed in HyperFlex profile-driven workflows.\n- **Reusable policy pattern**: Extends `policy.AbstractPolicy`, supporting reuse and standardized policy lifecycle.\n- **Governed lifecycle**: Supports create/update/delete under the Manage HyperFlex Cluster Profiles privilege set, ensuring that only authorized administrators change UCSM configuration baselines.\n- **Organization-scoped**: `owner: organization` indicates it is tenant-owned and managed within an org boundary.",
         "x-allOf-name": "hyperflex.UcsmConfigPolicy",
         "allOf": [
           {
@@ -529789,7 +529355,7 @@
       },
       "hyperflex.VcenterConfigPolicy": {
         "title": "vCenter",
-        "description": "A policy specifying vCenter configuration.",
+        "description": "The VcenterConfigPolicies object specifies the configuration settings required to integrate the HyperFlex cluster with VMware vCenter.\n#### Purpose\nIt enables the management of the cluster through vCenter, defining the credentials, datacenter location, and hostname required for integration.\n#### Key Concepts\n- **vCenter Integration:** Configures the vCenter server connection.\n- **Credential Management:** Securely stores vCenter credentials.\n- **Datacenter Mapping:** Specifies the target datacenter for the cluster deployment.",
         "x-allOf-name": "hyperflex.VcenterConfigPolicy",
         "allOf": [
           {
@@ -537128,7 +536694,7 @@
                 "x-enum-as-string": true
               },
               "Feature": {
-                "description": "The beta feature that will be enabled for specific account.\n* `IWO` - Intersight Workflow Optimizer.\n* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.\n* `KubernetesExtension` - Extension to the IKS and Adopted Clusters.\n* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.\n* `IvsPublicCloud` - Enables virtualization service for public clouds.\n* `TerraformCloud` - Enables an ability to create Terraform Cloud.\n* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades.\n* `Solutions` - Support for managing solutions.\n* `IksBm` - Enables Intersight Kubernetes Service on Baremetal server.\n* `NexusCloud` - Enables Nexus Cloud services functionality.\n* `NexusCloudTrial` - Enables Nexus Cloud trial period.\n* `NexusCloudUpgradeAssist` - Enables Nexus Cloud upgrade assist.\n* `NexusCloudSustainability` - Enables Nexus Cloud sustainability.\n* `PlatformUIRefresh` - Enables platform refreshed UI with new service launcher.\n* `IksGpu` - Enables GPU support for Intersight Kubernetes Service.\n* `IwoAppServiceVerticalScaling` - Enables vertical Scaling of App Service Plans.\n* `IwoDataExporter` - Enables IWO Data Exporter component.\n* `IwoMigrate` - Enables IWO data Migration.\n* `NexusCloudTechPreviewGold` - Enable Nexus Cloud Preview of stable features, available for public consumption.\n* `NexusCloudTechPreviewSilver` - Enable Nexus Cloud Preview of beta features. This feature set is intended for consumption by internal audiences.\n* `NexusCloudTechPreviewBronze` - Enable Nexus Cloud Preview of features still in development. This feature set is intended for consumption by internal audiences.\n* `DisconnectedTargetAlarm` - Raise an alarm when a Target is disconnected from Intersight. Intersight is unable to manage disconnected Targets.\n* `AsAService` - Enable AsAService Preview of beta features. This feature set is intended for consumption by selective audiences.\n* `EMEA` - Enable all avaialble features on Intersight EMEA region.\n* `CrossPlatformNavigation` - Enable Cross-Platform Navigation on UI.\n* `WorkflowsPreview` - Enable Workflows preview for this account.\n* `WorkflowsIntersightAssets` - Enable workflow Intersight assets for this account.\n* `ManualKEKSupport` - Enable support for Manual key to enhance storage controller security for this account.\n* `FirmwareConsolidationEFT` - Enable usage of firmware images transitioned from CCO to Intersight. This feature set is intended for consumption by internal audiences.\n* `FunctionAsAService` - Enable the usage of the function as a service (faas) for Workflows. This feature set is intended for consumption by selective audiences.\n* `FI6664EFT` - Support for EFT customers to use FI-6664 in Port Policy.\n* `GranularPrivilegeSets` - Enable granular privilege sets for this account.\n* `UnifiedEdge` - Enable Unified Edge related features for Avatar Platform.\n* `Goldeneye` - Enable Goldeneye related features.\n* `FI6652EFT` - Support for EFT customers to use FI-6652 in Port Policy.\n* `BackupAndRestore` - Enable Backup and Restore functionality for this account.\n* `CUIIntegration` - Enables Cisco Unified Identity (CUI) integration for Intersight accounts. With this flag, customers access their accounts using the intersight.com/cui URI and CUI IdP. Standard CCI or SSO login flows remain available during the transition period. Cisco Cloud Control customers must use /cui to create new accounts or contact Product Management to enable this feature to existing accounts, to use Cisco Cloud Control and Cisco Unified Identity.\n* `UnifiedEdgeSRN` - Enable Unified Edge Secure Router Node related features for Avatar Platform.\n* `TargetClaimWithNFC` - Enable Target Claim with NFC for Mobile App.\n* `PTPBeta` - Feature flag for support publishing of firmware to demo PTP feature.",
+                "description": "The beta feature that will be enabled for specific account.\n* `IWO` - Intersight Workflow Optimizer.\n* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.\n* `KubernetesExtension` - Extension to the IKS and Adopted Clusters.\n* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.\n* `IvsPublicCloud` - Enables virtualization service for public clouds.\n* `TerraformCloud` - Enables an ability to create Terraform Cloud.\n* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades.\n* `Solutions` - Support for managing solutions.\n* `IksBm` - Enables Intersight Kubernetes Service on Baremetal server.\n* `NexusCloud` - Enables Nexus Cloud services functionality.\n* `NexusCloudTrial` - Enables Nexus Cloud trial period.\n* `NexusCloudUpgradeAssist` - Enables Nexus Cloud upgrade assist.\n* `NexusCloudSustainability` - Enables Nexus Cloud sustainability.\n* `PlatformUIRefresh` - Enables platform refreshed UI with new service launcher.\n* `IksGpu` - Enables GPU support for Intersight Kubernetes Service.\n* `IwoAppServiceVerticalScaling` - Enables vertical Scaling of App Service Plans.\n* `IwoDataExporter` - Enables IWO Data Exporter component.\n* `IwoMigrate` - Enables IWO data Migration.\n* `NexusCloudTechPreviewGold` - Enable Nexus Cloud Preview of stable features, available for public consumption.\n* `NexusCloudTechPreviewSilver` - Enable Nexus Cloud Preview of beta features. This feature set is intended for consumption by internal audiences.\n* `NexusCloudTechPreviewBronze` - Enable Nexus Cloud Preview of features still in development. This feature set is intended for consumption by internal audiences.\n* `DisconnectedTargetAlarm` - Raise an alarm when a Target is disconnected from Intersight. Intersight is unable to manage disconnected Targets.\n* `AsAService` - Enable AsAService Preview of beta features. This feature set is intended for consumption by selective audiences.\n* `EMEA` - Enable all avaialble features on Intersight EMEA region.\n* `CrossPlatformNavigation` - Enable Cross-Platform Navigation on UI.\n* `WorkflowsPreview` - Enable Workflows preview for this account.\n* `WorkflowsIntersightAssets` - Enable workflow Intersight assets for this account.\n* `ManualKEKSupport` - Enable support for Manual key to enhance storage controller security for this account.\n* `FirmwareConsolidationEFT` - Enable usage of firmware images transitioned from CCO to Intersight. This feature set is intended for consumption by internal audiences.\n* `FunctionAsAService` - Enable the usage of the function as a service (faas) for Workflows. This feature set is intended for consumption by selective audiences.\n* `FI6664EFT` - Support for EFT customers to use FI-6664 in Port Policy.\n* `GranularPrivilegeSets` - Enable granular privilege sets for this account.\n* `UnifiedEdge` - Enable Unified Edge related features for Avatar Platform.\n* `Goldeneye` - Enable Goldeneye related features.\n* `FI6652EFT` - Support for EFT customers to use FI-6652 in Port Policy.\n* `BackupAndRestore` - Enable Backup and Restore functionality for this account.\n* `CUIIntegration` - Enables Cisco Unified Identity (CUI) integration for Intersight accounts. With this flag, customers access their accounts using the intersight.com/cui URI and CUI IdP. Standard CCI or SSO login flows remain available during the transition period. Cisco Cloud Control customers must use /cui to create new accounts or contact Product Management to enable this feature to existing accounts, to use Cisco Cloud Control and Cisco Unified Identity.\n* `UnifiedEdgeSRN` - Enable Unified Edge Secure Router Node related features for Avatar Platform.\n* `TargetClaimWithNFC` - Enable Target Claim with NFC for Mobile App.\n* `GuestAccessMobileApp` - Enable Guest Access for Mobile App.\n* `PTPBeta` - Feature flag for support publishing of firmware to demo PTP feature.",
                 "type": "string",
                 "enum": [
                   "IWO",
@@ -537170,6 +536736,7 @@
                   "CUIIntegration",
                   "UnifiedEdgeSRN",
                   "TargetClaimWithNFC",
+                  "GuestAccessMobileApp",
                   "PTPBeta"
                 ],
                 "default": "IWO",
@@ -537491,7 +537058,7 @@
                 "x-omitempty": true
               },
               "SpMetadataExpiryState": {
-                "description": "The expiration state of the certificate in the SP metadata used by this IdP. The state is not-applicable when SAML assertion encryption and AuthNRequest signing are both disabled.\n* `expiration-within-info-period` - The expiry date is beyond 270 days.\n* `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days.\n* `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days.\n* `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days.\n* `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days.\n* `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days.\n* `expiration-within-critical-period` - The expiry date is within 7 days.\n* `expired` - The expiry date has passed.\n* `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.",
+                "description": "The expiration state of the SP certificate used by this IdP. The state is not-applicable when SAML assertion encryption, AuthNRequest signing, and SLO signing are all disabled.\n* `expiration-within-info-period` - The expiry date is beyond 270 days.\n* `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days.\n* `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days.\n* `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days.\n* `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days.\n* `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days.\n* `expiration-within-critical-period` - The expiry date is within 7 days.\n* `expired` - The expiry date has passed.\n* `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.\n* `not-evaluated` - The SP certificate expiry state has not yet been evaluated from a successful login.",
                 "type": "string",
                 "enum": [
                   "expiration-within-info-period",
@@ -537502,20 +537069,28 @@
                   "expiration-within-30-day-critical-period",
                   "expiration-within-critical-period",
                   "expired",
-                  "not-applicable"
+                  "not-applicable",
+                  "not-evaluated"
                 ],
                 "default": "expiration-within-info-period",
                 "readOnly": true,
                 "x-omitempty": true
               },
               "SpMetadataHashMethod": {
-                "description": "Determines if the AuthNRequest sent to the Idp should be signed by the new (SHA-2) or the old (SHA-1) SP metadata during the grace period of SP SAML metadata rotation.\n* `Sha2` - The SAML SP metadata hash is generated using SHA-256 algorithm.\n* `Sha1` - The SAML SP metadata hash is generated using SHA-1 algorithm.",
+                "description": "Selects the legacy (SHA-1) or current (SHA-2) SP certificate used to sign AuthN and logout requests during certificate rotation.\n* `Sha2` - Use the current SHA-2 SP signing certificate.\n* `Sha1` - Use the legacy SHA-1 SP signing certificate.",
                 "type": "string",
                 "enum": [
                   "Sha2",
                   "Sha1"
                 ],
                 "default": "Sha2",
+                "x-omitempty": true
+              },
+              "SpMetadataHashMethodConfigured": {
+                "description": "Indicates whether this IdP uses its stored SP signing certificate selection. Existing IdPs without this marker continue using the legacy SHA-1 certificate.",
+                "type": "boolean",
+                "default": false,
+                "readOnly": true,
                 "x-omitempty": true
               },
               "Type": {
@@ -540780,7 +540355,7 @@
               "Uuid": {
                 "description": "UUID of the privilege set.",
                 "type": "string",
-                "pattern": "^[a-zA-Z0-9_ .:,-]{0,128}$",
+                "pattern": "^[a-zA-Z0-9_ .:,/-]{0,128}$",
                 "minLength": 0,
                 "maxLength": 128,
                 "readOnly": true,
@@ -542073,7 +541648,7 @@
                 "x-omitempty": true
               },
               "SpMetadataExpiryState": {
-                "description": "The expiration state of the certificates in the SP metadata rotation during the grace period of SP SAML metadata rotation.\n* `expiration-within-info-period` - The expiry date is beyond 270 days.\n* `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days.\n* `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days.\n* `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days.\n* `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days.\n* `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days.\n* `expiration-within-critical-period` - The expiry date is within 7 days.\n* `expired` - The expiry date has passed.\n* `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.",
+                "description": "The expiration state of the certificates in the SP metadata rotation during the grace period of SP SAML metadata rotation.\n* `expiration-within-info-period` - The expiry date is beyond 270 days.\n* `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days.\n* `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days.\n* `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days.\n* `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days.\n* `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days.\n* `expiration-within-critical-period` - The expiry date is within 7 days.\n* `expired` - The expiry date has passed.\n* `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.\n* `not-evaluated` - The SP certificate expiry state has not yet been evaluated from a successful login.",
                 "type": "string",
                 "enum": [
                   "expiration-within-info-period",
@@ -542084,7 +541659,8 @@
                   "expiration-within-30-day-critical-period",
                   "expiration-within-critical-period",
                   "expired",
-                  "not-applicable"
+                  "not-applicable",
+                  "not-evaluated"
                 ],
                 "default": "expiration-within-info-period",
                 "readOnly": true,
@@ -560851,6 +560427,7 @@
               "connector.StartStreamFromDevice",
               "connector.StreamAcknowledge",
               "connector.StreamInput",
+              "connector.StreamInventorySupport",
               "connector.StreamKeepalive",
               "connector.TargetChangeMessage",
               "connector.TargetSpecification",
@@ -560914,6 +560491,7 @@
               "firmware.ExcludeComponentPidListType",
               "firmware.FabricUpgradeImpact",
               "firmware.FeatureVersionMap",
+              "firmware.FirmwareInfo",
               "firmware.FirmwareInventory",
               "firmware.HttpServer",
               "firmware.ModelBundleVersion",
@@ -561122,6 +560700,7 @@
               "niatelemetry.EqptcapacityPolUsage5min",
               "niatelemetry.EqptcapacityPrefixEntries15min",
               "niatelemetry.EqptcapacityPrefixEntries5min",
+              "niatelemetry.FabricExtender",
               "niatelemetry.FanDetails",
               "niatelemetry.ImageDetail",
               "niatelemetry.ImpactedNodes",
@@ -561130,6 +560709,7 @@
               "niatelemetry.JobDetail",
               "niatelemetry.LogicalLink",
               "niatelemetry.MdsNeighborInfo",
+              "niatelemetry.Module",
               "niatelemetry.NetworkInfo",
               "niatelemetry.Node",
               "niatelemetry.NvePacketCounters",
@@ -561347,7 +560927,6 @@
               "tam.S3DataSource",
               "tam.SecurityAdvisoryDetails",
               "tam.TextFsmTemplateDataSource",
-              "task.FileDownloadInfo",
               "techsupportmanagement.ApplianceParam",
               "techsupportmanagement.NiaParam",
               "techsupportmanagement.PlatformParam",
@@ -561822,6 +561401,7 @@
               "connector.StartStreamFromDevice",
               "connector.StreamAcknowledge",
               "connector.StreamInput",
+              "connector.StreamInventorySupport",
               "connector.StreamKeepalive",
               "connector.TargetChangeMessage",
               "connector.TargetSpecification",
@@ -561885,6 +561465,7 @@
               "firmware.ExcludeComponentPidListType",
               "firmware.FabricUpgradeImpact",
               "firmware.FeatureVersionMap",
+              "firmware.FirmwareInfo",
               "firmware.FirmwareInventory",
               "firmware.HttpServer",
               "firmware.ModelBundleVersion",
@@ -562093,6 +561674,7 @@
               "niatelemetry.EqptcapacityPolUsage5min",
               "niatelemetry.EqptcapacityPrefixEntries15min",
               "niatelemetry.EqptcapacityPrefixEntries5min",
+              "niatelemetry.FabricExtender",
               "niatelemetry.FanDetails",
               "niatelemetry.ImageDetail",
               "niatelemetry.ImpactedNodes",
@@ -562101,6 +561683,7 @@
               "niatelemetry.JobDetail",
               "niatelemetry.LogicalLink",
               "niatelemetry.MdsNeighborInfo",
+              "niatelemetry.Module",
               "niatelemetry.NetworkInfo",
               "niatelemetry.Node",
               "niatelemetry.NvePacketCounters",
@@ -562318,7 +561901,6 @@
               "tam.S3DataSource",
               "tam.SecurityAdvisoryDetails",
               "tam.TextFsmTemplateDataSource",
-              "task.FileDownloadInfo",
               "techsupportmanagement.ApplianceParam",
               "techsupportmanagement.NiaParam",
               "techsupportmanagement.PlatformParam",
@@ -563685,7 +563267,6 @@
               "task.PureFlashBladeScopedInventory",
               "task.PureScopedInventory",
               "task.ServerScopedInventory",
-              "task.WorkflowAction",
               "techsupportmanagement.CollectionControlPolicy",
               "techsupportmanagement.Download",
               "techsupportmanagement.EndPoint",
@@ -564954,7 +564535,6 @@
               "task.PureFlashBladeScopedInventory",
               "task.PureScopedInventory",
               "task.ServerScopedInventory",
-              "task.WorkflowAction",
               "techsupportmanagement.CollectionControlPolicy",
               "techsupportmanagement.Download",
               "techsupportmanagement.EndPoint",
@@ -566332,7 +565912,6 @@
               "task.PureFlashBladeScopedInventory",
               "task.PureScopedInventory",
               "task.ServerScopedInventory",
-              "task.WorkflowAction",
               "techsupportmanagement.CollectionControlPolicy",
               "techsupportmanagement.Download",
               "techsupportmanagement.EndPoint",
@@ -570056,7 +569635,7 @@
               "OperReason": {
                 "type": "array",
                 "items": {
-                  "description": "The oper reason status list of the secure router.\n* `Unknown` - The health message type is not known.\n* `WillBootError` - The compute object has ecountered a will boot error status.\n* `MemoryInoperable` - One or more memory units on this server are inoperable.\n* `ProcessorInoperable` - One or more processor units on this server are inoperable.\n* `DeprecatedAdapter` - One or more adapter units on this server are not supported or deprecated.\n* `PciNodeInserted` - One or more PCIe node are detected that are managed by this server.\n* `PciNodeRemoved` - One or more PCIe node got removed that were managed by this server.\n* `PowerCycleRequired` - One or more PCIe node are detected and a compute node power cycle is required to update inventory.\n* `PowerOnRequired` - One or more PCIe node are detected and a compute node power on is required to update inventory.\n* `PCIeNodeUnsupported` - Unsupported PCIe node detected.\n* `PCIeNodeUnidentified` - Unidentified PCIe node detected.\n* `BiosPostTimedOut` - BIOS POST completion timeout was detected on this server.\n* `SysThrottleCritical` - The health state of the server at the time of system throttling.\n* `SysThrottleWarning` - The health state of the server at the time of system throttling.\n* `UnauthorizedManagementVic` - The network adapter used for management traffic has been determined to be counterfeit.\n* `ZoneInactive` - The operReason of the compute blade will be set to this value if the mapped PCIe device is not available.\n* `MappedPCIeDevicesRemoved` - One or more mapped PCIe devices have been physically removed.\n* `MappedPCIeDeviceConnectionsRemoved` - One or more mapped PCIe device connectivity modules (X-Fabric module) have been physically removed.\n* `BladeReseatedWithPcieConnPolicy` - The blade was reseated and has a PCIe connectivity policy assigned. The PCIe connectivity configuration needs to be reapplied.\n* `BladeInReservedSlot` - The blade is inserted in a slot that is reserved for Secure Router.",
+                  "description": "The oper reason status list of the secure router.\n* `Unknown` - The health message type is not known.\n* `WillBootError` - The compute object has ecountered a will boot error status.\n* `MemoryInoperable` - One or more memory units on this server are inoperable.\n* `ProcessorInoperable` - One or more processor units on this server are inoperable.\n* `DeprecatedAdapter` - One or more adapter units on this server are not supported or deprecated.\n* `PciNodeInserted` - One or more PCIe node are detected that are managed by this server.\n* `PciNodeRemoved` - One or more PCIe node got removed that were managed by this server.\n* `PowerCycleRequired` - One or more PCIe node are detected and a compute node power cycle is required to update inventory.\n* `PowerOnRequired` - One or more PCIe node are detected and a compute node power on is required to update inventory.\n* `PCIeNodeUnsupported` - Unsupported PCIe node detected.\n* `PCIeNodeUnidentified` - Unidentified PCIe node detected.\n* `BiosPostTimedOut` - BIOS POST completion timeout was detected on this server.\n* `SecureBootHealthError` - A secure boot health error was detected on this server during BIOS POST.\n* `SysThrottleCritical` - The health state of the server at the time of system throttling.\n* `SysThrottleWarning` - The health state of the server at the time of system throttling.\n* `UnauthorizedManagementVic` - The network adapter used for management traffic has been determined to be counterfeit.\n* `ZoneInactive` - The operReason of the compute blade will be set to this value if the mapped PCIe device is not available.\n* `MappedPCIeDevicesRemoved` - One or more mapped PCIe devices have been physically removed.\n* `MappedPCIeDeviceConnectionsRemoved` - One or more mapped PCIe device connectivity modules (X-Fabric module) have been physically removed.\n* `BladeReseatedWithPcieConnPolicy` - The blade was reseated and has a PCIe connectivity policy assigned. The PCIe connectivity configuration needs to be reapplied.\n* `BladeInReservedSlot` - The blade is inserted in a slot that is reserved for Secure Router.",
                   "type": "string",
                   "enum": [
                     "Unknown",
@@ -570071,6 +569650,7 @@
                     "PCIeNodeUnsupported",
                     "PCIeNodeUnidentified",
                     "BiosPostTimedOut",
+                    "SecureBootHealthError",
                     "SysThrottleCritical",
                     "SysThrottleWarning",
                     "UnauthorizedManagementVic",
@@ -581737,6 +581317,116 @@
           }
         ]
       },
+      "niatelemetry.FabricExtender": {
+        "title": "Niatelemetry:Fabric Extender",
+        "description": "Fabric extender inventory details reported for a managed switch.",
+        "x-allOf-name": "niatelemetry.FabricExtender",
+        "nullable": true,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/mo.BaseComplexType"
+          },
+          {
+            "type": "object",
+            "description": "Definition of the list of properties defined in 'niatelemetry.FabricExtender', excluding properties defined in parent classes.",
+            "required": [
+              "ClassId",
+              "ObjectType"
+            ],
+            "properties": {
+              "ClassId": {
+                "description": "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+                "enum": [
+                  "niatelemetry.FabricExtender"
+                ],
+                "default": "niatelemetry.FabricExtender",
+                "x-enum-as-string": true
+              },
+              "ObjectType": {
+                "description": "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+                "enum": [
+                  "niatelemetry.FabricExtender"
+                ],
+                "default": "niatelemetry.FabricExtender",
+                "x-enum-as-string": true
+              },
+              "Description": {
+                "description": "Descriptive text configured for the fabric extender.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "Id": {
+                "description": "Numeric identifier assigned to the fabric extender.",
+                "type": "integer",
+                "format": "int64",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "InterfaceNames": {
+                "type": "array",
+                "items": {
+                  "description": "Interface names associated with the fabric extender.",
+                  "type": "string",
+                  "readOnly": true,
+                  "x-omitempty": true
+                },
+                "nullable": true
+              },
+              "Model": {
+                "description": "Hardware model reported for the fabric extender.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "Name": {
+                "description": "Display name assigned to the fabric extender.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "PinningMaxLinks": {
+                "description": "Maximum number of pinning links supported by the fabric extender.",
+                "type": "integer",
+                "format": "int64",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "PortChannel": {
+                "description": "Port channel associated with the fabric extender.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "SerialNumber": {
+                "description": "Serial number reported for the fabric extender.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "SoftwareVersion": {
+                "description": "Software version running on the fabric extender.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "State": {
+                "description": "Current operational state reported for the fabric extender.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "VpcId": {
+                "description": "Optional virtual port channel identifier for the fabric extender.",
+                "type": "integer",
+                "format": "int64",
+                "readOnly": true,
+                "x-omitempty": true
+              }
+            }
+          }
+        ]
+      },
       "niatelemetry.FabricModuleDetails.Response": {
         "description": "The response body of a HTTP GET request for the 'niatelemetry.FabricModuleDetails' resource.\nThe value may be one of the following types.\n1. When 'tag' is specified in the URL query, the response schema\n    is a summary of the tag usage.\n1. When '$apply' is specified in the URL query, the response schema\n    is dynamically-generated schema based on the $apply value.\n1. When '$count' is specified in the URL query, the response is\n    a simple object providing the count of the resources.\n1. In all other cases, the response is a list of 'niatelemetry.FabricModuleDetails' resources.",
         "x-one-of-name": "niatelemetry.FabricModuleDetails.Response",
@@ -584527,6 +584217,176 @@
                   "$ref": "#/components/schemas/niatelemetry.MdsNeighbors"
                 },
                 "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "niatelemetry.Module": {
+        "title": "Niatelemetry:Module",
+        "description": "A switch hardware module in the device inventory.",
+        "x-allOf-name": "niatelemetry.Module",
+        "nullable": true,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/mo.BaseComplexType"
+          },
+          {
+            "type": "object",
+            "description": "Definition of the list of properties defined in 'niatelemetry.Module', excluding properties defined in parent classes.",
+            "required": [
+              "ClassId",
+              "ObjectType"
+            ],
+            "properties": {
+              "ClassId": {
+                "description": "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+                "enum": [
+                  "niatelemetry.Module"
+                ],
+                "default": "niatelemetry.Module",
+                "x-enum-as-string": true
+              },
+              "ObjectType": {
+                "description": "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+                "enum": [
+                  "niatelemetry.Module"
+                ],
+                "default": "niatelemetry.Module",
+                "x-enum-as-string": true
+              },
+              "AssetId": {
+                "description": "Asset identifier of the switch hardware module.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "HardwareRevision": {
+                "description": "Hardware revision of the switch hardware module.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "ModelName": {
+                "description": "Hardware model name of the switch hardware module.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "ModuleType": {
+                "type": "array",
+                "items": {
+                  "description": "Component type names of the switch hardware module.",
+                  "type": "string",
+                  "readOnly": true,
+                  "x-omitempty": true
+                },
+                "nullable": true
+              },
+              "ModuleVersion": {
+                "type": "array",
+                "items": {
+                  "description": "Component versions of the switch hardware module.",
+                  "type": "string",
+                  "readOnly": true,
+                  "x-omitempty": true
+                },
+                "nullable": true
+              },
+              "Name": {
+                "description": "Display name of the switch hardware module.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "OperStatus": {
+                "description": "Operational state of the switch hardware module.\n* `unknown` - The switch hardware module operational state is not known.\n* `boot` - The switch hardware module is booting and is not yet operational.\n* `diagFailed` - The switch hardware module failed its diagnostic checks.\n* `disabled` - The switch hardware module is disabled and is not in service.\n* `dormant` - The switch hardware module is dormant and is not actively operating.\n* `down` - The switch hardware module is down and is not passing traffic.\n* `failed` - The switch hardware module has failed and is not operational.\n* `fwDownloadFailure` - Firmware download for the switch hardware module did not complete successfully.\n* `fwDownloadSuccess` - Firmware download for the switch hardware module completed successfully.\n* `fwMismatchFound` - The switch hardware module firmware does not match the expected version.\n* `goingDown` - The switch hardware module is transitioning to a down operational state.\n* `mdr` - The switch hardware module is performing a minimal disruptive restart.\n* `mismatchConfig` - The switch hardware module configuration does not match the expected configuration.\n* `mismatchWithParent` - The switch hardware module does not match its parent hardware configuration.\n* `missing` - The expected switch hardware module is missing from its slot.\n* `nonOperational` - The switch hardware module is present but is not operational.\n* `notApplicable` - An operational state does not apply to this switch hardware module.\n* `notOk` - The switch hardware module is not in an acceptable operational state.\n* `offAdmin` - The switch hardware module is powered off by an administrative action.\n* `offConnectorRating` - The switch hardware module is off because of a connector rating limit.\n* `offCooling` - The switch hardware module is off because of a cooling condition.\n* `offDenied` - The switch hardware module was denied power and remains off.\n* `offEnvFan` - The switch hardware module is off because of a fan environmental fault.\n* `offEnvOther` - The switch hardware module is off because of another environmental fault.\n* `offEnvPower` - The switch hardware module is off because of a power environmental fault.\n* `offEnvTemp` - The switch hardware module is off because of a temperature environmental fault.\n* `offline` - The switch hardware module is offline and is not available for service.\n* `ok` - The switch hardware module is operating in a normal state.\n* `okButAuthFailed` - The switch hardware module is up but its authentication check failed.\n* `okButDiagFailed` - The switch hardware module is up but a diagnostic check failed.\n* `okButPowerOverCritical` - The switch hardware module is up but power use is above the critical threshold.\n* `okButPowerOverWarning` - The switch hardware module is up but power use is above the warning threshold.\n* `on` - The switch hardware module is powered on.\n* `onButFanFail` - The switch hardware module is on but a fan has failed.\n* `onButInlinePowerFail` - The switch hardware module is on but inline power has failed.\n* `online` - The switch hardware module is online and available for service.\n* `outOfServiceAdmin` - The switch hardware module was taken out of service by an administrator.\n* `outOfServiceEnvTemp` - The switch hardware module is out of service because of a temperature fault.\n* `powerCycled` - The switch hardware module was power cycled and is recovering.\n* `powerDenied` - Power was denied to the switch hardware module.\n* `poweredDown` - The switch hardware module is powered down and is not operating.\n* `poweredUp` - The switch hardware module is powered up.\n* `selfTest` - The switch hardware module is running its self-test sequence.\n* `shut` - The switch hardware module has been shut down and is not in service.\n* `syncInProgress` - The switch hardware module is synchronizing and is not fully ready.\n* `unavailable` - The switch hardware module operational state is currently unavailable.\n* `up` - The switch hardware module is up and available for operation.\n* `upgrading` - The switch hardware module software or firmware upgrade is in progress.",
+                "type": "string",
+                "enum": [
+                  "unknown",
+                  "boot",
+                  "diagFailed",
+                  "disabled",
+                  "dormant",
+                  "down",
+                  "failed",
+                  "fwDownloadFailure",
+                  "fwDownloadSuccess",
+                  "fwMismatchFound",
+                  "goingDown",
+                  "mdr",
+                  "mismatchConfig",
+                  "mismatchWithParent",
+                  "missing",
+                  "nonOperational",
+                  "notApplicable",
+                  "notOk",
+                  "offAdmin",
+                  "offConnectorRating",
+                  "offCooling",
+                  "offDenied",
+                  "offEnvFan",
+                  "offEnvOther",
+                  "offEnvPower",
+                  "offEnvTemp",
+                  "offline",
+                  "ok",
+                  "okButAuthFailed",
+                  "okButDiagFailed",
+                  "okButPowerOverCritical",
+                  "okButPowerOverWarning",
+                  "on",
+                  "onButFanFail",
+                  "onButInlinePowerFail",
+                  "online",
+                  "outOfServiceAdmin",
+                  "outOfServiceEnvTemp",
+                  "powerCycled",
+                  "powerDenied",
+                  "poweredDown",
+                  "poweredUp",
+                  "selfTest",
+                  "shut",
+                  "syncInProgress",
+                  "unavailable",
+                  "up",
+                  "upgrading"
+                ],
+                "default": "unknown",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "SerialNumber": {
+                "description": "Serial number of the switch hardware module.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "Slot": {
+                "description": "Slot identifier of the switch hardware module.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "SoftwareRevision": {
+                "description": "Software revision of the switch hardware module.",
+                "type": "string",
+                "readOnly": true,
+                "x-omitempty": true
+              },
+              "Type": {
+                "description": "Hardware category of the switch hardware module.\n* `module` - The switch hardware module is a generic hardware component in the switch.\n* `lineCard` - The switch hardware module is a line card installed in the switch.\n* `powerSupply` - The switch hardware module is a power supply installed in the switch.\n* `fan` - The switch hardware module is a fan or fan tray installed in the switch.\n* `chassis` - The switch hardware module represents the switch chassis hardware.",
+                "type": "string",
+                "enum": [
+                  "module",
+                  "lineCard",
+                  "powerSupply",
+                  "fan",
+                  "chassis"
+                ],
+                "default": "module",
+                "readOnly": true,
+                "x-omitempty": true
               }
             }
           }
@@ -590920,6 +590780,16 @@
                 "readOnly": true,
                 "x-omitempty": true
               },
+              "FabricExtenders": {
+                "type": "array",
+                "items": {
+                  "description": "Fabric extender inventory details associated with the switch.",
+                  "$ref": "#/components/schemas/niatelemetry.FabricExtender",
+                  "readOnly": true,
+                  "x-omitempty": true
+                },
+                "nullable": true
+              },
               "FabricType": {
                 "description": "The type of fabric the managed switch belongs to.",
                 "type": "string",
@@ -590979,6 +590849,16 @@
                 "type": "string",
                 "readOnly": true,
                 "x-omitempty": true
+              },
+              "Modules": {
+                "type": "array",
+                "items": {
+                  "description": "Switch hardware modules installed in the switch.",
+                  "$ref": "#/components/schemas/niatelemetry.Module",
+                  "readOnly": true,
+                  "x-omitempty": true
+                },
+                "nullable": true
               },
               "OperatingSystemVersion": {
                 "description": "The OS version of the managed switch.",
@@ -637283,7 +637163,7 @@
       },
       "storage.HyperFlexVolume": {
         "title": "Storage:Hyper Flex Volume",
-        "description": "The HyperFlexVolume object represents a HyperFlex Volume entity, which is integral to the storage capabilities of the HyperFlex system. It encapsulates the essential attributes and functionalities of a volume within the HyperFlex storage architecture.\n#### Purpose\nHyperFlexVolume serves as the primary entity for managing volume storage within a HyperFlex cluster. It provides essential capabilities for volume management, ensuring efficient storage operations and data handling.\n#### Key Concepts\n- **Volume Management:** Supports the creation, configuration, and maintenance of volumes, essential for organizing storage resources in a HyperFlex cluster.\n- **Data Handling:** Facilitates data storage operations, ensuring high performance and reliability within the storage environment.\n- **Access Control:** Implements comprehensive access control measures with privilege sets, allowing secure management of volume resources.\n- **Integration:** Works in conjunction with other storage components and systems, enabling a cohesive and efficient storage infrastructure.",
+        "description": "The HyperFlexVolume object represents a HyperFlex Volume entity, which is integral to the storage capabilities of the HyperFlex system. It encapsulates the essential attributes and functionalities of a volume within the HyperFlex storage architecture.\n#### Purpose\nHyperFlexVolume serves as the primary entity for managing volume storage within a HyperFlex cluster. This provides essential capabilities for volume management, ensuring efficient storage operations and data handling.\n#### Key Concepts\n- **Volume Management:** Supports the creation, configuration, and maintenance of volumes, essential for organizing storage resources in a HyperFlex cluster.\n- **Data Handling:** Facilitates data storage operations, ensuring high performance and reliability within the storage environment.\n- **Access Control:** Implements comprehensive access control measures with privilege sets, allowing secure management of volume resources.\n- **Integration:** Works in conjunction with other storage components and systems, enabling a cohesive and efficient storage infrastructure.",
         "x-allOf-name": "storage.HyperFlexVolume",
         "allOf": [
           {
@@ -656406,7 +656286,7 @@
               "State": {
                 "description": "Deprecated and retained only for backward compatibility. This field is effectively always 'unknown' and does not reflect whether the advisory currently applies to the affected object. The existence of an AdvisoryInstance record is itself what denotes an applicable, current advisory impact, independent of this value.\n* `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object.\n* `active` - Advisory instance is currently active and applicable for the affected managed object.\n* `cleared` - Advisory instance is no longer applicable for the affected managed object.",
                 "deprecated": true,
-                "x-sunset": "2027-11-05",
+                "x-sunset": "2027-11-15",
                 "type": "string",
                 "enum": [
                   "unknown",
@@ -657549,70 +657429,6 @@
           }
         ]
       },
-      "task.FileDownloadInfo": {
-        "title": "Task:File Download Info",
-        "description": "Specifies a download path or location supports S3 currently.",
-        "x-allOf-name": "task.FileDownloadInfo",
-        "nullable": true,
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/mo.BaseComplexType"
-          },
-          {
-            "type": "object",
-            "description": "Definition of the list of properties defined in 'task.FileDownloadInfo', excluding properties defined in parent classes.",
-            "required": [
-              "ClassId",
-              "ObjectType"
-            ],
-            "properties": {
-              "ClassId": {
-                "description": "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-                "enum": [
-                  "task.FileDownloadInfo"
-                ],
-                "default": "task.FileDownloadInfo",
-                "x-enum-as-string": true
-              },
-              "ObjectType": {
-                "description": "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-                "enum": [
-                  "task.FileDownloadInfo"
-                ],
-                "default": "task.FileDownloadInfo",
-                "x-enum-as-string": true
-              },
-              "Contents": {
-                "description": "When the type of the download is inline, it will read the file from the contents here.",
-                "type": "string",
-                "x-omitempty": true
-              },
-              "Path": {
-                "description": "The path of the download from the specified source location for type S3, then this is the object key.",
-                "type": "string",
-                "x-omitempty": true
-              },
-              "Source": {
-                "description": "The source of the download location and if type is S3, then this is the bucket name. In case of MoRef download type \nthe source will have the Moid of the workflow definition.",
-                "type": "string",
-                "x-omitempty": true
-              },
-              "Type": {
-                "description": "The type of download location is captured in type.\n* `S3` - Download workflow from S3.\n* `Local` - Download workflow from local path.\n* `Inline` - Workflow is provided inline.\n* `MoRef` - Start an existing workflow registered with given Moid.",
-                "type": "string",
-                "enum": [
-                  "S3",
-                  "Local",
-                  "Inline",
-                  "MoRef"
-                ],
-                "default": "S3",
-                "x-omitempty": true
-              }
-            }
-          }
-        ]
-      },
       "task.HciScopedInventory": {
         "title": "Task:Hci Scoped Inventory",
         "description": "The HciScopedInventory object is a trigger for on-demand inventory collection for the specified set of managed objects.\n#### Purpose\nThe HciScopedInventory object facilitates the on-demand collection of inventory data from registered devices. It acts as a trigger for inventory updates, ensuring that the system reflects the current state of managed assets.\n#### Key Concepts\n- **Inventory Collection:** Initiates on-demand inventory collection processes to ensure data accuracy.",
@@ -657738,7 +657554,7 @@
       },
       "task.HyperflexScopedInventory": {
         "title": "Task:Hyperflex Scoped Inventory",
-        "description": "API to trigger on-demand Hyperflex Cluster inventory to update modified objects in Intersight report.",
+        "description": "HyperflexScopedInventories are task-trigger objects used to initiate on-demand inventory collection for a specific HyperFlex cluster via its device registration reference.\n#### Purpose\nAllow administrators to request an immediate refresh of HyperFlex cluster inventory so changes are reflected in Intersight without waiting for the next scheduled cycle.\n#### Key Concepts\n- **On-demand inventory trigger:** Represents a request to collect/refresh inventory now.\n- **Scoped to a device:** Targets a specific cluster through the registered device relationship.\n- **Operational workflow hook:** Designed to drive backend collection workflows rather than store long-lived configuration.\n- **Permission inheritance:** Inherits access control from the registered device context to ensure only authorized users can trigger collection.",
         "x-allOf-name": "task.HyperflexScopedInventory",
         "allOf": [
           {
@@ -658182,146 +657998,6 @@
                 "$ref": "#/components/schemas/asset.DeviceRegistration.Relationship",
                 "description": "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
                 "x-createOnly": true
-              }
-            }
-          }
-        ]
-      },
-      "task.WorkflowAction.Response": {
-        "description": "The response body of a HTTP GET request for the 'task.WorkflowAction' resource.\nThe value may be one of the following types.\n1. When 'tag' is specified in the URL query, the response schema\n    is a summary of the tag usage.\n1. When '$apply' is specified in the URL query, the response schema\n    is dynamically-generated schema based on the $apply value.\n1. When '$count' is specified in the URL query, the response is\n    a simple object providing the count of the resources.\n1. In all other cases, the response is a list of 'task.WorkflowAction' resources.",
-        "x-one-of-name": "task.WorkflowAction.Response",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/mo.DocumentCount"
-          },
-          {
-            "$ref": "#/components/schemas/task.WorkflowAction.List"
-          },
-          {
-            "$ref": "#/components/schemas/mo.AggregateTransform"
-          },
-          {
-            "$ref": "#/components/schemas/mo.TagSummary"
-          }
-        ],
-        "discriminator": {
-          "propertyName": "ObjectType"
-        }
-      },
-      "task.WorkflowAction": {
-        "title": "Task:Workflow Action",
-        "description": "Start a test workflow using this object.",
-        "x-allOf-name": "task.WorkflowAction",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/mo.BaseMo"
-          },
-          {
-            "type": "object",
-            "description": "Definition of the list of properties defined in 'task.WorkflowAction', excluding properties defined in parent classes.",
-            "required": [
-              "ClassId",
-              "ObjectType"
-            ],
-            "properties": {
-              "ClassId": {
-                "description": "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-                "enum": [
-                  "task.WorkflowAction"
-                ],
-                "default": "task.WorkflowAction",
-                "x-enum-as-string": true
-              },
-              "ObjectType": {
-                "description": "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-                "enum": [
-                  "task.WorkflowAction"
-                ],
-                "default": "task.WorkflowAction",
-                "x-enum-as-string": true
-              },
-              "Action": {
-                "description": "Action for test workflow.\n* `start` - Start action for the workflow.\n* `stop` - Stop action for the workflow.",
-                "type": "string",
-                "enum": [
-                  "start",
-                  "stop"
-                ],
-                "default": "start",
-                "x-omitempty": true
-              },
-              "InputParams": {
-                "description": "Json formatted string input parameters to workflow.",
-                "type": "string",
-                "x-omitempty": true
-              },
-              "IsDynamic": {
-                "description": "When true, this workflow type will be triggered as a dynamic workflow, if not it will be treated as a static workflow.",
-                "type": "boolean",
-                "x-omitempty": true
-              },
-              "Retryable": {
-                "description": "When true, the retry operation can be performed on the workflow.",
-                "type": "boolean",
-                "x-omitempty": true
-              },
-              "SequenceKey": {
-                "description": "This key can be set so that the workflow execution can be sequenced with workflows having the same key. An example usecase is say there are diferent workflows which operate on the server, and are executed at the same time on the same server and the sequence key for all the workflows are same, then workflow engine will enforce that the workflow execution are sequenced and started one after the other, based on timestamp of the arrival of the execution requests.",
-                "type": "string",
-                "x-omitempty": true
-              },
-              "WaitOnDuplicate": {
-                "description": "When true, the workflow will wait for previous one to complete before starting a new one.",
-                "type": "boolean",
-                "x-omitempty": true
-              },
-              "WorkflowContext": {
-                "description": "Json formatted string that has the contents of the workflow context used when starting a workflow.",
-                "type": "string",
-                "x-omitempty": true
-              },
-              "WorkflowFile": {
-                "description": "Path to workflow metadata file that will be published and started.",
-                "$ref": "#/components/schemas/task.FileDownloadInfo",
-                "x-omitempty": true
-              },
-              "WorkflowInfoMoid": {
-                "description": "Returns the workflow info moid of the workflow started by workflow action api. workflowInfoMoid will be an empty sting if an error occurs while starting the workflow.",
-                "type": "string",
-                "readOnly": true,
-                "x-omitempty": true
-              },
-              "Account": {
-                "$ref": "#/components/schemas/iam.Account.Relationship",
-                "description": "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-                "readOnly": true
-              }
-            }
-          }
-        ]
-      },
-      "task.WorkflowAction.List": {
-        "title": "List of 'task.WorkflowAction' resources",
-        "description": "This resource list is returned as a response to a HTTP GET request that does not include a specific resource identifier.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/mo.BaseResponse"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "Count": {
-                "description": "The total number of 'task.WorkflowAction' resources matching the request, accross all pages.\nThe 'Count' attribute is included when the HTTP GET request includes the '$inlinecount' parameter.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Results": {
-                "description": "The array of 'task.WorkflowAction' resources matching the request.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/task.WorkflowAction"
-                },
-                "nullable": true
               }
             }
           }
@@ -692693,7 +692369,7 @@
         }
       },
       "mo.AggregateTransform": {
-        "description": "The output of a request that includes the $apply query parameter.\nThe schema of an aggregation query is dynamically determined based on the request query parameters. \nSee https://stage.starshipcloud.com/apidocs/introduction/query/#apply-query-option for more details.",
+        "description": "The output of a request that includes the $apply query parameter.\nThe schema of an aggregation query is dynamically determined based on the request query parameters. \nSee https://intersight.com/apidocs/introduction/query/#apply-query-option for more details.",
         "allOf": [
           {
             "$ref": "#/components/schemas/mo.BaseResponse"
@@ -693021,7 +692697,7 @@
           "property_createTime_gt_now": {
             "summary": "Return the resources that were created less than seventy-two hours ago.",
             "value": "$filter=CreateTime gt now() sub PT72H",
-            "description": "This example uses a filter expression to compare the 'CreateTime' property of the resource against the current time.\nThe now() function is resolved to the current time in the Intersight service when the query is processed.\n'PT72H' is a string value that represents 72 hours.\nSee https://stage.starshipcloud.com/apidocs for more details about how to construct a duration.\nThe \"sub\" operator is used to substract a duration from the current time."
+            "description": "This example uses a filter expression to compare the 'CreateTime' property of the resource against the current time.\nThe now() function is resolved to the current time in the Intersight service when the query is processed.\n'PT72H' is a string value that represents 72 hours.\nSee https://intersight.com/apidocs for more details about how to construct a duration.\nThe \"sub\" operator is used to substract a duration from the current time."
           },
           "property_createTime_lt_now": {
             "summary": "Return the resources that were created at least 60 days ago.",
@@ -693572,7 +693248,8 @@
               "PRIVSET.Datastores": "Manage and configure datastores.\n",
               "PRIVSET.Decommission Fabric Extender (FEX)": "Safely retire and remove Fabric Extenders (FEX), deactivating related connections and updating the system status. \n",
               "PRIVSET.Decommission chassis": "Safely retire and remove chassis.\n",
-              "PRIVSET.Decommission servers": "Safely shut down servers, disconnect from the network, and ensure data is erased and backed up in alignment with policies.\n",
+              "PRIVSET.Decommission servers": "Remove the server from the Cisco UCS configuration.\n",
+              "PRIVSET.Decommission servers with secure erase": "Remove the server from the Cisco UCS configuration and permanently delete all data from the server\n",
               "PRIVSET.Define and edit chassis profile general properties": "Set or edit name, description, organization and tag of chassis profiles.\n",
               "PRIVSET.Define and edit chassis profile template general properties": "Set or edit name, description, organization and tag of chassis profile templates.\n",
               "PRIVSET.Define and edit domain profile general properties": "Add or edit name, description, organization and tag for UCS domain profiles.\n",
@@ -694195,6 +693872,7 @@
               "PRIVSET.SSL Certificates": "As a user with access to SSL Certificates, you can view and manage the SSL certificates used for secure communications within the system.\nNote: This is a virtual appliance only privilege.\n",
               "PRIVSET.Save and clone explorations": "Save or clone an existing exploration.\n",
               "PRIVSET.Scrub policies": "As a Scrub Policy user, you can create, edit, delete, and manage virtual media policies, allowing you to configure and control remote media access for servers.\n",
+              "PRIVSET.Secure erase servers": "Permanently delete all data from the server, including BIOS, BMC, NVRAM, DIMM, eMMC, VIC, and storage disks components (except remote LUNs).\n",
               "PRIVSET.Security and privacy": "Configure data collection and connection to Intersight.\n",
               "PRIVSET.Serial Over LAN policies": "Manage remote access to the management console through the server's management interface, facilitating troubleshooting and server management without a direct connection.\n",
               "PRIVSET.Server Administrator": "As a Server Administrator, you can view and manage UCS Servers and Fabric Interconnects,\nview all the server and Fabric Interconnect dashboard widgets, perform server actions,\nview server details, launch management interfaces and the CLI, create and deploy server\npolicies and profiles, and manage API keys. This role does not include the ability to claim a device.\nYou must have a Device Technician, Device Administrator, or an Account Administrator role to claim a device.\n",
@@ -696370,9 +696048,6 @@
               "CREATE.task.PureFlashBladeScopedInventory": "Create a 'task.PureFlashBladeScopedInventory' resource.",
               "CREATE.task.PureScopedInventory": "Create a 'task.PureScopedInventory' resource.",
               "CREATE.task.ServerScopedInventory": "Create a 'task.ServerScopedInventory' resource.",
-              "CREATE.task.WorkflowAction": "Create a 'task.WorkflowAction' resource.",
-              "READ.task.WorkflowAction": "Read a 'task.WorkflowAction' resource.",
-              "UPDATE.task.WorkflowAction": "Update a 'task.WorkflowAction' resource.",
               "CREATE.techsupportmanagement.CollectionControlPolicy": "Create a 'techsupportmanagement.CollectionControlPolicy' resource.",
               "DELETE.techsupportmanagement.CollectionControlPolicy": "Delete a 'techsupportmanagement.CollectionControlPolicy' resource.",
               "READ.techsupportmanagement.CollectionControlPolicy": "Read a 'techsupportmanagement.CollectionControlPolicy' resource.",

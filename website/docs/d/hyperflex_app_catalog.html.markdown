@@ -3,12 +3,30 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_app_catalog"
 description: |-
-        A catalog for managing application settings for HyperFlex cluster configuration service.
+        AppCatalog is a system-owned, singleton catalog used by the HyperFlex cluster configuration service to manage application settings and supported configuration data. It is created during service initialization and is maintained by the system (for example, via packaged catalog content and future external catalog sources), while being readable in account context for operational and configuration workflows.
+        #### Purpose
+        Serve as the authoritative catalog for HyperFlex configuration-service application settings and supported software/version data, enabling cluster profile workflows and UIs to reference a consistent set of supported HyperFlex Data Platform versions and software distribution entries.
+        #### Key Concepts
+        - **Singleton, system-managed catalog**: `owner: system` and restricted CREATE/UPDATE/DELETE (System Administrator only) indicate the platform controls lifecycle and content updates.
+        - **Account-context consumption**: Broad READ access enables users and tooling to query supported settings without being able to mutate the catalog.
+        - **Catalog versioning**: `version` tracks the catalog revision used by the HyperFlex configuration service.
+        - **Supported software versions**: The catalog stores supported HyperFlex Data Platform versions and enables compatibility-driven selection.
+        - **Supported distribution entries**: `softwareDistributions` lists supported HyperFlex software distribution entries used by the service for validation and workflows.
+        - **Hierarchical catalog structure**: Version and software distribution records establish AppCatalog as the container for these supported-data records.
 
 ---
 
 # Data Source: intersight_hyperflex_app_catalog
-A catalog for managing application settings for HyperFlex cluster configuration service.
+AppCatalog is a system-owned, singleton catalog used by the HyperFlex cluster configuration service to manage application settings and supported configuration data. It is created during service initialization and is maintained by the system (for example, via packaged catalog content and future external catalog sources), while being readable in account context for operational and configuration workflows.
+#### Purpose
+Serve as the authoritative catalog for HyperFlex configuration-service application settings and supported software/version data, enabling cluster profile workflows and UIs to reference a consistent set of supported HyperFlex Data Platform versions and software distribution entries.
+#### Key Concepts
+- **Singleton, system-managed catalog**: `owner: system` and restricted CREATE/UPDATE/DELETE (System Administrator only) indicate the platform controls lifecycle and content updates.
+- **Account-context consumption**: Broad READ access enables users and tooling to query supported settings without being able to mutate the catalog.
+- **Catalog versioning**: `version` tracks the catalog revision used by the HyperFlex configuration service.
+- **Supported software versions**: The catalog stores supported HyperFlex Data Platform versions and enables compatibility-driven selection.
+- **Supported distribution entries**: `softwareDistributions` lists supported HyperFlex software distribution entries used by the service for validation and workflows.
+- **Hierarchical catalog structure**: Version and software distribution records establish AppCatalog as the container for these supported-data records.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

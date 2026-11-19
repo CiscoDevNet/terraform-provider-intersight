@@ -5,7 +5,7 @@ page_title: "Intersight: intersight_storage_hyper_flex_volume"
 description: |-
         The HyperFlexVolume object represents a HyperFlex Volume entity, which is integral to the storage capabilities of the HyperFlex system. It encapsulates the essential attributes and functionalities of a volume within the HyperFlex storage architecture.
         #### Purpose
-        HyperFlexVolume serves as the primary entity for managing volume storage within a HyperFlex cluster. It provides essential capabilities for volume management, ensuring efficient storage operations and data handling.
+        HyperFlexVolume serves as the primary entity for managing volume storage within a HyperFlex cluster. This provides essential capabilities for volume management, ensuring efficient storage operations and data handling.
         #### Key Concepts
         - **Volume Management:** Supports the creation, configuration, and maintenance of volumes, essential for organizing storage resources in a HyperFlex cluster.
         - **Data Handling:** Facilitates data storage operations, ensuring high performance and reliability within the storage environment.
@@ -17,7 +17,7 @@ description: |-
 # Data Source: intersight_storage_hyper_flex_volume
 The HyperFlexVolume object represents a HyperFlex Volume entity, which is integral to the storage capabilities of the HyperFlex system. It encapsulates the essential attributes and functionalities of a volume within the HyperFlex storage architecture.
 #### Purpose
-HyperFlexVolume serves as the primary entity for managing volume storage within a HyperFlex cluster. It provides essential capabilities for volume management, ensuring efficient storage operations and data handling.
+HyperFlexVolume serves as the primary entity for managing volume storage within a HyperFlex cluster. This provides essential capabilities for volume management, ensuring efficient storage operations and data handling.
 #### Key Concepts
 - **Volume Management:** Supports the creation, configuration, and maintenance of volumes, essential for organizing storage resources in a HyperFlex cluster.
 - **Data Handling:** Facilitates data storage operations, ensuring high performance and reliability within the storage environment.

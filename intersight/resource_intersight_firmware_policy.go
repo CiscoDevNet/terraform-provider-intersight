@@ -148,9 +148,10 @@ func resourceFirmwarePolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"bundle_version": {
-							Description: "The bundle version to which the server will be upgraded.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The bundle version to which the server will be upgraded.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[A-Za-z0-9.()_-]+$"), ""),
+							Optional:     true,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",

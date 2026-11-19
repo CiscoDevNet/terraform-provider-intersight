@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_ext_fc_storage_policy"
 description: |-
-        A policy specifying external storage connectivity information via Fabric attached FC storage.
+        The ExtFcStoragePolicies object specifies connectivity settings for fabric-attached external Fibre Channel (FC) storage.
+        #### Purpose
+        It enables the integration of external FC storage arrays with the HyperFlex cluster, defining the VSANs and WWxN ranges required for connectivity.
+        #### Key Concepts
+        - **External Storage Integration:** Enables fabric-attached FC storage connectivity.
+        - **VSAN Configuration:** Defines primary and secondary VSANs for storage traffic.
+        - **Identity Management:** Manages WWxN prefix ranges for FC endpoints.
 
 ---
 
 # Data Source: intersight_hyperflex_ext_fc_storage_policy
-A policy specifying external storage connectivity information via Fabric attached FC storage.
+The ExtFcStoragePolicies object specifies connectivity settings for fabric-attached external Fibre Channel (FC) storage.
+#### Purpose
+It enables the integration of external FC storage arrays with the HyperFlex cluster, defining the VSANs and WWxN ranges required for connectivity.
+#### Key Concepts
+- **External Storage Integration:** Enables fabric-attached FC storage connectivity.
+- **VSAN Configuration:** Defines primary and secondary VSANs for storage traffic.
+- **Identity Management:** Manages WWxN prefix ranges for FC endpoints.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_hw_catalog_info"
 description: |-
-        Hardware catalog information for HyperFlex Data Platform, required for BOM validation.
+        The HwCatalogInfos object provides the essential hardware catalog metadata for the HyperFlex Data Platform, which is required for performing Bill of Materials (BOM) validation.
+        #### Purpose
+        This serves as the foundation for hardware compatibility checks, ensuring that the server models and types used in a HyperFlex cluster are supported by the platform.
+        #### Key Concepts
+        - **BOM Validation:** Acts as the reference data for validating hardware configurations during cluster deployment.
+        - **Hardware Identification:** Tracks specific server models and types, such as All-Flash (AF) configurations.
+        - **Catalog Integration:** Maintains relationships with detailed server hardware catalog information to provide a comprehensive validation check.
 
 ---
 
 # Data Source: intersight_hcl_hw_catalog_info
-Hardware catalog information for HyperFlex Data Platform, required for BOM validation.
+The HwCatalogInfos object provides the essential hardware catalog metadata for the HyperFlex Data Platform, which is required for performing Bill of Materials (BOM) validation.
+#### Purpose
+This serves as the foundation for hardware compatibility checks, ensuring that the server models and types used in a HyperFlex cluster are supported by the platform.
+#### Key Concepts
+- **BOM Validation:** Acts as the reference data for validating hardware configurations during cluster deployment.
+- **Hardware Identification:** Tracks specific server models and types, such as All-Flash (AF) configurations.
+- **Catalog Integration:** Maintains relationships with detailed server hardware catalog information to provide a comprehensive validation check.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

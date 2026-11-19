@@ -1234,8 +1234,10 @@ docs/ConnectorStartStream.md
 docs/ConnectorStartStreamFromDevice.md
 docs/ConnectorStreamAcknowledge.md
 docs/ConnectorStreamInput.md
+docs/ConnectorStreamInventorySupport.md
 docs/ConnectorStreamKeepalive.md
 docs/ConnectorStreamMessage.md
+docs/ConnectorStreamSupport.md
 docs/ConnectorTargetChangeMessage.md
 docs/ConnectorTargetSpecification.md
 docs/ConnectorUrl.md
@@ -1883,6 +1885,7 @@ docs/FirmwareEulaResponse.md
 docs/FirmwareExcludeComponentPidListType.md
 docs/FirmwareFabricUpgradeImpact.md
 docs/FirmwareFeatureVersionMap.md
+docs/FirmwareFirmwareInfo.md
 docs/FirmwareFirmwareInventory.md
 docs/FirmwareFirmwareSummary.md
 docs/FirmwareFirmwareSummaryList.md
@@ -3508,6 +3511,7 @@ docs/NiatelemetryEqptcapacityPolUsage5min.md
 docs/NiatelemetryEqptcapacityPrefixEntries15min.md
 docs/NiatelemetryEqptcapacityPrefixEntries5min.md
 docs/NiatelemetryFabric.md
+docs/NiatelemetryFabricExtender.md
 docs/NiatelemetryFabricList.md
 docs/NiatelemetryFabricModuleDetails.md
 docs/NiatelemetryFabricModuleDetailsList.md
@@ -3570,6 +3574,7 @@ docs/NiatelemetryMdsNeighborInfo.md
 docs/NiatelemetryMdsNeighbors.md
 docs/NiatelemetryMdsNeighborsList.md
 docs/NiatelemetryMdsNeighborsResponse.md
+docs/NiatelemetryModule.md
 docs/NiatelemetryMsoContractDetails.md
 docs/NiatelemetryMsoContractDetailsList.md
 docs/NiatelemetryMsoContractDetailsResponse.md
@@ -5082,7 +5087,6 @@ docs/TamTextFsmTemplateDataSource.md
 docs/TaskApi.md
 docs/TaskCatalystSdwanScopedInventory.md
 docs/TaskFabricMosScopedInventory.md
-docs/TaskFileDownloadInfo.md
 docs/TaskHciScopedInventory.md
 docs/TaskHitachiScopedInventory.md
 docs/TaskHyperFlexManagementScopedInventory.md
@@ -5097,9 +5101,6 @@ docs/TaskNexusVlanScopedInventory.md
 docs/TaskPureFlashBladeScopedInventory.md
 docs/TaskPureScopedInventory.md
 docs/TaskServerScopedInventory.md
-docs/TaskWorkflowAction.md
-docs/TaskWorkflowActionList.md
-docs/TaskWorkflowActionResponse.md
 docs/TechsupportmanagementApi.md
 docs/TechsupportmanagementApplianceParam.md
 docs/TechsupportmanagementCollectionControlPolicy.md
@@ -7029,8 +7030,10 @@ model_connector_start_stream.go
 model_connector_start_stream_from_device.go
 model_connector_stream_acknowledge.go
 model_connector_stream_input.go
+model_connector_stream_inventory_support.go
 model_connector_stream_keepalive.go
 model_connector_stream_message.go
+model_connector_stream_support.go
 model_connector_target_change_message.go
 model_connector_target_specification.go
 model_connector_url.go
@@ -7661,6 +7664,7 @@ model_firmware_eula_response.go
 model_firmware_exclude_component_pid_list_type.go
 model_firmware_fabric_upgrade_impact.go
 model_firmware_feature_version_map.go
+model_firmware_firmware_info.go
 model_firmware_firmware_inventory.go
 model_firmware_firmware_summary.go
 model_firmware_firmware_summary_list.go
@@ -9258,6 +9262,7 @@ model_niatelemetry_eqptcapacity_pol_usage5min.go
 model_niatelemetry_eqptcapacity_prefix_entries15min.go
 model_niatelemetry_eqptcapacity_prefix_entries5min.go
 model_niatelemetry_fabric.go
+model_niatelemetry_fabric_extender.go
 model_niatelemetry_fabric_list.go
 model_niatelemetry_fabric_module_details.go
 model_niatelemetry_fabric_module_details_list.go
@@ -9320,6 +9325,7 @@ model_niatelemetry_mds_neighbor_info.go
 model_niatelemetry_mds_neighbors.go
 model_niatelemetry_mds_neighbors_list.go
 model_niatelemetry_mds_neighbors_response.go
+model_niatelemetry_module.go
 model_niatelemetry_mso_contract_details.go
 model_niatelemetry_mso_contract_details_list.go
 model_niatelemetry_mso_contract_details_response.go
@@ -10795,7 +10801,6 @@ model_tam_severity.go
 model_tam_text_fsm_template_data_source.go
 model_task_catalyst_sdwan_scoped_inventory.go
 model_task_fabric_mos_scoped_inventory.go
-model_task_file_download_info.go
 model_task_hci_scoped_inventory.go
 model_task_hitachi_scoped_inventory.go
 model_task_hyper_flex_management_scoped_inventory.go
@@ -10810,9 +10815,6 @@ model_task_nexus_vlan_scoped_inventory.go
 model_task_pure_flash_blade_scoped_inventory.go
 model_task_pure_scoped_inventory.go
 model_task_server_scoped_inventory.go
-model_task_workflow_action.go
-model_task_workflow_action_list.go
-model_task_workflow_action_response.go
 model_techsupportmanagement_appliance_param.go
 model_techsupportmanagement_collection_control_policy.go
 model_techsupportmanagement_collection_control_policy_list.go

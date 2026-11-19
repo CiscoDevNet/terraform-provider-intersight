@@ -3,12 +3,22 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_server_firmware_version_entry"
 description: |-
-        An entry specifying supported server firmware version in regex format.
+        The ServerFirmwareVersionEntries object specifies a supported server firmware version using regex patterns.
+        #### Purpose
+        This provides the validation logic to ensure that the firmware applied to a UCS server is supported and compatible with the HyperFlex cluster.
+        #### Key Concepts
+        - **Compatibility Validation:** Matches server platform types to supported firmware versions via regex.
+        - **Constraint Enforcement:** Ensures that firmware versions meet specific requirements before being applied.
 
 ---
 
 # Data Source: intersight_hyperflex_server_firmware_version_entry
-An entry specifying supported server firmware version in regex format.
+The ServerFirmwareVersionEntries object specifies a supported server firmware version using regex patterns.
+#### Purpose
+This provides the validation logic to ensure that the firmware applied to a UCS server is supported and compatible with the HyperFlex cluster.
+#### Key Concepts
+- **Compatibility Validation:** Matches server platform types to supported firmware versions via regex.
+- **Constraint Enforcement:** Ensures that firmware versions meet specific requirements before being applied.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -8501,6 +8501,30 @@ func TestFlattenListNiatelemetryFabricRelationship(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListNiatelemetryFabricExtender(t *testing.T) {
+	p := []models.NiatelemetryFabricExtender{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"niatelemetry.FabricExtender","Description":"Description %d","Id":32,"Model":"Model %d","Name":"Name %d","ObjectType":"niatelemetry.FabricExtender","PinningMaxLinks":32,"PortChannel":"PortChannel %d","SerialNumber":"SerialNumber %d","SoftwareVersion":"SoftwareVersion %d","State":"State %d","VpcId":32}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListNiatelemetryFabricExtender(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.NiatelemetryFabricExtender{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListNiatelemetryFabricExtender(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "niatelemetry.FabricExtender", "description": "Description 1", "id": 32, "model": "Model 1", "name": "Name 1", "object_type": "niatelemetry.FabricExtender", "pinning_max_links": 32, "port_channel": "PortChannel 1", "serial_number": "SerialNumber 1", "software_version": "SoftwareVersion 1", "state": "State 1", "vpc_id": 32}, {"class_id": "niatelemetry.FabricExtender", "description": "Description 2", "id": 32, "model": "Model 2", "name": "Name 2", "object_type": "niatelemetry.FabricExtender", "pinning_max_links": 32, "port_channel": "PortChannel 2", "serial_number": "SerialNumber 2", "software_version": "SoftwareVersion 2", "state": "State 2", "vpc_id": 32}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListNiatelemetryFanDetails(t *testing.T) {
 	p := []models.NiatelemetryFanDetails{}
 	var d = &schema.ResourceData{}
@@ -8664,6 +8688,30 @@ func TestFlattenListNiatelemetryMdsNeighborInfo(t *testing.T) {
 	}
 	ffOp := flattenListNiatelemetryMdsNeighborInfo(p, d)
 	expectedOp := []map[string]interface{}{{"class_id": "niatelemetry.MdsNeighborInfo", "device_wwn": "DeviceWwn 1", "object_type": "niatelemetry.MdsNeighborInfo"}, {"class_id": "niatelemetry.MdsNeighborInfo", "device_wwn": "DeviceWwn 2", "object_type": "niatelemetry.MdsNeighborInfo"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListNiatelemetryModule(t *testing.T) {
+	p := []models.NiatelemetryModule{}
+	var d = &schema.ResourceData{}
+	c := `{"AssetId":"AssetId %d","ClassId":"niatelemetry.Module","HardwareRevision":"HardwareRevision %d","ModelName":"ModelName %d","Name":"Name %d","ObjectType":"niatelemetry.Module","OperStatus":"OperStatus %d","SerialNumber":"SerialNumber %d","Slot":"Slot %d","SoftwareRevision":"SoftwareRevision %d","Type":"Type %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListNiatelemetryModule(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.NiatelemetryModule{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListNiatelemetryModule(p, d)
+	expectedOp := []map[string]interface{}{{"asset_id": "AssetId 1", "class_id": "niatelemetry.Module", "hardware_revision": "HardwareRevision 1", "model_name": "ModelName 1", "name": "Name 1", "object_type": "niatelemetry.Module", "oper_status": "OperStatus 1", "serial_number": "SerialNumber 1", "slot": "Slot 1", "software_revision": "SoftwareRevision 1", "type": "Type 1"}, {"asset_id": "AssetId 2", "class_id": "niatelemetry.Module", "hardware_revision": "HardwareRevision 2", "model_name": "ModelName 2", "name": "Name 2", "object_type": "niatelemetry.Module", "oper_status": "OperStatus 2", "serial_number": "SerialNumber 2", "slot": "Slot 2", "software_revision": "SoftwareRevision 2", "type": "Type 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -17945,6 +17993,24 @@ func TestFlattenMapFirmwareExcludeComponentPidListType(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
+func TestFlattenMapFirmwareFirmwareInfo(t *testing.T) {
+	p := models.FirmwareFirmwareInfo{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"firmware.FirmwareInfo","ObjectType":"firmware.FirmwareInfo","RunningVersion":"RunningVersion %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapFirmwareFirmwareInfo(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapFirmwareFirmwareInfo(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "firmware.FirmwareInfo", "object_type": "firmware.FirmwareInfo", "running_version": "RunningVersion 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
 func TestFlattenMapFirmwareNetworkShare(t *testing.T) {
 	p := models.FirmwareNetworkShare{}
 	var d = &schema.ResourceData{}
@@ -25304,24 +25370,6 @@ func TestFlattenMapTamSeverity(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapTamSeverity(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "tam.Severity", "object_type": "tam.Severity"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapTaskFileDownloadInfo(t *testing.T) {
-	p := models.TaskFileDownloadInfo{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"task.FileDownloadInfo","Contents":"Contents %d","ObjectType":"task.FileDownloadInfo","Path":"Path %d","Source":"Source %d","Type":"Type %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapTaskFileDownloadInfo(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapTaskFileDownloadInfo(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "task.FileDownloadInfo", "contents": "Contents 1", "object_type": "task.FileDownloadInfo", "path": "Path 1", "nr_source": "Source 1", "type": "Type 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

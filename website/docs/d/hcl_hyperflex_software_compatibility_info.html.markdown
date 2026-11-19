@@ -3,12 +3,24 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_hyperflex_software_compatibility_info"
 description: |-
-        Lists software compatibility information between different HperFlex component versions like HyperFlex Data Platform, Hypervisor, Drive Firmware, etc.
+        The HyperflexSoftwareCompatibilityInfos object manages the compatibility matrix between various HyperFlex component versions.
+        ### Purpose
+        This provides a structured way to determine if a specific combination of HyperFlex Data Platform, hypervisor, and server firmware versions are compatible, which is critical for successful cluster operations and upgrades.
+        ### Key Concepts
+        - **Compatibility Matrix:** Defines supported version ranges (min/max) for management builds and hypervisors.
+        - **Constraint-Based Matching:** Uses compatibility constraints to handle specific operational scenarios, such as ensuring versions are compatible for upgrade operations.
+        - **Component Interoperability:** Tracks compatibility across different HyperFlex components, including the HyperFlex Data Platform, hypervisors (ESX, Hyper-V, KVM), and UCS server firmware.
 
 ---
 
 # Data Source: intersight_hcl_hyperflex_software_compatibility_info
-Lists software compatibility information between different HperFlex component versions like HyperFlex Data Platform, Hypervisor, Drive Firmware, etc.
+The HyperflexSoftwareCompatibilityInfos object manages the compatibility matrix between various HyperFlex component versions.
+### Purpose
+This provides a structured way to determine if a specific combination of HyperFlex Data Platform, hypervisor, and server firmware versions are compatible, which is critical for successful cluster operations and upgrades.
+### Key Concepts
+- **Compatibility Matrix:** Defines supported version ranges (min/max) for management builds and hypervisors.
+- **Constraint-Based Matching:** Uses compatibility constraints to handle specific operational scenarios, such as ensuring versions are compatible for upgrade operations.
+- **Component Interoperability:** Tracks compatibility across different HyperFlex components, including the HyperFlex Data Platform, hypervisors (ESX, Hyper-V, KVM), and UCS server firmware.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

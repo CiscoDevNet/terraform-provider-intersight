@@ -433,7 +433,7 @@ func resourceIamIdp() *schema.Resource {
 					return
 				}},
 			"sp_metadata_expiry_state": {
-				Description: "The expiration state of the certificate in the SP metadata used by this IdP. The state is not-applicable when SAML assertion encryption and AuthNRequest signing are both disabled.\n* `expiration-within-info-period` - The expiry date is beyond 270 days.\n* `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days.\n* `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days.\n* `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days.\n* `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days.\n* `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days.\n* `expiration-within-critical-period` - The expiry date is within 7 days.\n* `expired` - The expiry date has passed.\n* `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.",
+				Description: "The expiration state of the SP certificate used by this IdP. The state is not-applicable when SAML assertion encryption, AuthNRequest signing, and SLO signing are all disabled.\n* `expiration-within-info-period` - The expiry date is beyond 270 days.\n* `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days.\n* `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days.\n* `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days.\n* `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days.\n* `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days.\n* `expiration-within-critical-period` - The expiry date is within 7 days.\n* `expired` - The expiry date has passed.\n* `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.\n* `not-evaluated` - The SP certificate expiry state has not yet been evaluated from a successful login.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -444,12 +444,23 @@ func resourceIamIdp() *schema.Resource {
 					return
 				}},
 			"sp_metadata_hash_method": {
-				Description:  "Determines if the AuthNRequest sent to the Idp should be signed by the new (SHA-2) or the old (SHA-1) SP metadata during the grace period of SP SAML metadata rotation.\n* `Sha2` - The SAML SP metadata hash is generated using SHA-256 algorithm.\n* `Sha1` - The SAML SP metadata hash is generated using SHA-1 algorithm.",
+				Description:  "Selects the legacy (SHA-1) or current (SHA-2) SP certificate used to sign AuthN and logout requests during certificate rotation.\n* `Sha2` - Use the current SHA-2 SP signing certificate.\n* `Sha1` - Use the legacy SHA-1 SP signing certificate.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Sha2", "Sha1"}, false),
 				Optional:     true,
 				Default:      "Sha2",
 			},
+			"sp_metadata_hash_method_configured": {
+				Description: "Indicates whether this IdP uses its stored SP signing certificate selection. Existing IdPs without this marker continue using the legacy SHA-1 certificate.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"system": {
 				Description: "A reference to a iamSystem resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1421,6 +1432,10 @@ func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interfac
 
 	if err := d.Set("sp_metadata_hash_method", (s.GetSpMetadataHashMethod())); err != nil {
 		return diag.Errorf("error occurred while setting property SpMetadataHashMethod in IamIdp object: %s", err.Error())
+	}
+
+	if err := d.Set("sp_metadata_hash_method_configured", (s.GetSpMetadataHashMethodConfigured())); err != nil {
+		return diag.Errorf("error occurred while setting property SpMetadataHashMethodConfigured in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("system", flattenMapIamSystemRelationship(s.GetSystem(), d)); err != nil {

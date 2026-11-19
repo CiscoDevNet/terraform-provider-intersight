@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_network_policy"
 description: |-
-        A policy specifying VLANs for management, VM migration, and VM traffic.
+        The ClusterNetworkPolicies object  defines the network infrastructure requirements for a HyperFlex cluster, including VLANs, MTU settings, and IP ranges.
+        #### Purpose
+        It ensures that the cluster has the correct network connectivity for management, VM migration, and guest VM traffic, which is critical for cluster stability and performance.
+        #### Key Concepts
+        - **VLAN Management:** Configures specific VLANs for management, migration, and VM traffic.
+        - **Network Performance:** Supports Jumbo Frame configuration for optimized throughput.
+        - **Connectivity Infrastructure:** Manages KVM IP ranges and MAC prefix ranges to ensure unique network identities for servers.
 
 ---
 
 # Resource: intersight_hyperflex_cluster_network_policy
-A policy specifying VLANs for management, VM migration, and VM traffic.
+The ClusterNetworkPolicies object  defines the network infrastructure requirements for a HyperFlex cluster, including VLANs, MTU settings, and IP ranges.
+#### Purpose
+It ensures that the cluster has the correct network connectivity for management, VM migration, and guest VM traffic, which is critical for cluster stability and performance.
+#### Key Concepts
+- **VLAN Management:** Configures specific VLANs for management, migration, and VM traffic.
+- **Network Performance:** Supports Jumbo Frame configuration for optimized throughput.
+- **Connectivity Infrastructure:** Manages KVM IP ranges and MAC prefix ranges to ensure unique network identities for servers.
 ## Usage Example
 ### Resource Creation
 

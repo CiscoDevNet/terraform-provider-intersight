@@ -3,12 +3,22 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_software_distribution_component"
 description: |-
-        A HyperFlex Software Distribution Component.
+        The SoftwareDistributionComponents object (``) defines individual components of a HyperFlex software distribution.
+        #### Purpose
+        This provides the metadata (version, file path, download location) for specific software components needed during cluster installation or upgrades.
+        #### Key Concepts
+        - **Component Metadata:** Tracks ID, name, and version of software components.
+        - **Download Management:** Specifies the source (e.g., cloud storage bucket) and files required for installation.
 
 ---
 
 # Data Source: intersight_hyperflex_software_distribution_component
-A HyperFlex Software Distribution Component.
+The SoftwareDistributionComponents object (``) defines individual components of a HyperFlex software distribution.
+#### Purpose
+This provides the metadata (version, file path, download location) for specific software components needed during cluster installation or upgrades.
+#### Key Concepts
+- **Component Metadata:** Tracks ID, name, and version of software components.
+- **Download Management:** Specifies the source (e.g., cloud storage bucket) and files required for installation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

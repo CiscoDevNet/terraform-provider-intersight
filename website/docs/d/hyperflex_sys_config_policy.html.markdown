@@ -3,12 +3,32 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_sys_config_policy"
 description: |-
-        A policy specifying system configuration such as timezone, DNS servers, and NTP Servers.
+        SysConfigPolicies define baseline system settings—DNS, NTP, and timezone—that should be applied for a HyperFlex cluster deployment. The policy is reusable and attachable to HyperFlex cluster profiles, enabling consistent, profile-driven configuration of core time and name-resolution settings across clusters.
+        #### Purpose
+        Provide a centralized, reusable policy for configuring essential system services (timezone, DNS servers, and NTP servers) for HyperFlex clusters, supporting consistent operations, auditing, and repeatable deployments.
+        #### Key Concepts
+        - **System configuration intent**: Captures desired cluster-wide system settings, including `timezone`, DNS server configuration, and NTP server configuration.
+        - **Profile-driven application**: Tagged as attachable to `hyperflex.ClusterProfile`, indicating it is meant to be applied through cluster profile workflows.
+        - **Multi-platform applicability**: Tagged for both FI-managed and standalone HyperFlex deployments (`managementplatform.fi` and `managementplatform.standalone`).
+        - **Reusable policy model**: Extends `policy.AbstractPolicy`, aligning with standard policy lifecycle and reuse patterns in Intersight.
+        - **Governed lifecycle**: CREATE/UPDATE/DELETE are restricted to roles that manage HyperFlex cluster profiles; READ is available to common operational roles.
+        - **Time synchronization**: `timezone` and NTP server configuration ensure that the cluster maintains accurate and consistent system time, which is important for logging, troubleshooting, certificates, and distributed services.
+        - **DNS resolution**: DNS server configuration provides name resolution for the cluster.
 
 ---
 
 # Data Source: intersight_hyperflex_sys_config_policy
-A policy specifying system configuration such as timezone, DNS servers, and NTP Servers.
+SysConfigPolicies define baseline system settings—DNS, NTP, and timezone—that should be applied for a HyperFlex cluster deployment. The policy is reusable and attachable to HyperFlex cluster profiles, enabling consistent, profile-driven configuration of core time and name-resolution settings across clusters.
+#### Purpose
+Provide a centralized, reusable policy for configuring essential system services (timezone, DNS servers, and NTP servers) for HyperFlex clusters, supporting consistent operations, auditing, and repeatable deployments.
+#### Key Concepts
+- **System configuration intent**: Captures desired cluster-wide system settings, including `timezone`, DNS server configuration, and NTP server configuration.
+- **Profile-driven application**: Tagged as attachable to `hyperflex.ClusterProfile`, indicating it is meant to be applied through cluster profile workflows.
+- **Multi-platform applicability**: Tagged for both FI-managed and standalone HyperFlex deployments (`managementplatform.fi` and `managementplatform.standalone`).
+- **Reusable policy model**: Extends `policy.AbstractPolicy`, aligning with standard policy lifecycle and reuse patterns in Intersight.
+- **Governed lifecycle**: CREATE/UPDATE/DELETE are restricted to roles that manage HyperFlex cluster profiles; READ is available to common operational roles.
+- **Time synchronization**: `timezone` and NTP server configuration ensure that the cluster maintains accurate and consistent system time, which is important for logging, troubleshooting, certificates, and distributed services.
+- **DNS resolution**: DNS server configuration provides name resolution for the cluster.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

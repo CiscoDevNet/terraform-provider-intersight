@@ -3,12 +3,22 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_software_distribution_entry"
 description: |-
-        A HyperFlex Software Distribution.
+        The SoftwareDistributionEntries object  represents a category of HyperFlex software distribution.
+        #### Purpose
+        It groups software distribution versions by type, assisting in the organization and retrieval of compatible software packages.
+        #### Key Concepts
+        - **Categorization:** Groups software versions based on distribution type.
+        - **Version Association:** Links to multiple software distribution versions.
 
 ---
 
 # Data Source: intersight_hyperflex_software_distribution_entry
-A HyperFlex Software Distribution.
+The SoftwareDistributionEntries object  represents a category of HyperFlex software distribution.
+#### Purpose
+It groups software distribution versions by type, assisting in the organization and retrieval of compatible software packages.
+#### Key Concepts
+- **Categorization:** Groups software versions based on distribution type.
+- **Version Association:** Links to multiple software distribution versions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

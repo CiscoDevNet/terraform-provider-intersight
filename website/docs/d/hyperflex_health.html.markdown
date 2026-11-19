@@ -3,12 +3,12 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_health"
 description: |-
-        The data health status and ability of the HyperFlex storage cluster to tolerate failures.
+        Health objects capture a HyperFlex cluster’s operational status and resiliency posture, including replication compliance, tolerable failures, zone resiliency, and service health indicators such as ZooKeeper and the arbitration service. They provide detailed information for proactive monitoring and operational decisions, including whether the cluster is online, offline, readonly, or enospaced; how many failures it can tolerate and whether policy compliance has degraded; the health of the ZooKeeper ensemble and arbitration service where applicable, particularly for 2-node edge clusters; and resiliency details by zone or site for stretched or LAZ configurations.
 
 ---
 
 # Data Source: intersight_hyperflex_health
-The data health status and ability of the HyperFlex storage cluster to tolerate failures.
+Health objects capture a HyperFlex cluster’s operational status and resiliency posture, including replication compliance, tolerable failures, zone resiliency, and service health indicators such as ZooKeeper and the arbitration service. They provide detailed information for proactive monitoring and operational decisions, including whether the cluster is online, offline, readonly, or enospaced; how many failures it can tolerate and whether policy compliance has degraded; the health of the ZooKeeper ensemble and arbitration service where applicable, particularly for 2-node edge clusters; and resiliency details by zone or site for stretched or LAZ configurations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

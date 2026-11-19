@@ -3,12 +3,22 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_node_config_policy"
 description: |-
-        A policy specifying node details such as management and storage data IP ranges. For HyperFlex Edge, storage data IP range is pre-defined.
+        The NodeConfigPolicies object specifies IP address ranges for various node networks, including management, storage data, and controller communication.
+        #### Purpose
+        It automates the IP assignment process for new nodes, ensuring that each node is correctly networked within the cluster.
+        #### Key Concepts
+        - **Network Partitioning:** Defines ranges for management, hypervisor control, and storage data traffic.
+        - **Deployment Automation:** Provides the necessary IP parameters to configure nodes during cluster installation.
 
 ---
 
 # Data Source: intersight_hyperflex_node_config_policy
-A policy specifying node details such as management and storage data IP ranges. For HyperFlex Edge, storage data IP range is pre-defined.
+The NodeConfigPolicies object specifies IP address ranges for various node networks, including management, storage data, and controller communication.
+#### Purpose
+It automates the IP assignment process for new nodes, ensuring that each node is correctly networked within the cluster.
+#### Key Concepts
+- **Network Partitioning:** Defines ranges for management, hypervisor control, and storage data traffic.
+- **Deployment Automation:** Provides the necessary IP parameters to configure nodes during cluster installation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

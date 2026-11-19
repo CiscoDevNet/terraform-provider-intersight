@@ -1090,7 +1090,6 @@ func GetDataSourceMapping() map[string]*schema.Resource {
 		"intersight_tam_advisory_info":                                       dataSourceTamAdvisoryInfo(),
 		"intersight_tam_advisory_instance":                                   dataSourceTamAdvisoryInstance(),
 		"intersight_tam_security_advisory":                                   dataSourceTamSecurityAdvisory(),
-		"intersight_task_workflow_action":                                    dataSourceTaskWorkflowAction(),
 		"intersight_techsupportmanagement_collection_control_policy":         dataSourceTechsupportmanagementCollectionControlPolicy(),
 		"intersight_techsupportmanagement_download":                          dataSourceTechsupportmanagementDownload(),
 		"intersight_techsupportmanagement_end_point":                         dataSourceTechsupportmanagementEndPoint(),

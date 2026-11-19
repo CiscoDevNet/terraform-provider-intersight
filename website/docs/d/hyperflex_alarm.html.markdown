@@ -3,12 +3,12 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_alarm"
 description: |-
-        An alarm representing a fault in the HyperFlex cluster configuration or hardware.
+        Alarms represent faults or notable conditions reported by a HyperFlex cluster, providing a normalized view of what happened, the affected entity, severity, and acknowledgement state to support monitoring and triage. Each alarm is associated with an entity such as a cluster, node, disk, or VM through its type, name, and UUID; includes its severity and trigger and acknowledgement timestamps; records who acknowledged it and when; and includes relationships to ancestor managed objects for context and navigation. This alarm inventory supports monitoring, filtering by severity or entity, and operational troubleshooting.
 
 ---
 
 # Data Source: intersight_hyperflex_alarm
-An alarm representing a fault in the HyperFlex cluster configuration or hardware.
+Alarms represent faults or notable conditions reported by a HyperFlex cluster, providing a normalized view of what happened, the affected entity, severity, and acknowledgement state to support monitoring and triage. Each alarm is associated with an entity such as a cluster, node, disk, or VM through its type, name, and UUID; includes its severity and trigger and acknowledgement timestamps; records who acknowledged it and when; and includes relationships to ancestor managed objects for context and navigation. This alarm inventory supports monitoring, filtering by severity or entity, and operational troubleshooting.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

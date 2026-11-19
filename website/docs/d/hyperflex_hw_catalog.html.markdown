@@ -3,12 +3,22 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_hw_catalog"
 description: |-
-        Hardware catalog for managing HyperFlex server BOM validation.
+        The HwCatalogs object provides the hardware catalog used for HyperFlex server Bill of Materials (BOM) validation.
+        #### Purpose
+        It ensures that the hardware components (servers, disks, etc.) being used in a cluster deployment are compatible and supported by the HyperFlex platform.
+        #### Key Concepts
+        - **BOM Validation:** Validates that server models and hardware types meet HyperFlex requirements.
+        - **Catalog Versioning:** Tracks the version of the hardware catalog to ensure up-to-date validation logic.
 
 ---
 
 # Data Source: intersight_hyperflex_hw_catalog
-Hardware catalog for managing HyperFlex server BOM validation.
+The HwCatalogs object provides the hardware catalog used for HyperFlex server Bill of Materials (BOM) validation.
+#### Purpose
+It ensures that the hardware components (servers, disks, etc.) being used in a cluster deployment are compatible and supported by the HyperFlex platform.
+#### Key Concepts
+- **BOM Validation:** Validates that server models and hardware types meet HyperFlex requirements.
+- **Catalog Versioning:** Tracks the version of the hardware catalog to ensure up-to-date validation logic.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

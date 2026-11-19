@@ -3,14 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_node_profile"
 description: |-
-        A configuration profile per node in the HyperFlex cluster.
-        It defines node settings such as IP address configuration for hypervisor management network, storage data network, HyperFlex management network, and the assigned physical server.
+        The NodeProfiles object defines the configuration for an individual node within a HyperFlex cluster.
+        #### Purpose
+        It acts as the configuration profile for a specific node, linking physical server hardware to its required network and storage IP configurations.
+        #### Key Concepts
+        - **Node Configuration:** Manages IP settings for hypervisors and controller VMs.
+        - **Role Assignment:** Defines the role of the node (e.g., converged, compute) within the cluster.
+        - **Server Mapping:** Associates the profile with a specific physical server.
 
 ---
 
 # Resource: intersight_hyperflex_node_profile
-A configuration profile per node in the HyperFlex cluster.
-It defines node settings such as IP address configuration for hypervisor management network, storage data network, HyperFlex management network, and the assigned physical server.
+The NodeProfiles object defines the configuration for an individual node within a HyperFlex cluster.
+#### Purpose
+It acts as the configuration profile for a specific node, linking physical server hardware to its required network and storage IP configurations.
+#### Key Concepts
+- **Node Configuration:** Manages IP settings for hypervisors and controller VMs.
+- **Role Assignment:** Defines the role of the node (e.g., converged, compute) within the cluster.
+- **Server Mapping:** Associates the profile with a specific physical server.
 ## Usage Example
 ### Resource Creation
 

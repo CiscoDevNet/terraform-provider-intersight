@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026110514
+API version: 1.0.11-2026111504
 Contact: intersight@cisco.com
 */
 
@@ -34,7 +34,8 @@ type NiatelemetrySwitch struct {
 	CompensatingControlStatus   *string                                        `json:"CompensatingControlStatus,omitempty"`
 	CompensatingControlsDetails NullableNiatelemetryCompensatingControlDetails `json:"CompensatingControlsDetails,omitempty"`
 	// The compliance status of the managed switch.
-	ComplianceStatus *string `json:"ComplianceStatus,omitempty"`
+	ComplianceStatus *string                      `json:"ComplianceStatus,omitempty"`
+	FabricExtenders  []NiatelemetryFabricExtender `json:"FabricExtenders,omitempty"`
 	// The type of fabric the managed switch belongs to.
 	FabricType *string `json:"FabricType,omitempty"`
 	// The hardware conformance status of the managed switch.
@@ -54,7 +55,8 @@ type NiatelemetrySwitch struct {
 	// Live Protect enablement status reported for the switch.
 	LiveProtectStatus *string `json:"LiveProtectStatus,omitempty"`
 	// The model of the managed switch.
-	Model *string `json:"Model,omitempty"`
+	Model   *string              `json:"Model,omitempty"`
+	Modules []NiatelemetryModule `json:"Modules,omitempty"`
 	// The OS version of the managed switch.
 	OperatingSystemVersion *string `json:"OperatingSystemVersion,omitempty"`
 	// The out-of-band IPv4 address of the managed switch.
@@ -312,6 +314,39 @@ func (o *NiatelemetrySwitch) HasComplianceStatus() bool {
 // SetComplianceStatus gets a reference to the given string and assigns it to the ComplianceStatus field.
 func (o *NiatelemetrySwitch) SetComplianceStatus(v string) {
 	o.ComplianceStatus = &v
+}
+
+// GetFabricExtenders returns the FabricExtenders field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetrySwitch) GetFabricExtenders() []NiatelemetryFabricExtender {
+	if o == nil {
+		var ret []NiatelemetryFabricExtender
+		return ret
+	}
+	return o.FabricExtenders
+}
+
+// GetFabricExtendersOk returns a tuple with the FabricExtenders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetrySwitch) GetFabricExtendersOk() ([]NiatelemetryFabricExtender, bool) {
+	if o == nil || IsNil(o.FabricExtenders) {
+		return nil, false
+	}
+	return o.FabricExtenders, true
+}
+
+// HasFabricExtenders returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasFabricExtenders() bool {
+	if o != nil && !IsNil(o.FabricExtenders) {
+		return true
+	}
+
+	return false
+}
+
+// SetFabricExtenders gets a reference to the given []NiatelemetryFabricExtender and assigns it to the FabricExtenders field.
+func (o *NiatelemetrySwitch) SetFabricExtenders(v []NiatelemetryFabricExtender) {
+	o.FabricExtenders = v
 }
 
 // GetFabricType returns the FabricType field value if set, zero value otherwise.
@@ -632,6 +667,39 @@ func (o *NiatelemetrySwitch) HasModel() bool {
 // SetModel gets a reference to the given string and assigns it to the Model field.
 func (o *NiatelemetrySwitch) SetModel(v string) {
 	o.Model = &v
+}
+
+// GetModules returns the Modules field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetrySwitch) GetModules() []NiatelemetryModule {
+	if o == nil {
+		var ret []NiatelemetryModule
+		return ret
+	}
+	return o.Modules
+}
+
+// GetModulesOk returns a tuple with the Modules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetrySwitch) GetModulesOk() ([]NiatelemetryModule, bool) {
+	if o == nil || IsNil(o.Modules) {
+		return nil, false
+	}
+	return o.Modules, true
+}
+
+// HasModules returns a boolean if a field has been set.
+func (o *NiatelemetrySwitch) HasModules() bool {
+	if o != nil && !IsNil(o.Modules) {
+		return true
+	}
+
+	return false
+}
+
+// SetModules gets a reference to the given []NiatelemetryModule and assigns it to the Modules field.
+func (o *NiatelemetrySwitch) SetModules(v []NiatelemetryModule) {
+	o.Modules = v
 }
 
 // GetOperatingSystemVersion returns the OperatingSystemVersion field value if set, zero value otherwise.
@@ -1271,6 +1339,9 @@ func (o NiatelemetrySwitch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ComplianceStatus) {
 		toSerialize["ComplianceStatus"] = o.ComplianceStatus
 	}
+	if o.FabricExtenders != nil {
+		toSerialize["FabricExtenders"] = o.FabricExtenders
+	}
 	if !IsNil(o.FabricType) {
 		toSerialize["FabricType"] = o.FabricType
 	}
@@ -1300,6 +1371,9 @@ func (o NiatelemetrySwitch) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
+	}
+	if o.Modules != nil {
+		toSerialize["Modules"] = o.Modules
 	}
 	if !IsNil(o.OperatingSystemVersion) {
 		toSerialize["OperatingSystemVersion"] = o.OperatingSystemVersion
@@ -1416,7 +1490,8 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		CompensatingControlStatus   *string                                        `json:"CompensatingControlStatus,omitempty"`
 		CompensatingControlsDetails NullableNiatelemetryCompensatingControlDetails `json:"CompensatingControlsDetails,omitempty"`
 		// The compliance status of the managed switch.
-		ComplianceStatus *string `json:"ComplianceStatus,omitempty"`
+		ComplianceStatus *string                      `json:"ComplianceStatus,omitempty"`
+		FabricExtenders  []NiatelemetryFabricExtender `json:"FabricExtenders,omitempty"`
 		// The type of fabric the managed switch belongs to.
 		FabricType *string `json:"FabricType,omitempty"`
 		// The hardware conformance status of the managed switch.
@@ -1436,7 +1511,8 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		// Live Protect enablement status reported for the switch.
 		LiveProtectStatus *string `json:"LiveProtectStatus,omitempty"`
 		// The model of the managed switch.
-		Model *string `json:"Model,omitempty"`
+		Model   *string              `json:"Model,omitempty"`
+		Modules []NiatelemetryModule `json:"Modules,omitempty"`
 		// The OS version of the managed switch.
 		OperatingSystemVersion *string `json:"OperatingSystemVersion,omitempty"`
 		// The out-of-band IPv4 address of the managed switch.
@@ -1484,6 +1560,7 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetrySwitch.CompensatingControlStatus = varNiatelemetrySwitchWithoutEmbeddedStruct.CompensatingControlStatus
 		varNiatelemetrySwitch.CompensatingControlsDetails = varNiatelemetrySwitchWithoutEmbeddedStruct.CompensatingControlsDetails
 		varNiatelemetrySwitch.ComplianceStatus = varNiatelemetrySwitchWithoutEmbeddedStruct.ComplianceStatus
+		varNiatelemetrySwitch.FabricExtenders = varNiatelemetrySwitchWithoutEmbeddedStruct.FabricExtenders
 		varNiatelemetrySwitch.FabricType = varNiatelemetrySwitchWithoutEmbeddedStruct.FabricType
 		varNiatelemetrySwitch.HardwareConformance = varNiatelemetrySwitchWithoutEmbeddedStruct.HardwareConformance
 		varNiatelemetrySwitch.HardwareEndOfVulnerabilitySupportDate = varNiatelemetrySwitchWithoutEmbeddedStruct.HardwareEndOfVulnerabilitySupportDate
@@ -1494,6 +1571,7 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		varNiatelemetrySwitch.LiveProtectAgentStatus = varNiatelemetrySwitchWithoutEmbeddedStruct.LiveProtectAgentStatus
 		varNiatelemetrySwitch.LiveProtectStatus = varNiatelemetrySwitchWithoutEmbeddedStruct.LiveProtectStatus
 		varNiatelemetrySwitch.Model = varNiatelemetrySwitchWithoutEmbeddedStruct.Model
+		varNiatelemetrySwitch.Modules = varNiatelemetrySwitchWithoutEmbeddedStruct.Modules
 		varNiatelemetrySwitch.OperatingSystemVersion = varNiatelemetrySwitchWithoutEmbeddedStruct.OperatingSystemVersion
 		varNiatelemetrySwitch.OutOfBandIp = varNiatelemetrySwitchWithoutEmbeddedStruct.OutOfBandIp
 		varNiatelemetrySwitch.Role = varNiatelemetrySwitchWithoutEmbeddedStruct.Role
@@ -1535,6 +1613,7 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "CompensatingControlStatus")
 		delete(additionalProperties, "CompensatingControlsDetails")
 		delete(additionalProperties, "ComplianceStatus")
+		delete(additionalProperties, "FabricExtenders")
 		delete(additionalProperties, "FabricType")
 		delete(additionalProperties, "HardwareConformance")
 		delete(additionalProperties, "HardwareEndOfVulnerabilitySupportDate")
@@ -1545,6 +1624,7 @@ func (o *NiatelemetrySwitch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "LiveProtectAgentStatus")
 		delete(additionalProperties, "LiveProtectStatus")
 		delete(additionalProperties, "Model")
+		delete(additionalProperties, "Modules")
 		delete(additionalProperties, "OperatingSystemVersion")
 		delete(additionalProperties, "OutOfBandIp")
 		delete(additionalProperties, "Role")

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | Operational state of the transceiver. | [optional] [readonly] 
 **OperStateQual** | Pointer to **string** | Reason for this transceiver&#39;s operational state. | [optional] [readonly] 
 **PortId** | Pointer to **int64** | Switch physical port identifier. | [optional] [readonly] 
+**SfpFirmwareInfo** | Pointer to [**NullableFirmwareFirmwareInfo**](FirmwareFirmwareInfo.md) |  | [optional] 
 **SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the pluggable SFP. | [optional] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
@@ -334,6 +335,41 @@ SetPortId sets PortId field to given value.
 
 HasPortId returns a boolean if a field has been set.
 
+### GetSfpFirmwareInfo
+
+`func (o *EquipmentTransceiver) GetSfpFirmwareInfo() FirmwareFirmwareInfo`
+
+GetSfpFirmwareInfo returns the SfpFirmwareInfo field if non-nil, zero value otherwise.
+
+### GetSfpFirmwareInfoOk
+
+`func (o *EquipmentTransceiver) GetSfpFirmwareInfoOk() (*FirmwareFirmwareInfo, bool)`
+
+GetSfpFirmwareInfoOk returns a tuple with the SfpFirmwareInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSfpFirmwareInfo
+
+`func (o *EquipmentTransceiver) SetSfpFirmwareInfo(v FirmwareFirmwareInfo)`
+
+SetSfpFirmwareInfo sets SfpFirmwareInfo field to given value.
+
+### HasSfpFirmwareInfo
+
+`func (o *EquipmentTransceiver) HasSfpFirmwareInfo() bool`
+
+HasSfpFirmwareInfo returns a boolean if a field has been set.
+
+### SetSfpFirmwareInfoNil
+
+`func (o *EquipmentTransceiver) SetSfpFirmwareInfoNil(b bool)`
+
+ SetSfpFirmwareInfoNil sets the value for SfpFirmwareInfo to be an explicit nil
+
+### UnsetSfpFirmwareInfo
+`func (o *EquipmentTransceiver) UnsetSfpFirmwareInfo()`
+
+UnsetSfpFirmwareInfo ensures that no value is present for SfpFirmwareInfo, not even an explicit nil
 ### GetSlotId
 
 `func (o *EquipmentTransceiver) GetSlotId() int64`

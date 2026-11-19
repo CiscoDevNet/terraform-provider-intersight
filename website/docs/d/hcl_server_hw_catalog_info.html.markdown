@@ -3,12 +3,24 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_server_hw_catalog_info"
 description: |-
-        Server hardware catalog information for a particular server model, used for server BOM validation.
+        The ServerHwCatalogInfos object provides granular, server-specific hardware catalog information used for detailed BOM validation.
+        #### Purpose
+        This stores the technical specifications and constraints for individual server models, allowing the system to perform deep validation of server hardware components.
+        #### Key Concepts
+        - **Detailed Specifications:** Contains JSON-formatted values that define the technical specifications of server components, such as processors, memory, and disks.
+        - **Display Customization:** Provides user-friendly display models that map technical Cisco PIDs to readable strings for Intersight users.
+        - **Constraint Enforcement:** Implements constraints to handle hardware-specific rules, such as maximum data disk counts based on the management platform.
 
 ---
 
 # Data Source: intersight_hcl_server_hw_catalog_info
-Server hardware catalog information for a particular server model, used for server BOM validation.
+The ServerHwCatalogInfos object provides granular, server-specific hardware catalog information used for detailed BOM validation.
+#### Purpose
+This stores the technical specifications and constraints for individual server models, allowing the system to perform deep validation of server hardware components.
+#### Key Concepts
+- **Detailed Specifications:** Contains JSON-formatted values that define the technical specifications of server components, such as processors, memory, and disks.
+- **Display Customization:** Provides user-friendly display models that map technical Cisco PIDs to readable strings for Intersight users.
+- **Constraint Enforcement:** Implements constraints to handle hardware-specific rules, such as maximum data disk counts based on the management platform.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
