@@ -3,12 +3,28 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_ucsm_config_policy"
 description: |-
-        A policy specifying UCS Manager settings such as service profile org, KVM IP addresses, and MAC prefix for server configuration in Fabric Interconnect environment.
+        UcsmConfigPolicies define UCS Manager-related configuration settings used when configuring servers in a Fabric Interconnect environment. The policy captures key UCSM settings such as the service profile organization, KVM IP address assignments, and MAC prefix configuration, enabling consistent UCSM-integrated provisioning as part of HyperFlex cluster profile operations.
+        #### Purpose
+        Centralize and standardize UCS Manager configuration inputs required for FI-based server configuration, so HyperFlex cluster provisioning and ongoing operations can apply consistent UCSM settings through cluster profiles.
+        #### Key Concepts
+        - **UCSM configuration intent**: Specifies UCS Manager settings (service profile org, KVM IPs, MAC prefix) needed to drive consistent server configuration.
+        - **FI/HyperFlex attachability**: Tagged for FI-based management (`managementplatform.fi: true`) and attachable to a HyperFlex cluster profile, indicating it is meant to be consumed in HyperFlex profile-driven workflows.
+        - **Reusable policy pattern**: Extends `policy.AbstractPolicy`, supporting reuse and standardized policy lifecycle.
+        - **Governed lifecycle**: Supports create/update/delete under the Manage HyperFlex Cluster Profiles privilege set, ensuring that only authorized administrators change UCSM configuration baselines.
+        - **Organization-scoped**: `owner: organization` indicates it is tenant-owned and managed within an org boundary.
 
 ---
 
 # Data Source: intersight_hyperflex_ucsm_config_policy
-A policy specifying UCS Manager settings such as service profile org, KVM IP addresses, and MAC prefix for server configuration in Fabric Interconnect environment.
+UcsmConfigPolicies define UCS Manager-related configuration settings used when configuring servers in a Fabric Interconnect environment. The policy captures key UCSM settings such as the service profile organization, KVM IP address assignments, and MAC prefix configuration, enabling consistent UCSM-integrated provisioning as part of HyperFlex cluster profile operations.
+#### Purpose
+Centralize and standardize UCS Manager configuration inputs required for FI-based server configuration, so HyperFlex cluster provisioning and ongoing operations can apply consistent UCSM settings through cluster profiles.
+#### Key Concepts
+- **UCSM configuration intent**: Specifies UCS Manager settings (service profile org, KVM IPs, MAC prefix) needed to drive consistent server configuration.
+- **FI/HyperFlex attachability**: Tagged for FI-based management (`managementplatform.fi: true`) and attachable to a HyperFlex cluster profile, indicating it is meant to be consumed in HyperFlex profile-driven workflows.
+- **Reusable policy pattern**: Extends `policy.AbstractPolicy`, supporting reuse and standardized policy lifecycle.
+- **Governed lifecycle**: Supports create/update/delete under the Manage HyperFlex Cluster Profiles privilege set, ensuring that only authorized administrators change UCSM configuration baselines.
+- **Organization-scoped**: `owner: organization` indicates it is tenant-owned and managed within an org boundary.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

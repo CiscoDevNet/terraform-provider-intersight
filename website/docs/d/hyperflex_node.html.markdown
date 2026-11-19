@@ -3,12 +3,12 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_node"
 description: |-
-        A host participating in the cluster. The host consists of a hypervisor installed on a node that manages virtual machines.
+        Nodes represent hosts in a HyperFlex cluster and expose per-node inventory and state so administrators can monitor cluster composition, node readiness, and host-level configuration and health. Each Node captures the hypervisor type, version, and build; hostname; identity fields such as serial number and node UUID; operational state and maintenance-mode status; management and data network addresses for both the hypervisor and HXDP controller interfaces; links to cluster-member registration and, when available, the underlying UCS server object; and the parent context for associated drive inventory.
 
 ---
 
 # Data Source: intersight_hyperflex_node
-A host participating in the cluster. The host consists of a hypervisor installed on a node that manages virtual machines.
+Nodes represent hosts in a HyperFlex cluster and expose per-node inventory and state so administrators can monitor cluster composition, node readiness, and host-level configuration and health. Each Node captures the hypervisor type, version, and build; hostname; identity fields such as serial number and node UUID; operational state and maintenance-mode status; management and data network addresses for both the hypervisor and HXDP controller interfaces; links to cluster-member registration and, when available, the underlying UCS server object; and the parent context for associated drive inventory.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

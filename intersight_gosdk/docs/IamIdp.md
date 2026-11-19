@@ -16,8 +16,9 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the Identity Provider, for example Cisco, Okta, or OneID. | [optional] 
 **SkipWarning** | Pointer to **bool** | When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message. | [optional] 
 **SpCertRotated** | Pointer to **bool** | Status of the SP certificate rotation for the IdP. | [optional] [readonly] [default to true]
-**SpMetadataExpiryState** | Pointer to **string** | The expiration state of the certificate in the SP metadata used by this IdP. The state is not-applicable when SAML assertion encryption and AuthNRequest signing are both disabled. * &#x60;expiration-within-info-period&#x60; - The expiry date is beyond 270 days. * &#x60;expiration-within-270-day-info-period&#x60; - The expiry date is within 270 days but beyond 180 days. * &#x60;expiration-within-180-day-info-period&#x60; - The expiry date is within 180 days but beyond 90 days. * &#x60;expiration-within-90-day-warning-period&#x60; - The expiry date is within 90 days but beyond 60 days. * &#x60;expiration-within-60-day-warning-period&#x60; - The expiry date is within 60 days but beyond 30 days. * &#x60;expiration-within-30-day-critical-period&#x60; - The expiry date is within 30 days but beyond 7 days. * &#x60;expiration-within-critical-period&#x60; - The expiry date is within 7 days. * &#x60;expired&#x60; - The expiry date has passed. * &#x60;not-applicable&#x60; - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled. | [optional] [readonly] [default to "expiration-within-info-period"]
-**SpMetadataHashMethod** | Pointer to **string** | Determines if the AuthNRequest sent to the Idp should be signed by the new (SHA-2) or the old (SHA-1) SP metadata during the grace period of SP SAML metadata rotation. * &#x60;Sha2&#x60; - The SAML SP metadata hash is generated using SHA-256 algorithm. * &#x60;Sha1&#x60; - The SAML SP metadata hash is generated using SHA-1 algorithm. | [optional] [default to "Sha2"]
+**SpMetadataExpiryState** | Pointer to **string** | The expiration state of the SP certificate used by this IdP. The state is not-applicable when SAML assertion encryption, AuthNRequest signing, and SLO signing are all disabled. * &#x60;expiration-within-info-period&#x60; - The expiry date is beyond 270 days. * &#x60;expiration-within-270-day-info-period&#x60; - The expiry date is within 270 days but beyond 180 days. * &#x60;expiration-within-180-day-info-period&#x60; - The expiry date is within 180 days but beyond 90 days. * &#x60;expiration-within-90-day-warning-period&#x60; - The expiry date is within 90 days but beyond 60 days. * &#x60;expiration-within-60-day-warning-period&#x60; - The expiry date is within 60 days but beyond 30 days. * &#x60;expiration-within-30-day-critical-period&#x60; - The expiry date is within 30 days but beyond 7 days. * &#x60;expiration-within-critical-period&#x60; - The expiry date is within 7 days. * &#x60;expired&#x60; - The expiry date has passed. * &#x60;not-applicable&#x60; - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled. * &#x60;not-evaluated&#x60; - The SP certificate expiry state has not yet been evaluated from a successful login. | [optional] [readonly] [default to "expiration-within-info-period"]
+**SpMetadataHashMethod** | Pointer to **string** | Selects the legacy (SHA-1) or current (SHA-2) SP certificate used to sign AuthN and logout requests during certificate rotation. * &#x60;Sha2&#x60; - Use the current SHA-2 SP signing certificate. * &#x60;Sha1&#x60; - Use the legacy SHA-1 SP signing certificate. | [optional] [default to "Sha2"]
+**SpMetadataHashMethodConfigured** | Pointer to **bool** | Indicates whether this IdP uses its stored SP signing certificate selection. Existing IdPs without this marker continue using the legacy SHA-1 certificate. | [optional] [readonly] [default to false]
 **Type** | Pointer to **string** | Authentication protocol used by the IdP. * &#x60;saml&#x60; - Use SAML as the authentication protocol for sign-on. * &#x60;oidc&#x60; - Open ID connect to be used as an authentication protocol for sign-on. * &#x60;local&#x60; - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. * &#x60;guest&#x60; - Guest users accessing Intersight are assigned to a guest Identity Provider (IdP). They do not have single sign-on options available and must log in  using their email address and a one-time password (OTP). Upon successful authentication, all guest users associated with the account are grouped under  the guest IdP. Guest IdP is primarily used in cloud environment. | [optional] [default to "saml"]
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **LdapMeta** | Pointer to [**NullableIamLdapMetaRelationship**](IamLdapMetaRelationship.md) |  | [optional] 
@@ -397,6 +398,31 @@ SetSpMetadataHashMethod sets SpMetadataHashMethod field to given value.
 `func (o *IamIdp) HasSpMetadataHashMethod() bool`
 
 HasSpMetadataHashMethod returns a boolean if a field has been set.
+
+### GetSpMetadataHashMethodConfigured
+
+`func (o *IamIdp) GetSpMetadataHashMethodConfigured() bool`
+
+GetSpMetadataHashMethodConfigured returns the SpMetadataHashMethodConfigured field if non-nil, zero value otherwise.
+
+### GetSpMetadataHashMethodConfiguredOk
+
+`func (o *IamIdp) GetSpMetadataHashMethodConfiguredOk() (*bool, bool)`
+
+GetSpMetadataHashMethodConfiguredOk returns a tuple with the SpMetadataHashMethodConfigured field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpMetadataHashMethodConfigured
+
+`func (o *IamIdp) SetSpMetadataHashMethodConfigured(v bool)`
+
+SetSpMetadataHashMethodConfigured sets SpMetadataHashMethodConfigured field to given value.
+
+### HasSpMetadataHashMethodConfigured
+
+`func (o *IamIdp) HasSpMetadataHashMethodConfigured() bool`
+
+HasSpMetadataHashMethodConfigured returns a boolean if a field has been set.
 
 ### GetType
 

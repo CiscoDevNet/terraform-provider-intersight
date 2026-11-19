@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026110514
+API version: 1.0.11-2026111504
 Contact: intersight@cisco.com
 */
 
@@ -49,10 +49,12 @@ type IamIdp struct {
 	SkipWarning *bool `json:"SkipWarning,omitempty"`
 	// Status of the SP certificate rotation for the IdP.
 	SpCertRotated *bool `json:"SpCertRotated,omitempty"`
-	// The expiration state of the certificate in the SP metadata used by this IdP. The state is not-applicable when SAML assertion encryption and AuthNRequest signing are both disabled. * `expiration-within-info-period` - The expiry date is beyond 270 days. * `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days. * `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days. * `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days. * `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days. * `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days. * `expiration-within-critical-period` - The expiry date is within 7 days. * `expired` - The expiry date has passed. * `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.
+	// The expiration state of the SP certificate used by this IdP. The state is not-applicable when SAML assertion encryption, AuthNRequest signing, and SLO signing are all disabled. * `expiration-within-info-period` - The expiry date is beyond 270 days. * `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days. * `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days. * `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days. * `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days. * `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days. * `expiration-within-critical-period` - The expiry date is within 7 days. * `expired` - The expiry date has passed. * `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled. * `not-evaluated` - The SP certificate expiry state has not yet been evaluated from a successful login.
 	SpMetadataExpiryState *string `json:"SpMetadataExpiryState,omitempty"`
-	// Determines if the AuthNRequest sent to the Idp should be signed by the new (SHA-2) or the old (SHA-1) SP metadata during the grace period of SP SAML metadata rotation. * `Sha2` - The SAML SP metadata hash is generated using SHA-256 algorithm. * `Sha1` - The SAML SP metadata hash is generated using SHA-1 algorithm.
+	// Selects the legacy (SHA-1) or current (SHA-2) SP certificate used to sign AuthN and logout requests during certificate rotation. * `Sha2` - Use the current SHA-2 SP signing certificate. * `Sha1` - Use the legacy SHA-1 SP signing certificate.
 	SpMetadataHashMethod *string `json:"SpMetadataHashMethod,omitempty"`
+	// Indicates whether this IdP uses its stored SP signing certificate selection. Existing IdPs without this marker continue using the legacy SHA-1 certificate.
+	SpMetadataHashMethodConfigured *bool `json:"SpMetadataHashMethodConfigured,omitempty"`
 	// Authentication protocol used by the IdP. * `saml` - Use SAML as the authentication protocol for sign-on. * `oidc` - Open ID connect to be used as an authentication protocol for sign-on. * `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. * `guest` - Guest users accessing Intersight are assigned to a guest Identity Provider (IdP). They do not have single sign-on options available and must log in  using their email address and a one-time password (OTP). Upon successful authentication, all guest users associated with the account are grouped under  the guest IdP. Guest IdP is primarily used in cloud environment.
 	Type       *string                                     `json:"Type,omitempty"`
 	Account    NullableIamAccountRelationship              `json:"Account,omitempty"`
@@ -550,6 +552,38 @@ func (o *IamIdp) SetSpMetadataHashMethod(v string) {
 	o.SpMetadataHashMethod = &v
 }
 
+// GetSpMetadataHashMethodConfigured returns the SpMetadataHashMethodConfigured field value if set, zero value otherwise.
+func (o *IamIdp) GetSpMetadataHashMethodConfigured() bool {
+	if o == nil || IsNil(o.SpMetadataHashMethodConfigured) {
+		var ret bool
+		return ret
+	}
+	return *o.SpMetadataHashMethodConfigured
+}
+
+// GetSpMetadataHashMethodConfiguredOk returns a tuple with the SpMetadataHashMethodConfigured field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamIdp) GetSpMetadataHashMethodConfiguredOk() (*bool, bool) {
+	if o == nil || IsNil(o.SpMetadataHashMethodConfigured) {
+		return nil, false
+	}
+	return o.SpMetadataHashMethodConfigured, true
+}
+
+// HasSpMetadataHashMethodConfigured returns a boolean if a field has been set.
+func (o *IamIdp) HasSpMetadataHashMethodConfigured() bool {
+	if o != nil && !IsNil(o.SpMetadataHashMethodConfigured) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpMetadataHashMethodConfigured gets a reference to the given bool and assigns it to the SpMetadataHashMethodConfigured field.
+func (o *IamIdp) SetSpMetadataHashMethodConfigured(v bool) {
+	o.SpMetadataHashMethodConfigured = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *IamIdp) GetType() string {
 	if o == nil || IsNil(o.Type) {
@@ -991,6 +1025,9 @@ func (o IamIdp) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SpMetadataHashMethod) {
 		toSerialize["SpMetadataHashMethod"] = o.SpMetadataHashMethod
 	}
+	if !IsNil(o.SpMetadataHashMethodConfigured) {
+		toSerialize["SpMetadataHashMethodConfigured"] = o.SpMetadataHashMethodConfigured
+	}
 	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
@@ -1096,10 +1133,12 @@ func (o *IamIdp) UnmarshalJSON(data []byte) (err error) {
 		SkipWarning *bool `json:"SkipWarning,omitempty"`
 		// Status of the SP certificate rotation for the IdP.
 		SpCertRotated *bool `json:"SpCertRotated,omitempty"`
-		// The expiration state of the certificate in the SP metadata used by this IdP. The state is not-applicable when SAML assertion encryption and AuthNRequest signing are both disabled. * `expiration-within-info-period` - The expiry date is beyond 270 days. * `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days. * `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days. * `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days. * `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days. * `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days. * `expiration-within-critical-period` - The expiry date is within 7 days. * `expired` - The expiry date has passed. * `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled.
+		// The expiration state of the SP certificate used by this IdP. The state is not-applicable when SAML assertion encryption, AuthNRequest signing, and SLO signing are all disabled. * `expiration-within-info-period` - The expiry date is beyond 270 days. * `expiration-within-270-day-info-period` - The expiry date is within 270 days but beyond 180 days. * `expiration-within-180-day-info-period` - The expiry date is within 180 days but beyond 90 days. * `expiration-within-90-day-warning-period` - The expiry date is within 90 days but beyond 60 days. * `expiration-within-60-day-warning-period` - The expiry date is within 60 days but beyond 30 days. * `expiration-within-30-day-critical-period` - The expiry date is within 30 days but beyond 7 days. * `expiration-within-critical-period` - The expiry date is within 7 days. * `expired` - The expiry date has passed. * `not-applicable` - The SP certificate is not used because SAML assertion encryption and AuthNRequest signing are both disabled. * `not-evaluated` - The SP certificate expiry state has not yet been evaluated from a successful login.
 		SpMetadataExpiryState *string `json:"SpMetadataExpiryState,omitempty"`
-		// Determines if the AuthNRequest sent to the Idp should be signed by the new (SHA-2) or the old (SHA-1) SP metadata during the grace period of SP SAML metadata rotation. * `Sha2` - The SAML SP metadata hash is generated using SHA-256 algorithm. * `Sha1` - The SAML SP metadata hash is generated using SHA-1 algorithm.
+		// Selects the legacy (SHA-1) or current (SHA-2) SP certificate used to sign AuthN and logout requests during certificate rotation. * `Sha2` - Use the current SHA-2 SP signing certificate. * `Sha1` - Use the legacy SHA-1 SP signing certificate.
 		SpMetadataHashMethod *string `json:"SpMetadataHashMethod,omitempty"`
+		// Indicates whether this IdP uses its stored SP signing certificate selection. Existing IdPs without this marker continue using the legacy SHA-1 certificate.
+		SpMetadataHashMethodConfigured *bool `json:"SpMetadataHashMethodConfigured,omitempty"`
 		// Authentication protocol used by the IdP. * `saml` - Use SAML as the authentication protocol for sign-on. * `oidc` - Open ID connect to be used as an authentication protocol for sign-on. * `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. * `guest` - Guest users accessing Intersight are assigned to a guest Identity Provider (IdP). They do not have single sign-on options available and must log in  using their email address and a one-time password (OTP). Upon successful authentication, all guest users associated with the account are grouped under  the guest IdP. Guest IdP is primarily used in cloud environment.
 		Type       *string                                     `json:"Type,omitempty"`
 		Account    NullableIamAccountRelationship              `json:"Account,omitempty"`
@@ -1136,6 +1175,7 @@ func (o *IamIdp) UnmarshalJSON(data []byte) (err error) {
 		varIamIdp.SpCertRotated = varIamIdpWithoutEmbeddedStruct.SpCertRotated
 		varIamIdp.SpMetadataExpiryState = varIamIdpWithoutEmbeddedStruct.SpMetadataExpiryState
 		varIamIdp.SpMetadataHashMethod = varIamIdpWithoutEmbeddedStruct.SpMetadataHashMethod
+		varIamIdp.SpMetadataHashMethodConfigured = varIamIdpWithoutEmbeddedStruct.SpMetadataHashMethodConfigured
 		varIamIdp.Type = varIamIdpWithoutEmbeddedStruct.Type
 		varIamIdp.Account = varIamIdpWithoutEmbeddedStruct.Account
 		varIamIdp.LdapMeta = varIamIdpWithoutEmbeddedStruct.LdapMeta
@@ -1177,6 +1217,7 @@ func (o *IamIdp) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "SpCertRotated")
 		delete(additionalProperties, "SpMetadataExpiryState")
 		delete(additionalProperties, "SpMetadataHashMethod")
+		delete(additionalProperties, "SpMetadataHashMethodConfigured")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "LdapMeta")

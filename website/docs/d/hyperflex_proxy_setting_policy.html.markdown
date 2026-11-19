@@ -3,12 +3,30 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_proxy_setting_policy"
 description: |-
-        A policy specifying the HTTP proxy settings to be used by the HyperFlex installation process and HyperFlex storage controller VMs. This policy is required when the internet access of your servers including CIMC and HyperFlex storage controller VMs is secured by a HTTP proxy.
+        ProxySettingPolicies define the HTTP proxy configuration used by the HyperFlex installation workflow and by HyperFlex storage controller VMs. This policy is intended for environments where direct internet access from servers (including CIMC) and controller VMs is restricted and must traverse an HTTP proxy.
+        #### Purpose
+        Provide a reusable, attachable policy that supplies required proxy settings to HyperFlex cluster profile operations—especially installation, expansion, and software redeploy—so HyperFlex components can reach external services through an approved proxy.
+        #### Key Concepts
+        - **Installation and runtime consumption**: Used both during HyperFlex installation and by storage controller VMs after deployment to enable proxied connectivity.
+        - **Required for proxied environments**: Specifically targets environments where server/CIMC/controller VM internet access is secured via an HTTP proxy.
+        - **Multi-platform applicability**: Tagged for both FI-managed and standalone management modes (`managementplatform.fi` and `managementplatform.standalone`).
+        - **Profile attachability**: Marked as attachable to a HyperFlex cluster profile, aligning it with profile-driven configuration.
+        - **Lifecycle operations support**: Tags indicate it is relevant for expansion and software redeploy workflows (`config.expansion`, `config.swredeploy`).
+        - **Core proxy endpoint configuration**: `hostname` is a required, read-write setting representing the proxy server FQDN or IP address.
 
 ---
 
 # Data Source: intersight_hyperflex_proxy_setting_policy
-A policy specifying the HTTP proxy settings to be used by the HyperFlex installation process and HyperFlex storage controller VMs. This policy is required when the internet access of your servers including CIMC and HyperFlex storage controller VMs is secured by a HTTP proxy.
+ProxySettingPolicies define the HTTP proxy configuration used by the HyperFlex installation workflow and by HyperFlex storage controller VMs. This policy is intended for environments where direct internet access from servers (including CIMC) and controller VMs is restricted and must traverse an HTTP proxy.
+#### Purpose
+Provide a reusable, attachable policy that supplies required proxy settings to HyperFlex cluster profile operations—especially installation, expansion, and software redeploy—so HyperFlex components can reach external services through an approved proxy.
+#### Key Concepts
+- **Installation and runtime consumption**: Used both during HyperFlex installation and by storage controller VMs after deployment to enable proxied connectivity.
+- **Required for proxied environments**: Specifically targets environments where server/CIMC/controller VM internet access is secured via an HTTP proxy.
+- **Multi-platform applicability**: Tagged for both FI-managed and standalone management modes (`managementplatform.fi` and `managementplatform.standalone`).
+- **Profile attachability**: Marked as attachable to a HyperFlex cluster profile, aligning it with profile-driven configuration.
+- **Lifecycle operations support**: Tags indicate it is relevant for expansion and software redeploy workflows (`config.expansion`, `config.swredeploy`).
+- **Core proxy endpoint configuration**: `hostname` is a required, read-write setting representing the proxy server FQDN or IP address.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,28 @@ subcategory: "comm"
 layout: "intersight"
 page_title: "Intersight: intersight_comm_http_proxy_policy"
 description: |-
-        A policy specifying the HTTP proxy settings to be used by the HyperFlex installation process and HyperFlex storage controller VMs. This policy is required when the internet access of your servers including CIMC and HyperFlex storage controller VMs is secured by a HTTP proxy.
+        HttpProxyPolicies define the HTTP proxy configuration used by HyperFlex installation workflows and HyperFlex storage controller VMs. They provide a reusable, attachable policy that supplies proxy settings in environments where servers (including CIMC) and controller VMs must reach external services through an HTTP proxy.
+        #### Purpose
+        Enable consistent, profile-driven application of HTTP proxy settings for HyperFlex deployments across both FI-managed and standalone environments, supporting installation and ongoing controller-VM connectivity requirements.
+        #### Key Concepts
+        - **Proxy configuration intent**: Captures the desired HTTP proxy settings (via `comm.AbstractHttpProxyPolicy`) to be consumed by HyperFlex installation and controller VMs.
+        - **Profile attachability and reuse**: Designed to be attached to `hyperflex.ClusterProfile`, and related via `clusterProfiles` for visibility into consumers.
+        - **Multi-platform applicability**: Tagged for both FI and standalone management platforms (`managementplatform.fi`, `managementplatform.standalone`).
+        - **Governed lifecycle**: Supports READ/CREATE/UPDATE/DELETE with privileges scoped to HyperFlex cluster profile management roles.
+        - **Non-destructive detachment**: `clusterProfiles` uses `ondelete: unset`, allowing cluster profiles to persist even if a proxy policy is removed or replaced.
 
 ---
 
 # Resource: intersight_comm_http_proxy_policy
-A policy specifying the HTTP proxy settings to be used by the HyperFlex installation process and HyperFlex storage controller VMs. This policy is required when the internet access of your servers including CIMC and HyperFlex storage controller VMs is secured by a HTTP proxy.
+HttpProxyPolicies define the HTTP proxy configuration used by HyperFlex installation workflows and HyperFlex storage controller VMs. They provide a reusable, attachable policy that supplies proxy settings in environments where servers (including CIMC) and controller VMs must reach external services through an HTTP proxy.
+#### Purpose
+Enable consistent, profile-driven application of HTTP proxy settings for HyperFlex deployments across both FI-managed and standalone environments, supporting installation and ongoing controller-VM connectivity requirements.
+#### Key Concepts
+- **Proxy configuration intent**: Captures the desired HTTP proxy settings (via `comm.AbstractHttpProxyPolicy`) to be consumed by HyperFlex installation and controller VMs.
+- **Profile attachability and reuse**: Designed to be attached to `hyperflex.ClusterProfile`, and related via `clusterProfiles` for visibility into consumers.
+- **Multi-platform applicability**: Tagged for both FI and standalone management platforms (`managementplatform.fi`, `managementplatform.standalone`).
+- **Governed lifecycle**: Supports READ/CREATE/UPDATE/DELETE with privileges scoped to HyperFlex cluster profile management roles.
+- **Non-destructive detachment**: `clusterProfiles` uses `ondelete: unset`, allowing cluster profiles to persist even if a proxy policy is removed or replaced.
 ## Usage Example
 ### Resource Creation
 

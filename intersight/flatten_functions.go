@@ -7480,6 +7480,31 @@ func flattenListNiatelemetryFabricRelationship(p []models.NiatelemetryFabricRela
 	}
 	return niatelemetryfabricrelationships
 }
+func flattenListNiatelemetryFabricExtender(p []models.NiatelemetryFabricExtender, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryfabricextenders []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetryfabricextender := make(map[string]interface{})
+		niatelemetryfabricextender["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetryfabricextender["class_id"] = item.GetClassId()
+		niatelemetryfabricextender["description"] = item.GetDescription()
+		niatelemetryfabricextender["id"] = item.GetId()
+		niatelemetryfabricextender["interface_names"] = item.GetInterfaceNames()
+		niatelemetryfabricextender["model"] = item.GetModel()
+		niatelemetryfabricextender["name"] = item.GetName()
+		niatelemetryfabricextender["object_type"] = item.GetObjectType()
+		niatelemetryfabricextender["pinning_max_links"] = item.GetPinningMaxLinks()
+		niatelemetryfabricextender["port_channel"] = item.GetPortChannel()
+		niatelemetryfabricextender["serial_number"] = item.GetSerialNumber()
+		niatelemetryfabricextender["software_version"] = item.GetSoftwareVersion()
+		niatelemetryfabricextender["state"] = item.GetState()
+		niatelemetryfabricextender["vpc_id"] = item.GetVpcId()
+		niatelemetryfabricextenders = append(niatelemetryfabricextenders, niatelemetryfabricextender)
+	}
+	return niatelemetryfabricextenders
+}
 func flattenListNiatelemetryFanDetails(p []models.NiatelemetryFanDetails, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetryfandetailss []map[string]interface{}
 	if len(p) == 0 {
@@ -7605,6 +7630,31 @@ func flattenListNiatelemetryMdsNeighborInfo(p []models.NiatelemetryMdsNeighborIn
 		niatelemetrymdsneighborinfos = append(niatelemetrymdsneighborinfos, niatelemetrymdsneighborinfo)
 	}
 	return niatelemetrymdsneighborinfos
+}
+func flattenListNiatelemetryModule(p []models.NiatelemetryModule, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrymodules []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetrymodule := make(map[string]interface{})
+		niatelemetrymodule["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetrymodule["asset_id"] = item.GetAssetId()
+		niatelemetrymodule["class_id"] = item.GetClassId()
+		niatelemetrymodule["hardware_revision"] = item.GetHardwareRevision()
+		niatelemetrymodule["model_name"] = item.GetModelName()
+		niatelemetrymodule["module_type"] = item.GetModuleType()
+		niatelemetrymodule["module_version"] = item.GetModuleVersion()
+		niatelemetrymodule["name"] = item.GetName()
+		niatelemetrymodule["object_type"] = item.GetObjectType()
+		niatelemetrymodule["oper_status"] = item.GetOperStatus()
+		niatelemetrymodule["serial_number"] = item.GetSerialNumber()
+		niatelemetrymodule["slot"] = item.GetSlot()
+		niatelemetrymodule["software_revision"] = item.GetSoftwareRevision()
+		niatelemetrymodule["type"] = item.GetType()
+		niatelemetrymodules = append(niatelemetrymodules, niatelemetrymodule)
+	}
+	return niatelemetrymodules
 }
 func flattenListNiatelemetryNxosModuleInfo(p []models.NiatelemetryNxosModuleInfo, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetrynxosmoduleinfos []map[string]interface{}
@@ -10933,7 +10983,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		input_definition_x, _ := d.GetOk("input_definition")
+		type_definition_x, _ := d.GetOk("type_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -10951,7 +11001,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), input_definition_x)
+		})(item.GetDefault(), type_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -10969,7 +11019,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), input_definition_x)
+		})(item.GetDisplayMeta(), type_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()
@@ -16870,6 +16920,22 @@ func flattenMapFirmwareExcludeComponentPidListType(p models.FirmwareExcludeCompo
 	firmwareexcludecomponentpidlisttypes = append(firmwareexcludecomponentpidlisttypes, firmwareexcludecomponentpidlisttype)
 	return firmwareexcludecomponentpidlisttypes
 }
+func flattenMapFirmwareFirmwareInfo(p models.FirmwareFirmwareInfo, d *schema.ResourceData) []map[string]interface{} {
+	var firmwarefirmwareinfos []map[string]interface{}
+	var ret models.FirmwareFirmwareInfo
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	firmwarefirmwareinfo := make(map[string]interface{})
+	firmwarefirmwareinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	firmwarefirmwareinfo["class_id"] = item.GetClassId()
+	firmwarefirmwareinfo["object_type"] = item.GetObjectType()
+	firmwarefirmwareinfo["running_version"] = item.GetRunningVersion()
+
+	firmwarefirmwareinfos = append(firmwarefirmwareinfos, firmwarefirmwareinfo)
+	return firmwarefirmwareinfos
+}
 func flattenMapFirmwareNetworkShare(p models.FirmwareNetworkShare, d *schema.ResourceData) []map[string]interface{} {
 	var firmwarenetworkshares []map[string]interface{}
 	var ret models.FirmwareNetworkShare
@@ -18340,7 +18406,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 	hyperflexipaddrrange["class_id"] = item.GetClassId()
 	hyperflexipaddrrange["end_addr"] = item.GetEndAddr()
 	hyperflexipaddrrange["gateway"] = item.GetGateway()
-	kvm_ip_range_x, _ := d.GetOk("kvm_ip_range")
+	data_ip_range_x, _ := d.GetOk("data_ip_range")
 	hyperflexipaddrrange["ip_addr_blocks"] = (func(p []models.CommIpV4AddressBlock, v interface{}) []map[string]interface{} {
 		var commipv4addressblocks []map[string]interface{}
 		if len(p) == 0 {
@@ -18356,7 +18422,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 			commipv4addressblocks = append(commipv4addressblocks, commipv4addressblock)
 		}
 		return commipv4addressblocks
-	})(item.GetIpAddrBlocks(), kvm_ip_range_x)
+	})(item.GetIpAddrBlocks(), data_ip_range_x)
 	hyperflexipaddrrange["netmask"] = item.GetNetmask()
 	hyperflexipaddrrange["object_type"] = item.GetObjectType()
 	hyperflexipaddrrange["start_addr"] = item.GetStartAddr()
@@ -25812,25 +25878,6 @@ func flattenMapTamSeverity(p models.TamSeverity, d *schema.ResourceData) []map[s
 
 	tamseveritys = append(tamseveritys, tamseverity)
 	return tamseveritys
-}
-func flattenMapTaskFileDownloadInfo(p models.TaskFileDownloadInfo, d *schema.ResourceData) []map[string]interface{} {
-	var taskfiledownloadinfos []map[string]interface{}
-	var ret models.TaskFileDownloadInfo
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	taskfiledownloadinfo := make(map[string]interface{})
-	taskfiledownloadinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	taskfiledownloadinfo["class_id"] = item.GetClassId()
-	taskfiledownloadinfo["contents"] = item.GetContents()
-	taskfiledownloadinfo["object_type"] = item.GetObjectType()
-	taskfiledownloadinfo["path"] = item.GetPath()
-	taskfiledownloadinfo["nr_source"] = item.GetSource()
-	taskfiledownloadinfo["type"] = item.GetType()
-
-	taskfiledownloadinfos = append(taskfiledownloadinfos, taskfiledownloadinfo)
-	return taskfiledownloadinfos
 }
 func flattenMapTechsupportmanagementTechSupportBundleRelationship(p models.TechsupportmanagementTechSupportBundleRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var techsupportmanagementtechsupportbundlerelationships []map[string]interface{}

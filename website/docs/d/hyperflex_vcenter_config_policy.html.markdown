@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vcenter_config_policy"
 description: |-
-        A policy specifying vCenter configuration.
+        The VcenterConfigPolicies object specifies the configuration settings required to integrate the HyperFlex cluster with VMware vCenter.
+        #### Purpose
+        It enables the management of the cluster through vCenter, defining the credentials, datacenter location, and hostname required for integration.
+        #### Key Concepts
+        - **vCenter Integration:** Configures the vCenter server connection.
+        - **Credential Management:** Securely stores vCenter credentials.
+        - **Datacenter Mapping:** Specifies the target datacenter for the cluster deployment.
 
 ---
 
 # Data Source: intersight_hyperflex_vcenter_config_policy
-A policy specifying vCenter configuration.
+The VcenterConfigPolicies object specifies the configuration settings required to integrate the HyperFlex cluster with VMware vCenter.
+#### Purpose
+It enables the management of the cluster through vCenter, defining the credentials, datacenter location, and hostname required for integration.
+#### Key Concepts
+- **vCenter Integration:** Configures the vCenter server connection.
+- **Credential Management:** Securely stores vCenter credentials.
+- **Datacenter Mapping:** Specifies the target datacenter for the cluster deployment.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

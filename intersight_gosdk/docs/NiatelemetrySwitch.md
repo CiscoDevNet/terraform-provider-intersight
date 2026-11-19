@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CompensatingControlStatus** | Pointer to **string** | Compensating control status reported for the switch. | [optional] [readonly] 
 **CompensatingControlsDetails** | Pointer to [**NullableNiatelemetryCompensatingControlDetails**](NiatelemetryCompensatingControlDetails.md) |  | [optional] 
 **ComplianceStatus** | Pointer to **string** | The compliance status of the managed switch. | [optional] [readonly] 
+**FabricExtenders** | Pointer to [**[]NiatelemetryFabricExtender**](NiatelemetryFabricExtender.md) |  | [optional] 
 **FabricType** | Pointer to **string** | The type of fabric the managed switch belongs to. | [optional] [readonly] 
 **HardwareConformance** | Pointer to **string** | The hardware conformance status of the managed switch. | [optional] [readonly] 
 **HardwareEndOfVulnerabilitySupportDate** | Pointer to **string** | The hardware end of vulnerability support date of the managed switch. | [optional] [readonly] 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **LiveProtectAgentStatus** | Pointer to **string** | Live Protect agent status reported for the switch. | [optional] [readonly] 
 **LiveProtectStatus** | Pointer to **string** | Live Protect enablement status reported for the switch. | [optional] [readonly] 
 **Model** | Pointer to **string** | The model of the managed switch. | [optional] [readonly] 
+**Modules** | Pointer to [**[]NiatelemetryModule**](NiatelemetryModule.md) |  | [optional] 
 **OperatingSystemVersion** | Pointer to **string** | The OS version of the managed switch. | [optional] [readonly] 
 **OutOfBandIp** | Pointer to **string** | The out-of-band IPv4 address of the managed switch. | [optional] [readonly] 
 **Role** | Pointer to **string** | The role of the managed switch. | [optional] [readonly] 
@@ -208,6 +210,41 @@ SetComplianceStatus sets ComplianceStatus field to given value.
 
 HasComplianceStatus returns a boolean if a field has been set.
 
+### GetFabricExtenders
+
+`func (o *NiatelemetrySwitch) GetFabricExtenders() []NiatelemetryFabricExtender`
+
+GetFabricExtenders returns the FabricExtenders field if non-nil, zero value otherwise.
+
+### GetFabricExtendersOk
+
+`func (o *NiatelemetrySwitch) GetFabricExtendersOk() (*[]NiatelemetryFabricExtender, bool)`
+
+GetFabricExtendersOk returns a tuple with the FabricExtenders field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFabricExtenders
+
+`func (o *NiatelemetrySwitch) SetFabricExtenders(v []NiatelemetryFabricExtender)`
+
+SetFabricExtenders sets FabricExtenders field to given value.
+
+### HasFabricExtenders
+
+`func (o *NiatelemetrySwitch) HasFabricExtenders() bool`
+
+HasFabricExtenders returns a boolean if a field has been set.
+
+### SetFabricExtendersNil
+
+`func (o *NiatelemetrySwitch) SetFabricExtendersNil(b bool)`
+
+ SetFabricExtendersNil sets the value for FabricExtenders to be an explicit nil
+
+### UnsetFabricExtenders
+`func (o *NiatelemetrySwitch) UnsetFabricExtenders()`
+
+UnsetFabricExtenders ensures that no value is present for FabricExtenders, not even an explicit nil
 ### GetFabricType
 
 `func (o *NiatelemetrySwitch) GetFabricType() string`
@@ -458,6 +495,41 @@ SetModel sets Model field to given value.
 
 HasModel returns a boolean if a field has been set.
 
+### GetModules
+
+`func (o *NiatelemetrySwitch) GetModules() []NiatelemetryModule`
+
+GetModules returns the Modules field if non-nil, zero value otherwise.
+
+### GetModulesOk
+
+`func (o *NiatelemetrySwitch) GetModulesOk() (*[]NiatelemetryModule, bool)`
+
+GetModulesOk returns a tuple with the Modules field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModules
+
+`func (o *NiatelemetrySwitch) SetModules(v []NiatelemetryModule)`
+
+SetModules sets Modules field to given value.
+
+### HasModules
+
+`func (o *NiatelemetrySwitch) HasModules() bool`
+
+HasModules returns a boolean if a field has been set.
+
+### SetModulesNil
+
+`func (o *NiatelemetrySwitch) SetModulesNil(b bool)`
+
+ SetModulesNil sets the value for Modules to be an explicit nil
+
+### UnsetModules
+`func (o *NiatelemetrySwitch) UnsetModules()`
+
+UnsetModules ensures that no value is present for Modules, not even an explicit nil
 ### GetOperatingSystemVersion
 
 `func (o *NiatelemetrySwitch) GetOperatingSystemVersion() string`

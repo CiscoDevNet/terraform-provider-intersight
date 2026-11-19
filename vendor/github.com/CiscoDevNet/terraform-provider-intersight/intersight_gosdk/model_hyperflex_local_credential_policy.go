@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026110514
+API version: 1.0.11-2026111504
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the HyperflexLocalCredentialPolicy type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HyperflexLocalCredentialPolicy{}
 
-// HyperflexLocalCredentialPolicy A policy specifying credentials for HyperFlex cluster such as controller VM password, hypervisor username, and password.
+// HyperflexLocalCredentialPolicy The LocalCredentialPolicies object specifies the credentials required for HyperFlex cluster components, including controller VMs and hypervisors. #### Purpose It centralizes the management of security credentials, ensuring that the installation and expansion workflows have the necessary access to configure cluster nodes. #### Key Concepts - **Secure Credential Storage:** Stores encrypted passwords for controller VMs, hypervisors, and deployment keys. - **Security Compliance:** Enforces password complexity requirements. - **Workflow Integration:** Used by deployment and expansion workflows to authenticate with cluster nodes.
 type HyperflexLocalCredentialPolicy struct {
 	PolicyAbstractPolicy
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

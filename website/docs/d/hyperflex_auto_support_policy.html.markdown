@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_auto_support_policy"
 description: |-
-        A policy specifying the configuration to automatically generate support tickets with Cisco TAC.
+        The AutoSupportPolicy object specifies the configuration settings for automatically generating and delivering support tickets to Cisco TAC.
+        #### Purpose
+        It enables proactive monitoring and automated support by defining the delivery mechanism and recipient for support information, reducing manual intervention during issue resolution.
+        #### Key Concepts
+        - **Automated Support:** Enables or disables the automated generation of support messages.
+        - **Ticket Routing:** Configures the recipient email address for support tickets.
+        - **Policy Enforcement:** Applied via cluster profiles to ensure consistent support configurations across the environment.
 
 ---
 
 # Data Source: intersight_hyperflex_auto_support_policy
-A policy specifying the configuration to automatically generate support tickets with Cisco TAC.
+The AutoSupportPolicy object specifies the configuration settings for automatically generating and delivering support tickets to Cisco TAC.
+#### Purpose
+It enables proactive monitoring and automated support by defining the delivery mechanism and recipient for support information, reducing manual intervention during issue resolution.
+#### Key Concepts
+- **Automated Support:** Enables or disables the automated generation of support messages.
+- **Ticket Routing:** Configures the recipient email address for support tickets.
+- **Policy Enforcement:** Applied via cluster profiles to ensure consistent support configurations across the environment.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

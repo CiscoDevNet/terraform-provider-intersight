@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_storage_policy"
 description: |-
-        A policy specifying HyperFlex cluster storage settings (optional).
+        The ClusterStoragePolicies object specifies HyperFlex cluster storage settings, such as disk cleanup and VDI optimization.
+        #### Purpose
+        This provides control over the storage layer, allowing administrators to enable performance-enhancing features or define cleanup behaviors during cluster deployment.
+        #### Key Concepts
+        - **Disk Management:** Controls whether existing disk partitions are cleaned up during deployment.
+        - **Performance Optimization:** Offers toggles for VDI-specific optimizations.
+        - **Logical Availability:** Configures Logical Availability Zones (LAZ) for increased fault tolerance.
 
 ---
 
 # Data Source: intersight_hyperflex_cluster_storage_policy
-A policy specifying HyperFlex cluster storage settings (optional).
+The ClusterStoragePolicies object specifies HyperFlex cluster storage settings, such as disk cleanup and VDI optimization.
+#### Purpose
+This provides control over the storage layer, allowing administrators to enable performance-enhancing features or define cleanup behaviors during cluster deployment.
+#### Key Concepts
+- **Disk Management:** Controls whether existing disk partitions are cleaned up during deployment.
+- **Performance Optimization:** Offers toggles for VDI-specific optimizations.
+- **Logical Availability:** Configures Logical Availability Zones (LAZ) for increased fault tolerance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

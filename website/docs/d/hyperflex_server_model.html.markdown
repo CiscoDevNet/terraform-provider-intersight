@@ -3,12 +3,22 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_server_model"
 description: |-
-        A supported server model.
+        ServerModels define the set of supported HyperFlex server models. Instead of listing only exact model strings, the supported models are expressed as one or more regex-based entries, allowing the platform to match and validate a broader set of model variants consistently.
+        #### Purpose
+        Provide an authoritative, system-managed list of supported server model patterns used by HyperFlex workflows (such as validation and compatibility checks) to determine whether a given server model is supported.
+        #### Key Concepts
+        - **Supported model catalog**: Represents the supported server model set for HyperFlex.
+        - **Regex-based matching**: `serverModelEntries` stores supported model definitions in regex format to match families/variants of server models.
 
 ---
 
 # Data Source: intersight_hyperflex_server_model
-A supported server model.
+ServerModels define the set of supported HyperFlex server models. Instead of listing only exact model strings, the supported models are expressed as one or more regex-based entries, allowing the platform to match and validate a broader set of model variants consistently.
+#### Purpose
+Provide an authoritative, system-managed list of supported server model patterns used by HyperFlex workflows (such as validation and compatibility checks) to determine whether a given server model is supported.
+#### Key Concepts
+- **Supported model catalog**: Represents the supported server model set for HyperFlex.
+- **Regex-based matching**: `serverModelEntries` stores supported model definitions in regex format to match families/variants of server models.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

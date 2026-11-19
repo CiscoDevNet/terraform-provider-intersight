@@ -3,12 +3,28 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_software_version_policy"
 description: |-
-        A policy capturing software versions for different HyperFlex Cluster compatible components ( like HyperFlex Data Platform, Hypervisor, etc. ), that the user wishes to apply on the HyperFlex cluster.
+        SoftwareVersionPolicies capture the set of software versions a user intends to run across the different components that make up a HyperFlex cluster (for example, HyperFlex Data Platform and the hypervisor). The policy acts as a single place to define version selection so cluster deployments and lifecycle operations can apply a consistent, compatible software stack.
+        #### Purpose
+        Enable administrators to standardize and apply component software versions to HyperFlex clusters via cluster profiles, supporting controlled upgrades, repeatable deployments, and compatibility alignment across the stack.
+        #### Key Concepts
+        - **Version intent for multiple components**: Encapsulates desired versions for several HyperFlex-compatible components rather than a single software artifact.
+        - **Profile-driven application**: Designed to be attached/applied as part of HyperFlex cluster profile workflows.
+        - **Lifecycle management**: Supports controlled create/update/delete so version baselines can evolve over time (e.g., during upgrades).
+        - **Reusable policy object**: Extends `policy.AbstractPolicy`, enabling reuse across clusters and consistency across environments.
+        - **Role-based access**: Read access is broadly available; create/update/delete is restricted to users who manage HyperFlex cluster profiles.
 
 ---
 
 # Resource: intersight_hyperflex_software_version_policy
-A policy capturing software versions for different HyperFlex Cluster compatible components ( like HyperFlex Data Platform, Hypervisor, etc. ), that the user wishes to apply on the HyperFlex cluster.
+SoftwareVersionPolicies capture the set of software versions a user intends to run across the different components that make up a HyperFlex cluster (for example, HyperFlex Data Platform and the hypervisor). The policy acts as a single place to define version selection so cluster deployments and lifecycle operations can apply a consistent, compatible software stack.
+#### Purpose
+Enable administrators to standardize and apply component software versions to HyperFlex clusters via cluster profiles, supporting controlled upgrades, repeatable deployments, and compatibility alignment across the stack.
+#### Key Concepts
+- **Version intent for multiple components**: Encapsulates desired versions for several HyperFlex-compatible components rather than a single software artifact.
+- **Profile-driven application**: Designed to be attached/applied as part of HyperFlex cluster profile workflows.
+- **Lifecycle management**: Supports controlled create/update/delete so version baselines can evolve over time (e.g., during upgrades).
+- **Reusable policy object**: Extends `policy.AbstractPolicy`, enabling reuse across clusters and consistency across environments.
+- **Role-based access**: Read access is broadly available; create/update/delete is restricted to users who manage HyperFlex cluster profiles.
 ## Usage Example
 ### Resource Creation
 

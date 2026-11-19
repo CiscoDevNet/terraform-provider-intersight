@@ -3,11 +3,25 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_ext_iscsi_storage_policy"
 description: |-
+        The ExtIscsiStoragePolicies object specifies connectivity settings for fabric-attached external iSCSI storage.
+        #### Purpose
+        It allows for the integration of external iSCSI storage arrays, ensuring the cluster can communicate with external targets via the storage network.
+        #### Key Concepts
+        - **External Storage Integration:** Enables fabric-attached iSCSI storage connectivity.
+        - **Traffic VLANs:** Defines VLANs for primary and secondary iSCSI traffic.
+        - **Operational Control:** Provides an administrative state to enable or disable the external storage integration.
         A policy specifying external storage connectivity information via Fabric attached iSCSI storage.
 
 ---
 
 # Data Source: intersight_hyperflex_ext_iscsi_storage_policy
+The ExtIscsiStoragePolicies object specifies connectivity settings for fabric-attached external iSCSI storage.
+#### Purpose
+It allows for the integration of external iSCSI storage arrays, ensuring the cluster can communicate with external targets via the storage network.
+#### Key Concepts
+- **External Storage Integration:** Enables fabric-attached iSCSI storage connectivity.
+- **Traffic VLANs:** Defines VLANs for primary and secondary iSCSI traffic.
+- **Operational Control:** Provides an administrative state to enable or disable the external storage integration.
 A policy specifying external storage connectivity information via Fabric attached iSCSI storage.
 ## Argument Reference
 The results of this data source are stored in `results` property.

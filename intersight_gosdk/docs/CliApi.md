@@ -1,6 +1,6 @@
 # \CliApi
 
-All URIs are relative to *https://stage.starshipcloud.com*
+All URIs are relative to *https://intersight.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

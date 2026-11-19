@@ -3,12 +3,12 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_encryption"
 description: |-
-        The overview of software-encryption on the cluster
+        Encryptions represent the software-encryption status of a HyperFlex cluster, giving administrators a concise view of whether encryption is enabled, configured, supported, failed, or in an unknown state. The status describes the cluster as a whole rather than individual disks, uses an enum to represent these conditions, and is linked to the cluster’s device registration so that the status is attributed to the correct endpoint.
 
 ---
 
 # Data Source: intersight_hyperflex_encryption
-The overview of software-encryption on the cluster
+Encryptions represent the software-encryption status of a HyperFlex cluster, giving administrators a concise view of whether encryption is enabled, configured, supported, failed, or in an unknown state. The status describes the cluster as a whole rather than individual disks, uses an enum to represent these conditions, and is linked to the cluster’s device registration so that the status is attributed to the correct endpoint.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

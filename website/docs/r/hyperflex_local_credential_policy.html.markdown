@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_local_credential_policy"
 description: |-
-        A policy specifying credentials for HyperFlex cluster such as controller VM password, hypervisor username, and password.
+        The LocalCredentialPolicies object specifies the credentials required for HyperFlex cluster components, including controller VMs and hypervisors.
+        #### Purpose
+        It centralizes the management of security credentials, ensuring that the installation and expansion workflows have the necessary access to configure cluster nodes.
+        #### Key Concepts
+        - **Secure Credential Storage:** Stores encrypted passwords for controller VMs, hypervisors, and deployment keys.
+        - **Security Compliance:** Enforces password complexity requirements.
+        - **Workflow Integration:** Used by deployment and expansion workflows to authenticate with cluster nodes.
 
 ---
 
 # Resource: intersight_hyperflex_local_credential_policy
-A policy specifying credentials for HyperFlex cluster such as controller VM password, hypervisor username, and password.
+The LocalCredentialPolicies object specifies the credentials required for HyperFlex cluster components, including controller VMs and hypervisors.
+#### Purpose
+It centralizes the management of security credentials, ensuring that the installation and expansion workflows have the necessary access to configure cluster nodes.
+#### Key Concepts
+- **Secure Credential Storage:** Stores encrypted passwords for controller VMs, hypervisors, and deployment keys.
+- **Security Compliance:** Enforces password complexity requirements.
+- **Workflow Integration:** Used by deployment and expansion workflows to authenticate with cluster nodes.
 ## Usage Example
 ### Resource Creation
 

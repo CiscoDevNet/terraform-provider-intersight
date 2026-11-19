@@ -3,12 +3,26 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_hyperflex_scoped_inventory"
 description: |-
-        API to trigger on-demand Hyperflex Cluster inventory to update modified objects in Intersight report.
+        HyperflexScopedInventories are task-trigger objects used to initiate on-demand inventory collection for a specific HyperFlex cluster via its device registration reference.
+        #### Purpose
+        Allow administrators to request an immediate refresh of HyperFlex cluster inventory so changes are reflected in Intersight without waiting for the next scheduled cycle.
+        #### Key Concepts
+        - **On-demand inventory trigger:** Represents a request to collect/refresh inventory now.
+        - **Scoped to a device:** Targets a specific cluster through the registered device relationship.
+        - **Operational workflow hook:** Designed to drive backend collection workflows rather than store long-lived configuration.
+        - **Permission inheritance:** Inherits access control from the registered device context to ensure only authorized users can trigger collection.
 
 ---
 
 # Resource: intersight_task_hyperflex_scoped_inventory
-API to trigger on-demand Hyperflex Cluster inventory to update modified objects in Intersight report.
+HyperflexScopedInventories are task-trigger objects used to initiate on-demand inventory collection for a specific HyperFlex cluster via its device registration reference.
+#### Purpose
+Allow administrators to request an immediate refresh of HyperFlex cluster inventory so changes are reflected in Intersight without waiting for the next scheduled cycle.
+#### Key Concepts
+- **On-demand inventory trigger:** Represents a request to collect/refresh inventory now.
+- **Scoped to a device:** Targets a specific cluster through the registered device relationship.
+- **Operational workflow hook:** Designed to drive backend collection workflows rather than store long-lived configuration.
+- **Permission inheritance:** Inherits access control from the registered device context to ensure only authorized users can trigger collection.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

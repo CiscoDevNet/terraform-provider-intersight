@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026110514
+API version: 1.0.11-2026111504
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the TaskHyperflexScopedInventory type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TaskHyperflexScopedInventory{}
 
-// TaskHyperflexScopedInventory API to trigger on-demand Hyperflex Cluster inventory to update modified objects in Intersight report.
+// TaskHyperflexScopedInventory HyperflexScopedInventories are task-trigger objects used to initiate on-demand inventory collection for a specific HyperFlex cluster via its device registration reference. #### Purpose Allow administrators to request an immediate refresh of HyperFlex cluster inventory so changes are reflected in Intersight without waiting for the next scheduled cycle. #### Key Concepts - **On-demand inventory trigger:** Represents a request to collect/refresh inventory now. - **Scoped to a device:** Targets a specific cluster through the registered device relationship. - **Operational workflow hook:** Designed to drive backend collection workflows rather than store long-lived configuration. - **Permission inheritance:** Inherits access control from the registered device context to ensure only authorized users can trigger collection.
 type TaskHyperflexScopedInventory struct {
 	ConnectorScopedInventory
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
